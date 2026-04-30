@@ -4,7 +4,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-const EFFECTIVE_DATE = '2026-04-22';
+const EFFECTIVE_DATE = '2026-04-27';
 
 export default function PrivacyPolicyScreen() {
   const { t, i18n } = useTranslation();
@@ -69,13 +69,17 @@ function PolicyKo() {
       <Bullet>단어장 정보: 단어장 이름, 저장한 단어 및 AI 생성 정의</Bullet>
       <Bullet>기기 언어: 앱 초기 언어 설정을 위해 1회 확인 (서버 전송 없음)</Bullet>
       <Bullet>카메라/사진: 이미지 단어 추출 기능 사용 시 촬영하거나 선택한 이미지가 AI 처리를 위해 서버로 전송됩니다. 이미지는 처리 후 즉시 삭제되며 서버에 저장되지 않습니다.</Bullet>
+      <Bullet>마이크/음성: 음성 검색 기능 사용 시 마이크 입력이 기기 운영체제(Apple/Google)의 음성 인식 서비스로 전달되어 텍스트로 변환됩니다. 변환된 텍스트만 단어 검색에 사용되며, 음성 데이터 자체는 앱 서버로 전송·저장되지 않습니다.</Bullet>
+      <Bullet>알림: 학습 리마인더(전체 일일 알림, 주간 요약, 단어장별 요일/시각 알림)를 발송하기 위해 알림 권한이 사용됩니다. 모든 알림은 기기에 로컬로 예약되며 외부 서버로 데이터가 전송되지 않습니다. 단어장별 알림 설정(요일/시각)은 클라우드 동기화를 위해 서버에도 저장됩니다.</Bullet>
+      <Bullet>거주 국가/시간대: 온보딩 시 선택한 거주 국가와 그에 대응하는 시간대가 저장됩니다. 월간 사용량 한도 산정 및 알림 시각 등에 사용됩니다. 설정에서 월 1회 변경 가능합니다.</Bullet>
+      <Bullet>학습 진도: 단어장별 복습 횟수, 다음 복습 예정일, 연속 학습 일수(스트릭) 등 학습 데이터가 기기와 서버에 저장됩니다.</Bullet>
       <Bullet>API 사용 기록: 단어 검색 횟수, 응답 시간, 비용 (서비스 운영 목적)</Bullet>
       <Bullet>구독 상태: 프리미엄 구독 여부 및 관련 거래 정보</Bullet>
 
       <SectionTitle>2. 수집하지 않는 정보</SectionTitle>
       <Bullet>전화번호 등 추가 개인 식별 정보</Bullet>
-      <Bullet>위치 정보</Bullet>
-      <Bullet>연락처, 마이크</Bullet>
+      <Bullet>위치 정보(GPS) 및 정밀 위치</Bullet>
+      <Bullet>연락처, 캘린더, 건강 데이터</Bullet>
       <Bullet>결제 카드 정보 (결제는 Apple/Google을 통해 처리됩니다)</Bullet>
       <Bullet>광고 추적 정보 (단, Google AdMob이 자체적으로 수집하는 정보는 Google 정책을 따릅니다)</Bullet>
 
@@ -97,23 +101,35 @@ function PolicyKo() {
       <SectionTitle>5. 음성 합성(TTS)</SectionTitle>
       <P>발음 듣기 기능은 기기 내장 TTS 엔진을 사용하며, 외부 서버로 데이터가 전송되지 않습니다.</P>
 
-      <SectionTitle>6. 데이터 보관 및 삭제</SectionTitle>
+      <SectionTitle>6. 음성 인식</SectionTitle>
+      <P>단어 검색 화면에서 마이크 버튼으로 음성 입력을 사용할 수 있습니다. 음성은 운영체제가 제공하는 음성 인식 서비스(iOS Speech, Google Speech)에서 처리되며, Apple/Google의 개인정보처리방침이 적용될 수 있습니다. 앱은 인식 결과 텍스트만 받아 검색에 사용하고, 음성 데이터를 별도로 저장하거나 외부로 전송하지 않습니다.</P>
+
+      <SectionTitle>7. 푸시 알림</SectionTitle>
+      <P>일일 학습 리마인더, 주간 학습 요약, 단어장별 알림 등은 모두 기기에 로컬로 예약되어 표시되는 알림이며, 외부 서버에서 발송되거나 사용자 행동을 추적하지 않습니다. 단어장별 알림은 사용자가 직접 요일과 시각을 선택할 수 있고, 알림은 설정에서 언제든 비활성화할 수 있습니다.</P>
+
+      <SectionTitle>8. 단어장 내보내기</SectionTitle>
+      <P>프리미엄 사용자는 단어장을 CSV 파일로 내보낼 수 있습니다. 파일은 기기 내에서 생성되어 운영체제의 공유 시트(이메일, 메시지, 클라우드 드라이브 등)를 통해 사용자가 직접 선택한 곳으로 전달됩니다. 내보내기 과정에서 앱 서버로 추가 데이터가 전송되지 않습니다.</P>
+
+      <SectionTitle>9. 광고 식별자 (iOS ATT / Android GAID)</SectionTitle>
+      <P>iOS에서는 처음 앱 실행 시 광고 식별자(IDFA) 사용 동의를 묻는 시스템 팝업이 표시될 수 있습니다. Android에서는 Google 광고 ID(GAID)가 사용되며, 기기 설정에서 광고 개인화를 제한하거나 광고 ID를 재설정할 수 있습니다. 동의/허용 여부는 광고 개인화 정도에만 영향을 미치며, 거부하더라도 앱의 기본 기능 사용에는 제한이 없습니다. 유럽(GDPR) 및 캘리포니아(CCPA) 지역 사용자에게는 별도의 광고 개인정보 동의 화면이 표시됩니다.</P>
+
+      <SectionTitle>10. 데이터 보관 및 삭제</SectionTitle>
       <P>기기에 저장된 단어장 데이터는 앱 삭제 시 함께 삭제됩니다. 설정 화면의 "초기화" 기능을 통해 언제든 기기 내 모든 데이터를 삭제할 수 있습니다.</P>
       <P>계정을 등록한 사용자는 설정 화면에서 계정 삭제를 요청할 수 있으며, 삭제 시 서버에 저장된 이메일, 단어장 데이터 등 모든 정보가 영구적으로 삭제됩니다.</P>
       <P>구독 해지 후에도 서버 데이터는 계정 삭제를 요청할 때까지 보관됩니다.</P>
 
-      <SectionTitle>7. 계정 및 인증</SectionTitle>
+      <SectionTitle>11. 계정 및 인증</SectionTitle>
       <P>앱은 회원가입 없이 사용할 수 있습니다. 클라우드 백업 및 동기화를 이용하려면 이메일 또는 Google 계정으로 로그인할 수 있습니다.</P>
       <P>이메일 계정 등록 시 이메일 인증을 통해 본인 확인을 진행합니다. 비밀번호는 암호화되어 저장되며, 개발자가 비밀번호 원문을 확인할 수 없습니다.</P>
       <P>Google 로그인 시 Google 계정의 이메일 주소와 프로필 정보(이름)가 수집됩니다. Google 계정의 비밀번호는 앱에서 처리하지 않습니다.</P>
 
-      <SectionTitle>8. 아동 개인정보 보호</SectionTitle>
+      <SectionTitle>12. 아동 개인정보 보호</SectionTitle>
       <P>본 앱은 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다. 만 14세 미만 사용자는 보호자의 동의 하에 앱을 사용해야 합니다.</P>
 
-      <SectionTitle>9. 변경 사항 고지</SectionTitle>
+      <SectionTitle>13. 변경 사항 고지</SectionTitle>
       <P>개인정보처리방침이 변경될 경우, 앱 내 공지를 통해 사전에 안내합니다.</P>
 
-      <SectionTitle>10. 문의</SectionTitle>
+      <SectionTitle>14. 문의</SectionTitle>
       <P>개인정보와 관련한 문의는 아래로 연락해 주세요.</P>
       <P>이메일: support@typeword.app</P>
     </View>
@@ -137,13 +153,17 @@ function PolicyEn() {
       <Bullet>Wordlist data: list names, saved words, and AI-generated definitions</Bullet>
       <Bullet>Device language: checked once for initial UI language (not sent to servers)</Bullet>
       <Bullet>Camera/Photos: When using the image word extraction feature, captured or selected images are sent to our server for AI processing. Images are deleted immediately after processing and are not stored on our servers.</Bullet>
+      <Bullet>Microphone/Voice: When using voice search, microphone input is forwarded to your operating system's speech recognition service (Apple/Google) for conversion to text. Only the transcribed text is used for word lookup; the audio itself is not transmitted to or stored on our servers.</Bullet>
+      <Bullet>Notifications: Notification permission is used for learning reminders (daily reminders, weekly recap, and per-wordlist reminders with day-of-week and time selection). All notifications are scheduled locally on your device — no notification data is sent to external servers. Per-wordlist notification settings are also stored on the server for cloud sync.</Bullet>
+      <Bullet>Country/Timezone: The country and matching timezone you select during onboarding are stored. They are used for monthly usage limit calculations, notification timing, and similar features. You can change your region once per month from Settings.</Bullet>
+      <Bullet>Learning progress: Per-wordlist review counts, next-review dates, and consecutive learning days (streak) are stored on your device and on the server.</Bullet>
       <Bullet>API usage logs: lookup counts, response times, and costs (for service operations)</Bullet>
       <Bullet>Subscription status: premium subscription state and related transaction information</Bullet>
 
       <SectionTitle>2. Information We Do Not Collect</SectionTitle>
       <Bullet>Additional personal identifiers such as phone number</Bullet>
-      <Bullet>Location data</Bullet>
-      <Bullet>Contacts or microphone access</Bullet>
+      <Bullet>GPS or precise location data</Bullet>
+      <Bullet>Contacts, calendar, or health data</Bullet>
       <Bullet>Payment card information (payments are processed through Apple/Google)</Bullet>
       <Bullet>Advertising or tracking identifiers (however, Google AdMob may collect such data per Google's own privacy policy)</Bullet>
 
@@ -165,23 +185,35 @@ function PolicyEn() {
       <SectionTitle>5. Text-to-Speech (TTS)</SectionTitle>
       <P>The pronunciation feature uses your device's built-in TTS engine. No data is sent to external servers for this feature.</P>
 
-      <SectionTitle>6. Data Retention and Deletion</SectionTitle>
+      <SectionTitle>6. Speech Recognition</SectionTitle>
+      <P>The microphone button on the word lookup screen lets you dictate a word instead of typing. Audio is processed by your operating system's speech recognition service (iOS Speech, Google Speech) and the corresponding privacy policies of Apple/Google may apply. Our app receives only the transcribed text and uses it for lookup; raw audio is not stored or transmitted by us.</P>
+
+      <SectionTitle>7. Push Notifications</SectionTitle>
+      <P>Daily learning reminders, weekly recaps, and per-wordlist notifications are all scheduled locally on your device. They are not sent from our servers and do not track user behavior. For per-wordlist notifications, you can pick the days of the week and time. Notifications can be disabled at any time from Settings.</P>
+
+      <SectionTitle>8. Wordlist Export</SectionTitle>
+      <P>Premium users can export wordlists as CSV files. Files are generated on-device and shared via your operating system's share sheet (email, messaging, cloud drives, etc.) to a destination you choose. No additional data is sent to our servers during export.</P>
+
+      <SectionTitle>9. Advertising Identifiers (iOS ATT / Android GAID)</SectionTitle>
+      <P>On iOS, the system may show a tracking permission prompt (IDFA) the first time you launch the App. On Android, the Google Advertising ID (GAID) is used; you can limit ad personalization or reset the GAID in your device settings. Your decision affects only ad personalization — declining does not restrict the app's core functionality. Users in the EU (GDPR) and California (CCPA) will see a separate ad consent screen.</P>
+
+      <SectionTitle>10. Data Retention and Deletion</SectionTitle>
       <P>Locally stored wordlist data is deleted when you uninstall the app. You can also delete all on-device data at any time using the "Reset" option in Settings.</P>
       <P>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email and wordlist data will be permanently removed.</P>
       <P>Server data is retained after subscription cancellation until you request account deletion.</P>
 
-      <SectionTitle>7. Accounts and Authentication</SectionTitle>
+      <SectionTitle>11. Accounts and Authentication</SectionTitle>
       <P>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email or Google account.</P>
       <P>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the developer.</P>
       <P>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google account password is not processed by the App.</P>
 
-      <SectionTitle>8. Children's Privacy</SectionTitle>
-      <P>This App does not knowingly collect personal information from children under the age of 14. Users under 14 should use the App only with parental consent.</P>
+      <SectionTitle>12. Children's Privacy</SectionTitle>
+      <P>This App does not knowingly collect personal information from children under the age of 13. Users under 13 should use the App only with parental consent.</P>
 
-      <SectionTitle>9. Changes to This Policy</SectionTitle>
+      <SectionTitle>13. Changes to This Policy</SectionTitle>
       <P>If this Privacy Policy is updated, we will notify you through an in-app notice prior to the changes taking effect.</P>
 
-      <SectionTitle>10. Contact Us</SectionTitle>
+      <SectionTitle>14. Contact Us</SectionTitle>
       <P>For privacy-related inquiries, please contact us at:</P>
       <P>Email: support@typeword.app</P>
     </View>
