@@ -16,57 +16,91 @@
   p { margin-bottom: 16px; font-size: 15px; color: #d1d5db; }
   ul { margin: 0 0 16px 24px; }
   li { margin-bottom: 6px; font-size: 15px; color: #d1d5db; }
+  a { color: #9ca3af; }
 </style>
 </head>
 <body>
 <div class="container">
   <a href="index.html" class="back">&larr; Back</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Effective: April 16, 2026</p>
+  <p class="date">Effective: April 27, 2026</p>
 
   <h2>1. Information We Collect</h2>
   <p>TypeWord ("the App") collects the following information to provide its services.</p>
   <ul>
+    <li>Email address: collected when you register an account (optional)</li>
+    <li>Password: collected for email account authentication and stored in encrypted form</li>
+    <li>Google profile information: email address and name are collected when signing in with Google (optional)</li>
     <li>Language settings: native language, source language, target language</li>
     <li>Wordlist data: list names, saved words, and AI-generated definitions</li>
     <li>Device language: checked once for initial UI language (not sent to servers)</li>
+    <li>Camera/Photos: When using the image word extraction feature, captured or selected images are sent to our server for AI processing. Images are deleted immediately after processing and are not stored on our servers.</li>
+    <li>Microphone/Voice: When using voice search, microphone input is forwarded to your operating system's speech recognition service (Apple/Google) for conversion to text. Only the transcribed text is used for word lookup; the audio itself is not transmitted to or stored on our servers.</li>
+    <li>Notifications: Notification permission is used for learning reminders (daily reminders, weekly recap, and per-wordlist reminders with day-of-week and time selection). All notifications are scheduled locally on your device — no notification data is sent to external servers. Per-wordlist notification settings are also stored on the server for cloud sync.</li>
+    <li>Country/Timezone: The country and matching timezone you select during onboarding are stored. They are used for monthly usage limit calculations, notification timing, and similar features. You can change your region once per month from Settings.</li>
+    <li>Learning progress: Per-wordlist review counts, next-review dates, and consecutive learning days (streak) are stored on your device and on the server.</li>
     <li>API usage logs: lookup counts, response times, and costs (for service operations)</li>
+    <li>Subscription status: premium subscription state and related transaction information</li>
   </ul>
 
   <h2>2. Information We Do Not Collect</h2>
   <ul>
-    <li>Personal identifiers such as name, email, or phone number</li>
-    <li>Location data</li>
-    <li>Contacts, photos, camera, or microphone access</li>
-    <li>Advertising or tracking identifiers</li>
+    <li>Additional personal identifiers such as phone number</li>
+    <li>GPS or precise location data</li>
+    <li>Contacts, calendar, or health data</li>
+    <li>Payment card information (payments are processed through Apple/Google)</li>
+    <li>Advertising or tracking identifiers (however, Google AdMob may collect such data per Google's own privacy policy)</li>
   </ul>
 
   <h2>3. Where Data Is Stored</h2>
-  <p>Wordlists and vocabulary data are stored locally on your device (SQLite) and are not automatically synced to any server. Language settings are kept in on-device storage.</p>
+  <p>Wordlists and vocabulary data are stored locally on your device (SQLite). Language settings are kept in on-device storage (AsyncStorage).</p>
+  <p>For registered users, wordlist data is securely transmitted and stored on our server (Supabase) for cloud backup and cross-device sync.</p>
   <p>When you look up a word, the request is processed through our server (Supabase) for AI processing. Results may be stored in an anonymous cache to improve service quality.</p>
 
   <h2>4. Third-Party Services</h2>
-  <p>The App uses the following external services for word lookup functionality.</p>
+  <p>The App uses the following external services to provide its functionality.</p>
   <ul>
-    <li>OpenAI: Only the searched word and language pair are sent. No user identification is transmitted.</li>
-    <li>Supabase: Provides authentication, database, and API hosting.</li>
-    <li>Google AdMob: Displays advertisements. AdMob may collect device information for ad personalization. See <a href="https://policies.google.com/privacy" style="color:#9ca3af;">Google's Privacy Policy</a>.</li>
-    <li>Sentry: Collects anonymous crash reports to improve app stability. No personal data is included.</li>
+    <li>OpenAI: The searched word and language pair are sent. When using image word extraction, images are also transmitted. No user identification is transmitted.</li>
+    <li>Supabase: Provides authentication, database, cloud sync, and API hosting</li>
+    <li>RevenueCat: Handles subscription payment processing and subscription state management. Only an anonymous user ID and subscription information are shared.</li>
+    <li>Free Dictionary API: Fallback dictionary for English lookups (only the word is sent)</li>
+    <li>Google AdMob: Displays advertisements to free-tier users. AdMob may collect device identifiers and ad interaction data in accordance with <a href="https://policies.google.com/privacy">Google's privacy policy</a>. Premium users do not see ads.</li>
+    <li>Sentry: Error monitoring service. Device information and error logs may be transmitted when errors occur; no personal identifiers are included.</li>
   </ul>
+  <p>We do not share data with analytics tools or social media platforms.</p>
 
   <h2>5. Text-to-Speech (TTS)</h2>
   <p>The pronunciation feature uses your device's built-in TTS engine. No data is sent to external servers for this feature.</p>
 
-  <h2>6. Data Retention and Deletion</h2>
-  <p>All wordlist data is stored on your device and will be deleted when you uninstall the app. You can also delete all data at any time using the "Reset" option in Settings.</p>
+  <h2>6. Speech Recognition</h2>
+  <p>The microphone button on the word lookup screen lets you dictate a word instead of typing. Audio is processed by your operating system's speech recognition service (iOS Speech, Google Speech) and the corresponding privacy policies of Apple/Google may apply. Our app receives only the transcribed text and uses it for lookup; raw audio is not stored or transmitted by us.</p>
 
-  <h2>7. Children's Privacy</h2>
-  <p>This App does not knowingly collect personal information from children under 14 years of age.</p>
+  <h2>7. Push Notifications</h2>
+  <p>Daily learning reminders, weekly recaps, and per-wordlist notifications are all scheduled locally on your device. They are not sent from our servers and do not track user behavior. For per-wordlist notifications, you can pick the days of the week and time. Notifications can be disabled at any time from Settings.</p>
 
-  <h2>8. Changes to This Policy</h2>
+  <h2>8. Wordlist Export</h2>
+  <p>Premium users can export wordlists as CSV files. Files are generated on-device and shared via your operating system's share sheet (email, messaging, cloud drives, etc.) to a destination you choose. No additional data is sent to our servers during export.</p>
+
+  <h2>9. Advertising Identifiers (iOS ATT / Android GAID)</h2>
+  <p>On iOS, the system may show a tracking permission prompt (IDFA) the first time you launch the App. On Android, the Google Advertising ID (GAID) is used; you can limit ad personalization or reset the GAID in your device settings. Your decision affects only ad personalization — declining does not restrict the app's core functionality. Users in the EU (GDPR) and California (CCPA) will see a separate ad consent screen.</p>
+
+  <h2>10. Data Retention and Deletion</h2>
+  <p>Locally stored wordlist data is deleted when you uninstall the app. You can also delete all on-device data at any time using the "Reset" option in Settings.</p>
+  <p>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email and wordlist data will be permanently removed.</p>
+  <p>Server data is retained after subscription cancellation until you request account deletion.</p>
+
+  <h2>11. Accounts and Authentication</h2>
+  <p>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email or Google account.</p>
+  <p>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the developer.</p>
+  <p>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google account password is not processed by the App.</p>
+
+  <h2>12. Children's Privacy</h2>
+  <p>This App does not knowingly collect personal information from children under the age of 13. Users under 13 should use the App only with parental consent.</p>
+
+  <h2>13. Changes to This Policy</h2>
   <p>If this Privacy Policy is updated, we will notify you through an in-app notice prior to the changes taking effect.</p>
 
-  <h2>9. Contact Us</h2>
+  <h2>14. Contact Us</h2>
   <p>For privacy-related inquiries, please contact us at:</p>
   <p>Email: support@typeword.app</p>
 </div>
