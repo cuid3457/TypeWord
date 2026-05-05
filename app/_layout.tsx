@@ -22,6 +22,7 @@ import { OfflineBanner } from '@/components/offline-banner';
 import { useColorScheme, syncTheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { requestAdsConsent } from '@src/services/adsConsent';
+import { setupAudioMode } from '@src/services/audio';
 import { ensureSession } from '@src/services/authService';
 import { supabase } from '@src/api/supabase';
 import { captureError, initSentry, setUser } from '@src/services/sentry';
@@ -29,7 +30,8 @@ import { initEdgeWarmup } from '@src/services/edgeWarmup';
 import { getDb } from '@src/db';
 import { markCelebrated, markDailyCelebrated, getDailyEmoji, CELEBRATE_EVENT, type CelebrateInfo } from '@src/services/streakMilestone';
 import { getTodayStreakDate } from '@src/services/streakService';
-import { initSubscription, identifyUser, resetUser } from '@src/services/subscriptionService';
+import { initSubscription, identifyUser, resetUser, refreshBonusPremium } from '@src/services/subscriptionService';
+import { initXP } from '@src/services/xpService';
 import { syncAll } from '@src/services/syncService';
 
 const REM_SCALE = { small: 14, medium: 17, large: 20 } as const;
@@ -57,10 +59,13 @@ export default function RootLayout() {
     initSentry();
     SplashScreen.hideAsync();
     Font.loadAsync({ material: MaterialIconsFont }).catch(captureError);
+    setupAudioMode().catch(captureError);
     ensureSession().catch(captureError);
     getDb().catch(captureError);
     requestAdsConsent().catch(() => {});
     initSubscription().catch(captureError);
+    refreshBonusPremium().catch(captureError);
+    initXP().catch(captureError);
     syncAll().catch(captureError);
     initEdgeWarmup();
   }, []);
@@ -73,7 +78,19 @@ export default function RootLayout() {
           setUser(session.user.id);
           if (!session.user.is_anonymous) {
             identifyUser(session.user.id).catch(captureError);
+            // Resume pending invite flow: a user who tapped a typeword://invite/...
+            // link while anonymous is sent through auth; once they're signed up
+            // we re-route them back to the invite screen so the friend add +
+            // bonus claim can proceed.
+            (async () => {
+              try {
+                const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
+                const code = await AsyncStorage.getItem('typeword.pendingInviteCode');
+                if (code) router.replace(`/invite/${code}`);
+              } catch { /* no-op */ }
+            })();
           }
+          refreshBonusPremium().catch(captureError);
         }
       }
       if (event === 'SIGNED_OUT') {
@@ -140,7 +157,11 @@ export default function RootLayout() {
   useEffect(() => {
     if (loading) return;
     const onOnboarding = segments[0] === 'onboarding';
-    if (!settings && !onOnboarding) {
+    // Allow viewing the legal documents during onboarding without being
+    // bounced back. The user must reach these from the onboarding consent
+    // line before tapping "Get Started".
+    const onLegalDoc = segments[0] === 'terms' || segments[0] === 'privacy';
+    if (!settings && !onOnboarding && !onLegalDoc) {
       router.replace('/onboarding');
     } else if (settings && onOnboarding) {
       router.replace('/(tabs)');
@@ -156,6 +177,9 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="onboarding" options={{ headerShown: false }} />
             <Stack.Screen name="wordlist/new" options={{ title: '' }} />
+            <Stack.Screen name="wordlist/library" options={{ headerShown: false }} />
+            <Stack.Screen name="wordlist/library/[id]" options={{ headerShown: false }} />
+            <Stack.Screen name="wordlist/ai-create" options={{ headerShown: false }} />
             <Stack.Screen name="wordlist/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="wordlist/add/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="auth" options={{ headerShown: false }} />

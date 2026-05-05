@@ -1,8 +1,9 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
+  BackHandler,
   FlatList,
   Pressable,
   Text,
@@ -15,10 +16,14 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { AdBanner } from '@/components/ad-banner';
 import { AppModal } from '@/components/app-modal';
+import { ExportFormatModal } from '@/components/export-format-modal';
 import { ReportModal } from '@/components/report-modal';
 import { Toast } from '@/components/toast';
-import { getTtsText, speakWord } from '@src/utils/ttsLocale';
-import { translatePOS } from '@src/utils/normalizeResult';
+import { VoiceToggle } from '@/components/voice-toggle';
+import * as Clipboard from 'expo-clipboard';
+import { TextActionPopover, type PopoverPosition } from '@/components/text-action-popover';
+import { getTtsText, speakWord, phonemeForChinese } from '@src/utils/ttsLocale';
+import { formatPOS } from '@src/utils/normalizeResult';
 import { ReadingDisplay } from '@/components/reading-display';
 import { findLanguage } from '@src/constants/languages';
 import {
@@ -26,16 +31,25 @@ import {
   getBook,
   getReviewableCount,
   listWordsByBook,
+  updateBookNotif,
   updateBookTitle,
   updateWordResult,
   type StoredWord,
 } from '@src/db/queries';
 import { lookupWord, checkWordFreshness } from '@src/services/wordService';
+import { exportWordlistCsv, exportWordlistPdf } from '@src/services/exportService';
+import { usePremium } from '@src/hooks/usePremium';
+import { useUserSettings } from '@src/hooks/useUserSettings';
+import { Paywall } from '@/components/paywall';
+import { WordlistNotifModal } from '@/components/wordlist-notif-modal';
+import { getNotificationTranslations, isNotificationAvailable, requestNotificationPermission, rescheduleNotifications } from '@src/services/notificationService';
+import { getPreferredNotificationHour } from '@src/services/streakService';
 import type { Book } from '@src/types/book';
 
 import { useFocusEffect } from 'expo-router';
 
 const AD_INTERVAL = 30;
+const MAX_TITLE_LENGTH = 40;
 type ListItem = { type: 'word'; data: StoredWord } | { type: 'ad'; key: string };
 
 function buildListWithAds(words: StoredWord[]): ListItem[] {
@@ -71,6 +85,16 @@ export default function WordlistDetailScreen() {
   const longPressedRef = useRef(false);
   const [reportWord, setReportWord] = useState<StoredWord | null>(null);
   const [reportToast, setReportToast] = useState('');
+  const [popover, setPopover] = useState<PopoverPosition | null>(null);
+  const [exportModalOpen, setExportModalOpen] = useState(false);
+  const [notifModalOpen, setNotifModalOpen] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [exportToast, setExportToast] = useState('');
+  const [paywallVisible, setPaywallVisible] = useState(false);
+  const [defaultHour, setDefaultHour] = useState(21);
+  const premium = usePremium();
+  const { settings, save: saveSettings } = useUserSettings();
+  const globalNotifEnabled = !!settings?.notificationsEnabled;
 
   useFocusEffect(
     useCallback(() => {
@@ -78,11 +102,17 @@ export default function WordlistDetailScreen() {
       (async () => {
         if (!id) return;
         try {
-          const [b, ws, rc] = await Promise.all([getBook(id), listWordsByBook(id), getReviewableCount(id)]);
+          const [b, ws, rc, hour] = await Promise.all([
+            getBook(id),
+            listWordsByBook(id),
+            getReviewableCount(id),
+            getPreferredNotificationHour(),
+          ]);
           if (!cancelled) {
             setBook(b);
             setWords(ws);
             setReviewCount(rc);
+            setDefaultHour(hour);
           }
         } catch (err) {
           console.error('Failed to load wordlist:', err);
@@ -97,6 +127,77 @@ export default function WordlistDetailScreen() {
     }, [id]),
   );
 
+  const runExport = useCallback(
+    async (format: 'csv' | 'pdf') => {
+      if (!book) return;
+      if (words.length === 0) {
+        setExportToast(t('wordlist.export_empty'));
+        return;
+      }
+      setExporting(true);
+      try {
+        if (format === 'csv') {
+          await exportWordlistCsv(book.title, words);
+        } else {
+          await exportWordlistPdf(book.title, words, {
+            synonyms: t('add_word.synonyms'),
+            antonyms: t('add_word.antonyms'),
+            wordsSuffix: t('wordlist.pdf_words_suffix'),
+          });
+        }
+      } catch (err) {
+        console.error('Export failed:', err);
+        setExportToast(t('wordlist.export_failed'));
+      } finally {
+        setExporting(false);
+      }
+    },
+    [book, words, t],
+  );
+
+  const handleExport = useCallback(() => {
+    if (!book) return;
+    setExportModalOpen(true);
+  }, [book]);
+
+  const handleNotifSave = useCallback(
+    async (enabled: boolean, hour: number, minute: number, days: number) => {
+      if (!book) return;
+
+      // Enabling per-list notifications: ensure OS permission + global app
+      // toggle are both on. This is the contextual permission request that
+      // Apple HIG / Google's runtime permission guidance recommend.
+      if (enabled) {
+        if (!isNotificationAvailable()) {
+          setExportToast(t('settings.notifications_unavailable'));
+          return;
+        }
+        const granted = await requestNotificationPermission();
+        if (!granted) {
+          setExportToast(t('wordlist.notif_perm_denied'));
+          return;
+        }
+        if (settings && !settings.notificationsEnabled) {
+          await saveSettings({ ...settings, notificationsEnabled: true });
+        }
+      }
+
+      await updateBookNotif(book.id, enabled, hour, minute, days);
+      setBook({
+        ...book,
+        notifEnabled: enabled,
+        notifHour: hour,
+        notifMinute: minute,
+        notifDays: days,
+      });
+
+      if (isNotificationAvailable()) {
+        await rescheduleNotifications(getNotificationTranslations(t));
+      }
+    },
+    [book, settings, saveSettings, t],
+  );
+
   const toggleEditMode = () => {
     if (editMode) {
       setSelectedIds(new Set());
@@ -104,6 +205,16 @@ export default function WordlistDetailScreen() {
     setEditMode(!editMode);
     setExpandedId(null);
   };
+
+  useEffect(() => {
+    if (!editMode) return;
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      setSelectedIds(new Set());
+      setEditMode(false);
+      return true;
+    });
+    return () => sub.remove();
+  }, [editMode]);
 
   const toggleSelect = (wordId: string) => {
     setSelectedIds((prev) => {
@@ -206,6 +317,7 @@ export default function WordlistDetailScreen() {
               onChangeText={setEditTitle}
               autoFocus
               selectTextOnFocus
+              maxLength={MAX_TITLE_LENGTH}
               onSubmitEditing={async () => {
                 const trimmed = editTitle.trim();
                 if (trimmed && trimmed !== book.title) {
@@ -247,7 +359,7 @@ export default function WordlistDetailScreen() {
                 accessibilityLabel={t('common.edit')}
                 accessibilityRole="button"
               >
-                <Text className="text-3xl font-bold text-black dark:text-white" numberOfLines={1}>
+                <Text className="flex-1 text-3xl font-bold text-black dark:text-white">
                   {book.title}
                 </Text>
                 <MaterialIcons name="edit" size={20} color="#9ca3af" style={{ marginLeft: 8 }} />
@@ -255,14 +367,67 @@ export default function WordlistDetailScreen() {
             </View>
           </View>
         )}
-        {src && tgt ? (
-          <Text className="mt-1 text-sm text-gray-500">
-            {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
-          </Text>
-        ) : null}
-        <Text className="mt-1 text-sm text-gray-500">
-          {t('wordlist.word_count', { count: words.length })}
-        </Text>
+        <View className="mt-1 flex-row items-start justify-between">
+          <View className="flex-1">
+            {src && tgt ? (
+              <Text className="text-sm text-gray-500">
+                {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+              </Text>
+            ) : null}
+            <Text className="mt-1 text-sm text-gray-500">
+              {t('wordlist.word_count', { count: words.length })}
+            </Text>
+          </View>
+          <View className="ml-3 flex-row items-start gap-2">
+            <View className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800">
+              <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
+            </View>
+            <Pressable
+              onPress={() => setNotifModalOpen(true)}
+              className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
+              accessibilityLabel={t('wordlist.notif_settings')}
+              accessibilityRole="button"
+            >
+              <MaterialIcons
+                name={
+                  !globalNotifEnabled
+                    ? 'notifications-off'
+                    : book.notifEnabled
+                    ? 'notifications-active'
+                    : 'notifications-none'
+                }
+                size={22}
+                color={
+                  !globalNotifEnabled
+                    ? '#9ca3af'
+                    : book.notifEnabled
+                    ? '#2EC4A5'
+                    : '#6b7280'
+                }
+              />
+            </Pressable>
+            <View className="items-center">
+              <Pressable
+                onPress={handleExport}
+                disabled={exporting}
+                className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
+                accessibilityLabel={t('wordlist.export_csv')}
+                accessibilityRole="button"
+              >
+                <MaterialIcons
+                  name="ios-share"
+                  size={22}
+                  color={exporting ? '#9ca3af' : '#2EC4A5'}
+                />
+              </Pressable>
+              {!premium ? (
+                <Text className="mt-1 text-[10px] font-bold text-amber-600 dark:text-amber-400">
+                  Pro
+                </Text>
+              ) : null}
+            </View>
+          </View>
+        </View>
 
         {!editMode ? (
           <>
@@ -393,6 +558,22 @@ export default function WordlistDetailScreen() {
                   )
                 }
                 onReport={() => setReportWord(w)}
+                onShowTextActions={(text, e, onSearch) => {
+                  const buttons: { label: string; onPress: () => void }[] = [];
+                  if (onSearch) buttons.push({ label: t('common.search'), onPress: onSearch });
+                  buttons.push({
+                    label: t('common.copy'),
+                    onPress: async () => {
+                      try {
+                        await Clipboard.setStringAsync(text);
+                        setReportToast(t('common.copied'));
+                      } catch {
+                        /* clipboard rarely fails — silent */
+                      }
+                    },
+                  });
+                  setPopover({ x: e.nativeEvent.pageX, y: e.nativeEvent.pageY, buttons });
+                }}
                 t={t}
               />
             );
@@ -459,6 +640,51 @@ export default function WordlistDetailScreen() {
         />
       ) : null}
       <Toast visible={!!reportToast} message={reportToast} type="success" onHide={() => setReportToast('')} style={{ position: 'absolute', bottom: 132, left: 0, right: 0 }} />
+      <Toast visible={!!exportToast} message={exportToast} type="error" onHide={() => setExportToast('')} style={{ position: 'absolute', bottom: 80, left: 0, right: 0 }} />
+
+      {book ? (
+        <WordlistNotifModal
+          visible={notifModalOpen}
+          bookTitle={book.title}
+          initialEnabled={book.notifEnabled}
+          initialHour={book.notifHour}
+          initialMinute={book.notifMinute}
+          initialDays={book.notifDays}
+          defaultHour={defaultHour}
+          onClose={() => setNotifModalOpen(false)}
+          onSave={handleNotifSave}
+        />
+      ) : null}
+
+      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
+
+      <TextActionPopover state={popover} onDismiss={() => setPopover(null)} />
+
+      <ExportFormatModal
+        visible={exportModalOpen}
+        premium={!!premium}
+        title={t('wordlist.export_choose_title')}
+        subtitle={t('wordlist.export_choose_body')}
+        csvTitle={t('wordlist.export_csv')}
+        csvDescription={t('wordlist.export_csv_description')}
+        pdfTitle={t('wordlist.export_pdf')}
+        pdfDescription={t('wordlist.export_pdf_description')}
+        pdfLockedHint={t('wordlist.export_pdf_premium_badge')}
+        cancelText={t('common.cancel')}
+        onPickCsv={() => {
+          setExportModalOpen(false);
+          runExport('csv');
+        }}
+        onPickPdf={() => {
+          setExportModalOpen(false);
+          if (premium) {
+            runExport('pdf');
+          } else {
+            setPaywallVisible(true);
+          }
+        }}
+        onClose={() => setExportModalOpen(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -473,6 +699,7 @@ function WordRow({
   onLongPress,
   onEnriched,
   onReport,
+  onShowTextActions,
   t,
 }: {
   word: StoredWord;
@@ -484,8 +711,16 @@ function WordRow({
   onLongPress: () => void;
   onEnriched: (result: import('@src/types/word').WordLookupResult) => void;
   onReport: () => void;
+  onShowTextActions: (
+    text: string,
+    e: { nativeEvent: { pageX: number; pageY: number } },
+    onSearch?: () => void,
+  ) => void;
   t: (key: string) => string;
 }) {
+  const navigateAndSearch = (q: string) => {
+    router.push({ pathname: '/wordlist/add/[id]', params: { id: book.id, q } });
+  };
   const { i18n } = useTranslation();
   const [enriching, setEnriching] = useState(false);
   const meanings = word.result.meanings ?? [];
@@ -535,10 +770,14 @@ function WordRow({
       onLongPress={editMode ? undefined : onLongPress}
       className="mb-2 rounded-xl border border-gray-300 p-4 dark:border-gray-800"
     >
-      {/* Header */}
-      <View className="flex-row items-center">
+      {/* Header — word + reading share the bounded left column (icons take the
+          right edge), but IPA renders on its OWN row below the header so it
+          can use the card's full width before wrapping. IPA's left edge
+          aligns with the word's because both start at the card's content
+          padding origin. */}
+      <View className="flex-row items-start">
         {editMode ? (
-          <View className="mr-3">
+          <View className="mr-3 mt-1">
             <MaterialIcons
               name={selected ? 'check-box' : 'check-box-outline-blank'}
               size={22}
@@ -547,37 +786,64 @@ function WordRow({
           </View>
         ) : null}
 
-        <View className="flex-row items-center flex-1">
-          {!editMode && word.reviewCount > 0 ? (
-            <ReviewStatusIcon intervalDays={word.intervalDays} />
-          ) : null}
-          <Text className="text-lg font-semibold text-black dark:text-white">
-            {word.word}
-          </Text>
+        <View className="flex-1" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 6, rowGap: 4 }}>
+          <Pressable
+            onLongPress={(e) => onShowTextActions(word.word, e)}
+            delayLongPress={350}
+            className="shrink"
+          >
+            <Text className="shrink text-lg font-semibold text-black dark:text-white">
+              {word.word}
+            </Text>
+          </Pressable>
           {word.result.reading ? (
-            <ReadingDisplay reading={word.result.reading} sourceLang={book.sourceLang} compact />
-          ) : null}
-          {!editMode ? (
-            <Pressable
-              onPress={(e) => {
-                e.stopPropagation?.();
-                speakWord(getTtsText(word.word, book.sourceLang, word.result.reading), book.sourceLang);
-              }}
-              className="ml-2 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800"
-              accessibilityLabel={t('common.speak')}
-              accessibilityRole="button"
-            >
-              <MaterialIcons name="volume-up" size={16} color="#6b7280" />
-            </Pressable>
+            <ReadingDisplay reading={word.result.reading} sourceLang={book.sourceLang} word={word.word} compact />
           ) : null}
         </View>
 
         {!editMode ? (
-          <View className="flex-row items-center">
+          <View className="flex-row items-center shrink-0 ml-2 mt-1">
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation?.();
+                speakWord(
+                  getTtsText(word.word, book.sourceLang, word.result.reading),
+                  book.sourceLang,
+                  // Phoneme override only for polysemy-disambiguated entries
+                  // (readingKey set during curated-list add). Non-polysemy words
+                  // pronounce correctly via Azure's default — overriding them
+                  // breaks playback entirely for single-char hanzi.
+                  word.readingKey
+                    ? phonemeForChinese(book.sourceLang, word.result.reading, word.word) ?? undefined
+                    : undefined,
+                );
+              }}
+              className="mr-3 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800"
+              accessibilityLabel={t('common.speak')}
+              accessibilityRole="button"
+            >
+              <MaterialIcons name="volume-up" size={16} color="#10b981" />
+            </Pressable>
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation?.();
+                onReport();
+              }}
+              className="mr-3 p-1"
+              accessibilityLabel={t('report.title')}
+              accessibilityRole="button"
+              hitSlop={8}
+            >
+              <MaterialIcons name="flag" size={16} color="#9ca3af" />
+            </Pressable>
             <Text className="text-xs text-gray-400">{expanded ? '▲' : '▼'}</Text>
           </View>
         ) : null}
       </View>
+
+      {word.result.ipa ? (
+        <Text className="mt-1 text-sm text-gray-400">{word.result.ipa}</Text>
+      ) : null}
 
       {/* Meanings — show 1 when collapsed, all when expanded */}
       {!editMode ? (
@@ -585,7 +851,7 @@ function WordRow({
           {(expanded ? meanings : meanings.slice(0, 1)).map((m, i) => (
             <Text key={i} className="mt-1 text-sm text-gray-600 dark:text-gray-300">
               {meanings.length > 1 ? `${i + 1}. ` : ''}
-              {m.partOfSpeech ? `(${translatePOS(m.partOfSpeech, i18n.language)}) ` : ''}
+              {m.partOfSpeech ? `(${formatPOS(m.partOfSpeech, m.gender, i18n.language)}) ` : ''}
               {m.definition}
             </Text>
           ))}
@@ -616,22 +882,28 @@ function WordRow({
                   {examples.map((e, i) => (
                     <View key={i} className="mt-2 rounded-lg bg-gray-50 p-3 dark:bg-gray-900">
                       <View className="flex-row items-start">
-                        <Text className="flex-1 text-sm italic text-black dark:text-white">
-                          {e.sentence.includes('**')
-                            ? e.sentence.split('**').map((seg, si) =>
-                                si % 2 === 1
-                                  ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                                  : <Text key={si}>{seg}</Text>
-                              )
-                            : e.sentence}
-                        </Text>
+                        <Pressable
+                          onLongPress={(evt) => onShowTextActions(e.sentence.replace(/\*\*/g, ''), evt)}
+                          delayLongPress={350}
+                          style={{ flex: 1 }}
+                        >
+                          <Text className="text-sm italic text-black dark:text-white">
+                            {e.sentence.includes('**')
+                              ? e.sentence.split('**').map((seg, si) =>
+                                  si % 2 === 1
+                                    ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
+                                    : <Text key={si}>{seg}</Text>
+                                )
+                              : e.sentence}
+                          </Text>
+                        </Pressable>
                         <Pressable
                           onPress={() => speakWord(e.sentence.replace(/\*\*/g, ''), book.sourceLang)}
                           className="ml-2 rounded-full bg-gray-200 p-1 dark:bg-gray-700"
                           accessibilityLabel={t('common.speak')}
                           accessibilityRole="button"
                         >
-                          <MaterialIcons name="volume-up" size={14} color="#6b7280" />
+                          <MaterialIcons name="volume-up" size={14} color="#10b981" />
                         </Pressable>
                       </View>
                       {e.translation ? (
@@ -655,9 +927,20 @@ function WordRow({
                   <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                     {t('add_word.synonyms')}
                   </Text>
-                  <Text className="mt-1 text-sm text-black dark:text-white">
-                    {synonyms.join(', ')}
-                  </Text>
+                  <View className="mt-1 flex-row flex-wrap">
+                    {synonyms.map((s, i) => (
+                      <Pressable
+                        key={`syn-${i}`}
+                        onPress={() => navigateAndSearch(s)}
+                        onLongPress={(evt) => onShowTextActions(s, evt, () => navigateAndSearch(s))}
+                        delayLongPress={350}
+                      >
+                        <Text className="text-sm text-black dark:text-white">
+                          {s}{i < synonyms.length - 1 ? ', ' : ''}
+                        </Text>
+                      </Pressable>
+                    ))}
+                  </View>
                 </View>
               ) : null}
 
@@ -666,16 +949,23 @@ function WordRow({
                   <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                     {t('add_word.antonyms')}
                   </Text>
-                  <Text className="mt-1 text-sm text-black dark:text-white">
-                    {antonyms.join(', ')}
-                  </Text>
+                  <View className="mt-1 flex-row flex-wrap">
+                    {antonyms.map((a, i) => (
+                      <Pressable
+                        key={`ant-${i}`}
+                        onPress={() => navigateAndSearch(a)}
+                        onLongPress={(evt) => onShowTextActions(a, evt, () => navigateAndSearch(a))}
+                        delayLongPress={350}
+                      >
+                        <Text className="text-sm text-black dark:text-white">
+                          {a}{i < antonyms.length - 1 ? ', ' : ''}
+                        </Text>
+                      </Pressable>
+                    ))}
+                  </View>
                 </View>
               ) : null}
 
-              <Pressable onPress={onReport} className="mt-1 flex-row items-center self-end">
-                <MaterialIcons name="flag" size={14} color="#9ca3af" />
-                <Text className="ml-1 text-xs text-gray-400">{t('report.title')}</Text>
-              </Pressable>
             </>
           )}
         </View>
@@ -684,12 +974,3 @@ function WordRow({
   );
 }
 
-function ReviewStatusIcon({ intervalDays }: { intervalDays: number }) {
-  if (intervalDays >= 3) {
-    return <MaterialIcons name="check" size={14} color="#2EC4A5" style={{ marginRight: 4 }} />;
-  }
-  if (intervalDays >= 1) {
-    return <MaterialIcons name="change-history" size={14} color="#9ca3af" style={{ marginRight: 4 }} />;
-  }
-  return <MaterialIcons name="close" size={14} color="#ef4444" style={{ marginRight: 4 }} />;
-}

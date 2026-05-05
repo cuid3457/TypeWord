@@ -1,12 +1,14 @@
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  FlatList,
   Linking,
   Pressable,
   ScrollView,
   Switch,
   Text,
+  TextInput,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,7 +17,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AppModal } from '@/components/app-modal';
 import { Paywall } from '@/components/paywall';
 import { ensureLanguageLoaded } from '@src/i18n';
-import { LANGUAGES, findLanguage, type Language } from '@src/constants/languages';
+import { NATIVE_LANGUAGES, findLanguage } from '@src/constants/languages';
+import { findCountry, getSortedCountries, localizedCountryName } from '@src/constants/countries';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { showAdsPrivacyOptions } from '@src/services/adsConsent';
@@ -31,7 +34,7 @@ import {
   cancelAllNotifications,
 } from '@src/services/notificationService';
 
-type EditingField = 'native' | null;
+type EditingField = 'native' | 'region' | null;
 
 export default function SettingsScreen() {
   const { t, i18n } = useTranslation();
@@ -46,6 +49,8 @@ export default function SettingsScreen() {
   const [notifDeniedModal, setNotifDeniedModal] = useState(false);
   const [rateModal, setRateModal] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [regionSearch, setRegionSearch] = useState('');
+  const [pendingRegionCode, setPendingRegionCode] = useState<string | null>(null);
 
   useFocusEffect(
     useCallback(() => {
@@ -54,23 +59,69 @@ export default function SettingsScreen() {
     }, []),
   );
 
+  // Prewarm the country list cache so the picker opens instantly when tapped.
+  useEffect(() => {
+    getSortedCountries(t, i18n.language);
+  }, [t, i18n.language]);
+
   if (!settings) return null;
 
   const native = findLanguage(settings.nativeLanguage);
+  const country = findCountry(settings.countryCode);
+  const pendingCountry = pendingRegionCode ? findCountry(pendingRegionCode) : null;
 
   const handleSelect = async (field: EditingField, code: string) => {
     if (!field) return;
-    const next = { ...settings };
 
     if (field === 'native') {
+      const next = { ...settings };
       next.nativeLanguage = code;
       next.primaryTargetLang = code;
       ensureLanguageLoaded(code);
       i18n.changeLanguage(code);
+      await save(next);
+      setEditing(null);
+      return;
     }
 
+    if (field === 'region') {
+      const picked = findCountry(code);
+      if (!picked) {
+        setEditing(null);
+        return;
+      }
+      if (picked.code === settings.countryCode) {
+        // No change — just close.
+        setEditing(null);
+        setRegionSearch('');
+        return;
+      }
+      // Defer the actual save until the user confirms in the modal.
+      setPendingRegionCode(code);
+      setEditing(null);
+      setRegionSearch('');
+    }
+  };
+
+  const handleConfirmRegionChange = async () => {
+    if (!pendingRegionCode) return;
+    const picked = findCountry(pendingRegionCode);
+    if (!picked) {
+      setPendingRegionCode(null);
+      return;
+    }
+    const next = {
+      ...settings,
+      countryCode: picked.code,
+      timezone: picked.timezone,
+    };
     await save(next);
-    setEditing(null);
+    setPendingRegionCode(null);
+  };
+
+  const onRegionPress = () => {
+    setEditing(editing === 'region' ? null : 'region');
+    if (editing !== 'region') setRegionSearch('');
   };
 
   const handleReset = async () => {
@@ -102,7 +153,7 @@ export default function SettingsScreen() {
               <View className="ml-3">
                 <View className="flex-row items-center">
                   <Text className="text-base font-semibold text-black dark:text-white">
-                    {premium ? t('premium.premium_plan') : t('premium.free_plan')}
+                    {premium ? t('premium.premium_plan') : t('premium.subscribe')}
                   </Text>
                   {premium ? (
                     <View className="ml-2 rounded-full bg-[#2EC4A5] px-2 py-0.5">
@@ -111,7 +162,7 @@ export default function SettingsScreen() {
                   ) : null}
                 </View>
                 <Text className="mt-0.5 text-xs text-gray-500">
-                  {premium ? t('premium.active') : t('premium.subscribe')}
+                  {premium ? t('premium.active') : t('premium.current_free')}
                 </Text>
               </View>
             </View>
@@ -150,18 +201,52 @@ export default function SettingsScreen() {
             isOpen={editing === 'native'}
             onPress={() => setEditing(editing === 'native' ? null : 'native')}
           />
-        </View>
 
-        {editing === 'native' ? (
-          <View className="mt-2 rounded-2xl border border-gray-300 dark:border-gray-700" style={{ height: 320 }}>
-            <LanguageList
-              excludeCode={null}
-              selectedCode={settings.nativeLanguage}
-              onSelect={(code) => handleSelect(editing, code)}
-              t={t}
-            />
-          </View>
-        ) : null}
+          {/* Inline list under the active row so the option list is visually
+              attached to the row that opened it. The other row is hidden
+              while editing — same pattern as the new-wordlist screen. */}
+          {editing === 'native' ? (
+            <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+              <LanguageList
+                excludeCode={null}
+                selectedCode={settings.nativeLanguage}
+                onSelect={(code) => handleSelect(editing, code)}
+                t={t}
+              />
+            </View>
+          ) : null}
+
+          {editing !== 'native' ? (
+            <>
+              <View className="mx-4 h-px bg-gray-200 dark:bg-gray-800" />
+
+              {/* Region */}
+              <SettingRow
+                label={t('settings.region')}
+                value={
+                  country
+                    ? `${country.flag} ${localizedCountryName(t, country.code, i18n.language, country.name)}`
+                    : '—'
+                }
+                isOpen={editing === 'region'}
+                onPress={onRegionPress}
+              />
+
+              {editing === 'region' ? (
+                <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 360 }}>
+                  <CountryList
+                    selectedCode={settings.countryCode ?? ''}
+                    query={regionSearch}
+                    onQueryChange={setRegionSearch}
+                    onSelect={(code) => handleSelect('region', code)}
+                    lang={i18n.language}
+                    t={t}
+                  />
+                </View>
+              ) : null}
+            </>
+          ) : null}
+        </View>
 
         {/* Theme selector */}
         <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
@@ -292,6 +377,15 @@ export default function SettingsScreen() {
         </Pressable>
 
         <Pressable
+          onPress={() => router.push('/business-info')}
+          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+        >
+          <Text className="text-center text-sm font-medium text-black dark:text-white">
+            {t('settings.business_info')}
+          </Text>
+        </Pressable>
+
+        <Pressable
           onPress={async () => {
             const shown = await showAdsPrivacyOptions();
             if (!shown) setAdModal(true);
@@ -389,6 +483,22 @@ export default function SettingsScreen() {
         onClose={() => setRateModal(false)}
       />
 
+      <AppModal
+        visible={!!pendingCountry}
+        title={t('settings.region_change_title')}
+        message={
+          pendingCountry
+            ? t('settings.region_change_message', {
+                country: `${pendingCountry.flag} ${localizedCountryName(t, pendingCountry.code, i18n.language, pendingCountry.name)}`,
+              })
+            : ''
+        }
+        buttonText={t('settings.cancel')}
+        confirmText={t('settings.region_change_confirm')}
+        onConfirm={handleConfirmRegionChange}
+        onClose={() => setPendingRegionCode(null)}
+      />
+
       <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
 
       <AppModal
@@ -429,6 +539,81 @@ function SettingRow({
   );
 }
 
+function CountryList({
+  selectedCode,
+  query,
+  onQueryChange,
+  onSelect,
+  lang,
+  t,
+}: {
+  selectedCode: string;
+  query: string;
+  onQueryChange: (q: string) => void;
+  onSelect: (code: string) => void;
+  lang: string;
+  t: (key: string, opts?: { defaultValue?: string }) => string;
+}) {
+  // Cached across remounts per locale — avoids re-translating + re-sorting
+  // 170+ countries every time the picker opens.
+  const sortedCountries = useMemo(() => getSortedCountries(t, lang), [lang, t]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return sortedCountries;
+    return sortedCountries.filter(
+      (c) =>
+        c.displayName.toLowerCase().includes(q) ||
+        c.name.toLowerCase().includes(q) ||
+        c.code.toLowerCase().includes(q),
+    );
+  }, [query, sortedCountries]);
+
+  return (
+    <View className="flex-1">
+      <View className="mx-3 mt-3 flex-row items-center rounded-xl border border-gray-200 px-3 dark:border-gray-700">
+        <MaterialIcons name="search" size={18} color="#9ca3af" />
+        <TextInput
+          value={query}
+          onChangeText={onQueryChange}
+          placeholder={t('settings.region_search_placeholder')}
+          placeholderTextColor="#9ca3af"
+          className="ml-2 flex-1 py-2 text-sm text-black dark:text-white"
+        />
+      </View>
+      <FlatList
+        data={filtered}
+        keyExtractor={(item) => item.code}
+        className="mt-2"
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled
+        initialNumToRender={20}
+        windowSize={5}
+        removeClippedSubviews
+        renderItem={({ item: c }) => {
+          const selected = c.code === selectedCode;
+          return (
+            <Pressable
+              onPress={() => onSelect(c.code)}
+              className={`flex-row items-center px-4 py-3 ${
+                selected ? 'bg-black/5 dark:bg-white/10' : ''
+              }`}
+            >
+              <Text className="mr-3 text-xl">{c.flag}</Text>
+              <Text className="flex-1 text-base text-black dark:text-white">
+                {c.displayName}
+              </Text>
+              {selected ? (
+                <MaterialIcons name="check-circle" size={22} color="#2EC4A5" />
+              ) : null}
+            </Pressable>
+          );
+        }}
+      />
+    </View>
+  );
+}
+
 function LanguageList({
   excludeCode,
   selectedCode,
@@ -440,7 +625,7 @@ function LanguageList({
   onSelect: (code: string) => void;
   t: (key: string) => string;
 }) {
-  const list = LANGUAGES.filter((l) => {
+  const list = NATIVE_LANGUAGES.filter((l) => {
     if (excludeCode && l.code === excludeCode) return false;
     return true;
   });
@@ -468,7 +653,7 @@ function LanguageList({
               ) : null}
             </View>
             {selected ? (
-              <Text className="text-base text-black dark:text-white">✓</Text>
+              <MaterialIcons name="check-circle" size={22} color="#2EC4A5" />
             ) : null}
           </Pressable>
         );

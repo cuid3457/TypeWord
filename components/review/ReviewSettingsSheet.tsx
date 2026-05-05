@@ -1,17 +1,16 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useMemo, useCallback } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { useMemo, useCallback, useState } from 'react';
+import { Dimensions, Modal, Pressable, ScrollView, Text, View } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { type SharedValue, runOnJS, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium } from '@src/hooks/usePremium';
 import { getDailyLimit, type ReviewMode as LimitReviewMode } from '@src/services/reviewLimitService';
 
 type ReviewOrder = 'newest' | 'shuffle';
-type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context';
+type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
 
 const MIN_SESSION = 5;
 const MAX_SESSION = 50;
@@ -44,9 +43,18 @@ export function ReviewSettingsSheet({
   onStart,
 }: Props) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme();
   const insets = useSafeAreaInsets();
   const premium = usePremium();
+  const [modeListOpen, setModeListOpen] = useState(false);
+
+  const MODE_ORDER: ReviewMode[] = ['auto', 'flashcard', 'choice', 'dictation', 'context', 'fill_blank'];
+  const modeIcon = (m: ReviewMode): keyof typeof MaterialIcons.glyphMap =>
+    m === 'auto' ? 'shuffle'
+    : m === 'flashcard' ? 'style'
+    : m === 'choice' ? 'quiz'
+    : m === 'dictation' ? 'keyboard'
+    : m === 'context' ? 'menu-book'
+    : 'edit-note';
 
   const hideSheet = useCallback(() => {
     onDismiss();
@@ -83,17 +91,38 @@ export function ReviewSettingsSheet({
     <Modal visible={visible} transparent animationType="none" onRequestClose={dismissSheet}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Pressable onPress={dismissSheet} className="flex-1 justify-end bg-black/50">
-          <GestureDetector gesture={panGesture}>
-            <Animated.View className="rounded-t-3xl bg-white px-6 pt-6 dark:bg-gray-900" style={[{ paddingBottom: Math.max(insets.bottom, 16) + 16 }, sheetAnimStyle]}>
+          <Animated.View
+            accessibilityLabel={t('review.settings_title')}
+            className="rounded-t-3xl bg-white dark:bg-gray-900"
+            style={[
+              {
+                // Cap sheet at 90% of screen so the inner ScrollView gets a
+                // scrollable area instead of the sheet pushing its top edge
+                // off-screen when content grows (large fonts × expanded
+                // mode list × keyboard etc.).
+                maxHeight: Dimensions.get('window').height * 0.9,
+              },
+              sheetAnimStyle,
+            ]}
+          >
+            {/* Pan-to-dismiss is scoped to the drag handle only — wrapping
+                the entire sheet in the GestureDetector intercepts every
+                vertical drag, including the user's attempt to scroll the
+                ScrollView (so the last mode in the list, fill_blank, was
+                unreachable on tall layouts). */}
+            <GestureDetector gesture={panGesture}>
               <Pressable onPress={() => {}}>
-                <View className="mb-4 items-center">
+                <View className="items-center pt-3 pb-2">
                   <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
                 </View>
-                <Text className="text-xl font-bold text-black dark:text-white">
-                  {t('review.settings_title')}
-                </Text>
-
-                <Text className="mb-2 mt-5 text-sm font-semibold text-gray-500">{t('review.order')}</Text>
+              </Pressable>
+            </GestureDetector>
+              {/* Plain View instead of ScrollView — order + mode trigger
+                  are fixed-size sections that should stay put. The mode
+                  list (when expanded) has its own bounded ScrollView so
+                  only the 6 mode rows scroll, never the order section. */}
+              <View className="px-6 pt-4 pb-4" style={{ flexShrink: 1 }}>
+                <Text className="mb-2 text-sm font-semibold text-gray-500">{t('review.order')}</Text>
                 <View className="flex-row gap-2">
                   {(['newest', 'shuffle'] as const).map((o) => (
                     <Pressable
@@ -113,42 +142,81 @@ export function ReviewSettingsSheet({
                 </View>
 
                 <Text className="mb-2 mt-5 text-sm font-semibold text-gray-500">{t('review.mode')}</Text>
-                <View className="flex-row flex-wrap gap-2">
-                  {(['flashcard', 'choice', 'dictation', 'context'] as const).map((m) => {
-                    const icon = m === 'flashcard' ? 'style' : m === 'choice' ? 'quiz' : m === 'dictation' ? 'keyboard' : 'menu-book';
-                    const rem = settingsRemaining[m] ?? Infinity;
-                    const limit = getDailyLimit(m as LimitReviewMode);
-                    return (
-                      <Pressable
-                        key={m}
-                        onPress={() => setReviewMode(m)}
-                        className={`w-[48%] items-center rounded-xl py-4 ${
-                          reviewMode === m ? 'bg-black dark:bg-white' : 'bg-gray-100 dark:bg-gray-800'
-                        }`}
-                      >
-                        <MaterialIcons
-                          name={icon}
-                          size={24}
-                          color={reviewMode === m ? (colorScheme === 'dark' ? '#000' : '#fff') : '#6b7280'}
-                        />
-                        <Text className={`mt-1 text-sm font-semibold ${
-                          reviewMode === m ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-400'
-                        }`}>
-                          {t(`review.mode_${m}`)}
-                        </Text>
-                        {!premium && rem !== Infinity ? (
-                          <Text className={`mt-0.5 text-xs ${
-                            reviewMode === m ? 'text-gray-300 dark:text-gray-600' : 'text-gray-400 dark:text-gray-500'
-                          }`}>
-                            {rem}/{limit}
+                {/* Collapsed trigger: shows just the active mode. Tap toggles
+                    an inline list of all options below — same UX pattern as
+                    the native-language picker on the settings screen. */}
+                <Pressable
+                  onPress={() => setModeListOpen((v) => !v)}
+                  className="flex-row items-center rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700"
+                >
+                  <MaterialIcons name={modeIcon(reviewMode)} size={22} color="#10b981" />
+                  <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                    {t(`review.mode_${reviewMode}`)}
+                  </Text>
+                  <MaterialIcons
+                    name={modeListOpen ? 'expand-less' : 'expand-more'}
+                    size={22}
+                    color="#9ca3af"
+                  />
+                </Pressable>
+                {modeListOpen ? (
+                  // Self-scrolling list — only the 6 mode rows move when
+                  // the user drags inside this box. Order section + mode
+                  // trigger above stay fixed. Cap chosen so all 6 rows
+                  // fit at default font; large fonts scroll within.
+                  <ScrollView
+                    nestedScrollEnabled
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator
+                    className="mt-1 rounded-xl border border-gray-200 dark:border-gray-800"
+                    style={{ maxHeight: 350 }}
+                    contentContainerStyle={{ padding: 4, gap: 4 }}
+                  >
+                    {MODE_ORDER.map((m) => {
+                      const rem = settingsRemaining[m] ?? Infinity;
+                      const limit = getDailyLimit(m as LimitReviewMode);
+                      const isSelected = reviewMode === m;
+                      return (
+                        <Pressable
+                          key={m}
+                          onPress={() => {
+                            setReviewMode(m);
+                            setModeListOpen(false);
+                          }}
+                          className={`flex-row items-center rounded-lg px-3 py-3 ${
+                            isSelected ? 'bg-black/5 dark:bg-white/10' : ''
+                          }`}
+                        >
+                          <MaterialIcons
+                            name={modeIcon(m)}
+                            size={22}
+                            color={isSelected ? '#10b981' : '#6b7280'}
+                          />
+                          <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                            {t(`review.mode_${m}`)}
                           </Text>
-                        ) : null}
-                      </Pressable>
-                    );
-                  })}
-                </View>
+                          {!premium && rem !== Infinity ? (
+                            <Text className="text-xs text-gray-400">
+                              {rem}/{limit}
+                            </Text>
+                          ) : null}
+                        </Pressable>
+                      );
+                    })}
+                  </ScrollView>
+                ) : null}
 
-                <Text className="mb-2 mt-5 text-sm font-semibold text-gray-500">{t('review.session_count')}</Text>
+              </View>
+
+              {/* Sticky footer — keeps the session-count stepper AND the
+                  start button pinned above the system nav bar regardless
+                  of how tall the inner ScrollView grows (e.g. when the
+                  mode list expands). Only the ScrollView above scrolls. */}
+              <View
+                className="px-6"
+                style={{ paddingTop: 12, paddingBottom: Math.max(insets.bottom, 16) + 24 }}
+              >
+                <Text className="mb-2 text-sm font-semibold text-gray-500">{t('review.session_count')}</Text>
                 <View className="flex-row items-center justify-center gap-4">
                   <Pressable
                     onPress={() => setSessionCount((c) => Math.max(MIN_SESSION, c - 5))}
@@ -173,12 +241,11 @@ export function ReviewSettingsSheet({
                   </Pressable>
                 </View>
 
-                <Pressable onPress={onStart} className="mt-6 items-center rounded-xl bg-black py-4 dark:bg-white">
+                <Pressable onPress={onStart} className="mt-4 items-center rounded-xl bg-black py-4 dark:bg-white">
                   <Text className="text-base font-semibold text-white dark:text-black">{t('review.start')}</Text>
                 </Pressable>
-              </Pressable>
-            </Animated.View>
-          </GestureDetector>
+              </View>
+          </Animated.View>
         </Pressable>
       </GestureHandlerRootView>
     </Modal>

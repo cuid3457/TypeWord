@@ -86,6 +86,7 @@ JSON schema:
 }
 
 Deno.serve(async (req: Request) => {
+  console.log("[image-extract] incoming request", { method: req.method });
   const cors = getCorsHeaders(req);
   if (req.method === "OPTIONS") {
     return new Response(null, { status: 204, headers: cors });
@@ -99,13 +100,21 @@ Deno.serve(async (req: Request) => {
 
   const authHeader = req.headers.get("Authorization") ?? "";
   const jwt = authHeader.replace(/^Bearer\s+/i, "");
-  if (!jwt) return jsonResponse({ error: "Missing Authorization header" }, 401, cors);
+  if (!jwt) {
+    console.log("[image-extract] missing auth header");
+    return jsonResponse({ error: "Missing Authorization header" }, 401, cors);
+  }
 
   const { data: userData, error: userErr } = await admin.auth.getUser(jwt);
   if (userErr || !userData?.user) {
+    console.log("[image-extract] invalid token", { userErr: userErr?.message });
     return jsonResponse({ error: "Invalid token" }, 401, cors);
   }
   const userId = userData.user.id;
+  console.log("[image-extract] authenticated", {
+    userId,
+    email: userData.user.email,
+  });
 
   let imageBase64: string;
   let sourceLang: string;
@@ -123,11 +132,24 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ error: "image, sourceLang, targetLang required" }, 400, cors);
   }
 
+  // Cap inbound payload — 5 MB raw image (~6.7 MB base64). Quota + rate
+  // limits gate *frequency* of abuse; this gates *size* per call so an
+  // attacker can't push 50 MB JPEGs through OpenAI on each allowed shot.
+  const MAX_BASE64_BYTES = 7 * 1024 * 1024;
+  if (imageBase64.length > MAX_BASE64_BYTES) {
+    return jsonResponse({ error: "image too large (max 5MB)" }, 413, cors);
+  }
+
   const startedAt = Date.now();
 
   try {
     await enforceAllLimits(admin, userId);
+    console.log("[image-extract] rate limits passed");
   } catch (err) {
+    console.log("[image-extract] rate limit blocked", {
+      type: err?.constructor?.name,
+      message: err instanceof Error ? err.message : String(err),
+    });
     if (err instanceof RateLimitError) {
       return jsonResponse({ error: err.message }, err.status, cors);
     }
@@ -138,50 +160,59 @@ Deno.serve(async (req: Request) => {
   }
 
   // ── Image extraction usage limit ──
+  // Atomic consume on profiles: O(1) regardless of api_calls volume.
+  // Calendar-month reset based on user's stored timezone; falls back to UTC
+  // if timezone not set. Refunds on OpenAI-side failure (see catch block).
   const { data: profile } = await admin
     .from("profiles")
-    .select("plan")
+    .select("plan, timezone")
     .eq("user_id", userId)
     .single();
 
   const isPremium = profile?.plan === "premium";
+  const userTimezone = profile?.timezone ?? "UTC";
+  const limit = isPremium ? IMAGE_LIMIT_PREMIUM : IMAGE_LIMIT_FREE;
+  console.log("[image-extract] profile loaded", {
+    userId,
+    plan: profile?.plan,
+    timezone: userTimezone,
+    limit,
+  });
 
-  if (isPremium) {
-    const monthStart = new Date();
-    monthStart.setUTCDate(1);
-    monthStart.setUTCHours(0, 0, 0, 0);
+  // Raw count read just before consume, for divergence diagnosis.
+  const { data: rawCheck } = await admin
+    .from("profiles")
+    .select("image_extract_count, image_extract_bucket")
+    .eq("user_id", userId)
+    .single();
+  console.log("[image-extract] raw profile state pre-consume", rawCheck);
 
-    const { count } = await admin
-      .from("api_calls")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .eq("endpoint", ENDPOINT)
-      .eq("status", "ok")
-      .gte("created_at", monthStart.toISOString());
+  const { data: quotaResult, error: quotaErr } = await admin.rpc(
+    "try_consume_image_extract_quota",
+    {
+      p_user_id: userId,
+      p_timezone: userTimezone,
+      p_limit: limit,
+    },
+  );
+  console.log("[image-extract] quota consume result", {
+    quotaResult,
+    quotaErr: quotaErr?.message,
+  });
 
-    if ((count ?? 0) >= IMAGE_LIMIT_PREMIUM) {
-      return jsonResponse(
-        { error: "IMAGE_LIMIT_REACHED", limit: IMAGE_LIMIT_PREMIUM, used: count },
-        429,
-        cors,
-      );
-    }
-  } else {
-    const { count } = await admin
-      .from("api_calls")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .eq("endpoint", ENDPOINT)
-      .eq("status", "ok");
-
-    if ((count ?? 0) >= IMAGE_LIMIT_FREE) {
-      return jsonResponse(
-        { error: "IMAGE_LIMIT_REACHED", limit: IMAGE_LIMIT_FREE, used: count },
-        429,
-        cors,
-      );
-    }
+  if (quotaErr) {
+    return jsonResponse({ error: "Internal error" }, 500, cors);
   }
+
+  const quota = quotaResult as { allowed: boolean; used: number; limit: number };
+  if (!quota.allowed) {
+    return jsonResponse(
+      { error: "IMAGE_LIMIT_REACHED", limit: quota.limit, used: quota.used },
+      429,
+      cors,
+    );
+  }
+  console.log("[image-extract] quota allowed, calling OpenAI", { used: quota.used });
 
   try {
     const systemPrompt = buildSystemPrompt(sourceLang, targetLang);
@@ -248,7 +279,8 @@ Deno.serve(async (req: Request) => {
         completionTokens * PRICE_OUTPUT_PER_1M) /
       1_000_000;
 
-    logApiCall(admin, {
+    // Await log write so the edge runtime doesn't terminate it mid-insert.
+    await logApiCall(admin, {
       userId,
       endpoint: ENDPOINT,
       cacheHit: false,
@@ -257,19 +289,32 @@ Deno.serve(async (req: Request) => {
       costUsd,
       durationMs: Date.now() - startedAt,
       status: "ok",
-    }).catch(() => {});
+      timezone: userTimezone,
+    }).catch((e) => console.log("[image-extract] logApiCall failed", e));
 
     return jsonResponse({ result: parsed }, 200, cors);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    logApiCall(admin, {
-      userId,
-      endpoint: ENDPOINT,
-      cacheHit: false,
-      status: "error",
-      errorMessage: message,
-      durationMs: Date.now() - startedAt,
-    }).catch(() => {});
+    console.log("[image-extract] error path", { message });
+
+    // Refund + log in parallel, but AWAIT them — fire-and-forget gets
+    // cancelled by the edge runtime when the response returns.
+    await Promise.allSettled([
+      admin.rpc("refund_image_extract_quota", {
+        p_user_id: userId,
+        p_timezone: userTimezone,
+      }),
+      logApiCall(admin, {
+        userId,
+        endpoint: ENDPOINT,
+        cacheHit: false,
+        status: "error",
+        errorMessage: message,
+        durationMs: Date.now() - startedAt,
+        timezone: userTimezone,
+      }),
+    ]);
+
     return jsonResponse({ error: message }, 500, cors);
   }
 });

@@ -17,6 +17,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Toast } from '@/components/toast';
 import { signUpWithEmail, signInWithEmail, signInWithGoogle, signOut, ensureSession } from '@src/services/authService';
+import { isTimeoutError, withTimeout } from '@src/utils/timeout';
+
+const AUTH_TIMEOUT_MS = 20000;
 
 function mapAuthError(raw: string): string {
   const lower = raw.toLowerCase();
@@ -59,20 +62,32 @@ export default function AuthScreen() {
     setLoading(true);
     setToast(null);
 
-    const result = mode === 'signup'
-      ? await signUpWithEmail(email.trim(), password)
-      : await signInWithEmail(email.trim(), password);
+    try {
+      const result = await withTimeout(
+        mode === 'signup'
+          ? signUpWithEmail(email.trim(), password)
+          : signInWithEmail(email.trim(), password),
+        AUTH_TIMEOUT_MS,
+      );
 
-    setLoading(false);
-    if (result.error) {
-      console.log('Auth error:', result.error);
-      showToast(t(mapAuthError(result.error)));
-    } else {
-      if (mode === 'signup') {
-        setSignedUpEmail(email.trim());
-        showToast(t('auth.verify_email'), 'success');
+      setLoading(false);
+      if (result.error) {
+        console.log('Auth error:', result.error);
+        showToast(t(mapAuthError(result.error)));
       } else {
-        router.back();
+        if (mode === 'signup') {
+          setSignedUpEmail(email.trim());
+          showToast(t('auth.verify_email'), 'success');
+        } else {
+          router.back();
+        }
+      }
+    } catch (err) {
+      setLoading(false);
+      if (isTimeoutError(err)) {
+        showToast(t('error.slow_network'));
+      } else {
+        showToast(t('auth.error_unknown'));
       }
     }
   };
@@ -102,15 +117,16 @@ export default function AuthScreen() {
             onPress={async () => {
               try {
                 setGoogleLoading(true);
-                const result = await signInWithGoogle();
+                const result = await withTimeout(signInWithGoogle(), AUTH_TIMEOUT_MS);
                 setGoogleLoading(false);
                 if (result.error) {
                   if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
                 } else {
                   router.back();
                 }
-              } catch {
+              } catch (err) {
                 setGoogleLoading(false);
+                if (isTimeoutError(err)) showToast(t('error.slow_network'));
               }
             }}
             disabled={googleLoading || loading}
@@ -199,12 +215,20 @@ export default function AuthScreen() {
             <Pressable
               onPress={async () => {
                 setResending(true);
-                const result = await signUpWithEmail(email.trim(), password);
-                setResending(false);
-                if (result.error) {
-                  showToast(t(mapAuthError(result.error)));
-                } else {
-                  showToast(t('auth.email_resent'), 'success');
+                try {
+                  const result = await withTimeout(
+                    signUpWithEmail(email.trim(), password),
+                    AUTH_TIMEOUT_MS,
+                  );
+                  setResending(false);
+                  if (result.error) {
+                    showToast(t(mapAuthError(result.error)));
+                  } else {
+                    showToast(t('auth.email_resent'), 'success');
+                  }
+                } catch (err) {
+                  setResending(false);
+                  if (isTimeoutError(err)) showToast(t('error.slow_network'));
                 }
               }}
               disabled={resending || !email.trim() || !password.trim()}

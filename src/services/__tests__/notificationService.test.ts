@@ -18,6 +18,13 @@ const mockTranslations: NotificationTranslations = {
   return14dBody: '{{count}} words are waiting for review.',
   weeklyTitle: '📊 Weekly progress',
   weeklyBody: 'You studied {{count}} words this week. Keep it up!',
+  perListTitle: '🔔 {{title}}',
+  perListBodyDue: '{{count}} words are waiting for review',
+  perListBodyDue2: "Start with today's {{count}} words?",
+  perListBodyDueStreak: 'Review {{count}} to keep your {{streak}}-day streak 🔥',
+  perListBodyEmpty: 'How about adding new words today?',
+  perListBodyEmpty2: 'Add one more word to this list?',
+  perListBodyEmptyStreak: '{{streak}}-day streak going! A quick session today 🔥',
 };
 
 describe('stripBookName', () => {

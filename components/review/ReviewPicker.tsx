@@ -92,21 +92,18 @@ export function ReviewPicker({
               </Text>
             </View>
             <View className="flex-row items-center gap-1">
-              {Array.from({ length: 2 }, (_, i) => (
-                <MaterialIcons
-                  key={i}
-                  name="favorite"
-                  size={18}
-                  color={i < streak.hearts ? '#ef4444' : colorScheme === 'dark' ? '#78350f' : '#fcd34d'}
-                />
-              ))}
+              {Array.from({ length: 2 }, (_, i) => {
+                const active = i < streak.hearts;
+                return (
+                  <MaterialIcons
+                    key={i}
+                    name={active ? 'favorite' : 'favorite-border'}
+                    size={18}
+                    color={active ? '#ef4444' : colorScheme === 'dark' ? '#6b7280' : '#9ca3af'}
+                  />
+                );
+              })}
             </View>
-            <MaterialIcons
-              name={streak.todayDone ? 'check-circle' : 'radio-button-unchecked'}
-              size={20}
-              color={streak.todayDone ? '#2EC4A5' : '#9ca3af'}
-              style={{ marginLeft: 8 }}
-            />
           </View>
         ) : (
           <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-gray-100 px-4 py-3 dark:bg-gray-800">
@@ -241,7 +238,6 @@ export function ReviewPicker({
             <Pressable
               onPress={() => {
                 if (!canStart) {
-                  if (canReload) return;
                   onMinWordToast();
                   return;
                 }
@@ -250,36 +246,36 @@ export function ReviewPicker({
               className={`mb-2 rounded-xl border px-4 py-4 ${
                 highlighted ? '' : 'border-gray-300 dark:border-gray-700'
               }`}
-              style={[
-                highlighted ? { borderColor: '#2EC4A5' } : undefined,
-                !canStart && !canReload ? { opacity: 0.4 } : undefined,
-              ]}
+              style={highlighted ? { borderColor: '#2EC4A5' } : undefined}
             >
-              <View className="flex-row items-center justify-between">
-                <Text className="flex-1 text-base font-medium text-black dark:text-white" numberOfLines={1}>
-                  {item.title}
-                </Text>
-                <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-                  <Text className="text-sm font-semibold text-black dark:text-white">
-                    {t('home.word_count', { count: item.dueCount })}
+              {/* Dimmed header/meta only — reload button below stays full opacity. */}
+              <View style={!canStart ? { opacity: 0.4 } : undefined}>
+                <View className="flex-row items-center justify-between">
+                  <Text className="flex-1 text-base font-medium text-black dark:text-white" numberOfLines={1}>
+                    {item.title}
                   </Text>
+                  <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                    <Text className="text-sm font-semibold text-black dark:text-white">
+                      {t('home.word_count', { count: item.dueCount })}
+                    </Text>
+                  </View>
                 </View>
+                {src && tgt ? (
+                  <Text className="mt-1 text-xs text-gray-500">
+                    {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+                  </Text>
+                ) : null}
               </View>
-              {src && tgt ? (
-                <Text className="mt-1 text-xs text-gray-500">
-                  {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
-                </Text>
-              ) : null}
               {canReload ? (
                 <Pressable
                   onPress={async () => {
                     await resetReviewSchedule(item.bookId);
                     await loadPickerData(sortMode, sortReversed);
                   }}
-                  className="mt-2 flex-row items-center self-start rounded-lg bg-gray-100 px-3 py-1.5 dark:bg-gray-800"
+                  className="mt-2 flex-row items-center self-start rounded-lg border border-[#2EC4A5] bg-gray-100 px-3 py-1.5 dark:bg-gray-800"
                 >
-                  <MaterialIcons name="refresh" size={14} color="#6b7280" />
-                  <Text className="ml-1 text-xs font-medium text-gray-600 dark:text-gray-400">
+                  <MaterialIcons name="refresh" size={14} color="#2EC4A5" />
+                  <Text className="ml-1 text-xs font-medium text-[#2EC4A5]">
                     {t('review.reload_hint', { count: Math.min(item.reloadableCount, MAX_RELOAD) })}
                   </Text>
                 </Pressable>

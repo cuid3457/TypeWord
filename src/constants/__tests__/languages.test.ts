@@ -1,8 +1,8 @@
-import { LANGUAGES, STUDY_LANGUAGES, isStudyLang, findLanguage } from '../languages';
+import { LANGUAGES, STUDY_LANGUAGES, isStudyLang, findLanguage, migrateNativeLang } from '../languages';
 
 describe('LANGUAGES', () => {
-  it('has 16 languages', () => {
-    expect(LANGUAGES).toHaveLength(16);
+  it('has 11 supported languages', () => {
+    expect(LANGUAGES).toHaveLength(11);
   });
 
   it('each language has required fields', () => {
@@ -21,19 +21,13 @@ describe('LANGUAGES', () => {
 });
 
 describe('STUDY_LANGUAGES', () => {
-  it('excludes nativeOnly languages', () => {
-    const nativeOnly = LANGUAGES.filter((l) => l.nativeOnly);
-    for (const lang of nativeOnly) {
-      expect(STUDY_LANGUAGES.find((s) => s.code === lang.code)).toBeUndefined();
-    }
-  });
-
-  it('includes en, ko, ja, zh, es, fr, de, it, pt, ru', () => {
+  it('includes en, ko, ja, zh-CN, zh-TW, es, fr, de, it, pt, ru', () => {
     const codes = STUDY_LANGUAGES.map((l) => l.code);
     expect(codes).toContain('en');
     expect(codes).toContain('ko');
     expect(codes).toContain('ja');
-    expect(codes).toContain('zh');
+    expect(codes).toContain('zh-CN');
+    expect(codes).toContain('zh-TW');
     expect(codes).toContain('es');
     expect(codes).toContain('fr');
     expect(codes).toContain('de');
@@ -50,7 +44,7 @@ describe('isStudyLang', () => {
     expect(isStudyLang('ja')).toBe(true);
   });
 
-  it('returns false for nativeOnly languages', () => {
+  it('returns false for removed legacy native-only codes', () => {
     expect(isStudyLang('vi')).toBe(false);
     expect(isStudyLang('th')).toBe(false);
     expect(isStudyLang('ar')).toBe(false);
@@ -63,6 +57,10 @@ describe('isStudyLang', () => {
     expect(isStudyLang('xx')).toBe(false);
     expect(isStudyLang('')).toBe(false);
   });
+
+  it('treats legacy zh as a study language', () => {
+    expect(isStudyLang('zh')).toBe(true);
+  });
 });
 
 describe('findLanguage', () => {
@@ -73,14 +71,41 @@ describe('findLanguage', () => {
     expect(en!.flag).toBe('🇺🇸');
   });
 
-  it('finds nativeOnly languages', () => {
-    const vi = findLanguage('vi');
-    expect(vi).toBeDefined();
-    expect(vi!.nativeName).toBe('Tiếng Việt');
+  it('returns undefined for removed native-only codes', () => {
+    expect(findLanguage('vi')).toBeUndefined();
+    expect(findLanguage('th')).toBeUndefined();
   });
 
   it('returns undefined for unknown code', () => {
     expect(findLanguage('xx')).toBeUndefined();
     expect(findLanguage('')).toBeUndefined();
+  });
+
+  it('maps legacy zh to zh-CN', () => {
+    const zh = findLanguage('zh');
+    expect(zh).toBeDefined();
+    expect(zh!.code).toBe('zh-CN');
+  });
+});
+
+describe('migrateNativeLang', () => {
+  it('passes through supported codes unchanged', () => {
+    expect(migrateNativeLang('en')).toBe('en');
+    expect(migrateNativeLang('ko')).toBe('ko');
+    expect(migrateNativeLang('zh-CN')).toBe('zh-CN');
+  });
+
+  it('migrates removed codes to en', () => {
+    expect(migrateNativeLang('vi')).toBe('en');
+    expect(migrateNativeLang('id')).toBe('en');
+    expect(migrateNativeLang('th')).toBe('en');
+    expect(migrateNativeLang('ar')).toBe('en');
+    expect(migrateNativeLang('hi')).toBe('en');
+    expect(migrateNativeLang('tr')).toBe('en');
+  });
+
+  it('falls back to en for null/undefined', () => {
+    expect(migrateNativeLang(null)).toBe('en');
+    expect(migrateNativeLang(undefined)).toBe('en');
   });
 });

@@ -1,11 +1,19 @@
 /**
- * TTS voice selection — picks the best available voice for each language.
- * Prefers network voices (higher quality, better tone/accent) over local ones.
+ * TTS playback — uses the cloud TTS edge function (Azure Neural via
+ * Supabase). Falls back to expo-speech device TTS on network failure or
+ * when the language isn't in the supported set.
+ *
+ * Voice gender + playback rate come from user settings. Per-voice rate
+ * correction is applied so toggling F/M within a language yields a
+ * consistent perceived speed at user_rate=1.0.
  */
-import * as Speech from 'expo-speech';
+import { prefetchTts, speakCloud, stopAll, type PhonemeOverride } from '@src/services/ttsService';
+import { phonemeForChinese } from '@src/utils/pinyin';
 
 const TTS_LOCALE: Record<string, string> = {
   zh: 'zh-CN',
+  'zh-CN': 'zh-CN',
+  'zh-TW': 'zh-TW',
   ja: 'ja-JP',
   ko: 'ko-KR',
   en: 'en-US',
@@ -21,65 +29,39 @@ export function getTtsLocale(langCode: string): string {
   return TTS_LOCALE[langCode] ?? langCode;
 }
 
-// Cache the best voice per locale so we only resolve once
-const voiceCache: Record<string, string | null> = {};
-let voicesLoaded = false;
-let allVoices: Speech.Voice[] = [];
-
-async function loadVoices(): Promise<void> {
-  if (voicesLoaded) return;
-  try {
-    allVoices = await Speech.getAvailableVoicesAsync();
-    voicesLoaded = true;
-  } catch {
-    // Silently fail — will use default voice
-  }
+/**
+ * Speak a word using cloud TTS (Azure Neural). User's voice gender +
+ * playback rate are read from settings inside speakCloud. Falls back to
+ * expo-speech if the cloud call fails.
+ *
+ * `phoneme` is an optional pronunciation override for polysemous Chinese
+ * chars (e.g. 长 → ph='zhang3' to force zhǎng instead of Azure's default
+ * cháng). Use `phonemeForChinese(langCode, reading)` to derive it from a
+ * single-element pinyin reading.
+ */
+export function speakWord(text: string, langCode: string, phoneme?: PhonemeOverride): void {
+  // Fire-and-forget — don't block the UI on TTS playback.
+  speakCloud(text, langCode, phoneme).catch(() => {
+    // Already falls back internally; here just swallow any final error.
+  });
 }
 
-function pickBestVoice(locale: string): string | null {
-  if (voiceCache[locale] !== undefined) return voiceCache[locale];
-
-  // Filter voices matching this locale
-  const matching = allVoices.filter((v) => v.language === locale);
-  if (matching.length === 0) {
-    voiceCache[locale] = null;
-    return null;
-  }
-
-  // Prefer network voices (higher quality, better tones/prosody)
-  const network = matching.find((v) => v.identifier.includes('-network'));
-  const picked = network ?? matching[0];
-  voiceCache[locale] = picked.identifier;
-  return picked.identifier;
+/** Stop any in-flight playback (used when navigating away or interrupting). */
+export function stopSpeaking(): void {
+  stopAll();
 }
 
 /**
- * Speak a word with the best available voice for the given language.
- * Falls back to locale-only if the specific voice fails.
+ * Warm the TTS cache for the given text in advance (no playback). Call this
+ * the moment a quick / enrich lookup returns so the audio is already cached
+ * by the time the user taps the speaker button.
  */
-export function speakWord(text: string, langCode: string, rate = 0.85): void {
-  const locale = getTtsLocale(langCode);
-
-  // Try with a specific high-quality voice if voices are loaded
-  if (voicesLoaded) {
-    const voiceId = pickBestVoice(locale);
-    if (voiceId) {
-      try {
-        Speech.speak(text, { language: locale, rate, voice: voiceId });
-        return;
-      } catch {
-        // voice rejected — fall through to basic call
-      }
-    }
-  }
-
-  // Fallback: locale only
-  try {
-    Speech.speak(text, { language: locale, rate });
-  } catch {
-    // TTS unavailable — silently ignore
-  }
+export function prefetchSpeak(text: string, langCode: string, phoneme?: PhonemeOverride): void {
+  prefetchTts(text, langCode, phoneme);
 }
+
+/** Re-export so call sites can build phoneme overrides without a second import. */
+export { phonemeForChinese };
 
 /**
  * For ja, TTS should use the reading (hiragana) instead of raw kanji,
@@ -102,5 +84,4 @@ export function getTtsText(
   return clean || word;
 }
 
-// Preload voices in the background on first import
-loadVoices();
+// (cloud TTS doesn't need device voice preloading)

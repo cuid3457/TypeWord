@@ -18,6 +18,9 @@ import {
 import { findWord, saveWord, updateWordResult, applyCacheUpdate } from '@src/db/queries';
 import type { WordLookupMode, WordLookupRequest, WordLookupResult } from '@src/types/word';
 import { normalizeResult } from '@src/utils/normalizeResult';
+import { isTimeoutError, withTimeout } from '@src/utils/timeout';
+
+const REQUEST_TIMEOUT_MS = 15000;
 
 export type WordLookupSource = 'local' | 'server_cache' | 'openai' | 'fallback';
 
@@ -31,7 +34,7 @@ function hasEnrichedFields(r: WordLookupResult): boolean {
 }
 
 export class WordLookupError extends Error {
-  code: 'rate_limited' | 'budget_exhausted' | 'unauthorized' | 'server_error' | 'unavailable';
+  code: 'rate_limited' | 'budget_exhausted' | 'unauthorized' | 'server_error' | 'unavailable' | 'timeout';
   constructor(
     message: string,
     code: WordLookupError['code'] = 'server_error',
@@ -46,39 +49,56 @@ export interface HeadwordCandidate {
   hint: string;
 }
 
+export interface ResolveHeadwordResult {
+  candidates: HeadwordCandidate[];
+  note?: 'sentence' | 'non_word' | 'wrong_language';
+  timedOut?: boolean;
+}
+
 /**
  * Resolve a reverse lookup: translate a native-language word to the study language.
- * Returns an array of candidates for disambiguation (e.g. "은행" → [{headword:"bank", hint:"금융 기관"}, {headword:"ginkgo", hint:"은행나무 열매"}]).
+ * Returns candidates for disambiguation (e.g. "은행" → [{headword:"bank"}, {headword:"ginkgo"}]),
+ * or an empty list with a `note` when the input is out of scope (sentence / non-word / wrong language).
  */
 export async function resolveHeadword(
   word: string,
   sourceLang: string,
   targetLang: string,
-): Promise<HeadwordCandidate[]> {
+): Promise<ResolveHeadwordResult> {
   try {
-    const { data, error } = await supabase.functions.invoke<{
-      result: { candidates?: HeadwordCandidate[]; headword?: string };
-    }>('word-lookup', {
-      body: {
-        word,
-        sourceLang,
-        targetLang,
-        translate: true,
-      },
-    });
+    const { data, error } = await withTimeout(
+      supabase.functions.invoke<{
+        result: { candidates?: HeadwordCandidate[]; headword?: string; note?: string };
+      }>('word-lookup', {
+        body: {
+          word,
+          sourceLang,
+          targetLang,
+          translate: true,
+        },
+      }),
+      REQUEST_TIMEOUT_MS,
+    );
     if (error) {
       console.warn('resolveHeadword error:', error);
-      return [];
+      return { candidates: [] };
     }
-    if (data?.result?.candidates?.length) {
-      return data.result.candidates.filter((c) => c.headword);
+    const r = data?.result;
+    const note = r?.note;
+    const validNote = note === 'sentence' || note === 'non_word' || note === 'wrong_language' ? note : undefined;
+    if (r?.candidates?.length) {
+      return { candidates: r.candidates.filter((c) => c.headword), note: validNote };
     }
-    const hw = data?.result?.headword;
-    if (hw) return [{ headword: hw, hint: '' }];
-    return [];
+    if (r?.headword) {
+      return { candidates: [{ headword: r.headword, hint: '' }], note: validNote };
+    }
+    return { candidates: [], note: validNote };
   } catch (err) {
+    if (isTimeoutError(err)) {
+      return { candidates: [], timedOut: true };
+    }
     console.warn('resolveHeadword exception:', err);
-    return [];
+    return { candidates: [] };
   }
 }
 
@@ -105,11 +125,14 @@ export async function enrichWord(
 ): Promise<Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'> | null> {
   try {
     const { meanings, ...rest } = req;
-    const { data } = await supabase.functions.invoke<{
-      result: Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'>;
-    }>('word-lookup', {
-      body: { ...rest, mode: 'enrich', ...(meanings?.length ? { meanings } : {}) },
-    });
+    const { data } = await withTimeout(
+      supabase.functions.invoke<{
+        result: Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'>;
+      }>('word-lookup', {
+        body: { ...rest, mode: 'enrich', ...(meanings?.length ? { meanings } : {}) },
+      }),
+      REQUEST_TIMEOUT_MS,
+    );
     if (!data?.result) return null;
 
     // If already saved locally, merge enrichment into the stored result
@@ -197,12 +220,15 @@ export async function lookupWord(
   // 2. Edge Function
   try {
     const { meanings, ...restReq } = req;
-    const { data, error } = await supabase.functions.invoke<{
-      result: WordLookupResult;
-      cached: boolean;
-    }>('word-lookup', {
-      body: { ...restReq, mode, ...(mode === 'enrich' && meanings?.length ? { meanings } : {}) },
-    });
+    const { data, error } = await withTimeout(
+      supabase.functions.invoke<{
+        result: WordLookupResult;
+        cached: boolean;
+      }>('word-lookup', {
+        body: { ...restReq, mode, ...(mode === 'enrich' && meanings?.length ? { meanings } : {}) },
+      }),
+      REQUEST_TIMEOUT_MS,
+    );
 
     if (error) {
       const status = (error.context as { status?: number } | undefined)?.status;
@@ -247,6 +273,7 @@ export async function lookupWord(
   } catch (err) {
     // 3. Fallback — only for recoverable errors
     if (err instanceof WordLookupError && err.code === 'unauthorized') throw err;
+    if (isTimeoutError(err)) throw new WordLookupError('Timeout', 'timeout');
 
     const fallback = await fetchFromFallbackDictionary(req.word, req.sourceLang);
     if (!fallback) {
@@ -279,12 +306,15 @@ export async function checkWordFreshness(
   cacheSyncedAt: number,
 ): Promise<WordLookupResult | null> {
   try {
-    const { data, error } = await supabase.rpc('check_word_freshness', {
-      p_word: word.trim().toLowerCase(),
-      p_source_lang: sourceLang,
-      p_target_lang: targetLang,
-      p_since: new Date(cacheSyncedAt || 0).toISOString(),
-    });
+    const { data, error } = await withTimeout(
+      supabase.rpc('check_word_freshness', {
+        p_word: word.trim().toLowerCase(),
+        p_source_lang: sourceLang,
+        p_target_lang: targetLang,
+        p_since: new Date(cacheSyncedAt || 0).toISOString(),
+      }),
+      REQUEST_TIMEOUT_MS,
+    );
 
     if (error || !data?.length) return null;
 

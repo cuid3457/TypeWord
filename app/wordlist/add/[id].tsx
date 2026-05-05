@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
+  DeviceEventEmitter,
   Keyboard,
   KeyboardAvoidingView,
   Linking,
@@ -28,6 +29,13 @@ import { findLanguage } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
 import { findWord, getBook, getTotalWordCount, saveWord } from '@src/db/queries';
 import { isAnonymous } from '@src/services/authService';
+import { getStreak, getTodayStreakDate } from '@src/services/streakService';
+import {
+  CELEBRATE_EVENT,
+  getDailyVariant,
+  shouldCelebrate,
+  shouldCelebrateDaily,
+} from '@src/services/streakMilestone';
 import {
   IMAGE_LIMIT_FREE,
   IMAGE_LIMIT_PREMIUM,
@@ -39,6 +47,7 @@ import {
   WordLookupError,
   enrichWord,
   genId,
+  lookupWord,
   lookupWordStream,
   resolveHeadword,
   type HeadwordCandidate,
@@ -55,17 +64,88 @@ import { AdBanner } from '@/components/ad-banner';
 import { Paywall } from '@/components/paywall';
 import { ReportModal } from '@/components/report-modal';
 import { ReadingDisplay } from '@/components/reading-display';
-import { getTtsText, speakWord } from '@src/utils/ttsLocale';
-import { translatePOS } from '@src/utils/normalizeResult';
+import { fetchIpa, ipaApplicable, ipaSupported } from '@src/services/ipaService';
+import { promoteToPersistent } from '@src/services/ttsCache';
+import { getTtsText, prefetchSpeak, speakWord } from '@src/utils/ttsLocale';
+import { VoiceToggle } from '@/components/voice-toggle';
+import { formatPOS } from '@src/utils/normalizeResult';
 
-const MAX_WORD_LENGTH = 60;
+// Per-language max input length (in code points). Mirrors server validator.
+// Sized to admit most idioms/proverbs while still rejecting full sentences.
+const LANG_LIMITS: Record<string, number> = {
+  ko: 25, ja: 25, zh: 25, 'zh-CN': 25, 'zh-TW': 25,
+  de: 60, ru: 60,
+};
+const DEFAULT_WORD_LIMIT = 50;
 const MAX_EXPR_LENGTH = 8;
+
+function getLangLimit(lang: string): number {
+  return LANG_LIMITS[lang] ?? DEFAULT_WORD_LIMIT;
+}
+
+function codepointLength(s: string): number {
+  let n = 0;
+  for (const _ of s) n++;
+  return n;
+}
+
+/**
+ * Fire-and-forget pre-warm for a single reverse-lookup candidate. Runs the
+ * full lookup pipeline (quick + enrich + TTS for headword and examples) so
+ * that when the user taps this candidate, every downstream cache is hit
+ * and the screen renders instantly. Errors are silent — the user-initiated
+ * path will retry on actual selection.
+ */
+function backgroundPrefetchCandidate(
+  headword: string,
+  sourceLang: string,
+  targetLang: string,
+  bookId: string,
+): void {
+  (async () => {
+    try {
+      const quick = await lookupWord({ word: headword, sourceLang, targetLang, bookId, mode: 'quick' });
+      if (!quick?.result?.meanings?.length) return;
+      prefetchSpeak(getTtsText(headword, sourceLang, quick.result.reading), sourceLang);
+      const enriched = await enrichWord({
+        word: headword,
+        sourceLang,
+        targetLang,
+        bookId,
+        mode: 'enrich',
+        meanings: quick.result.meanings.map((m) => ({
+          definition: m.definition,
+          partOfSpeech: m.partOfSpeech,
+        })),
+      });
+      for (const ex of enriched?.examples ?? []) {
+        const plain = (ex.sentence ?? '').replace(/\*\*/g, '').trim();
+        if (plain) prefetchSpeak(plain, sourceLang);
+      }
+    } catch {
+      // silent — main flow handles user-facing errors
+    }
+  })();
+}
 
 function isNumericOrExpression(text: string): boolean {
   const t = text.trim().replace(/,/g, '');
   if (/^\d+(\.\d+)?$/.test(t)) return true;
   if (t.length > 0 && /^[\d\s+\-*/^!=<>().%]+$/.test(t)) return true;
   return false;
+}
+
+/**
+ * Translate a server "note" code or empty-meanings result into a UI message key.
+ */
+function getNoteMessageKey(note?: string): string {
+  switch (note) {
+    case 'sentence': return 'add_word.note_sentence';
+    case 'non_word': return 'add_word.note_non_word';
+    case 'wrong_language': return 'add_word.note_wrong_language';
+    case 'phrase_too_long': return 'add_word.note_phrase_too_long';
+    default: return 'add_word.word_not_found';
+  }
 }
 const SEARCH_COOLDOWN_MS = 2000;
 
@@ -93,7 +173,10 @@ function isStudyLangInput(text: string, studyLang: string): boolean {
   switch (studyLang) {
     case 'ko': return ko > 0 || han > 0;
     case 'ja': return (ja + han) > 0 && ko === 0;
-    case 'zh': return han > 0 && ko === 0 && ja === 0;
+    case 'zh':
+    case 'zh-CN':
+    case 'zh-TW':
+      return han > 0 && ko === 0 && ja === 0;
     case 'ru': return ru > 0;
     default: return la > 0;
   }
@@ -101,7 +184,7 @@ function isStudyLangInput(text: string, studyLang: string): boolean {
 
 export default function AddWordScreen() {
   const { t, i18n } = useTranslation();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, q: prefillQuery } = useLocalSearchParams<{ id: string; q?: string }>();
   const isConnected = useNetworkStatus();
   const premium = usePremium();
   const [paywallVisible, setPaywallVisible] = useState(false);
@@ -173,6 +256,12 @@ export default function AddWordScreen() {
                   }
                 : prev,
             );
+            // Pre-warm TTS cache for each example sentence (no playback).
+            // Strip ** markers since TTS speaks the sentence as-is.
+            for (const ex of enriched.examples ?? []) {
+              const plain = (ex.sentence ?? '').replace(/\*\*/g, '').trim();
+              if (plain) prefetchSpeak(plain, sLang);
+            }
           }
         })
         .catch(() => {})
@@ -188,8 +277,18 @@ export default function AddWordScreen() {
     getBook(id).then(setBook);
   }, [id, premium]);
 
+  // Autosearch when navigated here with ?q=... (e.g. tapped a synonym).
+  // Runs once after the book loads so book/lang context is ready.
+  const autosearchTriggeredRef = useRef(false);
   useEffect(() => {
-    getImageExtractUsage(premium).then(setOcrUsed).catch(() => {});
+    if (!book || !prefillQuery || autosearchTriggeredRef.current) return;
+    autosearchTriggeredRef.current = true;
+    setWord(prefillQuery);
+    handleLookup(prefillQuery);
+  }, [book, prefillQuery]);
+
+  useEffect(() => {
+    getImageExtractUsage().then(setOcrUsed).catch(() => {});
   }, [premium]);
 
   useEffect(() => {
@@ -226,8 +325,8 @@ export default function AddWordScreen() {
   }, [word]);
   const fullPlaceholder = book ? `${getExamplePrefix(i18n.language)} ${randomWord}` : '';
   const isExpr = isNumericOrExpression(word);
-  const effectiveMax = isExpr ? MAX_EXPR_LENGTH : MAX_WORD_LENGTH;
-  const wordOverLimit = word.trim().length > effectiveMax;
+  const effectiveMax = isExpr ? MAX_EXPR_LENGTH : getLangLimit(sourceLang);
+  const wordOverLimit = codepointLength(word.trim()) > effectiveMax;
   const wordEmpty = word.length === 0 && !hasSearched;
 
   useEffect(() => {
@@ -245,12 +344,15 @@ export default function AddWordScreen() {
     return () => clearInterval(timer);
   }, [fullPlaceholder, wordEmpty]);
 
-  const handleLookup = async () => {
+  const handleLookup = async (overrideWord?: string) => {
     if (!isConnected) {
       setToast(t('error.offline_message'));
       return;
     }
-    const trimmed = word.trim();
+    // Callers (e.g. OCR word tap) can pass a word directly to avoid React
+    // state update/closure timing — setWord() is async so a bare handleLookup()
+    // right after setWord() would read the previous value.
+    const trimmed = (overrideWord ?? word).trim();
     if (!trimmed) {
       setToast(t('add_word.word_required'));
       return;
@@ -275,8 +377,17 @@ export default function AddWordScreen() {
     setPartial(null);
     setSaved(false);
     setAlreadyExists(false);
+    setSaving(false);
+    setCandidates([]);
 
     setHasSearched(true);
+
+    // Kick off IPA fetch in parallel with the AI lookup. For most lookups the
+    // headword == user input so this prefetch saves the post-lookup round trip.
+    // If the AI corrects spelling, we'll re-fetch with the corrected form below.
+    const earlyIpaPromise: Promise<string | null> | null = ipaSupported(sourceLang)
+      ? fetchIpa(trimmed, sourceLang)
+      : null;
 
     // If input doesn't match source language, resolve headword via reverse lookup
     const isReverse = !isStudyLangInput(trimmed, sourceLang);
@@ -284,15 +395,26 @@ export default function AddWordScreen() {
     let reverseHeadword: string | undefined;
 
     if (isReverse) {
-      const results = await resolveHeadword(trimmed, sourceLang, targetLang);
+      const { candidates: results, note, timedOut } = await resolveHeadword(trimmed, sourceLang, targetLang);
+      if (timedOut) {
+        setToast(t('error.slow_network'));
+        setLoading(false);
+        return;
+      }
       if (results.length === 0) {
-        setError(t('add_word.word_not_found'));
+        setError(t(getNoteMessageKey(note)));
         setLoading(false);
         return;
       }
       if (results.length > 1) {
         setCandidates(results);
         setLoading(false);
+        // Pre-warm every candidate's full pipeline (quick + enrich + TTS)
+        // while the user picks. By the time they tap one, all caches are
+        // populated and the next screen renders instantly.
+        for (const c of results) {
+          backgroundPrefetchCandidate(c.headword, sourceLang, targetLang, book.id);
+        }
         return;
       }
       reverseHeadword = results[0].headword;
@@ -314,14 +436,13 @@ export default function AddWordScreen() {
           // Check if the word was actually found
           const meanings = res.result.meanings ?? [];
           if (meanings.length === 0) {
-            setError(t('add_word.word_not_found'));
+            setError(t(getNoteMessageKey(res.result.note)));
             setPartial(null);
             setLoading(false);
             return;
           }
 
           // Attach headword so UI shows the translated word
-
           const finalRes = reverseHeadword
             ? { ...res, result: { ...res.result, headword: reverseHeadword } }
             : res;
@@ -333,15 +454,47 @@ export default function AddWordScreen() {
           setResponse(finalRes);
           setPartial(null);
           setLoading(false);
+          // Pre-warm TTS cache for the headword (no playback) so the user
+          // gets instant audio when they tap the speaker.
+          prefetchSpeak(getTtsText(hw, sourceLang, finalRes.result.reading), sourceLang);
+          // Resolve IPA: prefer the early-fetched promise when the headword
+          // matches the user's input (no AI typo correction). Otherwise fetch
+          // fresh for the corrected headword.
+          if (ipaSupported(sourceLang) && ipaApplicable(finalRes.result.meanings)) {
+            // Case-sensitive comparison: German espeak voice can't recognize
+            // lowercase nouns ("könig" → letter-spelling garbage) and falls
+            // back to spelling mode. Even pure case-correction by the AI
+            // (könig → König) means the early IPA fetch result is unusable;
+            // we must re-fetch with the corrected case.
+            const sameInput = hw.trim() === trimmed.trim();
+            const ipaPromise = sameInput && earlyIpaPromise
+              ? earlyIpaPromise
+              : fetchIpa(hw, sourceLang);
+            ipaPromise.then((ipa) => {
+              if (ipa) {
+                setResponse((prev) =>
+                  prev ? { ...prev, result: { ...prev.result, ipa } } : prev,
+                );
+              }
+            });
+          }
           if (finalRes.source !== 'local') {
             startEnrich(finalRes, lookupWord, sourceLang, targetLang, book.id);
           }
         },
         onError: (err) => {
+          const isTimeout = (err instanceof WordLookupError && err.code === 'timeout') || err.message === 'Timeout';
+          if (isTimeout) {
+            setToast(t('error.slow_network'));
+            setLoading(false);
+            return;
+          }
           const raw = err instanceof WordLookupError
             ? (err.message || err.code)
             : (err.message || 'Lookup failed');
-          const key = `add_word.error_${raw}`;
+          // Server may return "PHRASE_TOO_LONG:30" — strip the parameter.
+          const errCode = raw.split(':')[0];
+          const key = `add_word.error_${errCode}`;
           const translated = t(key);
           const msg = translated !== key ? translated : raw;
           setError(msg);
@@ -349,6 +502,33 @@ export default function AddWordScreen() {
         },
       },
     );
+  };
+
+  const maybeCelebrateStreak = () => {
+    // Check streak after a save in case the user crossed today's threshold
+    // (5+ adds qualifies as today's activity). Fires modal at most once per
+    // streak day; subsequent saves are no-ops thanks to AsyncStorage flags.
+    getStreak()
+      .then(async (s) => {
+        if (!s.todayDone || s.current <= 0) return;
+        if (await shouldCelebrate(s.current)) {
+          DeviceEventEmitter.emit(CELEBRATE_EVENT, {
+            type: 'milestone',
+            streak: s.current,
+            variant: 0,
+          });
+          return;
+        }
+        const todayDate = getTodayStreakDate();
+        if (await shouldCelebrateDaily(todayDate)) {
+          DeviceEventEmitter.emit(CELEBRATE_EVENT, {
+            type: 'daily',
+            streak: s.current,
+            variant: getDailyVariant(todayDate),
+          });
+        }
+      })
+      .catch(() => {});
   };
 
   const handleSave = async () => {
@@ -365,8 +545,26 @@ export default function AddWordScreen() {
         word: savedWord,
         result: response.result,
       });
+      // Promote the cached TTS mp3s (both genders) to persistent storage so
+      // playback works offline and survives system cache eviction. Headword
+      // + every example sentence (with ** markers stripped, matching what
+      // prefetchSpeak fed into the cache).
+      try {
+        const ttsText = getTtsText(savedWord, sourceLang, response.result.reading);
+        promoteToPersistent(ttsText, sourceLang);
+        for (const ex of response.result.examples ?? []) {
+          const plain = ex.sentence?.replace(/\*\*/g, '').trim();
+          if (plain) promoteToPersistent(plain, sourceLang);
+        }
+      } catch (err) {
+        console.warn('promote tts cache failed:', err);
+      }
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
       setSaved(true);
+      // Keep saving=true through the collapse animation so the button content
+      // (spinner) doesn't visually swap mid-animation. Reset happens when the
+      // next search clears state.
+      maybeCelebrateStreak();
       const NUDGE_KEY = 'typeword.signupNudgeShown';
       const alreadyNudged = await AsyncStorage.getItem(NUDGE_KEY);
       if (!alreadyNudged) {
@@ -378,7 +576,6 @@ export default function AddWordScreen() {
       }
     } catch {
       setError(t('error.title'));
-    } finally {
       setSaving(false);
     }
   };
@@ -399,7 +596,7 @@ export default function AddWordScreen() {
         onFinal: async (res) => {
           const meanings = res.result.meanings ?? [];
           if (meanings.length === 0) {
-            setError(t('add_word.word_not_found'));
+            setError(t(getNoteMessageKey(res.result.note)));
             setPartial(null);
             setLoading(false);
             return;
@@ -411,15 +608,35 @@ export default function AddWordScreen() {
           setResponse(finalRes);
           setPartial(null);
           setLoading(false);
+          // Pre-warm TTS cache for the headword (no playback) so the user
+          // gets instant audio when they tap the speaker.
+          prefetchSpeak(getTtsText(hw, sourceLang, finalRes.result.reading), sourceLang);
+          // Fetch IPA in parallel (European languages, non-expression POS only).
+          if (ipaSupported(sourceLang) && ipaApplicable(finalRes.result.meanings)) {
+            fetchIpa(hw, sourceLang).then((ipa) => {
+              if (ipa) {
+                setResponse((prev) =>
+                  prev ? { ...prev, result: { ...prev.result, ipa } } : prev,
+                );
+              }
+            });
+          }
           if (finalRes.source !== 'local') {
             startEnrich(finalRes, lookupWord, sourceLang, targetLang, book.id);
           }
         },
         onError: (err) => {
+          const isTimeout = (err instanceof WordLookupError && err.code === 'timeout') || err.message === 'Timeout';
+          if (isTimeout) {
+            setToast(t('error.slow_network'));
+            setLoading(false);
+            return;
+          }
           const raw = err instanceof WordLookupError
             ? (err.message || err.code)
             : (err.message || 'Lookup failed');
-          const key = `add_word.error_${raw}`;
+          const errCode = raw.split(':')[0];
+          const key = `add_word.error_${errCode}`;
           const translated = t(key);
           setError(translated !== key ? translated : raw);
           setLoading(false);
@@ -438,6 +655,7 @@ export default function AddWordScreen() {
       setError(null);
       setSaved(false);
       setAlreadyExists(false);
+      setSaving(false);
       setHasSearched(false);
       setEnriching(false);
       setCandidates([]);
@@ -504,6 +722,8 @@ export default function AddWordScreen() {
         setToast(t('add_word.error_BUDGET_EXHAUSTED'));
       } else if (msg === 'NATIVE_UNAVAILABLE') {
         setToast(t('add_word.ocr_dev_build_required'));
+      } else if (msg === 'SLOW_NETWORK') {
+        setToast(t('error.slow_network'));
       } else {
         setToast(t('add_word.ocr_no_words'));
       }
@@ -516,6 +736,24 @@ export default function AddWordScreen() {
 
   const [cameraModalVisible, setCameraModalVisible] = useState(false);
   const cameraTranslateY = useSharedValue(0);
+
+  // Save-button collapse animation: 1 = shown at full size, 0 = collapsed.
+  // Appearing after lookup is instant; disappearing after save is animated.
+  const saveBtnAnim = useSharedValue(0);
+  const showSaveBtn = !!response && !saved && !alreadyExists;
+  useEffect(() => {
+    if (showSaveBtn) {
+      saveBtnAnim.value = 1;
+    } else {
+      saveBtnAnim.value = withTiming(0, { duration: 1000 });
+    }
+  }, [showSaveBtn]);
+  const saveBtnStyle = useAnimatedStyle(() => ({
+    opacity: saveBtnAnim.value,
+    maxHeight: saveBtnAnim.value * 80,
+    marginTop: saveBtnAnim.value * 12,
+    overflow: 'hidden',
+  }));
   const colorScheme = useColorScheme();
   const dark = colorScheme === 'dark';
   const insets = useSafeAreaInsets();
@@ -584,7 +822,11 @@ export default function AddWordScreen() {
     setError(null);
     setSaved(false);
     setAlreadyExists(false);
+    setSaving(false);
     setHasSearched(false);
+    // Trigger lookup immediately with the picked word (overriding the
+    // not-yet-committed `word` state from setWord above).
+    handleLookup(w.word);
   };
 
   const handleMicPress = async () => {
@@ -631,8 +873,16 @@ export default function AddWordScreen() {
         'result',
         (event: { results: { transcript: string; isFinal?: boolean }[] }) => {
           const transcript = event.results[0]?.transcript ?? '';
-          const trimmed = transcript.slice(0, MAX_WORD_LENGTH).toLowerCase();
-          setWord(trimmed);
+          const limit = getLangLimit(sourceLang);
+          // STT can produce CJK code points beyond ASCII — slice by code points.
+          let n = 0;
+          let trimmed = '';
+          for (const ch of transcript) {
+            if (n >= limit) break;
+            trimmed += ch;
+            n++;
+          }
+          setWord(trimmed.toLowerCase());
           if (event.results[0]?.isFinal) setListening(false);
         },
       );
@@ -650,7 +900,7 @@ export default function AddWordScreen() {
     } catch {
       // native module not available
     }
-  }, []);
+  }, [sourceLang]);
 
   const src = findLanguage(sourceLang);
   const tgt = findLanguage(targetLang);
@@ -673,17 +923,22 @@ export default function AddWordScreen() {
           </View>
 
           <View className="mt-1 flex-row items-center justify-between">
-            <View>
+            <View className="mr-3 flex-1">
               {book ? (
-                <Text className="text-sm text-gray-500 dark:text-gray-400">
+                <Text className="text-sm text-gray-500 dark:text-gray-400" numberOfLines={1}>
                   {book.title}
                 </Text>
               ) : null}
-              <Text className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
+              <Text className="mt-0.5 text-sm text-gray-500 dark:text-gray-400" numberOfLines={1}>
                 {src?.flag} {t(`languages.${src?.code}`)} → {tgt?.flag} {t(`languages.${tgt?.code}`)}
               </Text>
             </View>
-            <View className="flex-row items-start gap-3">
+            <View className="shrink-0 flex-row items-start gap-3">
+              <View className="items-center">
+                <View className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800">
+                  <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
+                </View>
+              </View>
               <View className="items-center">
                 <Pressable onPress={handleMicPress} className={`rounded-full p-2.5 ${listening ? 'bg-red-100 dark:bg-red-900' : 'bg-gray-100 dark:bg-gray-800'}`} accessibilityLabel={t('add_word.voice_search')} accessibilityRole="button">
                   <MaterialIcons name={listening ? 'stop' : 'mic'} size={22} color={listening ? '#ef4444' : '#2EC4A5'} />
@@ -720,7 +975,7 @@ export default function AddWordScreen() {
               value={word}
               onChangeText={setWord}
               onFocus={handleInputFocus}
-              onSubmitEditing={handleLookup}
+              onSubmitEditing={() => handleLookup()}
               returnKeyType="search"
               autoCapitalize="none"
               autoCorrect={false}
@@ -730,33 +985,61 @@ export default function AddWordScreen() {
               className="mt-2 rounded-xl px-4 py-3 text-base text-black dark:text-white"
               style={{ borderWidth: 2, borderColor: listening ? '#ef4444' : '#2EC4A5' }}
             />
-            {word.length >= effectiveMax - (isExpr ? 2 : 10) ? (
-              <Text className={`mt-1 text-right text-xs ${word.length > effectiveMax ? 'text-red-500' : 'text-gray-400'}`}>
-                {word.length}/{effectiveMax}
-              </Text>
-            ) : null}
+            {(() => {
+              const wlen = codepointLength(word);
+              if (wlen < effectiveMax - (isExpr ? 2 : 8)) return null;
+              return (
+                <Text className={`mt-1 text-right text-xs ${wlen > effectiveMax ? 'text-red-500' : 'text-gray-400'}`}>
+                  {wlen}/{effectiveMax}
+                </Text>
+              );
+            })()}
           </View>
 
-          <Pressable
-            onPress={handleLookup}
-            disabled={loading || !book || wordOverLimit}
-            className={`mt-6 items-center rounded-xl py-4 ${
-              loading || !word.trim() || !book || wordOverLimit
-                ? 'bg-gray-300'
-                : 'bg-black dark:bg-white'
-            }`}
-          >
-            {loading && !partial ? (
-              <ActivityIndicator color="#ffffff" />
-            ) : (
-              <Text className="text-base font-semibold text-white dark:text-black">
-                {t('add_word.search')}
-              </Text>
-            )}
-          </Pressable>
+          <View className="mt-6" style={{ position: 'relative' }}>
+            <Pressable
+              onPress={() => handleLookup()}
+              disabled={loading || !book || wordOverLimit}
+              className={`items-center rounded-xl py-4 ${
+                loading || !word.trim() || !book || wordOverLimit
+                  ? 'bg-gray-300'
+                  : 'bg-black dark:bg-white'
+              }`}
+            >
+              {loading && !partial ? (
+                <ActivityIndicator color="#ffffff" />
+              ) : (
+                <Text className="text-base font-semibold text-white dark:text-black">
+                  {t('add_word.search')}
+                </Text>
+              )}
+            </Pressable>
 
-          <Toast visible={!!error} message={error ?? ''} onHide={() => setError(null)} style={{ marginTop: 16 }} />
-          <Toast visible={!!toast} message={toast} onHide={() => setToast('')} style={{ marginTop: 16 }} />
+            {(!!error || !!toast || (response && (saved || alreadyExists))) && (
+              <View
+                pointerEvents="box-none"
+                style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center' }}
+              >
+                <Toast visible={!!error} message={error ?? ''} onHide={() => setError(null)} />
+                <Toast visible={!!toast} message={toast} onHide={() => setToast('')} />
+                <Toast visible={!!(response && saved)} message={t('add_word.saved')} type="success" />
+                <Toast visible={!!(response && alreadyExists)} message={t('add_word.already_exists')} />
+              </View>
+            )}
+          </View>
+
+          {/* Stacked save button — animated collapse on save */}
+          <Animated.View style={saveBtnStyle} pointerEvents={showSaveBtn ? 'auto' : 'none'}>
+            <Pressable
+              onPress={handleSave}
+              disabled={saving || !showSaveBtn}
+              className="items-center rounded-xl py-4 bg-[#2EC4A5]"
+            >
+              <Text className="text-base font-semibold text-white">
+                {t('add_word.save')}
+              </Text>
+            </Pressable>
+          </Animated.View>
 
         </View>
 
@@ -804,30 +1087,6 @@ export default function AddWordScreen() {
           ) : null}
         </ScrollView>
 
-        {/* ── Fixed bottom: save button / toasts ── */}
-        {response && saved ? (
-          <Toast visible message={t('add_word.saved')} type="success" collapse style={{ paddingHorizontal: 24, paddingVertical: 8 }} />
-        ) : response && alreadyExists ? (
-          <Toast visible message={t('add_word.already_exists')} collapse style={{ paddingHorizontal: 24, paddingVertical: 8 }} />
-        ) : response ? (
-          <View style={{ paddingHorizontal: 24, paddingVertical: 8 }}>
-            <Pressable
-              onPress={handleSave}
-              disabled={saving}
-              className={`items-center rounded-xl py-4 ${
-                saving ? 'bg-gray-300' : 'bg-black dark:bg-white'
-              }`}
-            >
-              {saving ? (
-                <ActivityIndicator color="#ffffff" />
-              ) : (
-                <Text className="text-base font-semibold text-white dark:text-black">
-                  {t('add_word.save')}
-                </Text>
-              )}
-            </Pressable>
-          </View>
-        ) : null}
       </KeyboardAvoidingView>
       <AdBanner />
 
@@ -1067,7 +1326,7 @@ function PartialCard({ partial, t }: { partial: PartialLookup; t: TFn }) {
               className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
             >
               {m.partOfSpeech ? (
-                <Text className="text-xs text-gray-500">{translatePOS(m.partOfSpeech, i18n.language)}</Text>
+                <Text className="text-xs text-gray-500">{formatPOS(m.partOfSpeech, m.gender, i18n.language)}</Text>
               ) : null}
               <Text className="mt-1 text-base text-black dark:text-white">
                 {m.definition}
@@ -1097,30 +1356,77 @@ function ResultCard({
   const { result } = response;
   const displayWord = result.headword || word;
 
+  // Show "did you mean" only if the AI corrected to something different
+  // from what THIS user typed. Compare against `word` (current input), not
+  // result.originalInput — cache can serve a result whose originalInput came
+  // from a previous user's typo lookup.
+  // Skip for multi-token inputs (phrases/idioms/proverbs): the canonical form
+  // is already shown prominently as the headword, so the hint is redundant
+  // and adds visual noise.
+  const userTyped = word.trim().toLowerCase();
+  const corrected = result.correctedHeadword?.trim();
+  const isMultiTokenInput = /\s/.test(userTyped);
+  const showCorrection = !!corrected
+    && corrected.toLowerCase() !== userTyped
+    && userTyped.length > 0
+    && !isMultiTokenInput;
+
+  // Surface a soft warning when the AI is uncertain (40-69 = borderline).
+  // <40 should never reach this card (handled as error upstream).
+  const lowConfidence =
+    typeof result.confidence === 'number' && result.confidence < 70;
+
   const handleSpeak = () => {
     speakWord(getTtsText(displayWord, sourceLang, result.reading), sourceLang);
   };
 
   return (
     <View className="mt-4">
-      <View className="flex-row items-center">
-        <Text className="text-xl font-bold text-black dark:text-white">
+      {showCorrection ? (
+        <View className="mb-3 flex-row items-center rounded-xl bg-amber-50 px-3 py-2 dark:bg-amber-950">
+          <MaterialIcons name="auto-fix-high" size={16} color="#d97706" />
+          <Text className="ml-2 flex-1 text-xs text-amber-800 dark:text-amber-200">
+            {t('add_word.did_you_mean').replace('{{word}}', corrected!)}
+          </Text>
+        </View>
+      ) : null}
+
+      {/* Header — speaker and flag are grouped on the right so they always
+          travel together. When the word fits on one line, all three render in
+          a single row; when the word wraps to multiple lines, the icon group
+          stays as a unit aligned to the top of the headword block. */}
+      <View className="flex-row items-start">
+        <Text className="shrink flex-1 text-xl font-bold text-black dark:text-white">
           {displayWord}
         </Text>
-        <Pressable
-          onPress={handleSpeak}
-          className="ml-2 rounded-full bg-gray-100 p-2 dark:bg-gray-800"
-        >
-          <MaterialIcons name="volume-up" size={20} color="#6b7280" />
-        </Pressable>
-        {onReport ? (
-          <Pressable onPress={onReport} className="ml-auto rounded-full bg-gray-100 p-2 dark:bg-gray-800" style={{ marginLeft: 12 }}>
-            <MaterialIcons name="flag" size={18} color="#9ca3af" />
+        <View className="shrink-0 ml-2 flex-row items-center">
+          <Pressable
+            onPress={handleSpeak}
+            className="rounded-full bg-gray-100 p-2 dark:bg-gray-800"
+          >
+            <MaterialIcons name="volume-up" size={20} color="#10b981" />
           </Pressable>
-        ) : null}
+          {onReport ? (
+            <Pressable onPress={onReport} className="ml-2 rounded-full bg-gray-100 p-2 dark:bg-gray-800">
+              <MaterialIcons name="flag" size={18} color="#9ca3af" />
+            </Pressable>
+          ) : null}
+        </View>
       </View>
       {result.reading ? (
-        <ReadingDisplay reading={result.reading} sourceLang={sourceLang} />
+        <ReadingDisplay reading={result.reading} sourceLang={sourceLang} word={displayWord} />
+      ) : null}
+      {result.ipa ? (
+        <Text className="mt-1 text-sm text-gray-400">{result.ipa}</Text>
+      ) : null}
+
+      {lowConfidence ? (
+        <View className="mt-2 flex-row items-center">
+          <MaterialIcons name="info-outline" size={14} color="#9ca3af" />
+          <Text className="ml-1 text-xs text-gray-500">
+            {t('add_word.low_confidence_warning')}
+          </Text>
+        </View>
       ) : null}
 
       <View className="mt-4">
@@ -1133,7 +1439,7 @@ function ResultCard({
               key={i}
               className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
             >
-              <Text className="text-xs text-gray-500">{translatePOS(m.partOfSpeech, i18n.language)}</Text>
+              <Text className="text-xs text-gray-500">{formatPOS(m.partOfSpeech, m.gender, i18n.language)}</Text>
               <Text className="mt-1 text-base text-black dark:text-white">
                 {m.definition}
               </Text>

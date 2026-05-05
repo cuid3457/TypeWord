@@ -3,13 +3,15 @@ import { isPremium } from './subscriptionService';
 
 const STORAGE_KEY = 'typeword.reviewLimits';
 
-export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context';
+export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
 
 const LIMITS: Record<ReviewMode, number> = {
   flashcard: 50,
   choice: 50,
   dictation: 30,
   context: 30,
+  fill_blank: 30,
+  auto: 50,
 };
 
 const MAX_REWARDED_ADS_PER_DAY = 1;
@@ -29,7 +31,7 @@ function todayKey(): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-const EMPTY_USED: Record<ReviewMode, number> = { flashcard: 0, choice: 0, dictation: 0, context: 0 };
+const EMPTY_USED: Record<ReviewMode, number> = { flashcard: 0, choice: 0, dictation: 0, context: 0, fill_blank: 0, auto: 0 };
 
 async function loadState(): Promise<DailyState> {
   const raw = await AsyncStorage.getItem(STORAGE_KEY);
@@ -53,13 +55,15 @@ export async function getRemaining(mode: ReviewMode): Promise<number> {
 }
 
 export async function getRemainingAll(): Promise<Record<ReviewMode, number>> {
-  if (isPremium()) return { flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity };
+  if (isPremium()) return { flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, auto: Infinity };
   const state = await loadState();
   return {
     flashcard: Math.max(0, LIMITS.flashcard - (state.used.flashcard ?? 0)),
     choice: Math.max(0, LIMITS.choice - (state.used.choice ?? 0)),
     dictation: Math.max(0, LIMITS.dictation - (state.used.dictation ?? 0)),
     context: Math.max(0, LIMITS.context - (state.used.context ?? 0)),
+    fill_blank: Math.max(0, LIMITS.fill_blank - (state.used.fill_blank ?? 0)),
+    auto: Math.max(0, LIMITS.auto - (state.used.auto ?? 0)),
   };
 }
 

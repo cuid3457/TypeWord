@@ -22,6 +22,16 @@ verify_jwt = false
 [functions.image-extract]
 verify_jwt = false
 
+[functions.tts-synthesize]
+# Same as word-lookup: gateway-level JWT verification disabled because of
+# ES256 key incompatibility; verified inside via admin.auth.getUser(jwt).
+verify_jwt = false
+
+[functions.revenuecat-webhook]
+# Public webhook — auth is via Authorization header with RC-shared secret,
+# not a user JWT. Verified inside the function.
+verify_jwt = false
+
 [api]
 enabled = true
 # Port to use for the API URL.

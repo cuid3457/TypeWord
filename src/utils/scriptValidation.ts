@@ -22,6 +22,8 @@ const LANG_SCRIPTS: Record<string, string[]> = {
   ko: ['hangul', 'cjk'],
   ja: ['hiragana', 'katakana', 'cjk'],
   zh: ['cjk'],
+  'zh-CN': ['cjk'],
+  'zh-TW': ['cjk'],
   ru: ['cyrillic'],
 };
 

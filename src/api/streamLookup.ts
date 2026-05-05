@@ -18,7 +18,7 @@ export interface StreamHandlers {
 
 export interface PartialLookup {
   reading?: string | string[];
-  meanings: { definition: string; partOfSpeech?: string }[];
+  meanings: { definition: string; partOfSpeech?: string; gender?: 'm' | 'f' | 'n' | 'mf' }[];
 }
 
 /**
@@ -29,9 +29,11 @@ export interface PartialLookup {
 export function extractPartialLookup(accumulated: string): PartialLookup {
   const defRegex = /"definition"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/g;
   const posRegex = /"partOfSpeech"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/g;
+  const genderRegex = /"gender"\s*:\s*"(mf|[mfn])"/g;
 
   const defs = [...accumulated.matchAll(defRegex)].map((m) => unescapeJson(m[1]));
   const poss = [...accumulated.matchAll(posRegex)].map((m) => unescapeJson(m[1]));
+  const genders = [...accumulated.matchAll(genderRegex)].map((m) => m[1] as 'm' | 'f' | 'n' | 'mf');
 
   // reading can be a string or an array of strings
   let reading: string | string[] | undefined;
@@ -49,6 +51,7 @@ export function extractPartialLookup(accumulated: string): PartialLookup {
   const meanings = defs.map((d, i) => ({
     definition: d,
     partOfSpeech: poss[i],
+    gender: genders[i],
   }));
 
   return { reading, meanings };

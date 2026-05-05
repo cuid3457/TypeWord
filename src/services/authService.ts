@@ -5,10 +5,26 @@ import { setUser } from './sentry';
 
 const REDIRECT_URL = 'typeword://auth/callback';
 
-GoogleSignin.configure({
-  webClientId: '518104064870-e4ktklgq48hf8j9akrb21v9vv0nqoo06.apps.googleusercontent.com',
-  iosClientId: '518104064870-rksfiejtdq0o3cto25ftjkcf8pteblud.apps.googleusercontent.com',
-});
+// Lazy-configure: a top-level configure() call was previously crashing the
+// iOS production build at launch (NSException raised from GIDSignIn
+// signInWithOptions on import). Move the call inside a guarded helper so it
+// runs only when the user actually attempts Google sign-in, and any native
+// failure surfaces as a recoverable error instead of taking the whole app
+// down. The configure call itself is idempotent — calling it more than once
+// is safe.
+let googleConfigured = false;
+function ensureGoogleConfigured(): void {
+  if (googleConfigured) return;
+  try {
+    GoogleSignin.configure({
+      webClientId: '518104064870-e4ktklgq48hf8j9akrb21v9vv0nqoo06.apps.googleusercontent.com',
+      iosClientId: '518104064870-rksfiejtdq0o3cto25ftjkcf8pteblud.apps.googleusercontent.com',
+    });
+    googleConfigured = true;
+  } catch (err) {
+    console.warn('GoogleSignin.configure failed:', err);
+  }
+}
 
 export async function ensureSession(): Promise<string> {
   const { data, error } = await supabase.auth.getSession();
@@ -96,6 +112,7 @@ export async function signInWithEmail(email: string, password: string): Promise<
 
 export async function signInWithGoogle(): Promise<{ error?: string }> {
   try {
+    ensureGoogleConfigured();
     await GoogleSignin.hasPlayServices();
     await GoogleSignin.signOut().catch(() => {});
     const response = await GoogleSignin.signIn();

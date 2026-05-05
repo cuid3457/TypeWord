@@ -16,17 +16,17 @@ const POS_MAP: Record<string, Record<string, string>> = {
     preposition: '전치사', conjunction: '접속사', interjection: '감탄사',
     pronoun: '대명사', determiner: '관형사', particle: '조사',
     'proper noun': '고유명사', abbreviation: '약어', prefix: '접두사', suffix: '접미사',
-    expression: '수식',
+    expression: '표현',
   },
   ja: {
     noun: '名詞', verb: '動詞', adjective: '形容詞', adverb: '副詞',
     preposition: '前置詞', conjunction: '接続詞', interjection: '感嘆詞',
-    pronoun: '代名詞', 'proper noun': '固有名詞', expression: '数式',
+    pronoun: '代名詞', 'proper noun': '固有名詞', expression: '表現',
   },
   zh: {
     noun: '名词', verb: '动词', adjective: '形容词', adverb: '副词',
     preposition: '介词', conjunction: '连词', interjection: '叹词',
-    pronoun: '代词', 'proper noun': '专有名词', expression: '表达式',
+    pronoun: '代词', 'proper noun': '专有名词', expression: '表达',
   },
   es: {
     noun: 'sustantivo', verb: 'verbo', adjective: 'adjetivo', adverb: 'adverbio',
@@ -72,14 +72,60 @@ export function translatePOS(pos: string, toLang: string): string {
   const normalized = pos.toLowerCase().trim();
   const enKey = REVERSE_POS[normalized] ?? normalized;
   if (toLang === 'en') return enKey;
-  const map = POS_MAP[toLang];
+  // Normalize zh-CN/zh-TW to zh for POS lookup.
+  const posLang = toLang === 'zh-CN' || toLang === 'zh-TW' ? 'zh' : toLang;
+  const map = POS_MAP[posLang];
   if (!map) return pos;
   return map[enKey] ?? pos;
 }
 
+/**
+ * Localized labels for grammatical gender. UI shows these alongside the
+ * part-of-speech for nouns in gendered languages (de/fr/es/it/pt/ru). Each
+ * row is keyed by the UI locale, then by gender code. `mf` is common/epicene
+ * (one surface form used for both genders, e.g. élève, médecin).
+ */
+const GENDER_LABEL: Record<string, { m: string; f: string; n: string; mf: string }> = {
+  ko: { m: '남성', f: '여성', n: '중성', mf: '남성·여성' },
+  en: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  ja: { m: '男性', f: '女性', n: '中性', mf: '男女共通' },
+  'zh-CN': { m: '阳性', f: '阴性', n: '中性', mf: '阳·阴' },
+  'zh-TW': { m: '陽性', f: '陰性', n: '中性', mf: '陽·陰' },
+  es: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  fr: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  de: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  it: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  pt: { m: 'm.', f: 'f.', n: 'n.', mf: 'm./f.' },
+  ru: { m: 'м.', f: 'ж.', n: 'с.', mf: 'м./ж.' },
+};
+
+/**
+ * Build the parenthetical text shown before each meaning's definition. Combines
+ * partOfSpeech with grammatical gender when present, in the UI locale. Returns
+ * just the inner text (no parens) so call sites control the wrapping.
+ *
+ * Format:
+ *   - With gender: `<pos>/<gender>`  (e.g. "명사/남성")
+ *   - Without:     `<pos>`            (e.g. "명사")
+ */
+export function formatPOS(
+  pos: string,
+  gender: 'm' | 'f' | 'n' | 'mf' | undefined,
+  uiLang: string,
+): string {
+  const localizedPos = translatePOS(pos, uiLang);
+  if (!gender) return localizedPos;
+  const labels = GENDER_LABEL[uiLang]
+    ?? GENDER_LABEL[uiLang.split('-')[0]]
+    ?? GENDER_LABEL.en;
+  return `${localizedPos}/${labels[gender]}`;
+}
+
 function fixPOS(result: WordLookupResult, targetLang: string): WordLookupResult {
   if (targetLang === 'en' || !result.meanings) return result;
-  const map = POS_MAP[targetLang];
+  // Normalize zh-CN/zh-TW to zh for POS lookup.
+  const posLang = targetLang === 'zh-CN' || targetLang === 'zh-TW' ? 'zh' : targetLang;
+  const map = POS_MAP[posLang];
   if (!map) return result;
 
   let changed = false;

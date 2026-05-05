@@ -53,13 +53,11 @@ Deno.serve(async (req: Request) => {
     const userEmail = user.email;
     const userLang = user.user_metadata?.lang || "en";
 
-    await supabase.from("user_words").delete().eq("user_id", userId);
-    await supabase.from("books").delete().eq("user_id", userId);
-    await supabase.from("content_reports").delete().eq("user_id", userId);
-    await supabase.from("inquiries").delete().eq("user_id", userId);
-    await supabase.from("profiles").delete().eq("user_id", userId);
-    await supabase.from("api_calls").delete().eq("user_id", userId);
-
+    // Delete the auth user FIRST. ON DELETE CASCADE on profiles + tables that
+    // reference auth.users will sweep most rows atomically. This avoids the
+    // partial-delete window where (e.g.) profiles is gone but auth.users
+    // remains, which would let the handle_new_user trigger recreate a blank
+    // profile on the next login.
     const { error: deleteError } = await supabase.auth.admin.deleteUser(userId);
     if (deleteError) {
       return new Response(JSON.stringify({ error: deleteError.message }), {
@@ -67,6 +65,19 @@ Deno.serve(async (req: Request) => {
         headers: { ...cors, "Content-Type": "application/json" },
       });
     }
+
+    // Belt-and-suspenders: clean up any rows that don't have ON DELETE
+    // CASCADE wired up. Failures here are logged but not fatal — the auth
+    // user is already gone and the user can't reach this data anyway.
+    const cleanupTables = ["user_words", "books", "content_reports", "inquiries", "profiles", "api_calls"];
+    await Promise.allSettled(
+      cleanupTables.map((tbl) =>
+        supabase.from(tbl).delete().eq("user_id", userId)
+          .then(({ error }) => {
+            if (error) console.warn(`cleanup ${tbl} failed:`, error.message);
+          }),
+      ),
+    );
 
     if (userEmail) {
       try {

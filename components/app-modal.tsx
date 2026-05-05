@@ -10,6 +10,13 @@ interface AppModalProps {
   confirmText?: string;
   onConfirm?: () => void;
   destructive?: boolean;
+  /**
+   * Optional link-style action rendered between the message and main buttons.
+   * Useful for "Manage Subscription"–type accessory actions that need to be
+   * distinct from the primary confirm/cancel choice.
+   */
+  secondaryText?: string;
+  onSecondary?: () => void;
 }
 
 export function AppModal({
@@ -21,8 +28,11 @@ export function AppModal({
   confirmText,
   onConfirm,
   destructive,
+  secondaryText,
+  onSecondary,
 }: AppModalProps) {
   const hasTwoButtons = !!(confirmText && onConfirm);
+  const hasSecondary = !!(secondaryText && onSecondary);
 
   return (
     <Modal
@@ -45,6 +55,17 @@ export function AppModal({
           <Text className="mt-3 text-sm leading-5 text-gray-600 dark:text-gray-300">
             {message}
           </Text>
+
+          {hasSecondary ? (
+            <Pressable
+              onPress={onSecondary}
+              className="mt-4 items-center rounded-xl border border-[#2EC4A5] bg-[#2EC4A510] py-3"
+            >
+              <Text className="text-sm font-semibold text-[#2EC4A5]">
+                {secondaryText}
+              </Text>
+            </Pressable>
+          ) : null}
 
           {hasTwoButtons ? (
             <View className="mt-5 flex-row gap-3">

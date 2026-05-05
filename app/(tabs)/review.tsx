@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { AppState, BackHandler, FlatList, Keyboard, Pressable, Text } from 'react-native';
 import { useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getTtsText, speakWord } from '@src/utils/ttsLocale';
+import { getTtsText, phonemeForChinese, prefetchSpeak, speakWord } from '@src/utils/ttsLocale';
+import { compareDictation } from '@src/utils/dictationCompare';
+import { getSttLocale } from '@src/utils/sttLocale';
 import { ReviewSettingsSheet } from '@/components/review/ReviewSettingsSheet';
 import { ReviewComplete } from '@/components/review/ReviewComplete';
 import { ReviewPicker } from '@/components/review/ReviewPicker';
@@ -12,7 +14,7 @@ import { ReviewActiveCard } from '@/components/review/ReviewActiveCard';
 import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 
 import * as Haptics from 'expo-haptics';
-import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
+import { useRefreshReviewBadge, useTabBarVisibility } from '@/app/(tabs)/_layout';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { saveUserSettings } from '@src/storage/userSettings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -40,6 +42,7 @@ import {
   type BookSortMode,
   type StoredWord,
 } from '@src/db/queries';
+import { awardXP, calculateXP } from '@src/services/xpService';
 import { checkWordFreshness } from '@src/services/wordService';
 import { getStreak, getTodayStreakDate, type StreakInfo } from '@src/services/streakService';
 import {
@@ -58,7 +61,22 @@ export default function ReviewScreen() {
   const params = useLocalSearchParams<{ bookId?: string }>();
 
   type ReviewOrder = 'newest' | 'shuffle';
-  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context';
+  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
+  // Modes a single card can actually render (auto resolves into one of these per card).
+  type ResolvedMode = Exclude<ReviewMode, 'auto'>;
+  const AUTO_CANDIDATE_MODES: ResolvedMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank'];
+  // Indices of examples whose translation contains highlight markers. context
+  // and fill_blank both surface the translation as the bridge between sentence
+  // and word — examples missing that bridge (e.g. negated form 모르다 for 知道)
+  // make the card visually broken, so they're excluded from review picking.
+  const markeredExampleIndices = (examples?: { translation?: string }[]): number[] => {
+    if (!examples || examples.length === 0) return [];
+    const out: number[] = [];
+    for (let i = 0; i < examples.length; i++) {
+      if (examples[i]?.translation?.includes('**')) out.push(i);
+    }
+    return out;
+  };
   const DEFAULT_SESSION = 20;
   const MIN_SESSION = 5;
   const MAX_SESSION = 50;
@@ -105,7 +123,7 @@ export default function ReviewScreen() {
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitAdAvailable, setLimitAdAvailable] = useState(false);
   const [paywallVisible, setPaywallVisible] = useState(false);
-  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity });
+  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, auto: Infinity });
 
   // Settings modal state
   const [showSettings, setShowSettings] = useState(false);
@@ -115,18 +133,54 @@ export default function ReviewScreen() {
   }, []);
   const [pendingBookId, setPendingBookId] = useState<string | null>(null);
   const [reviewOrder, setReviewOrder] = useState<ReviewOrder>('shuffle');
-  const [reviewMode, setReviewMode] = useState<ReviewMode>('flashcard');
+  const [reviewMode, setReviewMode] = useState<ReviewMode>((settings?.reviewMode as ReviewMode) ?? 'auto');
+  // settings hook loads async — once it arrives, hydrate from the stored
+  // last-used mode. Tracked by ref so we only hydrate once (subsequent
+  // user changes within the session must not be clobbered).
+  const reviewModeHydratedRef = useRef(false);
+  useEffect(() => {
+    if (reviewModeHydratedRef.current) return;
+    if (!settings) return;
+    reviewModeHydratedRef.current = true;
+    const stored = settings.reviewMode as ReviewMode | undefined;
+    if (stored && stored !== reviewMode) {
+      setReviewMode(stored);
+    }
+  }, [settings, reviewMode]);
+  // Persist reviewMode the moment the user picks one — saving only at
+  // session start meant cancelling out of the sheet would lose the
+  // selection on the next app launch.
+  useEffect(() => {
+    if (!reviewModeHydratedRef.current || !settings) return;
+    if (settings.reviewMode === reviewMode) return;
+    saveUserSettings({ ...settings, reviewMode }).catch(() => {});
+  }, [reviewMode, settings]);
   const [sessionCount, setSessionCount] = useState(settings?.sessionCount ?? DEFAULT_SESSION);
 
   // Choice / context mode state
   const [choices, setChoices] = useState<string[]>([]);
   const [choiceSelected, setChoiceSelected] = useState<number | null>(null);
   const [contextExampleIdx, setContextExampleIdx] = useState(0);
-  const initialReversedRef = useRef(Math.random() < 0.5);
+  // Per-card example index cache keyed by word id. Without this, going back
+  // and forward through the deck re-randomizes the example sentence shown
+  // for context / fill_blank, so the same card looks different on revisit.
+  const [cardExampleIdx, setCardExampleIdx] = useState<Record<string, number>>({});
 
-  // Dictation mode state
+  // Dictation mode state. Mic input writes into dictationInput via STT —
+  // typing and speaking share the same input + grading path.
   const [dictationInput, setDictationInput] = useState('');
   const [dictationChecked, setDictationChecked] = useState(false);
+  const [dictationListening, setDictationListening] = useState(false);
+
+  // Per-card resolved mode for `auto`. Empty for non-auto sessions; for auto,
+  // length matches `words` and indexes align so resolvedMode() can read by idx.
+  const [cardModes, setCardModes] = useState<ResolvedMode[]>([]);
+
+  // Gamification — combo (resets on still_learning, kept on uncertain) and
+  // a transient XP gain popup that fades after each correct answer. Total
+  // XP lives in xpService and is shown on the dashboard.
+  const [combo, setCombo] = useState(0);
+  const [xpGain, setXpGain] = useState<{ amount: number; key: number } | null>(null);
 
 
   // Refs for auto-rate on blur/exit
@@ -195,6 +249,12 @@ export default function ReviewScreen() {
       showInterstitialIfReady();
     }
     setPhase('picker');
+    // Reset session state so the next startReview doesn't render with the
+    // previous session's stale completeCelebrate / words / index.
+    setWords([]);
+    setCardModes([]);
+    setIndex(0);
+    setCompleteCelebrate(null);
     await loadPickerData(sortMode, sortReversed);
   }, [loadPickerData, sortMode, sortReversed]);
 
@@ -269,6 +329,19 @@ export default function ReviewScreen() {
     return unsubscribe;
   }, [navigation, phase, goBackToPicker]);
 
+  // Hide the tab bar during an active review session — the bottom tabs
+  // steal vertical space and break focus when the user is mid-card. Picker
+  // phase keeps the tabs so navigation between Wordlists / Review /
+  // Dashboard / Settings is one tap away. Goes through the layout's
+  // TabBarVisibleContext so the layout-owned tabBarStyle (height,
+  // paddingBottom, background) is preserved — setOptions on the screen
+  // would replace the entire style and shift the bar's position.
+  const { setHidden: setTabBarHidden } = useTabBarVisibility();
+  useEffect(() => {
+    setTabBarHidden(phase === 'review');
+    return () => { setTabBarHidden(false); };
+  }, [phase, setTabBarHidden]);
+
   const handleStartRequest = (bookId?: string | null) => {
     setPendingBookId(bookId ?? null);
     sheetTranslateY.value = 1000;
@@ -282,8 +355,8 @@ export default function ReviewScreen() {
   };
 
   const handleConfirmStart = async () => {
-    if (settings && settings.sessionCount !== sessionCount) {
-      await saveUserSettings({ ...settings, sessionCount });
+    if (settings && (settings.sessionCount !== sessionCount || settings.reviewMode !== reviewMode)) {
+      await saveUserSettings({ ...settings, sessionCount, reviewMode });
     }
     if (!premium) {
       const rem = await getRemaining(reviewMode as LimitReviewMode);
@@ -374,11 +447,38 @@ export default function ReviewScreen() {
     setChoiceSelected(null);
   };
 
+  // Fill-blank picks WORDS from the same source language as distractors
+  // (instead of definitions). The blank in the example sentence asks "which
+  // word fills this spot?" so the choice list must be word forms.
+  const generateFillBlankChoices = (ws: StoredWord[], idx: number, langMap?: Record<string, string>) => {
+    const cur = ws[idx];
+    if (!cur) return;
+    const map = langMap ?? langs;
+    const curSrc = cur.bookId ? map[cur.bookId] : '';
+    const correct = cur.word;
+
+    const candidates = ws
+      .filter((w, i) => i !== idx && w.word)
+      .filter((w) => {
+        if (!curSrc) return true;
+        const sl = w.bookId ? map[w.bookId] : '';
+        return sl === curSrc;
+      })
+      .map((w) => w.word);
+
+    const unique = [...new Set(candidates)].filter((w) => w !== correct);
+    const wrong = shuffleArray(unique).slice(0, 3);
+    setChoices(shuffleArray([correct, ...wrong]));
+    setChoiceSelected(null);
+  };
+
   const startReview = async (bookId?: string | null, order: ReviewOrder = 'shuffle', count = DEFAULT_SESSION) => {
     setReviewLoading(true);
     setSelectedBookId(bookId ?? null);
     try {
-      const ws = await getReviewableWords(count, bookId);
+      const { getNewCardsRemainingToday } = await import('@src/services/newCardLimitService');
+      const newCardBudget = await getNewCardsRemainingToday();
+      const ws = await getReviewableWords(count, bookId, newCardBudget);
 
       const langMap: Record<string, string> = {};
       const tgtLangMap: Record<string, string> = {};
@@ -411,20 +511,77 @@ export default function ReviewScreen() {
         ordered = shuffleArray(freshWords);
       }
 
-      initialReversedRef.current = Math.random() < 0.5;
+      // fill_blank and context both lean on the marker bridge between the
+      // example sentence and its translation. Drop words with no markered
+      // example so every card can render that bridge; auto mode handles this
+      // per-card by demoting these cards out of the fill_blank/context pool.
+      if (reviewMode === 'fill_blank' || reviewMode === 'context') {
+        ordered = ordered.filter((w) => markeredExampleIndices(w.result.examples).length > 0);
+      }
+
+      // Empty session → bail back to picker with a toast instead of falling
+      // through to ReviewComplete (which would otherwise show a stale streak
+      // celebration from the previous session).
+      if (ordered.length === 0) {
+        setPhase('picker');
+        setWords([]);
+        setCardModes([]);
+        setIndex(0);
+        setCompleteCelebrate(null);
+        setToastMsg(t('review.no_cards_for_mode'));
+        setToastVisible(true);
+        return;
+      }
+
+      // Resolve per-card mode for auto sessions. fill_blank and context both
+      // require at least one markered example; cards without one fall back to
+      // the remaining modes uniformly.
+      const resolvedModes: ResolvedMode[] = reviewMode === 'auto'
+        ? ordered.map((w) => {
+            const hasMarkered = markeredExampleIndices(w.result.examples).length > 0;
+            const pool = hasMarkered
+              ? AUTO_CANDIDATE_MODES
+              : AUTO_CANDIDATE_MODES.filter((m) => m !== 'fill_blank' && m !== 'context');
+            return pool[Math.floor(Math.random() * pool.length)];
+          })
+        : [];
+
       setWords(ordered);
+      setCardModes(resolvedModes);
       setLangs(langMap);
       setTargetLangs(tgtLangMap);
       setBookNames(nameMap);
       setIndex(0);
+      setCompleteCelebrate(null);
+
+      // Pre-warm audio for the first 2 words of a dictation session so the
+      // initial playback isn't bottlenecked on a fresh fetchTts round-trip.
+      if (reviewMode === 'dictation') {
+        for (let i = 0; i < Math.min(2, ordered.length); i++) {
+          const w = ordered[i];
+          const lang = w.bookId ? (langMap[w.bookId] ?? 'en') : 'en';
+          prefetchSpeak(
+            getTtsText(w.word, lang, w.result.reading),
+            lang,
+            w.readingKey
+              ? phonemeForChinese(lang, w.result.reading, w.word) ?? undefined
+              : undefined,
+          );
+        }
+      }
       setFlipped(false);
       setDictationInput('');
       setDictationChecked(false);
+      setDictationListening(false);
       setStats({ total: 0, gotIt: 0, uncertain: 0, stillLearning: 0 });
       setHistory([]);
       setReExposureCount({});
       setWordResults({});
       setSkipCount({});
+      setCardExampleIdx({});
+      setCombo(0);
+      setXpGain(null);
+      committedCardsRef.current = new Set();
       setPhase('review');
 
       const remaining = await getRemaining(reviewMode as LimitReviewMode);
@@ -433,10 +590,21 @@ export default function ReviewScreen() {
       setLimitTotal(limit);
 
       if ((reviewMode === 'choice' || reviewMode === 'context') && ordered.length > 0) {
-        const exLen = ordered[0]?.result.examples?.length ?? 0;
-        const exIdx = exLen > 0 ? Math.floor(Math.random() * exLen) : 0;
+        // context picks only from markered examples; choice is unaffected by
+        // markers so it falls back to the full list.
+        const examples = ordered[0]?.result.examples;
+        const pool = reviewMode === 'context'
+          ? markeredExampleIndices(examples)
+          : examples?.map((_, i) => i) ?? [];
+        const exIdx = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : 0;
         setContextExampleIdx(exIdx);
         generateChoices(ordered, 0, tgtLangMap, reviewMode === 'context' ? exIdx : undefined);
+      }
+      if (reviewMode === 'fill_blank' && ordered.length > 0) {
+        const pool = markeredExampleIndices(ordered[0]?.result.examples);
+        const exIdx = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : 0;
+        setContextExampleIdx(exIdx);
+        generateFillBlankChoices(ordered, 0, langMap);
       }
     } catch {
       setPickerError(true);
@@ -447,8 +615,33 @@ export default function ReviewScreen() {
 
 
   const current = words[index];
-  const cardReversed = (index % 2 === 0) === initialReversedRef.current;
+  // Flashcards show word → definition only (no direction alternation).
+  const cardReversed = false;
+  // For auto sessions, each card's mode comes from the per-card resolution
+  // generated at startReview time. Falls back to flashcard if the array is
+  // shorter than expected (defensive — shouldn't normally happen).
+  const activeMode: ResolvedMode = reviewMode === 'auto'
+    ? (cardModes[index] ?? 'flashcard')
+    : reviewMode;
   const isComplete = phase === 'review' && !reviewLoading && (words.length === 0 || index >= words.length);
+
+  // Prefetch TTS for the current card so the speaker button is instant.
+  // Includes the headword and any example sentences attached to the saved word.
+  useEffect(() => {
+    if (!current) return;
+    const lang = (current.bookId ? langs[current.bookId] : 'en') ?? 'en';
+    prefetchSpeak(
+      getTtsText(current.word, lang, current.result.reading),
+      lang,
+      current.readingKey
+        ? phonemeForChinese(lang, current.result.reading, current.word) ?? undefined
+        : undefined,
+    );
+    for (const ex of current.result.examples ?? []) {
+      const plain = (ex.sentence ?? '').replace(/\*\*/g, '').trim();
+      if (plain) prefetchSpeak(plain, lang);
+    }
+  }, [current, langs]);
 
   const [showNotifPrompt, setShowNotifPrompt] = useState(false);
   const [completeCelebrate, setCompleteCelebrate] = useState<CelebrateInfo | null>(null);
@@ -515,14 +708,47 @@ export default function ReviewScreen() {
 
   const consumeOnAnswer = useCallback(async () => {
     if (premium) return;
-    const { allowed, remaining } = await consumeWord(reviewMode as LimitReviewMode);
+    // For auto sessions count against the resolved per-card mode bucket so
+    // limit accounting matches the modes actually rendered.
+    const { allowed, remaining } = await consumeWord(activeMode as LimitReviewMode);
     setLimitRemaining(remaining);
     if (!allowed || remaining <= 0) {
       const adOk = await canWatchRewardedAd();
       setLimitAdAvailable(adOk);
       setShowLimitModal(true);
     }
-  }, [premium, reviewMode]);
+  }, [premium, activeMode]);
+
+  // Tracks cards whose answer effects (haptic, XP, combo) have already
+  // fired this session — so handleRate (called on the Next button) doesn't
+  // double-award when the commit already happened on choice/check tap.
+  const committedCardsRef = useRef<Set<string>>(new Set());
+
+  // Fire the immediate "you answered" feedback: haptic + XP + combo update +
+  // floating XP popup. Idempotent per (session, card) — second call for the
+  // same card is a no-op so flashcard's handleRate path and the choice/
+  // dictation wrappers can both call it safely.
+  const commitAnswerEffects = useCallback((quality: 'got_it' | 'uncertain' | 'still_learning') => {
+    if (!current) return;
+    if (committedCardsRef.current.has(current.id)) return;
+    committedCardsRef.current.add(current.id);
+    if (quality === 'got_it') {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      const earned = calculateXP({
+        mode: activeMode,
+        intervalDays: current.intervalDays ?? 0,
+        reviewCount: current.reviewCount ?? 0,
+        combo,
+      });
+      awardXP(earned).catch(() => {});
+      setXpGain({ amount: earned, key: Date.now() });
+      setCombo((c) => c + 1);
+    } else if (quality === 'still_learning') {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      setCombo(0);
+    }
+    // uncertain: no haptic, no XP, combo unchanged.
+  }, [current, activeMode, combo]);
 
   const wrappedSetFlipped = useCallback((v: boolean) => {
     if (v && !flipped) consumeOnAnswer();
@@ -530,38 +756,65 @@ export default function ReviewScreen() {
   }, [flipped, consumeOnAnswer]);
 
   const wrappedSetChoiceSelected = useCallback((i: number | null) => {
-    if (i !== null && choiceSelected === null) consumeOnAnswer();
+    if (i !== null && choiceSelected === null) {
+      consumeOnAnswer();
+      // Compute correctness inline (mirrors the `correctDefinition` derivation
+      // below) and fire commit effects immediately — no need to wait for the
+      // user to tap Next.
+      const cur = words[index];
+      let correct = '';
+      if (cur) {
+        if (activeMode === 'context') {
+          correct = findContextDefinition(cur, contextExampleIdx);
+        } else if (activeMode === 'fill_blank') {
+          correct = cur.word;
+        } else {
+          correct = cur.result.meanings?.[0]?.definition ?? '';
+        }
+      }
+      commitAnswerEffects(choices[i] === correct ? 'got_it' : 'still_learning');
+    }
     setChoiceSelected(i);
-  }, [choiceSelected, consumeOnAnswer]);
+  }, [choiceSelected, consumeOnAnswer, choices, activeMode, words, index, contextExampleIdx, commitAnswerEffects]);
 
   const wrappedSetDictationChecked = useCallback((v: boolean) => {
-    if (v && !dictationChecked) consumeOnAnswer();
+    if (v && !dictationChecked && current) {
+      consumeOnAnswer();
+      const lang = current.bookId ? langs[current.bookId] ?? 'en' : 'en';
+      const result = compareDictation(dictationInput, current.word, lang);
+      commitAnswerEffects(result === 'wrong' ? 'still_learning' : 'got_it');
+    }
     setDictationChecked(v);
-  }, [dictationChecked, consumeOnAnswer]);
+  }, [dictationChecked, consumeOnAnswer, current, langs, dictationInput, commitAnswerEffects]);
 
   const handleRate = async (quality: 'got_it' | 'uncertain' | 'still_learning') => {
     if (!current) return;
     pendingRef.current = null;
-    if (quality === 'got_it') {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    } else if (quality === 'still_learning') {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    }
+    // Fires haptic + XP + combo for cards that haven't committed yet (the
+    // flashcard rate buttons are themselves the commit). For choice/
+    // dictation modes the commit already fired on answer tap, so this is
+    // a no-op via committedCardsRef.
+    commitAnswerEffects(quality);
     let nextReviewMs: number;
     try {
-      const result = await updateReviewResult(current.id, quality, reviewMode);
+      const result = await updateReviewResult(current.id, quality, activeMode);
       nextReviewMs = result.nextReviewMs;
     } catch {
       nextReviewMs = 0;
     }
     refreshBadge();
 
-    // Within-session re-exposure: X words reappear 5-8 cards later (max 2 times)
+    // Within-session re-exposure: a wrong card reappears once, after a
+    // distance proportional to the remaining session size. Anki/Pimsleur
+    // research shows 1 re-exposure (= 2 total appearances) hits the boredom
+    // vs retention sweet spot for adult learners; 3+ wears engagement.
     if (quality === 'still_learning') {
       const count = reExposureCount[current.id] ?? 0;
-      if (count < 2) {
-        const offset = 5 + Math.floor(Math.random() * 4);
-        const insertAt = Math.min(index + offset, words.length);
+      if (count < 1) {
+        const remaining = Math.max(1, words.length - index - 1);
+        const distance = Math.min(8, Math.max(3, Math.floor(remaining / 3)));
+        const jitter = Math.floor(Math.random() * 3);
+        const insertAt = Math.min(index + distance + jitter, words.length);
         setWords((prev) => {
           const next = [...prev];
           next.splice(insertAt, 0, current);
@@ -593,6 +846,7 @@ export default function ReviewScreen() {
     setChoiceSelected(null);
     setDictationInput('');
     setDictationChecked(false);
+    setDictationListening(false);
 
     setIndex((prev) => prev + 1);
   };
@@ -632,18 +886,23 @@ export default function ReviewScreen() {
     setChoiceSelected(null);
     setDictationInput('');
     setDictationChecked(false);
+    setDictationListening(false);
     setIndex((i) => i - 1);
   };
 
   const getAnswerQuality = (): 'got_it' | 'uncertain' | 'still_learning' | null => {
-    if ((reviewMode === 'choice' || reviewMode === 'context') && choiceSelected !== null) {
+    if ((activeMode === 'choice' || activeMode === 'context') && choiceSelected !== null) {
       return choices[choiceSelected] === correctDefinition ? 'got_it' : 'still_learning';
     }
-    if (reviewMode === 'dictation' && dictationChecked) {
-      return dictationInput.trim().toLocaleLowerCase() === current?.word.toLocaleLowerCase()
-        ? 'got_it' : 'still_learning';
+    if (activeMode === 'fill_blank' && choiceSelected !== null && current) {
+      return choices[choiceSelected] === current.word ? 'got_it' : 'still_learning';
     }
-    if (reviewMode === 'flashcard' && flipped) {
+    if (activeMode === 'dictation' && dictationChecked && current) {
+      const lang = current.bookId ? langs[current.bookId] ?? 'en' : 'en';
+      const result = compareDictation(dictationInput, current.word, lang);
+      return result === 'wrong' ? 'still_learning' : 'got_it';
+    }
+    if (activeMode === 'flashcard' && flipped) {
       return 'uncertain';
     }
     return null;
@@ -671,14 +930,90 @@ export default function ReviewScreen() {
     setChoiceSelected(null);
     setDictationInput('');
     setDictationChecked(false);
+    setDictationListening(false);
     setIndex((i) => i + 1);
   };
 
   const handleSpeak = () => {
     if (!current) return;
     const lang = current.bookId ? langs[current.bookId] : 'en';
-    speakWord(getTtsText(current.word, lang ?? 'en', current.result.reading), lang ?? 'en');
+    const safeLang = lang ?? 'en';
+    speakWord(
+      getTtsText(current.word, safeLang, current.result.reading),
+      safeLang,
+      current.readingKey
+        ? phonemeForChinese(safeLang, current.result.reading, current.word) ?? undefined
+        : undefined,
+    );
   };
+
+  // ── Dictation mic: speech-to-text into the dictation input ──
+  // Same STT plumbing as the add screen's mic flow: request permission →
+  // start → stream interim transcripts → stop. The transcript is piped into
+  // dictationInput so typing and speaking share one grading path. Wrapped
+  // in try/catch because the native module is absent under Expo Go.
+  const handleDictationMicPress = useCallback(async () => {
+    if (dictationChecked) return; // already graded — mic is locked
+    if (dictationListening) {
+      try {
+        const { ExpoSpeechRecognitionModule } = require('expo-speech-recognition');
+        ExpoSpeechRecognitionModule.stop();
+      } catch { /* no-op */ }
+      setDictationListening(false);
+      return;
+    }
+    try {
+      const { ExpoSpeechRecognitionModule } = require('expo-speech-recognition');
+      const { granted } = await ExpoSpeechRecognitionModule.requestPermissionsAsync();
+      if (!granted) return; // user can re-tap mic to re-trigger the system prompt
+      const lang = current?.bookId ? langs[current.bookId] : 'en';
+      setDictationInput('');
+      setDictationListening(true);
+      ExpoSpeechRecognitionModule.start({
+        lang: getSttLocale(lang ?? 'en'),
+        interimResults: true,
+      });
+    } catch {
+      // Module unavailable (Expo Go without dev client). Fall through silently.
+      setDictationListening(false);
+    }
+  }, [dictationListening, dictationChecked, current, langs]);
+
+  // STT event listener — only the dictation mode reacts. Auto sessions also
+  // fire only when the resolved per-card mode is dictation.
+  useEffect(() => {
+    let cleanup: (() => void) | null = null;
+    const sttActive = () => activeMode === 'dictation';
+    try {
+      const { ExpoSpeechRecognitionModule } = require('expo-speech-recognition');
+      const resultSub = ExpoSpeechRecognitionModule.addListener(
+        'result',
+        (event: { results: { transcript: string; isFinal?: boolean }[] }) => {
+          if (!sttActive()) return;
+          const transcript = event.results[0]?.transcript ?? '';
+          setDictationInput(transcript);
+          if (event.results[0]?.isFinal) {
+            setDictationListening(false);
+            if (transcript.trim()) setDictationChecked(true);
+          }
+        },
+      );
+      const endSub = ExpoSpeechRecognitionModule.addListener('end', () => {
+        if (!sttActive()) return;
+        setDictationListening(false);
+      });
+      const errorSub = ExpoSpeechRecognitionModule.addListener('error', () => {
+        if (!sttActive()) return;
+        setDictationListening(false);
+      });
+      cleanup = () => {
+        resultSub.remove();
+        endSub.remove();
+        errorSub.remove();
+      };
+    } catch { /* native module missing */ }
+    return () => { cleanup?.(); };
+  }, [activeMode]);
 
   const handleLimitWatchAd = async () => {
     const wasInReview = phase === 'review';
@@ -728,38 +1063,92 @@ export default function ReviewScreen() {
       return;
     }
     const q = getAnswerQuality();
-    pendingRef.current = q ? { wordId: current.id, mode: reviewMode, quality: q } : null;
-  }, [phase, current?.id, choiceSelected, dictationChecked, dictationInput, flipped, reviewMode]);
+    pendingRef.current = q ? { wordId: current.id, mode: activeMode, quality: q } : null;
+  }, [phase, current?.id, choiceSelected, dictationChecked, dictationInput, flipped, activeMode]);
 
-  // Generate choices / auto-play TTS when index changes
+  // Generate choices / auto-play TTS when index changes. Branches off the
+  // resolved per-card mode so auto sessions get the right setup per card.
+  // Resolves the example index from the per-card cache when available so
+  // navigating back to an earlier card shows the same example sentence.
   useEffect(() => {
     if (phase !== 'review' || words.length === 0 || index >= words.length) return;
-    if (reviewMode === 'choice' || reviewMode === 'context') {
-      const exLen = words[index]?.result.examples?.length ?? 0;
-      const exIdx = exLen > 0 ? Math.floor(Math.random() * exLen) : 0;
+    const m: ResolvedMode = reviewMode === 'auto'
+      ? (cardModes[index] ?? 'flashcard')
+      : reviewMode;
+    const wordId = words[index]?.id;
+    // restrictToMarkered=true narrows the pool to examples whose translation
+    // has highlight markers — required for context/fill_blank where the
+    // marker is the visible bridge between sentence and word.
+    const pickExampleIdx = (restrictToMarkered: boolean): number => {
+      const examples = words[index]?.result.examples;
+      const exLen = examples?.length ?? 0;
+      if (exLen === 0) return 0;
+      const pool = restrictToMarkered
+        ? markeredExampleIndices(examples)
+        : Array.from({ length: exLen }, (_, i) => i);
+      if (pool.length === 0) return 0;
+      const cached = wordId ? cardExampleIdx[wordId] : undefined;
+      if (cached !== undefined && pool.includes(cached)) return cached;
+      const fresh = pool[Math.floor(Math.random() * pool.length)];
+      if (wordId) {
+        setCardExampleIdx((prev) => ({ ...prev, [wordId]: fresh }));
+      }
+      return fresh;
+    };
+    if (m === 'choice' || m === 'context') {
+      const exIdx = pickExampleIdx(m === 'context');
       setContextExampleIdx(exIdx);
-      generateChoices(words, index, undefined, reviewMode === 'context' ? exIdx : undefined);
+      generateChoices(words, index, undefined, m === 'context' ? exIdx : undefined);
     }
-    if (reviewMode === 'dictation') {
+    if (m === 'fill_blank') {
+      const exIdx = pickExampleIdx(true);
+      setContextExampleIdx(exIdx);
+      generateFillBlankChoices(words, index);
+    }
+    if (m === 'dictation') {
       const w = words[index];
-      const lang = w.bookId ? langs[w.bookId] : 'en';
-      speakWord(getTtsText(w.word, lang ?? 'en', w.result.reading), lang ?? 'en');
+      const lang = (w.bookId ? langs[w.bookId] : 'en') ?? 'en';
+      speakWord(
+        getTtsText(w.word, lang, w.result.reading),
+        lang,
+        w.readingKey
+          ? phonemeForChinese(lang, w.result.reading, w.word) ?? undefined
+          : undefined,
+      );
+      // Pre-warm the next word's audio so when the user advances, the cloud
+      // TTS response is already in cache and playback starts immediately.
+      const next = words[index + 1];
+      if (next) {
+        const nextLang = (next.bookId ? langs[next.bookId] : 'en') ?? 'en';
+        prefetchSpeak(
+          getTtsText(next.word, nextLang, next.result.reading),
+          nextLang,
+          next.readingKey
+            ? phonemeForChinese(nextLang, next.result.reading, next.word) ?? undefined
+            : undefined,
+        );
+      }
     }
   }, [index, phase, targetLangs]);
 
   const isAnswered =
-    reviewMode === 'choice' || reviewMode === 'context' ? choiceSelected !== null
-    : reviewMode === 'dictation' ? dictationChecked
+    activeMode === 'choice' || activeMode === 'context' || activeMode === 'fill_blank' ? choiceSelected !== null
+    : activeMode === 'dictation' ? dictationChecked
     : flipped;
 
+  // For fill_blank the "correct choice" is the WORD itself; for context it's
+  // the definition tied to the chosen example; for choice it's the primary
+  // definition. ReviewCardContent compares each candidate to this value.
   const correctDefinition = phase === 'review' && words[index]
-    ? reviewMode === 'context'
+    ? activeMode === 'context'
       ? findContextDefinition(words[index], contextExampleIdx)
+      : activeMode === 'fill_blank'
+      ? words[index].word
       : words[index].result.meanings?.[0]?.definition ?? ''
     : '';
 
   const showFinish = index >= words.length - 1 && !(
-    getAnswerQuality() === 'still_learning' && (reExposureCount[current?.id ?? ''] ?? 0) < 2
+    getAnswerQuality() === 'still_learning' && (reExposureCount[current?.id ?? ''] ?? 0) < 1
   );
 
   const settingsModal = (
@@ -885,7 +1274,7 @@ export default function ReviewScreen() {
       words={words}
       current={current}
       currentBookName={currentBookName}
-      reviewMode={reviewMode}
+      reviewMode={activeMode}
       flipped={flipped}
       setFlipped={wrappedSetFlipped}
       isAnswered={isAnswered}
@@ -901,6 +1290,10 @@ export default function ReviewScreen() {
       setDictationInput={setDictationInput}
       dictationChecked={dictationChecked}
       setDictationChecked={wrappedSetDictationChecked}
+      dictationListening={dictationListening}
+      onDictationMicPress={handleDictationMicPress}
+      combo={combo}
+      xpGain={xpGain}
       handleRate={handleRate}
       handleBack={handleBack}
       handleSkip={handleSkip}

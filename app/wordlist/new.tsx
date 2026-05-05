@@ -3,6 +3,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -15,6 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Toast } from '@/components/toast';
 import { Paywall } from '@/components/paywall';
+import { AdBanner } from '@/components/ad-banner';
 
 import { STUDY_LANGUAGES, findLanguage, isStudyLang } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
@@ -23,6 +25,8 @@ import { usePremium } from '@src/hooks/usePremium';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { genId } from '@src/services/wordService';
 import { useUserSettings } from '@src/hooks/useUserSettings';
+
+const MAX_TITLE_LENGTH = 40;
 
 export default function NewWordlistScreen() {
   const { t, i18n } = useTranslation();
@@ -123,7 +127,7 @@ export default function NewWordlistScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <View className="flex-row items-center">
-            <Pressable onPress={() => router.back()} className="mr-2 p-1">
+            <Pressable onPress={() => { Keyboard.dismiss(); router.back(); }} className="mr-2 p-1">
               <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
             </Pressable>
             <Text className="text-3xl font-bold text-black dark:text-white">
@@ -143,63 +147,56 @@ export default function NewWordlistScreen() {
               onChangeText={setTitle}
               placeholder={animatedPlaceholder}
               placeholderTextColor="#9ca3af"
-              className="mt-2 rounded-xl px-4 py-3 text-base text-black dark:text-white"
-              style={{ borderWidth: 2, borderColor: '#2EC4A5' }}
+              maxLength={MAX_TITLE_LENGTH}
+              className="mt-2 rounded-xl px-4 text-base text-black dark:text-white"
+              style={{ borderWidth: 2, borderColor: '#2EC4A5', height: 50, includeFontPadding: false, textAlignVertical: 'center' }}
             />
+            {title.length >= MAX_TITLE_LENGTH - 10 ? (
+              <Text className="mt-1 text-right text-xs text-gray-400">
+                {title.length}/{MAX_TITLE_LENGTH}
+              </Text>
+            ) : null}
           </View>
 
           <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
             <Pressable
-              onPress={() => setEditingLang(editingLang === 'study' ? null : 'study')}
+              onPress={() => {
+                Keyboard.dismiss();
+                setEditingLang(editingLang === 'study' ? null : 'study');
+              }}
               className="flex-row items-center p-4"
             >
               <View className="flex-1">
                 <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
                   {t('new_wordlist.study_lang')}
                 </Text>
-                <Text className="mt-1 text-base text-black dark:text-white">
+                <Text
+                  className="mt-1 text-base text-black dark:text-white"
+                  style={{ lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
+                  numberOfLines={1}
+                >
                   {studyLabel ? `${studyLabel.flag} ${t(`languages.${studyLabel.code}`)}` : '—'}
                 </Text>
               </View>
               <Text className="text-base text-gray-400">{editingLang === 'study' ? '▲' : '▼'}</Text>
             </Pressable>
 
-            <View className="mx-4 flex-row items-center justify-center py-1">
-              <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
-              <MaterialIcons name="arrow-downward" size={16} color="#9ca3af" style={{ marginHorizontal: 8 }} />
-              <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
-            </View>
-
-            <Pressable
-              onPress={() => setEditingLang(editingLang === 'trans' ? null : 'trans')}
-              className="flex-row items-center p-4"
-            >
-              <View className="flex-1">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                  {t('new_wordlist.target_lang')}
-                </Text>
-                <Text className="mt-1 text-base text-black dark:text-white">
-                  {transLabel ? `${transLabel.flag} ${t(`languages.${transLabel.code}`)}` : '—'}
-                </Text>
-              </View>
-              <Text className="text-base text-gray-400">{editingLang === 'trans' ? '▲' : '▼'}</Text>
-            </Pressable>
-          </View>
-
-          {editingLang ? (
-            <View className="mt-2 rounded-2xl border border-gray-300 dark:border-gray-700" style={{ height: 320 }}>
-              <ScrollView nestedScrollEnabled>
-                {STUDY_LANGUAGES
-                  .map((item) => {
-                    const selectedCode = editingLang === 'study' ? studyLang : transLang;
-                    const selected = item.code === selectedCode;
+            {/* Inline list right below the study picker so the option list is
+                visually attached to the row that opened it. The trans picker
+                + swap button are hidden during selection to keep focus and
+                avoid the "list appearing below the wrong row" confusion. */}
+            {editingLang === 'study' ? (
+              <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+                <ScrollView nestedScrollEnabled>
+                  {STUDY_LANGUAGES.map((item) => {
+                    const selected = item.code === studyLang;
                     const translatedName = t(`languages.${item.code}`);
                     return (
                       <Pressable
                         key={item.code}
                         onPress={() => {
-                          if (editingLang === 'study') setStudyLang(item.code);
-                          else setTransLang(item.code);
+                          Keyboard.dismiss();
+                          setStudyLang(item.code);
                           setEditingLang(null);
                         }}
                         className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
@@ -211,17 +208,98 @@ export default function NewWordlistScreen() {
                             <Text className="text-xs text-gray-400">{item.nativeName}</Text>
                           ) : null}
                         </View>
-                        {selected ? <Text className="text-base text-black dark:text-white">✓</Text> : null}
+                        {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
                       </Pressable>
                     );
                   })}
-              </ScrollView>
-            </View>
-          ) : null}
+                </ScrollView>
+              </View>
+            ) : null}
+
+            {editingLang !== 'study' ? (
+              <>
+                <View className="mx-4 flex-row items-center justify-center py-1">
+                  <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                  <Pressable
+                    onPress={() => {
+                      Keyboard.dismiss();
+                      setEditingLang(null);
+                      const a = studyLang;
+                      setStudyLang(transLang);
+                      setTransLang(a);
+                    }}
+                    hitSlop={10}
+                    accessibilityLabel={t('new_wordlist.swap_langs')}
+                    accessibilityRole="button"
+                    className="mx-2 h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"
+                  >
+                    <MaterialIcons name="swap-vert" size={18} color="#6b7280" />
+                  </Pressable>
+                  <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                </View>
+
+                <Pressable
+                  onPress={() => {
+                    Keyboard.dismiss();
+                    setEditingLang(editingLang === 'trans' ? null : 'trans');
+                  }}
+                  className="flex-row items-center p-4"
+                >
+                  <View className="flex-1">
+                    <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                      {t('new_wordlist.target_lang')}
+                    </Text>
+                    <Text
+                      className="mt-1 text-base text-black dark:text-white"
+                      style={{ lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
+                      numberOfLines={1}
+                    >
+                      {transLabel ? `${transLabel.flag} ${t(`languages.${transLabel.code}`)}` : '—'}
+                    </Text>
+                  </View>
+                  <Text className="text-base text-gray-400">{editingLang === 'trans' ? '▲' : '▼'}</Text>
+                </Pressable>
+
+                {editingLang === 'trans' ? (
+                  <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+                    <ScrollView nestedScrollEnabled>
+                      {STUDY_LANGUAGES.map((item) => {
+                        const selected = item.code === transLang;
+                        const translatedName = t(`languages.${item.code}`);
+                        return (
+                          <Pressable
+                            key={item.code}
+                            onPress={() => {
+                              Keyboard.dismiss();
+                              setTransLang(item.code);
+                              setEditingLang(null);
+                            }}
+                            className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
+                          >
+                            <Text className="mr-3 text-xl">{item.flag}</Text>
+                            <View className="flex-1">
+                              <Text className="text-base text-black dark:text-white">{translatedName}</Text>
+                              {translatedName !== item.nativeName ? (
+                                <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                              ) : null}
+                            </View>
+                            {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
+                          </Pressable>
+                        );
+                      })}
+                    </ScrollView>
+                  </View>
+                ) : null}
+              </>
+            ) : null}
+          </View>
 
           <View className="mt-8">
             <Pressable
-              onPress={handleCreate}
+              onPress={() => {
+                Keyboard.dismiss();
+                handleCreate();
+              }}
               className={`items-center rounded-xl py-4 ${
                 canSubmit ? 'bg-black dark:bg-white' : 'bg-gray-300'
               }`}
@@ -238,6 +316,7 @@ export default function NewWordlistScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      <AdBanner />
       <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} />
     </SafeAreaView>
   );

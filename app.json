@@ -11,8 +11,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "app.typeword.app",
+      "buildNumber": "8",
       "infoPlist": {
-        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you."
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
@@ -45,7 +47,12 @@
         }
       ],
       "expo-localization",
-      "@react-native-google-signin/google-signin",
+      [
+        "@react-native-google-signin/google-signin",
+        {
+          "iosUrlScheme": "com.googleusercontent.apps.518104064870-rksfiejtdq0o3cto25ftjkcf8pteblud"
+        }
+      ],
       "expo-tracking-transparency",
       "expo-sqlite",
       [
@@ -69,7 +76,16 @@
           "microphonePermission": "Allow TypeWord to use the microphone for voice search.",
           "speechRecognitionPermission": "Allow TypeWord to use speech recognition for voice search."
         }
-      ]
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "TypeWord accesses your photo library to extract words from images for vocabulary learning.",
+          "cameraPermission": "TypeWord uses your camera to capture text and extract words for vocabulary learning."
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true
@@ -84,6 +100,7 @@
       "policy": "appVersion"
     },
     "updates": {
+      "enabled": false,
       "url": "https://u.expo.dev/dcfebb54-591a-425d-b9db-f30647c85bd6"
     }
   }

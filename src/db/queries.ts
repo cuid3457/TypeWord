@@ -3,6 +3,7 @@ import type { WordLookupResult } from '@src/types/word';
 
 import { getDb } from './index';
 import { scheduleSync } from '@src/services/syncService';
+import { removeFromPersistent } from '@src/services/ttsCache';
 
 // ---------- Books ----------
 
@@ -18,6 +19,10 @@ interface BookRow {
   cover_url: string | null;
   sort_order: number;
   pinned: number;
+  notif_enabled: number;
+  notif_hour: number | null;
+  notif_minute: number;
+  notif_days: number;
   created_at: number;
   updated_at: number;
   synced_at: number | null;
@@ -34,9 +39,73 @@ function rowToBook(row: BookRow): Omit<Book, 'userId'> {
     studyLang: row.study_lang,
     isbn: row.isbn,
     coverUrl: row.cover_url,
+    notifEnabled: !!row.notif_enabled,
+    notifHour: row.notif_hour,
+    notifMinute: row.notif_minute ?? 0,
+    notifDays: row.notif_days ?? 127,
     createdAt: new Date(row.created_at).toISOString(),
     updatedAt: new Date(row.updated_at).toISOString(),
   };
+}
+
+export async function updateBookNotif(
+  id: string,
+  enabled: boolean,
+  hour: number | null,
+  minute: number,
+  days: number,
+): Promise<void> {
+  const db = await getDb();
+  await db.runAsync(
+    'UPDATE books SET notif_enabled = ?, notif_hour = ?, notif_minute = ?, notif_days = ?, updated_at = ? WHERE id = ?',
+    [enabled ? 1 : 0, hour, minute, days, Date.now(), id],
+  );
+  scheduleSync();
+}
+
+export interface NotifBook {
+  id: string;
+  title: string;
+  hour: number;
+  minute: number;
+  days: number;
+  reviewableCount: number;
+}
+
+/**
+ * Returns books with notifications enabled, joined with their reviewable count.
+ * Used by notificationService to schedule per-wordlist daily reminders.
+ */
+export async function getBooksForNotifications(defaultHour: number): Promise<NotifBook[]> {
+  const db = await getDb();
+  const now = Date.now();
+  const rows = await db.getAllAsync<{
+    id: string;
+    title: string;
+    notif_hour: number | null;
+    notif_minute: number | null;
+    notif_days: number | null;
+  }>(
+    'SELECT id, title, notif_hour, notif_minute, notif_days FROM books WHERE notif_enabled = 1',
+  );
+  const result: NotifBook[] = [];
+  for (const r of rows) {
+    const dueRows = await db.getAllAsync<{ word: string }>(
+      `SELECT word FROM user_words
+       WHERE book_id = ? AND (next_review IS NULL OR next_review <= ?)`,
+      [r.id, now],
+    );
+    const reviewableCount = dueRows.filter((d) => !isExpression(d.word)).length;
+    result.push({
+      id: r.id,
+      title: r.title,
+      hour: r.notif_hour ?? defaultHour,
+      minute: r.notif_minute ?? 0,
+      days: r.notif_days ?? 127,
+      reviewableCount,
+    });
+  }
+  return result;
 }
 
 export interface BookWithCount extends Omit<Book, 'userId'> {
@@ -133,6 +202,14 @@ export async function updateBookTitle(id: string, title: string): Promise<void> 
 export async function deleteBooks(ids: string[]): Promise<void> {
   if (ids.length === 0) return;
   const db = await getDb();
+  // Collect TTS keys for all words (and their example sentences) about to be
+  // cascade-deleted, before the rows go away.
+  const placeholdersOuter = ids.map(() => '?').join(',');
+  const wordRows = await db.getAllAsync<{ id: string }>(
+    `SELECT id FROM user_words WHERE book_id IN (${placeholdersOuter})`,
+    ids,
+  );
+  const ttsKeys = await lookupTtsKeysForWords(wordRows.map((r) => r.id));
   await db.withTransactionAsync(async () => {
     const placeholders = ids.map(() => '?').join(',');
     const now = Date.now();
@@ -156,6 +233,7 @@ export async function deleteBooks(ids: string[]): Promise<void> {
     await db.runAsync(`DELETE FROM user_words WHERE book_id IN (${placeholders})`, ids);
     await db.runAsync(`DELETE FROM books WHERE id IN (${placeholders})`, ids);
   });
+  purgeTtsForWords(ttsKeys);
   scheduleSync();
 }
 
@@ -174,6 +252,7 @@ interface UserWordRow {
   id: string;
   book_id: string | null;
   word: string;
+  reading_key: string | null;
   result_json: string;
   user_note: string | null;
   source_sentence: string | null;
@@ -198,6 +277,7 @@ function rowToWord(row: UserWordRow): StoredWord {
     id: row.id,
     bookId: row.book_id,
     word: row.word,
+    readingKey: row.reading_key ?? '',
     cacheKey: null,
     userNote: row.user_note,
     sourceSentence: row.source_sentence,
@@ -215,12 +295,13 @@ function rowToWord(row: UserWordRow): StoredWord {
 export async function findWord(params: {
   word: string;
   bookId: string | null;
+  readingKey?: string;
 }): Promise<StoredWord | null> {
   const db = await getDb();
   const row = await db.getFirstAsync<UserWordRow>(
     `SELECT * FROM user_words
-     WHERE word = ? AND COALESCE(book_id, '') = COALESCE(?, '')`,
-    [params.word, params.bookId],
+     WHERE word = ? AND COALESCE(book_id, '') = COALESCE(?, '') AND reading_key = ?`,
+    [params.word, params.bookId, params.readingKey ?? ''],
   );
   return row ? rowToWord(row) : null;
 }
@@ -229,15 +310,19 @@ export async function saveWord(params: {
   id: string;
   bookId: string | null;
   word: string;
+  /** '' (default) for normal entries; set for polysemous CJK chars to keep
+   * each reading as a separate row in the same wordlist. */
+  readingKey?: string;
   result: WordLookupResult;
   sourceSentence?: string | null;
 }): Promise<void> {
   const db = await getDb();
   const now = Date.now();
+  const readingKey = params.readingKey ?? '';
   await db.runAsync(
-    `INSERT INTO user_words (id, book_id, word, result_json, source_sentence, cache_synced_at, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-     ON CONFLICT(COALESCE(book_id, ''), word) DO UPDATE SET
+    `INSERT INTO user_words (id, book_id, word, reading_key, result_json, source_sentence, cache_synced_at, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ON CONFLICT(COALESCE(book_id, ''), word, reading_key) DO UPDATE SET
        result_json = excluded.result_json,
        source_sentence = excluded.source_sentence,
        cache_synced_at = excluded.cache_synced_at,
@@ -246,6 +331,7 @@ export async function saveWord(params: {
       params.id,
       params.bookId,
       params.word,
+      readingKey,
       JSON.stringify(params.result),
       params.sourceSentence ?? null,
       now,
@@ -263,19 +349,67 @@ export async function saveWord(params: {
   scheduleSync();
 }
 
+async function lookupTtsKeysForWords(ids: string[]): Promise<{ word: string; lang: string }[]> {
+  if (ids.length === 0) return [];
+  const db = await getDb();
+  const placeholders = ids.map(() => '?').join(',');
+  const rows = await db.getAllAsync<{ word: string; source_lang: string | null; result_json: string }>(
+    `SELECT uw.word, uw.result_json, b.source_lang FROM user_words uw
+     LEFT JOIN books b ON b.id = uw.book_id
+     WHERE uw.id IN (${placeholders})`,
+    ids,
+  );
+  const keys: { word: string; lang: string }[] = [];
+  for (const r of rows) {
+    if (!r.source_lang) continue;
+    keys.push({ word: r.word, lang: r.source_lang });
+    // Parse examples from result_json so example-sentence mp3s also get
+    // cleaned up. Mirrors the (sentence with ** stripped) form fed to the
+    // cache by prefetchSpeak.
+    try {
+      const parsed = JSON.parse(r.result_json) as WordLookupResult;
+      for (const ex of parsed.examples ?? []) {
+        const plain = ex.sentence?.replace(/\*\*/g, '').trim();
+        if (plain) keys.push({ word: plain, lang: r.source_lang });
+      }
+    } catch {
+      /* ignore parse failures — only headword audio gets purged */
+    }
+  }
+  return keys;
+}
+
+function purgeTtsForWords(keys: { word: string; lang: string }[]): void {
+  if (keys.length === 0) return;
+  // The mp3 keys for ja are derived from the reading (hiragana), but at
+  // delete time we only have the kanji form. Those orphaned files are a
+  // harmless leak — the OS cache dir gets evicted under storage pressure
+  // and persistent leaks accumulate slowly enough to ignore for v1.
+  try {
+    for (const k of keys) {
+      removeFromPersistent(k.word, k.lang);
+    }
+  } catch (err) {
+    console.warn('purgeTtsForWords failed:', err);
+  }
+}
+
 export async function deleteWord(id: string): Promise<void> {
   const db = await getDb();
+  const ttsKeys = await lookupTtsKeysForWords([id]);
   await db.runAsync(
     'INSERT INTO pending_deletes (record_id, table_name, deleted_at) VALUES (?, ?, ?)',
     [id, 'user_words', Date.now()],
   );
   await db.runAsync('DELETE FROM user_words WHERE id = ?', [id]);
+  await purgeTtsForWords(ttsKeys);
   scheduleSync();
 }
 
 export async function deleteWords(ids: string[]): Promise<void> {
   if (ids.length === 0) return;
   const db = await getDb();
+  const ttsKeys = await lookupTtsKeysForWords(ids);
   await db.withTransactionAsync(async () => {
     const now = Date.now();
     for (const id of ids) {
@@ -287,6 +421,7 @@ export async function deleteWords(ids: string[]): Promise<void> {
     const placeholders = ids.map(() => '?').join(',');
     await db.runAsync(`DELETE FROM user_words WHERE id IN (${placeholders})`, ids);
   });
+  await purgeTtsForWords(ttsKeys);
   scheduleSync();
 }
 
@@ -342,12 +477,21 @@ const CANDIDATE_LIMIT = 200;
 export async function getReviewableWords(
   limit = DEFAULT_SESSION_LIMIT,
   bookId?: string | null,
+  newCardBudget?: number,
 ): Promise<StoredWord[]> {
   const db = await getDb();
   const now = Date.now();
   const bookFilter = bookId ? 'AND w.book_id = ?' : '';
   const bookParams = bookId ? [bookId] : [];
-  const newWordCap = Math.max(3, Math.floor(limit / 3));
+  // No per-session cap on new cards: respect the user's chosen session size
+  // even when a fresh wordlist has only new cards. Pacing is handled by the
+  // ±15% jitter on graduated intervals (calculateNextReview) so a bulk
+  // import doesn't all come back due on the same day. Still capped at the
+  // session limit itself so the session never exceeds the user's choice.
+  const newWordCap = Math.min(
+    limit,
+    newCardBudget !== undefined ? Math.max(0, newCardBudget) : limit,
+  );
 
   const dueRows = await db.getAllAsync<UserWordRow>(
     `SELECT w.* FROM user_words w
@@ -400,10 +544,14 @@ export async function getReviewableWords(
   const dueSlots = limit - selectedNew.length;
   const selectedDue = scoredDue.slice(0, dueSlots);
 
-  // If due words don't fill remaining slots, allow more new words
+  // If due words don't fill remaining slots, allow more new words — but
+  // never exceed today's new-card budget if one was passed.
   const extraNewSlots = dueSlots - selectedDue.length;
   if (extraNewSlots > 0) {
-    const extra = scoredNew.slice(newWordCap, newWordCap + extraNewSlots);
+    const remaining = newCardBudget !== undefined
+      ? Math.max(0, newCardBudget - selectedNew.length)
+      : extraNewSlots;
+    const extra = scoredNew.slice(newWordCap, newWordCap + Math.min(extraNewSlots, remaining));
     selectedNew.push(...extra);
   }
 
@@ -609,6 +757,14 @@ export async function updateReviewResult(
      WHERE id = ?`,
     [result.easeFactor, result.intervalDays, result.nextReview, row.review_count + 1, result.learningStep, now, id],
   );
+  // Count this card against today's new-card daily budget if it was the
+  // very first review (review_count was 0). Lazy-required to avoid a cycle.
+  if (row.review_count === 0) {
+    try {
+      const { recordNewCardIntroduced } = await import('@src/services/newCardLimitService');
+      await recordNewCardIntroduced();
+    } catch { /* counter is best-effort UX pacing */ }
+  }
   scheduleSync();
   return { nextReviewMs: result.nextReview };
 }

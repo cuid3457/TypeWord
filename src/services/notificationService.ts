@@ -1,5 +1,7 @@
+import { Platform } from 'react-native';
+
 import { getStreak, getPreferredNotificationHour } from './streakService';
-import { getReviewableCount, getRecentBookName, getWeeklyStudyCount } from '@src/db/queries';
+import { getReviewableCount, getRecentBookName, getWeeklyStudyCount, getBooksForNotifications } from '@src/db/queries';
 import { captureError } from './sentry';
 
 let Notifications: typeof import('expo-notifications') | null = null;
@@ -8,12 +10,31 @@ try {
   Notifications!.setNotificationHandler({
     handleNotification: async () => ({
       shouldShowAlert: true,
-      shouldPlaySound: false,
+      shouldPlaySound: true,
       shouldSetBadge: false,
       shouldShowBanner: true,
       shouldShowList: true,
     }),
   });
+
+  // Android 8+ requires a notification channel for any notification to display.
+  // Without this, scheduled alarms fire but expo-notifications silently drops
+  // them (no banner). Create a default channel at module load.
+  if (Platform.OS === 'android' && Notifications) {
+    // HIGH importance ensures heads-up banner + sound on lock screen.
+    Notifications
+      .setNotificationChannelAsync('study-reminders', {
+        name: 'Study Reminders',
+        importance: Notifications.AndroidImportance.HIGH,
+        vibrationPattern: [0, 250, 250, 250],
+        sound: 'default',
+        enableVibrate: true,
+        lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+      })
+      .catch(() => {
+        // Channel creation can fail if permissions denied — non-blocking.
+      });
+  }
 } catch {
   Notifications = null;
 }
@@ -48,6 +69,13 @@ export interface NotificationTranslations {
   return14dBody: string;
   weeklyTitle: string;
   weeklyBody: string;
+  perListTitle: string;
+  perListBodyDue: string;
+  perListBodyDue2: string;
+  perListBodyDueStreak: string;
+  perListBodyEmpty: string;
+  perListBodyEmpty2: string;
+  perListBodyEmptyStreak: string;
 }
 
 export function getNotificationTranslations(t: (key: string) => string): NotificationTranslations {
@@ -65,6 +93,13 @@ export function getNotificationTranslations(t: (key: string) => string): Notific
     return14dBody: t('notification.return_14d_body'),
     weeklyTitle: t('notification.weekly_title'),
     weeklyBody: t('notification.weekly_body'),
+    perListTitle: t('notification.per_list_title'),
+    perListBodyDue: t('notification.per_list_body_due'),
+    perListBodyDue2: t('notification.per_list_body_due_2'),
+    perListBodyDueStreak: t('notification.per_list_body_due_streak'),
+    perListBodyEmpty: t('notification.per_list_body_empty'),
+    perListBodyEmpty2: t('notification.per_list_body_empty_2'),
+    perListBodyEmptyStreak: t('notification.per_list_body_empty_streak'),
   };
 }
 
@@ -118,21 +153,61 @@ export function getReengagementContent(
   };
 }
 
+/**
+ * Pick one of three body variants for a per-list notification.
+ * Variant 2 is the streak variant — falls back to variant 0 when streak is 0
+ * (so we never show "0-day streak" copy).
+ */
+function pickPerListBody(
+  tr: NotificationTranslations,
+  reviewableCount: number,
+  streak: number,
+  variantIdx: number,
+): string {
+  const isDue = reviewableCount > 0;
+  const useStreak = variantIdx === 2 && streak > 0;
+
+  if (isDue) {
+    if (useStreak) {
+      return tr.perListBodyDueStreak
+        .replace('{{count}}', String(reviewableCount))
+        .replace('{{streak}}', String(streak));
+    }
+    const template = variantIdx === 1 ? tr.perListBodyDue2 : tr.perListBodyDue;
+    return template.replace('{{count}}', String(reviewableCount));
+  }
+  if (useStreak) {
+    return tr.perListBodyEmptyStreak.replace('{{streak}}', String(streak));
+  }
+  return variantIdx === 1 ? tr.perListBodyEmpty2 : tr.perListBodyEmpty;
+}
+
 async function scheduleAtDay(
   daysFromNow: number,
   hour: number,
   title: string,
   body: string,
+  minute = 0,
 ): Promise<void> {
   if (!Notifications) return;
   const target = new Date();
   target.setDate(target.getDate() + daysFromNow);
-  target.setHours(hour, 0, 0, 0);
+  target.setHours(hour, minute, 0, 0);
   const seconds = Math.floor((target.getTime() - Date.now()) / 1000);
   if (seconds <= 0) return;
   await Notifications.scheduleNotificationAsync({
-    content: { title, body },
-    trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds },
+    content: {
+      title,
+      body,
+      sound: 'default',
+      priority: Notifications.AndroidNotificationPriority.HIGH,
+      vibrate: [0, 250, 250, 250],
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds,
+      ...(Platform.OS === 'android' ? { channelId: 'study-reminders' } : {}),
+    },
   });
 }
 
@@ -163,8 +238,15 @@ async function scheduleWeeklySummary(
     content: {
       title: tr.weeklyTitle,
       body: tr.weeklyBody.replace('{{count}}', String(weeklyCount)),
+      sound: 'default',
+      priority: Notifications.AndroidNotificationPriority.HIGH,
+      vibrate: [0, 250, 250, 250],
     },
-    trigger: { type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL, seconds },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds,
+      ...(Platform.OS === 'android' ? { channelId: 'study-reminders' } : {}),
+    },
   });
 }
 
@@ -180,16 +262,25 @@ export async function rescheduleNotifications(tr: NotificationTranslations): Pro
     const bookName = await getRecentBookName();
     const weeklyCount = await getWeeklyStudyCount();
 
-    // Today's reminder (fires only if notification hour hasn't passed yet)
-    if (!todayDone) {
-      const content = getDailyContent(tr, dueCount, streak, bookName);
-      await scheduleAtDay(0, hour, content.title, content.body);
-    }
+    // Per-wordlist daily reminders (for books with notif_enabled = true).
+    // If any per-list reminders are configured, the user has opted into
+    // per-book control — we skip the generic global daily reminder to
+    // avoid duplicate "study today" pings. Re-engagement and weekly
+    // summary still fire (different purpose).
+    const notifBooks = await getBooksForNotifications(hour);
 
-    // Daily reminders for the next 3 days
-    for (const day of [1, 2, 3]) {
-      const content = getDailyContent(tr, dueCount, streak, bookName);
-      await scheduleAtDay(day, hour, content.title, content.body);
+    if (notifBooks.length === 0) {
+      // Today's reminder (fires only if notification hour hasn't passed yet)
+      if (!todayDone) {
+        const content = getDailyContent(tr, dueCount, streak, bookName);
+        await scheduleAtDay(0, hour, content.title, content.body);
+      }
+
+      // Daily reminders for the next 3 days
+      for (const day of [1, 2, 3]) {
+        const content = getDailyContent(tr, dueCount, streak, bookName);
+        await scheduleAtDay(day, hour, content.title, content.body);
+      }
     }
 
     // Re-engagement: 7, 10, 21, then every 30 days
@@ -200,6 +291,26 @@ export async function rescheduleNotifications(tr: NotificationTranslations): Pro
 
     // Weekly summary (next Sunday)
     await scheduleWeeklySummary(tr, hour, weeklyCount);
+
+    for (const book of notifBooks) {
+      if (book.days === 0) continue; // user deselected all weekdays — skip
+      const title = tr.perListTitle.replace('{{title}}', book.title);
+      // Schedule for next 7 days, only on days where the bitmask bit is set.
+      // Bit 0 = Sunday, ..., Bit 6 = Saturday (matches JS Date.getDay()).
+      for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+        const target = new Date();
+        target.setDate(target.getDate() + dayOffset);
+        const dayOfWeek = target.getDay();
+        if (!(book.days & (1 << dayOfWeek))) continue;
+
+        // Rotate body across 3 variants by absolute date so the same day
+        // always uses the same variant (predictable yet varied).
+        const variantIdx = target.getDate() % 3;
+        const body = pickPerListBody(tr, book.reviewableCount, streak, variantIdx);
+
+        await scheduleAtDay(dayOffset, book.hour, title, body, book.minute);
+      }
+    }
   } catch (e) {
     captureError(e, { service: 'notificationService', fn: 'rescheduleNotifications' });
   }

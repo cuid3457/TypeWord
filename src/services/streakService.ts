@@ -109,6 +109,21 @@ export async function getStreak(): Promise<StreakInfo> {
   return { current: streak, todayDone, hearts };
 }
 
+/**
+ * Returns the set of YYYY-MM-DD streak dates (in user's local time, with the
+ * 4 AM day boundary) where the user qualified as "studied" within the last
+ * `daysBack` days. Used by the dashboard calendar heatmap to render activity.
+ */
+export async function getStudiedDates(daysBack: number): Promise<Set<string>> {
+  const today = getTodayStreakDate();
+  const todayStart = new Date(today);
+  todayStart.setHours(DAY_BOUNDARY_HOUR, 0, 0, 0);
+  const todayStartMs = todayStart.getTime();
+  const todayEndMs = todayStartMs + DAY_MS;
+  const rangeStartMs = todayStartMs - daysBack * DAY_MS;
+  return getQualifiedDates(rangeStartMs, todayEndMs);
+}
+
 export async function getPreferredNotificationHour(): Promise<number> {
   const db = await getDb();
   const twoWeeksAgo = Date.now() - 14 * DAY_MS;

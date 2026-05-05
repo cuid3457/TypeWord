@@ -22,6 +22,9 @@ const MAPPING = {
   'books.vertical.fill': 'menu-book',
   'rectangle.on.rectangle.angled.fill': 'style',
   'gearshape.fill': 'settings',
+  'person.2.fill': 'people',
+  'person.fill': 'person',
+  'square.grid.2x2.fill': 'grid-view',
 } as IconMapping;
 
 export function IconSymbol({

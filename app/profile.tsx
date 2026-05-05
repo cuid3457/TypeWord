@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
+  Linking,
   Platform,
   Pressable,
   ScrollView,
@@ -27,6 +28,13 @@ import {
 } from '@src/services/authService';
 import { syncAll } from '@src/services/syncService';
 import { clearLocalData } from '@src/db';
+import { usePremium } from '@src/hooks/usePremium';
+
+const SUBSCRIPTION_URL = Platform.select({
+  ios: 'https://apps.apple.com/account/subscriptions',
+  android: 'https://play.google.com/store/account/subscriptions',
+  default: 'https://play.google.com/store/account/subscriptions',
+}) as string;
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -39,6 +47,8 @@ export default function ProfileScreen() {
   const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
   const [logoutModal, setLogoutModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const [subscriptionWarningModal, setSubscriptionWarningModal] = useState(false);
+  const premium = usePremium();
 
   useEffect(() => {
     getEmail().then(setUserEmail);
@@ -218,10 +228,25 @@ export default function ProfileScreen() {
             </View>
           ) : null}
 
+          {/* Cancel subscription (premium only) — neutral styling since the
+              actual cancellation happens in the store, not here. */}
+          {premium ? (
+            <Pressable
+              onPress={() => {
+                Linking.openURL(SUBSCRIPTION_URL).catch(() => {});
+              }}
+              className="mt-4 items-center rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+            >
+              <Text className="text-base font-medium text-black dark:text-white">
+                {t('auth.cancel_subscription')}
+              </Text>
+            </Pressable>
+          ) : null}
+
           {/* Logout button */}
           <Pressable
             onPress={() => setLogoutModal(true)}
-            className="mt-6 items-center rounded-xl border border-red-500 py-4"
+            className={`${premium ? 'mt-4' : 'mt-6'} items-center rounded-xl border border-red-500 py-4`}
           >
             <Text className="text-base font-semibold text-red-500">
               {t('auth.logout')}
@@ -230,7 +255,10 @@ export default function ProfileScreen() {
 
           {/* Delete account button */}
           <Pressable
-            onPress={() => setDeleteModal(true)}
+            onPress={() => {
+              if (premium) setSubscriptionWarningModal(true);
+              else setDeleteModal(true);
+            }}
             className="mt-4 items-center py-3"
           >
             <Text className="text-sm text-gray-400">
@@ -259,6 +287,24 @@ export default function ProfileScreen() {
       />
 
       <AppModal
+        visible={subscriptionWarningModal}
+        title={t('auth.subscription_warning_title')}
+        message={t('auth.subscription_warning_message')}
+        secondaryText={t('auth.manage_subscription')}
+        onSecondary={() => {
+          Linking.openURL(SUBSCRIPTION_URL).catch(() => {});
+        }}
+        buttonText={t('settings.cancel')}
+        confirmText={t('auth.continue_delete')}
+        onConfirm={() => {
+          setSubscriptionWarningModal(false);
+          setDeleteModal(true);
+        }}
+        onClose={() => setSubscriptionWarningModal(false)}
+        destructive
+      />
+
+      <AppModal
         visible={deleteModal}
         title={t('auth.delete_account')}
         message={t('auth.delete_confirm')}
@@ -269,8 +315,12 @@ export default function ProfileScreen() {
           const result = await deleteAccount();
           if (!result.error) {
             await clearLocalData();
+            // Wipe local onboarding flag so the user lands on the welcome flow
+            // with a fresh anonymous session + can optionally re-login.
+            const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
+            await AsyncStorage.removeItem('typeword.userSettings.v1');
             await ensureSession().catch(() => {});
-            router.back();
+            router.replace('/onboarding');
           }
         }}
         onClose={() => setDeleteModal(false)}

@@ -17,9 +17,14 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AppModal } from '@/components/app-modal';
+import { Toast } from '@/components/toast';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { supabase } from '@src/api/supabase';
 import { captureError } from '@src/services/sentry';
+import { isTimeoutError, withTimeout } from '@src/utils/timeout';
+
+const UPLOAD_TIMEOUT_MS = 20000;
+const INSERT_TIMEOUT_MS = 15000;
 
 const MAX_IMAGES = 3;
 const MAX_BODY_LENGTH = 500;
@@ -35,8 +40,10 @@ export default function InquiryScreen() {
   const [successModal, setSuccessModal] = useState(false);
   const [errorModal, setErrorModal] = useState('');
   const [photoDeniedModal, setPhotoDeniedModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
-  const canSubmit = body.trim().length > 0 && !submitting;
+  const hasBody = body.trim().length > 0;
+  const canSubmit = hasBody && !submitting;
 
   const pickImage = async () => {
     if (images.length >= MAX_IMAGES) return;
@@ -65,7 +72,11 @@ export default function InquiryScreen() {
   };
 
   const handleSubmit = async () => {
-    if (!canSubmit) return;
+    if (submitting) return;
+    if (!hasBody) {
+      setToastMessage(t('inquiry.body_required'));
+      return;
+    }
     setSubmitting(true);
 
     try {
@@ -87,9 +98,12 @@ export default function InquiryScreen() {
         const blob = await response.blob();
         const arrayBuffer = await new Response(blob).arrayBuffer();
 
-        const { error: uploadError } = await supabase.storage
-          .from('inquiries')
-          .upload(fileName, arrayBuffer, { contentType: `image/${ext}`, upsert: false });
+        const { error: uploadError } = await withTimeout(
+          supabase.storage
+            .from('inquiries')
+            .upload(fileName, arrayBuffer, { contentType: `image/${ext}`, upsert: false }),
+          UPLOAD_TIMEOUT_MS,
+        );
 
         if (uploadError) {
           captureError(uploadError, { service: 'inquiry', fn: 'uploadImage' });
@@ -100,12 +114,15 @@ export default function InquiryScreen() {
         uploadedUrls.push(urlData.publicUrl);
       }
 
-      const { error } = await supabase.from('inquiries').insert({
-        user_id: userId,
-        email,
-        body: body.trim(),
-        image_urls: uploadedUrls,
-      });
+      const { error } = await withTimeout(
+        supabase.from('inquiries').insert({
+          user_id: userId,
+          email,
+          body: body.trim(),
+          image_urls: uploadedUrls,
+        }),
+        INSERT_TIMEOUT_MS,
+      );
 
       if (error) {
         captureError(error, { service: 'inquiry', fn: 'insert' });
@@ -116,6 +133,11 @@ export default function InquiryScreen() {
 
       setSuccessModal(true);
     } catch (e) {
+      if (isTimeoutError(e)) {
+        setToastMessage(t('error.slow_network'));
+        setSubmitting(false);
+        return;
+      }
       captureError(e, { service: 'inquiry', fn: 'handleSubmit' });
       setErrorModal(t('inquiry.submit_failed'));
     } finally {
@@ -190,22 +212,33 @@ export default function InquiryScreen() {
           </View>
 
           {/* Submit button */}
-          <Pressable
-            onPress={handleSubmit}
-            disabled={!canSubmit}
-            className="mt-6 items-center rounded-xl py-4"
-            style={{ backgroundColor: canSubmit ? '#2EC4A5' : dark ? '#333' : '#e5e7eb' }}
-          >
-            {submitting ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text
-                className={`text-base font-semibold ${canSubmit ? 'text-white' : 'text-gray-400'}`}
-              >
-                {t('inquiry.submit')}
-              </Text>
-            )}
-          </Pressable>
+          <View className="mt-6">
+            <Pressable
+              onPress={handleSubmit}
+              disabled={submitting}
+              className={`items-center rounded-xl py-4 ${
+                !canSubmit ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+              }`}
+            >
+              {submitting ? (
+                <ActivityIndicator color={dark ? '#000' : '#fff'} />
+              ) : (
+                <Text
+                  className={`text-base font-semibold ${
+                    !canSubmit ? 'text-gray-400' : 'text-white dark:text-black'
+                  }`}
+                >
+                  {t('inquiry.submit')}
+                </Text>
+              )}
+            </Pressable>
+            <Toast
+              visible={!!toastMessage}
+              message={toastMessage}
+              onHide={() => setToastMessage('')}
+              style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', pointerEvents: 'none' }}
+            />
+          </View>
 
           <View className="h-8" />
         </ScrollView>

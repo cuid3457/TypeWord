@@ -5,7 +5,7 @@
  * Schema changes: bump SCHEMA_VERSION and add a migration block to runMigrations().
  */
 
-export const SCHEMA_VERSION = 10;
+export const SCHEMA_VERSION = 15;
 
 export const SCHEMA_V1 = `
 PRAGMA journal_mode = WAL;
@@ -92,4 +92,39 @@ CREATE TABLE IF NOT EXISTS pending_reports (
 
 export const SCHEMA_V10 = `
 ALTER TABLE user_words ADD COLUMN cache_synced_at INTEGER NOT NULL DEFAULT 0;
+`;
+
+export const SCHEMA_V11 = `
+ALTER TABLE books ADD COLUMN notif_enabled INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE books ADD COLUMN notif_hour INTEGER;
+`;
+
+export const SCHEMA_V12 = `
+ALTER TABLE books ADD COLUMN notif_minute INTEGER NOT NULL DEFAULT 0;
+`;
+
+export const SCHEMA_V13 = `
+ALTER TABLE books ADD COLUMN notif_days INTEGER NOT NULL DEFAULT 127;
+`;
+
+// V14: polysemy split. reading_key disambiguates same-word entries with
+// different readings (e.g. 长 cháng vs zhǎng). '' = no reading distinction.
+// The unique index moves from (book_id, word) to (book_id, word, reading_key)
+// so users can keep both readings as separate cards in the same wordlist.
+export const SCHEMA_V14 = `
+ALTER TABLE user_words ADD COLUMN reading_key TEXT NOT NULL DEFAULT '';
+DROP INDEX IF EXISTS idx_user_words_unique;
+CREATE UNIQUE INDEX idx_user_words_unique
+  ON user_words(COALESCE(book_id, ''), word, reading_key);
+`;
+
+// V15: defensive re-application of V14 index. Some devices got stuck with the
+// old (book_id, word) UNIQUE index after the V14 migration partially failed —
+// resulting in polysemous entries (长 cháng / zhǎng) collapsing back to a
+// single row when added from a curated wordlist. Force-recreate the index here
+// so all devices end up on the new (book_id, word, reading_key) shape.
+export const SCHEMA_V15 = `
+DROP INDEX IF EXISTS idx_user_words_unique;
+CREATE UNIQUE INDEX idx_user_words_unique
+  ON user_words(COALESCE(book_id, ''), word, reading_key);
 `;

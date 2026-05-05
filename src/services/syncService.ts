@@ -104,6 +104,8 @@ async function pushProfile() {
     user_id: user.id,
     email: user.email ?? null,
     native_language: settings?.nativeLanguage ?? null,
+    country_code: settings?.countryCode ?? null,
+    timezone: settings?.timezone ?? null,
   }, { onConflict: 'user_id' });
   if (error) throw new Error(`pushProfile: ${error.message} (${error.code})`);
 }
@@ -174,6 +176,10 @@ interface LocalBookRow {
   study_lang: string | null;
   sort_order: number;
   pinned: number;
+  notif_enabled: number;
+  notif_hour: number | null;
+  notif_minute: number;
+  notif_days: number;
   created_at: number;
   updated_at: number;
 }
@@ -199,6 +205,10 @@ async function pushBooks(since: string) {
     study_lang: r.study_lang,
     sort_order: r.sort_order,
     pinned: r.pinned === 1,
+    notif_enabled: r.notif_enabled === 1,
+    notif_hour: r.notif_hour,
+    notif_minute: r.notif_minute ?? 0,
+    notif_days: r.notif_days ?? 127,
     created_at: new Date(r.created_at).toISOString(),
     updated_at: new Date(r.updated_at).toISOString(),
   }));
@@ -213,6 +223,7 @@ interface LocalWordRow {
   id: string;
   book_id: string | null;
   word: string;
+  reading_key: string | null;
   result_json: string;
   source_sentence: string | null;
   ease_factor: number;
@@ -231,6 +242,7 @@ function wordRowToRecord(r: LocalWordRow, userId: string) {
     user_id: userId,
     book_id: r.book_id,
     word: r.word,
+    reading_key: r.reading_key ?? '',
     result_json: resultJson,
     source_sentence: r.source_sentence,
     ease_factor: r.ease_factor,
@@ -262,7 +274,10 @@ async function pushWords(since: string) {
         const { error: err } = await supabase.from('user_words').upsert(record, { onConflict: 'id' });
         if (err?.code === '23505') {
           const { id: _id, ...fields } = record;
-          let q = supabase.from('user_words').update(fields).eq('user_id', userId).eq('word', record.word);
+          let q = supabase.from('user_words').update(fields)
+            .eq('user_id', userId)
+            .eq('word', record.word)
+            .eq('reading_key', record.reading_key);
           q = record.book_id ? q.eq('book_id', record.book_id) : q.is('book_id', null);
           await q;
         } else if (err) {
@@ -305,8 +320,8 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
       if (existing && existing.updated_at >= updatedAt) continue;
 
       await db.runAsync(
-        `INSERT INTO books (id, title, source_lang, target_lang, bidirectional, study_lang, sort_order, pinned, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO books (id, title, source_lang, target_lang, bidirectional, study_lang, sort_order, pinned, notif_enabled, notif_hour, notif_minute, notif_days, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(id) DO UPDATE SET
            title = excluded.title,
            source_lang = excluded.source_lang,
@@ -315,6 +330,10 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
            study_lang = excluded.study_lang,
            sort_order = excluded.sort_order,
            pinned = excluded.pinned,
+           notif_enabled = excluded.notif_enabled,
+           notif_hour = excluded.notif_hour,
+           notif_minute = excluded.notif_minute,
+           notif_days = excluded.notif_days,
            updated_at = excluded.updated_at`,
         [
           row.id,
@@ -325,6 +344,10 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
           row.study_lang,
           row.sort_order ?? 0,
           row.pinned ? 1 : 0,
+          row.notif_enabled ? 1 : 0,
+          row.notif_hour ?? null,
+          row.notif_minute ?? 0,
+          row.notif_days ?? 127,
           new Date(row.created_at).getTime(),
           updatedAt,
         ],
@@ -360,9 +383,10 @@ async function pullWords(since: string, pendingDeleteIds: Set<string>) {
       );
       if (existingById && existingById.updated_at >= updatedAt) continue;
 
+      const readingKey = (row as { reading_key?: string | null }).reading_key ?? '';
       const existingByWord = await db.getFirstAsync<{ id: string; updated_at: number }>(
-        "SELECT id, updated_at FROM user_words WHERE COALESCE(book_id, '') = COALESCE(?, '') AND word = ?",
-        [row.book_id, row.word],
+        "SELECT id, updated_at FROM user_words WHERE COALESCE(book_id, '') = COALESCE(?, '') AND word = ? AND reading_key = ?",
+        [row.book_id, row.word, readingKey],
       );
       if (existingByWord && existingByWord.id !== row.id) {
         if (existingByWord.updated_at >= updatedAt) continue;
@@ -372,11 +396,12 @@ async function pullWords(since: string, pendingDeleteIds: Set<string>) {
       const resultJson = row.result_json ? JSON.stringify(row.result_json) : '{"meanings":[]}';
 
       await db.runAsync(
-        `INSERT INTO user_words (id, book_id, word, result_json, source_sentence, ease_factor, interval_days, next_review, review_count, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO user_words (id, book_id, word, reading_key, result_json, source_sentence, ease_factor, interval_days, next_review, review_count, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(id) DO UPDATE SET
            book_id = excluded.book_id,
            word = excluded.word,
+           reading_key = excluded.reading_key,
            result_json = excluded.result_json,
            source_sentence = excluded.source_sentence,
            ease_factor = excluded.ease_factor,
@@ -388,6 +413,7 @@ async function pullWords(since: string, pendingDeleteIds: Set<string>) {
           row.id,
           row.book_id,
           row.word,
+          readingKey,
           resultJson,
           row.source_sentence,
           row.ease_factor,

@@ -5,7 +5,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BackHandler,
-  DeviceEventEmitter,
   Keyboard,
   Pressable,
   Text,
@@ -17,6 +16,7 @@ import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { AppModal } from '@/components/app-modal';
 import { Paywall } from '@/components/paywall';
+import { WordlistCreateModal } from '@/components/wordlist-create-modal';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium } from '@src/hooks/usePremium';
@@ -33,7 +33,6 @@ import {
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { getStreak, type StreakInfo } from '@src/services/streakService';
 import { isNotificationAvailable, rescheduleNotifications, getNotificationTranslations } from '@src/services/notificationService';
-import { shouldCelebrate, CELEBRATE_EVENT } from '@src/services/streakMilestone';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -49,6 +48,7 @@ export default function HomeScreen() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showPaywall, setShowPaywall] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
   const [streak, setStreak] = useState<StreakInfo | null>(null);
@@ -71,22 +71,8 @@ export default function HomeScreen() {
     useCallback(() => {
       if (consumePaywallPending()) setShowPaywall(true);
       loadBooks(sortMode, sortReversed);
-      getStreak().then(async (s) => {
+      getStreak().then((s) => {
         setStreak(s);
-        if (s.todayDone && s.current > 0) {
-          const milestone = await shouldCelebrate(s.current);
-          if (milestone) {
-            DeviceEventEmitter.emit(CELEBRATE_EVENT, { type: 'milestone', streak: s.current, variant: 0 });
-          } else {
-            const { shouldCelebrateDaily, getDailyVariant } = require('@src/services/streakMilestone');
-            const { getTodayStreakDate } = require('@src/services/streakService');
-            const todayDate = getTodayStreakDate();
-            const daily = await shouldCelebrateDaily(todayDate);
-            if (daily) {
-              DeviceEventEmitter.emit(CELEBRATE_EVENT, { type: 'daily', streak: s.current, variant: getDailyVariant(todayDate) });
-            }
-          }
-        }
         if (isNotificationAvailable()) {
           rescheduleNotifications(getNotificationTranslations(t));
         }
@@ -231,7 +217,7 @@ export default function HomeScreen() {
               if (!premium && books.length >= FREE_BOOK_LIMIT) {
                 setShowPaywall(true);
               } else {
-                router.push('/wordlist/new');
+                setShowCreateModal(true);
               }
             }}
             className="rounded-xl bg-black px-4 py-3 dark:bg-white"
@@ -256,21 +242,18 @@ export default function HomeScreen() {
                 </Text>
               </View>
               <View className="flex-row items-center gap-1">
-                {Array.from({ length: 2 }, (_, i) => (
-                  <MaterialIcons
-                    key={i}
-                    name="favorite"
-                    size={18}
-                    color={i < streak.hearts ? '#ef4444' : colorScheme === 'dark' ? '#78350f' : '#fcd34d'}
-                  />
-                ))}
+                {Array.from({ length: 2 }, (_, i) => {
+                  const active = i < streak.hearts;
+                  return (
+                    <MaterialIcons
+                      key={i}
+                      name={active ? 'favorite' : 'favorite-border'}
+                      size={18}
+                      color={active ? '#ef4444' : colorScheme === 'dark' ? '#6b7280' : '#9ca3af'}
+                    />
+                  );
+                })}
               </View>
-              <MaterialIcons
-                name={streak.todayDone ? 'check-circle' : 'radio-button-unchecked'}
-                size={20}
-                color={streak.todayDone ? '#2EC4A5' : '#9ca3af'}
-                style={{ marginLeft: 8 }}
-              />
             </View>
           ) : (
             <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-gray-100 px-4 py-3 dark:bg-gray-800">
@@ -462,6 +445,13 @@ export default function HomeScreen() {
         />
 
         <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} />
+
+        <WordlistCreateModal
+          visible={showCreateModal}
+          onClose={() => setShowCreateModal(false)}
+          onPickBlank={() => router.push('/wordlist/new')}
+          onPickBrowse={() => router.push('/wordlist/library')}
+        />
       </SafeAreaView>
     </GestureHandlerRootView>
   );

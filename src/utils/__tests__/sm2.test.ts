@@ -122,9 +122,9 @@ describe('calculateNextReview', () => {
       expect(result.nextReview).toBe(NOW + Math.round(10 * 60_000 * 0.8));
     });
 
-    it('context gives 0.9x interval', () => {
+    it('context gives 1.1x interval', () => {
       const result = calculateNextReview(makeInput({ learningStep: 0 }), 'got_it', 'context', NOW);
-      expect(result.nextReview).toBe(NOW + Math.round(10 * 60_000 * 0.9));
+      expect(result.nextReview).toBe(NOW + Math.round(10 * 60_000 * 1.1));
     });
 
     it('dictation multiplier applies to graduated interval', () => {
@@ -154,10 +154,10 @@ describe('calculateNextReview', () => {
       expect(result.easeFactor).toBeCloseTo(1.9);
     });
 
-    it('still_learning decreases ease by 0.2', () => {
+    it('still_learning on graduated card decreases ease by 0.15', () => {
       const input = makeInput({ learningStep: 3, intervalDays: 5, easeFactor: 2.0, updatedAt: NOW - 5 * DAY_MS });
       const result = calculateNextReview(input, 'still_learning', 'flashcard', NOW);
-      expect(result.easeFactor).toBeCloseTo(1.8);
+      expect(result.easeFactor).toBeCloseTo(1.85);
     });
   });
 
@@ -236,16 +236,28 @@ describe('calculateNextReview', () => {
       expect(result.nextReview).toBe(NOW);
     });
 
-    it('resets graduated card back to step 0', () => {
+    it('keeps graduated card graduated and halves the interval', () => {
       const input = makeInput({ learningStep: 3, intervalDays: 30, easeFactor: 2.5, updatedAt: NOW - 30 * DAY_MS });
       const result = calculateNextReview(input, 'still_learning', 'flashcard', NOW);
-      expect(result.learningStep).toBe(0);
-      expect(result.intervalDays).toBe(0);
-      expect(result.nextReview).toBe(NOW);
+      expect(result.learningStep).toBe(3);
+      expect(result.intervalDays).toBe(15);
+      expect(result.nextReview).toBe(NOW + 15 * DAY_MS);
     });
 
-    it('decreases ease factor by 0.2', () => {
+    it('floors graduated lapse interval at 1 day', () => {
+      const input = makeInput({ learningStep: 3, intervalDays: 1, easeFactor: 2.5, updatedAt: NOW - DAY_MS });
+      const result = calculateNextReview(input, 'still_learning', 'flashcard', NOW);
+      expect(result.intervalDays).toBeGreaterThanOrEqual(1);
+    });
+
+    it('decreases ease factor by 0.15 for graduated lapse', () => {
       const input = makeInput({ learningStep: 3, intervalDays: 10, easeFactor: 2.5, updatedAt: NOW - 10 * DAY_MS });
+      const result = calculateNextReview(input, 'still_learning', 'flashcard', NOW);
+      expect(result.easeFactor).toBeCloseTo(2.35);
+    });
+
+    it('decreases ease factor by 0.2 for in-learning still_learning', () => {
+      const input = makeInput({ learningStep: 1, intervalDays: 0, easeFactor: 2.5 });
       const result = calculateNextReview(input, 'still_learning', 'flashcard', NOW);
       expect(result.easeFactor).toBeCloseTo(2.3);
     });
@@ -288,7 +300,7 @@ describe('calculateNextReview', () => {
   });
 
   describe('uncertain graduated', () => {
-    it('reduces interval to 40% of previous', () => {
+    it('keeps interval unchanged (Anki-style Hard)', () => {
       const input = makeInput({
         learningStep: 3,
         intervalDays: 10,
@@ -296,21 +308,21 @@ describe('calculateNextReview', () => {
         updatedAt: NOW - 10 * DAY_MS,
       });
       const result = calculateNextReview(input, 'uncertain', 'flashcard', NOW);
-      expect(result.intervalDays).toBe(Math.round(Math.max(1, Math.round(10 * 0.4)) * 1.0));
+      expect(result.intervalDays).toBe(10);
     });
 
-    it('floor of 40% is at least 1 day', () => {
+    it('decreases ease by 0.1', () => {
       const input = makeInput({
         learningStep: 3,
-        intervalDays: 2,
+        intervalDays: 10,
         easeFactor: 2.5,
-        updatedAt: NOW - 2 * DAY_MS,
+        updatedAt: NOW - 10 * DAY_MS,
       });
       const result = calculateNextReview(input, 'uncertain', 'flashcard', NOW);
-      expect(result.intervalDays).toBeGreaterThanOrEqual(1);
+      expect(result.easeFactor).toBeCloseTo(2.4);
     });
 
-    it('applies mode multiplier to reduced interval', () => {
+    it('does not apply mode multiplier (interval unchanged)', () => {
       const input = makeInput({
         learningStep: 3,
         intervalDays: 10,
@@ -318,13 +330,12 @@ describe('calculateNextReview', () => {
         updatedAt: NOW - 10 * DAY_MS,
       });
       const result = calculateNextReview(input, 'uncertain', 'dictation', NOW);
-      const base = Math.max(1, Math.round(10 * 0.4));
-      expect(result.intervalDays).toBe(Math.round(base * 1.3));
+      expect(result.intervalDays).toBe(10);
     });
   });
 
-  describe('elapsed time capping', () => {
-    it('uses actual elapsed time when less than 2x interval', () => {
+  describe('elapsed-time growth credit', () => {
+    it('uses actual elapsed time when greater than scheduled interval', () => {
       const elapsedDays = 8;
       const input = makeInput({
         learningStep: 3,
@@ -336,16 +347,16 @@ describe('calculateNextReview', () => {
       expect(result.intervalDays).toBe(Math.round(elapsedDays * 2.0));
     });
 
-    it('caps elapsed time at 2x interval', () => {
+    it('gives full lateness credit (no cap below MAX_INTERVAL)', () => {
       const input = makeInput({
         learningStep: 3,
         intervalDays: 5,
         easeFactor: 2.0,
-        updatedAt: NOW - 100 * DAY_MS,
+        updatedAt: NOW - 60 * DAY_MS,
       });
       const result = calculateNextReview(input, 'got_it', 'flashcard', NOW);
-      const cappedElapsed = 5 * 2;
-      expect(result.intervalDays).toBe(Math.round(cappedElapsed * 2.0));
+      // 60 elapsed days × ease 2.0 = 120 — uncapped (still under MAX 180)
+      expect(result.intervalDays).toBe(120);
     });
 
     it('uses prevInterval when elapsed is less than prevInterval', () => {

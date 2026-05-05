@@ -3,26 +3,35 @@ import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
 
 import en from './locales/en';
+import { migrateNativeLang } from '@src/constants/languages';
 
-export const deviceLang = getLocales()[0]?.languageCode ?? 'en';
+function resolveDeviceLang(): string {
+  const primary = getLocales()[0];
+  if (!primary?.languageCode) return 'en';
+  const code = primary.languageCode;
+  if (code !== 'zh') return migrateNativeLang(code);
+  // Chinese: disambiguate Simplified vs Traditional from tag/region.
+  const tag = primary.languageTag ?? '';
+  const region = primary.regionCode ?? '';
+  if (tag.includes('Hant') || ['TW', 'HK', 'MO'].includes(region)) return 'zh-TW';
+  return 'zh-CN';
+}
+
+export const deviceLang = resolveDeviceLang();
 
 function loadLocale(code: string) {
   switch (code) {
     case 'ko': return require('./locales/ko').default;
     case 'ja': return require('./locales/ja').default;
-    case 'zh': return require('./locales/zh').default;
+    case 'zh':
+    case 'zh-CN': return require('./locales/zh-CN').default;
+    case 'zh-TW': return require('./locales/zh-TW').default;
     case 'es': return require('./locales/es').default;
     case 'fr': return require('./locales/fr').default;
     case 'de': return require('./locales/de').default;
     case 'it': return require('./locales/it').default;
     case 'pt': return require('./locales/pt').default;
     case 'ru': return require('./locales/ru').default;
-    case 'vi': return require('./locales/vi').default;
-    case 'id': return require('./locales/id').default;
-    case 'th': return require('./locales/th').default;
-    case 'ar': return require('./locales/ar').default;
-    case 'hi': return require('./locales/hi').default;
-    case 'tr': return require('./locales/tr').default;
     default: return en;
   }
 }

@@ -1,5 +1,6 @@
 import { supabase } from '@src/api/supabase';
 import { getDb } from '@src/db';
+import { withTimeout } from '@src/utils/timeout';
 
 interface ReportParams {
   word: string;
@@ -51,7 +52,10 @@ export async function flushPendingReports(): Promise<void> {
       created_at: new Date(r.created_at).toISOString(),
     }));
 
-    const { error } = await supabase.from('content_reports').insert(payload);
+    const { error } = await withTimeout(
+      supabase.from('content_reports').insert(payload),
+      15000,
+    );
     if (error) return;
 
     const ids = rows.map((r) => r.id);

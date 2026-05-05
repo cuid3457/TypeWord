@@ -22,12 +22,34 @@ const BOOKS: Record<string, string[]> = {
     '蜜蜂と遠雷', '夜は短し歩けよ乙女', 'キッチン', '色彩を持たない多崎つくる',
     'かもめ食堂', '図書館戦争', 'また同じ夢を見ていた', 'コーヒーが冷めないうちに',
   ],
-  zh: [
+  // Curated for politically/morally neutral classics + globally translated
+  // works. Avoids titles tied to Cultural Revolution trauma, religious
+  // sensitivity, or explicit content.
+  'zh-CN': [
+    // 4 Chinese classics (universal)
     '红楼梦', '西游记', '三国演义', '水浒传',
-    '子夜', '活着', '围城', '平凡的世界',
-    '骆驼祥子', '边城', '呐喊', '白鹿原',
-    '许三观卖血记', '家', '长恨歌', '穆斯林的葬礼',
-    '你好旧时光', '从你的全世界路过', '撒哈拉的故事', '兄弟',
+    // Universal Chinese literature (apolitical)
+    '围城', '边城', '骆驼祥子', '城南旧事',
+    // Taiwan author Sanmao — beloved travel writing
+    '撒哈拉的故事',
+    // Translated international classics
+    '小王子', '老人与海', '哈利·波特', '简爱', '傲慢与偏见',
+    '飘', '安徒生童话', '伊索寓言',
+    // Modern light fiction (apolitical)
+    '你好旧时光', '从你的全世界路过', '解忧杂货店',
+  ],
+  'zh-TW': [
+    // 4 Chinese classics (universal)
+    '紅樓夢', '西遊記', '三國演義', '水滸傳',
+    // Taiwan-friendly authors (Sanmao, Lin Haiyin — beloved, apolitical)
+    '撒哈拉的故事', '雨季不再來', '城南舊事',
+    // Translated international classics
+    '小王子', '老人與海', '哈利波特', '簡愛', '傲慢與偏見',
+    '飄', '安徒生童話', '伊索寓言', '一千零一夜',
+    // Universal Chinese literature
+    '圍城', '邊城', '駱駝祥子',
+    // Modern light fiction
+    '解憂雜貨店', '從你的全世界路過',
   ],
   es: [
     'Cien años de soledad', 'Don Quijote', 'La sombra del viento', 'Como agua para chocolate',
@@ -73,76 +95,85 @@ const BOOKS: Record<string, string[]> = {
   ],
 };
 
+// Intermediate-level (~B1 / TOPIK 3 / HSK 3-4 / JLPT N3) words selected for
+// beauty and positive connotation. Avoids literary/archaic/highly-compound forms.
 const WORDS: Record<string, string[]> = {
   en: [
-    'serendipity', 'harmony', 'blossom', 'wanderlust',
-    'aurora', 'cascade', 'melody', 'horizon',
-    'radiance', 'voyage', 'tranquil', 'whisper',
-    'velvet', 'breeze', 'jubilant', 'lullaby',
-    'sparkle', 'cherish', 'gentle', 'luminous',
+    'harmony', 'blossom', 'melody', 'horizon',
+    'breeze', 'sparkle', 'gentle', 'whisper',
+    'sunshine', 'kindness', 'cheerful', 'graceful',
+    'rainbow', 'sunset', 'bloom', 'twilight',
+    'meadow', 'comfort', 'wonder', 'cherish',
   ],
   ko: [
-    '설렘', '여유', '따스함', '싱그럽다',
-    '포근하다', '나들이', '어울림', '반짝이다',
-    '산들바람', '다정하다', '꿈결', '보람',
-    '봄날', '고즈넉하다', '풍경', '어여쁘다',
-    '햇살', '나른하다', '노을', '향기',
+    '설렘', '여유', '따스함', '포근하다',
+    '나들이', '반짝이다', '산들바람', '다정하다',
+    '보람', '봄날', '풍경', '햇살',
+    '노을', '향기', '미소', '꽃잎',
+    '바람결', '평온', '햇볕', '예쁘다',
   ],
   ja: [
-    '木漏れ日', '花吹雪', '風鈴', 'ときめき',
-    '月明かり', '春風', '夕焼け', '星空',
-    '陽だまり', '微笑み', '心地よい', '彩り',
-    '爽やか', '穏やか', '煌めき', '懐かしい',
-    '小春日和', '風薫る', '清らか', '和やか',
+    '春風', '夕焼け', '星空', '陽だまり',
+    '微笑み', '心地よい', '爽やか', '穏やか',
+    '懐かしい', '風鈴', 'ときめき', '月明かり',
+    '彩り', '朝日', 'そよ風', '輝き',
+    '優しい', '楽しい', '元気', '希望',
   ],
-  zh: [
-    '缘分', '温柔', '花开', '微风',
-    '晨光', '清澈', '星辰', '和煦',
-    '明朗', '安然', '春意', '欢喜',
-    '如意', '美好', '芬芳', '灿烂',
-    '柔和', '宁静', '悠然', '暖阳',
+  'zh-CN': [
+    '温柔', '花开', '微风', '晨光',
+    '清澈', '星辰', '明朗', '春意',
+    '欢喜', '美好', '灿烂', '柔和',
+    '宁静', '暖阳', '温暖', '幸福',
+    '花香', '阳光', '希望', '快乐',
+  ],
+  'zh-TW': [
+    '溫柔', '花開', '微風', '晨光',
+    '清澈', '星辰', '明朗', '春意',
+    '歡喜', '美好', '燦爛', '柔和',
+    '寧靜', '暖陽', '溫暖', '幸福',
+    '花香', '陽光', '希望', '快樂',
   ],
   es: [
-    'mariposa', 'amanecer', 'brisa', 'encanto',
-    'jardín', 'dulzura', 'estrella', 'alegría',
-    'arcoíris', 'primavera', 'sonrisa', 'melodía',
-    'horizonte', 'destello', 'cascada', 'susurro',
-    'cristalino', 'florido', 'luminoso', 'sereno',
+    'mariposa', 'amanecer', 'brisa', 'jardín',
+    'estrella', 'alegría', 'arcoíris', 'primavera',
+    'sonrisa', 'melodía', 'horizonte', 'amistad',
+    'dulce', 'luz', 'flor', 'brillante',
+    'calma', 'cielo', 'esperanza', 'belleza',
   ],
   fr: [
-    'lumière', 'papillon', 'rêverie', 'sourire',
-    'douceur', 'arc-en-ciel', 'étoile', 'fleur',
-    'harmonie', 'aurore', 'merveille', 'brise',
-    'chaleur', 'pétillant', 'tendresse', 'mélodie',
-    'étincelle', 'printemps', 'sérénité', 'horizon',
+    'lumière', 'papillon', 'sourire', 'douceur',
+    'arc-en-ciel', 'étoile', 'fleur', 'aurore',
+    'brise', 'chaleur', 'mélodie', 'printemps',
+    'horizon', 'rêve', 'magie', 'joyeux',
+    'amour', 'calme', 'soleil', 'jardin',
   ],
   de: [
-    'Wanderlust', 'Sonnenschein', 'Schmetterling', 'Frühling',
-    'Sternenstaub', 'Geborgenheit', 'Morgenrot', 'Blütenblatt',
-    'Lebensfreude', 'Sternschnuppe', 'Regenbogen', 'Windstille',
-    'Glücklich', 'Traumhaft', 'Zauberhaft', 'Wunderbar',
-    'Herzlich', 'Sanftmut', 'Heiterkeit', 'Lichtblick',
+    'Sonnenschein', 'Schmetterling', 'Frühling', 'Regenbogen',
+    'Wärme', 'Sonnenaufgang', 'Blume', 'Freude',
+    'Stern', 'Traum', 'Hoffnung', 'Garten',
+    'Lächeln', 'Glück', 'Liebe', 'wunderbar',
+    'herzlich', 'fröhlich', 'sanft', 'schön',
   ],
   it: [
     'dolcezza', 'farfalla', 'armonia', 'tramonto',
-    'brezza', 'incanto', 'sorriso', 'primavera',
-    'serenità', 'arcobaleno', 'melodia', 'aurora',
-    'fioritura', 'scintilla', 'splendore', 'tenerezza',
-    'luminoso', 'delicato', 'gioioso', 'meraviglia',
+    'brezza', 'sorriso', 'primavera', 'arcobaleno',
+    'melodia', 'aurora', 'amore', 'calma',
+    'fiore', 'luce', 'sole', 'dolce',
+    'bello', 'gentile', 'felice', 'cielo',
   ],
   pt: [
-    'alegria', 'borboleta', 'saudade', 'amanhecer',
-    'brisa', 'encanto', 'estrela', 'harmonia',
-    'arco-íris', 'primavera', 'sorriso', 'melodia',
-    'horizonte', 'brilho', 'cascata', 'serenidade',
-    'florescer', 'luminoso', 'acolhedor', 'suavidade',
+    'alegria', 'borboleta', 'amanhecer', 'brisa',
+    'estrela', 'arco-íris', 'primavera', 'sorriso',
+    'melodia', 'horizonte', 'brilho', 'cascata',
+    'flor', 'luz', 'ternura', 'calma',
+    'amigo', 'sol', 'esperança', 'beleza',
   ],
   ru: [
     'счастье', 'рассвет', 'бабочка', 'гармония',
     'звезда', 'мелодия', 'радуга', 'уют',
-    'весна', 'улыбка', 'тепло', 'сияние',
-    'мечта', 'рассвет', 'нежность', 'вдохновение',
-    'светлый', 'ласковый', 'чудесный', 'волшебный',
+    'весна', 'улыбка', 'тепло', 'мечта',
+    'свет', 'доброта', 'радость', 'солнце',
+    'цветок', 'ласковый', 'чудесный', 'волшебный',
   ],
 };
 
