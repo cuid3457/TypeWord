@@ -37,6 +37,8 @@ import ESpeakNg from "npm:espeak-ng@1.0.2";
 import { BudgetExhaustedError, RateLimitError, enforceAllLimits } from "../_shared/limits.ts";
 
 const ALLOWED_ORIGINS = new Set([
+  "https://moavoca.com",
+  "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
 ]);
@@ -266,7 +268,7 @@ Deno.serve(async (req: Request) => {
 
   // Rate limit only applies to fresh espeak runs (cache misses).
   try {
-    await enforceAllLimits(admin, userId);
+    await enforceAllLimits(admin, userId, "ipa-generate");
   } catch (err) {
     if (err instanceof RateLimitError) return jsonResponse({ error: err.message }, err.status);
     if (err instanceof BudgetExhaustedError) return jsonResponse({ error: err.message }, err.status);

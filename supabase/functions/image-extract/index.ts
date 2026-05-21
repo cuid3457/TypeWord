@@ -16,9 +16,24 @@ const PRICE_OUTPUT_PER_1M = 10.0;
 const ENDPOINT = "image-extract";
 
 const IMAGE_LIMIT_FREE = 3;
-const IMAGE_LIMIT_PREMIUM = 50;
+const IMAGE_LIMIT_PLUS = 50;
+const IMAGE_LIMIT_PRO = 150;
+/** Legacy alias retained for any callers still referencing the old name. */
+const IMAGE_LIMIT_PREMIUM = IMAGE_LIMIT_PLUS;
+
+/** Resolve monthly image-extract limit from the profile's plan string.
+ *  Accepts new tier values ('free' / 'plus' / 'pro') and the legacy
+ *  'premium' value (mapped to plus, since current Pro entitlement was
+ *  renamed to Plus in the 3-tier launch). */
+function imageLimitForPlan(plan: string | null | undefined): number {
+  if (plan === "pro") return IMAGE_LIMIT_PRO;
+  if (plan === "plus" || plan === "premium") return IMAGE_LIMIT_PLUS;
+  return IMAGE_LIMIT_FREE;
+}
 
 const ALLOWED_ORIGINS = new Set([
+  "https://moavoca.com",
+  "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
 ]);
@@ -111,10 +126,8 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ error: "Invalid token" }, 401, cors);
   }
   const userId = userData.user.id;
-  console.log("[image-extract] authenticated", {
-    userId,
-    email: userData.user.email,
-  });
+  // Email omitted from log: PII per audit M-3. userId is sufficient for ops debugging.
+  console.log("[image-extract] authenticated", { userId });
 
   let imageBase64: string;
   let sourceLang: string;
@@ -143,7 +156,7 @@ Deno.serve(async (req: Request) => {
   const startedAt = Date.now();
 
   try {
-    await enforceAllLimits(admin, userId);
+    await enforceAllLimits(admin, userId, "image-extract");
     console.log("[image-extract] rate limits passed");
   } catch (err) {
     console.log("[image-extract] rate limit blocked", {
@@ -169,9 +182,8 @@ Deno.serve(async (req: Request) => {
     .eq("user_id", userId)
     .single();
 
-  const isPremium = profile?.plan === "premium";
   const userTimezone = profile?.timezone ?? "UTC";
-  const limit = isPremium ? IMAGE_LIMIT_PREMIUM : IMAGE_LIMIT_FREE;
+  const limit = imageLimitForPlan(profile?.plan);
   console.log("[image-extract] profile loaded", {
     userId,
     plan: profile?.plan,

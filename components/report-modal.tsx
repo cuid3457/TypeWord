@@ -27,12 +27,14 @@ interface Props {
   word: string;
   wordId?: string;
   context: 'search' | 'detail' | 'review';
+  sourceLang?: string;
+  targetLang?: string;
   onSubmitted?: (thanksMessage: string) => void;
 }
 
 const REASONS: Reason[] = ['wrong_meaning', 'wrong_example', 'other'];
 
-export function ReportModal({ visible, onClose, word, wordId, context, onSubmitted }: Props) {
+export function ReportModal({ visible, onClose, word, wordId, context, sourceLang, targetLang, onSubmitted }: Props) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const dark = colorScheme === 'dark';
@@ -110,7 +112,7 @@ export function ReportModal({ visible, onClose, word, wordId, context, onSubmitt
       return;
     }
     setSubmitting(true);
-    await submitReport({ word, wordId, reason, description: description.trim(), context });
+    await submitReport({ word, wordId, reason, description: description.trim(), context, sourceLang, targetLang });
     setSubmitting(false);
     const idx = Math.floor(Math.random() * 3) + 1;
     const msg = t(`report.thanks_${idx}`);

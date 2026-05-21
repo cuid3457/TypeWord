@@ -369,7 +369,7 @@ export function ReviewActiveCard({
         onSwitchMode={handleLimitSwitchMode}
         onEnd={handleLimitEnd}
       />
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
+      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} reason="cards" />
     </SafeAreaView>
   );
 }

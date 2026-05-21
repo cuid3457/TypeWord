@@ -15,6 +15,8 @@ import {
   streamWordLookup,
   type PartialLookup,
 } from '@src/api/streamLookup';
+import { lookupV2, lookupV2Stream, LookupV2Error } from '@src/api/lookupV2';
+import { USE_V2_LOOKUP, V2_SUPPORTS_TRANSLATE_MODE } from '@src/config/lookupVersion';
 import { findWord, saveWord, updateWordResult, applyCacheUpdate } from '@src/db/queries';
 import type { WordLookupMode, WordLookupRequest, WordLookupResult } from '@src/types/word';
 import { normalizeResult } from '@src/utils/normalizeResult';
@@ -60,16 +62,18 @@ export interface ResolveHeadwordResult {
  * Returns candidates for disambiguation (e.g. "은행" → [{headword:"bank"}, {headword:"ginkgo"}]),
  * or an empty list with a `note` when the input is out of scope (sentence / non-word / wrong language).
  */
-export async function resolveHeadword(
+async function resolveHeadwordOnce(
   word: string,
   sourceLang: string,
   targetLang: string,
 ): Promise<ResolveHeadwordResult> {
+  // Reverse lookup endpoint: v2 (since 2026-05-14) or v1 (legacy).
+  const endpoint = V2_SUPPORTS_TRANSLATE_MODE ? 'word-lookup-v2' : 'word-lookup';
   try {
     const { data, error } = await withTimeout(
       supabase.functions.invoke<{
         result: { candidates?: HeadwordCandidate[]; headword?: string; note?: string };
-      }>('word-lookup', {
+      }>(endpoint, {
         body: {
           word,
           sourceLang,
@@ -102,6 +106,31 @@ export async function resolveHeadword(
   }
 }
 
+/**
+ * Reverse-lookup translation with one automatic retry on empty result.
+ * Cold-start variability of the OpenAI translate prompt occasionally returns
+ * `candidates=[]` for valid words on the first call (the second succeeds via
+ * prompt cache + warm function). Retry only when the empty result lacks a
+ * definitive note ('sentence' / 'wrong_language' / 'non_word' = real refusals).
+ */
+export async function resolveHeadword(
+  word: string,
+  sourceLang: string,
+  targetLang: string,
+): Promise<ResolveHeadwordResult> {
+  const first = await resolveHeadwordOnce(word, sourceLang, targetLang);
+  if (first.candidates.length > 0) return first;
+  if (first.timedOut) return first;
+  // Hard refusals — don't waste a retry; the AI knows what it's doing.
+  if (first.note === 'sentence' || first.note === 'wrong_language') return first;
+  // 'non_word' or no note + zero candidates: likely cold-start variability.
+  // Single short retry (~700ms backoff) usually succeeds via prompt cache.
+  await new Promise((r) => setTimeout(r, 700));
+  const second = await resolveHeadwordOnce(word, sourceLang, targetLang);
+  if (second.candidates.length > 0) return second;
+  return first; // preserve original note for the error message
+}
+
 export function genId(): string {
   if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID();
   const h = '0123456789abcdef';
@@ -125,15 +154,23 @@ export async function enrichWord(
 ): Promise<Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'> | null> {
   try {
     const { meanings, ...rest } = req;
-    const { data } = await withTimeout(
-      supabase.functions.invoke<{
-        result: Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'>;
-      }>('word-lookup', {
-        body: { ...rest, mode: 'enrich', ...(meanings?.length ? { meanings } : {}) },
-      }),
-      REQUEST_TIMEOUT_MS,
-    );
-    if (!data?.result) return null;
+    let resultData: Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'> | undefined;
+    if (USE_V2_LOOKUP) {
+      const v2 = await lookupV2({ ...rest, mode: 'enrich' });
+      resultData = v2.result;
+    } else {
+      const { data } = await withTimeout(
+        supabase.functions.invoke<{
+          result: Pick<WordLookupResult, 'synonyms' | 'antonyms' | 'examples'>;
+        }>('word-lookup', {
+          body: { ...rest, mode: 'enrich', ...(meanings?.length ? { meanings } : {}) },
+        }),
+        REQUEST_TIMEOUT_MS,
+      );
+      resultData = data?.result;
+    }
+    if (!resultData) return null;
+    const data = { result: resultData };
 
     // If already saved locally, merge enrichment into the stored result
     const existing = await findWord({ word: req.word.trim(), bookId: req.bookId ?? null });
@@ -175,24 +212,71 @@ export async function lookupWordStream(
     return;
   }
 
+  // Cold-start variability: gpt-4.1-mini occasionally returns
+  // `meanings=[]` + `note='non_word'` for valid short CJK inputs (e.g.
+  // 学校) on the first call, then succeeds on retry via the prompt cache.
+  // Same pattern as resolveHeadword's retry. Only retry on non_word /
+  // missing-note empties — 'sentence' / 'wrong_language' are real refusals
+  // and retrying wouldn't change the answer.
+  // Explicit type so the union of {lookupV2Stream, streamWordLookup}
+  // narrows cleanly — both have identical signatures but TS struggles
+  // with the union otherwise.
+  const streamer: typeof streamWordLookup =
+    USE_V2_LOOKUP ? (lookupV2Stream as typeof streamWordLookup) : streamWordLookup;
+
+  const runOnce = (
+    onPartial: (partial: PartialLookup) => void,
+    onResult: (res: WordLookupResponse) => void,
+    onError: (err: Error) => void,
+  ) => streamer(
+    { ...req, mode: req.mode ?? 'quick' },
+    {
+      onDelta: (accumulated) => onPartial(extractPartialLookup(accumulated)),
+      onResult: (result, cached) => onResult({
+        result: normalizeResult(result, {
+          sourceLang: req.sourceLang,
+          targetLang: req.targetLang,
+        }),
+        source: cached ? 'server_cache' : 'openai',
+      }),
+      onError,
+    },
+  );
+
+  const isRetryableEmpty = (res: WordLookupResponse): boolean => {
+    const meanings = res.result.meanings ?? [];
+    if (meanings.length > 0) return false;
+    const note = res.result.note;
+    return !note || note === 'non_word';
+  };
+
   try {
-    await streamWordLookup(
-      { ...req, mode: req.mode ?? 'quick' },
-      {
-        onDelta: (accumulated) => {
-          handlers.onPartial?.(extractPartialLookup(accumulated));
-        },
-        onResult: (result, cached) => {
-          handlers.onFinal({
-            result: normalizeResult(result, {
-              sourceLang: req.sourceLang,
-              targetLang: req.targetLang,
-            }),
-            source: cached ? 'server_cache' : 'openai',
-          });
-        },
-        onError: handlers.onError,
-      },
+    let firstResult: WordLookupResponse | null = null;
+    await runOnce(
+      (p) => handlers.onPartial?.(p),
+      (res) => { firstResult = res; },
+      handlers.onError,
+    );
+    if (!firstResult) return;
+    if (!isRetryableEmpty(firstResult)) {
+      handlers.onFinal(firstResult);
+      return;
+    }
+    // Cold-start empty: wait briefly then retry once via warm prompt cache.
+    await new Promise((r) => setTimeout(r, 700));
+    // Wrap in an object so TS doesn't narrow-to-null on the let binding
+    // through the callback closure (mutable-capture narrowing quirk).
+    const slot: { value: WordLookupResponse | null } = { value: null };
+    await runOnce(
+      (p) => handlers.onPartial?.(p),
+      (res) => { slot.value = res; },
+      handlers.onError,
+    );
+    const secondResult = slot.value;
+    handlers.onFinal(
+      secondResult && (secondResult.result.meanings ?? []).length > 0
+        ? secondResult
+        : firstResult,
     );
   } catch (err) {
     handlers.onError(err instanceof Error ? err : new Error('stream failed'));
@@ -220,22 +304,45 @@ export async function lookupWord(
   // 2. Edge Function
   try {
     const { meanings, ...restReq } = req;
-    const { data, error } = await withTimeout(
-      supabase.functions.invoke<{
-        result: WordLookupResult;
-        cached: boolean;
-      }>('word-lookup', {
-        body: { ...restReq, mode, ...(mode === 'enrich' && meanings?.length ? { meanings } : {}) },
-      }),
-      REQUEST_TIMEOUT_MS,
-    );
+    let data: { result: WordLookupResult; cached: boolean } | undefined;
 
-    if (error) {
-      const status = (error.context as { status?: number } | undefined)?.status;
-      if (status === 429) throw new WordLookupError(error.message, 'rate_limited');
-      if (status === 402) throw new WordLookupError(error.message, 'budget_exhausted');
-      if (status === 401) throw new WordLookupError(error.message, 'unauthorized');
-      throw new WordLookupError(error.message, 'server_error');
+    if (USE_V2_LOOKUP) {
+      try {
+        const v2 = await lookupV2({ ...restReq, mode });
+        data = { result: v2.result, cached: v2.cached };
+      } catch (e) {
+        // Translate LookupV2Error → WordLookupError for unified handling.
+        if (e instanceof LookupV2Error) {
+          const validCodes: WordLookupError['code'][] = [
+            'rate_limited', 'budget_exhausted', 'unauthorized',
+            'server_error', 'unavailable', 'timeout',
+          ];
+          const mapped = (validCodes as string[]).includes(e.code)
+            ? (e.code as WordLookupError['code'])
+            : 'server_error';
+          throw new WordLookupError(e.message, mapped);
+        }
+        throw e;
+      }
+    } else {
+      const { data: invokeData, error } = await withTimeout(
+        supabase.functions.invoke<{
+          result: WordLookupResult;
+          cached: boolean;
+        }>('word-lookup', {
+          body: { ...restReq, mode, ...(mode === 'enrich' && meanings?.length ? { meanings } : {}) },
+        }),
+        REQUEST_TIMEOUT_MS,
+      );
+
+      if (error) {
+        const status = (error.context as { status?: number } | undefined)?.status;
+        if (status === 429) throw new WordLookupError(error.message, 'rate_limited');
+        if (status === 402) throw new WordLookupError(error.message, 'budget_exhausted');
+        if (status === 401) throw new WordLookupError(error.message, 'unauthorized');
+        throw new WordLookupError(error.message, 'server_error');
+      }
+      data = invokeData ?? undefined;
     }
 
     if (!data?.result) {
@@ -298,55 +405,6 @@ export async function lookupWord(
   }
 }
 
-export async function checkWordFreshness(
-  wordId: string,
-  word: string,
-  sourceLang: string,
-  targetLang: string,
-  cacheSyncedAt: number,
-): Promise<WordLookupResult | null> {
-  try {
-    const { data, error } = await withTimeout(
-      supabase.rpc('check_word_freshness', {
-        p_word: word.trim().toLowerCase(),
-        p_source_lang: sourceLang,
-        p_target_lang: targetLang,
-        p_since: new Date(cacheSyncedAt || 0).toISOString(),
-      }),
-      REQUEST_TIMEOUT_MS,
-    );
-
-    if (error || !data?.length) return null;
-
-    const { getDb } = await import('@src/db');
-    const db = await getDb();
-    const existing = await db.getFirstAsync<{ result_json: string }>(
-      'SELECT result_json FROM user_words WHERE id = ?',
-      [wordId],
-    );
-    if (!existing) return null;
-
-    let result: Record<string, unknown>;
-    try { result = JSON.parse(existing.result_json); } catch { return null; }
-
-    for (const row of data as { cache_result: Record<string, unknown>; cache_mode: string }[]) {
-      if (row.cache_mode === 'quick') {
-        const q = row.cache_result;
-        if (q.headword) result.headword = q.headword;
-        if (q.meanings) result.meanings = q.meanings;
-        if (q.reading) result.reading = q.reading;
-      } else if (row.cache_mode === 'enrich') {
-        const e = row.cache_result;
-        if (e.examples) result.examples = e.examples;
-        if (e.synonyms) result.synonyms = e.synonyms;
-        if (e.antonyms) result.antonyms = e.antonyms;
-      }
-    }
-
-    const merged = normalizeResult(result as unknown as WordLookupResult, { sourceLang, targetLang });
-    await applyCacheUpdate(wordId, merged);
-    return merged;
-  } catch {
-    return null;
-  }
-}
+// checkWordFreshness removed 2026-05-14 — v1's per-word freshness probe
+// against global_word_cache. Covered now by syncUserWordsContent which
+// runs on app launch + foreground (services/userWordsSyncService.ts).

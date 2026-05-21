@@ -1,0 +1,1624 @@
+# hsk-1 (zh-CN → en,ko) | 150 words
+
+爱 [en] ipa=- | meanings: love[noun] | to love[verb]
+   e1: 家人之间有深厚的**爱**。 || There is deep **love** among family members.
+   e2: 我**爱**你胜过一切。 || I **love** you more than anything.
+   syn: [喜欢, 热爱] | ant: []
+
+爱 [ko] ipa=- | meanings: 사랑[명사] | 사랑하다[동사]
+   e1: 家庭是我们最深的**爱**。 || 가족은 우리의 가장 깊은 **사랑**이다.
+   e2: 我**爱**读书，因为它带来快乐。 || 나는 책 읽는 것을 **사랑한다**, 왜냐하면 그것이 기쁨을 주기 때문이다.
+   syn: [喜欢, 恋爱] | ant: []
+
+八 [en] ipa=- | meanings: eight[noun]
+   e1: 桌子上有**八**个苹果。 || There are **eight** apples on the table.
+   e2: 我有**八**只小鸟在花园里。 || I have **eight** little birds in the garden.
+   syn: [] | ant: []
+
+八 [ko] ipa=- | meanings: 여덟[명사]
+   e1: 我有**八**个苹果。 || 나는 **여덟** 개의 사과가 있어요.
+   e2: **八**只小鸟在树上唱歌。 || **여덟** 마리의 작은 새들이 나무 위에서 노래해요.
+   syn: [] | ant: []
+
+爸爸 [en] ipa=- | meanings: dad, father[noun]
+   e1: 我的**爸爸**喜欢种花。 || My **dad** likes to grow flowers.
+   e2: **爸爸**每天早上都会给我做早餐。 || **Dad** makes breakfast for me every morning.
+   syn: [父亲, 爹爹] | ant: []
+
+爸爸 [ko] ipa=- | meanings: 아버지, 아빠[명사]
+   e1: 我和**爸爸**一起去公园了。 || 나는 **아빠**와 함께 공원에 갔다.
+   e2: **爸爸**做了好吃的晚饭。 || **아빠**가 맛있는 저녁을 만들었다.
+   syn: [父亲, 父亲大人] | ant: []
+
+杯子 [en] ipa=- | meanings: cup[noun] | glass[noun]
+   e1: 我用**杯子**喝茶。 || I drink tea with a **cup**.
+   e2: 请给我一个干净的**杯子**。 || Please give me a clean **glass**.
+   syn: [茶杯, 水杯] | ant: []
+
+杯子 [ko] ipa=- | meanings: 컵[명사]
+   e1: 请给我一个**杯子**。 || 저에게 **컵** 하나 주세요.
+   e2: 桌子上有许多不同的**杯子**。 || 책상 위에 여러 종류의 **컵**이 있습니다.
+   syn: [水杯, 茶杯, 酒杯] | ant: []
+
+北京 [en] ipa=- | meanings: Beijing, city in China[proper noun]
+   e1: 我计划明年去**北京**旅游。 || I plan to travel to **Beijing** next year.
+   e2: **北京**的春天非常美丽。 || The spring in **Beijing** is very beautiful.
+   syn: [] | ant: []
+
+北京 [ko] ipa=- | meanings: 베이징, 도시[고유명사]
+   e1: 我计划明年去**北京**旅游。 || 나는 내년에 **베이징**(을) 여행할 계획이다.
+   e2: **北京**是中国的首都。 || **베이징**은 중국의 수도이다.
+   syn: [] | ant: []
+
+本 [en] ipa=- | meanings: origin, root, source[noun] | this, current, the present[pronoun]
+   e1: 事情的**本**源很复杂。 || The **origin** of the matter is complicated.
+   e2: **本**周我们有一个重要会议。 || We have an important meeting **this** week.
+   syn: [] | ant: []
+
+本 [ko] ipa=- | meanings: 근본, 본질[명사] | 책[명사]
+   e1: 这是问题的**本质**。 || 이것이 문제의 **본질**이다.
+   e2: 我买了一**本**新书。 || 나는 새 **책**을 한 권 샀다.
+   e3: 了解事情的**本质**很重要。 || 사실의 **본질**을 이해하는 것이 중요하다.
+   syn: [] | ant: []
+
+不客气 [en] ipa=- | meanings: you're welcome[expression] | impolite[adjective]
+   e1: 谢谢你帮忙，**不客气**。 || Thank you for helping, **you're welcome**.
+   e2: 他说话很直接，有时显得**不客气**。 || He speaks very directly and sometimes seems **impolite**.
+   syn: [不谢] | ant: []
+
+不客气 [ko] ipa=- | meanings: 천만에요, 별말씀을요[표현] | 거만하지 않음[형용사]
+   e1: 谢谢你的帮助！——**不客气**！ || 도와주셔서 감사합니다! —— **천만에요**!
+   e2: 他待人**不客气**，很受欢迎。 || 그는 사람들에게 **거만하지** 않고, 그래서 인기가 많아요.
+   syn: [不谢, 没关系] | ant: []
+
+不 [en] ipa=- | meanings: not[adverb] | no[adverb]
+   e1: 我**不**喜欢辣的食物。 || I **do not** like spicy food.
+   e2: 他**不**去了，因为下雨了。 || He **did not** go because it was raining.
+   syn: [没] | ant: []
+
+不 [ko] ipa=- | meanings: 아니다, 부정[부사]
+   e1: 我**不**喜欢吃辣。 || 나는 매운 음식을 **좋아하지** 않는다.
+   e2: 他**不**去了，因为他很忙。 || 그는 바빠서 **가지** 않는다.
+   e3: 我明天**不**去学校。 || 나는 내일 학교에 **가지** 않는다.
+   syn: [] | ant: []
+
+菜 [en] ipa=- | meanings: vegetable, dish[noun] | cuisine[noun]
+   e1: 我喜欢吃新鲜的**菜**。 || I like to eat fresh **vegetable**s.
+   e2: 这家餐厅的川**菜**非常有名。 || This restaurant's **Sichuan cuisine** is very famous.
+   e3: 晚饭有三道不同的**菜**。 || There are three different **dish**es for dinner.
+   syn: [蔬菜, 食品] | ant: []
+
+菜 [ko] ipa=- | meanings: 채소[명사] | 요리[명사]
+   e1: 我喜欢吃新鲜的**菜**。 || 나는 신선한 **채소**를 먹는 것을 좋아한다.
+   e2: 晚餐有很多好吃的**菜**。 || 저녁 식사에는 맛있는 **요리**가 많이 있다.
+   syn: [蔬菜, 蔬果, 菜肴, 饭菜] | ant: []
+
+茶 [en] ipa=- | meanings: tea[noun]
+   e1: 我每天早上喝一杯**茶**。 || I drink a cup of **tea** every morning.
+   e2: 这家店的**茶**非常好喝。 || The **tea** at this shop is very delicious.
+   e3: 他喜欢在下午喝绿**茶**。 || He likes to drink green **tea** in the afternoon.
+   syn: [茶叶, 茶水] | ant: []
+
+茶 [ko] ipa=- | meanings: 차[명사]
+   e1: 我喜欢在早上喝一杯**茶**。 || 나는 아침에 한 잔의 **차**를 마시는 것을 좋아한다.
+   e2: 这家店有各种不同的**茶**。 || 이 가게에는 다양한 종류의 **차**가 있다.
+   e3: 她邀请我去她家喝**茶**。 || 그녀는 나를 그녀의 집에 와서 **차**를 마시자고 초대했다.
+   syn: [饮料, 茶叶] | ant: []
+
+吃 [en] ipa=- | meanings: eat[verb] | consume[verb]
+   e1: 他们一起**吃**晚饭。 || They **eat** dinner together.
+   e2: 猫喜欢**吃**鱼。 || The cat likes to **eat** fish.
+   e3: 这台机器每天**吃**很多电。 || This machine **consume**s a lot of electricity every day.
+   syn: [用餐, 进食] | ant: []
+
+吃 [ko] ipa=- | meanings: 먹다[동사]
+   e1: 我们一起**吃**晚饭吧。 || 우리 함께 **먹자** 저녁을.
+   e2: 小猫喜欢**吃**鱼。 || 아기 고양이는 물고기를 **먹는** 것을 좋아한다.
+   e3: 他每天早上**吃**水果。 || 그는 매일 아침에 **먹는다** 과일을.
+   syn: [用餐, 进食] | ant: []
+
+出租车 [en] ipa=- | meanings: taxi[noun]
+   e1: 我坐**出租车**去机场。 || I took a **taxi** to the airport.
+   e2: 晚饭后我们叫了一辆**出租车**回家。 || After dinner, we called a **taxi** home.
+   e3: 这座城市的**出租车**很方便。 || The city's **taxi**s are very convenient.
+   syn: [的士, 计程车] | ant: []
+
+出租车 [ko] ipa=- | meanings: 택시[명사]
+   e1: 我乘坐了**出租车**去机场。 || 나는 공항에 가기 위해 **택시**를 탔다.
+   e2: 晚上打**出租车**很方便。 || 밤에 **택시**를 잡는 것이 매우 편리하다.
+   e3: 他在街上叫了一辆**出租车**。 || 그는 길에서 **택시**를 불렀다.
+   syn: [的士, 计程车] | ant: []
+
+打电话 [en] ipa=- | meanings: make a phone call[verb]
+   e1: 我给妈妈**打电话**了。 || I **called** mom.
+   e2: 请你帮我**打电话**给学校。 || Please help me **call** the school.
+   e3: 他每天都会**打电话**问候家人。 || He **calls** his family every day to greet them.
+   syn: [拨电话, 打个电话] | ant: []
+
+打电话 [ko] ipa=- | meanings: 전화를 걸다[동사]
+   e1: 我每天都要给家人**打电话**。 || 나는 매일 가족에게 **전화를 걸**어요.
+   e2: 你可以帮我**打电话**给医生吗？ || 너는 나 대신에 의사에게 **전화를 걸** 수 있나요?
+   e3: 她正在给朋友**打电话**聊天。 || 그녀는 친구에게 **전화를 걸**어 이야기하고 있어요.
+   syn: [拨电话, 通话] | ant: []
+
+大 [en] ipa=- | meanings: big[adjective] | great[adjective]
+   e1: 这只狗非常**大**。 || This dog is very **big**.
+   e2: 他在社区里有很**大**的影响力。 || He has a **great** influence in the community.
+   syn: [巨大, 庞大, 宏大] | ant: [小]
+
+大 [ko] ipa=- | meanings: 크다[형용사] | 성대하다[형용사]
+   e1: 那只狗很**大**。 || 저 개는 매우 **크다**.
+   e2: 这个建筑非常**大**，很壮观。 || 이 건축물은 매우 **성대하다**, 아주 장관이다.
+   syn: [巨大, 庞大, 宏大] | ant: [小]
+
+的 [en] ipa=- | meanings: of[expression] | possessive particle[expression]
+   e1: 这是我**的**书。 || This is my **book**.
+   e2: 那个房子**的**颜色很漂亮。 || The color **of** that house is beautiful.
+   e3: 这是我妈妈**的**菜。 || This is my **mom's** dish.
+   syn: [] | ant: []
+
+的 [ko] ipa=- | meanings: 의[조사]
+   e1: 这是我**的**书。 || 이것은 나**의** 책이다.
+   e2: 漂亮**的**花开了。 || 예쁜 꽃이 **피었다**.
+   e3: 他是老师**的**朋友。 || 그는 선생님**의** 친구이다.
+   syn: [] | ant: []
+
+点 [en] ipa=- | meanings: point, dot, spot[noun] | to light, to order, to nod[verb]
+   e1: 地图上有一个红色的**点**。 || There is a red **point** on the map.
+   e2: 请帮我**点**一份咖啡。 || Please help me **order** a coffee.
+   e3: 那个**点亮**了，表示有电。 || That **dot** lit up, indicating power.
+   syn: [斑点, 标记, 位置] | ant: []
+
+点 [ko] ipa=- | meanings: 점[명사] | 조금[명사]
+   e1: 现在是三**点**半。 || 지금은 세 **시** 반이에요.
+   e2: 我想吃一**点**甜的点心。 || 나는 **조금** 달콤한 점심을 먹고 싶어요.
+   syn: [时刻, 刻] | ant: []
+
+电脑 [en] ipa=- | meanings: computer[noun]
+   e1: 我每天使用**电脑**工作。 || I use a **computer** for work every day.
+   e2: 新的**电脑**速度非常快。 || The new **computer** is very fast.
+   e3: 孩子们用**电脑**学习编程。 || Children use **computers** to learn programming.
+   syn: [计算机, 电子计算机] | ant: []
+
+电脑 [ko] ipa=- | meanings: 컴퓨터[명사]
+   e1: 我每天都用**电脑**工作。 || 나는 매일 **컴퓨터**로 일한다.
+   e2: 孩子们喜欢玩**电脑**游戏。 || 아이들은 **컴퓨터** 게임을 좋아한다.
+   syn: [计算机, 电子计算机] | ant: []
+
+电视 [en] ipa=- | meanings: television[noun] | TV[noun]
+   e1: 我买了一台新的**电视**。 || I bought a new **television**.
+   e2: 晚上我们一起看**电视**。 || We watch **TV** together in the evening.
+   e3: 这个**电视**很适合客厅。 || This **television** fits well in the living room.
+   syn: [电视机, 液晶电视, 智能电视] | ant: []
+
+电视 [ko] ipa=- | meanings: 텔레비전, 전자기기[명사]
+   e1: 我们一起看**电视**吧。 || 우리 함께 **텔레비전**을 봅시다.
+   e2: 这台**电视**很清晰。 || 이 **텔레비전**은 매우 선명합니다.
+   e3: 孩子们喜欢玩**电视**游戏。 || 아이들은 **텔레비전** 게임을 좋아합니다.
+   syn: [电视机, 电视机顶盒] | ant: []
+
+电影 [en] ipa=- | meanings: movie, film[noun]
+   e1: 我们一起去看**电影**吧。 || Let's go watch a **movie** together.
+   e2: 这部**电影**讲述了一个感人的故事。 || This **movie** tells a touching story.
+   syn: [影片, 胶片] | ant: []
+
+电影 [ko] ipa=- | meanings: 영화[명사]
+   e1: 我喜欢看科幻**电影**。 || 나는 공상과학 **영화** 보는 것을 좋아한다.
+   e2: 这部**电影**讲述了友谊的故事。 || 이 **영화**는 우정에 관한 이야기를 담고 있다.
+   e3: 我们周末去看了一个新的**电影**。 || 우리는 주말에 새 **영화**를 보러 갔다.
+   syn: [影片, 电影片] | ant: []
+
+东西 [en] ipa=- | meanings: thing, object[noun] | west and east[noun]
+   e1: 我买了很多**东西**。 || I bought many **thing**s.
+   e2: **东西**方向的风很大。 || The wind from the **east** and **west** is strong.
+   syn: [物品, 东西儿, 物件] | ant: []
+
+东西 [ko] ipa=- | meanings: 물건[명사] | 동서 방향[명사]
+   e1: 这家商店有很多有趣的**东西**。 || 이 가게에는 재미있는 **물건**이 많다.
+   e2: 我们沿着**东西**方向走。 || 우리는 **동서 방향**을 따라 걷는다.
+   syn: [物品, 物件] | ant: []
+
+都 [en] ipa=- | meanings: capital[noun] | all, both[adverb]
+   e1: 北京是中国的**都**市。 || Beijing is the **capital** city of China.
+   e2: 他们**都**喜欢春天的花朵。 || They **all** like spring flowers.
+   e3: 我们**都**去了公园散步。 || We **all** went to the park for a walk.
+   syn: [全都, 全部, 皆] | ant: []
+
+都 [ko] ipa=- | meanings: 모두[부사] | 도시[명사]
+   e1: 我们**都**喜欢春天的花。 || 우리 **모두** 봄꽃을 좋아해요.
+   e2: 北京是中国的一个大**都**市。 || 베이징은 중국의 큰 **도시** 중 하나입니다.
+   e3: 他们**都**参加了聚会。 || 그들은 **모두** 모임에 참석했어요.
+   syn: [] | ant: []
+
+读 [en] ipa=- | meanings: to read, to study[verb]
+   e1: 我每天都会**读**书。 || I **read** books every day.
+   e2: 孩子们在图书馆安静地**读**书。 || The children quietly **read** books in the library.
+   e3: 她喜欢在床上**读**小说。 || She likes to **read** novels in bed.
+   syn: [看, 学习] | ant: []
+
+读 [ko] ipa=- | meanings: 읽다[동사] | 공부하다[동사]
+   e1: 她每天都**读**书。 || 그녀는 매일 책을 **읽는다**.
+   e2: 学生们在教室里认真**读**书。 || 학생들이 교실에서 열심히 **공부한다**.
+   syn: [看, 学习] | ant: []
+
+对不起 [en] ipa=- | meanings: sorry, excuse me, apologize[expression]
+   e1: 我**对不起**你迟到。 || I am **sorry** for being late.
+   e2: 请**对不起**，我没听清楚你说的话。 || **Excuse me**, I didn't hear what you said clearly.
+   syn: [抱歉, 不好意思] | ant: []
+
+对不起 [ko] ipa=- | meanings: 미안하다, 죄송하다[감탄사]
+   e1: **对不起**，我迟到了。 || **죄송합니다**, 제가 늦었어요.
+   e2: 如果让你不开心，**对不起**。 || 만약 당신을 불편하게 했다면, **죄송합니다**.
+   e3: 请你原谅我，**对不起**。 || 저를 용서해 주세요, **미안해요**.
+   syn: [抱歉, 不好意思] | ant: []
+
+多 [en] ipa=- | meanings: many,much,multi-[adjective] | more,increase[verb]
+   e1: 这个花园有**多**种花。 || This garden has **many** kinds of flowers.
+   e2: 请给我**多**一点时间。 || Please give me **more** time.
+   e3: 我们收获了**很多**果实。 || We harvested **many** fruits.
+   syn: [很多, 大量, 众多] | ant: []
+
+多 [ko] ipa=- | meanings: 많다[형용사]
+   e1: 这儿有**多**花。 || 여기에 **많은** 꽃이 있다.
+   e2: 朋友**多**了，生活更开心。 || 친구가 **많아져서** 생활이 더 즐거워졌다.
+   syn: [很多, 许多, 大量] | ant: []
+
+多少 [en] ipa=- | meanings: how much, how many[pronoun] | some, several, a certain amount[pronoun]
+   e1: 这本书**多少**钱？ || How **much** is this book?
+   e2: 我们带了**多少**食物去野餐。 || We brought **some** food for the picnic.
+   e3: 你这里有**多少**人？ || How **many** people are there here?
+   syn: [几多, 几许] | ant: []
+
+多少 [ko] ipa=- | meanings: 얼마[대명사] | 얼마나, 어느 정도[부사]
+   e1: 这个礼物值**多少**？ || 이 선물은 **얼마** 가치가 있습니까?
+   e2: 你觉得这个汉字难写**多少**？ || 이 한자는 **얼마나** 쓰기 어렵다고 생각합니까?
+   syn: [] | ant: []
+
+儿子 [en] ipa=- | meanings: son[noun]
+   e1: 我的**儿子**正在公园玩耍。 || My **son** is playing in the park.
+   e2: 她的**儿子**很聪明。 || Her **son** is very intelligent.
+   syn: [男孩, 男儿] | ant: []
+
+儿子 [ko] ipa=- | meanings: 아들[명사]
+   e1: 他是我的**儿子**。 || 그는 나의 **아들**입니다.
+   e2: 我有一个聪明的**儿子**。 || 나는 똑똑한 **아들**이 하나 있습니다.
+   syn: [男孩, 子嗣] | ant: []
+
+二 [en] ipa=- | meanings: two[expression] | second[adjective]
+   e1: 我买了**二**个苹果。 || I bought **two** apples.
+   e2: 她是班里的**二**号选手。 || She is the **second** contestant in the class.
+   syn: [] | ant: []
+
+二 [ko] ipa=- | meanings: 둘[명사]
+   e1: 他有**二**个苹果。 || 그는 **두** 개의 사과가 있습니다.
+   e2: 我家里有**二**只猫。 || 우리 집에는 **두** 마리 고양이가 있습니다.
+   syn: [] | ant: []
+
+饭店 [en] ipa=- | meanings: hotel[noun] | restaurant[noun]
+   e1: 我们在**饭店**住了两晚。 || We stayed at the **hotel** for two nights.
+   e2: 这家**饭店**的菜非常好吃。 || The food at this **restaurant** is very delicious.
+   syn: [酒店, 旅馆, 餐馆, 饭馆] | ant: []
+
+饭店 [ko] ipa=- | meanings: 호텔[명사] | 식당[명사]
+   e1: 我们晚上住在一家很好的**饭店**。 || 우리는 저녁에 좋은 **호텔**에서 묵었어요.
+   e2: 那个**饭店**的饭菜非常好吃。 || 그 **식당**의 음식이 매우 맛있어요.
+   syn: [旅馆, 宾馆, 饭馆] | ant: []
+
+飞机 [en] ipa=- | meanings: airplane[noun]
+   e1: 我乘坐**飞机**去旅行。 || I travel by **plane**.
+   e2: 天空中有许多**飞机**飞过。 || Many **planes** fly in the sky.
+   syn: [] | ant: []
+
+飞机 [ko] ipa=- | meanings: 비행기[명사]
+   e1: 我坐**飞机**去了北京。 || 나는 **비행기**를 타고 베이징에 갔다.
+   e2: **飞机**在天空中飞翔。 || **비행기**가 하늘을 날고 있다.
+   e3: 他预订了明天的**飞机**票。 || 그는 내일 **비행기** 표를 예약했다.
+   syn: [航班, 飞机票] | ant: []
+
+分钟 [en] ipa=- | meanings: minute[noun]
+   e1: 我等了你十**分钟**。 || I waited for you ten **minute**s.
+   e2: 会议将在三十**分钟**后开始。 || The meeting will start in thirty **minute**s.
+   syn: [] | ant: []
+
+分钟 [ko] ipa=- | meanings: 분[명사]
+   e1: 我每天跑步三十**分钟**。 || 나는 매일 삼십 **분** 동안 달리기를 합니다.
+   e2: 会议将在五**分钟**后开始。 || 회의는 오 **분** 후에 시작합니다.
+   e3: 请等我一**分钟**，我马上回来。 || 잠시만 기다려 주세요, 나는 곧 **분** 안에 돌아올게요.
+   syn: [时分, 刻钟] | ant: []
+
+高兴 [en] ipa=- | meanings: happy[adjective] | glad[adjective]
+   e1: 她收到礼物后非常**高兴**。 || She was very **happy** after receiving the gift.
+   e2: 我很**高兴**见到你。 || I am **glad** to see you.
+   e3: 孩子们在公园玩得很**高兴**。 || The children played very **happily** in the park.
+   syn: [开心, 快乐] | ant: []
+
+高兴 [ko] ipa=- | meanings: 기쁘다[형용사] | 즐겁다[형용사]
+   e1: 我很**高兴**收到你的礼物。 || 나는 네 선물을 받아서 매우 **기쁘다**.
+   e2: 孩子们在公园里玩得很**高兴**。 || 아이들은 공원에서 매우 **즐겁다**.
+   syn: [快乐, 愉快] | ant: []
+
+个 [en] ipa=- | meanings: general classifier[noun] | piece, unit[noun]
+   e1: 我有三**个**苹果，每个都很新鲜。 || I have three apples, each **one** is very fresh.
+   e2: 请给我一**个**面包。 || Please give me **one** bread.
+   syn: [] | ant: []
+
+个 [ko] ipa=- | meanings: 개[명사] | 하나[명사]
+   e1: 他买了**个**苹果。 || 그는 **하나**의 사과를 샀어요.
+   e2: 这**个**子很高。 || 이 **개**체는 키가 커요.
+   syn: [] | ant: []
+
+工作 [en] ipa=- | meanings: work[noun] | to work[verb]
+   e1: 他每天八小时的**工作**很努力。 || He **work**s hard at his eight-hour daily work.
+   e2: 她在医院**工作**，帮助病人。 || She **works** at the hospital, helping patients.
+   e3: 我们一起完成了那个重要的**工作**。 || We completed that important **work** together.
+   syn: [劳动, 职业, 职务] | ant: []
+
+工作 [ko] ipa=- | meanings: 일, 직무[명사] | 일하다, 근무하다[동사]
+   e1: 他正在寻找一份新的**工作**。 || 그는 새로운 **일**을 찾고 있습니다.
+   e2: 我每天都要**工作**八小时。 || 나는 매일 여덟 시간씩 **근무합니다**.
+   e3: 这份**工作**让我感到很满足。 || 이 **직무**는 나에게 큰 만족감을 줍니다.
+   syn: [劳动, 职位, 职业] | ant: []
+
+狗 [en] ipa=- | meanings: dog[noun]
+   e1: 这只**狗**很友好。 || This **dog** is very friendly.
+   e2: 我的**狗**喜欢跑步。 || My **dog** likes to run.
+   e3: 她养了一只黑色的**狗**。 || She has a black **dog**.
+   syn: [犬, 狗狗] | ant: []
+
+狗 [ko] ipa=- | meanings: 개[명사]
+   e1: 我家养了一只小**狗**。 || 우리 집에는 작은 **개**가 한 마리 있어요.
+   e2: 那只**狗**在公园里跑来跑去。 || 그 **개**는 공원에서 뛰어다니고 있어요.
+   syn: [犬] | ant: []
+
+汉语 [en] ipa=- | meanings: Chinese language[noun]
+   e1: 我学习了很多年**汉语**。 || I have studied **Chinese** for many years.
+   e2: 她的母语是**汉语**。 || Her native language is **Chinese**.
+   syn: [中文] | ant: []
+
+汉语 [ko] ipa=- | meanings: 중국어[명사]
+   e1: 他正在学习**汉语**。 || 그는 **중국어**를 배우고 있다.
+   e2: 我们用**汉语**交流很顺畅。 || 우리는 **중국어**로 소통이 아주 원활하다.
+   e3: **汉语**有很多方言。 || **중국어**에는 많은 방언이 있다.
+   syn: [中文, 普通话, 华语] | ant: []
+
+好 [en] ipa=- | meanings: good,nice,fine[adjective] | to like[verb]
+   e1: 这家餐厅的环境非常**好**。 || The environment of this restaurant is very **good**.
+   e2: 我**好**喜欢这本书的故事。 || I really **like** the story of this book.
+   syn: [好听, 良好, 美好] | ant: [坏]
+
+好 [ko] ipa=- | meanings: 좋다, 훌륭하다[형용사] | 좋음, 호의[명사]
+   e1: 这个苹果真的很**好**。 || 이 사과는 진짜로 매우 **좋다**.
+   e2: 她对我有很**好的**印象。 || 그녀는 나에게 매우 **좋은** 인상을 가지고 있다.
+   syn: [棒, 优秀, 佳] | ant: []
+
+号 [en] ipa=- | meanings: number[noun] | to cry, to call[verb]
+   e1: 我的电话**号**码是12345号。 || My phone **number** is 12345.
+   e2: 她在街上大声**号召**大家注意安全。 || She loudly **called** for everyone's attention on the street.
+   syn: [数字, 号码] | ant: []
+
+号 [ko] ipa=- | meanings: 번호[명사] | 신호, 부호[명사]
+   e1: 请告诉我你的电话**号**码。 || 당신의 **번호**를 알려주세요.
+   e2: 这是重要的救援信**号**。 || 이것은 중요한 구조 **신호**입니다.
+   syn: [号码, 编号, 数字] | ant: []
+
+喝 [en] ipa=- | meanings: to drink[verb] | to shout, to scold[verb]
+   e1: 他渴了，就开始**喝**水。 || He was thirsty, so he started to **drink** water.
+   e2: 妈妈生气地对他说：不要**喝**那么大声。 || Mom **shouted** at him angrily: Don't **shout** so loudly.
+   syn: [饮, 饮用, 吼, 骂] | ant: []
+
+喝 [ko] ipa=- | meanings: 마시다[동사] | 호통치다[동사]
+   e1: 他喜欢**喝**绿茶。 || 그는 녹차를 **마신다**.
+   e2: 妈妈**喝**了孩子一顿。 || 엄마가 아이를 한참 **호통쳤다**.
+   e3: 我们一起**喝**咖啡吧。 || 우리 같이 커피를 **마시자**.
+   syn: [饮] | ant: []
+
+和 [en] ipa=- | meanings: and[conjunction] | harmony[noun]
+   e1: 我**和**你一起去公园。 || You **and** I will go to the park together.
+   e2: 家庭成员之间应该有**和谐**。 || There should be **harmony** among family members.
+   syn: [与, 及, 同] | ant: []
+
+和 [ko] ipa=- | meanings: 화합, 평화[명사] | 더하다, 합하다[동사]
+   e1: 他们之间保持了**和谐**。 || 그들은 서로 **화합**을 유지했다.
+   e2: 请将两个数字**和**起来。 || 두 숫자를 **더해** 주세요.
+   syn: [合, 与, 同] | ant: []
+
+很 [en] ipa=- | meanings: very[adverb]
+   e1: 这花园的风景**很**美。 || The garden's scenery is **very** beautiful.
+   e2: 他今天**很**开心。 || He is **very** happy today.
+   e3: 这道菜**很**辣。 || This dish is **very** spicy.
+   syn: [非常, 十分, 极其] | ant: []
+
+很 [ko] ipa=- | meanings: 매우[부사]
+   e1: 她今天**很**开心。 || 그녀는 오늘 **매우** 행복하다.
+   e2: 这个菜**很**好吃。 || 이 음식은 **매우** 맛있다.
+   e3: 天气**很**冷，我们去喝点热茶吧。 || 날씨가 **매우** 춥다, 우리 뜨거운 차를 마시자.
+   syn: [] | ant: []
+
+后面 [en] ipa=- | meanings: back, rear[noun] | behind, at the back[adverb]
+   e1: 汽车的**后面**有一个大行李箱。 || There is a big trunk at the **back** of the car.
+   e2: 孩子们都在老师的**后面**坐着。 || The children are all sitting **behind** the teacher.
+   syn: [背后, 后方] | ant: [前面]
+
+后面 [ko] ipa=- | meanings: 뒤, 뒷부분[명사]
+   e1: 他站在我的**后面**。 || 그는 내 **뒤**에 서 있다.
+   e2: 房子的**后面**有一个花园。 || 집 **뒤**에 정원이 있다.
+   syn: [背后, 末尾] | ant: []
+
+回 [en] ipa=- | meanings: turn, return[verb] | time, occasion[noun]
+   e1: 我今天要**回**家。 || I will **return** home today.
+   e2: 这是我第一次来这个城市的**回**。 || This is my first **time** visiting this city.
+   syn: [返回, 转回] | ant: []
+
+回 [ko] ipa=- | meanings: 돌다, 돌아가다[동사] | 번(횟수)[명사]
+   e1: 风向开始**回**转。 || 바람 방향이 **돌기** 시작했다.
+   e2: 他今天来了三**回**。 || 그는 오늘 세 **번** 왔다.
+   syn: [转, 返回] | ant: []
+
+会 [en] ipa=- | meanings: can, be able to, know how to[verb] | meeting, gathering, conference[noun]
+   e1: 我**会**开车。 || I **can** drive a car.
+   e2: 我们明天有一个重要的**会**。 || We have an important **meeting** tomorrow.
+   syn: [会议, 集会] | ant: []
+
+会 [ko] ipa=- | meanings: 모임, 회의[명사] | 할 수 있다, 알다[동사]
+   e1: 我们下午有一个**会**。 || 우리는 오후에 **회**가 있습니다.
+   e2: 他**会**说三种语言。 || 그는 세 가지 언어를 **할 수 있습니다**.
+   syn: [聚会, 会议, 集会] | ant: []
+
+几 [en] ipa=- | meanings: how many, several, a few[pronoun] | small table[noun]
+   e1: 你有**几**本书？ || How **many** books do you have?
+   e2: 客厅里有一张小**几**。 || There is a **small table** in the living room.
+   syn: [多少, 几许] | ant: []
+
+几 [ko] ipa=- | meanings: 몇[대명사] | 탁자[명사]
+   e1: 你有**几**支笔？ || 너는 **몇** 자루 펜이 있니?
+   e2: 客厅里有一张新的**几**。 || 거실에 새 **탁자**가 하나 있다.
+   syn: [桌子] | ant: []
+
+家 [en] ipa=- | meanings: home[noun] | family[noun]
+   e1: 我很想念我的**家**。 || I really miss my **home**.
+   e2: **家**是我们最温暖的地方。 || **Home** is our warmest place.
+   e3: **家人**们聚在一起很幸福。 || The **family** feels happy when gathered together.
+   syn: [住所, 宅] | ant: []
+
+家 [ko] ipa=- | meanings: 집[명사] | 가족[명사]
+   e1: 我**家**很温馨。 || 우리 **집**은 매우 따뜻해요.
+   e2: 他有一个幸福的**家**。 || 그는 행복한 **가족**이 있어요.
+   syn: [家庭, 屋子] | ant: []
+
+叫 [en] ipa=- | meanings: call[verb] | shout[verb]
+   e1: 我**叫**妈妈帮忙。 || I **called** my mom for help.
+   e2: 他在远处大声**叫**我。 || He **shouted** to me from afar.
+   syn: [喊, 呼叫] | ant: []
+
+叫 [ko] ipa=- | meanings: 부르다[동사] | 소리치다[동사]
+   e1: 我**叫**他来帮忙。 || 나는 그를 **부른다** 도와주라고.
+   e2: 她大声**叫**出了他的名字。 || 그녀는 큰 소리로 그의 이름을 **소리쳤다**.
+   e3: 孩子们在操场上**叫**得很开心。 || 아이들이 운동장에서 즐겁게 **소리친다**.
+   syn: [喊, 呼叫, 呼喊] | ant: []
+
+今天 [en] ipa=- | meanings: today[noun]
+   e1: 我**今天**去了公园散步。 || I went for a walk in the park **today**.
+   e2: **今天**天气非常好。 || The weather is very nice **today**.
+   syn: [今日] | ant: []
+
+今天 [ko] ipa=- | meanings: 오늘[명사]
+   e1: 我计划**今天**去公园散步。 || 나는 **오늘** 공원에 산책 가기로 계획했어요.
+   e2: **今天**天气非常好。 || **오늘** 날씨가 매우 좋아요.
+   syn: [如今, 此日] | ant: []
+
+九 [en] ipa=- | meanings: nine[noun]
+   e1: 我有**九**本书。 || I have **nine** books.
+   e2: 这儿有**九**个人。 || There are **nine** people here.
+   syn: [] | ant: []
+
+九 [ko] ipa=- | meanings: 구[명사]
+   e1: 我有**九**本书。 || 나는 **아홉** 권의 책이 있어요.
+   e2: 他**九**点钟去学校。 || 그는 **아홉** 시에 학교에 가요.
+   syn: [] | ant: []
+
+开 [en] ipa=- | meanings: open[verb] | operate, drive[verb]
+   e1: 请**开**窗户让空气流通。 || Please **open** the window to let the air circulate.
+   e2: 他每天早上**开**车去上班。 || He **drive**s a car to work every morning.
+   e3: 会议将在九点钟正式**开**始。 || The meeting will officially **start** at nine o'clock.
+   syn: [开启, 启动] | ant: [关]
+
+开 [ko] ipa=- | meanings: 열다[동사] | 시작하다[동사]
+   e1: 请帮我**开**门。 || 문을 **열어** 주세요.
+   e2: 会议将在九点钟**开**始。 || 회의가 아홉 시에 **시작합니다**.
+   syn: [开启, 启动] | ant: []
+
+看 [en] ipa=- | meanings: look, see, watch[verb]
+   e1: 我喜欢**看**日落。 || I like to **look** at the sunset.
+   e2: 请**看**这幅画，很美。 || Please **look** at this painting, it is beautiful.
+   e3: 他在电视上**看**足球比赛。 || He is **watch**ing the soccer match on TV.
+   syn: [瞧, 望, 注视] | ant: []
+
+看 [ko] ipa=- | meanings: 보다[동사] | 돌보다[동사]
+   e1: 我喜欢**看**夕阳。 || 나는 노을을 **본다** 좋아한다.
+   e2: 她每天都要**看**小猫。 || 그녀는 매일 새끼 고양이를 **돌본다**.
+   e3: 请你帮我**看**一下这本书。 || 부디 이 책을 좀 **봐** 주세요.
+   syn: [观察, 瞧, 注视] | ant: []
+
+看见 [en] ipa=- | meanings: see[verb] | catch sight of[verb]
+   e1: 我**看见**那只漂亮的鸟了。 || I **saw** that beautiful bird.
+   e2: 他突然**看见**了远处的灯光。 || He suddenly **caught sight of** the distant lights.
+   syn: [看到, 望见] | ant: []
+
+看见 [ko] ipa=- | meanings: 보다, 봄[동사]
+   e1: 我在公园里**看见**了很多花。 || 나는 공원에서 많은 꽃을 **보았다**.
+   e2: 他刚才**看见**那只小鸟飞过。 || 그는 방금 그 작은 새가 나는 것을 **보았다**.
+   syn: [看到, 瞧见] | ant: []
+
+块 [en] ipa=- | meanings: unit of currency[noun] | piece[noun]
+   e1: 这件衣服要五十**块**钱。 || This piece of clothing costs fifty **kuai**.
+   e2: 我切了一**块**蛋糕给你。 || I cut a **piece** of cake for you.
+   syn: [元, 钱, 片] | ant: []
+
+块 [ko] ipa=- | meanings: 덩어리[명사] | 화폐단위[명사]
+   e1: 我看见一**块**石头在路边。 || 나는 길가에서 **덩어리** 돌을 보았어요.
+   e2: 这**块**钱是人民币。 || 이 **덩어리** 돈은 인민폐입니다.
+   syn: [块状, 块儿] | ant: []
+
+来 [en] ipa=- | meanings: come[verb] | future[noun]
+   e1: 她**来了**看我了。 || She **came** to see me.
+   e2: 我们期待美好的未来**来**临。 || We look forward to a beautiful **future** coming.
+   e3: 朋友们快点**来**这里。 || Friends, quickly **come** here.
+   syn: [到来, 过来] | ant: []
+
+来 [ko] ipa=- | meanings: 오다[동사] | 미래[명사]
+   e1: 朋友们**来了**，我们开始聚会吧。 || 친구들이 **왔어요**, 우리 파티를 시작합시다.
+   e2: 他期待着**未来**的美好生活。 || 그는 **미래**의 아름다운 삶을 기대하고 있어요.
+   syn: [到来, 光临] | ant: []
+
+老师 [en] ipa=- | meanings: teacher[noun]
+   e1: **老师**每天都耐心地教我们。 || The **teacher** patiently teaches us every day.
+   e2: 我的**老师**非常关心学生的成长。 || My **teacher** cares deeply about the students' growth.
+   e3: 学生们给**老师**送了感谢卡。 || The students gave the **teacher** a thank-you card.
+   syn: [教师, 教员, 导师] | ant: []
+
+老师 [ko] ipa=- | meanings: 선생님[명사] | 교사[명사]
+   e1: **老师**正在教我们新的知识。 || **선생님**이 우리에게 새로운 지식을 가르치고 계십니다.
+   e2: 这位**老师**很有耐心。 || 이 **교사**는 매우 인내심이 많습니다.
+   syn: [教师, 教员] | ant: []
+
+了 [en] ipa=- | meanings: completed[particle] | understand[verb]
+   e1: 我吃**了**饭。 || I have **finished** eating.
+   e2: 我明白**了**你的意思。 || I **understand** your meaning.
+   syn: [] | ant: []
+
+了 [ko] ipa=- | meanings: 완료조사[조사] | 끝나다, 완료하다[동사]
+   e1: 我吃**了**晚饭。 || 나는 저녁밥을 **먹었다**.
+   e2: 电影已经放映**了**。 || 영화가 이미 상영을 **마쳤다**.
+   e3: 他走**了**。 || 그가 **가버렸다**.
+   syn: [] | ant: []
+
+冷 [en] ipa=- | meanings: cold[adjective] | coldness[noun]
+   e1: 冬天的风很**冷**。 || The wind in winter is very **cold**.
+   e2: 他感受到了房间里的**冷**。 || He felt the **coldness** in the room.
+   syn: [凉] | ant: [热]
+
+冷 [ko] ipa=- | meanings: 차다[형용사] | 추위[명사]
+   e1: 冬天的早晨非常**冷**。 || 겨울 아침은 매우 **차다**.
+   e2: 感冒时身体会觉得**冷**。 || 감기에 걸리면 몸이 **추위**를 느낀다.
+   syn: [凉] | ant: [热]
+
+里 [en] ipa=- | meanings: inside, inner[noun] | Chinese mile (unit of length)[noun]
+   e1: 瓶子**里**装满了水。 || The bottle is full of water **inside**.
+   e2: 村庄距离城市三十**里**。 || The village is thirty **li** from the city.
+   syn: [] | ant: []
+
+里 [ko] ipa=- | meanings: 내부[명사] | 리 (중국의 거리 단위)[명사]
+   e1: 房子**里**有很多花。 || 집 **안에** 꽃이 많아요.
+   e2: 这里离学校还有一**里**远。 || 여기는 학교에서 아직 한 **리** 멀어요.
+   syn: [] | ant: []
+
+六 [en] ipa=- | meanings: six[expression]
+   e1: 我买了**六**个苹果。 || I bought **six** apples.
+   e2: 她家有**六**口人。 || Her family has **six** members.
+   e3: 今天是星期**六**。 || Today is **Saturday**.
+   syn: [] | ant: []
+
+六 [ko] ipa=- | meanings: 육[명사]
+   e1: 我有**六**个苹果。 || 나는 **육**개 사과가 있어요.
+   e2: 今天是六月的第**六**天。 || 오늘은 6월의 **육**번째 날이에요.
+   syn: [] | ant: []
+
+妈妈 [en] ipa=- | meanings: mother, mom[noun]
+   e1: 我和**妈妈**一起去公园散步。 || I went for a walk in the park with my **mom**.
+   e2: **妈妈**做的饭菜非常美味。 || **Mom**’s cooking is very delicious.
+   syn: [母亲, 妈妈咪] | ant: []
+
+妈妈 [ko] ipa=- | meanings: 엄마, 어머니[명사]
+   e1: 我每天都会给**妈妈**打电话。 || 나는 매일 **엄마**에게 전화해요.
+   e2: **妈妈**做了我最喜欢的菜。 || **엄마**가 내가 가장 좋아하는 음식을 만들었어요.
+   e3: 小孩依偎在**妈妈**怀里。 || 아이가 **엄마** 품에 기대요.
+   syn: [母亲, 母妈] | ant: []
+
+吗 [en] ipa=- | meanings: question particle[particle]
+   e1: 你喜欢这本书**吗**？ || Do you like this book**?**
+   e2: 他**吗**？ || **Is** he?
+   e3: 你们准备好了**吗**？ || Are you ready**?**
+   syn: [] | ant: []
+
+吗 [ko] ipa=- | meanings: 의문조사[조사]
+   e1: 你好**吗**？ || 너는 괜찮**니**?
+   e2: 他来了**吗**？ || 그가 왔**니**?
+   syn: [] | ant: []
+
+买 [en] ipa=- | meanings: buy[verb]
+   e1: 我今天去商店**买**水果。 || I **bought** fruit at the store today.
+   e2: 他打算**买**一辆新车。 || He plans to **buy** a new car.
+   e3: 我们应该**买**一些礼物给朋友。 || We should **buy** some gifts for our friends.
+   syn: [购买, 购入] | ant: []
+
+买 [ko] ipa=- | meanings: 사다[동사]
+   e1: 我想**买**一杯咖啡。 || 나는 커피 한 잔을 **사**고 싶다.
+   e2: 她昨天**买**了很多蔬菜。 || 그녀는 어제 많은 채소를 **샀다**.
+   e3: 孩子们喜欢去市场**买**玩具。 || 아이들은 시장에 가서 장난감을 **사는** 것을 좋아한다.
+   syn: [购买, 采购] | ant: [卖]
+
+猫 [en] ipa=- | meanings: cat[noun]
+   e1: 这只**猫**很可爱。 || This **cat** is very cute.
+   e2: 我家养了一只黑色的**猫**。 || My family has a black **cat**.
+   e3: **猫**在阳光下睡觉。 || The **cat** is sleeping under the sunlight.
+   syn: [猫咪, 小猫] | ant: []
+
+猫 [ko] ipa=- | meanings: 고양이[명사]
+   e1: 这只**猫**很可爱。 || 이 **고양이**는 매우 귀엽다.
+   e2: 我喜欢和**猫**玩耍。 || 나는 **고양이**와 노는 것을 좋아한다.
+   syn: [小猫, 咪咪] | ant: []
+
+没关系 [en] ipa=- | meanings: it does not matter, never mind[expression] | no relation, not connected[expression]
+   e1: 别担心，**没关系**。 || Don't worry, it **does not matter**.
+   e2: 他和这个问题**没关系**。 || He has **no relation** to this issue.
+   syn: [没事, 无所谓] | ant: []
+
+没关系 [ko] ipa=- | meanings: 괜찮다, 문제없다[표현] | 상관없다, 중요하지 않다[표현]
+   e1: 对不起，我迟到了。——**没关系**。 || 죄송해요, 늦었어요. —— **괜찮아요**.
+   e2: 这个错误**没关系**，我们可以改正。 || 이 오류는 **문제없어요**, 우리가 고칠 수 있어요.
+   e3: 你想不想去**没关系**，我理解你的选择。 || 네가 가고 싶든 **상관없어요**, 네 선택을 이해해요.
+   syn: [没事, 不要紧] | ant: []
+
+没 [en] ipa=- | meanings: not[adverb] | sink[verb]
+   e1: 我**没**去过那个地方。 || I have **not** been to that place.
+   e2: 船在河里**没**了。 || The boat **sank** in the river.
+   syn: [未, 不] | ant: []
+
+没 [ko] ipa=- | meanings: 아니다, 없다, 못하다[부사] | 물 속에 잠기다, 잠수하다[동사]
+   e1: 我**没**钱去旅行。 || 나는 여행할 돈이 **없다**.
+   e2: 他**没**参加昨天的会议。 || 그는 어제 회의에 참석하지 **않았다**.
+   e3: 鱼儿在水里**没**了。 || 물고기가 물속에 **잠겼다**.
+   syn: [] | ant: []
+
+米饭 [en] ipa=- | meanings: cooked rice[noun]
+   e1: 我每天吃**米饭**。 || I eat **rice** every day.
+   e2: 晚餐有鸡肉和**米饭**。 || Dinner has chicken and **rice**.
+   syn: [饭, 白饭] | ant: []
+
+米饭 [ko] ipa=- | meanings: 밥[명사]
+   e1: 我每天早餐吃**米饭**。 || 나는 매일 아침에 **밥**을 먹어요.
+   e2: 妈妈做的**米饭**很好吃。 || 엄마가 만든 **밥**이 아주 맛있어요.
+   e3: 请给我一碗白色的**米饭**。 || 저에게 흰 **밥** 한 그릇 주세요.
+   syn: [饭] | ant: []
+
+名字 [en] ipa=- | meanings: name[noun]
+   e1: 你的**名字**是什么意思？ || What does your **name** mean?
+   e2: 请告诉我你的**名字**。 || Please tell me your **name**.
+   e3: 她的**名字**在家里很有名。 || Her **name** is famous at home.
+   syn: [称呼, 姓名, 称号] | ant: []
+
+名字 [ko] ipa=- | meanings: 이름[명사]
+   e1: 请告诉我你的**名字**。 || 당신의 **이름** 알려 주세요.
+   e2: 这个礼物上写着她的**名字**。 || 이 선물에 그녀의 **이름** 적혀 있어요.
+   e3: 我喜欢这个**名字**的意思。 || 나는 이 **이름**의 뜻이 좋아요.
+   syn: [称呼, 姓名] | ant: []
+
+明天 [en] ipa=- | meanings: tomorrow[noun]
+   e1: 我们**明天**去公园吧。 || Let's go to the park **tomorrow**.
+   e2: 我**明天**有一个重要的会议。 || I have an important meeting **tomorrow**.
+   syn: [次日, 翌日] | ant: []
+
+明天 [ko] ipa=- | meanings: 내일[명사]
+   e1: 我们**明天**去公园散步。 || 우리 **내일** 공원에 산책하러 가요.
+   e2: **明天**的天气会很好。 || **내일** 날씨가 아주 좋을 거예요.
+   e3: 老师说**明天**要考试。 || 선생님은 **내일** 시험이 있다고 하셨어요.
+   syn: [次日, 来日] | ant: []
+
+哪 [en] ipa=- | meanings: which[pronoun] | where[pronoun]
+   e1: 你喜欢**哪**个颜色？ || **Which** color do you like?
+   e2: 我们要去**哪**儿玩？ || **Where** are we going to play?
+   e3: 请告诉我你要买的**哪**本书。 || Please tell me **which** book you want to buy.
+   syn: [] | ant: []
+
+哪 [ko] ipa=- | meanings: 어느[대명사] | 어디[대명사]
+   e1: 你想买**哪**本书？ || 너는 **어느** 책을 사고 싶니?
+   e2: 你要去**哪**里？ || 너는 **어디**에 가고 싶니?
+   e3: **哪**个人是你的朋友？ || **어느** 사람이 네 친구니?
+   syn: [] | ant: []
+
+哪儿 [en] ipa=- | meanings: where[pronoun]
+   e1: 你**哪儿**去玩？ || **Where** are you going to play?
+   e2: 我不知道他**在哪儿**。 || I don't know **where** he is.
+   e3: **哪儿**有好吃的饭店？ || **Where** is a good restaurant?
+   syn: [哪里] | ant: []
+
+哪儿 [ko] ipa=- | meanings: 어디[대명사]
+   e1: 你去**哪儿**了？ || 너는 **어디** 갔니?
+   e2: 这本书放在**哪儿**了？ || 이 책은 **어디**에 뒀니?
+   e3: 他们住在**哪儿**？ || 그들은 **어디**에 살아요?
+   syn: [哪里, 何处, 处所] | ant: []
+
+那 [en] ipa=- | meanings: that[pronoun] | then[adverb]
+   e1: 我喜欢**那**本书。 || I like **that** book.
+   e2: 你去，我**那**去。 || You go, I will go **then**.
+   e3: 他买了**那**件衣服。 || He bought **that** piece of clothing.
+   syn: [] | ant: []
+
+那 [ko] ipa=- | meanings: 저, 그[대명사] | 그때, 그[부사]
+   e1: **那**是我的朋友。 || **저**는 나의 친구입니다.
+   e2: **那**时候我们很快乐。 || **그**때 우리는 매우 행복했습니다.
+   syn: [那边, 那个] | ant: []
+
+呢 [en] ipa=- | meanings: modal particle used at the end of a question or to soften a statement[particle] | used after a noun to indicate emphasis or a slight pause[particle]
+   e1: 你喜欢吃苹果**呢**？ || Do you like to eat apples**?**
+   e2: 他**呢**，是我的好朋友。 || He **is** my good friend.
+   e3: 今天的天气怎么样**呢**？ || How **is** the weather today?
+   syn: [] | ant: []
+
+呢 [ko] ipa=- | meanings: 조사[조사] | 어떠하다[형용사]
+   e1: 你现在在做什么**呢**？ || 너는 지금 무엇을 하고 있**니**?
+   e2: 天气怎么样**呢**？ || 날씨가 어떻**니**?
+   syn: [] | ant: []
+
+能 [en] ipa=- | meanings: ability[noun] | can[verb]
+   e1: 他有很强的**能力**解决问题。 || He has strong **ability** to solve problems.
+   e2: 我**能**帮你完成这个任务。 || I **can** help you complete this task.
+   e3: 我们**能**在公园里散步。 || We **can** take a walk in the park.
+   syn: [能力, 才干, 本领] | ant: [不能]
+
+能 [ko] ipa=- | meanings: 능력[명사] | 할 수 있다[동사]
+   e1: 他有很强的**能力**。 || 그는 매우 강한 **능력**이 있습니다.
+   e2: 我**能**帮助你完成任务。 || 나는 당신의 임무를 완성하는데 **할 수 있다**.
+   e3: 我们**能**一起去旅行。 || 우리는 함께 여행을 **갈 수 있습니다**.
+   syn: [能力, 才华] | ant: []
+
+你 [en] ipa=- | meanings: you[pronoun]
+   e1: **你**喜欢这本书吗？ || Do **you** like this book?
+   e2: **你**的笑容很美。 || **You**r smile is beautiful.
+   e3: **你**今天去哪儿了？ || Where did **you** go today?
+   syn: [] | ant: []
+
+你 [ko] ipa=- | meanings: 너[대명사]
+   e1: 这是给**你**的礼物。 || 이것은 **너**를 위한 선물이야.
+   e2: **你**今天感觉怎么样？ || **너** 오늘 기분이 어때?
+   syn: [] | ant: []
+
+年 [en] ipa=- | meanings: year[noun]
+   e1: 今年是新的一**年**。 || This **year** is a new one.
+   e2: 去年我去了很多地方旅行**年**。 || Last **year** I traveled to many places.
+   e3: 我们每**年**都会庆祝春节。 || We celebrate the Spring Festival every **year**.
+   syn: [年份, 年度] | ant: []
+
+年 [ko] ipa=- | meanings: 년, 해[명사]
+   e1: 今年是新的一**年**。 || 올**해**는 새로운 해입니다.
+   e2: 他三十多**年**没回来过。 || 그는 30여 **년** 동안 돌아오지 않았습니다.
+   e3: 每**年**，我们都去旅行。 || 매**년** 우리는 여행을 갑니다.
+   syn: [岁, 年份, 岁数] | ant: []
+
+女儿 [en] ipa=- | meanings: daughter[noun]
+   e1: 我的**女儿**喜欢画画。 || My **daughter** likes to draw.
+   e2: **女儿**在学校努力学习。 || The **daughter** studies hard at school.
+   syn: [闺女, 姑娘, 千金] | ant: []
+
+女儿 [ko] ipa=- | meanings: 딸[명사]
+   e1: 我的**女儿**今天过生日。 || 내 **딸**이 오늘 생일이에요.
+   e2: 她的**女儿**正在学习钢琴。 || 그녀의 **딸**은 피아노를 배우고 있어요.
+   syn: [姑娘, 女孩] | ant: []
+
+朋友 [en] ipa=- | meanings: friend[noun]
+   e1: 我和**朋友**一起去公园散步。 || I went to the park for a walk with my **friend**.
+   e2: 她是我最好的**朋友**。 || She is my best **friend**.
+   e3: 每个人都需要一个真正的**朋友**。 || Everyone needs a true **friend**.
+   syn: [伙伴, 好友, 好友] | ant: []
+
+朋友 [ko] ipa=- | meanings: 친구[명사]
+   e1: 我和**朋友**一起去公园玩。 || 나는 **친구**와 함께 공원에 갔다.
+   e2: 他是我最好的**朋友**。 || 그는 내가 가장 좋은 **친구**다.
+   e3: **朋友**的帮助让我很感动。 || **친구**의 도움이 나를 감동시켰다.
+   syn: [好友, 伙伴, 密友] | ant: []
+
+漂亮 [en] ipa=- | meanings: beautiful[adjective] | pretty[adjective]
+   e1: 这幅画真**漂亮**。 || This painting is really **beautiful**.
+   e2: 她穿着一件**漂亮**的裙子。 || She wears a **pretty** dress.
+   syn: [美丽, 好看] | ant: []
+
+漂亮 [ko] ipa=- | meanings: 아름답다[형용사] | 예쁘다[형용사]
+   e1: 这幅画非常**漂亮**。 || 이 그림은 매우 **아름답다**.
+   e2: 她的衣服很**漂亮**。 || 그녀의 옷이 아주 **예쁘다**.
+   syn: [美丽, 好看] | ant: [丑陋]
+
+苹果 [en] ipa=- | meanings: apple[noun]
+   e1: 我每天吃一个**苹果**。 || I eat an **apple** every day.
+   e2: 这家店卖新鲜的**苹果**。 || This store sells fresh **apple**s.
+   e3: 小孩子喜欢绿色的**苹果**。 || Children like green **apple**s.
+   syn: [] | ant: []
+
+苹果 [ko] ipa=- | meanings: 사과[명사]
+   e1: 我每天早上吃一个**苹果**。 || 나는 매일 아침 **사과**를 먹습니다.
+   e2: 这个**苹果**又大又甜。 || 이 **사과**는 크고 달콤합니다.
+   syn: [苹果果] | ant: []
+
+七 [en] ipa=- | meanings: seven[noun]
+   e1: 我有**七**本书。 || I have **seven** books.
+   e2: 她的生日是**七**号，刚好今天是七月。 || Her birthday is on the **seventh**, and today is July.
+   e3: 这个房间有**七**把椅子。 || There are **seven** chairs in this room.
+   syn: [] | ant: []
+
+七 [ko] ipa=- | meanings: 일곱[명사]
+   e1: 我有**七**个苹果。 || 나는 **일곱** 개의 사과가 있습니다.
+   e2: 她今年**七**岁了。 || 그녀는 올해 **일곱** 살입니다.
+   syn: [] | ant: []
+
+前面 [en] ipa=- | meanings: front, ahead[noun] | in front, ahead[adverb]
+   e1: 我们在**前面**等你。 || We are waiting for you at the **front**.
+   e2: 汽车停在了**前面**。 || The car stopped **in front**.
+   syn: [前方, 前头] | ant: [后面]
+
+前面 [ko] ipa=- | meanings: 앞부분, 앞[명사]
+   e1: 他站在**前面**等你。 || 그가 너를 기다리며 **앞**에 서 있다.
+   e2: 请看**前面**的风景。 || 부디 **앞**쪽 경치를 보세요.
+   e3: 车子的**前面**有一点脏。 || 차의 **앞부분**이 약간 더럽다.
+   syn: [前方, 前头, 面前] | ant: [后面]
+
+钱 [en] ipa=- | meanings: money[noun] | coin[noun]
+   e1: 我需要一些**钱**买食物。 || I need some **money** to buy food.
+   e2: 他收集了各种不同的**钱**。 || He collected various different **coins**.
+   syn: [货币, 现金, 资金] | ant: []
+
+钱 [ko] ipa=- | meanings: 돈[명사] | 화폐[명사]
+   e1: 我今天带了很多**钱**。 || 나는 오늘 많은 **돈** 가지고 왔다.
+   e2: 这张纸是**钱**。 || 이 종이는 **화폐**이다.
+   syn: [现金, 货币] | ant: []
+
+请 [en] ipa=- | meanings: please, to invite, to request[verb] | please (polite particle)[expression]
+   e1: 我**请**你参加我的生日派对。 || I **invite** you to my birthday party.
+   e2: 您**请**坐，这里很舒服。 || **Please** sit; it is very comfortable here.
+   e3: 我**请**老师帮我解答问题。 || I **ask** the teacher to help me with the question.
+   syn: [拜托, 请求] | ant: []
+
+请 [ko] ipa=- | meanings: 부탁하다, 청하다[동사] | 초대하다, 요청하다[동사]
+   e1: 我想**请**你帮忙。 || 나는 너에게 **부탁**하고 싶다.
+   e2: 他**请**朋友来家里吃饭。 || 그는 친구를 집으로 **초청했다**.
+   syn: [请求, 恳请, 邀约] | ant: []
+
+去 [en] ipa=- | meanings: go[verb] | depart[verb]
+   e1: 我们一起**去**公园吧。 || Let's **go** to the park together.
+   e2: 火车即将**去**北京。 || The train is about to **depart** for Beijing.
+   syn: [走, 行] | ant: []
+
+去 [ko] ipa=- | meanings: 가다[동사] | 없애다[동사]
+   e1: 我现在要**去**商店。 || 나는 지금 **갈** 거예요 상점에.
+   e2: 请帮我把这些垃圾**去**掉。 || 이 쓰레기들을 **없애** 주세요.
+   syn: [离开, 走] | ant: []
+
+热 [en] ipa=- | meanings: heat, hot[adjective] | fever[noun]
+   e1: 夏天的天气非常**热**。 || The weather is very **hot** in summer.
+   e2: 他因为发**热**而休息了几天。 || He rested for a few days because of a **fever**.
+   syn: [热量, 炎热] | ant: [冷]
+
+热 [ko] ipa=- | meanings: 열기, 더움[명사] | 덥다, 뜨겁다[형용사]
+   e1: 夏天的**热**使人感到疲倦。 || 여름의 **열기**는 사람을 피곤하게 만든다.
+   e2: 这杯茶太**热**，不能马上喝。 || 이 차는 너무 **뜨거워서** 바로 마실 수 없다.
+   syn: [暑, 炎热] | ant: [冷]
+
+人 [en] ipa=- | meanings: person[noun] | people[noun]
+   e1: 她是一个善良的**人**。 || She is a kind **person**.
+   e2: 这座城市有很多**人**。 || There are many **people** in this city.
+   syn: [人类, 人们] | ant: []
+
+人 [ko] ipa=- | meanings: 사람[명사] | 인간[명사]
+   e1: 公园里有很多**人**在散步。 || 공원에 많은 **사람**들이 산책하고 있다.
+   e2: **人**类是智慧的生物。 || **인간**은 지혜로운 생물이다.
+   syn: [人物, 人类] | ant: []
+
+认识 [en] ipa=- | meanings: to know, to recognize[verb] | knowledge, understanding[noun]
+   e1: 我**认识**很多新朋友。 || I **know** many new friends.
+   e2: 他的**认识**很深刻。 || His **understanding** is profound.
+   e3: 你**认识**这只动物吗？ || Do you **recognize** this animal?
+   syn: [了解, 识别] | ant: []
+
+认识 [ko] ipa=- | meanings: 알다, 인식하다[동사] | 지인, 아는 사람[명사]
+   e1: 我不**认识**那个人。 || 나는 그 사람을 **모른다**.
+   e2: 她是我的**认识**。 || 그녀는 나의 **아는 사람**이다.
+   syn: [了解, 知道, 懂得] | ant: []
+
+三 [en] ipa=- | meanings: three[noun]
+   e1: 桌子上有**三**个苹果。 || There are **three** apples on the table.
+   e2: **三**只小鸟在树上唱歌。 || **Three** little birds are singing in the tree.
+   syn: [叁, ③] | ant: []
+
+三 [ko] ipa=- | meanings: 삼[명사]
+   e1: 我买了**三**个苹果。 || 나는 **세** 개의 사과를 샀다.
+   e2: 他有**三**个兄弟姐妹。 || 그에게는 **세** 명의 형제자매가 있다.
+   syn: [] | ant: []
+
+商店 [en] ipa=- | meanings: shop, store[noun]
+   e1: 这家**商店**卖很多新鲜水果。 || This **shop** sells many fresh fruits.
+   e2: 我每天都会去附近的**商店**买面包。 || I go to the nearby **store** every day to buy bread.
+   syn: [店铺, 商号, 店面] | ant: []
+
+商店 [ko] ipa=- | meanings: 가게[명사]
+   e1: 我昨天在**商店**买了水果。 || 나는 어제 **상점**에서 과일을 샀다.
+   e2: 这家**商店**的服务很好。 || 이 **상점** 서비스가 매우 좋다.
+   syn: [商铺, 店铺, 铺子] | ant: []
+
+上 [en] ipa=- | meanings: above, on, over, upon, earlier, first, previous[adverb] | to go up, to attend, to mount[verb]
+   e1: 书**上**有很多注释。 || There are many notes **on** the book.
+   e2: 他**上**了山去看日出。 || He went **up** the mountain to see the sunrise.
+   e3: 天**上**的云彩很美丽。 || The clouds **above** are beautiful.
+   syn: [上面, 顶部] | ant: [下]
+
+上 [ko] ipa=- | meanings: 위[명사] | 오르다, 올라가다[동사]
+   e1: 风筝飞到**上**了。 || 연이 **위**로 날아갔어요.
+   e2: 学生需要**上**楼去教室。 || 학생들이 교실로 **올라가야** 해요.
+   syn: [顶部, 高处] | ant: [下]
+
+上午 [en] ipa=- | meanings: morning[noun]
+   e1: 我们**上午**去公园散步。 || We go for a walk in the **morning**.
+   e2: **上午**的阳光特别温暖。 || The **morning** sunlight is especially warm.
+   syn: [早上, 晨间] | ant: [下午]
+
+上午 [ko] ipa=- | meanings: 오전[명사]
+   e1: 我们在**上午**八点开会。 || 우리는 **오전** 8시에 회의를 합니다.
+   e2: **上午**的阳光特别温暖。 || **오전** 햇살은 특히 따뜻합니다.
+   e3: 他每天**上午**去公园散步。 || 그는 매일 **오전** 공원에서 산책을 합니다.
+   syn: [] | ant: []
+
+少 [en] ipa=- | meanings: few[adjective] | to lack[verb]
+   e1: 每天喝**少**量的水也健康。 || Drinking a **small** amount of water every day is also healthy.
+   e2: 这里的食物**少**了盐。 || The food here **lacks** salt.
+   syn: [少量, 不足] | ant: [多]
+
+少 [ko] ipa=- | meanings: 적다, 부족하다[형용사] | 젊다, 어린[형용사]
+   e1: 这里的雨水很**少**，花儿渴望着雨。 || 여기에는 비가 매우 **적어서** 꽃이 비를 갈망합니다.
+   e2: 他是班里**少年**最有才华的学生。 || 그는 반에서 가장 **어린** 소년이자 재능 있는 학생입니다.
+   syn: [稀少, 不足] | ant: [多]
+
+谁 [en] ipa=- | meanings: who[pronoun]
+   e1: 这是**谁**的书？ || **Who**se book is this?
+   e2: **谁**在门口？ || **Who** is at the door?
+   e3: 告诉我，**谁**喜欢这朵花。 || Tell me, **who** likes this flower.
+   syn: [哪位, 何人] | ant: []
+
+谁 [ko] ipa=- | meanings: 누구[대명사]
+   e1: 这个包裹是**谁**的？ || 이 소포는 **누구**의 것입니까?
+   e2: 你知道**谁**来了？ || 너는 **누가** 왔는지 아니?
+   e3: **谁**能帮助我？ || **누가** 나를 도와줄 수 있나요?
+   syn: [] | ant: []
+
+什么 [en] ipa=- | meanings: what[pronoun]
+   e1: 你想吃**什么**？ || **What** do you want to eat?
+   e2: 她在问**什么**？ || **What** is she asking?
+   e3: 这**是什么**？ || **What** is this?
+   syn: [什么东西, 何事, 啥] | ant: []
+
+什么 [ko] ipa=- | meanings: 무엇[대명사] | 어떤 것[대명사]
+   e1: 你想吃**什么**？ || 너는 **무엇**을 먹고 싶니?
+   e2: 这**什么**颜色？ || 이것은 **어떤** 색깔인가요?
+   e3: 你说的**什么**没听清楚。 || 네가 말한 것을 제대로 못 들었어.
+   syn: [啥, 何, 哪] | ant: []
+
+十 [en] ipa=- | meanings: ten[noun]
+   e1: 我有**十**本书。 || I have **ten** books.
+   e2: 他走了**十**公里。 || He walked **ten** kilometers.
+   syn: [] | ant: []
+
+十 [ko] ipa=- | meanings: 십[명사]
+   e1: 我有**十**个苹果。 || 나는 **십** 개의 사과가 있습니다.
+   e2: 他跑了**十**公里。 || 그는 **십** 킬로미터를 달렸습니다.
+   syn: [] | ant: []
+
+时候 [en] ipa=- | meanings: time,moment[noun]
+   e1: 我记得那个**时候**的阳光很温暖。 || I remember the sunshine at that **time** was very warm.
+   e2: 考试**时候**我很紧张。 || I was very nervous during the **exam**.
+   e3: 请告诉我你方便的**时候**。 || Please tell me a **time** that is convenient for you.
+   syn: [时间, 期间, 时刻] | ant: []
+
+时候 [ko] ipa=- | meanings: 때, 시간[명사]
+   e1: 我很喜欢那个**时候**的风景。 || 나는 그 **때**를 정말 좋아해.
+   e2: 你什么**时候**有空，我们一起去玩。 || 너는 언제 **시간**이 있니, 우리 함께 놀러 가자.
+   syn: [时间, 期间, 时刻] | ant: []
+
+是 [en] ipa=- | meanings: be, is, am, are[verb] | yes, correct[interjection]
+   e1: 这**是**我的朋友。 || This **is** my friend.
+   e2: 你**是**对的。 || You **are** correct.
+   e3: 他问我是否参加，我说**是**。 || He asked if I would join, I said **yes**.
+   syn: [] | ant: []
+
+是 [ko] ipa=- | meanings: 이다[동사] | 옳다[형용사]
+   e1: 她**是**老师。 || 그녀는 **이다** 선생님이다.
+   e2: 这个答案**是**正确的。 || 이 답이 **옳다**.
+   syn: [] | ant: []
+
+书 [en] ipa=- | meanings: book[noun] | to write[verb]
+   e1: 我喜欢读**书**。 || I like to read **books**.
+   e2: 她每天晚上都会写**书稿**。 || She **writes** book drafts every night.
+   e3: 这本**书**很有趣。 || This **book** is very interesting.
+   syn: [书籍, 图书, 册子] | ant: []
+
+书 [ko] ipa=- | meanings: 책[명사]
+   e1: 我喜欢读各种各样的**书**。 || 나는 다양한 종류의 **책**을 읽는 것을 좋아합니다。
+   e2: 这本**书**很有趣，值得一读。 || 이 **책**은 매우 흥미로워서 읽을 가치가 있습니다。
+   e3: 她每天晚上都会看**书**学习。 || 그녀는 매일 밤 **책**을 보며 공부합니다。
+   syn: [册子, 文章] | ant: []
+
+水 [en] ipa=- | meanings: water[noun] | fluid, liquid[noun]
+   e1: 他喝了一杯**水**。 || He drank a glass of **water**.
+   e2: 空气中有很多**水**分子。 || There are many **water** molecules in the air.
+   syn: [液体, 水分] | ant: []
+
+水 [ko] ipa=- | meanings: 물[명사]
+   e1: 请给我一杯**水**。 || 나에게 한 잔의 **물** 주세요.
+   e2: 冬天喝热**水**很舒服。 || 겨울에 뜨거운 **물**을 마시면 매우 편안해요.
+   e3: 河里有很多清澈的**水**。 || 강에는 많은 맑은 **물**이 있어요.
+   syn: [水分, 液体] | ant: []
+
+水果 [en] ipa=- | meanings: fruit[noun]
+   e1: 我每天都吃**水果**保持健康。 || I eat **fruit** every day to stay healthy.
+   e2: 超市里的**水果**非常新鲜。 || The **fruit** in the supermarket is very fresh.
+   syn: [果子, 鲜果] | ant: []
+
+水果 [ko] ipa=- | meanings: 과일[명사]
+   e1: 我每天吃新鲜的**水果**。 || 나는 매일 신선한 **과일**을 먹습니다.
+   e2: **水果**对身体非常有益。 || **과일**은 몸에 매우 유익합니다.
+   e3: 夏天喜欢吃冷的**水果**。 || 여름에는 차가운 **과일**을 먹는 것을 좋아합니다.
+   syn: [水果类, 果品] | ant: []
+
+睡觉 [en] ipa=- | meanings: to sleep[verb]
+   e1: 孩子们晚上九点**睡觉**。 || The children **sleep** at nine in the evening.
+   e2: 他已经准备好去**睡觉**了。 || He is ready to **sleep** now.
+   syn: [休息, 睡眠] | ant: []
+
+睡觉 [ko] ipa=- | meanings: 잠자다[동사] | 자다[동사]
+   e1: 孩子晚上九点准时**睡觉**。 || 아이는 밤 9시에 정각으로 **잠자**다.
+   e2: 我晚上十点喜欢**睡觉**。 || 나는 밤 10시에 **자는** 것을 좋아한다.
+   syn: [睡眠, 休息] | ant: []
+
+说话 [en] ipa=- | meanings: to speak, to talk[verb] | speech, words[noun]
+   e1: 他喜欢跟朋友**说话**。 || He likes to **talk** with friends.
+   e2: 她的**说话**很有礼貌。 || Her **speech** is very polite.
+   syn: [谈话, 交谈, 讲话] | ant: []
+
+说话 [ko] ipa=- | meanings: 말하다, 이야기하다[동사] | 말, 이야기[명사]
+   e1: 她喜欢在聚会上**说话**。 || 그녀는 모임에서 **말하는** 것을 좋아한다.
+   e2: 请注意你的**说话**方式。 || 당신의 **말**하는 방식을 주의하세요.
+   e3: 我们正在**说话**关于未来的计划。 || 우리는 미래 계획에 대해 **말하고** 있다.
+   syn: [讲话, 谈话, 谈论] | ant: []
+
+四 [en] ipa=- | meanings: four[noun] | fourth[adjective]
+   e1: 我买了**四**个苹果。 || I bought **four** apples.
+   e2: 他赢得了**第四**名。 || He won the **fourth** place.
+   syn: [] | ant: []
+
+四 [ko] ipa=- | meanings: 넷[명사]
+   e1: 我有**四**本书。 || 나는 **네** 권의 책이 있어요.
+   e2: 房间里有**四**张椅子。 || 방에 **네** 개의 의자가 있어요.
+   syn: [] | ant: []
+
+岁 [en] ipa=- | meanings: age, year (of life)[noun]
+   e1: 他今年十**岁**了。 || He is ten **years** old this year.
+   e2: 孩子的**岁**数对老师很重要。 || The child's **age** is important to the teacher.
+   e3: 她的**岁**数比我大三岁。 || Her **age** is three years older than mine.
+   syn: [年龄, 年纪] | ant: []
+
+岁 [ko] ipa=- | meanings: 나이, 연령[명사]
+   e1: 他今年二十**岁**了。 || 그는 올해 스무 **살**입니다.
+   e2: 孩子们的**岁**数不同。 || 아이들의 **나이**가 다릅니다.
+   e3: 我在十五**岁**开始学钢琴。 || 나는 열다섯 **살**에 피아노를 배우기 시작했습니다.
+   syn: [年龄, 年龄段] | ant: []
+
+他 [en] ipa=- | meanings: he[pronoun] | him[pronoun]
+   e1: **他**是我的好朋友。 || **He** is my good friend.
+   e2: 请把书还给**他**。 || Please return the book to **him**.
+   syn: [] | ant: []
+
+他 [ko] ipa=- | meanings: 그[대명사]
+   e1: **他**是我的好朋友。 || **그**는 나의 좋은 친구예요.
+   e2: 今天**他**去了图书馆。 || 오늘 **그**가 도서관에 갔어요.
+   e3: **他**喜欢画画和音乐。 || **그**는 그림 그리기와 음악을 좋아해요.
+   syn: [他人, 本人] | ant: []
+
+她 [en] ipa=- | meanings: she, her[pronoun]
+   e1: **她**喜欢画画。 || **She** likes to paint.
+   e2: 昨天我见到了**她**。 || Yesterday I saw **her**.
+   syn: [她们] | ant: []
+
+她 [ko] ipa=- | meanings: 그녀[대명사]
+   e1: **她**是我的好朋友。 || **그녀**는 내 좋은 친구입니다.
+   e2: 我和**她**一起去公园。 || 나는 **그녀**와 함께 공원에 갔습니다.
+   e3: **她**喜欢画画和读书。 || **그녀**는 그림 그리기와 독서를 좋아합니다.
+   syn: [她们] | ant: []
+
+太 [en] ipa=- | meanings: too, excessively[adverb] | great, very[adjective]
+   e1: 今天的天气**太**热了。 || Today's weather is **too** hot.
+   e2: 这个蛋糕**太**好吃了！ || This cake is **very** delicious!
+   syn: [过于, 极其] | ant: []
+
+太 [ko] ipa=- | meanings: 너무[부사] | 크다[형용사]
+   e1: 这道菜**太**咸了。 || 이 요리는 **너무** 짜요.
+   e2: 这座房子**太**大了。 || 이 집은 **너무** 커요.
+   e3: 天气**太**热了，我们去游泳吧。 || 날씨가 **너무** 더워서, 수영하러 가요.
+   syn: [非常, 过于, 过分] | ant: []
+
+天气 [en] ipa=- | meanings: weather[noun]
+   e1: 今天的**天气**非常好，适合出去散步。 || Today's **weather** is very nice, perfect for a walk.
+   e2: 这里的**天气**冬天很冷，夏天很热。 || The **weather** here is very cold in winter and hot in summer.
+   e3: 我们需要关注明天的**天气**预报。 || We need to pay attention to tomorrow's **weather** forecast.
+   syn: [气候] | ant: []
+
+天气 [ko] ipa=- | meanings: 날씨[명사]
+   e1: 今天的**天气**非常晴朗。 || 오늘의 **날씨**는 매우 맑아요.
+   e2: **天气**变冷了，请多穿衣服。 || **날씨**가 추워졌으니 옷을 더 입으세요.
+   e3: 这个城市的**天气**很温暖。 || 이 도시의 **날씨**는 매우 따뜻해요.
+   syn: [气候] | ant: []
+
+听 [en] ipa=- | meanings: listen[verb] | hear[verb]
+   e1: 请你**听**我说。 || Please **listen** to me.
+   e2: 我能**听**见鸟儿唱歌。 || I can **hear** the birds singing.
+   e3: 他认真地**听**了音乐。 || He carefully **listen**ed to the music.
+   syn: [聆听, 倾听] | ant: []
+
+听 [ko] ipa=- | meanings: 듣다[동사] | 들어주다[동사]
+   e1: 请你认真**听**我说的话。 || 부디 내 말을 **들어주세요**.
+   e2: 他总是愿意**听**别人的意见。 || 그는 항상 다른 사람의 의견을 기꺼이 **들어준다**.
+   syn: [聆听, 倾听] | ant: []
+
+同学 [en] ipa=- | meanings: classmate[noun] | to study in the same school[verb]
+   e1: 我和他是很好的**同学**。 || He and I are good **classmates**.
+   e2: 我们都在这所大学**同学**习。 || We all **study** in the same school in this university.
+   syn: [同窗, 校友] | ant: []
+
+同学 [ko] ipa=- | meanings: 동급생[명사] | 학우[명사]
+   e1: 我和**同学**一起学习。 || 나는 **동급생**과 함께 공부합니다.
+   e2: 他是我的好**同学**。 || 그는 나의 좋은 **학우**입니다.
+   syn: [校友, 学友] | ant: []
+
+喂 [en] ipa=- | meanings: hello, hey[interjection] | to feed[verb]
+   e1: **喂**，我给你讲个故事。 || **Hello**, I'll tell you a story.
+   e2: 她每天都**喂**猫吃饭。 || She **feeds** the cat every day.
+   syn: [哈喽, 你好] | ant: []
+
+喂 [ko] ipa=- | meanings: 여보세요, (전화할 때 부르는 소리)[감탄사] | 먹이다[동사]
+   e1: 你**喂**？我在这。 || **여보세요**? 나 여기 있어.
+   e2: 妈妈正在给宝宝**喂**奶。 || 엄마가 아기에게 우유를 **먹이고** 있다.
+   syn: [哈喽, 喂喂] | ant: []
+
+我 [en] ipa=- | meanings: I, me[pronoun]
+   e1: **我**喜欢读书。 || **I** like to read books.
+   e2: **我**今天去公园散步。 || **I** went to the park for a walk today.
+   e3: 这是**我**的朋友。 || Th**i**s is my friend.
+   syn: [本人, 自己] | ant: []
+
+我 [ko] ipa=- | meanings: 나[대명사]
+   e1: **我**喜欢喝茶。 || **나**는 차 마시는 것을 좋아해요.
+   e2: **我**今天很开心。 || **나**는 오늘 매우 행복해요.
+   e3: 这本书是**我**的。 || 이 책은 **나**의 것이에요.
+   syn: [] | ant: []
+
+我们 [en] ipa=- | meanings: we[pronoun] | us[pronoun]
+   e1: **我们**一起去公园吧。 || **We** should go to the park together.
+   e2: 老师给了**我们**一些建议。 || The teacher gave **us** some advice.
+   syn: [咱们] | ant: []
+
+我们 [ko] ipa=- | meanings: 우리[대명사]
+   e1: **我们**一起去公园玩。 || **우리** 같이 공원에 가서 놀자.
+   e2: **我们**的老师很严格。 || **우리** 선생님은 매우 엄격하시다.
+   syn: [咱们, 咱] | ant: []
+
+五 [en] ipa=- | meanings: five[noun]
+   e1: 他有**五**个苹果。 || He has **five** apples.
+   e2: 这辆车速能达到**五十**公里每小时。 || This car can reach **fifty** kilometers per hour.
+   e3: 她在考试中得了满分，得了**五十**分。 || She got full score in the exam, a total of **fifty** points.
+   syn: [] | ant: []
+
+五 [ko] ipa=- | meanings: 오[명사]
+   e1: 我有**五**个苹果。 || 나는 **오** 개의 사과를 가지고 있어요.
+   e2: 她今年**五**岁了。 || 그녀는 올해 **다섯** 살이에요.
+   e3: 这个班有**五**个学生。 || 이 반에는 **오** 명의 학생이 있어요.
+   syn: [] | ant: []
+
+喜欢 [en] ipa=- | meanings: like,love[verb]
+   e1: 我很**喜欢**这本书。 || I really **like** this book.
+   e2: 她**喜欢**每天晨跑。 || She **like**s running every morning.
+   syn: [喜爱, 热爱, 爱] | ant: []
+
+喜欢 [ko] ipa=- | meanings: 좋아하다[동사]
+   e1: 我非常**喜欢**这本书。 || 나는 이 책을 매우 **좋아한다**.
+   e2: 她不**喜欢**吃辣椒。 || 그녀는 매운 고추 먹는 것을 **좋아하지** 않는다.
+   e3: 他们都**喜欢**春天的花。 || 그들은 모두 봄꽃을 **좋아한다**.
+   syn: [喜爱, 爱好] | ant: []
+
+下 [en] ipa=- | meanings: below, under, down[preposition] | to go down, to descend[verb]
+   e1: 书桌的**下**有一个盒子。 || There is a box **under** the desk.
+   e2: 太阳慢慢地**下**了山。 || The sun slowly **went down** the mountain.
+   syn: [下面, 底下] | ant: []
+
+下 [ko] ipa=- | meanings: 아래[명사] | 내리다[동사]
+   e1: 书本放在桌子**下**。 || 책이 탁자 **아래**에 놓여 있다.
+   e2: 雨开始**下**了。 || 비가 **내리기** 시작했다.
+   syn: [底下, 下面] | ant: [上]
+
+下午 [en] ipa=- | meanings: afternoon[noun]
+   e1: 我们**下午**去公园散步。 || We will go for a walk in the **afternoon**.
+   e2: **下午**的阳光非常温暖。 || The **afternoon** sunlight is very warm.
+   syn: [午后] | ant: []
+
+下午 [ko] ipa=- | meanings: 오후[명사]
+   e1: 我们**下午**三点见面吧。 || 우리 **오후** 세 시에 만나요.
+   e2: **下午**的阳光很温暖。 || **오후** 햇살이 매우 따뜻해요.
+   e3: 他喜欢在**下午**散步。 || 그는 **오후**에 산책하는 것을 좋아해요.
+   syn: [午后, 傍晚前] | ant: []
+
+下雨 [en] ipa=- | meanings: to rain[verb]
+   e1: 今天下午会**下雨**，记得带伞。 || It will **rain** this afternoon, remember to bring an umbrella.
+   e2: 开始**下雨**了，孩子们跑进屋里。 || It started **to rain**, and the children ran indoors.
+   syn: [降雨, 下大雨] | ant: []
+
+下雨 [ko] ipa=- | meanings: 비가 오다[동사]
+   e1: 今天下午开始**下雨**了。 || 오늘 오후부터 **비가 오기** 시작했다.
+   e2: 我们要带伞，因为外面正**下雨**。 || 우리는 우산을 가져가야 한다, 밖에 **비가 오고** 있기 때문이다.
+   syn: [降雨, 淋雨] | ant: []
+
+先生 [en] ipa=- | meanings: Mister, husband, teacher[noun]
+   e1: 这位**先生**是我的丈夫。 || This **mister** is my husband.
+   e2: 那位**先生**很有耐心地教我们数学。 || That **teacher** patiently taught us math.
+   e3: 请问，这位**先生**需要帮助吗？ || Excuse me, does this **mister** need help?
+   syn: [丈夫, 老师] | ant: []
+
+先生 [ko] ipa=- | meanings: 선생님[명사] | 남자[명사]
+   e1: 我的**先生**教我中文。 || 나의 **선생님**께서 나에게 중국어를 가르치십니다.
+   e2: 那位**先生**很有礼貌。 || 저 **선생님**은 매우 예의 바릅니다.
+   syn: [教师, 丈夫] | ant: []
+
+现在 [en] ipa=- | meanings: now[adverb] | present[noun]
+   e1: 我**现在**正在学习中文。 || I am studying Chinese **now**.
+   e2: **现在**是最好的开始时间。 || **Now** is the best time to start.
+   e3: 我们应关注**现在**，而不是过去。 || We should focus on the **present**, not the past.
+   syn: [此刻, 当下] | ant: []
+
+现在 [ko] ipa=- | meanings: 지금[부사] | 현대[명사]
+   e1: 我**现在**很忙，不能出去。 || 나는 **지금** 매우 바빠서 나갈 수 없다.
+   e2: 她喜欢研究**现在**的艺术风格。 || 그녀는 **현대** 예술 스타일을 연구하는 것을 좋아한다.
+   syn: [如今, 目前] | ant: []
+
+想 [en] ipa=- | meanings: to think[verb] | to want[verb]
+   e1: 我**想**这是个好主意。 || I **think** this is a good idea.
+   e2: 他**想**吃水果。 || He **wants** to eat fruit.
+   syn: [认为, 觉得, 想要] | ant: []
+
+想 [ko] ipa=- | meanings: 생각하다, 바라다[동사] | 그리워하다[동사]
+   e1: 我**想**明天会下雨。 || 나는 내일 비가 올 **생각**이에요.
+   e2: 我很**想**你。 || 나는 당신이 매우 **그리워요**.
+   e3: 他每天**想**学习新的技能。 || 그는 매일 새로운 기술을 배우고자 **생각해요**.
+   syn: [思考, 希望, 盼望, 怀念] | ant: []
+
+小 [en] ipa=- | meanings: small,little[adjective] | young,minor[adjective]
+   e1: 这是一只**小**猫。 || This is a **small** cat.
+   e2: 他还是个**小**孩子。 || He is still a **young** child.
+   syn: [小型, 微小, 微小的] | ant: [大]
+
+小 [ko] ipa=- | meanings: 작은[형용사] | 어린이[명사]
+   e1: 她喜欢穿**小**号的衣服。 || 그녀는 **작은** 사이즈 옷을 좋아합니다.
+   e2: 公园里有很多**小**孩在玩耍。 || 공원에 많은 **어린이**가 놀고 있습니다.
+   syn: [小的, 微小, 细小] | ant: [大]
+
+小姐 [en] ipa=- | meanings: young woman, miss[noun] | prostitute[noun]
+   e1: 那位**小姐**在图书馆学习。 || That **miss** is studying in the library.
+   e2: 他在街角遇到了一位**小姐**。 || He met a young **woman** at the street corner.
+   e3: 警方调查了当地的**小姐**情况。 || The police investigated the local **prostitute** situation.
+   syn: [姑娘, 小姐姐, 美女] | ant: []
+
+小姐 [ko] ipa=- | meanings: 아가씨[명사] | 매춘부[명사]
+   e1: 这位**小姐**很有礼貌。 || 이 **아가씨**는 매우 예의 바릅니다.
+   e2: 那个**小姐**在街角等客人。 || 저 **매춘부**는 길모퉁이에서 손님을 기다립니다.
+   syn: [女士, 姑娘] | ant: []
+
+些 [en] ipa=- | meanings: some, few, several[noun] | a little[adverb]
+   e1: 我买了**些**苹果。 || I bought **some** apples.
+   e2: 请给我**些**水。 || Please give me **some** water.
+   e3: 他**有些**紧张，但很快平静下来。 || He was **a little** nervous, but soon calmed down.
+   syn: [一些, 若干, 几许] | ant: []
+
+些 [ko] ipa=- | meanings: 약간, 조금[명사]
+   e1: 请给我**些**水。 || **조금** 물을 주세요.
+   e2: 我买了**些**水果。 || 나는 **몇** 과일을 샀다.
+   syn: [一点儿, 少量] | ant: []
+
+写 [en] ipa=- | meanings: write[verb] | describe[verb]
+   e1: 我每天都会**写**日记。 || I **write** a diary every day.
+   e2: 他用文字**写**出了美丽的风景。 || He **wrote** a beautiful description of the scenery.
+   syn: [书写, 撰写] | ant: []
+
+写 [ko] ipa=- | meanings: 쓰다[동사]
+   e1: 我每天都会**写**日记。 || 나는 매일 **쓴다** 일기를.
+   e2: 请你帮我**写**一封信。 || 제발 나 대신 편지를 **써** 주세요.
+   e3: 她喜欢用钢笔**写**字。 || 그녀는 만년필로 글씨를 **쓴다** 것을 좋아한다.
+   syn: [书写, 撰写, 写作] | ant: []
+
+谢谢 [en] ipa=- | meanings: thank you[expression]
+   e1: 我想说一句**谢谢**。 || I want to say **thank you**.
+   e2: 她向老师说了声**谢谢**。 || She said **thank you** to the teacher.
+   e3: 我们真心地说声**谢谢**。 || We sincerely say **thank you**.
+   syn: [感谢, 多谢] | ant: []
+
+谢谢 [ko] ipa=- | meanings: 고맙습니다, 감사합니다[표현]
+   e1: 我想对你说**谢谢**。 || 나는 당신에게 **감사합니다**라고 말하고 싶어요.
+   e2: 朋友送礼物，我说了**谢谢**。 || 친구가 선물을 줘서 나는 **감사**를 표현했어요.
+   syn: [多谢, 谢谢你, 感谢] | ant: []
+
+星期 [en] ipa=- | meanings: week, weekday[noun]
+   e1: 我每个**星期**都会去图书馆。 || I go to the library every **week**.
+   e2: 星期天是我休息的**星期**日。 || Sunday is my day off in the **week**.
+   e3: 他的工作日是从**星期**一到星期五。 || His working **days** are from Monday to Friday.
+   syn: [礼拜, 周] | ant: []
+
+星期 [ko] ipa=- | meanings: 주[명사]
+   e1: 我每个**星期**去一次图书馆。 || 나는 매 **주** 도서관에 간다.
+   e2: 下个**星期**我们要去旅行。 || 다음 **주**에 우리는 여행을 간다.
+   syn: [周] | ant: []
+
+学生 [en] ipa=- | meanings: student[noun]
+   e1: 他是一名优秀的**学生**。 || He is an excellent **student**.
+   e2: **学生**们在教室里认真听讲。 || **Student**s listen carefully in the classroom.
+   syn: [学子, 弟子] | ant: []
+
+学生 [ko] ipa=- | meanings: 학생[명사]
+   e1: 这位**学生**每天都认真学习。 || 이 **학생**은 매일 열심히 공부합니다.
+   e2: **学生**们在教室里讨论问题。 || **학생**들이 교실에서 문제를 토론합니다.
+   e3: 她是班上最优秀的**学生**。 || 그녀는 반에서 가장 우수한 **학생**입니다.
+   syn: [学徒, 学员, 弟子] | ant: []
+
+学习 [en] ipa=- | meanings: study, learning[noun] | to study, to learn[verb]
+   e1: 他喜欢**学习**历史。 || He likes **studying** history.
+   e2: **学习**是进步的关键。 || **Learning** is the key to progress.
+   e3: 她每天都努力**学习**新的知识。 || She works hard every day to **learn** new knowledge.
+   syn: [研习, 攻读, 钻研] | ant: []
+
+学习 [ko] ipa=- | meanings: 배우다, 공부하다[동사] | 학습[명사]
+   e1: 我每天都在**学习**中文。 || 나는 매일 **공부** 중국어를 합니다.
+   e2: 良好的**学习**习惯很重要。 || 좋은 **학습** 습관이 매우 중요합니다.
+   syn: [研习, 攻读] | ant: []
+
+学校 [en] ipa=- | meanings: school[noun]
+   e1: 我每天走路去**学校**。 || I walk to **school** every day.
+   e2: 这所有**学校**都有美丽的花园。 || All these **schools** have beautiful gardens.
+   e3: 她想转到另一所**学校**学习。 || She wants to transfer to another **school** to study.
+   syn: [学院, 学校机构] | ant: []
+
+学校 [ko] ipa=- | meanings: 학교[명사]
+   e1: 我每天早上去**学校**上课。 || 나는 매일 아침 **학교**에 가서 수업을 듣는다.
+   e2: 她喜欢和朋友在**学校**里一起玩耍。 || 그녀는 친구들과 **학교**에서 함께 노는 것을 좋아한다.
+   e3: **学校**的图书馆非常安静。 || **학교** 도서관은 매우 조용하다.
+   syn: [院校, 学府] | ant: []
+
+一 [en] ipa=- | meanings: one[numeral] | single[adjective]
+   e1: 我只有**一**本书。 || I have only **one** book.
+   e2: 她是家里的**一个**孩子。 || She is a **single** child in the family.
+   syn: [] | ant: []
+
+一 [ko] ipa=- | meanings: 일[명사]
+   e1: 我有**一**颗苹果。 || 나는 **일**개의 사과를 가지고 있어요.
+   e2: 请给我**一**杯水。 || 저에게 **일**잔의 물을 주세요.
+   e3: 他只吃了**一**块蛋糕。 || 그는 **일**조각의 케이크만 먹었어요.
+   syn: [] | ant: []
+
+一点儿 [en] ipa=- | meanings: a little, a bit[adverb]
+   e1: 我只需要**一点儿**时间。 || I only need **a little** time.
+   e2: 请给我**一点儿**水。 || Please give me **a bit** of water.
+   e3: 天气冷了，穿**一点儿**衣服吧。 || It's cold; wear **a little** more clothes.
+   syn: [稍微, 有点儿] | ant: []
+
+一点儿 [ko] ipa=- | meanings: 조금, 약간[부사] | 약간의 양[명사]
+   e1: 她只想喝**一点儿**水。 || 그녀는 단지 **조금**의 물만 마시고 싶어 한다.
+   e2: 请给我**一点儿**糖。 || 저에게 **약간의** 설탕을 주세요.
+   syn: [少许, 一点] | ant: []
+
+衣服 [en] ipa=- | meanings: clothes[noun]
+   e1: 她买了一件新**衣服**。 || She bought a new piece of **clothing**.
+   e2: 冬天要穿暖和的**衣服**。 || You should wear warm **clothes** in winter.
+   syn: [服装, 衣物] | ant: []
+
+衣服 [ko] ipa=- | meanings: 옷[명사]
+   e1: 我买了一件新**衣服**。 || 나는 새 **옷**을 샀다.
+   e2: 她穿了一套漂亮的**衣服**。 || 그녀는 예쁜 **옷**을 입었다.
+   e3: 换季时要整理好所有的**衣服**。 || 계절이 바뀔 때 모든 **옷**을 정리해야 한다.
+   syn: [服装, 衣裳] | ant: []
+
+医生 [en] ipa=- | meanings: doctor[noun]
+   e1: 医院里的**医生**非常专业。 || The **doctor** in the hospital is very professional.
+   e2: 我明天去看**医生**。 || I will visit the **doctor** tomorrow.
+   syn: [医师, 大夫] | ant: []
+
+医生 [ko] ipa=- | meanings: 의사[명사]
+   e1: 这个**医生**很有经验。 || 이 **의사**는 경험이 많아요.
+   e2: 我去看了**医生**，身体好多了。 || 나는 **의사**를 만나 몸이 많이 좋아졌어요.
+   syn: [大夫, 医师] | ant: []
+
+医院 [en] ipa=- | meanings: hospital[noun]
+   e1: 他昨天去了**医院**看病。 || He went to the **hospital** yesterday for a checkup.
+   e2: **医院**的环境非常安静和整洁。 || The environment of the **hospital** is very quiet and clean.
+   syn: [医馆, 疗养院] | ant: []
+
+医院 [ko] ipa=- | meanings: 병원[명사]
+   e1: 他生病了，需要去**医院**。 || 그는 아파서 **병원**에 가야 한다.
+   e2: **医院**里有很多医生和护士。 || **병원**에는 많은 의사와 간호사가 있다.
+   e3: 我们在**医院**里等待检查结果。 || 우리는 **병원**에서 검사 결과를 기다린다.
+   syn: [医疗机构, 诊所] | ant: []
+
+椅子 [en] ipa=- | meanings: chair[noun]
+   e1: 请坐在这把**椅子**上休息。 || Please sit on this **chair** to rest.
+   e2: 客厅里放着一把舒服的**椅子**。 || There is a comfortable **chair** in the living room.
+   syn: [靠背椅, 座椅] | ant: []
+
+椅子 [ko] ipa=- | meanings: 의자[명사]
+   e1: 请坐在这把**椅子**上。 || 이 **의자**에 앉으세요.
+   e2: 他买了一把新的办公**椅子**。 || 그는 새 사무용 **의자**를 샀다.
+   syn: [座椅, 靠背椅] | ant: []
+
+有 [en] ipa=- | meanings: have[verb] | exist[verb]
+   e1: 她**有**很多朋友。 || She **has** many friends.
+   e2: 这里**有**一棵大树。 || There **is** a big tree here.
+   syn: [拥有, 持有] | ant: []
+
+有 [ko] ipa=- | meanings: 가지다, 있다[동사]
+   e1: 我家里**有**一只猫。 || 우리 집에 는 고양이 한 마리가 **있습니다**.
+   e2: 他**有**很多好朋友。 || 그는 좋은 친구를 많이 **가지고 있습니다**.
+   e3: 这个城市**有**很多美丽的风景。 || 이 도시에는 아름다운 경치가 많이 **있습니다**.
+   syn: [拥有, 存在] | ant: [无]
+
+月 [en] ipa=- | meanings: moon[noun] | month[noun]
+   e1: 今晚的**月**很圆很亮。 || The **moon** is round and bright tonight.
+   e2: 他下个**月**生日是在六月。 || His birthday is next **month** in June.
+   syn: [月亮, 月份] | ant: []
+
+月 [ko] ipa=- | meanings: 달[명사] | 월[명사]
+   e1: 今晚的**月**非常圆。 || 오늘 밤의 **달**은 매우 둥글다.
+   e2: 他在五月出生的，五月是第五个**月**。 || 그는 5월에 태어났는데, 5월은 다섯 번째 **월**이다.
+   syn: [] | ant: []
+
+再见 [en] ipa=- | meanings: goodbye[expression] | to see again[verb]
+   e1: 我们明天见，先说**再见**。 || See you tomorrow, for now say **goodbye**.
+   e2: 希望以后还能**再见**到你。 || I hope to **see** you again in the future.
+   syn: [告别, 拜拜] | ant: []
+
+再见 [ko] ipa=- | meanings: 안녕, 작별 인사[표현]
+   e1: 朋友们，我们要说**再见**了。 || 친구들아, 우리는 이제 **안녕** 해야 해.
+   e2: 每次**再见**都感觉有点难过。 || 매번 **안녕** 할 때마다 조금 슬퍼.
+   syn: [拜拜, 告别] | ant: []
+
+在 [en] ipa=- | meanings: at, in, on[preposition] | to be present, to exist[verb]
+   e1: 我**在**家里读书。 || I am reading **at** home.
+   e2: 他**在**办公室工作。 || He is working **in** the office.
+   e3: 她今天**在**学校。 || She **is** at school today.
+   syn: [于, 于此] | ant: []
+
+在 [ko] ipa=- | meanings: 에 있다, ~에 있다[전치사]
+   e1: 我**在**家里读书。 || 나는 집**에**서 공부한다.
+   e2: 鸟儿**在**树上唱歌。 || 새가 나무**에**서 노래한다.
+   syn: [] | ant: []
+
+怎么 [en] ipa=- | meanings: how[adverb] | why[adverb]
+   e1: 你**怎么**解决这个问题？ || **How** do you solve this problem?
+   e2: 他**怎么**去那么远的地方？ || **How** does he go to such a far place?
+   e3: 你**怎么**还没吃饭？ || **Why** have you not eaten yet?
+   syn: [如何, 怎样] | ant: []
+
+怎么 [ko] ipa=- | meanings: 어떻게[부사] | 왜[부사]
+   e1: 你**怎么**去学校？ || 너는 학교에 **어떻게** 가니?
+   e2: 他**怎么**这么高兴？ || 그가 **왜** 이렇게 기뻐하니?
+   e3: 我不知道**怎么**做这个菜。 || 나는 이 요리를 **어떻게** 만드는지 몰라.
+   syn: [] | ant: []
+
+怎么样 [en] ipa=- | meanings: how, how about, how is it[expression]
+   e1: 我们明天去公园，**怎么样**？ || **How about** going to the park tomorrow?
+   e2: 你觉得这道菜**怎么样**？ || What do you **think** of this dish?
+   e3: 天气今天很不错，出去玩，**怎么样**？ || The weather is nice today, **how about** going out to play?
+   syn: [如何, 怎么样儿] | ant: []
+
+怎么样 [ko] ipa=- | meanings: 어떠하다, 어때[부사] | 어떻게 하다, 어떻게 하겠는가[동사]
+   e1: 你的新工作**怎么样**？ || 너의 새 직장은 **어때**?
+   e2: 我们今晚吃饭**怎么样**？ || 우리 오늘 밤 밥 먹는 게 **어떨까**?
+   e3: 这个计划**怎么样**，你赞成吗？ || 이 계획은 **어때**요, 너는 찬성하니?
+   syn: [] | ant: []
+
+这 [en] ipa=- | meanings: this[pronoun]
+   e1: 请把**这**本书给我。 || Please give me **this** book.
+   e2: **这**是我最喜欢的花。 || **This** is my favorite flower.
+   e3: 你看见**这**个漂亮的彩虹了吗？ || Did you see **this** beautiful rainbow?
+   syn: [此, 这个] | ant: []
+
+这 [ko] ipa=- | meanings: 이것[대명사]
+   e1: **这**是我的书。 || **이것**은 내 책입니다.
+   e2: 你喜欢**这**个颜色吗？ || 너는 **이** 색깔을 좋아합니까?
+   e3: **这**件事很重要。 || **이** 일은 매우 중요합니다.
+   syn: [] | ant: []
+
+中国 [en] ipa=- | meanings: China, country[proper noun]
+   e1: 我想去**中国**旅游。 || I want to travel to **China**.
+   e2: **中国**有悠久的历史。 || **China** has a long history.
+   syn: [] | ant: []
+
+中午 [en] ipa=- | meanings: noon, midday[noun]
+   e1: 我们**中午**一起去吃饭吧。 || Let's go eat together at **noon**.
+   e2: **中午**太阳最高，光线最强。 || The sun is highest and the light strongest at **noon**.
+   syn: [午间, 午时] | ant: []
+
+中午 [ko] ipa=- | meanings: 정오[명사]
+   e1: 我们在**中午**吃饭。 || 우리는 **정오**에 점심을 먹습니다.
+   e2: **中午**的阳光很温暖。 || **정오** 햇빛이 매우 따뜻합니다.
+   syn: [午间, 午时] | ant: []
+
+住 [en] ipa=- | meanings: reside[verb] | stop[verb]
+   e1: 我**住**在北京已经五年了。 || I have **lived** in Beijing for five years.
+   e2: 车在十字路口**住**了一下。 || The car **stopped** briefly at the intersection.
+   syn: [居住, 栖息] | ant: []
+
+住 [ko] ipa=- | meanings: 살다[동사] | 머무르다[동사]
+   e1: 他们决定在这里**住**一年。 || 그들은 여기에서 **살기로** 결정했다.
+   e2: 我们今晚在朋友家**住**。 || 우리는 오늘 밤 친구 집에 **머문다**.
+   syn: [居住, 停留] | ant: []
+
+桌子 [en] ipa=- | meanings: table[noun]
+   e1: 这张**桌子**很适合放茶具。 || This **table** is perfect for placing tea sets.
+   e2: 我们围着**桌子**一起吃晚饭。 || We sit around the **table** to have dinner together.
+   syn: [台子, 案子] | ant: []
+
+桌子 [ko] ipa=- | meanings: 책상[명사] | 테이블[명사]
+   e1: 这张**桌子**很适合写作。 || 이 **책상**은 글쓰기에 아주 적합하다.
+   e2: 我们在**桌子**旁边吃晚饭。 || 우리는 **테이블** 옆에서 저녁을 먹었다.
+   syn: [桌面, 案子] | ant: []
+
+字 [en] ipa=- | meanings: character[noun] | letter[noun]
+   e1: 这篇文章里的每个**字**都很重要。 || Every **character** in this article is important.
+   e2: 请教我怎么写这个**字**。 || Please teach me how to write this **character**.
+   e3: 英文字母的第一个**字**是A。 || The first **letter** of the English alphabet is A.
+   syn: [] | ant: []
+
+字 [ko] ipa=- | meanings: 글자[명사] | 글씨[명사]
+   e1: 这个**字**写得很漂亮。 || 이 **글자**는 매우 아름답게 쓰여졌어요.
+   e2: 她的**字**工整而清晰。 || 그녀의 **글씨**는 정갈하고 또렷해요.
+   syn: [字迹, 文字] | ant: []
+
+昨天 [en] ipa=- | meanings: yesterday[noun]
+   e1: 我**昨天**去了公园散步。 || I went for a walk in the park **yesterday**.
+   e2: **昨天**天气非常好。 || The weather was very nice **yesterday**.
+   e3: 你**昨天**吃了什么？ || What did you eat **yesterday**?
+   syn: [] | ant: []
+
+昨天 [ko] ipa=- | meanings: 어제[명사]
+   e1: 我们**昨天**去了公园。 || 우리는 **어제** 공원에 갔어요.
+   e2: **昨天**的天气很好。 || **어제** 날씨가 좋았어요.
+   e3: 我**昨天**买了新书。 || 나는 **어제** 새 책을 샀어요.
+   syn: [] | ant: []
+
+做 [en] ipa=- | meanings: do, make[verb]
+   e1: 她喜欢自己**做**蛋糕。 || She likes to **make** cakes herself.
+   e2: 我们一起**做**手工艺品吧。 || Let's **make** crafts together.
+   e3: 请**做**好准备再出发。 || Please **make** good preparations before setting off.
+   syn: [干, 制作, 办理] | ant: []
+
+做 [ko] ipa=- | meanings: 하다[동사] | 만들다[동사]
+   e1: 他喜欢**做**运动保持健康。 || 그는 건강을 위해 운동을 **한다**.
+   e2: 她在厨房里**做**蛋糕给朋友们。 || 그녀는 부엌에서 케이크를 **만든다**.
+   e3: 我们一起**做**志愿者工作帮助社区。 || 우리는 함께 지역사회를 돕기 위해 자원봉사를 **한다**.
+   syn: [干, 制作, 制造] | ant: []
+
+坐 [en] ipa=- | meanings: sit[verb] | seat[noun]
+   e1: 请**坐**，我给你拿茶。 || Please **sit** down, I'll get you some tea.
+   e2: 这**坐**位很舒服。 || This **seat** is very comfortable.
+   syn: [就座, 落座] | ant: [站]
+
+坐 [ko] ipa=- | meanings: 앉다[동사] | 타다[동사]
+   e1: 请你**坐**下来休息一下。 || 잠시 **앉으셔서** 쉬세요.
+   e2: 我们一起**坐**公交车去公园吧。 || 우리 같이 **타고** 버스를 공원에 가요.
+   syn: [就坐, 坐下] | ant: [站]

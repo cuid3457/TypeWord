@@ -1,0 +1,642 @@
+[
+  {
+    "word": "나",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "I, me",
+        "partOfSpeech": "pronoun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "**나**는 학교에 갔어요.",
+        "translation": "I went to school.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "저",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "I (polite)",
+        "partOfSpeech": "pronoun",
+        "relevanceScore": 95
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "**저**는 학생이에요.",
+        "translation": "I am a student.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "사",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "오",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "five",
+        "partOfSpeech": "noun",
+        "relevanceScore": 95
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **오** 분을 기다렸어요.",
+        "translation": "I waited for five minutes.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "백",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "월",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "분",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "천",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "년",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": []
+  },
+  {
+    "word": "이",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "Example uses '이' as a demonstrative ('this'), not as the numeral 'two'; also, '이 분' means 'this person', not 'two (of something)'."
+      },
+      {
+        "category": "translation",
+        "index": 1,
+        "problem": "Translation does not match the Korean sentence; '이 분을 주세요' means 'Please give me this person', not 'Please give me two of these.'"
+      }
+    ],
+    "meanings": [
+      {
+        "definition": "tooth",
+        "partOfSpeech": "noun",
+        "relevanceScore": 95
+      },
+      {
+        "definition": "two",
+        "partOfSpeech": "noun",
+        "relevanceScore": 90
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "**이**가 아파요.",
+        "translation": "My tooth hurts.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "**이** 분을 주세요.",
+        "translation": "Please give me two of these.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "가다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to go",
+        "partOfSpeech": "verb",
+        "relevanceScore": 100
+      },
+      {
+        "definition": "to pass, to proceed",
+        "partOfSpeech": "verb",
+        "relevanceScore": 80
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 학교에 **간다**.",
+        "translation": "I go to school.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "시간이 천천히 **간다**.",
+        "translation": "Time passes slowly.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "오다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to come",
+        "partOfSpeech": "verb",
+        "relevanceScore": 90
+      },
+      {
+        "definition": "to arrive",
+        "partOfSpeech": "verb",
+        "relevanceScore": 85
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "친구가 집에 **온다**.",
+        "translation": "A friend is coming to the house.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "기차가 역에 **온다**.",
+        "translation": "The train is arriving at the station.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "먹다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to eat",
+        "partOfSpeech": "verb",
+        "relevanceScore": 100
+      },
+      {
+        "definition": "to consume, to take in",
+        "partOfSpeech": "verb",
+        "relevanceScore": 80
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 밥을 **먹어요**.",
+        "translation": "I eat rice.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "그는 약을 **먹는다**.",
+        "translation": "He takes medicine.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "살다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to live",
+        "partOfSpeech": "verb",
+        "relevanceScore": 95
+      },
+      {
+        "definition": "to reside",
+        "partOfSpeech": "verb",
+        "relevanceScore": 80
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 서울에서 **산다**.",
+        "translation": "I live in Seoul.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "가족이 집에서 **산다**.",
+        "translation": "My family resides at home.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "사다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to buy",
+        "partOfSpeech": "verb",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 책을 **샀어요**.",
+        "translation": "I bought a book.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "앉다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to sit",
+        "partOfSpeech": "verb",
+        "relevanceScore": 95
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "아이들이 의자에 **앉아요**.",
+        "translation": "The children sit on the chairs.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "서다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to stand",
+        "partOfSpeech": "verb",
+        "relevanceScore": 90
+      },
+      {
+        "definition": "to stop",
+        "partOfSpeech": "verb",
+        "relevanceScore": 80
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "아이가 빨리 **선다**.",
+        "translation": "The child stands quickly.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "버스가 거기서 **선다**.",
+        "translation": "The bus stops there.",
+        "meaningIndex": 1
+      }
+    ]
+  },
+  {
+    "word": "보다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "Example uses '비교한다' (to compare), not an inflection of '보다'; marker is on the wrong word."
+      },
+      {
+        "category": "example",
+        "index": 2,
+        "problem": "Example uses '돌본다' (to take care of), not an inflection of '보다'; marker is on the wrong word."
+      }
+    ],
+    "meanings": [
+      {
+        "definition": "to see",
+        "partOfSpeech": "verb",
+        "relevanceScore": 90
+      },
+      {
+        "definition": "to compare",
+        "partOfSpeech": "verb",
+        "relevanceScore": 70
+      },
+      {
+        "definition": "to take care of",
+        "partOfSpeech": "verb",
+        "relevanceScore": 50
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 하늘을 **본다**.",
+        "translation": "I look at the sky.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "이 책을 저것과 **비교한다**.",
+        "translation": "I compare this book with that one.",
+        "meaningIndex": 1
+      },
+      {
+        "sentence": "할머니를 잘 **돌본다**.",
+        "translation": "I take good care of my grandmother.",
+        "meaningIndex": 2
+      }
+    ]
+  },
+  {
+    "word": "하다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "to do",
+        "partOfSpeech": "verb",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "우리는 숙제를 **한다**.",
+        "translation": "We do the homework.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "쓰다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Example does not use 쓰다 to mean 'to write'; '편지지를 쓰다' is unnatural—should be '편지를 쓰다' (write a letter), not '편지지' (stationery)."
+      },
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "Example demonstrates 'to wear (glasses)' not 'to use'; '안경을 쓰다' is not a typical example for 'to use'."
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation does not match the Korean sentence; '나는 편지지를 쓴다' means 'I use stationery', not 'I write a letter.'"
+      },
+      {
+        "category": "example",
+        "index": 2,
+        "problem": "Example does not demonstrate 'to wear (headgear)'; '약을 쓰다' means 'to use medicine', not 'to wear (headgear)'."
+      },
+      {
+        "category": "translation",
+        "index": 2,
+        "problem": "Translation does not match the Korean sentence; '이 약을 아침마다 쓴다' means 'I use this medicine every morning', not 'I take this medicine every morning.'"
+      }
+    ],
+    "meanings": [
+      {
+        "definition": "to write",
+        "partOfSpeech": "verb",
+        "relevanceScore": 90
+      },
+      {
+        "definition": "to use",
+        "partOfSpeech": "verb",
+        "relevanceScore": 90
+      },
+      {
+        "definition": "to wear (headgear)",
+        "partOfSpeech": "verb",
+        "relevanceScore": 80
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 편지지를 **쓴다**.",
+        "translation": "I write a letter.",
+        "meaningIndex": 0
+      },
+      {
+        "sentence": "그는 안경을 **쓴다**.",
+        "translation": "He wears glasses.",
+        "meaningIndex": 1
+      },
+      {
+        "sentence": "이 약을 아침마다 **쓴다**.",
+        "translation": "I take this medicine every morning.",
+        "meaningIndex": 2
+      }
+    ]
+  },
+  {
+    "word": "좋다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "be good, be nice, be fine",
+        "partOfSpeech": "adjective",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "이 꽃은 **좋다**.",
+        "translation": "This flower is nice.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "작다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "be small",
+        "partOfSpeech": "adjective",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "이 집은 **작다**.",
+        "translation": "This house is small.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "학교",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "school",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **학교**에 간다.",
+        "translation": "I am going to school.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "친구",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "friend",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **친구**를 만난다.",
+        "translation": "I meet a friend.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "음식",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "food",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **음식**을 먹는다.",
+        "translation": "I eat food.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "사람",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "person, human",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "**사람**이 길을 건넌다.",
+        "translation": "A person is crossing the street.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "회사",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "company, business, firm",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **회사**에 출근한다.",
+        "translation": "I go to work at the company.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "시간",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "time",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **시간**을 잘 관리한다.",
+        "translation": "I manage my time well.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "책",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "book",
+        "partOfSpeech": "noun",
+        "relevanceScore": 100
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "나는 **책**을 읽어요.",
+        "translation": "I am reading a book.",
+        "meaningIndex": 0
+      }
+    ]
+  },
+  {
+    "word": "잘 부탁드립니다",
+    "verdict": "PASS",
+    "issues": [],
+    "meanings": [
+      {
+        "definition": "Nice to meet you / I look forward to working",
+        "partOfSpeech": "expression",
+        "relevanceScore": 90
+      }
+    ],
+    "examples": [
+      {
+        "sentence": "처음 뵙겠습니다, **잘 부탁드립니다**.",
+        "translation": "Nice to meet you, I look forward to working with you.",
+        "meaningIndex": 0
+      }
+    ]
+  }
+]

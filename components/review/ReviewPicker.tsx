@@ -1,10 +1,13 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { FlatList, Keyboard, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabletContainer } from '@/components/tablet-container';
+import { useTablet } from '@src/hooks/useTablet';
 import { useTranslation } from 'react-i18next';
 import type { RefObject } from 'react';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { StreakBanner } from '@/components/streak-banner';
 import { Toast } from '@/components/toast';
 import { findLanguage } from '@src/constants/languages';
 import {
@@ -66,59 +69,20 @@ export function ReviewPicker({
 }: Props) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
+  const { isTablet } = useTablet();
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
       <View className="px-6 pt-6">
-        <Text className="text-3xl font-bold text-black dark:text-white">
-          {t('review.title')}
-        </Text>
-        <Text className="mt-1 text-sm text-gray-500">
-          {t('review.due_count', { count: totalDue })}
-        </Text>
+        <View className="h-11 justify-center">
+          <Text className="text-3xl font-bold text-black dark:text-white">
+            {t('review.title')}
+          </Text>
+        </View>
       </View>
 
-      {/* Streak banner */}
-      {streak ? (
-        streak.current > 0 ? (
-          <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-amber-50 px-4 py-3 dark:bg-amber-950">
-            <Text className="text-2xl">🔥</Text>
-            <View className="ml-3 flex-1">
-              <Text className="text-sm font-bold text-amber-800 dark:text-amber-200">
-                {t('streak.days', { count: streak.current })}
-              </Text>
-              <Text className="text-xs text-amber-600 dark:text-amber-400">
-                {streak.todayDone ? t('streak.done_today') : t('streak.not_yet')}
-              </Text>
-            </View>
-            <View className="flex-row items-center gap-1">
-              {Array.from({ length: 2 }, (_, i) => {
-                const active = i < streak.hearts;
-                return (
-                  <MaterialIcons
-                    key={i}
-                    name={active ? 'favorite' : 'favorite-border'}
-                    size={18}
-                    color={active ? '#ef4444' : colorScheme === 'dark' ? '#6b7280' : '#9ca3af'}
-                  />
-                );
-              })}
-            </View>
-          </View>
-        ) : (
-          <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-gray-100 px-4 py-3 dark:bg-gray-800">
-            <Text className="text-2xl" style={{ opacity: 0.4 }}>🔥</Text>
-            <View className="ml-3 flex-1">
-              <Text className="text-sm font-bold text-gray-500 dark:text-gray-400">
-                {t('streak.start_title')}
-              </Text>
-              <Text className="text-xs text-gray-400 dark:text-gray-500">
-                {t('streak.start_hint')}
-              </Text>
-            </View>
-          </View>
-        )
-      ) : null}
+      <StreakBanner streak={streak} />
 
       {/* Sort buttons */}
       <View className="mt-3 flex-row gap-2 px-6">
@@ -201,12 +165,15 @@ export function ReviewPicker({
       {/* Per-book list */}
       <FlatList
         ref={pickerListRef}
+        key={isTablet ? 'grid' : 'list'}
         data={bookCounts}
         keyExtractor={(item) => item.bookId}
         showsVerticalScrollIndicator={false}
+        numColumns={isTablet ? 2 : 1}
+        columnWrapperStyle={isTablet ? { gap: 8 } : undefined}
         contentContainerStyle={bookCounts.length === 0
           ? { flexGrow: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24 }
-          : { paddingHorizontal: 24, paddingTop: 24, paddingBottom: 24 }}
+          : { paddingHorizontal: 24, paddingTop: 24, paddingBottom: 24, gap: isTablet ? 8 : 0 }}
         ListEmptyComponent={
           <View className="items-center px-6">
             <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color="#9ca3af" />
@@ -243,28 +210,33 @@ export function ReviewPicker({
                 }
                 handleStartRequest(item.bookId);
               }}
-              className={`mb-2 rounded-xl border px-4 py-4 ${
+              className={`rounded-xl border px-4 py-4 ${isTablet ? 'flex-1' : 'mb-2'} ${
                 highlighted ? '' : 'border-gray-300 dark:border-gray-700'
               }`}
               style={highlighted ? { borderColor: '#2EC4A5' } : undefined}
             >
-              {/* Dimmed header/meta only — reload button below stays full opacity. */}
+              {/* Dimmed header/meta only — reload button below stays full opacity.
+                  Layout mirrors the wordlist tab BookCard: title + language
+                  stacked in a flex-1 column, word-count chip on the right
+                  vertically centered. */}
               <View style={!canStart ? { opacity: 0.4 } : undefined}>
-                <View className="flex-row items-center justify-between">
-                  <Text className="flex-1 text-base font-medium text-black dark:text-white" numberOfLines={1}>
-                    {item.title}
-                  </Text>
+                <View className="flex-row items-center">
+                  <View className="flex-1">
+                    <Text className="text-base font-medium text-black dark:text-white" numberOfLines={1}>
+                      {item.title}
+                    </Text>
+                    {src && tgt ? (
+                      <Text className="mt-1 text-xs text-gray-500">
+                        {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+                      </Text>
+                    ) : null}
+                  </View>
                   <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
                     <Text className="text-sm font-semibold text-black dark:text-white">
                       {t('home.word_count', { count: item.dueCount })}
                     </Text>
                   </View>
                 </View>
-                {src && tgt ? (
-                  <Text className="mt-1 text-xs text-gray-500">
-                    {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
-                  </Text>
-                ) : null}
               </View>
               {canReload ? (
                 <Pressable
@@ -291,6 +263,7 @@ export function ReviewPicker({
         onHide={() => setToastVisible(false)}
         style={{ position: 'absolute', bottom: 32, left: 0, right: 0 }}
       />
+      </TabletContainer>
 
       {settingsModal}
     </SafeAreaView>

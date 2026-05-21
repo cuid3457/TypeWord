@@ -1,0 +1,649 @@
+[
+  {
+    "word": "기간",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "누가",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "태국",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "된장찌개",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "힘",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Example uses '힘이 세요' (to be strong), which is an adjectival phrase, not a direct use of the noun '힘' (strength, power, force) itself. The headword is not used as a standalone noun in the sentence."
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation 'I am strong.' does not directly reflect the noun '힘' but rather the adjective 'strong'."
+      }
+    ]
+  },
+  {
+    "word": "만족",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "할아버지",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "못",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "입학식",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "점퍼",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "노래하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "요르단",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "무료",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "독서하다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "The verb '독서하다' is unnatural in this context; native speakers use '책을 읽다' for 'read books.' '독서하다' is used in more formal or abstract contexts, not for simple reading acts."
+      }
+    ]
+  },
+  {
+    "word": "치즈",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "운전하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "놀라다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "토끼",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "울리다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Example uses '울린다' as intransitive (the baby cries), but '울리다' is causative: 'to make (someone) cry'. The subject should be the causer, not the one crying."
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation does not match the causative meaning; it translates as 'The baby cries' instead of 'Someone makes the baby cry.'"
+      }
+    ]
+  },
+  {
+    "word": "디브이디",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "내려오다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "meaning",
+        "index": 1,
+        "problem": "Second meaning ('to descend and arrive') is not a distinct standalone sense from the first; it is a contextual elaboration, not a separate dictionary sense."
+      }
+    ]
+  },
+  {
+    "word": "듣다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "Incorrect verb form: '든다' is not a valid conjugation of '듣다'; should be '듣는다'."
+      }
+    ]
+  },
+  {
+    "word": "소설",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "오리",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "목걸이",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "손님",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "드시다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "그럼",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "감기약",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "목소리",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "아기",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "이월",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "후식",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "폭우",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "특히",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "어느",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Example uses '어느' in the sense of 'some/one', but the English translation does not match the literal meaning ('which' or 'some'). The example is ambiguous and does not clearly demonstrate the interrogative 'which' sense, nor is the translation accurate for the demonstrative 'some' sense."
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation 'One day, I went to the sea.' does not match the literal meaning of '나는 어느 날 바다에 갔어요.' which is 'I went to the sea on some day' or 'on a certain day'."
+      }
+    ]
+  },
+  {
+    "word": "이불",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "커피",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "볶다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "공짜",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "풀",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "meaning",
+        "index": 1,
+        "problem": "풀 does not mean 'solution' as a standalone noun; the correct word for 'solution' is '해' or '해답'. '풀' as a noun means 'grass' or 'glue', but not 'solution'."
+      },
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "The example uses '풀' to mean 'solution', which is not a valid standalone sense of '풀'."
+      },
+      {
+        "category": "translation",
+        "index": 1,
+        "problem": "Translation is based on an incorrect sense; '풀' does not mean 'solution' in this context."
+      }
+    ]
+  },
+  {
+    "word": "그분",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "걸리다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "경주",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "은행",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "목도리",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "잡수시다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "통",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "Example uses '통신' (compound), not bare '통'; violates requirement for bare headword usage."
+      }
+    ]
+  },
+  {
+    "word": "애인",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "볼펜",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "골목",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "빨리",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "그램",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Unnatural usage; '그램' is a counter and should be used with a numeral (e.g., '100그램'). The example does not use the headword in a natural, standalone way."
+      }
+    ]
+  },
+  {
+    "word": "수영",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "현금",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "지하실",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "합격",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "고민",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "진실",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "들리다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "meaning",
+        "index": 1,
+        "problem": "The sense 'to be raised, to be lifted' is not a standalone meaning of '들리다'; this is a confusion with '걸리다' or a dialectal/archaic/rare usage, not standard."
+      },
+      {
+        "category": "example",
+        "index": 1,
+        "problem": "The example '옷이 나무에 들렸어요.' is unnatural and does not demonstrate a standard meaning of '들리다'; likely a confusion with '걸리다'."
+      },
+      {
+        "category": "translation",
+        "index": 1,
+        "problem": "The translation 'The clothes got caught on the tree.' does not match any standard meaning of '들리다' and is inaccurate."
+      }
+    ]
+  },
+  {
+    "word": "날마다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "청소하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "배우",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "표현",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "요즘",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "십",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "일주일",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "신다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "넓다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "영수증",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "탁구",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "테니스",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "어깨",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "낮다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "수업",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "학원",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "입원하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "자세하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "한국어",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "어울리다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "대",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "사람",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "값",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "대학생",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "No example provided for the meaning."
+      }
+    ]
+  },
+  {
+    "word": "칭찬",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "No example sentences provided."
+      }
+    ]
+  },
+  {
+    "word": "시간",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "쉽다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "출석",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "No example provided to demonstrate usage."
+      }
+    ]
+  },
+  {
+    "word": "과자",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "도착하다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "낮",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "뿌리",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "피자",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "돌아오다",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "생선",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "계산",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "No examples provided for any sense"
+      }
+    ]
+  },
+  {
+    "word": "무섭다",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Subject is '나' (I), but '무섭다' is a state adjective and should have the state-bearer (the thing that is scary) as the subject, e.g., '그 어둠이 무섭다.' or '나는 그 어둠이 무섭다' is only natural as '나는 그 어둠이 무서워.'"
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation does not match the Korean sentence structure; the Korean sentence is awkward and the translation is not a direct match."
+      }
+    ]
+  },
+  {
+    "word": "환영",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "The example uses '환영' for 'optical illusion', but in standard Korean, '환영' in this sense means 'phantom' or 'apparition', not 'optical illusion'. The English translation does not accurately reflect the Korean usage."
+      },
+      {
+        "category": "translation",
+        "index": 0,
+        "problem": "Translation does not match the actual sense of '환영' in Korean, which is closer to 'phantom' or 'vision', not 'optical illusion'."
+      }
+    ]
+  },
+  {
+    "word": "미래",
+    "verdict": "PASS",
+    "issues": []
+  },
+  {
+    "word": "글쎄요",
+    "verdict": "FLAG",
+    "issues": [
+      {
+        "category": "example",
+        "index": 0,
+        "problem": "Unnatural usage; '글쎄요' is not typically used as reported speech ('라고 대답했다'). It is used directly in conversation, not as a quoted answer."
+      }
+    ]
+  }
+]

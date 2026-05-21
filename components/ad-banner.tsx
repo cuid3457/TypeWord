@@ -33,7 +33,10 @@ export function AdBanner() {
   const bg = scheme === 'dark' ? '#1A1A1A' : '#ECECEC';
 
   return (
-    <View style={loaded ? { backgroundColor: bg, paddingBottom: 8 } : { height: 0, overflow: 'hidden' }}>
+    <View style={[
+      { width: '100%', alignItems: 'center' },
+      loaded ? { backgroundColor: bg, paddingBottom: 8 } : { height: 0, overflow: 'hidden' },
+    ]}>
       <BannerAd
         unitId={BANNER_AD_UNIT_ID ?? TestIds.BANNER}
         size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER}

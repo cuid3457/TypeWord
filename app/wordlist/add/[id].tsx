@@ -17,7 +17,7 @@ import {
   View,
 } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -29,7 +29,7 @@ import { findLanguage } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
 import { findWord, getBook, getTotalWordCount, saveWord } from '@src/db/queries';
 import { isAnonymous } from '@src/services/authService';
-import { getStreak, getTodayStreakDate } from '@src/services/streakService';
+import { getStreak, getTodayStreakDate, recordStudyDateIfQualified } from '@src/services/streakService';
 import {
   CELEBRATE_EVENT,
   getDailyVariant,
@@ -37,8 +37,7 @@ import {
   shouldCelebrateDaily,
 } from '@src/services/streakMilestone';
 import {
-  IMAGE_LIMIT_FREE,
-  IMAGE_LIMIT_PREMIUM,
+  IMAGE_LIMIT_BY_TIER,
   extractWordsFromImage,
   getImageExtractUsage,
   type ExtractedWord,
@@ -58,7 +57,7 @@ import { getSttLocale } from '@src/utils/sttLocale';
 import type { Book } from '@src/types/book';
 import { useNetworkStatus } from '@src/hooks/useNetworkStatus';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { usePremium } from '@src/hooks/usePremium';
+import { usePremium, useTier } from '@src/hooks/usePremium';
 import { ImageCropModal } from '@/components/image-crop-modal';
 import { AdBanner } from '@/components/ad-banner';
 import { Paywall } from '@/components/paywall';
@@ -187,6 +186,7 @@ export default function AddWordScreen() {
   const { id, q: prefillQuery } = useLocalSearchParams<{ id: string; q?: string }>();
   const isConnected = useNetworkStatus();
   const premium = usePremium();
+  const tier = useTier();
   const [paywallVisible, setPaywallVisible] = useState(false);
   const [book, setBook] = useState<Omit<Book, 'userId'> | null>(null);
   const [word, setWord] = useState('');
@@ -421,21 +421,63 @@ export default function AddWordScreen() {
       lookupWord = results[0].headword;
     }
 
-    // Normal lookup (identical to direct search)
-    await lookupWordStream(
-      {
-        word: lookupWord,
-        sourceLang,
-        targetLang,
-        bookId: book.id,
-        mode: 'quick',
-      },
-      {
-        onPartial: (p) => setPartial(p),
-        onFinal: async (res) => {
+    // Same-script ambiguity: isStudyLangInput uses Unicode blocks to guess
+    // direction, but Latin↔Latin (fr↔en) and ja↔zh (han-only) inputs are
+    // genuinely indistinguishable by script alone. We fall through to forward
+    // lookup; if the AI replies wrong_language, retry as reverse below.
+    let triedReverseFallback = false;
+
+    const runForwardLookup = async (
+      forwardWord: string,
+      revHeadword: string | undefined,
+    ): Promise<void> => {
+      await lookupWordStream(
+        {
+          word: forwardWord,
+          sourceLang,
+          targetLang,
+          bookId: book.id,
+          mode: 'quick',
+        },
+        {
+          onPartial: (p) => setPartial(p),
+          onFinal: async (res) => {
           // Check if the word was actually found
           const meanings = res.result.meanings ?? [];
           if (meanings.length === 0) {
+            // Latin↔Latin fallback: forward thinks the input is wrong-language;
+            // try reverse lookup once before surfacing the error.
+            if (
+              !triedReverseFallback &&
+              !isReverse &&
+              res.result.note === 'wrong_language'
+            ) {
+              triedReverseFallback = true;
+              const { candidates: rev, note: revNote, timedOut } = await resolveHeadword(trimmed, sourceLang, targetLang);
+              if (timedOut) {
+                setToast(t('error.slow_network'));
+                setLoading(false);
+                return;
+              }
+              if (rev.length === 0) {
+                setError(t(getNoteMessageKey(revNote)));
+                setPartial(null);
+                setLoading(false);
+                return;
+              }
+              if (rev.length > 1) {
+                setCandidates(rev);
+                setPartial(null);
+                setLoading(false);
+                for (const c of rev) {
+                  backgroundPrefetchCandidate(c.headword, sourceLang, targetLang, book.id);
+                }
+                return;
+              }
+              const resolved = rev[0].headword;
+              await runForwardLookup(resolved, resolved);
+              return;
+            }
             setError(t(getNoteMessageKey(res.result.note)));
             setPartial(null);
             setLoading(false);
@@ -443,10 +485,10 @@ export default function AddWordScreen() {
           }
 
           // Attach headword so UI shows the translated word
-          const finalRes = reverseHeadword
-            ? { ...res, result: { ...res.result, headword: reverseHeadword } }
+          const finalRes = revHeadword
+            ? { ...res, result: { ...res.result, headword: revHeadword } }
             : res;
-          const hw = finalRes.result.headword || lookupWord;
+          const hw = finalRes.result.headword || forwardWord;
           const existing = await findWord({ word: hw, bookId: book.id });
           if (existing) {
             setAlreadyExists(true);
@@ -479,7 +521,7 @@ export default function AddWordScreen() {
             });
           }
           if (finalRes.source !== 'local') {
-            startEnrich(finalRes, lookupWord, sourceLang, targetLang, book.id);
+            startEnrich(finalRes, forwardWord, sourceLang, targetLang, book.id);
           }
         },
         onError: (err) => {
@@ -501,13 +543,19 @@ export default function AddWordScreen() {
           setLoading(false);
         },
       },
-    );
+      );
+    };
+
+    await runForwardLookup(lookupWord, reverseHeadword);
   };
 
   const maybeCelebrateStreak = () => {
     // Check streak after a save in case the user crossed today's threshold
-    // (5+ adds qualifies as today's activity). Fires modal at most once per
-    // streak day; subsequent saves are no-ops thanks to AsyncStorage flags.
+    // (10+ manual adds qualifies as today's activity). Fires modal at most
+    // once per streak day; subsequent saves are no-ops thanks to
+    // AsyncStorage flags. Also persists the streak-date so it survives
+    // any future wordlist delete.
+    recordStudyDateIfQualified().catch(() => {});
     getStreak()
       .then(async (s) => {
         if (!s.todayDone || s.current <= 0) return;
@@ -798,7 +846,7 @@ export default function AddWordScreen() {
     transform: [{ translateY: cameraTranslateY.value }],
   }));
 
-  const ocrLimit = premium ? IMAGE_LIMIT_PREMIUM : IMAGE_LIMIT_FREE;
+  const ocrLimit = IMAGE_LIMIT_BY_TIER[tier];
   const ocrRemaining = Math.max(ocrLimit - ocrUsed, 0);
 
   const handleCameraPress = () => {
@@ -1074,7 +1122,11 @@ export default function AddWordScreen() {
             </View>
           ) : null}
 
-          {partial && !response ? <PartialCard partial={partial} t={t} /> : null}
+          {loading && !partial && !response ? (
+            <SkeletonCard word={word.trim()} t={t} />
+          ) : null}
+
+          {partial && !response ? <PartialCard partial={partial} word={word.trim()} t={t} /> : null}
 
           {response ? (
             <ResultCard
@@ -1090,13 +1142,15 @@ export default function AddWordScreen() {
       </KeyboardAvoidingView>
       <AdBanner />
 
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
+      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} reason="images" />
 
       <ReportModal
         visible={showReport}
         onClose={() => setShowReport(false)}
         word={word.trim()}
         context="search"
+        sourceLang={sourceLang}
+        targetLang={targetLang}
         onSubmitted={(msg) => setReportToast(msg)}
       />
       <Toast visible={!!reportToast} message={reportToast} type="success" onHide={() => setReportToast('')} style={{ position: 'absolute', bottom: 132, left: 0, right: 0 }} />
@@ -1288,8 +1342,7 @@ export default function AddWordScreen() {
 }
 
 function hasEnriched(res: WordLookupResponse): boolean {
-  const r = res.result;
-  return !!(r.examples?.length || r.synonyms?.length || r.antonyms?.length);
+  return !!res.result.examples?.length;
 }
 
 type TFn = (key: string) => string;
@@ -1299,12 +1352,76 @@ function formatReading(reading?: string | string[]): string | undefined {
   return Array.isArray(reading) ? reading.join(' / ') : reading;
 }
 
-function PartialCard({ partial, t }: { partial: PartialLookup; t: TFn }) {
+/**
+ * SkeletonCard — sub-second placeholder shown immediately on search submit,
+ * before the SSE stream's first delta arrives. Two-purpose:
+ *   1. Echo the user's input as the headword so they immediately see "this
+ *      is what I searched for"
+ *   2. Show grey placeholder bars where meanings will land, so the user
+ *      knows the result shape is coming (industry-standard skeleton UX).
+ * Transitions seamlessly to PartialCard once the first delta arrives.
+ */
+function SkeletonCard({ word, t }: { word: string; t: TFn }) {
+  // Subtle pulse via opacity. Loops on a worklet thread (reanimated) so
+  // even a slow JS thread during enrich processing doesn't stutter it.
+  const pulse = useSharedValue(0.5);
+  useEffect(() => {
+    pulse.value = withRepeat(withTiming(1, { duration: 700 }), -1, true);
+  }, [pulse]);
+  const pulseStyle = useAnimatedStyle(() => ({ opacity: pulse.value }));
+
+  return (
+    <View className="mt-6">
+      {/* Headword echo — bold, prominent like the real result */}
+      {word ? (
+        <Text className="text-2xl font-bold text-black dark:text-white">{word}</Text>
+      ) : null}
+
+      <View className="mt-3 flex-row items-center">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          {t('add_word.generating')}
+        </Text>
+        <ActivityIndicator size="small" className="ml-2" />
+      </View>
+
+      <View className="mt-4">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          {t('add_word.meanings')}
+        </Text>
+        {[0, 1, 2].map((i) => (
+          <View
+            key={i}
+            className="mt-2 rounded-xl border border-gray-200 p-3 dark:border-gray-800"
+          >
+            <Animated.View
+              style={pulseStyle}
+              className="h-3 w-12 rounded bg-gray-200 dark:bg-gray-800"
+            />
+            <Animated.View
+              style={pulseStyle}
+              className="mt-2 h-4 w-4/5 rounded bg-gray-200 dark:bg-gray-800"
+            />
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function PartialCard({ partial, word, t }: { partial: PartialLookup; word: string; t: TFn }) {
   const { i18n } = useTranslation();
   const readingText = formatReading(partial.reading);
   return (
     <View className="mt-6">
-      <View className="flex-row items-center">
+      {/* Headword echo carried over from the skeleton phase so the user
+       * keeps seeing what they searched for even as meanings stream in.
+       * The final ResultCard may replace this with the AI-corrected
+       * canonical headword. */}
+      {word ? (
+        <Text className="text-2xl font-bold text-black dark:text-white">{word}</Text>
+      ) : null}
+
+      <View className="mt-3 flex-row items-center">
         <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
           {t('add_word.generating')}
         </Text>
@@ -1320,19 +1437,22 @@ function PartialCard({ partial, t }: { partial: PartialLookup; t: TFn }) {
           <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
             {t('add_word.meanings')}
           </Text>
-          {partial.meanings.map((m, i) => (
+          {partial.meanings.map((m, i) => {
+            const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+            return (
             <View
               key={i}
               className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
             >
-              {m.partOfSpeech ? (
-                <Text className="text-xs text-gray-500">{formatPOS(m.partOfSpeech, m.gender, i18n.language)}</Text>
+              {marker ? (
+                <Text className="text-xs text-gray-500">{marker}</Text>
               ) : null}
               <Text className="mt-1 text-base text-black dark:text-white">
                 {m.definition}
               </Text>
             </View>
-          ))}
+            );
+          })}
         </View>
       ) : null}
     </View>
@@ -1353,6 +1473,8 @@ function ResultCard({
   onReport?: () => void;
 }) {
   const { i18n } = useTranslation();
+  const colorScheme = useColorScheme();
+  const dark = colorScheme === 'dark';
   const { result } = response;
   const displayWord = result.headword || word;
 
@@ -1381,11 +1503,11 @@ function ResultCard({
   };
 
   return (
-    <View className="mt-4">
+    <View className="mt-2">
       {showCorrection ? (
-        <View className="mb-3 flex-row items-center rounded-xl bg-amber-50 px-3 py-2 dark:bg-amber-950">
-          <MaterialIcons name="auto-fix-high" size={16} color="#d97706" />
-          <Text className="ml-2 flex-1 text-xs text-amber-800 dark:text-amber-200">
+        <View className="mb-3 flex-row items-center rounded-xl bg-black px-3 py-2 dark:bg-white">
+          <MaterialIcons name="auto-fix-high" size={16} color={dark ? '#000' : '#fff'} />
+          <Text className="ml-2 flex-1 text-xs text-white dark:text-black">
             {t('add_word.did_you_mean').replace('{{word}}', corrected!)}
           </Text>
         </View>
@@ -1404,7 +1526,7 @@ function ResultCard({
             onPress={handleSpeak}
             className="rounded-full bg-gray-100 p-2 dark:bg-gray-800"
           >
-            <MaterialIcons name="volume-up" size={20} color="#10b981" />
+            <MaterialIcons name="volume-up" size={20} color="#2EC4A5" />
           </Pressable>
           {onReport ? (
             <Pressable onPress={onReport} className="ml-2 rounded-full bg-gray-100 p-2 dark:bg-gray-800">
@@ -1416,7 +1538,7 @@ function ResultCard({
       {result.reading ? (
         <ReadingDisplay reading={result.reading} sourceLang={sourceLang} word={displayWord} />
       ) : null}
-      {result.ipa ? (
+      {result.ipa && ipaSupported(sourceLang) ? (
         <Text className="mt-1 text-sm text-gray-400">{result.ipa}</Text>
       ) : null}
 
@@ -1434,17 +1556,22 @@ function ResultCard({
           {t('add_word.meanings')}
         </Text>
         {result.meanings?.length ? (
-          result.meanings.map((m, i) => (
+          result.meanings.map((m, i) => {
+            const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+            return (
             <View
               key={i}
               className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
             >
-              <Text className="text-xs text-gray-500">{formatPOS(m.partOfSpeech, m.gender, i18n.language)}</Text>
+              {marker ? (
+                <Text className="text-xs text-gray-500">{marker}</Text>
+              ) : null}
               <Text className="mt-1 text-base text-black dark:text-white">
                 {m.definition}
               </Text>
             </View>
-          ))
+            );
+          })
         ) : (
           <Text className="mt-2 text-sm text-gray-400">—</Text>
         )}

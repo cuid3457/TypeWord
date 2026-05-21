@@ -1,6 +1,6 @@
 import { router, Stack, useFocusEffect } from 'expo-router';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Keyboard,
@@ -20,17 +20,17 @@ import { AdBanner } from '@/components/ad-banner';
 
 import { STUDY_LANGUAGES, findLanguage, isStudyLang } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
-import { insertBook, getBookCount, FREE_BOOK_LIMIT } from '@src/db/queries';
-import { usePremium } from '@src/hooks/usePremium';
+import { insertBook, getBookCount, BOOK_LIMIT_BY_TIER } from '@src/db/queries';
+import { useTier } from '@src/hooks/usePremium';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { genId } from '@src/services/wordService';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 
-const MAX_TITLE_LENGTH = 40;
+const MAX_TITLE_LENGTH = 30;
 
 export default function NewWordlistScreen() {
   const { t, i18n } = useTranslation();
-  const premium = usePremium();
+  const tier = useTier();
   const { settings } = useUserSettings();
   const [title, setTitle] = useState('');
   const [studyLang, setStudyLang] = useState<string>(() => {
@@ -89,9 +89,10 @@ export default function NewWordlistScreen() {
       return;
     }
     if (!canSubmit) return;
-    if (!premium) {
+    const cap = BOOK_LIMIT_BY_TIER[tier];
+    if (Number.isFinite(cap)) {
       const count = await getBookCount();
-      if (count >= FREE_BOOK_LIMIT) {
+      if (count >= cap) {
         setShowPaywall(true);
         return;
       }
@@ -126,17 +127,14 @@ export default function NewWordlistScreen() {
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
           keyboardShouldPersistTaps="handled"
         >
-          <View className="flex-row items-center">
+          <View className="h-11 flex-row items-center">
             <Pressable onPress={() => { Keyboard.dismiss(); router.back(); }} className="mr-2 p-1">
               <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
             </Pressable>
-            <Text className="text-3xl font-bold text-black dark:text-white">
+            <Text className="text-base font-semibold text-black dark:text-white">
               {t('new_wordlist.title')}
             </Text>
           </View>
-          <Text className="mt-1 text-sm text-gray-500">
-            {t('new_wordlist.subtitle')}
-          </Text>
 
           <View className="mt-6">
             <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
@@ -149,7 +147,22 @@ export default function NewWordlistScreen() {
               placeholderTextColor="#9ca3af"
               maxLength={MAX_TITLE_LENGTH}
               className="mt-2 rounded-xl px-4 text-base text-black dark:text-white"
-              style={{ borderWidth: 2, borderColor: '#2EC4A5', height: 50, includeFontPadding: false, textAlignVertical: 'center' }}
+              style={[
+                { borderWidth: 2, borderColor: '#2EC4A5' },
+                // iOS line-box rules:
+                //   * text-base via NativeWind applies lineHeight: 24,
+                //     which on iOS leaves descender headroom and shifts
+                //     visible text below center.
+                //   * lineHeight = fontSize clips ascenders at the top.
+                //   * lineHeight ≈ fontSize × 1.25 is the standard iOS
+                //     UI value that keeps ascender + descender inside
+                //     the box AND centers cleanly.
+                // paddingVertical chosen so the total height (15+20+15
+                // ≈ 50) matches the Android height: 50 path visually.
+                Platform.OS === 'ios'
+                  ? { paddingVertical: 15, fontSize: 16, lineHeight: 20 }
+                  : { height: 50, includeFontPadding: false, textAlignVertical: 'center' },
+              ]}
             />
             {title.length >= MAX_TITLE_LENGTH - 10 ? (
               <Text className="mt-1 text-right text-xs text-gray-400">
@@ -172,7 +185,13 @@ export default function NewWordlistScreen() {
                 </Text>
                 <Text
                   className="mt-1 text-base text-black dark:text-white"
-                  style={{ lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
+                  // Android: tight box + remove font padding for crisp
+                  // alignment with the label above. iOS: skip the height
+                  // clamp — native text metrics handle centering and the
+                  // clamp would clip descenders.
+                  style={Platform.OS === 'ios'
+                    ? undefined
+                    : { lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
                   numberOfLines={1}
                 >
                   {studyLabel ? `${studyLabel.flag} ${t(`languages.${studyLabel.code}`)}` : '—'}
@@ -251,7 +270,9 @@ export default function NewWordlistScreen() {
                     </Text>
                     <Text
                       className="mt-1 text-base text-black dark:text-white"
-                      style={{ lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
+                      style={Platform.OS === 'ios'
+                        ? undefined
+                        : { lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
                       numberOfLines={1}
                     >
                       {transLabel ? `${transLabel.flag} ${t(`languages.${transLabel.code}`)}` : '—'}
@@ -317,7 +338,7 @@ export default function NewWordlistScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
       <AdBanner />
-      <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} />
+      <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} reason="books" />
     </SafeAreaView>
   );
 }

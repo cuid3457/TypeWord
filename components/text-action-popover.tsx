@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import {
   Dimensions,
   Modal,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -137,7 +138,9 @@ export function TextActionPopover({ state, onDismiss }: Props) {
                     color: '#fff',
                     fontSize: FONT_SIZE,
                     fontWeight: '600',
-                    includeFontPadding: false,
+                    // Android-only — strips extra font padding so the
+                    // popover's labels line up vertically with the icons.
+                    ...(Platform.OS === 'android' ? { includeFontPadding: false } : null),
                   }}
                 >
                   {b.label}

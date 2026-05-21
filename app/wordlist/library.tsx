@@ -2,8 +2,9 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, Stack, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTablet } from '@src/hooks/useTablet';
 
 import { AdBanner } from '@/components/ad-banner';
 import { Toast } from '@/components/toast';
@@ -31,6 +32,7 @@ const categoryIcon = (cat: string): keyof typeof MaterialIcons.glyphMap =>
 
 export default function WordlistLibraryScreen() {
   const { t, i18n } = useTranslation();
+  const { isTablet } = useTablet();
   // category param is optional now; the in-screen picker drives selection.
   // When provided (e.g. from a deep link), it seeds the initial pick.
   const params = useLocalSearchParams<{ category?: string }>();
@@ -107,15 +109,17 @@ export default function WordlistLibraryScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
-      <View className="flex-row items-center px-6 pt-2">
-        <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
-          <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
-        </Pressable>
-        <Text className="text-3xl font-bold text-black dark:text-white">
-          {t('library.title_browse')}
-        </Text>
+      <View className="px-6 pt-6">
+        <View className="h-11 flex-row items-center">
+          <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
+            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+          </Pressable>
+          <Text className="text-base font-semibold text-black dark:text-white">
+            {t('library.title_browse')}
+          </Text>
+        </View>
       </View>
 
       {loading ? (
@@ -153,7 +157,9 @@ export default function WordlistLibraryScreen() {
                       <MaterialIcons name={categoryIcon(activeCategory)} size={18} color="#6b7280" />
                       <Text
                         className="ml-2 text-base text-black dark:text-white"
-                        style={{ lineHeight: 24, includeFontPadding: false }}
+                        style={Platform.OS === 'ios'
+                          ? undefined
+                          : { lineHeight: 24, includeFontPadding: false }}
                         numberOfLines={1}
                       >
                         {t(`library.category_${activeCategory}`, { defaultValue: activeCategory })}
@@ -208,7 +214,9 @@ export default function WordlistLibraryScreen() {
                     </Text>
                     <Text
                       className="mt-1 text-base text-black dark:text-white"
-                      style={{ lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
+                      style={Platform.OS === 'ios'
+                        ? undefined
+                        : { lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
                       numberOfLines={1}
                     >
                       {activeLangMeta
@@ -255,9 +263,12 @@ export default function WordlistLibraryScreen() {
           </View>
 
           <FlatList
+            key={isTablet ? 'grid' : 'list'}
             data={filtered}
             keyExtractor={(it) => it.id}
-            contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
+            numColumns={isTablet ? 2 : 1}
+            columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
+            contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
             ListEmptyComponent={() => (
               <View className="items-center justify-center pt-16">
                 <MaterialIcons name="auto-stories" size={48} color="#9ca3af" />
@@ -283,7 +294,7 @@ export default function WordlistLibraryScreen() {
                   }
                   router.push({ pathname: '/wordlist/library/[id]', params: { id: item.id } });
                 }}
-                className="mb-3 flex-row items-center rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
+                className={`flex-row items-center rounded-2xl border border-gray-300 p-4 dark:border-gray-700 ${isTablet ? 'flex-1' : 'mb-3'}`}
                 style={item.wordCount === 0 ? { opacity: 0.55 } : undefined}
               >
                 <View className="h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">

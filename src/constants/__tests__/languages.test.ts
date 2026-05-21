@@ -1,8 +1,8 @@
 import { LANGUAGES, STUDY_LANGUAGES, isStudyLang, findLanguage, migrateNativeLang } from '../languages';
 
 describe('LANGUAGES', () => {
-  it('has 11 supported languages', () => {
-    expect(LANGUAGES).toHaveLength(11);
+  it('has 8 supported languages', () => {
+    expect(LANGUAGES).toHaveLength(8);
   });
 
   it('each language has required fields', () => {
@@ -21,19 +21,16 @@ describe('LANGUAGES', () => {
 });
 
 describe('STUDY_LANGUAGES', () => {
-  it('includes en, ko, ja, zh-CN, zh-TW, es, fr, de, it, pt, ru', () => {
+  it('includes en, ko, ja, zh-CN, es, fr, de, it', () => {
     const codes = STUDY_LANGUAGES.map((l) => l.code);
     expect(codes).toContain('en');
     expect(codes).toContain('ko');
     expect(codes).toContain('ja');
     expect(codes).toContain('zh-CN');
-    expect(codes).toContain('zh-TW');
     expect(codes).toContain('es');
     expect(codes).toContain('fr');
     expect(codes).toContain('de');
     expect(codes).toContain('it');
-    expect(codes).toContain('pt');
-    expect(codes).toContain('ru');
   });
 });
 

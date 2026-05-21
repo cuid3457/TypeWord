@@ -1,0 +1,881 @@
+{
+  "nullEntry": [],
+  "nonWord": [],
+  "emptyMeanings": [],
+  "emptyExamples": [],
+  "meaningCountDiffAcrossLangs": [
+    {
+      "word": "나",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "자기",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "그쪽",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "얼마나",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 1,
+        "it": 1
+      }
+    },
+    {
+      "word": "열",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "아침",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "저녁",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "날",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 1,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "오빠",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "가다",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "서다",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "찾다",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "나쁘다",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "가볍다",
+      "slug": "topik-1-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "입",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "발",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 1,
+        "it": 1
+      }
+    },
+    {
+      "word": "전화",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "아래",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "옆",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "운동",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "표",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "명",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 1,
+        "fr": 1,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "나가다",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "이상하다",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "구두",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "달",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 1,
+        "fr": 1,
+        "de": 1,
+        "it": 1
+      }
+    },
+    {
+      "word": "번호",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "앞",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "걸리다",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "끄다",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "다니다",
+      "slug": "topik-1-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "시키다",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "무섭다",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "밝다",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "금방",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "그럼",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "관계",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "마지막",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "문장",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "보이다",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "아가씨",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "열리다",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "원피스",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "유행",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "이용",
+      "slug": "topik-1-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "자식",
+      "slug": "topik-2-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "성적",
+      "slug": "topik-2-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "막히다",
+      "slug": "topik-2-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "주차",
+      "slug": "topik-2-part-1",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "뿌리",
+      "slug": "topik-2-part-1",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "심심하다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "기린",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "진하다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "선",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "방송",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "떨어지다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 1,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "잡다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 1,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "누르다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "떼다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "얕다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 1,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "진짜",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "사회",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 1,
+        "it": 2
+      }
+    },
+    {
+      "word": "조사하다",
+      "slug": "topik-2-part-2",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "현재",
+      "slug": "topik-2-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "가운데",
+      "slug": "topik-2-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 2,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    },
+    {
+      "word": "둘째",
+      "slug": "topik-2-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 1,
+        "es": 2,
+        "fr": 1,
+        "de": 2,
+        "it": 1
+      }
+    },
+    {
+      "word": "못하다",
+      "slug": "topik-2-part-3",
+      "counts": {
+        "en": 2,
+        "ja": 1,
+        "zh-CN": 2,
+        "es": 2,
+        "fr": 2,
+        "de": 2,
+        "it": 2
+      }
+    }
+  ],
+  "examplesMissingMarker": [],
+  "multipleMeaningsLooseSenses": []
+}

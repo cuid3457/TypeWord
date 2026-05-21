@@ -153,11 +153,11 @@ export default function InquiryScreen() {
         className="flex-1"
       >
         <ScrollView className="flex-1" contentContainerStyle={{ padding: 24, paddingBottom: 80 }} keyboardShouldPersistTaps="handled">
-          <View className="flex-row items-center">
+          <View className="h-11 flex-row items-center">
             <Pressable onPress={() => router.back()} className="mr-2 p-1">
               <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
             </Pressable>
-            <Text className="text-3xl font-bold text-black dark:text-white">
+            <Text className="text-base font-semibold text-black dark:text-white">
               {t('inquiry.title')}
             </Text>
           </View>

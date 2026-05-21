@@ -1,0 +1,1673 @@
+# delf-b1-part-2 (fr → ko) | 300 words
+
+vocation [ko] ipa=vɔkasjɔ̃ | meanings: 천직[명사] | 소명[명사]
+   e1: Elle a trouvé sa **vocation** dans l'enseignement. || 그녀는 가르치는 데에 자신의 **천직**을 찾았다.
+   e2: Il sent une forte **vocation** à aider les autres. || 그는 다른 사람들을 돕는 데 강한 **소명**을 느낀다.
+   syn: [appel, mission] | ant: []
+
+ambition [ko] ipa=ɑ̃bisjɔ̃ | meanings: 야망[명사] | 포부[명사]
+   e1: Son **ambition** est de devenir médecin. || 그의 **야망**은 의사가 되는 것이다.
+   e2: Elle nourrit une grande **ambition** pour son avenir. || 그녀는 자신의 미래에 대한 큰 **포부**를 품고 있다.
+   e3: L'**ambition** motive beaucoup de gens à travailler dur. || **야망**은 많은 사람들을 열심히 일하게 만든다.
+   syn: [désir, aspiration, rêve] | ant: []
+
+réussite professionnelle [ko] ipa=- | meanings: 직업적 성공[표현]
+   e1: La **réussite professionnelle** demande du travail et de la patience. || **직업적 성공**은 노력과 인내를 필요로 합니다.
+   e2: Elle célèbre sa **réussite professionnelle** avec ses amis. || 그녀는 친구들과 함께 **직업적 성공**을 축하합니다.
+   syn: [succès professionnel, ascension professionnelle] | ant: []
+
+épanouissement [ko] ipa=epanwisɛmɑ̃ | meanings: 개화[명사] | 발달, 성장[명사]
+   e1: L'**épanouissement** des fleurs annonce le printemps. || 꽃들의 **개화**는 봄을 알린다.
+   e2: L'**épanouissement** personnel est important pour le bonheur. || 개인의 **발달**은 행복에 중요하다.
+   e3: L'**épanouissement** des enfants demande du temps et de l'attention. || 아이들의 **성장**은 시간과 관심이 필요하다.
+   syn: [floraison, éclosion, développement, croissance] | ant: []
+
+épanouir [ko] ipa=epanwiʁ | meanings: 피다, 활짝 피다[동사] | 펼치다, 넓히다[동사]
+   e1: La fleur commence à **s'épanouir** au printemps. || 그 꽃은 봄에 **피기** 시작한다.
+   e2: Le jardinier veut **épanouir** les boutons de rose. || 정원사는 장미 꽃봉오리를 **활짝 피우고** 싶다.
+   e3: Elle a su **épanouir** son talent artistique. || 그녀는 자신의 예술적 재능을 잘 **펼쳤다**.
+   syn: [fleurir, s'épanouir, déployer] | ant: []
+
+reconversion [ko] ipa=ʁəkɔ̃vɛʁsjɔ̃ | meanings: 재취업[명사] | 전직[명사]
+   e1: La **reconversion** est importante après un licenciement. || 해고 후에는 **재취업**이 중요하다.
+   e2: Il a réussi sa **reconversion** dans un nouveau métier. || 그는 새로운 직업으로 성공적인 **전직**을 했다.
+   syn: [réorientation professionnelle, changement de carrière] | ant: []
+
+reconvertir [ko] ipa=ʁəkɔ̃vɛʁtiʁ | meanings: 다시 변환하다[동사]
+   e1: Ils ont décidé de **reconvertir** le vieux bâtiment en musée. || 그들은 오래된 건물을 박물관으로 **다시 변환**하기로 결정했다.
+   e2: L'usine a été **reconvertie** pour produire de l'énergie solaire. || 공장은 태양광 에너지를 생산하도록 **다시 변환**되었다.
+   syn: [transformer, changer, adapter] | ant: []
+
+spécialisation [ko] ipa=spe­sja­li­za­sjɔ̃ | meanings: 전문화[명사]
+   e1: La **spécialisation** en médecine demande beaucoup d'études. || 의학에서의 **전문화**는 많은 공부를 필요로 해요.
+   e2: Sa **spécialisation** est en droit international. || 그의 **전문화**는 국제법에 있어요.
+   syn: [expertise, spécialité, profiliation] | ant: []
+
+spécialiser [ko] ipa=spe.sja.li.ze | meanings: 전공하다[동사]
+   e1: Elle **se spécialise** en droit international. || 그녀는 국제법을 **전공한다**.
+   e2: Il veut **se spécialiser** dans la médecine générale. || 그는 일반 의학을 **전공하고** 싶어한다.
+   syn: [se consacrer, se dédier, se focaliser] | ant: []
+
+compétence professionnelle [ko] ipa=- | meanings: 직업 능력[표현]
+   e1: La **compétence professionnelle** est essentielle pour ce travail. || 이 일에는 **직업 능력**이 필수적입니다.
+   e2: Elle a amélioré sa **compétence professionnelle** grâce à la formation. || 그녀는 교육을 통해 **직업 능력**을 향상시켰습니다.
+   syn: [qualification professionnelle, aptitude professionnelle] | ant: []
+
+qualification [ko] ipa=kwali.fika.sjɔ̃ | meanings: 자격[명사] | 예선 경기[명사]
+   e1: La **qualification** est nécessaire pour ce poste. || 이 직책에는 **자격**이 필요합니다.
+   e2: L'équipe a gagné la **qualification** pour la finale. || 그 팀은 결승전에 가기 위한 **예선**을 통과했습니다.
+   e3: Sa **qualification** prouve son expertise. || 그의 **자격**은 그의 전문성을 증명합니다.
+   syn: [certification, aptitude, admission] | ant: []
+
+qualifié [ko] ipa=ka.li.fje | meanings: 자격을 갖춘[형용사]
+   e1: Elle est une personne **qualifiée** pour ce poste. || 그녀는 이 직책에 **자격을 갖춘** 사람입니다.
+   e2: Le travail exige un employé **qualifié**. || 그 일은 **자격을 갖춘** 직원을 요구합니다.
+   syn: [compétent, apte, habilité] | ant: []
+
+diplômé [ko] ipa=dip.lɔ.me | meanings: 졸업생[명사]
+   e1: Le **diplômé** a célébré sa réussite avec sa famille. || 그 **졸업생**은 가족과 함께 성공을 축하했다.
+   e2: Chaque **diplômé** reçoit un certificat officiel. || 모든 **졸업생**은 공식 증명서를 받는다.
+   syn: [lauréat, licencié] | ant: []
+
+expertise [ko] ipa=ɛks.pɛʁ.tiz | meanings: 전문 지식[명사] | 감정, 평가[명사]
+   e1: Son **expertise** en informatique est très utile. || 그의 컴퓨터 분야 **전문성**은 매우 유용합니다.
+   e2: L'**expertise** du tableau a confirmé son authenticité. || 그림에 대한 **감정**으로 진품임이 확인되었습니다.
+   syn: [compétence, savoir-faire, analyse, évaluation] | ant: []
+
+expert [ko] ipa=ɛkspɛʁ | meanings: 전문가[명사] | 능숙한[형용사]
+   e1: L'**expert** a donné une analyse claire. || **전문가**가 명확한 분석을 했다.
+   e2: Elle est très **experte** en informatique. || 그녀는 컴퓨터에 매우 **능숙하다**.
+   syn: [spécialiste, professionnel, maître] | ant: []
+
+consultant [ko] ipa=kɔ̃syltɑ̃ | meanings: 컨설턴트[명사]
+   e1: Le **consultant** a donné des conseils précieux. || 그 **컨설턴트**는 귀중한 조언을 주었다.
+   e2: Nous avons engagé un **consultant** pour ce projet. || 우리는 이 프로젝트를 위해 **컨설턴트**를 고용했다.
+   syn: [conseiller, expert, spécialiste] | ant: []
+
+conseil [ko] ipa=kɔ̃sɛj | meanings: 충고[명사] | 위원회[명사]
+   e1: Il donne toujours un **conseil**. || 그는 항상 좋은 **충고**를 한다.
+   e2: Le **conseil** a décidé de la nouvelle règle. || **위원회**가 새로운 규칙을 결정했다.
+   e3: Je cherche un **conseil** pour améliorer mon français. || 나는 프랑스어를 향상시키기 위한 **충고**를 찾고 있다.
+   syn: [recommandation, avis, suggestion, committee, assemblée] | ant: []
+
+stage rémunéré [ko] ipa=- | meanings: 유급 인턴십[명사]
+   e1: Elle a trouvé un **stage rémunéré** cet été. || 그녀는 이번 여름에 **유급 인턴십**을 찾았어요.
+   e2: Le **stage rémunéré** aide les étudiants à gagner de l'argent. || **유급 인턴십**은 학생들이 돈을 벌도록 돕습니다.
+   e3: Ils offrent un **stage rémunéré** dans cette entreprise. || 그들은 이 회사에서 **유급 인턴십**을 제공합니다.
+   syn: [stage payé, mission rémunérée] | ant: []
+
+stage non rémunéré [ko] ipa=- | meanings: 무급 인턴십[표현]
+   e1: Elle a fait un **stage non rémunéré** cet été. || 그녀는 이번 여름에 **무급 인턴십**을 했다.
+   e2: Un **stage non rémunéré** peut offrir une bonne expérience. || **무급 인턴십**은 좋은 경험을 제공할 수 있다.
+   e3: Il commence un **stage non rémunéré** en marketing. || 그는 마케팅 분야에서 **무급 인턴십**을 시작한다.
+   syn: [] | ant: []
+
+alternance [ko] ipa=altɛʁnɑ̃s | meanings: 교대[명사] | 산학연계 교육[명사]
+   e1: L'**alternance** des jours et des nuits est naturelle. || 낮과 밤의 **교대**는 자연스럽다.
+   e2: Il suit une formation en **alternance** cette année. || 그는 올해 **산학연계 교육**을 받고 있다.
+   e3: L'**alternance** des saisons change le paysage. || 계절의 **교대**는 경치를 바꾼다.
+   syn: [rotation, changement, variation] | ant: []
+
+tuteur [ko] ipa=tytœʁ | meanings: 후견인[명사] | 지주대[명사]
+   e1: Le **tuteur** aide l'enfant à apprendre. || 그 **후견인**은 아이가 배우도록 도와줍니다.
+   e2: Le **tuteur** soutient la plante dans le jardin. || 그 **지주대**는 정원에서 식물을 지탱합니다.
+   syn: [protecteur, gardien, support] | ant: []
+
+rapport [ko] ipa=ʁa.pɔʁ | meanings: 보고서[명사] | 관계[명사]
+   e1: J'ai écrit un **rapport** sur le projet. || 나는 그 프로젝트에 관한 **보고서**를 썼어요.
+   e2: Ils ont un bon **rapport** entre eux. || 그들은 서로 좋은 **관계**를 가지고 있어요.
+   e3: Le **rapport** présente les résultats annuels. || **보고서**는 연간 결과를 보여줍니다.
+   syn: [compte rendu, relation, liaison] | ant: []
+
+bilan [ko] ipa=bilɑ̃ | meanings: 결산, 대차대조표[명사] | 평가, 총괄[명사]
+   e1: Le **bilan** financier montre un excédent cette année. || 재무 **결산**은 올해 흑자를 보여준다.
+   e2: Le **bilan** de la réunion sera envoyé demain. || 회의의 **총괄**은 내일 발송될 것이다.
+   e3: Elle prépare le **bilan** annuel de l'entreprise. || 그녀는 회사의 연간 **결산**을 준비하고 있다.
+   syn: [compte, rapport, état] | ant: []
+
+évaluation [ko] ipa=evalɥasjɔ̃ | meanings: 평가[명사]
+   e1: L'**évaluation** des élèves a lieu en juin. || 학생들의 **평가**는 6월에 있습니다.
+   e2: Il a fait une **évaluation** juste de la situation. || 그는 상황에 대해 공정한 **평가**를 했습니다.
+   e3: L'**évaluation** annuelle mesure le progrès. || 연례 **평가**는 진전을 측정합니다.
+   syn: [appréciation, estimation, jugement] | ant: []
+
+évaluer [ko] ipa=evalɥe | meanings: 평가하다[동사]
+   e1: Nous devons **évaluer** les résultats du projet. || 우리는 프로젝트 결과를 **평가**해야 합니다.
+   e2: Le professeur va **évaluer** les devoirs demain. || 선생님은 내일 숙제를 **평가**할 것입니다.
+   e3: Il faut **évaluer** les compétences avant l'entretien. || 면접 전에 능력을 **평가**해야 합니다.
+   syn: [apprécier, estimer, juger] | ant: []
+
+appréciation [ko] ipa=apʁesjasjɔ̃ | meanings: 감사[명사] | 평가[명사]
+   e1: J'ai une grande **appréciation** pour son aide. || 나는 그의 도움에 대해 큰 **감사**를 느낀다.
+   e2: L'**appréciation** du projet a été positive. || 그 프로젝트에 대한 **평가**가 긍정적이었다.
+   syn: [reconnaissance, estimation, jugement] | ant: []
+
+réprimander [ko] ipa=ʁepʁimɑ̃de | meanings: 꾸짖다[동사] | 책망하다[동사]
+   e1: Le professeur a **réprimandé** l'élève avec douceur. || 선생님이 학생을 부드럽게 **꾸짖었다**.
+   e2: La mère **réprimande** souvent son enfant pour ses erreurs. || 어머니가 아이의 실수에 대해 자주 **책망한다**.
+   syn: [gronder, blâmer, admonester] | ant: []
+
+sanction [ko] ipa=sɑ̃ksjɔ̃ | meanings: 처벌[명사] | 인가[명사]
+   e1: La **sanction** est nécessaire pour maintenir l'ordre. || 질서를 유지하기 위해 **처벌**이 필요하다.
+   e2: Le gouvernement a donné sa **sanction** au projet. || 정부가 그 계획에 **인가**를 내렸다.
+   e3: Il a reçu une **sanction** pour son comportement. || 그는 행동 때문에 **처벌**을 받았다.
+   syn: [punition, réprimande, amen] | ant: []
+
+sanctionner [ko] ipa=sɑ̃ksjɔnɛʁ | meanings: 처벌하다[동사] | 인가하다[동사]
+   e1: Le juge a **sanctionné** le comportement illégal. || 판사는 불법 행위를 **처벌했다**.
+   e2: Le comité a **sanctionné** le projet après discussion. || 위원회는 논의 후에 그 계획을 **인가했다**.
+   syn: [punir, réprimer, châtier, valider, approuver] | ant: []
+
+augmentation [ko] ipa=oɡmɑ̃tasjɔ̃ | meanings: 증가[명사] | 임금 인상[명사]
+   e1: L'**augmentation** des fleurs rend le jardin plus beau. || 꽃의 **증가**가 정원을 더 아름답게 만듭니다.
+   e2: Il a reçu une **augmentation** de salaire ce mois-ci. || 그는 이번 달에 **인상**을 받았습니다.
+   e3: L'**augmentation** de la population demande plus de ressources. || 인구의 **증가**가 더 많은 자원을 필요로 합니다.
+   syn: [hausse, croissance, progrès, majoration] | ant: [diminution, baisse, réduction]
+
+prime [ko] ipa=pʁim | meanings: 상여금, 보너스[명사] | 보험료[명사]
+   e1: L'entreprise donne une **prime** annuelle à ses employés. || 회사는 직원들에게 연간 **상여금**을 지급합니다.
+   e2: Il a reçu une **prime** pour son excellent travail. || 그는 훌륭한 일에 대해 **보너스**를 받았습니다.
+   e3: La **prime** d'assurance augmente chaque année. || **보험료**는 매년 증가합니다.
+   syn: [bonus,  gratification,  indemnité] | ant: []
+
+indemnité [ko] ipa=ɛ̃dɛmnite | meanings: 보상금[명사] | 배상금[명사]
+   e1: Il a reçu une **indemnité** pour le dommage subi. || 그는 피해를 입은 것에 대해 **보상금**을 받았다.
+   e2: L'**indemnité** a été versée après le litige. || 분쟁 후에 **배상금**이 지급되었다.
+   syn: [compensation, dédommagement, réparation] | ant: []
+
+indemnisation [ko] ipa=ɛ̃dɛmnizasjɔ̃ | meanings: 보상[명사] | 배상[명사]
+   e1: L'**indemnisation** couvre les frais médicaux. || **보상**은 의료비를 포함합니다.
+   e2: L'**indemnisation** a été versée après l'accident. || 사고 후에 **배상금**이 지급되었습니다.
+   syn: [compensation, réparation] | ant: []
+
+lettre de motivation [ko] ipa=- | meanings: 자기소개서[명사]
+   e1: J'ai écrit une **lettre de motivation** pour postuler au travail. || 나는 일자리에 지원하기 위해 **자기소개서**를 썼다.
+   e2: La **lettre de motivation** doit être claire et concise. || **자기소개서**는 명확하고 간결해야 한다.
+   e3: Elle a envoyé sa **lettre de motivation** avec son CV. || 그녀는 이력서와 함께 **자기소개서**를 보냈다.
+   syn: [fiche de motivation, lettre d'accompagnement] | ant: []
+
+lauréat [ko] ipa=loʁeɑ | meanings: 수상자[명사]
+   e1: Le **lauréat** a reçu son prix avec émotion. || **수상자**가 감격으로 상을 받았다.
+   e2: Le **lauréat** du concours a partagé sa joie. || 대회 **수상자**가 기쁨을 나누었다.
+   e3: Chaque année, un nouveau **lauréat** est annoncé. || 매년 새로운 **수상자**가 발표된다.
+   syn: [gagnant, récompensé, primé] | ant: []
+
+embauche [ko] ipa=ɑ̃boʃ | meanings: 고용[명사] | 채용[명사]
+   e1: L'**embauche** a eu lieu hier dans l'entreprise. || 어제 회사에서 **고용**이 이루어졌다.
+   e2: Le processus d'**embauche** est très compétitif. || **채용** 과정은 매우 경쟁적이다.
+   syn: [recrutement, engagement] | ant: []
+
+période d'essai [ko] ipa=- | meanings: 시험 기간[표현]
+   e1: J'ai commencé ma **période d'essai** cette semaine. || 나는 이번 주에 **시험 기간**을 시작했어요.
+   e2: La **période d'essai** permet d'évaluer les compétences. || **시험 기간**은 역량을 평가하는 데 도움이 됩니다.
+   syn: [] | ant: []
+
+titularisation [ko] ipa=titylaʁizasjɔ̃ | meanings: 정규직 전환[명사]
+   e1: La **titularisation** offre une sécurité d'emploi aux salariés. || **정규직 전환**은 근로자에게 고용 안정성을 제공합니다.
+   e2: Après la **titularisation**, elle a obtenu de meilleurs avantages sociaux. || **정규직 전환** 후에 그녀는 더 좋은 사회적 혜택을 받았습니다.
+   e3: La procédure de **titularisation** peut être longue mais importante. || **정규직 전환** 절차는 길지만 중요합니다.
+   syn: [permanence, stabilisation] | ant: []
+
+titulariser [ko] ipa=titylaʁize | meanings: 정규직으로 임명하다[동사]
+   e1: L'école va **titulariser** de nouveaux enseignants bientôt. || 학교가 곧 새로운 교사들을 **정규직으로 임명할** 것입니다.
+   e2: Le gouvernement a décidé de **titulariser** ces employés temporaires. || 정부는 이 임시 직원들을 **정규직으로 임명하기로** 결정했습니다.
+   syn: [nommer, officialiser, intégrer] | ant: []
+
+progresser [ko] ipa=pʁɔɡʁese | meanings: 진보하다[동사] | 전진하다[동사]
+   e1: Elle **progresse** rapidement en français. || 그녀는 프랑스어에서 빠르게 **진보합니다**.
+   e2: Nous **progressons** vers la montagne doucement. || 우리는 천천히 산을 향해 **전진하고** 있습니다.
+   e3: Il faut **progresser** chaque jour pour réussir. || 성공하려면 매일 **진보해야** 합니다.
+   syn: [avancer, évoluer] | ant: []
+
+progression [ko] ipa=pʁɔɡʁɛsjɔ̃ | meanings: 진행[명사] | 발전[명사]
+   e1: La **progression** du chantier est rapide. || 공사의 **진행**이 빠르다.
+   e2: La **progression** des compétences est visible. || 능력의 **발전**이 눈에 띈다.
+   syn: [avancement, évolution, croissance] | ant: []
+
+avancement [ko] ipa=avãsmɑ̃ | meanings: 진행[명사] | 승진[명사]
+   e1: L'**avancement** du projet est plus rapide que prévu. || 프로젝트의 **진행**이 예상보다 빠르다.
+   e2: Elle a reçu un **avancement** au travail hier. || 그녀는 어제 직장에서 **승진**했다.
+   e3: L'**avancement** dans ses études est remarquable. || 그의 학업에서의 **진행**이 눈에 띈다.
+   syn: [progrès, avancée, évolution] | ant: []
+
+rétrogradation [ko] ipa=ʁetʁɔɡʁadasjɔ̃ | meanings: 후퇴[명사] | 역행[명사]
+   e1: La **rétrogradation** de l'équipe a surpris les supporters. || 팀의 **후퇴**가 팬들을 놀라게 했다.
+   e2: La planète subit une **rétrogradation** visible dans le ciel. || 행성은 하늘에서 보이는 **역행**을 경험한다.
+   syn: [recul, dégradation, déraillement] | ant: []
+
+désigner [ko] ipa=dezɪɲe | meanings: 지명하다, 지정하다[동사] | 표시하다, 가리키다[동사]
+   e1: Ils vont **désigner** un nouveau représentant. || 그들은 새로운 대표를 **지명할** 것이다.
+   e2: La flèche **désigne** l'entrée principale. || 화살표는 정문을 **가리킨다**.
+   e3: Le président **désigne** le chef du comité. || 회장은 위원장을 **지정한다**.
+   syn: [nommer, choisir, indiquer, montrer] | ant: []
+
+déléguer [ko] ipa=deleɡe | meanings: 위임하다[동사] | 대표를 파견하다[동사]
+   e1: Le chef a **délégué** la tâche à son assistant. || 사장이 일을 그의 조수에게 **위임했다**.
+   e2: Ils vont **déléguer** un représentant à la conférence. || 그들은 회의에 **대표를 파견할** 것이다.
+   e3: Elle a **délégué** ses responsabilités pour mieux se concentrer. || 그녀는 집중을 위해 자신의 책임을 **위임했다**.
+   syn: [mandater, attribuer, confier, charger] | ant: []
+
+délégation [ko] ipa=deleɡasjɔ̃ | meanings: 대표단[명사] | 위임[명사]
+   e1: La **délégation** est arrivée pour la conférence. || 그 **대표단**은 회의에 도착했다.
+   e2: La **délégation** de pouvoirs est officielle. || 권한의 **위임**이 공식적이다.
+   e3: La **délégation** discute les accords internationaux. || **대표단**은 국제 협약을 논의한다.
+   syn: [représentation, mandat, mission] | ant: []
+
+responsabiliser [ko] ipa=ʁɛspɔ̃sabilize | meanings: 책임을 지게 하다[동사]
+   e1: Le projet vise à **responsabiliser** chaque participant. || 이 프로젝트는 모든 참가자가 **책임지도록** 하는 것을 목표로 합니다.
+   e2: Il faut **responsabiliser** les jeunes dès leur enfance. || 어린 시절부터 청소년을 **책임지게** 해야 합니다.
+   e3: Cette formation aide à **responsabiliser** les employés au travail. || 이 교육은 직원들이 업무에서 **책임지도록** 하는 데 도움을 줍니다.
+   syn: [rendre responsable, impliquer] | ant: []
+
+autonomie [ko] ipa=otɔnɔmi | meanings: 자율성[명사] | 자치[명사]
+   e1: L'**autonomie** est essentielle pour grandir. || **자율성**은 성장에 필수적입니다.
+   e2: Cette région revendique plus d'**autonomie** politique. || 이 지역은 더 많은 **자치**를 요구합니다.
+   e3: Il souhaite maintenir son **autonomie** au travail. || 그는 직장에서 자신의 **자율성**을 유지하고 싶어합니다.
+   syn: [indépendance, liberté, auto-gestion] | ant: []
+
+littérature [ko] ipa=liteʁatyʁ | meanings: 문학[명사]
+   e1: J'aime lire la **littérature** classique française. || 나는 프랑스 고전 **문학**을 읽는 것을 좋아해요.
+   e2: La **littérature** moderne explore de nouveaux thèmes. || 현대 **문학**은 새로운 주제를 탐구해요.
+   e3: Elle étudie la **littérature** à l'université. || 그녀는 대학에서 **문학**을 공부해요.
+   syn: [écriture, lettres, œuvres] | ant: []
+
+littéraire [ko] ipa=li.tɛ.ʁɛʁ | meanings: 문학의[형용사] | 문학가[명사]
+   e1: Ce roman a une grande valeur **littéraire**. || 이 소설은 큰 **문학적** 가치를 지녔어요.
+   e2: Elle est une auteure **littéraire** reconnue. || 그녀는 인정받는 **문학가**입니다.
+   e3: Les critiques ont loué son style **littéraire**. || 비평가들은 그의 **문학적** 스타일을 칭찬했어요.
+   syn: [érudit, cultivé, écrivain] | ant: []
+
+œuvre [ko] ipa=œvʁ | meanings: 작품[명사] | 일[명사]
+   e1: L'**œuvre** de l'artiste est exposée au musée. || 그 예술가의 **작품**이 박물관에 전시되어 있다.
+   e2: Elle a terminé son **œuvre** avec passion. || 그녀는 열정을 가지고 자신의 **작품**을 완성했다.
+   e3: Cette **œuvre** demande beaucoup d'efforts. || 이 **일**은 많은 노력을 요구한다.
+   syn: [travail, création, production, ouvrage] | ant: []
+
+auteur [ko] ipa=otœʁ | meanings: 작가[명사] | 저자[명사]
+   e1: Cet **auteur** a publié un nouveau roman. || 이 **작가**는 새로운 소설을 출판했습니다.
+   e2: L'**auteur** de ce livre est très célèbre. || 이 책의 **저자**는 매우 유명합니다.
+   e3: L'**auteur** a donné une conférence intéressante. || **저자**가 재미있는 강연을 했습니다.
+   syn: [écrivain, romancier, scribe] | ant: []
+
+écrivaine [ko] ipa=ekʁivɛn | meanings: 여성 작가[명사]
+   e1: L'**écrivaine** a publié son nouveau roman. || **여성 작가**가 새 소설을 출판했어요.
+   e2: Cette **écrivaine** est reconnue pour ses histoires inspirantes. || 이 **여성 작가**는 감동적인 이야기로 인정받고 있어요.
+   e3: J'ai rencontré une **écrivaine** lors du salon du livre. || 책 박람회에서 한 **여성 작가**를 만났어요.
+   syn: [femme écrivain, auteure] | ant: []
+
+poète [ko] ipa=pwat | meanings: 시인[명사]
+   e1: Le **poète** a écrit un beau poème sur la nature. || **시인**은 자연에 관한 아름다운 시를 썼다.
+   e2: Mon frère rêve de devenir un grand **poète**. || 내 형은 훌륭한 **시인**이 되기를 꿈꾼다.
+   e3: Le festival célèbre les œuvres de chaque **poète** local. || 축제는 각 지역 **시인**들의 작품을 기념한다.
+   syn: [poétesse, barde] | ant: []
+
+poétesse [ko] ipa=pɔ.etɛs | meanings: 여성 시인[명사]
+   e1: La **poétesse** a publié un nouveau recueil. || **여성 시인**이 새 시집을 출간했습니다.
+   e2: Elle est reconnue comme une grande **poétesse**. || 그녀는 위대한 **여성 시인**으로 인정받고 있습니다.
+   syn: [poète (féminin)] | ant: []
+
+poésie [ko] ipa=pɔ.e.zi | meanings: 시[명사]
+   e1: Elle écrit une **poésie** sur la nature. || 그녀는 자연에 관한 **시**를 쓴다.
+   e2: La **poésie** exprime des émotions profondes. || **시**는 깊은 감정을 표현한다.
+   syn: [poème, vers, lyrisme] | ant: []
+
+poème [ko] ipa=pɔ.ɛm | meanings: 시[명사]
+   e1: J'ai écrit un **poème** pour ma mère. || 나는 엄마를 위해 **시**를 썼어요.
+   e2: Le **poème** parle de l'amour et de la nature. || **시**는 사랑과 자연에 대해 이야기합니다.
+   e3: Elle lit un **poème** pour la classe. || 그녀는 학급에서 **시**를 낭독합니다.
+   syn: [vers, poésie, chant] | ant: []
+
+vers [ko] ipa=vɛʁ | meanings: 쪽, 방향[전치사] | 벌레, 구더기[명사]
+   e1: Il marche **vers** la plage au coucher du soleil. || 그는 해질녘에 해변 **쪽**으로 걸어간다.
+   e2: Nous avons trouvé des **vers** dans le composteur du jardin. || 우리는 정원의 퇴비통에서 **구더기**를 발견했다.
+   e3: Elle s'est dirigée **vers** la sortie en souriant. || 그녀는 미소를 지으며 출구 **쪽**으로 향했다.
+   syn: [] | ant: []
+
+rime [ko] ipa=ʁim | meanings: 운[명사] | 시[명사]
+   e1: Cette poésie a une belle **rime**. || 이 시는 아름다운 **운**을 가지고 있습니다.
+   e2: La **rime** rend le poème mélodieux. || **운**이 시를 감미롭게 만듭니다.
+   e3: Il a écrit une **rime** simple mais touchante. || 그는 단순하지만 감동적인 **시**를 썼습니다.
+   syn: [assonance, vers, poésie] | ant: []
+
+strophe [ko] ipa=stʁɔf | meanings: 연[명사]
+   e1: La **strophe** de ce poème est courte et rythmée. || 이 시의 **연**은 짧고 리듬감 있다.
+   e2: Chaque **strophe** exprime une émotion différente. || 각 **연**은 서로 다른 감정을 표현한다.
+   e3: Ils chantent la première **strophe** de la chanson ensemble. || 그들은 노래의 첫 번째 **연**을 함께 부른다.
+   syn: [vers] | ant: []
+
+roman [ko] ipa=ʁɔ.mɑ̃ | meanings: 소설[명사] | 로마의, 로마 사람[형용사]
+   e1: J'ai lu un **roman** passionnant hier. || 나는 어젯밤에 흥미로운 **소설**을 읽었다.
+   e2: L'architecture **romane** est magnifique en France. || 프랑스에는 **로마식** 건축물이 아름답다.
+   e3: Ce **roman** raconte une histoire d'amour à Paris. || 이 **소설**은 파리의 사랑 이야기를 다룬다.
+   syn: [livre, texte, histoire] | ant: []
+
+romancier [ko] ipa=ʁɔmɑ̃sje | meanings: 소설가[명사]
+   e1: Le **romancier** a publié un nouveau livre. || **소설가**가 새 책을 출간했다.
+   e2: Elle admire le style du **romancier** célèbre. || 그녀는 유명한 **소설가**의 스타일을 존경한다.
+   e3: Le **romancier** a gagné un prix important. || **소설가**가 중요한 상을 받았다.
+   syn: [écrivain, auteur, narrateur] | ant: []
+
+nouvelle [ko] ipa=nu.vɛl | meanings: 소식[명사] | 뉴스[명사]
+   e1: J'ai reçu une **nouvelle** importante ce matin. || 나는 오늘 아침에 중요한 **소식**을 받았다.
+   e2: La **nouvelle** du jour est intéressante. || 오늘의 **뉴스**가 흥미롭다.
+   e3: Cette **nouvelle** change tout pour nous. || 이 **소식**이 우리에게 모든 것을 바꾼다.
+   syn: [information, communiqué, actualité] | ant: []
+
+récit [ko] ipa=ʁesi | meanings: 이야기, 서술[명사]
+   e1: Le **récit** de voyage était fascinant. || 그 **이야기**는 아주 매력적이었어요.
+   e2: Elle a partagé son **récit** avec enthousiasme. || 그녀는 열정적으로 자신의 **서술**을 나눴어요.
+   e3: Le **récit** de ses aventures a captivé tout le monde. || 그의 모험에 대한 **이야기**는 모두를 사로잡았어요.
+   syn: [histoire, conte, narration] | ant: []
+
+conte [ko] ipa=kɔ̃t | meanings: 이야기[명사]
+   e1: Elle raconte un **conte** merveilleux. || 그녀는 아름다운 **이야기**를 들려준다.
+   e2: Le **conte** fait rêver les enfants. || **이야기**는 아이들을 꿈꾸게 한다.
+   e3: Ce vieux **conte** est plein de sagesse. || 이 오래된 **이야기**는 지혜로 가득하다.
+   syn: [histoire, récit, fable] | ant: []
+
+fable [ko] ipa=fabl | meanings: 우화[명사] | 이야기[명사]
+   e1: La **fable** enseigne une morale importante aux enfants. || 그 **우화**는 아이들에게 중요한 교훈을 가르친다.
+   e2: Elle a raconté une **fable** pleine d'imagination. || 그녀는 상상력이 풍부한 **이야기**를 들려주었다.
+   syn: [conte, allégorie, récit] | ant: []
+
+mythologie [ko] ipa=mitɔlɔʒi | meanings: 신화학[명사]
+   e1: La **mythologie** grecque est fascinante. || 그리스 **신화학**은 매혹적이에요.
+   e2: Elle étudie la **mythologie** ancienne. || 그녀는 고대 **신화학**을 연구해요.
+   e3: La **mythologie** explique des croyances culturelles. || **신화학**은 문화적 믿음을 설명해요.
+   syn: [mythes, légendes, traditions] | ant: []
+
+épopée [ko] ipa=epɔpe | meanings: 서사시[명사]
+   e1: Nous lisons une **épopée** ancienne à l'école. || 우리는 학교에서 오래된 **서사시**를 읽어요.
+   e2: L'**épopée** raconte les aventures d'un héros célèbre. || **서사시**는 유명한 영웅의 모험을 이야기해요.
+   syn: [chant épique, poème heroïque] | ant: []
+
+tragédie [ko] ipa=tʁaʒedi | meanings: 비극[명사]
+   e1: La **tragédie** a bouleversé toute la communauté. || 그 **비극**은 전체 공동체를 뒤흔들었다.
+   e2: Cette pièce est une véritable **tragédie** classique. || 이 연극은 진정한 고전적인 **비극**이다.
+   syn: [drame, catastrophe, malheur] | ant: []
+
+comédie [ko] ipa=kɔmedi | meanings: 희극[명사] | 코메디[명사]
+   e1: La **comédie** de ce spectacle m'a beaucoup fait rire. || 이 공연의 **희극**은 나를 많이 웃게 했다.
+   e2: J'aime regarder la **comédie** à la télévision le soir. || 나는 저녁에 텔레비전에서 **코메디**를 보는 것을 좋아한다.
+   e3: La **comédie** classique repose sur des situations comiques. || 고전 **희극**은 코믹한 상황에 기초한다.
+   syn: [farce, bouffonnerie, satire] | ant: []
+
+drame [ko] ipa=dʁam | meanings: 극, 비극[명사]
+   e1: Le **drame** a ému tout le public. || 그 **드라마는** 모든 관객을 감동시켰어요.
+   e2: Cette pièce est un grand **drame** français. || 이 연극은 위대한 프랑스 **비극**이에요.
+   e3: Le film raconte un **drame** familial intense. || 그 영화는 강렬한 가족 **비극**을 이야기해요.
+   syn: [tragédie, catastrophe, calamité] | ant: []
+
+essai [ko] ipa=ɛsɛ | meanings: 시험, 시도[명사] | 에세이, 수필[명사]
+   e1: J'ai réussi mon premier **essai**. || 나는 첫 **시험**에 합격했어요.
+   e2: Son **essai** parle de la nature. || 그의 **수필**은 자연에 대해 이야기해요.
+   e3: Le scientifique fait un **essai** important. || 과학자가 중요한 **시도**를 하고 있어요.
+   syn: [tentative, test, épreuve, texte, récit] | ant: []
+
+biographie [ko] ipa=bjɔɡʁafi | meanings: 전기[명사]
+   e1: Cette **biographie** raconte la vie d'un grand artiste. || 이 **전기**는 위대한 예술가의 삶을 이야기합니다.
+   e2: Je lis une **biographie** pour mieux comprendre son parcours. || 나는 그의 경로를 더 잘 이해하기 위해 **전기**를 읽고 있어요.
+   e3: La **biographie** inclut des faits importants de son enfance. || 그 **전기**에는 그의 어린 시절 중요한 사실들이 포함되어 있어요.
+   syn: [récit de vie, histoire de vie, portrait] | ant: []
+
+autobiographie [ko] ipa=oto.bi.ɡʁa.fi | meanings: 자서전[명사]
+   e1: Elle a publié son **autobiographie** cette année. || 그녀는 올해 자신의 **자서전**을 출판했습니다.
+   e2: Son **autobiographie** raconte sa vie quotidienne. || 그의 **자서전**은 일상을 이야기합니다.
+   syn: [mémoires] | ant: []
+
+mémoires [ko] ipa=memoʁ | meanings: 회고록[명사] | 기억[명사]
+   e1: Elle a publié ses **mémoires** l'année dernière. || 그녀는 작년에 자신의 **회고록**을 출간했다.
+   e2: Les **mémoires** d'enfance restent vives dans son esprit. || 어린 시절의 **기억**은 그의 마음속에 생생하다.
+   e3: Ses **mémoires** racontent une vie pleine d'aventures. || 그의 **회고록**은 모험으로 가득한 삶을 이야기한다.
+   syn: [autobiographie, souvenirs, réminiscences] | ant: []
+
+chapitre [ko] ipa=ʃapitʁ | meanings: 장(책의 부분)[명사]
+   e1: Le premier **chapitre** est très intéressant. || 첫 번째 **장**이 매우 흥미롭다.
+   e2: Elle a lu trois **chapitres** hier soir. || 그녀는 어젯밤에 세 개의 **장**을 읽었다.
+   e3: Chaque **chapitre** raconte une histoire différente. || 각 **장**은 다른 이야기를 담고 있다.
+   syn: [section, partie, division] | ant: []
+
+préface [ko] ipa=pʁefaʃ | meanings: 서문[명사]
+   e1: La **préface** explique le contexte du livre. || **서문**은 책의 배경을 설명한다.
+   e2: Elle a écrit une courte **préface** remplie d'espoir. || 그녀는 희망이 담긴 짧은 **서문**을 썼다.
+   e3: Le célèbre auteur a signé la **préface** du nouveau roman. || 유명 작가가 새 소설의 **서문**에 서명했다.
+   syn: [avant-propos, introduction] | ant: []
+
+intrigue [ko] ipa=ɛ̃tʁiɡ | meanings: 음모[명사] | 갈등[명사]
+   e1: L'**intrigue** du roman est pleine de surprises. || 그 소설의 **음모**는 놀라움으로 가득하다.
+   e2: L'**intrigue** entre les personnages crée du suspense. || 등장인물들 사이의 **갈등**이 긴장을 만든다.
+   e3: L'**intrigue** politique se complique chaque jour. || 정치적 **음모**가 날로 복잡해지고 있다.
+   syn: [complot, manigance, machination, conspiration, stratagème] | ant: []
+
+personnage [ko] ipa=pɛʁsɔnɑʒ | meanings: 등장인물[명사]
+   e1: Le **personnage** principal est un héros courageux. || 주요 **등장인물**은 용감한 영웅입니다.
+   e2: Ce roman a un **personnage** très intéressant. || 이 소설에는 매우 흥미로운 **등장인물**이 있습니다.
+   syn: [acteur, figure, héros] | ant: []
+
+héros [ko] ipa=eʁo | meanings: 영웅[명사] | 주인공[명사]
+   e1: Le **héros** a sauvé la ville du danger. || 그 **영웅**은 도시를 위험에서 구했어요.
+   e2: Le **héros** du livre est un jeune courageux. || 그 책의 **주인공**은 용감한 젊은이예요.
+   e3: Chaque village a un **héros** local respecté. || 모든 마을에는 존경받는 지역 **영웅**이 있어요.
+   syn: [champion, protagoniste, vainqueur] | ant: []
+
+héroïne [ko] ipa=e.ʁɔ.in | meanings: 여성 영웅[명사] | 헤로인[명사]
+   e1: Elle est la **héroïne** de ce roman célèbre. || 그녀는 이 유명한 소설의 **여성 영웅**입니다.
+   e2: La police a saisi de la **héroïne** en grande quantité. || 경찰은 대량의 **헤로인**을 압수했습니다.
+   syn: [protagoniste, championne, icône] | ant: []
+
+antagoniste [ko] ipa=ɑ̃taɡɔnist | meanings: 적대자[명사] | 대항하는 사람[명사]
+   e1: Cet acteur joue l’**antagoniste** dans le film. || 이 배우는 영화에서 **적대자** 역할을 한다.
+   e2: L’**antagoniste** conteste toujours ses idées. || 그 **대항하는 사람**은 항상 그의 생각에 반대한다.
+   syn: [adversaire, opposant, rival] | ant: [allié, partisan]
+
+narrateur [ko] ipa=naʁatœʁ | meanings: 내레이터, 이야기하는 사람[명사]
+   e1: Le **narrateur** raconte une histoire captivante. || **내레이터**가 흥미로운 이야기를 전해요.
+   e2: Le **narrateur** partage ses pensées avec douceur. || **내레이터**가 부드럽게 생각을 나눠요.
+   syn: [conteur, récitateur] | ant: []
+
+narration [ko] ipa=naʁɑsjɔ̃ | meanings: 서술[명사] | 이야기하기[명사]
+   e1: La **narration** du roman est captivante. || 그 소설의 **서술**은 매력적입니다.
+   e2: La **narration** des événements était claire. || 사건들의 **서술**이 명확했습니다.
+   e3: La **narration** a captivé tous les auditeurs. || **이야기**가 모든 청중을 사로잡았습니다.
+   syn: [récit, description, conte] | ant: []
+
+trame [ko] ipa=tʁam | meanings: 구성, 구조[명사] | 씨실[명사]
+   e1: La **trame** du roman est très complexe. || 그 소설의 **구성**은 매우 복잡해요.
+   e2: Le tisserand a préparé la **trame** pour le tissu. || 직조공이 옷감을 위한 **씨실**을 준비했어요.
+   e3: La **trame** de la tapisserie est faite de fils solides. || 태피스트리의 **구조**는 튼튼한 실로 만들어져 있어요.
+   syn: [structure, ossature, armature] | ant: []
+
+thème [ko] ipa=tɛm | meanings: 주제, 테마[명사]
+   e1: Le **thème** de la fête était la nature. || 파티의 **주제**는 자연이었다.
+   e2: Nous avons choisi un **thème** pour notre exposé. || 우리는 발표를 위한 **주제**를 선택했다.
+   e3: Le livre développe un **thème** classique. || 그 책은 고전적인 **테마**를 전개한다.
+   syn: [sujet, motif, topique] | ant: []
+
+symbolique [ko] ipa=sɛ̃bɔlik | meanings: 상징적인[형용사]
+   e1: La colombe est un oiseau **symbolique** de la paix. || 비둘기는 평화의 **상징적인** 새입니다.
+   e2: Ce geste a une valeur **symbolique** forte dans la culture. || 이 동작은 문화에서 강한 **상징적** 가치를 가집니다.
+   e3: Le feu est un élément **symbolique** dans de nombreuses traditions. || 불은 많은 전통에서 **상징적인** 요소입니다.
+   syn: [emblématique, allégorique, figuratif] | ant: []
+
+métaphore [ko] ipa=metafɔʁ | meanings: 은유[명사]
+   e1: Cette phrase contient une **métaphore** poétique. || 이 문장에는 시적인 **은유**가 포함되어 있어요.
+   e2: La **métaphore** rend le texte plus vivant. || **은유**는 글을 더 생생하게 만들어 줘요.
+   syn: [comparaison, allégorie, image] | ant: []
+
+ironie [ko] ipa=iʁɔni | meanings: 반어[명사]
+   e1: Elle utilise **l'ironie** pour critiquer la société. || 그녀는 사회를 비판하기 위해 **반어**를 사용해요.
+   e2: Son discours est plein d'**ironie** discrète. || 그의 연설은 은근한 **반어**로 가득해요.
+   syn: [sarcasme, satire] | ant: []
+
+satire [ko] ipa=satiʁ | meanings: 풍자[명사]
+   e1: La **satire** critique les défauts de la société. || **풍자**는 사회의 결점을 비판합니다.
+   e2: Cette pièce est une **satire** humoristique du gouvernement. || 이 연극은 정부에 대한 유머러스한 **풍자**입니다.
+   syn: [parodie, caricature, ironique, moquerie] | ant: []
+
+humour [ko] ipa=ymuʁ | meanings: 유머[명사] | 기분[명사]
+   e1: Son **humour** fait toujours rire tout le monde. || 그의 **유머**는 항상 모두를 웃게 해요.
+   e2: Elle a un bon **humour** même quand il fait froid. || 그녀는 날씨가 추워도 좋은 **기분**이에요.
+   e3: L'**humour** dans ce film est très léger et agréable. || 이 영화의 **유머**는 아주 가볍고 즐거워요.
+   syn: [drôle, esprit, facétie, plaisanterie] | ant: []
+
+lyrique [ko] ipa=li.ʁik | meanings: 서정적인[형용사] | 연가, 서정시[명사]
+   e1: La musique **lyrique** émeut profondément le public. || 그 **서정적인** 음악은 관객을 깊이 감동시킨다.
+   e2: J'ai écrit un **lyrique** pour mon amie. || 나는 내 친구를 위해 **연가**를 썼다.
+   e3: Son style d'écriture est très **lyrique** et sensible. || 그의 글쓰기 스타일은 매우 **서정적**이고 감성적이다.
+   syn: [poétique, expressif] | ant: [prosaïque]
+
+épique [ko] ipa=epik | meanings: 서사적인[형용사] | 영웅적인[형용사]
+   e1: Ce film raconte une aventure **épique**. || 이 영화는 **서사적인** 모험을 이야기합니다.
+   e2: Le héros fait un acte vraiment **épique**. || 영웅은 정말 **영웅적인** 행동을 했어요.
+   e3: Ils ont vécu un voyage long et **épique**. || 그들은 길고 **서사적인** 여행을 경험했어요.
+   syn: [héroïque, légendaire, grandiose] | ant: []
+
+réaliste [ko] ipa=ʁe.alist | meanings: 현실적인[형용사] | 현실주의자[명사]
+   e1: Il a une approche très **réaliste** du problème. || 그는 문제에 대해 매우 **현실적인** 접근 방식을 가지고 있다.
+   e2: Elle est connue comme une **réaliste** en politique. || 그녀는 정치에서 **현실주의자**로 알려져 있다.
+   e3: Adopter une vision **réaliste** aide à éviter les déceptions. || **현실적인** 관점을 채택하면 실망을 피하는 데 도움이 된다.
+   syn: [pragmatique, concret, véridique] | ant: [idéaliste, utopiste]
+
+fantastique [ko] ipa=fɑ̃tastik | meanings: 환상적인[형용사] | 공상적인[형용사]
+   e1: Ce film est vraiment **fantastique**. || 이 영화는 정말 **환상적이에요**.
+   e2: Elle a une imagination **fantastique**. || 그녀는 **공상적인** 상상력을 갖고 있어요.
+   e3: Le décor du château est **fantastique**. || 성의 장식은 **환상적이에요**.
+   syn: [merveilleux, féérique, fabuleux, imaginatif] | ant: [réaliste]
+
+merveilleux [ko] ipa=mɛʁvɛjø | meanings: 경이로운[형용사] | 멋진[형용사]
+   e1: Le coucher du soleil était vraiment **merveilleux**. || 일몰이 정말 **경이로웠다**.
+   e2: Elle a fait un travail **merveilleux** sur ce projet. || 그녀는 이 프로젝트에서 **멋진** 일을 했다.
+   syn: [fantastique, splendide, formidable] | ant: []
+
+fiction [ko] ipa=fik.sjɔ̃ | meanings: 허구[명사] | 소설[명사]
+   e1: Cette histoire est une pure **fiction**. || 이 이야기는 순전한 **허구**입니다.
+   e2: Elle écrit une nouvelle **fiction** captivante. || 그녀는 매력적인 새로운 **소설**을 쓰고 있습니다.
+   syn: [narration, conte, récit] | ant: []
+
+non-fiction [ko] ipa=nɔ̃fik.sjɔ̃ | meanings: 논픽션[명사]
+   e1: J'aime lire des livres de **non-fiction** sur la nature. || 나는 자연에 관한 **논픽션** 책 읽는 것을 좋아해요.
+   e2: La bibliothèque offre une section large de **non-fiction**. || 도서관에는 다양한 **논픽션** 코너가 있어요.
+   e3: Ce film est une adaptation d'un livre de **non-fiction**. || 이 영화는 **논픽션** 책을 원작으로 했어요.
+   syn: [documentaire, récit réel] | ant: [fiction, roman, fantaisie]
+
+édition [ko] ipa=edisjɔ̃ | meanings: 출판[명사]
+   e1: L'**édition** du livre a eu lieu en mars. || 그 책의 **출판**은 3월에 이루어졌다.
+   e2: Cette **édition** est la plus recherchée. || 이 **출판**은 가장 인기가 많다.
+   syn: [publication, impression, tirage] | ant: []
+
+éditeur [ko] ipa=edityœʁ | meanings: 편집자[명사] | 출판사[명사]
+   e1: L'**éditeur** corrige le texte avec soin. || **편집자**가 텍스트를 꼼꼼히 수정합니다.
+   e2: Cette histoire est publiée par un grand **éditeur**. || 이 이야기는 큰 **출판사**에서 출판되었습니다.
+   e3: L'**éditeur** décide de la mise en page du livre. || **편집자**가 책의 레이아웃을 결정합니다.
+   syn: [publieur, pressier, maison d'édition] | ant: []
+
+publication [ko] ipa=pyblikasjɔ̃ | meanings: 출판[명사] | 공개[명사]
+   e1: La **publication** du livre a eu lieu hier. || 그 책의 **출판**은 어제 있었습니다.
+   e2: La **publication** des résultats est prévue demain. || 결과의 **공개**는 내일 예정되어 있습니다.
+   e3: Cette **publication** est très attendue par les lecteurs. || 이 **출판**은 독자들에게 매우 기대되고 있습니다.
+   syn: [édition, impression, diffusion] | ant: []
+
+manuscrit [ko] ipa=manyskʁi | meanings: 원고[명사] | 필사본[명사]
+   e1: L'écrivain corrige le **manuscrit** avant publication. || 작가는 출판 전에 **원고**를 수정합니다.
+   e2: Ce **manuscrit** ancien est très fragile. || 이 오래된 **필사본**은 매우 약하다.
+   e3: Le professeur a lu le **manuscrit** de l'étudiant. || 교수님이 학생의 **원고**를 읽으셨다.
+   syn: [épreuve, texte original, document manuscrit, copie] | ant: []
+
+rédiger [ko] ipa=ʁediʒe | meanings: 작성하다[동사]
+   e1: Je dois **rédiger** un rapport pour demain. || 나는 내일 제출할 보고서를 **작성**해야 해요.
+   e2: Elle aime **rédiger** des lettres manuscrites. || 그녀는 손으로 편지를 **작성**하는 것을 좋아해요.
+   e3: Nous allons **rédiger** ensemble le projet final. || 우리는 함께 최종 프로젝트를 **작성**할 거예요.
+   syn: [écrire, composer, formuler] | ant: []
+
+rédaction [ko] ipa=ʁedadksjɔ̃ | meanings: 작성[명사] | 편집[명사]
+   e1: La **rédaction** de cette lettre demande du temps. || 이 편지의 **작성**에는 시간이 걸려요.
+   e2: La **rédaction** du magazine est très créative. || 그 잡지의 **편집**은 매우 창의적이에요.
+   syn: [composition, écriture, rédiger] | ant: []
+
+relecture [ko] ipa=ʁəlɛktyʁ | meanings: 교정[명사] | 재검토[명사]
+   e1: La **relecture** du texte a corrigé toutes les fautes. || 텍스트의 **교정**으로 모든 오류가 수정되었다.
+   e2: Je fais une **relecture** attentive de mon rapport. || 나는 내 보고서를 신중하게 **재검토**한다.
+   syn: [correction, révision] | ant: []
+
+traduction [ko] ipa=tʁadyksjɔ̃ | meanings: 번역[명사]
+   e1: La **traduction** du livre a pris plusieurs mois. || 그 책의 **번역**은 몇 달 걸렸어요.
+   e2: Cette **traduction** est fidèle au texte original. || 이 **번역**은 원문에 충실합니다.
+   e3: J'ai commencé la **traduction** hier soir. || 나는 어젯밤에 **번역**을 시작했어요.
+   syn: [interprétation, version, rendition] | ant: []
+
+traducteur [ko] ipa=tʁadyktœʁ | meanings: 번역가[명사]
+   e1: Le **traducteur** travaille sur un nouveau livre. || **번역가**가 새 책에 작업하고 있어요.
+   e2: Elle est une **traductrice** très compétente. || 그녀는 매우 유능한 **번역가**입니다.
+   e3: Nous avons engagé un **traducteur** pour le projet. || 우리는 프로젝트를 위해 **번역가**를 고용했어요.
+   syn: [interprète] | ant: []
+
+interprète [ko] ipa=ɛ̃tɛʁpʁɛt | meanings: 통역사[명사] | 연주자[명사]
+   e1: L'**interprète** traduit les discours en temps réel. || 그 **통역사**는 실시간으로 연설을 통역해요.
+   e2: L'**interprète** joue une sonate au piano. || 그 **연주자**는 피아노로 소나타를 연주해요.
+   syn: [traducteur, musicien] | ant: []
+
+lecteur [ko] ipa=lɛktœʁ | meanings: 독자[명사] | 리더기[명사]
+   e1: Le **lecteur** a aimé le nouveau roman. || 그 **독자**는 새로운 소설을 좋아했다.
+   e2: Le **lecteur** de carte fonctionne bien. || 카드 **리더기**가 잘 작동한다.
+   syn: [auditeur, public, utilisateur] | ant: []
+
+lecture [ko] ipa=lɛk.tyʁ | meanings: 강의[명사] | 읽기[명사]
+   e1: La **lecture** commence à neuf heures. || **강의**는 9시에 시작해요.
+   e2: La **lecture** du roman est très intéressante. || 그 소설 **읽기**가 아주 흥미로워요.
+   e3: Après la **lecture**, nous avons discuté ensemble. || **읽기** 후에 우리는 함께 이야기했어요.
+   syn: [cours, conférence, exposé, réception, interprétation] | ant: []
+
+lectorat [ko] ipa=lɛktɔʁa | meanings: 독자층[명사]
+   e1: Le **lectorat** de ce magazine est principalement jeune. || 이 잡지의 **독자층**은 주로 젊은 층입니다.
+   e2: L'auteur a remercié son **lectorat** fidèle. || 저자는 충성스러운 **독자층**에게 감사를 표했습니다.
+   e3: Le **lectorat** augmente après la promotion du livre. || 책 홍보 후에 **독자층**이 늘어납니다.
+   syn: [public, audience, clients] | ant: []
+
+best-seller [ko] ipa=bɛst.sɛlœʁ | meanings: 베스트셀러[명사]
+   e1: Ce roman est un vrai **best-seller** en France. || 이 소설은 프랑스에서 진짜 **베스트셀러**다.
+   e2: Le **best-seller** a été traduit dans plusieurs langues. || **베스트셀러**는 여러 언어로 번역되었다.
+   e3: Elle a écrit un **best-seller** l'année dernière. || 그녀는 작년에 **베스트셀러**를 썼다.
+   syn: [livre à succès, meilleure vente] | ant: []
+
+prix littéraire [ko] ipa=- | meanings: 문학상[명사]
+   e1: Elle a gagné un **prix littéraire** cette année. || 그녀는 올해 **문학상**을 받았어요.
+   e2: Le **prix littéraire** célèbre les meilleurs écrivains. || **문학상**은 최고의 작가들을 축하합니다.
+   e3: Ce roman a reçu un prestigieux **prix littéraire**. || 이 소설은 명망 있는 **문학상**을 수상했어요.
+   syn: [récompense littéraire, distinction littéraire] | ant: []
+
+Académie française [ko] ipa=- | meanings: 프랑스, 학술 기관[고유명사]
+   e1: L'**Académie française** protège la langue française. || 프랑스 **학술 기관**은 프랑스어를 보호합니다.
+   e2: L'**Académie française** publie des dictionnaires officiels. || 프랑스 **학술 기관**은 공식 사전을 출판합니다.
+   syn: [] | ant: []
+
+patrimoine littéraire [ko] ipa=- | meanings: 문학적 유산[명사]
+   e1: Le **patrimoine littéraire** français est riche et varié. || 프랑스의 **문학적 유산**은 풍부하고 다양합니다.
+   e2: Nous devons préserver le **patrimoine littéraire** pour les générations futures. || 우리는 미래 세대를 위해 **문학적 유산**을 보존해야 합니다.
+   e3: Le festival célèbre le **patrimoine littéraire** régional. || 그 축제는 지역 **문학적 유산**을 기념합니다.
+   syn: [héritage littéraire, œuvre classique] | ant: []
+
+classique [ko] ipa=kla.sik | meanings: 고전적인[형용사] | 클래식음악[명사]
+   e1: Ce roman est un livre **classique**. || 이 소설은 **고전적인** 책입니다.
+   e2: J'écoute de la musique **classique** le soir. || 저는 저녁에 **클래식음악**을 듣습니다.
+   e3: Elle porte une robe **classique** pour la cérémonie. || 그녀는 행사에서 **고전적인** 드레스를 입었어요.
+   syn: [traditionnel, éternel, standard] | ant: [moderne, novateur, contemporain]
+
+contemporain [ko] ipa=kɔ̃tɑ̃pɔʁɛ̃ | meanings: 동시대의[형용사] | 현대의 사람[명사]
+   e1: Les artistes **contemporains** exposent leurs œuvres. || **현대인들이** 작품을 전시한다.
+   e2: Ce bâtiment est un exemple d'architecture **contemporaine**. || 이 건물은 **동시대** 건축 양식의 예이다.
+   syn: [moderne, actuel, présent] | ant: [ancien, traditionnel]
+
+cinématographique [ko] ipa=sinemaˈtɔɡʁafik | meanings: 영화의[형용사]
+   e1: Ce documentaire a une qualité **cinématographique** remarquable. || 이 다큐멘터리는 뛰어난 **영화** 품질을 지녔어요.
+   e2: Les effets spéciaux rendent le film très **cinématographique**. || 특수 효과들이 그 영화를 매우 **영화적으로** 보이게 해줘요.
+   syn: [filmique, ciné] | ant: []
+
+réalisateur [ko] ipa=ʁe.a.li.za.tœʁ | meanings: 감독[명사]
+   e1: Le **réalisateur** a gagné un prix pour son film. || 그 **감독**은 영화로 상을 받았다.
+   e2: Le **réalisateur** prépare le tournage du nouveau film. || 그 **감독**은 새 영화 촬영을 준비하고 있다.
+   e3: Le **réalisateur** travaille avec les acteurs sur le script. || 그 **감독**은 배우들과 대본 작업을 하고 있다.
+   syn: [metteur en scène, cinéaste, réalisatrice] | ant: []
+
+réalisatrice [ko] ipa=ʁe.a.li.za.tʁis | meanings: 여성 감독[명사]
+   e1: La **réalisatrice** a remporté un prix pour son film. || 그 **감독**은 그녀의 영화로 상을 받았습니다.
+   e2: Une jeune **réalisatrice** débute dans le cinéma. || 한 젊은 **감독**이 영화계에 첫발을 내디뎠습니다.
+   syn: [metteuse en scène, cinéaste] | ant: []
+
+metteur en scène [ko] ipa=- | meanings: 영화 감독[명사] | 무대 감독[명사]
+   e1: Le **metteur en scène** a dirigé un film célèbre. || **영화 감독**은 유명한 영화를 감독했다.
+   e2: Le **metteur en scène** prépare la pièce pour ce soir. || **무대 감독**이 오늘 밤 연극을 준비한다.
+   syn: [réalisateur, metteur en scène théâtral] | ant: []
+
+scénariste [ko] ipa=senaʁist | meanings: 시나리오 작가[명사]
+   e1: Le **scénariste** a écrit un film captivant. || **시나리오 작가**가 흥미로운 영화를 썼다.
+   e2: Un bon **scénariste** crée des histoires originales. || 좋은 **시나리오 작가**가 독창적인 이야기를 만든다.
+   syn: [auteur, réalisateur de scénario] | ant: []
+
+scénario [ko] ipa=se.na.ʁjo | meanings: 시나리오[명사]
+   e1: Le **scénario** du film est captivant. || 그 영화의 **시나리오**가 매력적이에요.
+   e2: Nous avons écrit un nouveau **scénario** pour la pièce. || 우리는 연극을 위한 새로운 **시나리오**를 썼어요.
+   syn: [texte, script, plan] | ant: []
+
+tournage [ko] ipa=tuʁnaʒ | meanings: 촬영[명사]
+   e1: Le **tournage** du film a duré trois semaines. || 그 영화의 **촬영**은 3주 동안 계속되었다.
+   e2: Nous avons assisté au **tournage** dans le studio. || 우리는 스튜디오에서 **촬영**에 참여했다.
+   e3: Le réalisateur prépare le calendrier du **tournage**. || 감독은 **촬영** 일정을 준비하고 있다.
+   syn: [filmage, prise de vue, enregistrement] | ant: []
+
+tourner [ko] ipa=tuʁne | meanings: 돌다, 회전하다[동사] | 돌리다, 회전시키다[동사]
+   e1: La roue **tourne** doucement. || 바퀴가 부드럽게 **돈다**.
+   e2: Il **tourne** la clé dans la serrure. || 그가 열쇠를 자물쇠에 **돌린다**.
+   syn: [virer, bouger, changer de direction] | ant: []
+
+plateau [ko] ipa=plat.o | meanings: 고원[명사] | 접시[명사]
+   e1: Le **plateau** s'étend sur des kilomètres. || **고원**은 수 킬로미터에 걸쳐 펼쳐져 있다.
+   e2: Elle a posé le gâteau sur le **plateau**. || 그녀는 케이크를 **쟁반** 위에 놓았다.
+   syn: [assiette, serviette, dessous-de-plat] | ant: []
+
+studio [ko] ipa=stydjo | meanings: 작업실[명사] | 스튜디오 아파트[명사]
+   e1: L'artiste travaille dans un **studio** lumineux. || 그 예술가는 밝은 **작업실**에서 작업해요.
+   e2: J'ai loué un petit **studio** en ville. || 나는 도시에 작은 **스튜디오 아파트**를 빌렸어요.
+   e3: Le **studio** est équipé pour les tournages vidéo. || **스튜디오**는 영상 촬영을 위해 장비가 갖춰져 있어요.
+   syn: [atelier, loft, appartement] | ant: []
+
+caméra [ko] ipa=kameʁa | meanings: 비디오카메라[명사] | 사진기[명사]
+   e1: La **caméra** filme le spectacle en direct. || 그 **카메라**는 공연을 생중계한다.
+   e2: Elle a acheté une nouvelle **caméra** pour les vacances. || 그녀는 휴가를 위해 새로운 **카메라**를 샀다.
+   e3: La **caméra** enregistre des souvenirs importants. || 그 **카메라**는 중요한 추억을 녹화한다.
+   syn: [caméscope, appareil photo] | ant: []
+
+image [ko] ipa=imaʒ | meanings: 영상, 이미지[명사] | 상상, 형상[명사]
+   e1: L'**image** sur l'écran est très nette. || 화면의 **이미지**가 매우 선명합니다.
+   e2: Elle a une belle **image** de la nature. || 그녀는 자연에 대한 아름다운 **형상**을 가지고 있습니다.
+   e3: J'ai vu une **image** animée dans le film. || 영화에서 움직이는 **영상**을 보았습니다.
+   syn: [photo, illustration, représentation] | ant: []
+
+son [ko] ipa=sɔ̃ | meanings: 소리[명사] | (그의/그녀의/그것의) 것[대명사]
+   e1: Le **son** du vent est apaisant. || 바람의 **소리**가 평온해요.
+   e2: C'est **son** livre préféré. || 이것은 **그의** 책이에요.
+   e3: J'aime le **son** de la mer le matin. || 나는 아침에 바다의 **소리**를 좋아해요.
+   syn: [] | ant: []
+
+lumière [ko] ipa=lymjɛʁ | meanings: 빛[명사] | 조명[명사]
+   e1: La **lumière** du soleil est douce ce matin. || 오늘 아침 햇살의 **빛**이 부드럽다.
+   e2: Nous avons allumé la **lumière** dans la chambre. || 우리는 방 안에 **조명**을 켰다.
+   e3: La **lumière** éclaire le chemin dans la forêt. || 숲 속에서 길을 밝히는 **빛**입니다.
+   syn: [éclairage, clarté, lueur] | ant: []
+
+montage [ko] ipa=mɔ̃taʒ | meanings: 편집[명사] | 조립[명사]
+   e1: Le **montage** du film a pris plusieurs semaines. || 영화의 **편집**은 여러 주가 걸렸다.
+   e2: Le **montage** des meubles est facile à faire. || 가구의 **조립**은 쉽게 할 수 있다.
+   e3: Le réalisateur supervise le **montage** final. || 감독은 최종 **편집**을 감독한다.
+   syn: [assemblage, édition, démontage] | ant: []
+
+monteur [ko] ipa=mɔ̃tœʁ | meanings: 조립공[명사] | 편집가[명사]
+   e1: Le **monteur** a assemblé la machine rapidement. || 그 **조립공**은 기계를 빠르게 조립했다.
+   e2: Le **monteur** travaille sur le nouveau film. || 그 **편집가**는 새 영화 작업을 하고 있다.
+   syn: [] | ant: []
+
+production cinématographique [ko] ipa=- | meanings: 영화 제작[명사]
+   e1: La **production cinématographique** française est reconnue mondialement. || 프랑스의 **영화 제작**은 세계적으로 인정받고 있다.
+   e2: Cette société se spécialise dans la **production cinématographique** indépendante. || 이 회사는 독립적인 **영화 제작**을 전문으로 한다.
+   syn: [réalisation de films, création cinématographique] | ant: []
+
+court métrage [ko] ipa=- | meanings: 단편 영화[명사]
+   e1: J'ai regardé un **court métrage** au festival de cinéma. || 나는 영화제에서 **단편 영화**를 봤어요.
+   e2: Le **court métrage** raconte une belle histoire d'amitié. || **단편 영화**는 아름다운 우정 이야기를 담고 있어요.
+   syn: [film court, court-métrage] | ant: []
+
+long métrage [ko] ipa=- | meanings: 장편 영화[명사]
+   e1: Ce **long métrage** a remporté plusieurs prix au festival. || 이 **장편 영화**는 영화제에서 여러 상을 받았다.
+   e2: Le réalisateur prépare un nouveau **long métrage** dramatique. || 감독은 새로운 드라마 **장편 영화**를 준비 중이다.
+   e3: Nous avons regardé un **long métrage** captivant hier soir. || 우리는 어젯밤에 흥미로운 **장편 영화**를 봤다.
+   syn: [film long, film de longue durée] | ant: []
+
+documentaire [ko] ipa=dɔkymɑ̃tɛʁ | meanings: 다큐멘터리[명사]
+   e1: Le **documentaire** raconte l'histoire de la nature. || **다큐멘터리**는 자연의 이야기를 전합니다.
+   e2: J'ai regardé un **documentaire** sur les animaux marins. || 나는 해양 동물에 관한 **다큐멘터리**를 봤어요.
+   e3: Le **documentaire** montre la beauté des montagnes. || **다큐멘터리**는 산의 아름다움을 보여줍니다.
+   syn: [film documentaire, reportage] | ant: []
+
+thriller [ko] ipa=tʁiləʁ | meanings: 스릴러 영화[명사]
+   e1: Ce **thriller** est plein de suspense et d'action. || 이 **스릴러**는 긴장감과 액션으로 가득해요.
+   e2: J'adore regarder un bon **thriller** le soir. || 저는 저녁에 좋은 **스릴러를** 보는 것을 좋아해요.
+   syn: [film à suspense, policier, film d'espionnage] | ant: []
+
+comédie romantique [ko] ipa=- | meanings: 로맨틱 코미디[표현]
+   e1: Nous avons regardé une **comédie romantique** hier soir. || 우리는 어젯밤에 **로맨틱 코미디**를 봤어요.
+   e2: La **comédie romantique** combine humour et amour. || **로맨틱 코미디**는 유머와 사랑을 결합해요.
+   syn: [film romantique comique, rom-com] | ant: []
+
+science-fiction [ko] ipa=sjɑ̃s fik.sjɔ̃ | meanings: 공상과학[명사]
+   e1: J'adore lire des romans de **science-fiction**. || 나는 **공상과학** 소설을 읽는 것을 좋아해요.
+   e2: Le film de **science-fiction** montre un futur lointain. || 그 **공상과학** 영화는 먼 미래를 보여줘요.
+   syn: [SF] | ant: []
+
+horreur [ko] ipa=ɔʁœʁ | meanings: 공포[명사] | 혐오[명사]
+   e1: Le film était rempli d'**horreur** et de suspense. || 그 영화는 **공포**와 서스펜스가 가득했다.
+   e2: Elle a ressenti une **horreur** profonde face à cette injustice. || 그녀는 이 부당함에 깊은 **혐오**를 느꼈다.
+   e3: L'**horreur** de la guerre est difficile à décrire. || 전쟁의 **공포**는 묘사하기 어렵다.
+   syn: [terreur, épouvante, effroi, crainte] | ant: []
+
+animation [ko] ipa=animasjɔ̃ | meanings: 애니메이션[명사] | 활동, 움직임[명사]
+   e1: J'adore regarder cette **animation** chaque soir. || 나는 매일 저녁 이 **애니메이션**을 보는 것을 좋아해요.
+   e2: L'**animation** de la fête a créé une ambiance joyeuse. || 축제의 **활동**이 즐거운 분위기를 만들었어요.
+   syn: [dessin animé, film d'animation, activité, mouvement] | ant: []
+
+doublage [ko] ipa=dublɑʒ | meanings: 더빙[명사] | 복제[명사]
+   e1: Le **doublage** de ce film est très réussi. || 이 영화의 **더빙**이 아주 잘 되었다.
+   e2: Ils ont fait un **doublage** du disque dur pour sauvegarder les données. || 그들은 데이터를 보호하기 위해 하드 드라이브를 **복제**했다.
+   syn: [versionnage, redoublement] | ant: []
+
+sous-titre [ko] ipa=su ti.tʁ | meanings: 자막[명사] | 부제[명사]
+   e1: Le **sous-titre** aide à comprendre le film étranger. || 그 영화의 외국어를 이해하는 데 **자막**이 도움이 된다.
+   e2: Le roman a un **sous-titre** mystérieux et intrigant. || 그 소설에는 신비롭고 흥미로운 **부제**가 있다.
+   e3: Les **sous-titres** sont utiles pour les malentendants. || 청각장애인을 위해 **자막**이 유용하다.
+   syn: [légende, intertitre] | ant: []
+
+version originale [ko] ipa=- | meanings: 원본 버전[표현]
+   e1: J'aime regarder les films en **version originale**. || 저는 영화를 **원본 버전**으로 보는 것을 좋아해요.
+   e2: Le livre est publié dans sa **version originale**. || 그 책은 **원본 버전**으로 출판되었습니다.
+   syn: [version non modifiée, texte original] | ant: []
+
+projection [ko] ipa=pʁɔ.ʒɛk.sjɔ̃ | meanings: 투사[명사] | 영사[명사]
+   e1: La **projection** du film commence à 20 heures. || 영화의 **영사**가 8시에 시작해요.
+   e2: La **projection** de l'image est claire sur le mur. || 벽에 이미지의 **투사**가 선명해요.
+   syn: [lancement, diffusion] | ant: []
+
+festival [ko] ipa=fɛstival | meanings: 축제[명사]
+   e1: Le **festival** attire beaucoup de visiteurs chaque été. || 그 **축제**는 매년 여름 많은 방문객을 끌어요.
+   e2: Nous avons assisté au **festival** de musique en plein air. || 우리는 야외 음악 **축제**에 참석했어요.
+   e3: Le **festival** célèbre la culture locale avec des spectacles. || 그 **축제**는 공연으로 지역 문화를 축하해요.
+   syn: [fête, carnaval, manifestation] | ant: []
+
+première [ko] ipa=pʁəmjɛʁ | meanings: 첫 번째[형용사] | 초연[명사]
+   e1: C'est la **première** fois que je visite Paris. || 나는 파리를 **첫 번째**로 방문했습니다.
+   e2: La **première** du spectacle était magique. || 공연의 **초연**은 마법 같았습니다.
+   e3: Elle a gagné la **première** place au concours. || 그녀는 대회에서 **첫 번째** 자리를 차지했습니다.
+   syn: [initiale, premier, originelle] | ant: []
+
+avant-première [ko] ipa=avɑ̃ pʁəˈmjɛʁ | meanings: 시사회[명사]
+   e1: Nous sommes allés à l'**avant-première** du film hier soir. || 우리는 어젯밤 영화 **시사회**에 갔어요.
+   e2: L'**avant-première** a attiré beaucoup de fans enthousiastes. || **시사회**에는 많은 열성 팬들이 모였어요.
+   syn: [projection privée, première] | ant: []
+
+critique cinématographique [ko] ipa=- | meanings: 영화비평[명사]
+   e1: La **critique cinématographique** est importante pour le succès du film. || **영화비평**은 영화의 성공에 중요하다.
+   e2: J'ai lu une **critique cinématographique** intéressante hier. || 나는 어제 흥미로운 **영화비평**을 읽었다.
+   e3: La **critique cinématographique** analyse chaque détail du film. || **영화비평**은 영화의 각 세부사항을 분석한다.
+   syn: [analyse cinématographique, réview de film, commentaire de film] | ant: []
+
+spectateur [ko] ipa=spɛkta.tœʁ | meanings: 관객[명사] | 관찰자[명사]
+   e1: Le **spectateur** applaudissait le spectacle. || **관객**이 공연에 박수를 쳤다.
+   e2: Un **spectateur** calme observait la scène. || 한 **관찰자**가 차분히 장면을 지켜봤다.
+   e3: Les **spectateurs** ont apprécié le film ensemble. || **관객**들이 함께 영화를 즐겼다.
+   syn: [auditeur, témoin] | ant: []
+
+audience [ko] ipa=odisjɑ̃s | meanings: 청중[명사] | 면담[명사]
+   e1: L'**audience** au théâtre était très captivée. || 극장의 **청중**은 매우 집중했다.
+   e2: Elle a obtenu une **audience** avec le directeur. || 그녀는 이사와 **면담**을 가졌다.
+   e3: L'**audience** a applaudi à la fin du spectacle. || 공연이 끝나자 **청중**은 박수쳤다.
+   syn: [public, assistance, spectateurs, rencontre, entretien] | ant: []
+
+succès [ko] ipa=syksɛs | meanings: 성공[명사]
+   e1: Le **succès** de ce film est incroyable. || 이 영화의 **성공**은 놀랍다.
+   e2: Elle a fêté son **succès** avec ses amis. || 그녀는 친구들과 함께 자신의 **성공**을 축하했다.
+   syn: [réussite, victoire, progrès] | ant: []
+
+échec commercial [ko] ipa=- | meanings: 판매 실패[표현]
+   e1: Le produit a été un **échec commercial** malgré la publicité. || 그 제품은 광고에도 불구하고 **판매 실패**였다.
+   e2: Cet film est un **échec commercial** au box-office. || 이 영화는 흥행에서 **판매 실패**를 기록했다.
+   e3: Une mauvaise stratégie a conduit à un **échec commercial**. || 나쁜 전략이 **판매 실패**로 이어졌다.
+   syn: [flop commercial, insuccès commercial] | ant: []
+
+blockbuster [ko] ipa=blɔksbystɛʁ | meanings: 대히트작[명사]
+   e1: Ce film est un **blockbuster** cet été. || 이 영화는 올해 여름에 **대히트작**이다.
+   e2: Le nouveau **blockbuster** attire beaucoup de spectateurs. || 새로운 **대히트작**이 많은 관객을 끌어들인다.
+   e3: Ils ont produit un **blockbuster** très attendu. || 그들은 매우 기대되는 **대히트작**을 제작했다.
+   syn: [succès, tube, grand succès] | ant: []
+
+indépendant [ko] ipa=ɛ̃depɑ̃dɑ̃ | meanings: 독립된[형용사] | 독립적인 사람[명사]
+   e1: Elle vit de manière **indépendante** maintenant. || 그녀는 지금 **독립적**으로 살고 있어요.
+   e2: Il est un **indépendant** dans son travail. || 그는 자신의 일에서 **독립적인 사람**입니다.
+   syn: [autonome, libre, individuel] | ant: []
+
+scène [ko] ipa=sɛn | meanings: 무대[명사] | 장면[명사]
+   e1: La **scène** était décorée pour le spectacle. || 그 **무대**는 공연을 위해 꾸며졌다.
+   e2: Cette **scène** du film était très émouvante. || 이 영화의 **장면**은 매우 감동적이었다.
+   e3: Les acteurs sont montés sur la **scène** rapidement. || 배우들이 빠르게 **무대**에 올랐다.
+   syn: [estrade, plateau, cadre, tableau] | ant: []
+
+tragique [ko] ipa=tʁa.ʒik | meanings: 비극적인[형용사]
+   e1: C'est un événement vraiment **tragique**. || 그것은 정말 **비극적인** 사건이에요.
+   e2: La fin du film était très **tragique**. || 그 영화의 끝은 매우 **비극적이었어요**.
+   e3: Le naufrage a causé des pertes **tragiques**. || 그 난파는 **비극적인** 피해를 초래했어요.
+   syn: [douloureux, funeste, lamentable] | ant: [heureux, joyeux, heureuse]
+
+comique [ko] ipa=kɔ.mik | meanings: 코미디의[형용사] | 코미디언[명사]
+   e1: Le spectacle **comique** a fait rire tout le monde. || 그 **코미디** 공연은 모두를 웃게 했다.
+   e2: Mon ami est un **comique** célèbre en France. || 내 친구는 프랑스에서 유명한 **코미디언**이다.
+   e3: Elle aime regarder des films **comiques** le weekend. || 그녀는 주말에 **코미디** 영화 보는 것을 좋아한다.
+   syn: [drôle, amusant, burlesque] | ant: [sérieux]
+
+monologue [ko] ipa=mɔnɔlɔɡ | meanings: 독백[명사]
+   e1: L'acteur commence un **monologue** émouvant sur scène. || 그 배우는 무대에서 감동적인 **독백**을 시작했다.
+   e2: Le **monologue** révèle les pensées intimes du personnage. || **독백**은 인물의 내면 생각을 드러낸다.
+   e3: Elle a préparé un **monologue** pour la pièce de théâtre. || 그녀는 연극을 위해 **독백**을 준비했다.
+   syn: [soliloque, discours] | ant: []
+
+dialogue [ko] ipa=djalɔɡ | meanings: 대화[명사] | 문답[명사]
+   e1: Le **dialogue** entre amis est important. || 친구들 사이의 **대화**는 중요해요.
+   e2: Le **dialogue** dans le livre est très vivant. || 책 속에 나오는 **문답**이 매우 생생해요.
+   syn: [conversation, entretien, discussion] | ant: []
+
+réplique [ko] ipa=ʁeplik | meanings: 응답[명사] | 복제품[명사]
+   e1: Sa **réplique** était rapide et précise. || 그의 **응답**은 빠르고 정확했다.
+   e2: Ce tableau est une **réplique** de l'original. || 이 그림은 원본의 **복제품**이다.
+   syn: [réponse, retour, copie, duplicata] | ant: []
+
+acte [ko] ipa=akt | meanings: 행위[명사] | 증서[명사]
+   e1: Son **acte** a sauvé une vie. || 그의 **행위**가 한 생명을 구했어요.
+   e2: Le notaire a signé l'**acte** officiel. || 공증인이 공식 **증서**에 서명했어요.
+   e3: Chaque **acte** a une conséquence importante. || 각 **행위**는 중요한 결과를 가져와요.
+   syn: [action, geste, document, certificat] | ant: []
+
+rôle [ko] ipa=ʁol | meanings: 역할[명사]
+   e1: Elle joue un **rôle** important dans l'équipe. || 그녀는 팀에서 중요한 **역할**을 합니다.
+   e2: Son **rôle** est d'aider les enfants à apprendre. || 그의 **역할**은 아이들이 배우도록 돕는 것입니다.
+   e3: Le **rôle** du guide est d'assurer la sécurité du groupe. || 가이드의 **역할**은 그룹의 안전을 책임지는 것입니다.
+   syn: [fonction, part, mission] | ant: []
+
+comédien [ko] ipa=kɔmedjɛ̃ | meanings: 배우[명사]
+   e1: Le **comédien** joue dans une pièce de théâtre. || 그 **배우**는 연극에서 연기합니다.
+   e2: Le **comédien** est très apprécié pour son talent. || 그 **배우**는 그의 재능으로 매우 사랑받습니다.
+   e3: Un **comédien** répète ses lignes chaque jour. || 한 **배우**가 매일 대사를 연습합니다.
+   syn: [acteur, interprète] | ant: []
+
+interprète théâtral [ko] ipa=- | meanings: 연극배우[명사]
+   e1: L'**interprète théâtral** a reçu une ovation. || **연극배우**가 기립 박수를 받았어요.
+   e2: Chaque **interprète théâtral** doit connaître son texte. || 모든 **연극배우**는 대본을 알아야 해요.
+   e3: L'**interprète théâtral** répète avant la représentation. || **연극배우**가 공연 전에 리허설해요.
+   syn: [comédien, acteur, dramaturge] | ant: []
+
+improvisation [ko] ipa=ɛ̃pʁɔvizasjɔ̃ | meanings: 즉흥연주[명사]
+   e1: L'**improvisation** a donné vie à la scène. || **즉흥연주**가 무대에 생명을 불어넣었다.
+   e2: Son talent pour l'**improvisation** est étonnant. || 그는 **즉흥연주**에 대한 재능이 놀랍다.
+   e3: L'orchestre a commencé par une **improvisation** joyeuse. || 오케스트라는 즐거운 **즉흥연주**로 시작했다.
+   syn: [improvisation musicale, improvisation spontanée] | ant: []
+
+répétition [ko] ipa=ʁepetisjɔ̃ | meanings: 반복[명사] | 연습[명사]
+   e1: La **répétition** du spectacle est prévue demain. || 공연의 **반복**은 내일 예정입니다.
+   e2: Nous avons une **répétition** avant le concert. || 우리는 콘서트 전에 **연습**이 있습니다.
+   e3: La **répétition** de cet exercice améliore la mémoire. || 이 연습의 **반복**은 기억력을 향상시킵니다.
+   syn: [redite, essai, exercice] | ant: []
+
+représentation [ko] ipa=ʁepʁezɑ̃tasjɔ̃ | meanings: 표현[명사] | 대표[명사]
+   e1: La **représentation** de ses idées est claire. || 그의 생각에 대한 **표현**이 명확하다.
+   e2: Elle est la **représentation** de notre groupe. || 그녀는 우리 그룹의 **대표**이다.
+   e3: Cette pièce offre une **représentation** vivante de la nature. || 이 연극은 자연에 대한 생생한 **표현**을 제공한다.
+   syn: [illustration, manifestation, démonstration, délégué, mandataire, déléguation] | ant: []
+
+ovation [ko] ipa=ovasjɔ̃ | meanings: 기립박수[명사]
+   e1: L'artiste a reçu une **ovation** longue après son spectacle. || 그 예술가는 공연 후에 긴 **기립박수**를 받았다.
+   e2: Le public a chanté en donnant une **ovation** chaleureuse. || 관중은 따뜻한 **기립박수**를 치며 노래를 불렀다.
+   syn: [applaudissement, acclamation, bravo] | ant: []
+
+rappel [ko] ipa=ʁapɛl | meanings: 재통지, 재알림[명사] | 재소집, 소집통지[명사]
+   e1: Le **rappel** du rendez-vous est important. || 약속에 대한 **재통지**가 중요해요.
+   e2: Le **rappel** des joueurs a eu lieu hier. || 선수들에 대한 **재소집**이 어제 있었어요.
+   syn: [notification, avis, souvenir] | ant: []
+
+coulisses [ko] ipa=kulis | meanings: 무대 뒤편, 비밀 장소[명사] | 배후, 배경[명사]
+   e1: Les acteurs attendent dans les **coulisses** avant la scène. || 배우들이 **무대 뒤편**에서 대기해요.
+   e2: Les secrets des **coulisses** du spectacle sont fascinants. || 공연의 **비밀 장소** 이야기는 흥미로워요.
+   e3: On découvre les **coulisses** du pouvoir politique dans ce livre. || 이 책에서 정치의 **배후**를 알 수 있어요.
+   syn: [arrière-scène, dessous, répétition, envers] | ant: []
+
+décor [ko] ipa=de.kɔʁ | meanings: 장식, 꾸밈[명사]
+   e1: Le **décor** de la salle est très élégant. || 그 방의 **장식**이 매우 우아하다.
+   e2: Ils ont changé le **décor** du théâtre pour la nouvelle pièce. || 그들은 새 연극을 위해 극장의 **장식**을 바꿨다.
+   syn: [ornement, ornementation, mise en scène] | ant: []
+
+maquillage [ko] ipa=makijaʒ | meanings: 화장[명사]
+   e1: Elle porte un **maquillage** léger aujourd'hui. || 그녀는 오늘 **화장**을 가볍게 했어요.
+   e2: Le **maquillage** met en valeur ses yeux bleus. || **화장**은 그녀의 파란 눈을 돋보이게 합니다.
+   e3: Je fais mon **maquillage** avant la soirée. || 나는 저녁 파티 전에 **화장**을 해요.
+   syn: [cosmétique, fard] | ant: []
+
+musique classique [ko] ipa=- | meanings: 클래식 음악[명사]
+   e1: J'écoute de la **musique classique** pour me détendre. || 나는 긴장을 풀기 위해 **클래식 음악**을 들어요.
+   e2: La **musique classique** remplit la salle de concert ce soir. || 오늘 밤 콘서트홀은 **클래식 음악**으로 가득해요.
+   e3: Ma sœur joue souvent de la **musique classique** au piano. || 내 여동생은 자주 피아노로 **클래식 음악**을 연주해요.
+   syn: [musique savante, musique symphonique] | ant: []
+
+musique populaire [ko] ipa=- | meanings: 대중음악[명사]
+   e1: La **musique populaire** rassemble beaucoup de fans. || **대중음악**은 많은 팬을 모읍니다.
+   e2: Elle écoute souvent de la **musique populaire** en voyage. || 그녀는 여행할 때 자주 **대중음악**을 듣습니다.
+   e3: La **musique populaire** évolue avec les tendances modernes. || **대중음악**은 현대 트렌드와 함께 발전합니다.
+   syn: [pop, chanson populaire, musique commerciale] | ant: []
+
+jazz [ko] ipa=dʒaz | meanings: 재즈[명사]
+   e1: Le **jazz** est un genre de musique populaire. || **재즈**는 인기 있는 음악 장르예요.
+   e2: Nous avons écouté du **jazz** toute la soirée. || 우리는 저녁 내내 **재즈**를 들었어요.
+   e3: Le festival de **jazz** attire beaucoup de visiteurs. || **재즈** 축제는 많은 방문객을 끌어요.
+   syn: [] | ant: []
+
+rock [ko] ipa=ʁɔk | meanings: 록, 음악 장르[명사] | 바위[명사]
+   e1: Le concert de **rock** commence ce soir. || 오늘 저녁에 **록** 콘서트가 시작됩니다.
+   e2: La montagne est pleine de **roches** imposantes. || 산은 거대한 **바위**로 가득 차 있습니다.
+   syn: [roche, caillou, pierres] | ant: []
+
+rap [ko] ipa=ʁap | meanings: 랩 음악[명사]
+   e1: Le **rap** est très populaire chez les jeunes. || **랩**은 젊은이들 사이에서 매우 인기가 있다.
+   e2: Elle écoute du **rap** en travaillant. || 그녀는 일하면서 **랩**을 듣는다.
+   e3: Le concert de **rap** a fini tard hier soir. || **랩** 콘서트는 어젯밤 늦게 끝났다.
+   syn: [] | ant: []
+
+électro [ko] ipa=elektʁo | meanings: 일렉트로닉 음악[명사] | 전기의[형용사]
+   e1: J'aime écouter de l'**électro** pendant la fête. || 나는 파티 동안 **일렉트로** 음악을 듣는 것을 좋아해요.
+   e2: La voiture utilise un moteur **électro** moderne. || 그 차는 현대적인 **전기** 모터를 사용해요.
+   syn: [électronique, électrique] | ant: []
+
+pop [ko] ipa=pɔp | meanings: 팝 음악[명사]
+   e1: J'écoute du **pop** en voiture. || 나는 차에서 **팝** 음악을 들어요.
+   e2: La chanteuse de **pop** a une belle voix. || 그 **팝** 가수는 아름다운 목소리를 가지고 있어요.
+   e3: Le concert de **pop** commence ce soir. || 오늘 밤 **팝** 콘서트가 시작돼요.
+   syn: [musique pop, populaire, variété] | ant: []
+
+compositeur [ko] ipa=kɔ̃pozitœʁ | meanings: 작곡가[명사]
+   e1: Le **compositeur** a écrit une belle symphonie. || 그 **작곡가**는 아름다운 교향곡을 썼다.
+   e2: Le **compositeur** travaille sur une nouvelle chanson. || 그 **작곡가**는 새로운 노래 작업을 하고 있다.
+   e3: Le concert met en vedette un **compositeur** célèbre. || 그 콘서트는 유명한 **작곡가**를 주목한다.
+   syn: [auteur de musique, créateur musical] | ant: []
+
+compositrice [ko] ipa=kɔ̃pɔzitʁis | meanings: 여성 작곡가[명사]
+   e1: La **compositrice** a écrit une belle symphonie. || **작곡가가** 아름다운 교향곡을 썼어요.
+   e2: Elle est une **compositrice** célèbre dans le monde entier. || 그녀는 전 세계적으로 유명한 **여성 작곡가**입니다.
+   syn: [auteure-compositrice, créatrice musicale] | ant: []
+
+chef d'orchestre [ko] ipa=- | meanings: 지휘자[명사]
+   e1: Le **chef d'orchestre** prépare la symphonie. || 그 **지휘자**는 교향곡을 준비합니다.
+   e2: Le **chef d'orchestre** guide les musiciens sur scène. || 그 **지휘자**는 무대 위에서 음악가들을 이끕니다.
+   e3: Le **chef d'orchestre** inspire l’orchestre entier. || 그 **지휘자**는 전체 오케스트라에 영감을 줍니다.
+   syn: [dirigeant d'orchestre, maestro] | ant: []
+
+orchestre [ko] ipa=ɔʁ.kɛstʁ | meanings: 오케스트라[명사]
+   e1: L'**orchestre** joue une belle symphonie ce soir. || **오케스트라**가 오늘 밤 아름다운 교향곡을 연주해요.
+   e2: Le chef dirige l'**orchestre** avec passion. || 지휘자가 열정적으로 **오케스트라**를 지휘해요.
+   e3: L'**orchestre** répète avant le grand concert. || **오케스트라**가 큰 콘서트 전에 연습해요.
+   syn: [ensemble, philharmonie, symphonie] | ant: []
+
+symphonie [ko] ipa=sɛ̃fɔni | meanings: 교향곡[명사]
+   e1: J'écoute une **symphonie** célèbre ce soir. || 나는 오늘 밤 유명한 **교향곡**을 듣고 있어요.
+   e2: La **symphonie** a été composée par un grand musicien. || **교향곡**은 위대한 음악가에 의해 작곡되었어요.
+   e3: Le chef d'orchestre dirige la **symphonie** avec passion. || 지휘자는 열정적으로 **교향곡**을 지휘해요.
+   syn: [composition orchestrale, oeuvre symphonique] | ant: []
+
+opéra [ko] ipa=ɔ.pe.ʁa | meanings: 오페라[명사]
+   e1: Nous avons regardé un **opéra** magnifique hier soir. || 우리는 어젯밤에 멋진 **오페라**를 봤어요.
+   e2: L'**opéra** de Paris est célèbre dans le monde entier. || 파리의 **오페라**는 전 세계적으로 유명해요.
+   e3: Elle aime écouter de la musique d'**opéra** pendant ses promenades. || 그녀는 산책할 때 **오페라** 음악을 듣는 것을 좋아해요.
+   syn: [théâtre lyrique] | ant: []
+
+ballet [ko] ipa=balɛ | meanings: 발레[명사]
+   e1: Le **ballet** était magnifique hier soir. || 어제 밤 **발레**가 아주 멋졌어요.
+   e2: Elle étudie le **ballet** depuis son enfance. || 그녀는 어릴 때부터 **발레**를 공부해요.
+   e3: Le spectacle de **ballet** attire beaucoup de visiteurs. || **발레** 공연은 많은 방문객을 끌어요.
+   syn: [danse classique, spectacle de danse] | ant: []
+
+danse contemporaine [ko] ipa=- | meanings: 현대 무용[명사]
+   e1: Elle pratique la **danse contemporaine** chaque semaine. || 그녀는 매주 **현대 무용**을 합니다.
+   e2: La **danse contemporaine** exprime des émotions profondes. || **현대 무용**은 깊은 감정을 표현합니다.
+   syn: [danse moderne, danse actuelle] | ant: []
+
+danseur [ko] ipa=dɑ̃sœʁ | meanings: 무용수[명사]
+   e1: Le **danseur** répète sa chorégraphie avec passion. || **무용수**가 열정적으로 안무를 연습해요.
+   e2: Un **danseur** célèbre a participé au spectacle. || 유명한 **무용수**가 공연에 참여했어요.
+   syn: [balletman, danseuse, interprète] | ant: []
+
+chorégraphe [ko] ipa=kɔʁeɡʁaf | meanings: 안무가[명사]
+   e1: Le **chorégraphe** a conçu une nouvelle danse pour le spectacle. || **안무가**가 공연을 위해 새로운 춤을 만들었어요.
+   e2: Cette troupe travaille avec un **chorégraphe** reconnu mondialement. || 이 무용단은 세계적으로 인정받는 **안무가**와 함께 일해요.
+   syn: [metteur en scène de danse, créateur de danse] | ant: []
+
+chorégraphie [ko] ipa=kɔʁeɡʁafi | meanings: 안무[명사]
+   e1: La **chorégraphie** de ce ballet est très élégante. || 이 발레의 **안무**는 매우 우아하다.
+   e2: Ils répètent la **chorégraphie** pour le spectacle. || 그들은 공연을 위해 **안무**를 연습하고 있다.
+   e3: Cette **chorégraphie** mélange modernité et tradition. || 이 **안무**는 현대성과 전통을 혼합한다.
+   syn: [mise en scène, danse, mise en mouvement] | ant: []
+
+voix [ko] ipa=vwa | meanings: 목소리[명사] | 의견[명사]
+   e1: Sa **voix** est douce et agréable. || 그의 **목소리**는 부드럽고 기분 좋다.
+   e2: Chaque personne a une **voix** dans la décision. || 각 사람은 결정에 한 **의견**을 가지고 있다.
+   e3: Nous écoutons la **voix** des enfants. || 우리는 아이들의 **목소리**를 듣는다.
+   syn: [son, timbre, parole, opinion, avis] | ant: []
+
+soprano [ko] ipa=sɔpʁano | meanings: 소프라노[명사]
+   e1: La **soprano** chante un air magnifique. || **소프라노**가 멋진 곡을 노래해요.
+   e2: Ce soir, la **soprano** est en vedette. || 오늘 밤, **소프라노**가 주인공이에요.
+   syn: [cantatrice, chanteuse] | ant: []
+
+ténor [ko] ipa=tenɔʁ | meanings: 테너[명사] | 주역[명사]
+   e1: Le **ténor** a chanté une aria magnifique. || 그 **테너**는 훌륭한 아리아를 불렀다.
+   e2: Il est le **ténor** principal de cette pièce de théâtre. || 그는 이 연극의 주된 **주역**이다.
+   syn: [chanteur, soliste, vedette] | ant: []
+
+harmonie [ko] ipa=aʁmɔni | meanings: 조화[명사] | 화음[명사]
+   e1: L'**harmonie** entre les couleurs est parfaite. || 색깔들 사이의 **조화**가 완벽하다.
+   e2: Cette chanson a une belle **harmonie** vocale. || 이 노래는 아름다운 **화음**이 있다.
+   e3: Ils ont trouvé une **harmonie** dans leur travail d'équipe. || 그들은 팀 작업에서 **조화**를 찾았다.
+   syn: [accord, équilibre, concorde] | ant: []
+
+mélodie [ko] ipa=meloˈdi | meanings: 선율[명사]
+   e1: La **mélodie** de cette chanson est très douce. || 이 노래의 **선율**은 매우 부드럽습니다.
+   e2: Elle a chanté la **mélodie** avec beaucoup d'émotion. || 그녀는 많은 감정을 담아 **선율**을 불렀습니다.
+   syn: [air, intonation, thème] | ant: []
+
+rythme [ko] ipa=ʁitm | meanings: 리듬[명사] | 박자[명사]
+   e1: Le **rythme** de la musique est très entraînant. || 음악의 **리듬**이 매우 신난다.
+   e2: Elle garde un **rythme** régulier en dansant. || 그녀는 춤을 추면서 규칙적인 **박자**를 유지한다.
+   e3: Nous avons changé le **rythme** du morceau pour le rendre plus dynamique. || 우리는 곡의 **리듬**을 바꿔서 더욱 역동적으로 만들었다.
+   syn: [battement, cadence] | ant: []
+
+tempo [ko] ipa=tɑ̃po | meanings: 템포, 박자[명사]
+   e1: Le **tempo** de cette chanson est très rapide. || 이 노래의 **템포**가 매우 빠릅니다.
+   e2: Le danseur suit le **tempo** de la musique avec précision. || 무용수가 음악의 **템포**를 정확히 맞춥니다.
+   e3: Le chef d'orchestre change le **tempo** pendant le concerto. || 지휘자가 협주곡 동안 **템포**를 바꿉니다.
+   syn: [rythme, cadence, vitesse] | ant: []
+
+partition [ko] ipa=paʁ.ti.sjɔ̃ | meanings: 악보[명사] | 분할, 구획[명사]
+   e1: Le musicien lit la **partition** pour jouer du piano. || 음악가는 피아노를 연주하기 위해 **악보**를 읽어요.
+   e2: La **partition** du terrain est clairement délimitée. || 땅의 **구획**이 명확하게 구분되어 있어요.
+   e3: Ils ont étudié la **partition** pour la chorale. || 그들은 합창단을 위해 **악보**를 공부했어요.
+   syn: [score, clivage, section] | ant: []
+
+interpréter [ko] ipa=ɛ̃.tɛʁ.pʁe.te | meanings: 해석하다[동사] | 연기하다[동사]
+   e1: Elle **interprète** le poème de façon claire. || 그녀는 시를 **해석한다**.
+   e2: Il **interprète** un rôle dans la pièce. || 그는 연극에서 배역을 **연기한다**.
+   e3: On doit bien **interpréter** cette phrase. || 우리는 이 문장을 잘 **해석해야** 한다.
+   syn: [expliquer, traduire, jouer, représenter] | ant: []
+
+interprétation [ko] ipa=ɛ̃tɛʁpʁetasjɔ̃ | meanings: 해석[명사] | 연주[명사]
+   e1: Son **interprétation** du texte est très claire. || 그는 텍스트에 대한 **해석**이 매우 명확해요.
+   e2: L'**interprétation** du piano était émouvante. || 피아노의 **연주**가 감동적이었어요.
+   syn: [exégèse, explication, performance, exécution] | ant: []
+
+récital [ko] ipa=ʁesiˈtal | meanings: 독주회[명사]
+   e1: Elle prépare un **récital** de piano ce soir. || 그녀는 오늘 밤에 **독주회**를 준비해요.
+   e2: Le **récital** de violon a été très apprécié. || 바이올린 **독주회**가 매우 호평을 받았어요.
+   e3: Nous avons assisté à un **récital** magnifique hier. || 우리는 어제 멋진 **독주회**에 참석했어요.
+   syn: [concert, performance] | ant: []
+
+studio d'enregistrement [ko] ipa=- | meanings: 녹음 스튜디오[명사]
+   e1: Ils ont loué un **studio d'enregistrement** pour leur album. || 그들은 앨범을 위해 **녹음 스튜디오**를 빌렸다.
+   e2: Le groupe passe beaucoup de temps dans le **studio d'enregistrement**. || 그 그룹은 **녹음 스튜디오**에서 많은 시간을 보낸다.
+   syn: [studio d'enregistrement sonore, studio de production sonore] | ant: []
+
+album [ko] ipa=al.bɔm | meanings: 앨범[명사]
+   e1: J'ai acheté un nouvel **album** de musique. || 나는 새 **앨범**을 샀다.
+   e2: Elle a rangé ses photos dans un **album**. || 그녀는 사진을 **앨범**에 정리했다.
+   e3: Cet **album** contient toutes ses chansons préférées. || 이 **앨범**에는 그가 좋아하는 노래가 모두 들어 있다.
+   syn: [recueil, livre-photo] | ant: []
+
+single [ko] ipa=sɛ̃ɡl | meanings: 독신자[명사] | 단일의[형용사]
+   e1: Elle est **single** depuis un an. || 그녀는 1년째 **독신자**이다.
+   e2: C'est un **single** jardinier. || 그는 **단일한** 정원사다.
+   syn: [] | ant: []
+
+tube [ko] ipa=tyb | meanings: 관, 튜브[명사] | 튜브(텔레비전 수상기를 비격식적으로 이르는 말)[명사]
+   e1: Le **tube** est en plastique transparent. || **튜브**는 투명한 플라스틱으로 되어 있어요.
+   e2: J'ai acheté un nouveau **tube** pour ma télévision. || 나는 내 텔레비전에 새 **튜브**를 샀어요.
+   e3: Le médecin a utilisé un **tube** pour l'analyse. || 의사는 분석을 위해 **튜브**를 사용했어요.
+   syn: [cylindre, canalisation, téléviseur] | ant: []
+
+tournée [ko] ipa=tuʁne | meanings: 순회 공연[명사] | 배달, 배송[명사]
+   e1: La troupe commence une nouvelle **tournée** ce mois-ci. || 그 극단은 이번 달에 새로운 **순회 공연**을 시작합니다.
+   e2: Le facteur fait sa **tournée** chaque matin. || 우체부는 매일 아침 **배달**을 합니다.
+   syn: [spectacle itinérant, livraison, distribution] | ant: []
+
+peinture [ko] ipa=pɛ̃tyʁ | meanings: 그림[명사] | 페인트[명사]
+   e1: La **peinture** décore le mur du salon. || 거실 벽을 **그림**이 장식해요.
+   e2: J'achète de la **peinture** pour peindre la porte. || 나는 문을 칠할 **페인트**를 샀어요.
+   e3: Cette **peinture** est pleine de couleurs vives. || 이 **그림**은 생생한 색깔로 가득해요.
+   syn: [tableau, dessin, illustration] | ant: []
+
+peintre [ko] ipa=pɛ̃tʁ | meanings: 화가[명사]
+   e1: Le **peintre** travaille sur une nouvelle toile. || **화가**가 새 그림 작업을 하고 있어요.
+   e2: Ma sœur est une **peintre** talentueuse. || 제 여동생은 재능 있는 **화가**입니다.
+   syn: [artiste, illustrateur, créateur] | ant: []
+
+tableau [ko] ipa=tablо | meanings: 그림[명사] | 표[명사]
+   e1: Le **tableau** dans la galerie est magnifique. || 그 갤러리의 **그림**이 멋지다.
+   e2: Le **tableau** des horaires est affiché à l'entrée. || 입구에 **표**가 게시되어 있다.
+   e3: Elle a peint un beau **tableau** avec des couleurs vives. || 그녀는 밝은 색을 사용해 아름다운 **그림**을 그렸다.
+   syn: [peinture, image, dessin, graphe, schéma] | ant: []
+
+toile [ko] ipa=twal | meanings: 천, 캔버스[명사] | 거미줄[명사]
+   e1: L'artiste a peint sur une **toile** blanche. || 그 화가는 흰 **캔버스**에 그림을 그렸다.
+   e2: La **toile** de l'araignée brille au soleil. || 거미의 **거미줄**이 햇볕에 반짝인다.
+   e3: Elle a acheté une **toile** pour faire un rideau. || 그녀는 커튼을 만들기 위해 **천**을 샀다.
+   syn: [tissu, canevas, drap] | ant: []
+
+pinceau [ko] ipa=pɛ̃so | meanings: 붓[명사]
+   e1: Le **pinceau** est propre après le lavage. || **붓**은 세척 후 깨끗합니다.
+   e2: Elle utilise un **pinceau** fin pour peindre des détails. || 그녀는 세밀한 부분을 그리기 위해 가는 **붓**을 사용합니다.
+   e3: Le **pinceau** glisse doucement sur la toile. || **붓**이 캔버스 위를 부드럽게 미끄러집니다.
+   syn: [brosse, outil de peinture] | ant: []
+
+couleur [ko] ipa=kulœʁ | meanings: 색깔[명사]
+   e1: La **couleur** du ciel est magnifique ce soir. || 오늘 저녁 하늘의 **색깔**이 아름다워요.
+   e2: Elle préfère la **couleur** bleue pour la peinture. || 그녀는 페인트로 파란**색깔**을 좋아해요.
+   e3: Cette robe a une **couleur** vive et joyeuse. || 이 드레스는 선명하고 밝은 **색깔**을 가지고 있어요.
+   syn: [teinte, nuance, ton, pigment] | ant: []
+
+palette [ko] ipa=palɛt | meanings: 물감판, 팔레트[명사] | 색상 배열, 색상 견본[명사]
+   e1: L'artiste mélange les couleurs sur la **palette**. || 화가는 **팔레트** 위에서 색을 섞어요.
+   e2: La **palette** de couleurs choisie est très douce. || 선택한 **색상 배열**이 아주 부드러워요.
+   e3: Elle a nettoyé sa **palette** après la peinture. || 그녀는 그림 후에 자신의 **팔레트**를 청소했어요.
+   syn: [tablette, nuancier] | ant: []
+
+aquarelle [ko] ipa=akwaʁɛl | meanings: 수채화[명사]
+   e1: Elle a créé une belle **aquarelle** de la mer. || 그녀는 바다의 아름다운 **수채화**를 그렸다.
+   e2: L'**aquarelle** donne des couleurs douces et translucides. || **수채화**는 부드럽고 투명한 색을 준다.
+   e3: Nous avons appris à peindre une **aquarelle** en classe. || 우리는 수업에서 **수채화** 그리는 법을 배웠다.
+   syn: [peinture à l'eau, lavis] | ant: []
+
+fresque [ko] ipa=fʁɛsk | meanings: 벽화[명사]
+   e1: La **fresque** raconte l'histoire de la ville. || 그 **벽화**는 도시의 역사를 이야기해요.
+   e2: Nous avons admiré la **fresque** colorée dans le musée. || 우리는 박물관에서 색채가 풍부한 **벽화**를 감상했어요.
+   e3: La **fresque** orne le mur de l'école primaire. || 그 **벽화**는 초등학교 벽을 장식해요.
+   syn: [peinture murale, murale] | ant: []
+
+portrait [ko] ipa=pɔʁtʁɛ | meanings: 초상화[명사] | 인물 묘사[명사]
+   e1: Le musée expose un **portrait** de la reine. || 박물관은 여왕의 **초상화**를 전시합니다.
+   e2: L'écrivain a fait un **portrait** touchant de son ami. || 작가는 그의 친구에 대한 감동적인 **인물 묘사**를 썼습니다.
+   e3: Ce **portrait** révèle la personnalité du personnage. || 이 **인물 묘사**는 인물의 성격을 드러냅니다.
+   syn: [tableau, représentation, image] | ant: []
+
+paysage [ko] ipa=pɛizaʒ | meanings: 풍경[명사]
+   e1: Le **paysage** est magnifique au coucher du soleil. || 일몰에 **풍경**이 아름답다.
+   e2: Nous avons dessiné le **paysage** pendant la promenade. || 산책 중에 **풍경**을 그렸다.
+   e3: Le **paysage** change avec les saisons. || **풍경**은 계절에 따라 변한다.
+   syn: [vue, panorama, scène] | ant: []
+
+nature morte [ko] ipa=- | meanings: 정물화[명사]
+   e1: Le peintre a créé une belle **nature morte**. || 그 화가는 아름다운 **정물화**를 그렸어요.
+   e2: Nous admirons souvent la **nature morte** dans les musées. || 우리는 자주 미술관에서 **정물화**를 감상해요.
+   e3: Cette **nature morte** montre des fruits frais et des fleurs. || 이 **정물화**는 신선한 과일과 꽃을 보여 줍니다.
+   syn: [tableau de fruits, peinture de fruits] | ant: []
+
+abstrait [ko] ipa=aps.tʁɛ | meanings: 추상적인[형용사]
+   e1: Ce tableau est très **abstrait**. || 이 그림은 매우 **추상적**입니다.
+   e2: L'art **abstrait** inspire beaucoup de créativité. || **추상적인** 예술은 많은 창의력을 불러일으킨다.
+   e3: Il explique des idées **abstraites** facilement. || 그는 **추상적인** 아이디어를 쉽게 설명한다.
+   syn: [conceptuel, théorique, immatériel] | ant: [concret, réel, tangible]
+
+figuratif [ko] ipa=figyʁatif | meanings: 구상적인[형용사]
+   e1: Le tableau est très **figuratif** et montre des détails précis. || 그 그림은 아주 **구상적**이며 정밀한 세부 사항을 보여줍니다.
+   e2: Cette œuvre d'art est un bon exemple de style **figuratif**. || 이 예술 작품은 좋은 **구상적인** 스타일의 예입니다.
+   syn: [représentatif, illustratif, réaliste] | ant: [abstrait]
+
+impressionnisme [ko] ipa=ɛ̃pʁɛsjɔnisme | meanings: 인상주의[명사]
+   e1: L'**impressionnisme** a révolutionné la peinture au 19e siècle. || **인상주의**는 19세기에 회화를 혁신했다.
+   e2: Les paysages sont souvent peints dans l'**impressionnisme**. || 풍경들은 자주 **인상주의** 양식으로 그려진다.
+   e3: L'**impressionnisme** met l'accent sur la lumière naturelle. || **인상주의**는 자연광에 중점을 둔다.
+   syn: [style impressionniste] | ant: []
+
+expressionnisme [ko] ipa=ɛkspʁɛsjɔnis.mə | meanings: 표현주의[명사]
+   e1: L'**expressionnisme** utilise des couleurs vives et des formes déformées. || **표현주의**는 선명한 색과 왜곡된 형태를 사용해요.
+   e2: Le musée expose des œuvres d'**expressionnisme** célèbre. || 박물관에는 유명한 **표현주의** 작품들이 전시돼요.
+   e3: L'**expressionnisme** montre souvent les émotions intenses. || **표현주의**는 종종 강한 감정을 보여줘요.
+   syn: [cubisme, surréalisme, fauvisme] | ant: []
+
+surréalisme [ko] ipa=syʁealism | meanings: 초현실주의[명사]
+   e1: Le **surréalisme** explore le monde des rêves. || **초현실주의**는 꿈의 세계를 탐구한다.
+   e2: L'exposition présente des œuvres du **surréalisme**. || 전시회는 **초현실주의** 작품을 선보인다.
+   e3: Le **surréalisme** cherche à libérer l'imagination. || **초현실주의**는 상상력을 해방시키려 한다.
+   syn: [automatisme, dadaïsme, fantastique] | ant: []
+
+cubisme [ko] ipa=kybism | meanings: 입체파[명사]
+   e1: Le **cubisme** a changé l'art moderne. || **입체파**는 현대 미술을 바꾸었다.
+   e2: Le peintre étudie le **cubisme** et ses formes. || 화가는 **입체파**와 그 형태를 연구한다.
+   syn: [] | ant: []
+
+Renaissance [ko] ipa=ʁənɛsɑ̃s | meanings: 르네상스[명사] | 재생, 부활[명사]
+   e1: La **Renaissance** a transformé l'art européen. || **르네상스**는 유럽 예술을 변화시켰다.
+   e2: Après une longue maladie, il a connu une **renaissance**. || 오랜 병 후에 그는 **부활**을 경험했다.
+   syn: [renouveau, réveil, réanimation] | ant: []
+
+Baroque [ko] ipa=baʁɔk | meanings: 바로크 양식[명사]
+   e1: Le château est un bel exemple du style **baroque**. || 그 성은 아름다운 **바로크 양식**의 예입니다.
+   e2: Les peintures **baroques** sont pleines de détails et de mouvement. || **바로크** 그림들은 세부와 움직임이 가득합니다.
+   syn: [rococo, classique tardif] | ant: []
+
+Romantisme [ko] ipa=ʁɔ.mɑ̃.tism | meanings: 낭만주의[명사]
+   e1: Le **romantisme** valorise les émotions et la nature. || **낭만주의**는 감정과 자연을 중시합니다.
+   e2: Les œuvres du **romantisme** expriment la passion et la liberté. || **낭만주의** 작품은 열정과 자유를 표현합니다.
+   e3: Le **romantisme** est un mouvement artistique du XIXe siècle. || **낭만주의**는 19세기의 예술 운동입니다.
+   syn: [sentimentalisme, idéalisme] | ant: []
+
+sculpture [ko] ipa=skylptyʁ | meanings: 조각 작품[명사]
+   e1: La **sculpture** est exposée dans le musée. || 그 **조각**은 박물관에 전시되어 있습니다.
+   e2: Elle admire la **sculpture** en pierre. || 그녀는 돌로 된 **조각**을 감상합니다.
+   e3: Cette **sculpture** représente un animal. || 이 **조각**은 동물을 표현합니다.
+   syn: [statue, œuvre, figure] | ant: []
+
+sculpteur [ko] ipa=skylptœʁ | meanings: 조각가[명사]
+   e1: Le **sculpteur** façonne une statue en marbre. || **조각가**가 대리석으로 조각을 만든다.
+   e2: Cette exposition célèbre le travail du **sculpteur** local. || 이 전시는 지역 **조각가**의 작품을 기념한다.
+   e3: Le **sculpteur** travaille dans son atelier au bord de la rivière. || **조각가**는 강가에 있는 작업장에서 일한다.
+   syn: [tailleur, statuaire, sculpteuse] | ant: []
+
+statue [ko] ipa=sta.ty | meanings: 조각상[명사]
+   e1: La **statue** se trouve au centre du parc. || 그 **조각상**은 공원 중앙에 있습니다.
+   e2: Ils admirent la **statue** ancienne au musée. || 그들은 박물관에서 오래된 **조각상**을 감상합니다.
+   e3: La **statue** représente un héros historique célèbre. || **조각상**은 유명한 역사적 영웅을 나타냅니다.
+   syn: [sculpture, figure, monument] | ant: []
+
+marbre [ko] ipa=maʁbʁ | meanings: 대리석[명사] | 몸의 근육[명사]
+   e1: La table est faite en **marbre** blanc. || 탁자는 흰색 **대리석**으로 만들어졌어요.
+   e2: Il a des bras comme du **marbre**, très musclés. || 그는 매우 근육질인, 마치 **대리석** 같은 팔을 가졌어요.
+   e3: Le sculpteur travaille le **marbre** avec soin. || 조각가는 신중하게 **대리석**을 다룹니다.
+   syn: [pierre, roc, statuaire, carrare] | ant: []
+
+bronze [ko] ipa=bʁɔ̃z | meanings: 청동[명사] | 동상[명사]
+   e1: Le vase est fait en **bronze**. || 그 꽃병은 **청동**으로 만들어졌어요.
+   e2: Le musée présente un **bronze** ancien. || 박물관은 오래된 **동상**을 전시해요.
+   e3: La sculpture en **bronze** brille au soleil. || 해빛 아래에서 **청동** 조각상이 빛나요.
+   syn: [] | ant: []
+
+argile [ko] ipa=aʁʒil | meanings: 점토[명사]
+   e1: L'artiste modèle **l'argile** avec ses mains. || 예술가는 손으로 **점토**를 빚어요.
+   e2: Cette région est riche en **argile** naturelle. || 이 지역은 자연 **점토**가 풍부해요.
+   syn: [terre glaise, boue, argileux] | ant: []
+
+galerie [ko] ipa=ɡalʁi | meanings: 화랑[명사] | 통로[명사]
+   e1: La **galerie** expose des œuvres d'art modernes. || 그 **화랑**은 현대 미술 작품을 전시합니다.
+   e2: Nous avons marché dans une longue **galerie** sombre. || 우리는 긴 어두운 **통로**를 걸었습니다.
+   e3: La **galerie** d'art accueille de nombreux visiteurs chaque jour. || 그 **화랑**은 매일 많은 방문객을 맞이합니다.
+   syn: [exposition, showroom, passage, couloir] | ant: []
+
+vernissage [ko] ipa=vɛʁ.ni.saʒ | meanings: 개막식[명사] | 사전 개막 행사[명사]
+   e1: Le **vernissage** de l'exposition a eu lieu hier soir. || 전시회의 **개막식**이 어젯밤에 열렸어요.
+   e2: Le **vernissage** permet aux invités de découvrir les œuvres en avant-première. || **사전 개막 행사**에서 손님들은 작품을 미리 볼 수 있어요.
+   e3: Nous avons assisté au **vernissage** de la galerie d'art locale. || 우리는 지역 미술관 **개막식**에 참석했어요.
+   syn: [inauguration, ouverture, exposition] | ant: []
+
+collection [ko] ipa=kɔlɛksjɔ̃ | meanings: 수집[명사] | 컬렉션, 작품 모음[명사]
+   e1: Sa **collection** de timbres est impressionnante. || 그의 우표 **수집**은 인상적입니다.
+   e2: Elle a publié une nouvelle **collection** de poèmes. || 그녀는 새로운 시 **컬렉션**을 출판했습니다.
+   e3: La **collection** de vêtements est très colorée. || 의류 **컬렉션**은 매우 다채롭습니다.
+   syn: [ensemble, série, recueil] | ant: []
+
+collectionneur [ko] ipa=kɔlɛksjɔnœʁ | meanings: 수집가[명사]
+   e1: Le **collectionneur** a trouvé une pièce rare. || 그 **수집가**는 희귀품을 찾았다.
+   e2: Une exposition pour les **collectionneurs** d'art a ouvert. || 미술 **수집가**들을 위한 전시회가 열렸다.
+   e3: Ce **collectionneur** aime rassembler des timbres anciens. || 이 **수집가**는 오래된 우표를 모으는 것을 좋아한다.
+   syn: [amateur, accumulateur, passionné d'objets] | ant: []
+
+conservateur [ko] ipa=kɔ̃sɛʁvatœʁ | meanings: 보존하는[형용사] | 보수주의자[명사]
+   e1: Le vin est **conservateur** grâce à la méthode spéciale. || 그 와인은 특별한 방법 덕분에 **보존적이다**.
+   e2: Mon oncle est un **conservateur** en politique. || 내 삼촌은 정치적으로 **보수주의자**이다.
+   syn: [traditionnel, réactionnaire, prudent] | ant: [progressiste, révolutionnaire]
+
+restauration [ko] ipa=ʁɛstaʁasjɔ̃ | meanings: 식사 제공업[명사] | 복원[명사]
+   e1: La **restauration** de cet hôtel est très réputée. || 이 호텔의 **식사 제공업**은 매우 유명해요.
+   e2: La **restauration** du tableau a pris plusieurs mois. || 그 그림의 **복원** 작업에 몇 달이 걸렸어요.
+   e3: La **restauration** rapide offre des repas simples et efficaces. || 패스트푸드는 간단하고 신속한 **식사**를 제공합니다.
+   syn: [service de restauration, restauration rapide, restitution] | ant: []
+
+chef-d'œuvre [ko] ipa=ʃɛf.dœvʁ | meanings: 걸작[명사] | 대표작[명사]
+   e1: Ce tableau est un **chef-d'œuvre** du XIXe siècle. || 이 그림은 19세기의 **걸작**입니다.
+   e2: Son dernier livre est considéré comme un **chef-d'œuvre**. || 그의 최신 저서는 **대표작**으로 여겨집니다.
+   syn: [masterpiece, pièce maîtresse] | ant: []
+
+esthétique [ko] ipa=ɛstetik | meanings: 미학[명사] | 심미적[형용사]
+   e1: L'**esthétique** de ce tableau est remarquable. || 이 그림의 **미학**은 뛰어납니다.
+   e2: Cette pièce a une touche **esthétique** unique. || 이 방은 독특한 **심미적** 느낌이 있습니다.
+   syn: [beau, artistique, élégant] | ant: []
+
+beauté [ko] ipa=bote | meanings: 아름다움[명사]
+   e1: La **beauté** de la nature est inspirante. || 자연의 **아름다움**은 영감을 준다.
+   e2: Elle admire la **beauté** du coucher de soleil. || 그녀는 석양의 **아름다움**에 감탄한다.
+   syn: [jolieté, charme, grâce] | ant: []
+
+laideur [ko] ipa=lɛdœʁ | meanings: 추함[명사]
+   e1: La **laideur** du tableau est surprenante. || 그 그림의 **추함**이 놀랍습니다.
+   e2: Elle accepte la **laideur** avec confiance. || 그녀는 자신감 있게 **추함**을 받아들입니다.
+   syn: [ugliness, décadence] | ant: [beauté, jolieté]
+
+goût artistique [ko] ipa=- | meanings: 예술적 취향[명사]
+   e1: Elle a un **goût artistique** très développé. || 그녀는 매우 발달된 **예술적 취향**을 가지고 있어요.
+   e2: Son **goût artistique** se reflète dans sa peinture. || 그의 **예술적 취향**이 그의 그림에 반영돼요.
+   syn: [sens artistique, préférence artistique, esthétique] | ant: []
+
+courant artistique [ko] ipa=- | meanings: 예술 사조[표현]
+   e1: Le **courant artistique** impressionniste est très célèbre. || 인상주의 **예술 사조**는 매우 유명해요.
+   e2: Chaque **courant artistique** a ses propres caractéristiques. || 각 **예술 사조**는 고유한 특징이 있어요.
+   syn: [mouvement artistique, style artistique, école artistique] | ant: []
+
+critique littéraire [ko] ipa=- | meanings: 문학 비평[표현]
+   e1: La **critique littéraire** aide à comprendre le texte. || **문학 비평**은 글을 이해하는 데 도움을 줍니다.
+   e2: Elle écrit une **critique littéraire** positive. || 그녀는 긍정적인 **문학 비평**을 씁니다.
+   syn: [analyse littéraire, examen littéraire] | ant: []
+
+recueil [ko] ipa=ʁəkœj | meanings: 모음집[명사] | 집합[명사]
+   e1: Le **recueil** de poèmes est très apprécié. || 시집 **모음집**이 매우 인기가 많아요.
+   e2: Le **recueil** des notes a pris plusieurs heures. || 메모들의 **모음**에 몇 시간이 걸렸어요.
+   syn: [anthologie, compilation, collection] | ant: []
+
+nouvelle vague [ko] ipa=- | meanings: 누벨바그, 영화운동[고유명사]
+   e1: La **nouvelle vague** a révolutionné le cinéma français. || **누벨바그**는 프랑스 영화를 혁신했다.
+   e2: Nous avons étudié la **nouvelle vague** en cours de cinéma. || 우리는 영화 수업에서 **누벨바그**를 배웠다.
+   e3: Le mouvement de la **nouvelle vague** présente des idées novatrices. || **누벨바그** 운동은 새로운 아이디어를 보여준다.
+   syn: [] | ant: []
+
+avant-garde [ko] ipa=a.vɑ̃.ɡaʁd | meanings: 아방가르드, 전위 예술[명사] | 선구자 집단[명사]
+   e1: L'**avant-garde** transforme les galeries. || **아방가르드**가 갤러리를 변화시킵니다.
+   e2: Le groupe **avant-garde** mène les nouvelles idées. || 그 **선구자 집단**은 새로운 아이디어를 이끕니다.
+   syn: [progressiste, révolutionnaire, pionnier] | ant: []
+
+génération littéraire [ko] ipa=- | meanings: 문학 세대[명사]
+   e1: La **génération littéraire** des années 1920 a marqué l'histoire. || 1920년대의 **문학 세대**가 역사를 장식했다.
+   e2: Cette revue célèbre la **génération littéraire** contemporaine. || 이 잡지는 현대 **문학 세대**를 기념한다.
+   syn: [courant littéraire, mouvement littéraire] | ant: []
+
+manifeste [ko] ipa=manifɛst | meanings: 성명, 선언문[명사] | 명확한, 분명한[형용사]
+   e1: Le **manifeste** a été signé par tous les membres. || 그 **성명**은 모든 회원이 서명했다.
+   e2: Son intérêt pour l'art est **manifeste**. || 그의 예술에 대한 관심은 **명확하다**.
+   e3: Ils ont publié un **manifeste** contre la guerre. || 그들은 전쟁에 반대하는 **선언문**을 발표했다.
+   syn: [déclaration, proclamation, évident, clair] | ant: []
+
+pamphlet [ko] ipa=pɑ̃flɛ | meanings: 소책자[명사] | 비방 전단지[명사]
+   e1: Elle a distribué un **pamphlet** informatif au parc. || 그녀는 공원에서 **소책자**를 나눠주었다.
+   e2: Le politicien a écrit un **pamphlet** contre ses adversaires. || 그 정치인은 경쟁자들을 비난하는 **비방 전단지**를 썼다.
+   syn: [brochure, tract, flyer] | ant: []
+
+chronique [ko] ipa=kʁɔ.nik | meanings: 사설[명사] | 만성적인[형용사]
+   e1: J'ai lu la **chronique** dans le journal ce matin. || 나는 오늘 아침 신문에서 **사설**을 읽었어요.
+   e2: Elle souffre d'une maladie **chronique** depuis des années. || 그녀는 수년간 **만성적인** 병을 앓고 있어요.
+   syn: [éditorial, commentaire, article] | ant: []
+
+feuilleton [ko] ipa=fœj.tɔ̃ | meanings: 연속극[명사] | 예술 문화 논평란[명사]
+   e1: Le **feuilleton** raconte une histoire chaque soir. || 그 **연속극**은 매일 밤 이야기를 전합니다.
+   e2: Le journal publie un **feuilleton** sur l'art moderne. || 신문은 현대 미술에 관한 **예술 문화 논평란**을 게재합니다.
+   syn: [série, soap-opéra, chronique] | ant: []
+
+salon littéraire [ko] ipa=- | meanings: 문학 모임[명사]
+   e1: Le **salon littéraire** a réuni de nombreux écrivains ce soir. || 오늘 밤 많은 작가들이 **문학 모임**에 모였다.
+   e2: Elle participe chaque semaine au **salon littéraire** du quartier. || 그녀는 매주 동네 **문학 모임**에 참여한다.
+   syn: [cercle littéraire, réunion littéraire] | ant: []
+
+mécène [ko] ipa=me.sɛn | meanings: 후원자[명사]
+   e1: Le **mécène** soutient l'artiste avec générosité. || **후원자**가 예술가를 관대하게 지원한다.
+   e2: Cette exposition est financée par un riche **mécène**. || 이 전시회는 부유한 **후원자**가 자금을 지원한다.
+   syn: [bienfaiteur, parrain, protecteur] | ant: []
+
+mécénat [ko] ipa=mesena | meanings: 후원[명사] | 예술·학술 지원[명사]
+   e1: Le **mécénat** a aidé l'association locale. || 그 **후원**은 지역 단체를 도왔어요.
+   e2: Le **mécénat** soutient les projets artistiques. || 그 **예술** 지원이 예술 프로젝트를 지원합니다.
+   syn: [sponsoring, patronage] | ant: []
+
+librairie indépendante [ko] ipa=- | meanings: 독립 서점[명사]
+   e1: Cette **librairie indépendante** vend des livres rares. || 이 **독립 서점**은 희귀 서적을 판매합니다.
+   e2: J'aime soutenir une **librairie indépendante** près de chez moi. || 나는 집 근처의 **독립 서점**을 지원하는 것을 좋아해요.
+   syn: [boutique de livres indépendante, librairie indépendante locale] | ant: []
+
+maison d'édition [ko] ipa=- | meanings: 출판사[명사]
+   e1: La **maison d'édition** a publié un nouveau roman. || 그 **출판사**는 새로운 소설을 출판했어요.
+   e2: J'ai reçu un contrat de la **maison d'édition**. || 나는 **출판사**로부터 계약을 받았어요.
+   syn: [éditeur, société d'édition, maison d'édition littéraire] | ant: []
+
+tirage [ko] ipa=tiʁaʒ | meanings: 추첨[명사] | 인쇄[명사]
+   e1: Le **tirage** au sort a décidé le gagnant. || **추첨**으로 당첨자가 결정되었다.
+   e2: Le **tirage** du livre a été réalisé ce matin. || 책의 **인쇄**가 오늘 아침에 이루어졌다.
+   syn: [lotterie, impression] | ant: []
+
+réédition [ko] ipa=ʁeɛdijsjɔ̃ | meanings: 재발행[명사]
+   e1: La **réédition** de ce livre est prévue pour demain. || 이 책의 **재발행**은 내일 예정되어 있습니다.
+   e2: Nous avons apprécié la **réédition** avec des illustrations inédites. || 우리는 새로운 삽화가 포함된 **재발행**을 즐겼습니다.
+   syn: [réimpression, réédition augmentée] | ant: []
+
+œuvre posthume [ko] ipa=- | meanings: 사후에 출판된 작품[표현]
+   e1: L'**œuvre posthume** fut saluée par les critiques. || 그 사후에 출판된 **작품**은 평론가들의 찬사를 받았다.
+   e2: Nous découvrons souvent une **œuvre posthume** originale. || 우리는 종종 독창적인 **사후에 출판된 작품**을 발견한다.
+   e3: Une **œuvre posthume** peut révéler le vrai style de l'artiste. || **사후에 출판된 작품**은 작가의 진정한 스타일을 드러낼 수 있다.
+   syn: [ouvrage posthume, travail posthume] | ant: []
+
+prosateur [ko] ipa=pʁɔ.za.tœʁ | meanings: 산문가[명사]
+   e1: Le **prosateur** a publié un nouveau roman ce mois-ci. || **산문가**가 이번 달에 새 소설을 출판했다.
+   e2: Ce **prosateur** est connu pour son style clair et précis. || 이 **산문가**는 명확하고 정밀한 문체로 유명하다.
+   syn: [écrivain, auteur, romancier] | ant: []
+
+lyrisme [ko] ipa=liʁism | meanings: 서정성[명사] | 서정주의[명사]
+   e1: Le **lyrisme** dans ce poème est très profond. || 이 시에서 **서정성**은 매우 깊습니다.
+   e2: Le style de l'auteur révèle un **lyrisme** marqué. || 작가의 스타일은 뚜렷한 **서정주의**를 보여줍니다.
+   e3: Le **lyrisme** aide à exprimer des sentiments intenses. || **서정성**은 강한 감정을 표현하는 데 도움이 됩니다.
+   syn: [émotion, poésie, expressivité] | ant: []
+
+pathos [ko] ipa=pa.tɔs | meanings: 비애[명사] | 연민[명사]
+   e1: Le film exprime un profond **pathos** par sa musique mélancolique. || 그 영화는 멜랑콜리한 음악으로 깊은 **비애**를 표현한다.
+   e2: Elle a ressenti un grand **pathos** pour les victimes de la catastrophe. || 그녀는 재해 희생자들에게 큰 **연민**을 느꼈다.
+   syn: [tristesse, compassion] | ant: []
+
+pathétique [ko] ipa=patetik | meanings: 가련한, 불쌍한[형용사] | 감동적인, 애절한[형용사]
+   e1: Cette situation est vraiment **pathétique**. || 이 상황은 정말 **가련하다**.
+   e2: Le film avait une fin **pathétique** qui m'a ému. || 그 영화는 나를 감동시킨 **애절한** 결말이 있었다.
+   syn: [lamentable, affligeant, touchant, émouvant] | ant: []
+
+sublime [ko] ipa=syblim | meanings: 최고의, 숭고한[형용사]
+   e1: Le coucher de soleil était vraiment **sublime**. || 일몰이 정말 **최고의**였다.
+   e2: Elle a fait une prestation **sublime** au concert. || 그녀는 콘서트에서 **숭고한** 공연을 했다.
+   syn: [excellent, grandiose, élevé] | ant: []
+
+ridicule [ko] ipa=ʁi.di.kyl | meanings: 우스꽝스러운[형용사] | 조롱[명사]
+   e1: Le spectacle était vraiment **ridicule**. || 그 공연은 정말 **우스꽝스러웠다**.
+   e2: Son comportement provoque le **ridicule**. || 그의 행동이 **조롱**을 불러일으킨다.
+   e3: C'est un argument totalement **ridicule**. || 그것은 완전히 **우스꽝스러운** 주장이에요.
+   syn: [absurde, grotesque, comique] | ant: []
+
+parodie [ko] ipa=paʁɔdi | meanings: 풍자[명사] | 모방[명사]
+   e1: La **parodie** critique la société avec humour. || 그 패러디는 유머로 사회를 **풍자**합니다.
+   e2: Cette **parodie** imite un film célèbre. || 이 **패러디**는 유명한 영화를 흉내 냈다.
+   e3: La chanson est une **parodie** amusante d'un hit. || 그 노래는 히트곡의 재미있는 **패러디**이다.
+   syn: [satire, burlesque, imitation] | ant: []
+
+pastiche [ko] ipa=pastiʃ | meanings: 모방 작품[명사]
+   e1: Ce film est un **pastiche** des classiques du cinéma. || 이 영화는 고전 영화들의 **모방 작품**입니다.
+   e2: L'artiste a créé un **pastiche** de plusieurs styles célèbres. || 그 예술가는 여러 유명한 스타일의 **모방 작품**을 만들었습니다.
+   syn: [imitation, copie, contrefaçon] | ant: []
+
+plagiat [ko] ipa=plaʒja | meanings: 표절[명사]
+   e1: Le professeur a détecté un **plagiat** dans ce devoir. || 선생님이 이 과제에서 **표절**을 발견했다.
+   e2: Le journal a dénoncé le **plagiat** dans cet article. || 신문은 이 기사에서 **표절**을 고발했다.
+   e3: La lutte contre le **plagiat** est importante pour la création. || 창작에는 **표절** 방지가 중요하다.
+   syn: [copie, contrefaçon, imitation] | ant: []
+
+plagier [ko] ipa=pla.ʒje | meanings: 표절하다[동사]
+   e1: Il a été accusé de **plagier** un article célèbre. || 그는 유명한 글을 **표절한** 혐의를 받았다.
+   e2: Elle essaie de ne pas **plagier** dans son rapport. || 그녀는 보고서에서 **표절하지** 않으려고 노력한다.
+   e3: Les étudiants doivent éviter de **plagier** leurs devoirs. || 학생들은 과제에서 **표절하는** 것을 피해야 한다.
+   syn: [copier, contrefaire, imiter] | ant: []
+
+inspiration [ko] ipa=ɛ̃spiʁa.sjɔ̃ | meanings: 영감[명사] | 숨을 들이마심[명사]
+   e1: L'artiste trouve souvent l'**inspiration** dans la nature. || 그 예술가는 종종 자연에서 **영감**을 얻어요.
+   e2: L'**inspiration** profonde aide à calmer l'esprit. || 깊은 **숨 들이마심**은 마음을 진정시키는 데 도움이 돼요.
+   e3: Elle partage son **inspiration** pour son nouveau roman. || 그녀는 새 소설에 대한 자신의 **영감**을 나눴어요.
+   syn: [insufflation, idéation, souffle] | ant: []
+
+s'inspirer [ko] ipa=sɛ̃spiʁe | meanings: 영감을 얻다, 영향을 받다[동사]
+   e1: Elle **s'inspire** souvent de la nature pour ses peintures. || 그녀는 종종 자연에서 **영감을 얻는다** 자신의 그림에.
+   e2: Nous devons **nous inspirer** des grands artistes pour progresser. || 우리는 발전하기 위해 위대한 예술가들에게서 **영감을 얻어야** 한다.
+   e3: Il **s'inspire** beaucoup du style ancien. || 그는 오래된 스타일에서 많이 **영감을 얻는다**.
+   syn: [puiser, tirer, recevoir une idée de] | ant: []
+
+muse [ko] ipa=myz | meanings: 뮤즈, 여신[명사]
+   e1: La **muse** a inspiré beaucoup de peintures célèbres. || 그 **뮤즈**는 많은 유명한 그림에 영감을 주었습니다.
+   e2: Son poème est dédié à sa **muse** préférée. || 그의 시는 그가 가장 좋아하는 **뮤즈**에게 바쳐졌습니다.
+   syn: [inspiration, égérie] | ant: []
+
+allusion [ko] ipa=alˈlyzjɔ̃ | meanings: 넌지시 말하기[명사] | 암시[명사]
+   e1: Son discours contenait une **allusion** subtile. || 그의 연설에는 **넌지시 말하기**가 있었다.
+   e2: L'**allusion** à ce fait est claire dans le texte. || 그 사실에 대한 **암시**가 문장에서 분명하다.
+   e3: Elle a fait une **allusion** discrète à son départ. || 그녀는 떠남에 대해 **넌지시 말하기**를 했다.
+   syn: [insinuation, sous-entendu, évocation] | ant: []
+
+référence culturelle [ko] ipa=- | meanings: 문화적 인용[표현]
+   e1: La peinture utilise une **référence culturelle** célèbre. || 그 그림은 유명한 **문화적 인용**을 사용합니다.
+   e2: Ce film est rempli de **références culturelles** françaises. || 이 영화에는 프랑스의 **문화적 인용**이 가득합니다.
+   syn: [] | ant: []
+
+analyse littéraire [ko] ipa=- | meanings: 문학 분석[표현]
+   e1: L'**analyse littéraire** révèle le style unique de l'auteur. || **문학 분석**은 작가의 독특한 스타일을 보여준다.
+   e2: Elle a fait une **analyse littéraire** approfondie du roman. || 그녀는 그 소설에 대해 심층적인 **문학 분석**을 했다.
+   syn: [examen littéraire, étude littéraire, critique littéraire] | ant: []
+
+commentaire de texte [ko] ipa=- | meanings: 텍스트 해설[표현]
+   e1: Le professeur a expliqué le **commentaire de texte** en classe. || 선생님이 수업에서 **텍스트 해설**을 설명하셨어요.
+   e2: Écrire un bon **commentaire de texte** demande de la patience. || 좋은 **텍스트 해설**을 쓰려면 인내가 필요해요.
+   syn: [analyse de texte, exégèse] | ant: []
+
+dissertation [ko] ipa=dizɛʁtasjɔ̃ | meanings: 논문[명사]
+   e1: Il a rédigé une **dissertation** sur la littérature française. || 그는 프랑스 문학에 관한 **논문**을 작성했다.
+   e2: La **dissertation** demande une analyse approfondie du sujet. || **논문**은 주제에 대한 깊은 분석을 요구한다.
+   e3: Nous devons rendre notre **dissertation** avant la fin du mois. || 우리는 이번 달 말 전에 **논문**을 제출해야 한다.
+   syn: [mémoire, thèse, rapport] | ant: []
+
+genre littéraire [ko] ipa=- | meanings: 문학 장르[명사]
+   e1: Le roman est un **genre littéraire** populaire. || 소설은 인기 있는 **문학 장르**입니다.
+   e2: Chaque **genre littéraire** a ses propres règles. || 각 **문학 장르**는 고유한 규칙이 있습니다.
+   e3: Nous étudions plusieurs **genres littéraires** en classe. || 우리는 수업에서 여러 **문학 장르**를 공부합니다.
+   syn: [type de littérature, catégorie littéraire, style littéraire] | ant: []
+
+siècle des Lumières [ko] ipa=- | meanings: 계몽 시대[고유명사]
+   e1: Le **siècle des Lumières** a influencé la pensée moderne. || **계몽 시대**는 현대 사상에 영향을 미쳤다.
+   e2: Nous étudions le **siècle des Lumières** en histoire. || 우리는 역사에서 **계몽 시대**를 공부한다.
+   e3: Les philosophes du **siècle des Lumières** valorisaient la raison. || **계몽 시대**의 철학자들은 이성을 중시했다.
+   syn: [] | ant: []
+
+romantisme français [ko] ipa=- | meanings: 프랑스 낭만주의 운동[표현]
+   e1: Le **romantisme français** influence encore la littérature. || 프랑스 **낭만주의**는 여전히 문학에 영향을 준다.
+   e2: Les artistes du **romantisme français** valorisent la nature. || 프랑스 **낭만주의** 예술가들은 자연을 소중히 여긴다.
+   e3: Le **romantisme français** a émergé au début du XIXe siècle. || 프랑스 **낭만주의**는 19세기 초에 등장했다.
+   syn: [] | ant: []
+
+Naturalisme [ko] ipa=natyʁalism | meanings: 자연주의[명사]
+   e1: Le **naturalisme** décrit la vie avec précision. || **자연주의**는 삶을 정확하게 묘사합니다.
+   e2: Ce roman suit les principes du **naturalisme**. || 이 소설은 **자연주의** 원칙을 따릅니다.
+   e3: Le **naturalisme** s'intéresse aux détails naturels. || **자연주의**는 자연의 세부 사항에 관심을 둡니다.
+   syn: [réalisme, mimésis] | ant: []
+
+symbolisme [ko] ipa=sɛ̃bɔlism | meanings: 상징주의[명사] | 상징 체계[명사]
+   e1: Le **symbolisme** est important dans la poésie. || 시에서 **상징주의**가 중요하다.
+   e2: Ce tableau utilise un **symbolisme** complexe. || 이 그림은 복잡한 **상징 체계**를 사용한다.
+   syn: [allégorie, image, emblème] | ant: []
+
+absurde [ko] ipa=apsyʁd | meanings: 부조리한[형용사]
+   e1: Cette idée est complètement **absurde**. || 이 생각은 완전히 **부조리합니다**.
+   e2: Il est **absurde** de croire à cette histoire. || 그 이야기를 믿는 것은 **부조리한** 일입니다.
+   e3: Son comportement paraît **absurde** mais drôle. || 그의 행동은 **부조리하게** 보이지만 재미있어요.
+   syn: [illogique, insensé, déraisonnable] | ant: [logique, sensé]
+
+théâtre de l'absurde [ko] ipa=- | meanings: 부조리 연극[표현]
+   e1: Le **théâtre de l'absurde** explore le sens du vide. || **부조리 연극**은 공허의 의미를 탐구한다.
+   e2: Nous avons regardé une pièce de **théâtre de l'absurde** hier. || 우리는 어제 **부조리 연극**을 봤다.
+   syn: [] | ant: []
+
+nouveau roman [ko] ipa=- | meanings: 새로운 소설[표현]
+   e1: Le **nouveau roman** change la façon d'écrire. || **새로운 소설**은 쓰는 방식을 바꿔요.
+   e2: Ils lisent un **nouveau roman** fascinant. || 그들은 매혹적인 **새로운 소설**을 읽어요.
+   e3: Ce **nouveau roman** explore des thèmes modernes. || 이 **새로운 소설**은 현대적인 주제를 탐구해요.
+   syn: [] | ant: []
+
+autofiction [ko] ipa=otɔfiksjɔ̃ | meanings: 자전소설[명사]
+   e1: Elle a publié une **autofiction** touchante. || 그녀는 감동적인 **자전소설**을 출판했어요.
+   e2: L'**autofiction** mêle réalité et imagination. || **자전소설**은 현실과 상상을 섞어요.
+   syn: [] | ant: []
+
+bande dessinée [ko] ipa=- | meanings: 만화[명사]
+   e1: J'adore lire une **bande dessinée** avant de dormir. || 나는 자기 전에 **만화**를 읽는 것을 좋아해요.
+   e2: Cette **bande dessinée** raconte une belle histoire d'amitié. || 이 **만화**는 아름다운 우정 이야기를 담고 있어요.
+   e3: La **bande dessinée** française est très populaire dans le monde. || 프랑스 **만화**는 전 세계에서 매우 인기가 많아요.
+   syn: [comic, fumetti, strip] | ant: []
+
+auteur de bande dessinée [ko] ipa=- | meanings: 만화작가[명사]
+   e1: Mon oncle est un célèbre **auteur de bande dessinée**. || 내 삼촌은 유명한 **만화작가**입니다.
+   e2: L'**auteur de bande dessinée** a publié un nouvel album. || **만화작가**가 새 앨범을 출간했습니다.
+   syn: [] | ant: []
+
+mangaka [ko] ipa=mɑ̃ɡaka | meanings: 만화가[명사]
+   e1: Le **mangaka** travaille sur son nouveau manga. || **만화가**가 새로운 만화를 작업하고 있어요.
+   e2: Ce **mangaka** est célèbre au Japon. || 이 **만화가**는 일본에서 유명해요.
+   syn: [illustrateur de manga, auteur de manga] | ant: []
+
+illustrateur [ko] ipa=ilystʁatœʁ | meanings: 삽화가[명사]
+   e1: L'**illustrateur** a dessiné une couverture colorée. || **삽화가**가 다채로운 표지를 그렸어요.
+   e2: Cet **illustrateur** travaille pour des magazines jeunesse. || 이 **삽화가**는 어린이 잡지를 위해 일해요.
+   syn: [dessinateur, graphiste] | ant: []
+
+illustration [ko] ipa=ilystʁasjɔ̃ | meanings: 삽화[명사] | 설명[명사]
+   e1: Cette **illustration** embellit le livre. || 이 **삽화**가 책을 아름답게 합니다.
+   e2: L'**illustration** aide à comprendre le texte. || **설명**은 글을 이해하는 데 도움이 됩니다.
+   syn: [dessin, image, exemple, explication] | ant: []
+
+gravure [ko] ipa=ɡʁavyʁ | meanings: 판화[명사] | 조각[명사]
+   e1: La **gravure** ancienne est exposée au musée. || 고풍스러운 **판화**가 박물관에 전시되어 있습니다.
+   e2: La **gravure** sur pierre demande beaucoup de patience. || 돌에 하는 **조각**은 많은 인내심이 필요합니다.
+   e3: Il a acheté une **gravure** originale pour décorer sa maison. || 그는 집을 장식하기 위해 원본 **판화**를 샀습니다.
+   syn: [estampe, gravure sur bois, impression] | ant: []
+
+lithographie [ko] ipa=litɔɡʁafi | meanings: 석판 인쇄[명사] | 석판화[명사]
+   e1: La **lithographie** est une technique d'impression ancienne. || **석판 인쇄**는 오래된 인쇄 기법입니다.
+   e2: Cette **lithographie** représente un paysage coloré. || 이 **석판화**는 다채로운 풍경을 나타냅니다.
+   syn: [impression lithographique, procédé lithographique, gravure sur pierre] | ant: []
+
+photographie d'art [ko] ipa=- | meanings: 예술 사진[명사]
+   e1: Cette **photographie d'art** est exposée au musée. || 이 **예술 사진**이 박물관에 전시되어 있습니다.
+   e2: Il apprécie la beauté d'une **photographie d'art**. || 그는 **예술 사진**의 아름다움을 감상합니다.
+   syn: [photo artistique, image artistique] | ant: []
+
+patrimoine culturel [ko] ipa=- | meanings: 문화 유산[명사]
+   e1: Le château est un **patrimoine culturel** important. || 그 성은 중요한 **문화 유산**입니다.
+   e2: Ils protègent le **patrimoine culturel** de leur région. || 그들은 자신들의 지역 **문화 유산**을 보호합니다.
+   e3: Le musée expose le **patrimoine culturel** local. || 박물관은 지역 **문화 유산**을 전시합니다.
+   syn: [héritage culturel, bien culturel, trésor culturel] | ant: []

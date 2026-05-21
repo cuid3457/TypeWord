@@ -1,0 +1,126 @@
+[
+  {
+    "slug": "topik-test-v3",
+    "word": "위로",
+    "before": {
+      "antonyms": [
+        "실망",
+        "절망"
+      ],
+      "examples": [
+        {
+          "sentence": "그의 말은 내게 큰 **위로**가 되었다.",
+          "translation": "His words were a great comfort to me.",
+          "meaning_index": 0
+        },
+        {
+          "sentence": "책을 **위로** 올려 놓았다.",
+          "translation": "I put the book up.",
+          "meaning_index": 1
+        }
+      ],
+      "headword": "위로",
+      "meanings": [
+        {
+          "definition": "comfort, consolation",
+          "partOfSpeech": "noun"
+        },
+        {
+          "definition": "upward, upward direction",
+          "partOfSpeech": "adverb"
+        }
+      ],
+      "synonyms": [
+        "위안",
+        "격려",
+        "응원",
+        "용기",
+        "격려금"
+      ],
+      "confidence": 100,
+      "originalInput": "위로"
+    },
+    "after": {
+      "meanings": [
+        {
+          "definition": "comfort, consolation",
+          "partOfSpeech": "noun"
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "그의 말은 내게 큰 **위로**가 되었다.",
+          "meaning_index": 0,
+          "translation": "His words were a great comfort to me."
+        }
+      ]
+    }
+  },
+  {
+    "slug": "topik-test-v3",
+    "word": "부르다",
+    "before": {
+      "ipa": "puɾɯda",
+      "antonyms": [
+        "굶주리다",
+        "거절하다"
+      ],
+      "examples": [
+        {
+          "sentence": "그녀가 노래를 **부른다**.",
+          "translation": "She sings a song.",
+          "meaning_index": 0
+        },
+        {
+          "sentence": "나는 저녁을 먹고 **배가** 부르다.",
+          "translation": "My stomach is full after having dinner.",
+          "meaning_index": 1
+        }
+      ],
+      "headword": "부르다",
+      "meanings": [
+        {
+          "definition": "to sing",
+          "partOfSpeech": "verb"
+        },
+        {
+          "definition": "to be full (of stomach)",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "synonyms": [
+        "노래하다",
+        "청하다",
+        "요청하다",
+        "초대하다",
+        "먹다"
+      ],
+      "confidence": 100,
+      "originalInput": "부르다"
+    },
+    "after": {
+      "meanings": [
+        {
+          "definition": "to sing",
+          "partOfSpeech": "verb"
+        },
+        {
+          "definition": "to be full (of stomach)",
+          "partOfSpeech": "adjective"
+        }
+      ],
+      "examples": [
+        {
+          "sentence": "그녀가 노래를 **부른다**.",
+          "meaning_index": 0,
+          "translation": "She sings a song."
+        },
+        {
+          "sentence": "저는 저녁을 먹고 나서 배가 **부릅니다**.",
+          "meaning_index": 1,
+          "translation": "My stomach is full after having dinner."
+        }
+      ]
+    }
+  }
+]

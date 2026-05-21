@@ -8,6 +8,8 @@ interface ReportParams {
   reason: 'wrong_meaning' | 'wrong_example' | 'other';
   description?: string;
   context: 'search' | 'detail' | 'review';
+  sourceLang?: string;
+  targetLang?: string;
 }
 
 export async function submitReport(params: ReportParams): Promise<boolean> {
@@ -16,9 +18,10 @@ export async function submitReport(params: ReportParams): Promise<boolean> {
 
   const db = await getDb();
   await db.runAsync(
-    `INSERT INTO pending_reports (id, word, word_id, reason, description, context, created_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
-    [id, params.word, params.wordId ?? null, params.reason, params.description || null, params.context, now],
+    `INSERT INTO pending_reports (id, word, word_id, reason, description, context, source_lang, target_lang, created_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [id, params.word, params.wordId ?? null, params.reason, params.description || null, params.context,
+     params.sourceLang ?? null, params.targetLang ?? null, now],
   );
 
   await flushPendingReports();
@@ -35,6 +38,8 @@ export async function flushPendingReports(): Promise<void> {
       reason: string;
       description: string | null;
       context: string;
+      source_lang: string | null;
+      target_lang: string | null;
       created_at: number;
     }>('SELECT * FROM pending_reports ORDER BY created_at ASC');
 
@@ -49,6 +54,8 @@ export async function flushPendingReports(): Promise<void> {
       reason: r.reason,
       description: r.description,
       context: r.context,
+      source_lang: r.source_lang,
+      target_lang: r.target_lang,
       created_at: new Date(r.created_at).toISOString(),
     }));
 

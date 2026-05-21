@@ -25,6 +25,7 @@ const MAPPING = {
   'person.2.fill': 'people',
   'person.fill': 'person',
   'square.grid.2x2.fill': 'grid-view',
+  'rectangle.stack.fill': 'collections-bookmark',
 } as IconMapping;
 
 export function IconSymbol({

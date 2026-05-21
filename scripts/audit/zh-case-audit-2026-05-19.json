@@ -1,0 +1,2173 @@
+[
+  {
+    "word": "42",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "四十二",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "会议定在**42**号会议室举行。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7318,
+          "out": 121
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "四十二",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "这本书有**42**页。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3839,
+          "out": 132
+        }
+      }
+    }
+  },
+  {
+    "word": "1984",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "천구백팔십사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "一九八四",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我出生于**1984**年。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7322,
+          "out": 133
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일구팔사",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "소설",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "一九八四",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "小说",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "这本书的页码是第**1984**页。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "乔治·奥威尔写了**1984**这部小说。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3854,
+          "out": 231
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "电子邮件符号",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "请在邮箱地址中输入**@**符号。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7265,
+          "out": 129
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "에이티, at 기호",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "艾特、at符号",
+              "partOfSpeech": "符号",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "请在邮件中输入 **@** 符号。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3842,
+          "out": 142
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "三点一四",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "圆周率约等于**3.14**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7324,
+          "out": 136
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일사",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "원주율",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "三点一四",
+              "partOfSpeech": "数词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "圆周率",
+              "partOfSpeech": "名词",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "这个圆的直径是**3.14**米。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "**3.14**是圆周率的近似值。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3857,
+          "out": 228
+        }
+      }
+    }
+  },
+  {
+    "word": "你好",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "你好",
+          "reading": [
+            "nǐhǎo"
+          ],
+          "originalInput": "你好",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "안녕하세요, 인사",
+              "partOfSpeech": "表达"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "问候, 打招呼",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我见到老师时对他说了**你好**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8474,
+          "out": 151
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "你好",
+          "reading": [
+            "nǐ hǎo"
+          ],
+          "originalInput": "你好",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "인사",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "问候",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "早上好，**你好**！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "您好"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4749,
+          "out": 158
+        }
+      }
+    }
+  },
+  {
+    "word": "谢谢",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "谢谢",
+          "reading": [
+            "xièxie"
+          ],
+          "originalInput": "谢谢",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "감사합니다, 고맙습니다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "感谢, 道谢",
+              "partOfSpeech": "动词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我想对你说声**谢谢**！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "感谢"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8476,
+          "out": 161
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "谢谢",
+          "reading": [
+            "xiè xie"
+          ],
+          "originalInput": "谢谢",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "감사",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "感谢",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "非常感谢您的帮助，**谢谢**！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "感谢"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4749,
+          "out": 156
+        }
+      }
+    }
+  },
+  {
+    "word": "对不起",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "对不起",
+          "originalInput": "对不起",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미안하다, 죄송하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "道歉, 抱歉",
+              "partOfSpeech": "动词",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "duìbuqǐ"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我向老师**对不起**了，因为迟到了。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "抱歉",
+            "歉意"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8479,
+          "out": 177
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "对不起",
+          "reading": [
+            "duì bu qǐ"
+          ],
+          "originalInput": "对不起",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미안함",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "사과의 표현",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "**对不起**，我迟到了。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "抱歉"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4754,
+          "out": 164
+        }
+      }
+    }
+  },
+  {
+    "word": "再见",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "再见",
+          "reading": [
+            "zàijiàn"
+          ],
+          "originalInput": "再见",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "안녕, 작별",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "작별 인사하다, 헤어지다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "告别, 离别",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "告别, 道别",
+              "partOfSpeech": "动词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们在车站做了正式的**再见**。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "离开前，他向大家挥手**再见**了。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "告别",
+            "辞别"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8509,
+          "out": 249
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "再见",
+          "reading": [
+            "zài jiàn"
+          ],
+          "originalInput": "再见",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "작별 인사",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "告别用语",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们明天见，**再见**！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "拜拜",
+            "告辞"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4756,
+          "out": 169
+        }
+      }
+    }
+  },
+  {
+    "word": "一帆风顺",
+    "expectedCase": "chengyu_4char",
+    "classified": "chengyu_4char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "一帆风顺",
+          "reading": [
+            "yīfān fēngshùn"
+          ],
+          "originalInput": "一帆风顺",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "순조롭게, 무난하게",
+              "partOfSpeech": "성어"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "顺利, 无阻碍",
+              "partOfSpeech": "成语",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "祝你事业**一帆风顺**，步步高升！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "顺风顺水",
+            "万事如意"
+          ],
+          "antonyms": [
+            "波折不断",
+            "坎坷不平"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8486,
+          "out": 201
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "一帆风顺",
+          "reading": [
+            "yī fān fēng shùn"
+          ],
+          "originalInput": "一帆风顺",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "순조롭게 진행됨 (격식)",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "事情进展非常顺利",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "祝你新工作**一帆风顺**，事业蒸蒸日上！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "顺风顺水",
+            "万事如意"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4677,
+          "out": 194
+        }
+      }
+    }
+  },
+  {
+    "word": "马马虎虎",
+    "expectedCase": "chengyu_4char",
+    "classified": "chengyu_4char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "马马虎虎",
+          "originalInput": "马马虎虎",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "그저 그런, 대충하는",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "马虎, 不认真",
+              "partOfSpeech": "形容词",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "mǎmahūhu"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "他的工作态度非常**马马虎虎**，常出错。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "敷衍",
+            "粗心"
+          ],
+          "antonyms": [
+            "认真",
+            "仔细"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8483,
+          "out": 192
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "马马虎虎",
+          "reading": [
+            "mǎ mǎ hū hū"
+          ],
+          "originalInput": "马马虎虎",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "그저 그런, 대충 하는",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "马虎敷衍，不认真",
+              "partOfSpeech": "表达",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "他的工作态度总是 **马马虎虎**，难以让人放心。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "敷衍",
+            "草率"
+          ],
+          "antonyms": [
+            "认真"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4676,
+          "out": 200
+        }
+      }
+    }
+  },
+  {
+    "word": "中华民族",
+    "expectedCase": "chengyu_4char",
+    "classified": "chengyu_4char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "中华民族",
+          "reading": [
+            "zhōnghuá mínzú"
+          ],
+          "originalInput": "中华民族",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중화민족",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国民族",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们学习了**中华民族**的历史和文化。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8469,
+          "out": 160
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "中华民族",
+          "reading": [
+            "zhōng huá mín zú"
+          ],
+          "originalInput": "中华民族",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중국 민족",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国的民族总称",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "保护 **中华民族** 的文化遗产十分重要。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4670,
+          "out": 168
+        }
+      }
+    }
+  },
+  {
+    "word": "人民日报",
+    "expectedCase": "chengyu_4char",
+    "classified": "chengyu_4char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "人民日报",
+          "reading": [
+            "rénmínrìbào"
+          ],
+          "originalInput": "人民日报",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "인민일보, 신문",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "人民日报, 报纸",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我每天早上都会读**人民日报**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8480,
+          "out": 156
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "人民日报",
+          "reading": [
+            "rén mín rì bào"
+          ],
+          "originalInput": "人民日报",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중국 공산당 중앙위원회 기관지",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国共产党中央委员会机关报",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "最新消息由**人民日报**权威发布。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4669,
+          "out": 170
+        }
+      }
+    }
+  },
+  {
+    "word": "水",
+    "expectedCase": "single_char",
+    "classified": "single_char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "水",
+          "originalInput": "水",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "물",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "水, 名词",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "shuǐ"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "请给我一杯**水**，谢谢！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8470,
+          "out": 155
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "水",
+          "reading": [
+            "shuǐ"
+          ],
+          "originalInput": "水",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "물",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "水",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "孩子们喝着 **水** 玩耍。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5770,
+          "out": 141
+        }
+      }
+    }
+  },
+  {
+    "word": "月",
+    "expectedCase": "single_char",
+    "classified": "single_char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "月",
+          "originalInput": "月",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "월",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "月亮",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "月份",
+              "partOfSpeech": "名词",
+              "relevanceScore": 95
+            }
+          ],
+          "reading": [
+            "yuè"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "今晚的**月**非常圆亮。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "我计划下个**月**去旅行。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8486,
+          "out": 204
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "月",
+          "reading": [
+            "yuè"
+          ],
+          "originalInput": "月",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "달",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "月份",
+              "partOfSpeech": "名词",
+              "relevanceScore": 90
+            },
+            {
+              "definition": "月亮",
+              "partOfSpeech": "名词",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我今年有十二个 **月** 。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "今晚的 **月** 很圆很亮。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5792,
+          "out": 215
+        }
+      }
+    }
+  },
+  {
+    "word": "人",
+    "expectedCase": "single_char",
+    "classified": "single_char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "人",
+          "originalInput": "人",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사람",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "人, 人物",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "rén"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "公园里有很多**人**在散步。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8470,
+          "out": 156
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "人",
+          "reading": [
+            "rén"
+          ],
+          "originalInput": "人",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사람,인간",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "人类、个人",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "**人** 是社会的主体。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5776,
+          "out": 152
+        }
+      }
+    }
+  },
+  {
+    "word": "行",
+    "expectedCase": "single_char",
+    "classified": "single_char",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "行",
+          "originalInput": "行",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "가다, 걷다",
+              "partOfSpeech": "동사"
+            },
+            {
+              "definition": "길, 도로",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "괜찮다, 가능하다",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "走, 行走",
+              "partOfSpeech": "动词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "道路, 街道",
+              "partOfSpeech": "名词",
+              "relevanceScore": 90
+            },
+            {
+              "definition": "可以, 允许",
+              "partOfSpeech": "形容词",
+              "relevanceScore": 80
+            }
+          ],
+          "reading": [
+            "xíng",
+            "háng"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们每天都要**行**走很多路。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "这条**行**是通往学校的主要道路。",
+              "meaning_index": 1
+            },
+            {
+              "sentence": "如果你觉得这样做**行**，我们就开始吧！",
+              "meaning_index": 2
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "走",
+            "走路"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8528,
+          "out": 335
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "行",
+          "reading": [
+            "xíng",
+            "háng"
+          ],
+          "originalInput": "行",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "걷다, 진행하다",
+              "partOfSpeech": "동사"
+            },
+            {
+              "definition": "줄, 업종",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "走，进行",
+              "partOfSpeech": "动词",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "行列，行业",
+              "partOfSpeech": "名词",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们 **行** 了很长时间。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "这个 **行** 业发展很快。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "走"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5800,
+          "out": 229
+        }
+      }
+    }
+  },
+  {
+    "word": "CCTV",
+    "expectedCase": "latin_acronym",
+    "classified": "latin_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "CCTV",
+          "originalInput": "CCTV",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "폐쇄회로 텔레비전",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "闭路电视",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "商店门口安装了新的**CCTV**监控。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8473,
+          "out": 154
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "CCTV",
+          "originalInput": "CCTV",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중국중앙텔레비전, 방송국",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国中央电视台、电视台",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我在课上学了 **CCTV**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3326,
+          "out": 153
+        }
+      }
+    }
+  },
+  {
+    "word": "NBA",
+    "expectedCase": "latin_acronym",
+    "classified": "latin_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "NBA",
+          "originalInput": "NBA",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "NBA, 농구 리그",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "NBA, 篮球联盟",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "昨天晚上我看了**NBA**的比赛直播。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8478,
+          "out": 154
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "NBA",
+          "originalInput": "NBA",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미국프로농구, 연맹",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "美国职业篮球联赛、体育联盟",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我在电视上看了 **NBA** 的比赛。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3325,
+          "out": 151
+        }
+      }
+    }
+  },
+  {
+    "word": "WTO",
+    "expectedCase": "latin_acronym",
+    "classified": "latin_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "WTO",
+          "originalInput": "WTO",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "세계무역기구",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "世界贸易组织",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "中国是**WTO**的成员国之一。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8475,
+          "out": 151
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "WTO",
+          "originalInput": "WTO",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "세계무역기구, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "世界贸易组织、国际组织",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我在课上学了 **WTO**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3325,
+          "out": 148
+        }
+      }
+    }
+  },
+  {
+    "word": "BTS",
+    "expectedCase": "latin_acronym",
+    "classified": "latin_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "BTS",
+          "originalInput": "BTS",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "방탄소년단, 그룹",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "防弹少年团, 音乐组合",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我非常喜欢**BTS**的音乐和舞蹈。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8487,
+          "out": 161
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "BTS",
+          "originalInput": "BTS",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "방탄소년단, 고유명사",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "防弹少年团、专有名词",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我喜欢听 **BTS** 的音乐。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3328,
+          "out": 152
+        }
+      }
+    }
+  },
+  {
+    "word": "北京",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "北京",
+          "reading": [
+            "běijīng"
+          ],
+          "originalInput": "北京",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "베이징, 도시",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国首都",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我计划下个月去**北京**旅游。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8472,
+          "out": 158
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "北京",
+          "reading": [
+            "běi jīng"
+          ],
+          "originalInput": "北京",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "베이징, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "北京、城市",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我明天去**北京**旅游。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "**北京**的冬天很冷。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "如果你去**北京**，一定要尝试当地美食！",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5985,
+          "out": 223
+        }
+      }
+    }
+  },
+  {
+    "word": "中国",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "中国",
+          "reading": [
+            "zhōngguó"
+          ],
+          "originalInput": "中国",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중국, 나라",
+              "partOfSpeech": "专有名词"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国, 国家",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我计划明年去**中国**旅游。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8472,
+          "out": 158
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "中国",
+          "reading": [
+            "zhōng guó"
+          ],
+          "originalInput": "中国",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "중국, 국가",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "中国、国家",
+              "partOfSpeech": "专有名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我计划明年去**中国**旅游。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5985,
+          "out": 164
+        }
+      }
+    }
+  },
+  {
+    "word": "学校",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "学校",
+          "reading": [
+            "xuéxiào"
+          ],
+          "originalInput": "学校",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "학교",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "学校",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我们明天去参观**学校**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8466,
+          "out": 140
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "学校",
+          "reading": [
+            "xué xiào"
+          ],
+          "originalInput": "学校",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "학교, 교육 기관",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "学校, 教育机构",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "孩子们每天去**学校**学习。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "**学校**在市中心，交通很方便。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "因为天气好，学生们在**学校**操场上玩耍。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5987,
+          "out": 222
+        }
+      }
+    }
+  },
+  {
+    "word": "朋友",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "朋友",
+          "originalInput": "朋友",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "친구",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "朋友",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "péngyǒu"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "我和**朋友**一起去公园散步。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "友人",
+            "伙伴"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8466,
+          "out": 163
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "朋友",
+          "reading": [
+            "péng yǒu"
+          ],
+          "originalInput": "朋友",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "친구",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "朋友",
+              "partOfSpeech": "名词",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "小明和我都是好**朋友**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5979,
+          "out": 157
+        }
+      }
+    }
+  }
+]

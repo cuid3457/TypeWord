@@ -4,6 +4,8 @@ import { getNotificationEmailTranslation } from "../_shared/email-translations.t
 import { renderEmailHtml } from "../_shared/email-templates.ts";
 
 const ALLOWED_ORIGINS = new Set([
+  "https://moavoca.com",
+  "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
 ]);

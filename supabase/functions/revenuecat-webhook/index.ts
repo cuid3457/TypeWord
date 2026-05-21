@@ -17,8 +17,11 @@
 // with the new (UUID) app_user_id, which we then handle.
 
 import { createClient } from "npm:@supabase/supabase-js@^2.45.0";
+import { timingSafeEqual } from "../_shared/timing-safe.ts";
 
-const PREMIUM_ENTITLEMENT_ID = "TypeWord premium";
+const PREMIUM_ENTITLEMENT_ID = "TypeWord premium"; // legacy entitlement → plus
+const PLUS_ENTITLEMENT_ID = "TypeWord plus";
+const PRO_ENTITLEMENT_ID = "TypeWord pro";
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function jsonResponse(status: number, body: unknown): Response {
@@ -28,23 +31,32 @@ function jsonResponse(status: number, body: unknown): Response {
   });
 }
 
+type Plan = "free" | "plus" | "pro";
+
 /**
- * Determine premium state from the webhook payload.
+ * Determine plan tier from the webhook payload.
  *  • EXPIRATION / SUBSCRIPTION_PAUSED → explicit free
  *  • TEST → skip (dev sandbox ping, no real user state)
- *  • Everything else → trust `entitlement_ids` list supplied by RC
+ *  • Everything else → derive tier from `entitlement_ids`
+ *      - "TypeWord pro"           → pro
+ *      - "TypeWord plus"          → plus
+ *      - "TypeWord premium" (legacy) → plus
+ *      - none                     → free
  *
  * Returns null when the event should be ignored (no DB write).
  */
-function computePremiumState(
+function computePlan(
   eventType: string,
   entitlementIds: string[],
-): boolean | null {
+): Plan | null {
   if (eventType === "TEST") return null;
   if (eventType === "EXPIRATION" || eventType === "SUBSCRIPTION_PAUSED") {
-    return false;
+    return "free";
   }
-  return entitlementIds.includes(PREMIUM_ENTITLEMENT_ID);
+  if (entitlementIds.includes(PRO_ENTITLEMENT_ID)) return "pro";
+  if (entitlementIds.includes(PLUS_ENTITLEMENT_ID)) return "plus";
+  if (entitlementIds.includes(PREMIUM_ENTITLEMENT_ID)) return "plus";
+  return "free";
 }
 
 Deno.serve(async (req: Request) => {
@@ -52,10 +64,11 @@ Deno.serve(async (req: Request) => {
     return jsonResponse(405, { error: "Method not allowed" });
   }
 
-  // 1. Auth via shared secret.
+  // 1. Auth via shared secret. Constant-time compare guards against timing
+  //    attacks where `!==` would short-circuit on the first mismatching byte.
   const webhookSecret = Deno.env.get("REVENUECAT_WEBHOOK_SECRET");
   const authHeader = req.headers.get("Authorization") ?? "";
-  if (!webhookSecret || authHeader !== `Bearer ${webhookSecret}`) {
+  if (!webhookSecret || !timingSafeEqual(authHeader, `Bearer ${webhookSecret}`)) {
     console.log("[rc-webhook] auth failed");
     return jsonResponse(401, { error: "Unauthorized" });
   }
@@ -88,13 +101,11 @@ Deno.serve(async (req: Request) => {
     return jsonResponse(200, { ok: true, skipped: "non-UUID app_user_id" });
   }
 
-  // 4. Determine new plan from event payload.
-  const isPremium = computePremiumState(eventType, entitlementIds);
-  if (isPremium === null) {
+  // 4. Determine new plan tier from event payload.
+  const newPlan = computePlan(eventType, entitlementIds);
+  if (newPlan === null) {
     return jsonResponse(200, { ok: true, skipped: `event type ${eventType}` });
   }
-
-  const newPlan = isPremium ? "premium" : "free";
 
   // 5. Update DB (no-op if plan already matches).
   const admin = createClient(

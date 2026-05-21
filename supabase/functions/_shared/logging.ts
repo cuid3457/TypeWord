@@ -58,4 +58,17 @@ export async function logApiCall(
     month_bucket: computeMonthBucket(log.timezone),
   });
   if (error) console.error("api_calls log failed:", error.message);
+
+  // Update warm_state when a real OpenAI call succeeded. Used by the
+  // warm-check endpoint to skip ping when real traffic has kept the cache
+  // hot within the last 5 min. tokensInput > 0 is the signal that OpenAI
+  // was actually invoked (refusals / blacklist hits have tokens=0).
+  if (log.status === "ok" && (log.tokensInput ?? 0) > 0) {
+    await supabase.from("warm_state").upsert(
+      { id: 1, last_real_call_at: new Date().toISOString() },
+      { onConflict: "id" },
+    ).then(({ error: e }) => {
+      if (e) console.error("warm_state update failed:", e.message);
+    });
+  }
 }

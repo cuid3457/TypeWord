@@ -7,7 +7,7 @@
  * correction is applied so toggling F/M within a language yields a
  * consistent perceived speed at user_rate=1.0.
  */
-import { prefetchTts, speakCloud, stopAll, type PhonemeOverride } from '@src/services/ttsService';
+import { prefetchTts, prefetchTtsAwaitable, speakCloud, stopAll, type PhonemeOverride } from '@src/services/ttsService';
 import { phonemeForChinese } from '@src/utils/pinyin';
 
 const TTS_LOCALE: Record<string, string> = {
@@ -58,6 +58,15 @@ export function stopSpeaking(): void {
  */
 export function prefetchSpeak(text: string, langCode: string, phoneme?: PhonemeOverride): void {
   prefetchTts(text, langCode, phoneme);
+}
+
+/** Awaitable variant — resolves once the mp3 is cached on disk. */
+export function prefetchSpeakAwaitable(
+  text: string,
+  langCode: string,
+  phoneme?: PhonemeOverride,
+): Promise<void> {
+  return prefetchTtsAwaitable(text, langCode, phoneme);
 }
 
 /** Re-export so call sites can build phoneme overrides without a second import. */

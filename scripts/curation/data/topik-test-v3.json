@@ -1,0 +1,24 @@
+{
+  "slug": "topik-test-v3",
+  "name_i18n": {
+    "ko": "TOPIK TEST v3 (신규 ALL_EXAMPLES 프롬프트)",
+    "en": "TOPIK TEST v3 (new ALL_EXAMPLES prompt)",
+    "zh-CN": "TOPIK TEST v3",
+    "ja": "TOPIK TEST v3",
+    "es": "TOPIK TEST v3",
+    "fr": "TOPIK TEST v3",
+    "de": "TOPIK TEST v3",
+    "it": "TOPIK TEST v3"
+  },
+  "description_i18n": {
+    "ko": "v3 프롬프트 (ALL_EXAMPLES + 슬랭 제외)로 처리한 TOPIK 10단어. v1·v2와 3-way 비교용.",
+    "en": "10 TOPIK words processed with v3 prompt (ALL_EXAMPLES + slang exclusion). For 3-way comparison with v1/v2."
+  },
+  "source_lang": "ko",
+  "exam_type": "TOPIK",
+  "level": "TEST3",
+  "category": "exam",
+  "display_order": 6,
+  "target_langs": ["en", "ja", "zh-CN", "es", "fr", "de", "it"],
+  "words": ["아침", "저녁", "안", "역", "팔", "김", "도", "위로", "부르다", "어리다"]
+}

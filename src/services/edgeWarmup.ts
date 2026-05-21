@@ -1,15 +1,28 @@
 import { AppState, type AppStateStatus } from 'react-native';
-import { SUPABASE_URL } from '@src/api/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@src/api/supabase';
 
-const PING_URL = `${SUPABASE_URL}/functions/v1/word-lookup`;
+const PING_URL = `${SUPABASE_URL}/functions/v1/word-lookup-v2`;
 const IDLE_THRESHOLD_MS = 3 * 60 * 1000; // 3 minutes
-const PING_INTERVAL_MS = 4 * 60 * 1000; // ping every 4 minutes while idle
+const PING_INTERVAL_MS = 5 * 60 * 1000; // ping every 5 minutes — matches OpenAI cache TTL
 
 let lastActivityTs = Date.now();
 let intervalId: ReturnType<typeof setInterval> | null = null;
 
 function ping() {
-  fetch(PING_URL, { method: 'GET' }).catch(() => {});
+  // Smart warm-check: server-side dedup. If any user (globally) has done
+  // a real OpenAI lookup within the last 5 minutes, the edge function
+  // returns "warm" immediately without spending an OpenAI call. Otherwise
+  // it fires a tiny dummy lookup to warm the prompt cache, then returns.
+  // This means high-traffic periods cost $0 for warmup; idle periods cost
+  // ~$0.005 per fire (max 12/hour = $0.06/hour worst case).
+  fetch(PING_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ warm_only: true }),
+  }).catch(() => {});
 }
 
 /** Call this whenever the user makes a real API request. */

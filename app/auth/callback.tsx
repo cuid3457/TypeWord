@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { router, useGlobalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import * as Linking from 'expo-linking';
-import { supabase } from '@src/api/supabase';
+import { confirmAndSetSessionFromDeepLink } from '@src/services/authService';
 
 async function handleDeepLink(url: string) {
-  const fragment = url.split('#')[1];
+  const [path, fragment] = url.split('#');
   if (!fragment) return;
-  const qs = new URLSearchParams(fragment);
-  const accessToken = qs.get('access_token');
-  const refreshToken = qs.get('refresh_token');
-  if (accessToken && refreshToken) {
-    await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
-  }
+  const fragParams = new URLSearchParams(fragment);
+  const accessToken = fragParams.get('access_token');
+  const refreshToken = fragParams.get('refresh_token');
+  if (!accessToken || !refreshToken) return;
+  // State nonce travels in the query string (part of the redirect_to we
+  // mint at sign-up time). Tokens travel in the fragment. A matching
+  // state lets the auth helper apply the session silently.
+  const queryStr = path.split('?')[1] ?? '';
+  const state = new URLSearchParams(queryStr).get('state');
+  await confirmAndSetSessionFromDeepLink(accessToken, refreshToken, state);
 }
 
 export default function AuthCallback() {

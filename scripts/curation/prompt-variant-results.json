@@ -1,0 +1,3061 @@
+{
+  "A": {
+    "이": {
+      "result": {
+        "headword": "이",
+        "meanings": [
+          {
+            "definition": "사람이나 사물의 위치를 나타내는 지시 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "치아를 가리키는 명사",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 대상이나 범위를 나타내는 조사",
+            "partOfSpeech": "조사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "**이** 책은 재미있어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "나는 어제 **이가** 아파서 병원에 갔어요.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "사과 **이** 맛있어요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사": {
+      "result": {
+        "headword": "사",
+        "meanings": [
+          {
+            "definition": "글자나 숫자 따위를 세는 단위",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람을 높여 이르는 말",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "죽음",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "한 **사를** 세어 보았다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 존경받는 **사**이다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그의 **사는** 안타까웠다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "오": {
+      "result": {
+        "headword": "오",
+        "meanings": [
+          {
+            "definition": "어떤 장소나 방향으로 움직여서 가까이 가다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "숫자 5를 나타내는 한자어",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "시간의 다섯 번째 단위, 오후를 나타내는 말",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "친구가 우리 집으로 **왔다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "나는 숫자 **오**를 좋아한다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "회의는 오후 세 시에 시작했다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"왔다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 2
+        }
+      ]
+    },
+    "백": {
+      "result": {
+        "headword": "백",
+        "meanings": [
+          {
+            "definition": "숫자 100을 나타내는 단위",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "흰색, 색깔의 하나",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 시험에서 **백** 점을 받았다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 꽃은 아주 순수한 **백** 색이었다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "월": {
+      "result": {
+        "headword": "월",
+        "meanings": [
+          {
+            "definition": "한 해의 열두 달 중 하나",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "달력에서 한 달을 나타내는 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "우리는 다음 **월**에 여행을 갈 계획이에요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이번 **월**은 날씨가 매우 따뜻했어요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "분": {
+      "result": {
+        "headword": "분",
+        "meanings": [
+          {
+            "definition": "시간의 단위로, 1시간의 60분의 하나",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람을 높여 이르는 말",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일이나 상태의 정도나 비율을 나타내는 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "수업은 50분 동안 진행되었습니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그분은 우리 회사의 대표입니다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "이 제품은 70분의 만족도를 보였습니다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 2
+        }
+      ]
+    },
+    "천": {
+      "result": {
+        "headword": "천",
+        "meanings": [
+          {
+            "definition": "숫자 1000을 나타내는 단위",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "아주 얇고 가벼운 직물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "하늘, 또는 하늘을 뜻하는 말",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 **천** 원을 지갑에 넣었다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 옷은 부드러운 **천**으로 만들어졌다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "맑은 **천** 아래에서 산책을 했다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "년": {
+      "result": {
+        "headword": "년",
+        "meanings": [
+          {
+            "definition": "시간의 단위로, 365일 또는 윤년에는 366일을 포함하는 기간",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람의 나이를 세는 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "한 **년** 동안 열심히 공부했어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 올해 스무 살 **년**이에요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "나": {
+      "result": {
+        "headword": "나",
+        "meanings": [
+          {
+            "definition": "화자가 자신을 가리키는 1인칭 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "숫자 1과 2 사이의 분수 또는 비율을 나타내는 말",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "**나는** 오늘 학교에 갔어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 문제는 3대 **나** 어려워요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "저": {
+      "result": {
+        "headword": "저",
+        "meanings": [
+          {
+            "definition": "화자가 자신을 낮추어 가리키는 1인칭 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "화자와 청자 모두에게서 먼 대상을 가리키는 지시사",
+            "partOfSpeech": "지시사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "**저**는 학생입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "**저** 산이 아름답습니다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "가다": {
+      "result": {
+        "headword": "가다",
+        "meanings": [
+          {
+            "definition": "어떤 장소로 이동하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "시간이 흐르다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황에 이르다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 학교에 **갔다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "시간이 빨리 **갔다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "상황이 나빠지고 있다가 결국 최악으로 **갔다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        }
+      ]
+    },
+    "오다": {
+      "result": {
+        "headword": "오다",
+        "meanings": [
+          {
+            "definition": "어떤 장소나 시점으로 이동해 도착하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일이 발생하거나 생기다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "날씨가 특정 상태로 변하다 (주로 비, 눈 등이 내리다)",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "친구가 내일 우리 집에 **온다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "갑자기 좋은 기회가 **왔다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "오늘 밤에는 비가 **온다**고 한다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"온다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"왔다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"온다\", stem=\"오\""
+        }
+      ]
+    },
+    "먹다": {
+      "result": {
+        "headword": "먹다",
+        "meanings": [
+          {
+            "definition": "음식을 입으로 섭취하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 것을 소비하거나 사용하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "손해나 피해를 입다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 밥을 **먹었다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 돈을 모두 **먹어버렸다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 팀은 큰 손해를 **먹었다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "살다": {
+      "result": {
+        "headword": "살다",
+        "meanings": [
+          {
+            "definition": "어떤 장소에서 생활하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "생명을 유지하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 처지에 있다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 서울에서 **살아요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "사람은 물과 공기가 있어야 **살아요**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 어려운 환경에서 **살고 있어요**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사다": {
+      "result": {
+        "headword": "사다",
+        "meanings": [
+          {
+            "definition": "물건이나 서비스를 돈을 주고 얻다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일을 하도록 부탁하거나 청하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 시장에서 과일을 **샀다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "친구에게 선물을 **사달라고** 부탁했다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"샀다\", stem=\"사\""
+        }
+      ]
+    },
+    "앉다": {
+      "result": {
+        "headword": "앉다",
+        "meanings": [
+          {
+            "definition": "엉덩이를 대고 자리에 몸을 내리다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 위치나 상태에 자리 잡다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 감정이나 상태가 마음속에 자리 잡다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "의자에 **앉았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 회의실 한가운데에 **앉았다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "불안한 마음이 가슴에 깊이 **앉았다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "서다": {
+      "result": {
+        "headword": "서다",
+        "meanings": [
+          {
+            "definition": "발을 땅에 대고 몸을 곧게 세우다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 위치나 장소에 위치하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "기계나 장치가 작동을 멈추다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "사람들이 길가에 **섰다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "건물이 도로 옆에 **서 있다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "자동차가 갑자기 **섰다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        }
+      ]
+    },
+    "보다": {
+      "result": {
+        "headword": "보다",
+        "meanings": [
+          {
+            "definition": "눈으로 어떤 대상을 인식하거나 관찰하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "비교하여 판단하거나 평가하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "경험하거나 시험삼아 해보다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 창밖을 **보았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 두 제품을 비교해서 더 좋은 것을 **보았다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "새로운 음식을 한번 **보았다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "하다": {
+      "result": {
+        "headword": "하다",
+        "meanings": [
+          {
+            "definition": "어떤 동작이나 행위를 하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황이 이루어지다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일을 직업이나 역할로 삼다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 숙제를 **했다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "오늘 날씨가 맑게 **했다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 선생님을 **했다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"했다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"했다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"했다\", stem=\"하\""
+        }
+      ]
+    },
+    "쓰다": {
+      "result": {
+        "headword": "쓰다",
+        "meanings": [
+          {
+            "definition": "펜이나 연필 등으로 글씨나 그림을 적다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "돈이나 시간을 어떤 일에 소비하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "머리나 얼굴에 모자, 안경, 마스크 등을 착용하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 편지에 정성껏 글씨를 **썼다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 여행 경비를 많이 **썼다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "추워서 모자를 **썼다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        }
+      ]
+    },
+    "학교": {
+      "result": {
+        "headword": "학교",
+        "meanings": [
+          {
+            "definition": "학생들이 공부하는 기관",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 매일 **학교**에 간다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "친구": {
+      "result": {
+        "headword": "친구",
+        "meanings": [
+          {
+            "definition": "서로 친밀한 관계를 맺고 있는 사람",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "같은 학교나 직장 등에서 함께 다니는 사람",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 어릴 때부터 **친구**와 자주 놀았다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 회사에서 좋은 **친구**를 만났다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "음식": {
+      "result": {
+        "headword": "음식",
+        "meanings": [
+          {
+            "definition": "사람이 먹는 모든 종류의 먹거리",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "특정한 조리법이나 재료로 만든 먹거리",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "한국의 **음식**은 매우 다양하다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 식당은 중국 **음식**을 전문으로 한다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사람": {
+      "result": {
+        "headword": "사람",
+        "meanings": [
+          {
+            "definition": "인간 또는 사람이라는 존재",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 집단이나 사회에 속한 개인",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "특정한 역할이나 신분을 가진 사람",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 착한 **사람**입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "우리 회사에는 능력 있는 **사람**이 많아요.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 이 마을의 중요한 **사람**이에요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "회사": {
+      "result": {
+        "headword": "회사",
+        "meanings": [
+          {
+            "definition": "사람들이 모여서 일정한 목적을 위해 조직한 단체",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 큰 **회사를** 다니고 있다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "시간": {
+      "result": {
+        "headword": "시간",
+        "meanings": [
+          {
+            "definition": "사건이나 상태가 진행되는 연속적인 흐름의 단위",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일을 하거나 어떤 상태가 지속되는 기간",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "약속이나 일정이 정해진 특정한 때",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "우리는 **시간**을 잘 활용해야 한다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 공부하는 **시간**을 늘렸다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "회의 **시간**이 오후 두 시로 정해졌다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "책": {
+      "result": {
+        "headword": "책",
+        "meanings": [
+          {
+            "definition": "글이나 그림을 모아 한 권으로 만든 인쇄물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일을 하거나 처리하는 데 필요한 계획이나 방책",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 새로운 **책**을 샀다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 문제를 해결할 좋은 **책**을 세웠다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "영화": {
+      "result": {
+        "headword": "영화",
+        "meanings": [
+          {
+            "definition": "움직이는 그림과 소리로 이야기를 전달하는 시각 예술의 한 형태",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "영화관에서 상영되는 영상 작품",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 주말에 재미있는 **영화**를 봤다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "새로운 **영화**가 이번 주에 개봉했다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "좋다": {
+      "result": {
+        "headword": "좋다",
+        "meanings": [
+          {
+            "definition": "기분이나 상태가 만족스럽고 쾌적하다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "가치나 품질이 뛰어나다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "마음에 들거나 호감이 가다",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "오늘 날씨가 정말 **좋아요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 제품은 품질이 매우 **좋습니다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 사람과 함께 있으면 기분이 **좋아져요**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "작다": {
+      "result": {
+        "headword": "작다",
+        "meanings": [
+          {
+            "definition": "크기나 양이 보통보다 적거나 작음",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "중요성이나 가치가 크지 않음",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "나이나 연령이 어리거나 적음",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "이 상자는 생각보다 **작아요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그의 실수는 아주 **작았어요**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 아이는 또래보다 몸집이 **작아요**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    }
+  },
+  "B": {
+    "이": {
+      "result": {
+        "headword": "이",
+        "meanings": [
+          {
+            "definition": "사람이나 사물의 위치나 대상을 가리키는 지시대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "사람의 몸에 있는 치아",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 수나 양을 나타내는 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 **이** 책을 읽고 있다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "아이가 **이가** 아파서 울었다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "사과를 세 개 중에서 **이** 개만 골랐다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사": {
+      "result": {
+        "headword": "사",
+        "meanings": [
+          {
+            "definition": "사람",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "일, 사건",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "죽다 (죽음)",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 훌륭한 **사**입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 **사**는 모두에게 충격을 주었어요.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 전쟁터에서 **사망했다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "오": {
+      "result": {
+        "headword": "오",
+        "meanings": [
+          {
+            "definition": "숫자 5를 나타내는 말",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 방향이나 장소로 움직여서 가까이 가다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일이 일어나다, 발생하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 숫자 **오**를 좋아한다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "친구가 우리 집에 **왔다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "문제가 갑자기 **왔다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"왔다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"왔다\", stem=\"오\""
+        }
+      ]
+    },
+    "백": {
+      "result": {
+        "headword": "백",
+        "meanings": [
+          {
+            "definition": "숫자 100을 나타내는 단위",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "흰색, 색깔의 하나",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그 가게에서 사과를 **백** 개 샀어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그림에 **백** 색을 많이 사용했어요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "월": {
+      "result": {
+        "headword": "월",
+        "meanings": [
+          {
+            "definition": "달력에서 한 해의 열두 부분 중 하나",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "월급, 한 달 동안 받는 급여",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "1**월**에는 눈이 많이 내립니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 이번 **월**에 월급을 받았습니다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "분": {
+      "result": {
+        "headword": "분",
+        "meanings": [
+          {
+            "definition": "사람을 높여 이르는 말",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "시간의 단위, 60초를 한 단위로 하는 시간",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 것을 나누었을 때의 한 부분",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그 **분**은 매우 친절하십니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "회의가 30 **분** 동안 계속되었습니다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "케이크를 다섯 **분**으로 나누었어요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "천": {
+      "result": {
+        "headword": "천",
+        "meanings": [
+          {
+            "definition": "하늘, 하늘의 영역",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "1000을 나타내는 수사",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "옷감이나 직물",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "맑은 **천**이 펼쳐져 있다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 가게에서 **천** 원짜리 사탕을 샀다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "이 **천**으로 새 옷을 만들었어요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "년": {
+      "result": {
+        "headword": "년",
+        "meanings": [
+          {
+            "definition": "1년, 시간의 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 3년 동안 해외에서 살았습니다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        }
+      ]
+    },
+    "나": {
+      "result": {
+        "headword": "나",
+        "meanings": [
+          {
+            "definition": "자신을 가리키는 1인칭 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "숫자 5를 뜻하는 한자어",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "오늘은 **내가** 발표를 맡았어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 **나**를 좋아하지 않는다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"내가\", stem=\"나\""
+        }
+      ]
+    },
+    "저": {
+      "result": {
+        "headword": "저",
+        "meanings": [
+          {
+            "definition": "화자가 자신을 낮추어 가리키는 1인칭 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "화자와 청자 모두에게서 멀리 떨어진 대상을 가리키는 지시사",
+            "partOfSpeech": "지시사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "**저**는 학생입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "**저** 산이 정말 아름답습니다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "가다": {
+      "result": {
+        "headword": "가다",
+        "meanings": [
+          {
+            "definition": "어떤 장소로 이동하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황에 이르다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "시간이 흐르다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 내일 서울에 **간다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 결국 목표를 이루는 데 **갔다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "시간이 너무 빨리 **갔어요**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"간다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"갔어요\", stem=\"가\""
+        }
+      ]
+    },
+    "오다": {
+      "result": {
+        "headword": "오다",
+        "meanings": [
+          {
+            "definition": "어떤 장소나 시점에 이르다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "비, 눈 등이 하늘에서 떨어지다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 감정이 생기다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "친구가 내일 집에 **온다**고 했다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "오늘 밤에는 눈이 많이 **온다**고 한다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "갑자기 피곤함이 몰려와서 쉬었다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"온다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"온다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 2
+        }
+      ]
+    },
+    "먹다": {
+      "result": {
+        "headword": "먹다",
+        "meanings": [
+          {
+            "definition": "음식을 입으로 섭취하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 것을 소비하거나 사용하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "고통이나 불이익을 당하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "저녁에 가족과 함께 **먹었어요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 차는 기름을 많이 **먹는다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 시험에서 큰 점수를 **먹었다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "살다": {
+      "result": {
+        "headword": "살다",
+        "meanings": [
+          {
+            "definition": "생명을 유지하며 존재하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 장소에 거주하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 환경에서 지내다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "사람은 공기와 물이 있어야 **산다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "나는 서울에서 **살아요**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 어려운 환경 속에서도 잘 **살았다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"산다\", stem=\"살\""
+        }
+      ]
+    },
+    "사다": {
+      "result": {
+        "headword": "사다",
+        "meanings": [
+          {
+            "definition": "물건이나 서비스를 돈을 주고 얻다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "누군가를 위해 물건을 구입하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 새 신발을 **샀다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "엄마를 위해 과일을 **사드렸어요**.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"샀다\", stem=\"사\""
+        }
+      ]
+    },
+    "앉다": {
+      "result": {
+        "headword": "앉다",
+        "meanings": [
+          {
+            "definition": "엉덩이를 대고 자리에 자리잡다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 위치나 상태에 자리잡다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 감정이나 기운이 마음에 자리잡다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "학생들이 의자에 **앉았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "해가 산꼭대기에 **앉았다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "불안한 마음이 점점 가라앉고 평화가 **앉았다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "서다": {
+      "result": {
+        "headword": "서다",
+        "meanings": [
+          {
+            "definition": "몸을 곧게 세워 일어나다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 위치나 장소에 위치하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "기계나 장치가 작동을 멈추다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "사람들이 버스 정류장에 **섰다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "건물이 도로 옆에 **서 있다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "자동차가 갑자기 **섰다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        }
+      ]
+    },
+    "보다": {
+      "result": {
+        "headword": "보다",
+        "meanings": [
+          {
+            "definition": "눈으로 대상을 인식하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "경험하거나 시험삼아 해보다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "비교하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 창밖을 **보았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "새 음식을 한번 **보세요**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "이 책이 저 책보다 더 좋다고 **봅니다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"봅니다\", stem=\"보\""
+        }
+      ]
+    },
+    "하다": {
+      "result": {
+        "headword": "하다",
+        "meanings": [
+          {
+            "definition": "어떤 행동이나 동작을 실행하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황이 이루어지다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일을 직업이나 역할로 삼다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "학생들이 숙제를 **한다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "오늘 날씨가 매우 좋다고 **한다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 선생님을 **한다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"한다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"한다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"한다\", stem=\"하\""
+        }
+      ]
+    },
+    "쓰다": {
+      "result": {
+        "headword": "쓰다",
+        "meanings": [
+          {
+            "definition": "글자나 내용을 적다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 도구나 물건을 이용하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "맛이 쓴 상태이다",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "일기장에 오늘 있었던 일을 **썼다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "컴퓨터를 자주 **쓴다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "이 약은 맛이 너무 **쓰다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R2_bare_stem",
+          "example": 2,
+          "detail": "terminal = bare \"쓰다\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"쓴다\", stem=\"쓰\""
+        }
+      ]
+    },
+    "학교": {
+      "result": {
+        "headword": "학교",
+        "meanings": [
+          {
+            "definition": "학생들이 교육을 받는 기관",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "군대나 경찰 등에서 훈련을 받는 장소",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "아이들이 **학교**에 갔어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "신병들이 **학교**에서 훈련을 받습니다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "친구": {
+      "result": {
+        "headword": "친구",
+        "meanings": [
+          {
+            "definition": "서로 친밀한 관계에 있는 사람",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "같은 학교나 직장 등에서 함께 지내는 사람",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "취미나 관심사가 비슷한 사람",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 어제 오랜만에 **친구**를 만났어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "회사에서 좋은 **친구**가 생겼습니다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "같은 취미를 가진 **친구**들과 여행을 갔어요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "음식": {
+      "result": {
+        "headword": "음식",
+        "meanings": [
+          {
+            "definition": "사람이 먹는 모든 종류의 먹거리",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "특정한 조리법이나 문화에 따른 먹거리",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "한국의 **음식**은 매운 맛이 특징입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 식당에서는 다양한 세계 **음식**을 맛볼 수 있어요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사람": {
+      "result": {
+        "headword": "사람",
+        "meanings": [
+          {
+            "definition": "인간, 사람",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 집단이나 조직에 속한 구성원",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람다운 성품이나 인격을 가진 존재",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 착한 **사람**입니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "우리 회사에는 유능한 **사람**이 많아요.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "정직한 **사람**이 되려고 노력합니다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "회사": {
+      "result": {
+        "headword": "회사",
+        "meanings": [
+          {
+            "definition": "사업을 하는 조직이나 단체",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 큰 **회사**에 다닌다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "시간": {
+      "result": {
+        "headword": "시간",
+        "meanings": [
+          {
+            "definition": "일이 진행되는 동안의 길이",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "약속이나 일정이 정해진 때",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일을 하는 데 필요한 기간",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "회의가 **시간**에 맞춰 시작되었다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "공부하는 데 많은 **시간**이 걸렸다.",
+            "meaning_index": 2
+          },
+          {
+            "sentence": "우리는 긴 **시간** 동안 이야기를 나누었다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "책": {
+      "result": {
+        "headword": "책",
+        "meanings": [
+          {
+            "definition": "글이나 그림을 모아 한 권으로 만든 인쇄물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일에 대해 책임을 지거나 맡는 일",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 새로운 **책**을 샀다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 모든 **책임**을 졌다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "영화": {
+      "result": {
+        "headword": "영화",
+        "meanings": [
+          {
+            "definition": "움직이는 영상으로 된 예술 작품이나 상업용 영상물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일이나 현상을 비유적으로 나타내는 것",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "어제 친구와 함께 **영화를** 봤어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그의 삶은 한 편의 **영화처럼** 감동적이었다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "좋다": {
+      "result": {
+        "headword": "좋다",
+        "meanings": [
+          {
+            "definition": "기분이나 상태가 만족스럽고 쾌적하다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "가치나 품질이 뛰어나다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "마음에 들거나 바람직하다",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "오늘 날씨가 정말 **좋아요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 제품은 품질이 **좋습니다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 사람과 함께 있으면 기분이 **좋아져요**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "작다": {
+      "result": {
+        "headword": "작다",
+        "meanings": [
+          {
+            "definition": "크기가 보통보다 적거나 작음",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "나이나 연령이 적음",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "중요성이나 영향력이 적음",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "이 방은 다른 방보다 **작아요**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 나이에 비해 마음이 아직도 **작다**고 느껴졌어요.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 문제는 생각보다 **작았습니다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    }
+  },
+  "C": {
+    "이": {
+      "result": {
+        "headword": "이",
+        "meanings": [
+          {
+            "definition": "사람이나 동물의 입 안에 있는 단단한 구조물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 대상이나 사람을 가리키는 지시 대명사",
+            "partOfSpeech": "대명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 어제 치과에서 **이를** 치료받았다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "**이** 책은 정말 재미있다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "사": {
+      "result": {
+        "headword": "사",
+        "meanings": [
+          {
+            "definition": "죽음",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "일, 사건",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 갑작스러운 **사**로 가족을 잃었다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이번 **사**는 매우 중요한 문제였다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 **사**는 매우 친절하게 대답했다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "오": {
+      "result": {
+        "headword": "오",
+        "meanings": [
+          {
+            "definition": "어떤 장소나 상태로 다가가거나 도착하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "숫자 5를 나타내는 한자어",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일이 일어나는 시기나 때",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "친구가 집에 **왔다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "나는 숫자 **오**를 좋아한다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "행사는 오후 다섯 시에 **온다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"왔다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"온다\", stem=\"오\""
+        }
+      ]
+    },
+    "백": {
+      "result": {},
+      "violations": []
+    },
+    "월": {
+      "result": {
+        "headword": "월",
+        "meanings": [
+          {
+            "definition": "달력에서 한 해를 12등분한 기간 중 하나",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "음력에서 한 달을 나타내는 단위",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "이번 **월**은 날씨가 매우 따뜻하다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "음력 **월**은 양력과 다르게 계산된다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "분": {
+      "result": {
+        "headword": "분",
+        "meanings": [
+          {
+            "definition": "시간의 단위로, 60초를 한 단위로 하는 것",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람을 높여 이르는 말",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "수업은 45**분** 동안 진행되었다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 **분**께서 오늘 회의에 참석하셨다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "천": {
+      "result": {
+        "headword": "천",
+        "meanings": [
+          {
+            "definition": "하늘",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "숫자 1000",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "맑은 **천**을 바라보며 산책했다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 가게에서 물건을 천 원에 샀다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        }
+      ]
+    },
+    "년": {
+      "result": {
+        "headword": "년",
+        "meanings": [
+          {
+            "definition": "1년 동안의 기간",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "그는 3년 동안 한국에서 공부했다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        }
+      ]
+    },
+    "나": {
+      "result": {
+        "headword": "나",
+        "meanings": [
+          {
+            "definition": "자신을 가리키는 1인칭 대명사",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "나무에서 떨어지는 열매나 씨앗",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 오늘 학교에 갔다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "가을에는 나가 많이 떨어진다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        }
+      ]
+    },
+    "저": {
+      "result": {
+        "headword": "저",
+        "meanings": [
+          {
+            "definition": "화자 자신을 낮추어 이르는 말",
+            "partOfSpeech": "대명사"
+          },
+          {
+            "definition": "화자와 청자 모두에게서 멀리 떨어진 사람이나 사물을 가리키는 말",
+            "partOfSpeech": "관형사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "저는 오늘 학교에 갔어요.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "저 책은 정말 재미있었어요.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        }
+      ]
+    },
+    "가다": {
+      "result": {
+        "headword": "가다",
+        "meanings": [
+          {
+            "definition": "어떤 장소로 이동하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "시간이 흐르다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황으로 변화하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 학교에 **간다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "시간이 빠르게 **갔다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "날씨가 점점 추워지고 있다가 겨울로 **갔다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"간다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"갔다\", stem=\"가\""
+        }
+      ]
+    },
+    "오다": {
+      "result": {
+        "headword": "오다",
+        "meanings": [
+          {
+            "definition": "어떤 장소나 방향으로 움직여 도착하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "시간이나 계절이 특정한 시점에 이르다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "비, 눈, 바람 등이 하늘에서 내려오다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "친구가 내일 우리 집에 **온다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "새해가 밝아왔다고 모두가 축하했다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "오늘은 비가 많이 **온다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"온다\", stem=\"오\""
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"온다\", stem=\"오\""
+        }
+      ]
+    },
+    "먹다": {
+      "result": {
+        "headword": "먹다",
+        "meanings": [
+          {
+            "definition": "음식을 입으로 섭취하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 것을 소비하거나 사용하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상황이나 결과를 겪다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 아침에 밥을 **먹었다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 돈을 모두 **먹어버렸다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 팀은 경기에서 큰 점수를 **먹었다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "살다": {
+      "result": {
+        "headword": "살다",
+        "meanings": [
+          {
+            "definition": "생명을 유지하며 존재하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 장소에 거주하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황에서 지내다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "사람은 물과 공기가 있어야 **산다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "나는 서울에서 **산다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 어려운 환경 속에서도 잘 **살았다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"산다\", stem=\"살\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"산다\", stem=\"살\""
+        }
+      ]
+    },
+    "사다": {
+      "result": {
+        "headword": "사다",
+        "meanings": [
+          {
+            "definition": "물건이나 서비스를 돈을 주고 얻다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 감정이나 상태를 품다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 시장에서 과일을 **샀다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 친구를 위해 용기를 **샀다**.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"샀다\", stem=\"사\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"샀다\", stem=\"사\""
+        }
+      ]
+    },
+    "앉다": {
+      "result": {
+        "headword": "앉다",
+        "meanings": [
+          {
+            "definition": "엉덩이를 바닥이나 의자 등에 대고 몸을 낮추다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 자리에 머무르다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "학생들이 의자에 **앉았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 항상 창가 자리에 **앉는다**.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "서다": {
+      "result": {
+        "headword": "서다",
+        "meanings": [
+          {
+            "definition": "몸을 곧게 펴고 발로 지면을 딛고 있는 상태가 되다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 위치나 장소에 위치하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "기계나 장치가 작동을 멈추다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "사람들이 무대 앞에 **섰다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "버스가 정류장에 **섰다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "컴퓨터가 갑자기 **섰다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"섰다\", stem=\"서\""
+        }
+      ]
+    },
+    "보다": {
+      "result": {
+        "headword": "보다",
+        "meanings": [
+          {
+            "definition": "눈으로 어떤 대상을 인식하거나 관찰하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일을 경험하거나 시험삼아 해보다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "비교하여 판단하거나 평가하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 저녁에 영화를 **보았다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "새로운 음식을 한번 **보았다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 사람을 다른 사람과 **보다** 더 친절하다고 생각한다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "하다": {
+      "result": {
+        "headword": "하다",
+        "meanings": [
+          {
+            "definition": "어떤 동작이나 행위를 하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 상태나 상황이 되다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "어떤 일을 직업이나 역할로 삼다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 매일 운동을 **한다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "오늘은 날씨가 맑게 **된다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그는 선생님을 **한다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"한다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"된다\", stem=\"하\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"한다\", stem=\"하\""
+        }
+      ]
+    },
+    "쓰다": {
+      "result": {
+        "headword": "쓰다",
+        "meanings": [
+          {
+            "definition": "펜이나 연필 등으로 글씨나 그림을 만들다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "돈이나 시간을 어떤 목적을 위해 소비하다",
+            "partOfSpeech": "동사"
+          },
+          {
+            "definition": "머리나 얼굴에 모자, 안경 등을 착용하다",
+            "partOfSpeech": "동사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 일기장에 오늘 있었던 일을 **썼다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 여행 경비로 많은 돈을 **썼다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "추워서 모자를 **썼다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_marker_offsite",
+          "example": 0,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 1,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        },
+        {
+          "rule": "R3_marker_offsite",
+          "example": 2,
+          "detail": "marked=\"썼다\", stem=\"쓰\""
+        }
+      ]
+    },
+    "학교": {
+      "result": {
+        "headword": "학교",
+        "meanings": [
+          {
+            "definition": "학생들이 공부하는 장소",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 매일 학교에 간다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        }
+      ]
+    },
+    "친구": {
+      "result": {
+        "headword": "친구",
+        "meanings": [
+          {
+            "definition": "서로 친밀한 관계에 있는 사람",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 어릴 적부터 많은 **친구**가 있다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "음식": {
+      "result": {
+        "headword": "음식",
+        "meanings": [
+          {
+            "definition": "사람이 먹는 모든 종류의 먹거리",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "특정한 조리법이나 재료로 만든 요리",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "한국의 음식은 매우 다양하다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 음식은 매운 맛이 강하다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R3_no_marker",
+          "example": 0
+        },
+        {
+          "rule": "R3_no_marker",
+          "example": 1
+        }
+      ]
+    },
+    "사람": {
+      "result": {
+        "headword": "사람",
+        "meanings": [
+          {
+            "definition": "인간 또는 사람이라는 존재",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 집단이나 조직에 속한 개인",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람을 가리키는 친근한 표현",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "저는 좋은 **사람**을 만났습니다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "우리 회사에는 능력 있는 **사람**이 많습니다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 **사람**은 정말 친절했어요.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "회사": {
+      "result": {
+        "headword": "회사",
+        "meanings": [
+          {
+            "definition": "사람들이 모여서 일정한 목적을 위해 조직한 단체",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 큰 **회사를** 다닌다.",
+            "meaning_index": 0
+          }
+        ]
+      },
+      "violations": []
+    },
+    "시간": {
+      "result": {
+        "headword": "시간",
+        "meanings": [
+          {
+            "definition": "어떤 일이 진행되거나 존재하는 동안의 길이",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "일정한 시각이나 때",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "사람들이 약속하거나 계획하는 때",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 공부할 **시간**이 부족하다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "회의 **시간**이 오후 두 시로 정해졌다.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "약속한 **시간**에 꼭 도착해야 한다.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": []
+    },
+    "책": {
+      "result": {
+        "headword": "책",
+        "meanings": [
+          {
+            "definition": "글이나 그림 따위를 모아 한 권으로 만든 인쇄물",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "어떤 일에 대해 책임을 지거나 맡는 의무",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 재미있는 **책**을 읽었다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그는 자신의 **책**을 다했다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "영화": {
+      "result": {
+        "headword": "영화",
+        "meanings": [
+          {
+            "definition": "움직이는 그림과 소리로 이야기를 전달하는 예술 작품",
+            "partOfSpeech": "명사"
+          },
+          {
+            "definition": "영화관에서 상영되는 영상물",
+            "partOfSpeech": "명사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "나는 주말에 재미있는 **영화를** 봤다.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "새로운 **영화가** 이번 주에 개봉했다.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": []
+    },
+    "좋다": {
+      "result": {
+        "headword": "좋다",
+        "meanings": [
+          {
+            "definition": "기분이나 상태가 만족스럽고 쾌적하다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "가치나 품질이 뛰어나다",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "마음에 들거나 바람직하다",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "오늘 날씨가 정말 **좋다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "이 책은 내용이 매우 **좋다**.",
+            "meaning_index": 1
+          },
+          {
+            "sentence": "그 사람과 함께 있으면 기분이 **좋다**.",
+            "meaning_index": 2
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R2_bare_stem",
+          "example": 0,
+          "detail": "terminal = bare \"좋다\""
+        },
+        {
+          "rule": "R2_bare_stem",
+          "example": 1,
+          "detail": "terminal = bare \"좋다\""
+        },
+        {
+          "rule": "R2_bare_stem",
+          "example": 2,
+          "detail": "terminal = bare \"좋다\""
+        }
+      ]
+    },
+    "작다": {
+      "result": {
+        "headword": "작다",
+        "meanings": [
+          {
+            "definition": "크기나 양이 보통보다 적거나 작음",
+            "partOfSpeech": "형용사"
+          },
+          {
+            "definition": "나이나 연령이 어리거나 적음",
+            "partOfSpeech": "형용사"
+          }
+        ],
+        "examples": [
+          {
+            "sentence": "이 집은 다른 집보다 **작다**.",
+            "meaning_index": 0
+          },
+          {
+            "sentence": "그 아이는 또래보다 키가 **작다**.",
+            "meaning_index": 1
+          }
+        ]
+      },
+      "violations": [
+        {
+          "rule": "R2_bare_stem",
+          "example": 0,
+          "detail": "terminal = bare \"작다\""
+        },
+        {
+          "rule": "R2_bare_stem",
+          "example": 1,
+          "detail": "terminal = bare \"작다\""
+        }
+      ]
+    }
+  }
+}

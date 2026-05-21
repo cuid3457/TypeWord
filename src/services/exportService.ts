@@ -3,6 +3,14 @@ import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 
 import type { StoredWord } from '@src/db/queries';
+import { isPaid } from '@src/services/subscriptionService';
+
+export class PaidFeatureRequiredError extends Error {
+  code = 'paid_feature_required' as const;
+  constructor() {
+    super('paid_feature_required');
+  }
+}
 
 function csvEscape(value: string | null | undefined): string {
   if (value === null || value === undefined) return '';
@@ -272,7 +280,7 @@ function buildPdfHtml(bookTitle: string, words: StoredWord[], labels: PdfLabels)
     <div class="date">${today} · ${words.length} ${escapeHtml(labels.wordsSuffix)}</div>
   </header>
   <div class="grid">${cards}</div>
-  <footer>TypeWord</footer>
+  <footer>MoaVoca</footer>
 </body>
 </html>`;
 }
@@ -281,12 +289,21 @@ function buildPdfHtml(bookTitle: string, words: StoredWord[], labels: PdfLabels)
  * Render the wordlist as a printable two-column "study sheet" PDF and open
  * the native share sheet. Premium-only feature (CSV stays free for GDPR
  * portability compliance).
+ *
+ * Tier check is enforced at function entry rather than only at the UI
+ * call-site. Without this, a tampered JS bundle (or a future call-site that
+ * forgets the gate) could call exportWordlistPdf() directly and bypass the
+ * paywall. The tier itself is hydrated from RevenueCat on app boot —
+ * AsyncStorage cache is advisory; isPaid() reflects RC's current state.
  */
 export async function exportWordlistPdf(
   bookTitle: string,
   words: StoredWord[],
   labels: PdfLabels,
 ): Promise<void> {
+  if (!isPaid()) {
+    throw new PaidFeatureRequiredError();
+  }
   const html = buildPdfHtml(bookTitle, words, labels);
   const { uri } = await Print.printToFileAsync({ html, base64: false });
 

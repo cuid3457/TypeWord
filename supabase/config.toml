@@ -32,6 +32,11 @@ verify_jwt = false
 # not a user JWT. Verified inside the function.
 verify_jwt = false
 
+[functions.community-upload]
+# Same as word-lookup: gateway-level JWT verification disabled because of
+# ES256 key incompatibility; verified inside via admin.auth.getUser(jwt).
+verify_jwt = false
+
 [api]
 enabled = true
 # Port to use for the API URL.

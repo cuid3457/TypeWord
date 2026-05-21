@@ -1,0 +1,1664 @@
+# delf-b1-part-1 (fr → ko) | 300 words
+
+gouvernement [ko] ipa=guvɛʁnəmɑ̃ | meanings: 정부[명사] | 내각[명사]
+   e1: Le **gouvernement** travaille pour le bien du pays. || 그 **정부**는 나라의 이익을 위해 일한다.
+   e2: Le nouveau **gouvernement** a annoncé des réformes. || 새로운 **내각**이 개혁을 발표했다.
+   syn: [administration, exécutif] | ant: []
+
+ministre [ko] ipa=ministʁ | meanings: 장관[명사] | 성직자[명사]
+   e1: Le **ministre** a présenté le nouveau projet de loi. || 그 **장관**은 새 법안을 발표했습니다.
+   e2: Le **ministre** a célébré la messe dimanche matin. || 그 **성직자**는 일요일 아침 미사를 집전했습니다.
+   e3: La réunion avec le **ministre** s'est bien passée. || 그 **장관**과의 회의가 잘 진행되었습니다.
+   syn: [secrétaire d'État, ministre du gouvernement, ecclésiastique, clerc] | ant: []
+
+président [ko] ipa=pʁezidɑ̃ | meanings: 대통령[명사] | 회장[명사]
+   e1: Le **président** a donné un discours inspirant. || **대통령**이 영감을 주는 연설을 했어요.
+   e2: La réunion avec le **président** du club a été productive. || 동호회의 **회장**과의 회의가 생산적이었어요.
+   syn: [chef d'État, dirigeant, présidente, présidence] | ant: []
+
+parlement [ko] ipa=paʁləmɑ̃ | meanings: 국회, 의회[명사]
+   e1: Le **parlement** a voté une nouvelle loi aujourd'hui. || **국회**는 오늘 새로운 법을 통과시켰다.
+   e2: Le débat au **parlement** a duré toute la journée. || **의회**에서의 토론이 하루 종일 지속되었다.
+   e3: Le président a rencontré les membres du **parlement**. || 대통령은 **국회** 구성원들을 만났다.
+   syn: [assemblée, congrès, chambre] | ant: []
+
+assemblée [ko] ipa=asɑ̃ble | meanings: 회의[명사] | 의회[명사]
+   e1: L'**assemblée** a décidé de reporter la réunion. || **회의**는 회의를 연기하기로 결정했다.
+   e2: L'**assemblée** nationale vote une nouvelle loi. || **의회**는 새로운 법안을 통과시켰다.
+   syn: [réunion, congrès, session] | ant: []
+
+député [ko] ipa=depyte | meanings: 국회의원[명사]
+   e1: Le **député** a présenté un nouveau projet de loi. || 그 **국회의원**은 새로운 법안을 제출했다.
+   e2: Chaque **député** représente une circonscription différente. || 각 **국회의원**은 다른 선거구를 대표한다.
+   syn: [parlementaire, législateur, représentant] | ant: []
+
+sénateur [ko] ipa=senaˈtœʁ | meanings: 상원의원[명사]
+   e1: Le **sénateur** a voté une nouvelle loi. || **상원의원**이 새로운 법안에 투표했다.
+   e2: Elle travaille comme **sénatrice** depuis dix ans. || 그녀는 10년간 **상원의원**으로 일했다.
+   syn: [] | ant: []
+
+élection [ko] ipa=e.lɛk.sjɔ̃ | meanings: 선거[명사]
+   e1: L'**élection** aura lieu en mai. || **선거**는 5월에 열립니다.
+   e2: Ils préparent les bulletins pour l'**élection**. || 그들은 **선거** 용 투표용지를 준비합니다.
+   e3: La campagne pour l'**élection** commence demain. || **선거**를 위한 선거운동은 내일 시작합니다.
+   syn: [scrutin, vote, consultation] | ant: []
+
+élire [ko] ipa=eliʁ | meanings: 선출하다, 뽑다[동사]
+   e1: Le peuple va **élire** un nouveau maire demain. || 사람들이 내일 새로운 시장을 **선출할** 거예요.
+   e2: Ils ont décidé d'**élire** un président juste. || 그들은 공정한 대통령을 **선출하기로** 결정했어요.
+   e3: Le comité doit **élire** son représentant cette semaine. || 위원회는 이번 주에 대표를 **선출해야** 해요.
+   syn: [choisir, nommer, désigner] | ant: []
+
+voter [ko] ipa=vɔte | meanings: 투표하다[동사]
+   e1: Ils vont **voter** demain à l'école. || 그들은 내일 학교에서 **투표할** 거예요.
+   e2: Je vais **voter** pour mon candidat préféré. || 나는 내가 좋아하는 후보에게 **투표할** 거예요.
+   syn: [suffrager, électoraliser] | ant: []
+
+candidat [ko] ipa=kan.di.da | meanings: 지원자[명사]
+   e1: Le **candidat** a réussi l'entretien d'embauche. || 그 **지원자**는 면접에 합격했다.
+   e2: Chaque **candidat** présente son projet devant le jury. || 각 **지원자**는 심사위원 앞에서 자신의 프로젝트를 발표한다.
+   e3: Le **candidat** attend les résultats de l'examen avec impatience. || 그 **지원자**는 시험 결과를 초조하게 기다린다.
+   syn: [postulant, concourant, aspirant] | ant: []
+
+candidature [ko] ipa=kɑ̃.di.da.tyʁ | meanings: 지원[명사] | 입후보[명사]
+   e1: J'ai envoyé ma **candidature** hier. || 나는 어제 나의 **지원**을 보냈어요.
+   e2: La **candidature** au poste est ouverte jusqu'à demain. || 그 직위에 대한 **지원**은 내일까지 열려 있어요.
+   e3: Sa **candidature** aux élections a surpris tout le monde. || 그의 **입후보**는 모두를 놀라게 했어요.
+   syn: [demande, inscription, présentation] | ant: []
+
+parti [ko] ipa=paʁti | meanings: 정당[명사] | 편[명사]
+   e1: Le **parti** organise une réunion demain. || **정당**은 내일 회의를 개최합니다.
+   e2: Je suis du même **parti** qu'elle. || 나는 그녀와 같은 **편**이다.
+   syn: [faction, camp] | ant: []
+
+démocratie [ko] ipa=demɔkʁasi | meanings: 민주주의[명사]
+   e1: La **démocratie** protège les droits des citoyens. || **민주주의**는 시민의 권리를 보호합니다.
+   e2: La **démocratie** permet à chacun de voter. || **민주주의**는 모두가 투표할 수 있게 합니다.
+   syn: [république, gouvernement populaire] | ant: []
+
+république [ko] ipa=ʁepyblik | meanings: 공화국[명사]
+   e1: La **république** garantit les droits des citoyens. || **공화국**은 시민의 권리를 보장합니다.
+   e2: La France est une **république** démocratique. || 프랑스는 민주적인 **공화국**입니다.
+   syn: [état, gouvernement] | ant: []
+
+monarchie [ko] ipa=mɔn.aʁ.ʃi | meanings: 군주제[명사]
+   e1: La **monarchie** a une longue histoire en Europe. || 유럽에는 긴 역사를 가진 **군주제**가 있습니다.
+   e2: Ils étudient la **monarchie** sous l'ancien régime. || 그들은 구체제 아래의 **군주제**를 공부합니다.
+   e3: La **monarchie** est souvent associée à un roi ou une reine. || **군주제**는 종종 왕이나 여왕과 관련됩니다.
+   syn: [royauté, régime monarchique] | ant: [république]
+
+dictature [ko] ipa=diktatyʁ | meanings: 독재[명사]
+   e1: La **dictature** limite souvent les droits des citoyens. || **독재**는 종종 시민의 권리를 제한합니다.
+   e2: Ils ont vécu sous une **dictature** pendant des années. || 그들은 몇 년 동안 **독재** 하에 살았습니다.
+   e3: La **dictature** empêche la liberté d'expression. || **독재**는 표현의 자유를 막습니다.
+   syn: [régime autoritaire, despotisme, tyrannie] | ant: [démocratie, liberté]
+
+constitution [ko] ipa=kɔ̃stitysjɔ̃ | meanings: 헌법[명사] | 구성[명사]
+   e1: La **constitution** protège les droits des citoyens. || 그 **헌법**은 시민의 권리를 보호합니다.
+   e2: La **constitution** du corps humain est complexe. || 인체의 **구성**은 복잡합니다.
+   e3: La nouvelle **constitution** a été adoptée hier. || 새로운 **헌법**이 어제 채택되었습니다.
+   syn: [charte, loi fondamentale, organisation] | ant: []
+
+loi [ko] ipa=lwa | meanings: 법[명사]
+   e1: La **loi** protège les droits des citoyens. || **법**은 시민의 권리를 보호합니다.
+   e2: Cette **loi** favorise l'égalité entre tous. || 이 **법**은 모두의 평등을 촉진합니다.
+   e3: La nouvelle **loi** entre en vigueur demain. || 새로운 **법**은 내일 시행됩니다.
+   syn: [règle, décret, code] | ant: []
+
+législation [ko] ipa=le.ʒis.la.sjɔ̃ | meanings: 법률[명사]
+   e1: La **législation** protège les droits des enfants. || **법률**은 아이들의 권리를 보호합니다.
+   e2: Cette **législation** favorise la protection de l'environnement. || 이 **법률**은 환경 보호를 촉진합니다.
+   e3: La nouvelle **législation** a été adoptée aujourd'hui. || 새로운 **법률**이 오늘 채택되었습니다.
+   syn: [loi, réglementation, droit] | ant: []
+
+décret [ko] ipa=dekʁɛ | meanings: 법령[명사]
+   e1: Le **décret** a été publié hier au journal officiel. || 그 **법령**은 어제 관보에 게시되었다.
+   e2: Ce **décret** impose de nouvelles règles environnementales. || 이 **법령**은 새로운 환경 규칙을 부과한다.
+   e3: Le gouvernement prépare un **décret** sur la sécurité alimentaire. || 정부는 식품 안전에 관한 **법령**을 준비하고 있다.
+   syn: [arrêté, règlement, ordonnance] | ant: []
+
+règlement [ko] ipa=ʁɛɡləmɑ̃ | meanings: 규칙, 규정[명사] | 결제, 지불[명사]
+   e1: Le **règlement** de l'école est strict. || 학교의 **규칙**은 엄격하다.
+   e2: Le **règlement** de la facture doit être rapide. || 청구서의 **결제**는 빨라야 한다.
+   e3: Tous doivent suivre le **règlement** intérieur. || 모두가 내부 **규정**을 따라야 한다.
+   syn: [directive, loi, règle, paiement, versement] | ant: []
+
+réforme [ko] ipa=ʁe.fɔʁm | meanings: 개혁[명사] | 개정[명사]
+   e1: La **réforme** éducative a amélioré les écoles. || 교육 **개혁**이 학교를 개선했다.
+   e2: Ils ont voté pour une **réforme** de la loi. || 그들은 법의 **개정**에 찬성했다.
+   e3: La **réforme** politique a apporté plus de justice. || 정치적 **개혁**이 더 많은 정의를 가져왔다.
+   syn: [changement, modification, amélioration] | ant: []
+
+citoyen [ko] ipa=si.twa.jɛ̃ | meanings: 시민[명사]
+   e1: Chaque **citoyen** a le devoir de voter. || 모든 **시민**은 투표할 의무가 있다.
+   e2: Le respect des droits est essentiel pour un **citoyen**. || 권리 존중은 **시민**에게 필수적이다.
+   e3: Le **citoyen** participe à la vie de sa communauté. || **시민**은 자신의 공동체 생활에 참여한다.
+   syn: [habitant, résident, urbain] | ant: []
+
+citoyenneté [ko] ipa=sitojɛnte | meanings: 시민권[명사]
+   e1: La **citoyenneté** apporte des droits et des devoirs. || **시민권**은 권리와 의무를 제공합니다.
+   e2: Il a obtenu la **citoyenneté** après plusieurs années. || 그는 여러 해 후에 **시민권**을 취득했습니다.
+   syn: [nationalité, civicité] | ant: []
+
+opposition [ko] ipa=ɔpɔzisjɔ̃ | meanings: 반대[명사] | 야당[명사]
+   e1: Il exprime son **opposition** à ce projet. || 그는 이 계획에 대한 **반대**를 표현해요.
+   e2: **L'opposition** critique le gouvernement activement. || **야당**이 정부를 활발히 비판해요.
+   e3: **L'opposition** a marqué son désaccord lors du débat. || 토론에서 **반대**가 불일치를 나타냈어요.
+   syn: [désaccord, contesté, résistance] | ant: []
+
+majorité [ko] ipa=ma.ʒɔ.ʁi.te | meanings: 성년[명사] | 과반수[명사]
+   e1: La **majorité** est atteinte à 18 ans en France. || 프랑스에서 **성년**은 18살에 도달합니다.
+   e2: La **majorité** des votants a choisi le candidat. || 투표자의 **과반수**가 후보를 선택했습니다.
+   syn: [majorat, majeur, plénitude] | ant: []
+
+minorité [ko] ipa=minɔʁite | meanings: 소수[명사] | 미성년자[명사]
+   e1: La **minorité** a des droits protégés par la loi. || **소수**는 법에 의해 보호받는 권리가 있어요.
+   e2: Elle est encore une **minorité** et ne peut pas voter. || 그녀는 아직 **미성년자**여서 투표할 수 없어요.
+   e3: La **minorité** linguistique parle une autre langue. || **소수** 언어 집단이 다른 언어를 사용해요.
+   syn: [fraction, partie, peuplement, jeune] | ant: []
+
+autorité [ko] ipa=otoʁite | meanings: 권위[명사] | 당국[명사]
+   e1: Son **autorité** inspire le respect chez tous. || 그의 **권위**는 모두에게 존경을 불러일으킨다.
+   e2: L'**autorité** locale a organisé la fête du quartier. || 지역 **당국**이 구역 축제를 주최했다.
+   e3: Elle exerce son **autorité** avec sagesse et bienveillance. || 그녀는 현명하고 자애롭게 **권위**를 행사한다.
+   syn: [pouvoir, influence, commandement, gouvernement] | ant: []
+
+débat [ko] ipa=de.ba | meanings: 토론, 논쟁[명사]
+   e1: Le **débat** a duré jusqu'à tard le soir. || 그 **토론**은 밤늦게까지 계속되었다.
+   e2: Ils ont organisé un **débat** sur l'environnement. || 그들은 환경에 관한 **토론**을 개최했다.
+   e3: Le **débat** entre les candidats a été animé. || 후보자들 간의 **토론**은 활발했다.
+   syn: [discussion, controverse, consultation] | ant: []
+
+discours [ko] ipa=dis.kuʁ | meanings: 연설[명사] | 담화[명사]
+   e1: Le président a tenu un **discours** inspirant. || 대통령이 감동적인 **연설**을 했다.
+   e2: Son **discours** exprimait clairement ses idées. || 그의 **담화**는 그의 생각을 명확히 표현했다.
+   e3: Le professeur fait un **discours** à ses élèves. || 교수님이 학생들에게 **연설**을 하신다.
+   syn: [allocution, oration, adresse] | ant: []
+
+manifestation [ko] ipa=manifɛstasjɔ̃ | meanings: 시위[명사] | 표출[명사]
+   e1: La **manifestation** a réuni de nombreux citoyens dans la ville. || 그 **시위**는 도시에서 많은 시민들을 모았다.
+   e2: Cette peinture est une claire **manifestation** de ses émotions. || 이 그림은 그의 감정의 명확한 **표출**이다.
+   e3: La police surveille la **manifestation** pacifique du week-end. || 경찰은 주말의 평화로운 **시위**를 감시하고 있다.
+   syn: [protestation, rassemblement, déclaration] | ant: []
+
+manifestant [ko] ipa=manifɛstɑ̃ | meanings: 시위자[명사] | 항의하는 사람[명사]
+   e1: Le **manifestant** brandissait une pancarte colorée. || **시위자**가 알록달록한 팻말을 들고 있었다.
+   e2: Un **manifestant** exprime son désaccord calmement. || 한 **항의하는 사람**이 차분하게 반대를 표현했다.
+   syn: [protestataire, gréviste] | ant: []
+
+grève [ko] ipa=ɡʁɛv | meanings: 파업[명사] | 해변[명사]
+   e1: Les ouvriers ont commencé une **grève** aujourd'hui. || 노동자들이 오늘 **파업**을 시작했다.
+   e2: Nous avons passé la journée sur la **grève** ensoleillée. || 우리는 햇볕이 잘 드는 **해변**에서 하루를 보냈다.
+   e3: La **grève** a duré plusieurs semaines sans accord. || **파업**은 합의 없이 몇 주 간 지속되었다.
+   syn: [manifestation, sit-in, plage, rivage] | ant: []
+
+syndicat [ko] ipa=sɛ̃dika | meanings: 노동조합[명사]
+   e1: Le **syndicat** défend les droits des travailleurs. || 그 **노동조합**은 노동자의 권리를 옹호합니다.
+   e2: Elle a adhéré au **syndicat** hier. || 그녀는 어제 **노동조합**에 가입했습니다.
+   e3: Le **syndicat** organise une réunion jeudi. || 그 **노동조합**은 목요일에 회의를 조직합니다.
+   syn: [union, association, caisse] | ant: []
+
+revendication [ko] ipa=ʁə.vɑ̃.di.ka.sjɔ̃ | meanings: 요구[명사] | 주장[명사]
+   e1: La **revendication** de meilleures conditions est justifiée. || 더 나은 조건에 대한 **요구**는 정당합니다.
+   e2: Sa **revendication** porte sur la propriété du terrain. || 그의 토지에 대한 **주장**입니다.
+   syn: [demande, exigence, plainte, affirmation, déclaration] | ant: []
+
+abolir [ko] ipa=abɔliʁ | meanings: 폐지하다[동사]
+   e1: Le gouvernement veut **abolir** cette loi injuste. || 정부가 이 불공평한 법을 **폐지**하려고 합니다.
+   e2: Ils ont décidé d'**abolir** les taxes anciennes. || 그들은 옛날 세금을 **폐지하기로** 결정했습니다.
+   syn: [supprimer, annuler] | ant: []
+
+ratifier [ko] ipa=ʁatife | meanings: 비준하다[동사]
+   e1: Le gouvernement doit **ratifier** le traité. || 정부가 조약을 **비준**해야 한다.
+   e2: Ils vont bientôt **ratifier** l'accord. || 그들은 곧 협정을 **비준**할 것이다.
+   e3: Le parlement a décidé de **ratifier** la convention. || 국회가 협약을 **비준**하기로 결정했다.
+   syn: [approuver, valider] | ant: []
+
+nommer [ko] ipa=nɔme | meanings: 임명하다[동사] | 지명하다[동사]
+   e1: Le président a **nommé** un nouveau ministre. || 대통령이 새 장관을 **임명했다**.
+   e2: Ils ont **nommé** un chef pour le projet. || 그들은 프로젝트의 책임자를 **지명했다**.
+   syn: [désigner, assigner] | ant: []
+
+réformer [ko] ipa=ʁe.fɔʁ.me | meanings: 개혁하다[동사] | 폐기하다[동사]
+   e1: Le gouvernement veut **réformer** le système éducatif. || 정부는 교육 시스템을 **개혁하려** 한다.
+   e2: Ils ont décidé de **réformer** cette loi obsolète. || 그들은 낡은 법을 **폐기하기로** 결정했다.
+   syn: [transformer, modifier, améliorer] | ant: []
+
+diplomate [ko] ipa=diplɔmat | meanings: 외교관[명사] | 다과[명사]
+   e1: Le **diplomate** a négocié la paix avec patience. || **외교관**은 인내심 있게 평화를 협상했다.
+   e2: Nous avons dégusté un délicieux **diplomate** après le dîner. || 우리는 저녁 식사 후에 맛있는 **다과**를 맛보았다.
+   syn: [ambassadeur, envoyé, représentant] | ant: []
+
+diplomatie [ko] ipa=diplomasi | meanings: 외교[명사]
+   e1: La **diplomatie** est essentielle pour la paix mondiale. || **외교**는 세계 평화를 위해 필수적이다.
+   e2: Les pays utilisent la **diplomatie** pour résoudre les conflits. || 나라들은 갈등을 해결하기 위해 **외교**를 사용한다.
+   e3: La **diplomatie** favorise la coopération entre les nations. || **외교**는 국가 간 협력을 촉진한다.
+   syn: [relations internationales, négociation, politique extérieure] | ant: []
+
+ambassadeur [ko] ipa=ɑ̃basadœʁ | meanings: 대사[명사]
+   e1: L'**ambassadeur** a rencontré le président ce matin. || **대사**가 오늘 아침 대통령을 만났어요.
+   e2: L'**ambassadeur** a organisé une réception amicale. || **대사**가 친선 리셉션을 주최했어요.
+   syn: [diplomate, envoyé, représentant] | ant: []
+
+ambassade [ko] ipa=ɑ̃basad | meanings: 대사관[명사]
+   e1: L'**ambassade** organise un événement culturel ce soir. || **대사관**이 오늘 밤 문화 행사를 주최한다.
+   e2: Nous avons visité l'**ambassade** pendant notre voyage. || 우리는 여행 중에 **대사관**을 방문했다.
+   e3: L'**ambassade** aide les citoyens à l'étranger. || **대사관**은 해외에 있는 시민들을 돕는다.
+   syn: [consulat, délégation] | ant: []
+
+traité [ko] ipa=tʁɛ.te | meanings: 조약, 협정[명사] | 논문, 연구서[명사]
+   e1: Le **traité** a été signé par deux pays amis. || 그 **조약**은 두 우호국에 의해 체결되었다.
+   e2: Elle a publié un **traité** sur la philosophie moderne. || 그녀는 현대 철학에 관한 **논문**을 발표했다.
+   e3: Le gouvernement a ratifié le nouveau **traité** international. || 정부는 새로운 국제 **협정**을 비준했다.
+   syn: [accord, convention, étude, dissertation] | ant: []
+
+accord [ko] ipa=akɔʁ | meanings: 합의[명사] | 조화[명사]
+   e1: Ils ont signé un **accord** de paix hier. || 그들은 어제 평화에 관한 **합의**를 체결했다.
+   e2: Les couleurs sont en **accord** dans cette peinture. || 이 그림에서는 색들이 **조화**를 이루고 있다.
+   e3: L'**accord** entre les deux partis a été rapide. || 두 당사자 간의 **합의**가 빨리 이루어졌다.
+   syn: [entente, pacte, harmonie] | ant: []
+
+négociation [ko] ipa=neɡɔsjasjɔ̃ | meanings: 교섭[명사] | 협상[명사]
+   e1: La **négociation** avec le client a duré toute la journée. || 고객과의 **교섭**은 하루 종일 계속되었어요.
+   e2: Ils ont réussi une **négociation** bénéfique pour les deux parties. || 그들은 양측에 유리한 **협상**을 성공적으로 마쳤어요.
+   syn: [pourparlers, discussion, transaction] | ant: []
+
+justice [ko] ipa=ʒys.tis | meanings: 정의[명사] | 사법[명사]
+   e1: La **justice** doit être équitable pour tous. || 모두에게 **정의**는 공정해야 합니다.
+   e2: Le système de **justice** protège les citoyens. || **사법** 제도는 시민들을 보호합니다.
+   syn: [équité, légalité, droit] | ant: []
+
+juge [ko] ipa=ʒyʒ | meanings: 판사[명사]
+   e1: Le **juge** a rendu son verdict rapidement. || **판사**가 신속하게 판결을 내렸어요.
+   e2: Le **juge** écoute attentivement les témoignages. || **판사**가 증언을 주의 깊게 듣고 있어요.
+   syn: [magistrat, arbitre] | ant: []
+
+tribunal [ko] ipa=tʁi.by.nal | meanings: 법원[명사]
+   e1: Le **tribunal** a rendu sa décision hier. || **법원**은 어제 판결을 내렸다.
+   e2: Nous avons visité le **tribunal** de la ville. || 우리는 도시의 **법원**을 방문했다.
+   e3: Le procès aura lieu au **tribunal** local. || 재판은 지역 **법원**에서 열릴 것이다.
+   syn: [cour, juridiction, cour de justice] | ant: []
+
+jugement [ko] ipa=ʒyʒmɑ̃ | meanings: 판단[명사] | 판결[명사]
+   e1: Le **jugement** du jury était juste. || 배심원의 **판단**은 공정했다.
+   e2: Le **jugement** du tribunal a été prononcé aujourd'hui. || 법원의 **판결**이 오늘 내려졌다.
+   e3: Son **jugement** est souvent influencé par ses émotions. || 그의 **판단**은 종종 감정에 의해 영향을 받는다.
+   syn: [décision, avis, arrêt] | ant: []
+
+cour [ko] ipa=kuʁ | meanings: 뜰, 마당[명사] | 법정[명사]
+   e1: Les enfants jouent dans la **cour**. || 아이들이 **뜰**에서 놉니다.
+   e2: L'audience a lieu dans la **cour** du tribunal. || 재판이 법원의 **법정**에서 열립니다.
+   e3: La **cour** est décorée de fleurs colorées. || **뜰**은 화려한 꽃들로 꾸며져 있습니다.
+   syn: [jardin, tribunal] | ant: []
+
+procureur [ko] ipa=pʁɔ.ky.ʁœʁ | meanings: 검사[명사]
+   e1: Le **procureur** a demandé une peine sévère. || **검사**가 엄중한 형벌을 요청했다.
+   e2: Le **procureur** travaille au tribunal tous les jours. || **검사**는 매일 법원에서 일한다.
+   syn: [avocat général, ministère public] | ant: []
+
+accusé [ko] ipa=ak.yze | meanings: 피고인[명사] | 고발된 사람[명사]
+   e1: L'**accusé** attendait son jugement au tribunal. || 그 **피고인**은 법정에서 자신의 판결을 기다렸다.
+   e2: L'**accusé** a nié toutes les charges portées contre lui. || **고발된 사람**은 자신에게 제기된 모든 혐의를 부인했다.
+   syn: [prévenu, défendeur, incriminé] | ant: []
+
+accusation [ko] ipa=akyzasjɔ̃ | meanings: 비난[명사] | 고소[명사]
+   e1: L'**accusation** de trahison est grave. || 반역에 대한 **비난**은 심각하다.
+   e2: Il a nié l'**accusation** devant le juge. || 그는 판사 앞에서 **고소**를 부인했다.
+   syn: [blâme, incrimination, mise en cause] | ant: []
+
+preuve [ko] ipa=pʁœv | meanings: 증거[명사]
+   e1: Il a présenté une **preuve** solide au tribunal. || 그는 법정에서 확실한 **증거**를 제시했다.
+   e2: Cette photo est une **preuve** de leur amitié. || 이 사진은 그들의 우정에 대한 **증거**이다.
+   e3: Ils ont cherché une **preuve** pour résoudre le mystère. || 그들은 미스터리를 해결하기 위한 **증거**를 찾았다.
+   syn: [témoignage, attestation, certificat] | ant: []
+
+témoin [ko] ipa=temwɛ̃ | meanings: 증인[명사] | 목격자[명사]
+   e1: Le **témoin** a raconté ce qu'il a vu au tribunal. || 그 **증인**은 법정에서 본 것을 이야기했다.
+   e2: Un **témoin** a aidé la police à comprendre l'accident. || 한 **목격자**가 경찰이 사고를 이해하는 데 도움을 주었다.
+   e3: Le **témoin** a signé le document officiel. || 그 **증인**은 공식 문서에 서명했다.
+   syn: [déposant, spectateur] | ant: []
+
+témoignage [ko] ipa=temwaɲaʒ | meanings: 증언[명사] | 간증[명사]
+   e1: Le **témoignage** du témoin a convaincu le juge. || 증인은 판사를 설득하는 **증언**을 했어요.
+   e2: Son **témoignage** a inspiré beaucoup de gens. || 그의 **간증**은 많은 사람들에게 영감을 주었어요.
+   e3: Nous avons enregistré le **témoignage** des survivants. || 우리는 생존자들의 **증언**을 녹음했어요.
+   syn: [déclaration, relate, récit] | ant: []
+
+verdict [ko] ipa=vɛʁdikt | meanings: 평결[명사]
+   e1: Le juge a prononcé le **verdict** final. || 판사가 최종 **평결**을 선고했다.
+   e2: Nous attendons le **verdict** avec impatience. || 우리는 그 **평결**을 기다리고 있다.
+   e3: Le **verdict** a surpris tout le monde dans la salle. || 그 **평결**은 방 안의 모두를 놀라게 했다.
+   syn: [décision, jugement, sentence] | ant: []
+
+condamnation [ko] ipa=kɔndamnasjɔ̃ | meanings: 유죄 판결[명사] | 비난[명사]
+   e1: La **condamnation** du suspect a été prononcée hier. || 용의자에 대한 **유죄 판결**이 어제 선고되었다.
+   e2: Sa **condamnation** publique a choqué tout le village. || 그의 공개적인 **비난**은 마을 전체를 충격에 빠뜨렸다.
+   syn: [jugement, peine, sentence, réprobation, blâme] | ant: []
+
+condamner [ko] ipa=kɔ̃.dam.ne | meanings: 유죄 판결을 내리다[동사] | 비난하다[동사]
+   e1: Le tribunal a **condamné** le voleur. || 법원은 도둑을 **유죄 판결했어요**.
+   e2: Elle a **condamné** le comportement injuste. || 그녀는 부당한 행동을 **비난했어요**.
+   syn: [juger, réprouver, blâmer] | ant: []
+
+innocence [ko] ipa=inɔsɑ̃s | meanings: 무죄[명사] | 순수[명사]
+   e1: Son **innocence** a été prouvée au tribunal. || 그의 **무죄**가 법정에서 입증되었습니다.
+   e2: Elle garde une **innocence** touchante malgré tout. || 그녀는 모든 것에도 불구하고 **순수**를 유지합니다.
+   syn: [] | ant: []
+
+innocent [ko] ipa=inɔsɑ̃ | meanings: 무죄의[형용사] | 순진한[형용사]
+   e1: Il est **innocent** du crime. || 그는 그 범죄에 대해 **무죄**입니다.
+   e2: Elle a un sourire **innocent** et sincère. || 그녀는 **순진한** 진실된 미소를 가지고 있습니다.
+   syn: [blanchi, naïf, candide] | ant: []
+
+coupable [ko] ipa=kupabl | meanings: 유죄인[형용사] | 책임이 있는[형용사]
+   e1: Il est **coupable** du vol selon le juge. || 판사는 그가 절도에 대해 **유죄**라고 말했다.
+   e2: Elle se sent **coupable** pour l'erreur commise. || 그녀는 저지른 실수에 대해 **책임이** 있다고 느낀다.
+   syn: [responsable, criminel, délinquant] | ant: [innocent]
+
+culpabilité [ko] ipa=kylpabilite | meanings: 죄책감[명사]
+   e1: Il ressent une profonde **culpabilité** après son erreur. || 그는 자신의 실수 후에 깊은 **죄책감**을 느낀다.
+   e2: La **culpabilité** peut parfois libérer l'esprit. || **죄책감**은 때때로 마음을 해방시킬 수 있다.
+   e3: Elle nie toute **culpabilité** dans l'accident. || 그녀는 그 사고에 대한 모든 **죄책감**을 부인한다.
+   syn: [remords, responsabilité, blâme] | ant: [innocence]
+
+peine [ko] ipa=pɛn | meanings: 고통[명사] | 형벌[명사]
+   e1: Elle a ressenti une grande **peine** après la perte. || 그녀는 상실 후에 큰 **고통**을 느꼈다.
+   e2: La **peine** d'emprisonnement fut décidée par le juge. || 판사는 징역 **형벌**을 선고했다.
+   e3: Il supporte sa **peine** avec courage chaque jour. || 그는 매일 용감하게 자신의 **고통**을 견딘다.
+   syn: [douleur, souffrance, châtiment, punition] | ant: []
+
+amende [ko] ipa=amɑ̃d | meanings: 벌금[명사]
+   e1: La voiture a reçu une **amende** pour excès de vitesse. || 차가 속도 위반으로 **벌금**을 받았다.
+   e2: Il doit payer son **amende** avant la fin du mois. || 그는 이달 말까지 **벌금**을 내야 한다.
+   syn: [contravention] | ant: []
+
+prison [ko] ipa=pʁizɔ̃ | meanings: 감옥[명사]
+   e1: Il a passé plusieurs années en **prison**. || 그는 여러 해 동안 **감옥**에 있었다.
+   e2: La **prison** est un lieu de privation de liberté. || **감옥**은 자유를 빼앗기는 장소이다.
+   e3: Elle visite souvent des projets pour les détenus en **prison**. || 그녀는 자주 **감옥**에 있는 재소자들을 위한 사업들을 방문한다.
+   syn: [cellule, cachot, centre de détention] | ant: []
+
+prisonnier [ko] ipa=pʁizɔnje | meanings: 죄수[명사] | 포로[명사]
+   e1: Le **prisonnier** a reçu une visite d'un avocat. || **죄수**가 변호사의 방문을 받았다.
+   e2: Les **prisonniers** de guerre ont été relâchés après le conflit. || 전쟁 **포로**들이 전쟁 후에 석방되었다.
+   e3: Un **prisonnier** a donné des nouvelles à sa famille. || 한 **죄수**가 가족에게 소식을 전했다.
+   syn: [détenu, captif] | ant: []
+
+crime [ko] ipa=kʁim | meanings: 범죄[명사]
+   e1: Il a été arrêté pour un **crime** grave. || 그는 중대한 **범죄**로 체포되었다.
+   e2: Le détective enquête sur le **crime**. || 형사는 **범죄**를 수사하고 있다.
+   e3: La société lutte contre le **crime** organisé. || 사회는 조직 **범죄**에 맞서 싸운다.
+   syn: [délit, infraction, méfait] | ant: []
+
+criminel [ko] ipa=kʁimi.nɛl | meanings: 범죄자[명사] | 범죄의[형용사]
+   e1: Le **criminel** a été arrêté hier soir. || 그 **범죄자**는 어젯밤에 체포되었다.
+   e2: Il a commis un acte **criminel** grave. || 그는 심각한 **범죄** 행위를 저질렀다.
+   syn: [délinquant, malfaiteur, criminel (adj.)] | ant: []
+
+délit [ko] ipa=de.li | meanings: 경범죄[명사]
+   e1: Il a été puni pour un **délit** mineur. || 그는 경미한 **경범죄**로 처벌받았다.
+   e2: Le tribunal traite plusieurs **délits** chaque jour. || 법원은 매일 여러 **경범죄**를 다룬다.
+   e3: Un **délit** peut entraîner une amende ou une peine légère. || **경범죄**는 벌금이나 가벼운 형벌을 초래할 수 있다.
+   syn: [infraction, contravention, méfait] | ant: []
+
+infraction [ko] ipa=ɛ̃fʁaksjɔ̃ | meanings: 법규 위반[명사]
+   e1: L'**infraction** a été constatée par la police. || 그 **위반**은 경찰에 의해 확인되었다.
+   e2: Il a commis une **infraction** au code de la route. || 그는 교통법규를 **위반**했다.
+   e3: Payer l'amende évite une **infraction** plus grave. || 벌금을 내면 더 큰 **법규 위반**을 피할 수 있다.
+   syn: [délit, contravention, violation] | ant: []
+
+loi pénale [ko] ipa=- | meanings: 형법[명사]
+   e1: La **loi pénale** protège les droits des citoyens. || **형법**은 시민의 권리를 보호합니다.
+   e2: La nouvelle **loi pénale** est stricte et claire. || 새로운 **형법**은 엄격하고 명확합니다.
+   syn: [] | ant: []
+
+code civil [ko] ipa=- | meanings: 민법[고유명사]
+   e1: Le **code civil** régit les contrats en France. || 프랑스에서 **민법**은 계약을 규율합니다.
+   e2: Nous avons étudié le **code civil** en droit civil. || 우리는 **민법**을 공부했습니다.
+   e3: Le professeur explique les articles du **code civil**. || 교수님이 **민법** 조항들을 설명합니다.
+   syn: [] | ant: []
+
+plainte [ko] ipa=plɛ̃t | meanings: 고소[명사] | 불평[명사]
+   e1: Elle a déposé une **plainte** au commissariat. || 그녀는 경찰서에 **고소**를 제기했다.
+   e2: Sa **plainte** concernant le bruit est justifiée. || 시끄러움에 대한 그의 **불평**은 정당하다.
+   e3: Il a écrit une **plainte** contre le voisin. || 그는 이웃에게 **고소**장을 썼다.
+   syn: [réclamation, doléance, mécontentement] | ant: []
+
+enquête [ko] ipa=ɑ̃.kɛt | meanings: 조사[명사] | 수사[명사]
+   e1: L'**enquête** sur la pollution avance bien. || 오염에 대한 **조사**가 잘 진행되고 있다.
+   e2: La police a lancé une **enquête** sérieuse. || 경찰이 진지한 **수사**를 시작했다.
+   e3: Cette **enquête** révèle des faits importants. || 이 **조사**는 중요한 사실들을 드러낸다.
+   syn: [investigation, analyse, examen] | ant: []
+
+enquêter [ko] ipa=ɑ̃.kɛ.te | meanings: 조사하다[동사] | 수사하다[동사]
+   e1: Le journaliste **enquête** sur le sujet délicat. || 그 기자는 민감한 주제를 **조사**합니다.
+   e2: La police **enquête** sur le vol dans la maison. || 경찰이 집의 도난 사건을 **수사**합니다.
+   syn: [examiner, investiguer, sonder] | ant: []
+
+arrestation [ko] ipa=aʁɛstasjɔ̃ | meanings: 체포[명사]
+   e1: L'**arrestation** a eu lieu ce matin. || 그 **체포**는 오늘 아침에 이루어졌습니다.
+   e2: L'**arrestation** s'est déroulée sans violence. || **체포**는 폭력 없이 진행되었습니다.
+   syn: [détention, captation] | ant: []
+
+interroger [ko] ipa=ɛ̃tɛʁɔʒe | meanings: 질문하다[동사] | 조사하다[동사]
+   e1: Le professeur **interroge** les élèves en classe. || 교수님이 수업 중에 학생들에게 **질문한다**.
+   e2: La police **interroge** le témoin du vol. || 경찰이 도난 사건의 목격자를 **조사한다**.
+   syn: [questionner, se renseigner, examiner] | ant: []
+
+interrogatoire [ko] ipa=ɛ̃tɛʁɔɡatwaʁ | meanings: 심문[명사]
+   e1: L'**interrogatoire** a duré plusieurs heures hier soir. || 그 **심문**은 어젯밤 여러 시간 동안 계속되었다.
+   e2: Après l'**interrogatoire**, il est retourné chez lui. || **심문** 후에 그는 집으로 돌아갔다.
+   e3: La police conduit un **interrogatoire** important aujourd'hui. || 경찰은 오늘 중요한 **심문**을 하고 있다.
+   syn: [examen, questionnement, enquête] | ant: []
+
+perquisition [ko] ipa=pɛʁ.kwi.zi.sjɔ̃ | meanings: 압수수색[명사]
+   e1: La police a commencé une **perquisition** ce matin. || 경찰이 오늘 아침 **압수수색**을 시작했다.
+   e2: Nous avons assisté à une **perquisition** dans le quartier tranquille. || 우리는 조용한 동네에서 **압수수색**을 목격했다.
+   e3: La **perquisition** a permis de trouver des indices importants. || **압수수색**을 통해 중요한 단서가 발견되었다.
+   syn: [fouille, inspection, raid] | ant: []
+
+saisie [ko] ipa=sɛzi | meanings: 압류[명사] | 입력[명사]
+   e1: La **saisie** des biens a été ordonnée par le juge. || 법원은 재산의 **압류**를 명령했다.
+   e2: La **saisie** des données est rapide sur ce logiciel. || 이 소프트웨어는 데이터 **입력**이 빠르다.
+   syn: [confiscation, recel, capture, enregistrement, entrée] | ant: []
+
+recours [ko] ipa=ʁə.kuʁ | meanings: 법적구제, 항소[명사] | 의지, 의뢰[명사]
+   e1: Ils ont fait un **recours** contre la décision. || 그들은 결정에 대해 **항소**를 제기했다.
+   e2: Elle cherche un **recours** dans cette situation difficile. || 그녀는 어려운 상황에서 **의지**를 찾고 있다.
+   syn: [appel, soutien, aide] | ant: []
+
+audience publique [ko] ipa=- | meanings: 공개 회의[표현] | 공공 청중[표현]
+   e1: L'**audience publique** a lieu dans la grande salle. || **공개 회의**가 큰 회의실에서 열립니다.
+   e2: L'**audience publique** a applaudi la prestation. || **공공 청중**이 공연에 박수를 보냈습니다.
+   e3: Nous avons assisté à une **audience publique** hier. || 우리는 어제 **공개 회의**에 참석했습니다.
+   syn: [] | ant: []
+
+huissier [ko] ipa=ɥisje | meanings: 법원 집행관[명사] | 회의 안내인[명사]
+   e1: Le **huissier** a déposé le document au tribunal. || 그 **법원 집행관**은 법원에 서류를 제출했다.
+   e2: Le **huissier** a accompagné les invités pendant la réunion. || 그 **회의 안내인**은 회의 내내 손님들을 안내했다.
+   syn: [sergent de justice, officier ministériel] | ant: []
+
+notaire [ko] ipa=nɔ.tɛʁ | meanings: 공증인[명사]
+   e1: Le **notaire** a signé le contrat aujourd'hui. || **공증인**이 오늘 계약서에 서명했다.
+   e2: Nous avons consulté un **notaire** pour la succession. || 우리는 유산 문제로 **공증인**과 상담했다.
+   syn: [officier public] | ant: []
+
+droits humains [ko] ipa=- | meanings: 인권[명사]
+   e1: Les **droits humains** sont essentiels pour la paix. || **인권**은 평화를 위해 필수적입니다.
+   e2: L'ONU protège les **droits humains** dans le monde. || 유엔은 전 세계에서 **인권**을 보호합니다.
+   e3: Les écoles enseignent le respect des **droits humains**. || 학교에서는 **인권** 존중을 가르칩니다.
+   syn: [droits de l'homme, droits fondamentaux] | ant: []
+
+dignité [ko] ipa=diɲite | meanings: 존엄[명사] | 위엄[명사]
+   e1: Il a conservé sa **dignité** malgré les difficultés. || 그는 어려움에도 불구하고 자신의 **존엄**을 지켰다.
+   e2: La reine dégage une grande **dignité** en public. || 그 여왕은 공개석상에서 큰 **위엄**을 풍긴다.
+   syn: [respectabilité, honneur, grandeur] | ant: []
+
+respect [ko] ipa=ʁɛspɛkt | meanings: 존경[명사] | 배려[명사]
+   e1: Elle montre un grand **respect** pour ses professeurs. || 그녀는 선생님들에 대해 큰 **존경**을 나타냅니다.
+   e2: Le **respect** des autres est essentiel en société. || 다른 사람들에 대한 **배려**는 사회에서 필수적입니다.
+   syn: [estime, considération, dévouement] | ant: []
+
+tolérance [ko] ipa=tɔ.lɛ.ʁɑ̃s | meanings: 관용[명사]
+   e1: La **tolérance** favorise la paix entre les peuples. || **관용**은 민족 간의 평화를 촉진합니다.
+   e2: Il faut cultiver la **tolérance** dans la société moderne. || 현대 사회에서는 **관용**을 기르는 것이 필요합니다.
+   e3: La **tolérance** permet de vivre en harmonie avec les autres. || **관용**은 다른 사람들과 조화롭게 사는 것을 가능하게 합니다.
+   syn: [acceptation, ouverture, patience] | ant: []
+
+intolérance [ko] ipa=ɛ̃tɔleʁɑ̃s | meanings: 편협[명사] | 내성 없음[명사]
+   e1: L'**intolérance** envers les différences pose problème. || 차이에 대한 **편협**은 문제를 일으킨다.
+   e2: Son **intolérance** au lactose est un défi quotidien. || 그의 **내성 없음**은 일상적인 도전이다.
+   e3: Nous devons combattre l'**intolérance** dans la société. || 우리는 사회에서 **편협**과 맞서 싸워야 한다.
+   syn: [intolérance religieuse, sectarisme, rigidité] | ant: [tolérance]
+
+censure [ko] ipa=sɑ̃.syʁ | meanings: 검열[명사] | 비난[명사]
+   e1: La **censure** interdit certains livres en bibliothèque. || 도서관에서 일부 책에 대한 **검열**이 이루어진다.
+   e2: La **censure** du film a surpris le public. || 그 영화에 대한 **검열**이 관객들을 놀라게 했다.
+   e3: La **censure** envers ses idées était injuste. || 그의 생각에 대한 **비난**은 부당했다.
+   syn: [contrôle, répression, critique] | ant: []
+
+pétition [ko] ipa=petisjɔ̃ | meanings: 청원서[명사] | 진정서[명사]
+   e1: Ils ont signé une **pétition** pour protéger le parc. || 그들은 공원을 보호하기 위해 **청원서**에 서명했다.
+   e2: La **pétition** a été envoyée au maire hier. || **청원서**는 어제 시장에게 전달되었다.
+   e3: La **pétition** exprimait un désir sincère de changement. || **진정서**는 진심 어린 변화를 바라는 뜻을 담고 있었다.
+   syn: [requête, appel, demande] | ant: []
+
+activiste [ko] ipa=aktivist | meanings: 운동가[명사]
+   e1: Cette **activiste** lutte pour l'environnement. || 이 **활동가**는 환경을 위해 싸워요.
+   e2: L'**activiste** organise une manifestation pacifique. || **활동가**가 평화 시위를 조직했어요.
+   syn: [militant, manifestant, engagé] | ant: []
+
+militant [ko] ipa=militɑ̃ | meanings: 투사[명사] | 싸우는[형용사]
+   e1: Le **militant** a assisté à la réunion locale. || 그 **투사**는 지역 회의에 참석했다.
+   e2: Elle est une **militante** pour les droits de l'homme. || 그녀는 인권을 위해 **싸우는** 사람이다.
+   syn: [activiste, combattant, engagé] | ant: []
+
+mouvement [ko] ipa=muvmɑ̃ | meanings: 움직임[명사] | 운동[명사]
+   e1: Le **mouvement** des feuilles est calme aujourd'hui. || 오늘은 **움직임**이 조용하다.
+   e2: Le **mouvement** pour la paix gagne du soutien. || 평화를 위한 **운동**이 지지를 얻고 있다.
+   syn: [action, déplacement, activité, révolution, agitation] | ant: []
+
+cause [ko] ipa=koz | meanings: 원인[명사] | 이유[명사]
+   e1: La pluie est la **cause** de la fête annulée. || 비는 파티가 취소된 **원인**입니다.
+   e2: Il a expliqué la **cause** de son retard. || 그는 그의 지각의 **이유**를 설명했습니다.
+   e3: La pollution est une mauvaise **cause** pour la santé. || 오염은 건강에 해로운 **원인**입니다.
+   syn: [motif, raisons, origine] | ant: []
+
+solidarité [ko] ipa=sɔ.li.da.ʁi.te | meanings: 연대[명사]
+   e1: La **solidarité** entre voisins est importante. || 이웃 간의 **연대**는 중요합니다.
+   e2: Ils ont montré leur **solidarité** après la tempête. || 그들은 태풍 후에 **연대**를 보여주었습니다.
+   syn: [entraide, fraternité, camaraderie] | ant: []
+
+résistance [ko] ipa=ʁe.zis.tɑ̃s | meanings: 저항[명사] | 레지스탕스, 반체제 운동[고유명사]
+   e1: La **résistance** s'organise contre la pluie forte. || 강한 비에 대한 **저항**이 조직된다.
+   e2: La **résistance** a protégé la liberté durant la guerre. || 전쟁 동안 **레지스탕스**가 자유를 보호했다.
+   e3: La peinture offre une bonne **résistance** à l'eau. || 페인트는 물에 대한 좋은 **저항**성을 제공한다.
+   syn: [opposition, refus, insoumission, défi] | ant: []
+
+revendiquer [ko] ipa=ʁəvɑ̃dike | meanings: 요구하다[동사] | 주장하다[동사]
+   e1: Ils **revendiquent** leurs droits au travail. || 그들은 노동에 대한 권리를 **요구한다**.
+   e2: Elle **revendique** la paternité de cette invention. || 그녀는 이 발명의 저작권을 **주장한다**.
+   syn: [exiger, demander, affirmer, prétendre] | ant: []
+
+dénoncer [ko] ipa=denɔ̃se | meanings: 고발하다[동사] | 비난하다[동사]
+   e1: Il a **dénoncé** le vol à la police. || 그는 경찰에 **고발했다**.
+   e2: Elle a **dénoncé** les mauvaises conditions de travail. || 그녀는 나쁜 노동 환경을 **비난했다**.
+   syn: [accuser, révéler, critiquer] | ant: []
+
+protester [ko] ipa=pʁɔ.tɛs.te | meanings: 항의하다[동사] | 시위하다[동사]
+   e1: Ils **protestent** contre la décision injuste. || 그들은 불공정한 결정에 **항의한다**.
+   e2: Le groupe **proteste** dans la rue pour leurs droits. || 그 그룹은 그들의 권리를 위해 거리에서 **시위한다**.
+   syn: [se plaindre, manifester, revendiquer] | ant: []
+
+critiquer [ko] ipa=kʁitikɛ | meanings: 비평하다[동사] | 비난하다[동사]
+   e1: Il faut **critiquer** ce livre avec attention. || 이 책을 주의 깊게 **비평해야** 한다.
+   e2: Elle aime **critiquer** les décisions injustes. || 그녀는 불공평한 결정들을 **비난하는** 것을 좋아한다.
+   e3: Les spécialistes vont **critiquer** cette œuvre d'art. || 전문가들이 이 예술 작품을 **비평할** 것이다.
+   syn: [évaluer, analyser, blâmer, reprocher] | ant: []
+
+défendre [ko] ipa=defɑ̃dʁ | meanings: 방어하다[동사] | 금지하다[동사]
+   e1: Il faut **défendre** les droits des enfants. || 아이들의 권리를 **방어**해야 합니다.
+   e2: Le parc est **défendu** aux visiteurs la nuit. || 공원은 밤에 방문객에게 **금지**되어 있습니다.
+   e3: Elle **défend** son équipe avec courage. || 그녀는 용감하게 자신의 팀을 **방어**합니다.
+   syn: [protéger, soutenir, interdire] | ant: []
+
+attaquer [ko] ipa=ata.ke | meanings: 공격하다[동사] | 시작하다[동사]
+   e1: Le chat a **attaqué** le jouet avec énergie. || 고양이가 에너지를 가지고 장난감을 **공격했다**.
+   e2: Ils vont **attaquer** le projet demain matin. || 그들은 내일 아침에 프로젝트를 **시작할** 것이다.
+   e3: L'équipe de football a **attaqué** dès le début du match. || 축구 팀은 경기 시작부터 **공격했다**.
+   syn: [agresser, assiéger, lancer] | ant: []
+
+plaider [ko] ipa=plɛdje | meanings: 변호하다, 변론하다[동사] | 탄원하다, 간청하다[동사]
+   e1: L'avocat **plaide** la cause de son client. || 변호사가 그의 의뢰인의 사건을 **변론한다**.
+   e2: Elle **plaide** pour une meilleure éducation. || 그녀는 더 나은 교육을 위해 **간청한다**.
+   e3: Le juge écoute quand on **plaide** le cas. || 판사는 사건을 **변론할** 때 듣는다.
+   syn: [défendre, représenter, argumenter, solliciter, supplier] | ant: []
+
+soutenir [ko] ipa=sutəniʁ | meanings: 지지하다[동사] | 받치다[동사]
+   e1: Je **soutiens** toujours mes amis dans les moments difficiles. || 나는 어려운 시기에 항상 친구들을 **지지한다**.
+   e2: Ce pilier **soutient** la vieille maison avec force. || 이 기둥은 오래된 집을 힘껏 **받친다**.
+   e3: Nous devons **soutenir** les initiatives écologiques ensemble. || 우리는 환경 보호 활동을 함께 **지지해야** 한다.
+   syn: [appuyer, encourager, maintenir] | ant: []
+
+égalité [ko] ipa=egalite | meanings: 평등[명사]
+   e1: Ils militent pour **l'égalité** des droits. || 그들은 권리의 **평등**을 위해 싸웁니다.
+   e2: Nous croyons en **l'égalité** devant la loi. || 우리는 법 앞의 **평등**을 믿습니다.
+   e3: L'école enseigne l'importance de **l'égalité**. || 학교는 **평등**의 중요성을 가르칩니다.
+   syn: [parité, équité, impartialité] | ant: []
+
+liberté d'expression [ko] ipa=- | meanings: 표현의 자유[표현]
+   e1: La **liberté d'expression** est essentielle dans une démocratie. || 민주주의에서 **표현의 자유**는 필수적이다.
+   e2: Les médias protègent la **liberté d'expression**. || 언론은 **표현의 자유**를 보호한다.
+   e3: La **liberté d'expression** permet de partager des idées. || **표현의 자유**는 아이디어를 나누게 해준다.
+   syn: [] | ant: []
+
+liberté de presse [ko] ipa=- | meanings: 언론의 자유[표현]
+   e1: La **liberté de presse** est essentielle dans une démocratie. || **언론의 자유**는 민주주의에서 필수적입니다.
+   e2: La **liberté de presse** protège les journalistes. || **언론의 자유**는 기자들을 보호합니다.
+   e3: Nous devons défendre la **liberté de presse** chaque jour. || 우리는 매일 **언론의 자유**를 지켜야 합니다.
+   syn: [] | ant: []
+
+discrimination [ko] ipa=diskʁiminasjɔ̃ | meanings: 차별[명사]
+   e1: La société lutte contre la **discrimination** raciale. || 사회는 인종 **차별**에 맞서 싸웁니다.
+   e2: Il faut dénoncer la **discrimination** au travail. || 일터에서의 **차별**을 고발해야 합니다.
+   e3: La loi vise à éliminer toute forme de **discrimination**. || 법은 모든 형태의 **차별**을 제거하는 것을 목표로 합니다.
+   syn: [injustice, préjugé, intolérance] | ant: []
+
+racisme [ko] ipa=ʁasisme | meanings: 인종차별[명사]
+   e1: Le **racisme** divise souvent les communautés. || **인종차별**은 종종 공동체를 분열시킵니다.
+   e2: Elle lutte contre le **racisme** chaque jour. || 그녀는 매일 **인종차별**에 맞서 싸웁니다.
+   e3: Le **racisme** est un problème mondial majeur. || **인종차별**은 전 세계적인 중요한 문제입니다.
+   syn: [discrimination raciale, intolérance raciale] | ant: []
+
+xénophobie [ko] ipa=ɡze.nɔ.fɔ.bi | meanings: 외국인 혐오[명사]
+   e1: La **xénophobie** cause souvent des conflits sociaux. || **외국인 혐오**는 종종 사회 갈등을 유발한다.
+   e2: Il faut lutter contre la **xénophobie** pour la paix. || 평화를 위해서는 **외국인 혐오**와 싸워야 한다.
+   e3: La campagne vise à réduire la **xénophobie**. || 그 캠페인은 **외국인 혐오**를 줄이는 것을 목표로 한다.
+   syn: [intolérance, racisme, discrimination] | ant: []
+
+homophobie [ko] ipa=ɔmɔfɔbi | meanings: 동성애 혐오[명사]
+   e1: La société lutte contre **l'homophobie** chaque jour. || 사회는 매일 **동성애 혐오**와 싸웁니다.
+   e2: Nous devons éduquer pour éliminer **l'homophobie**. || 우리는 **동성애 혐오**를 없애기 위해 교육해야 합니다.
+   syn: [intolérance envers les homosexuels, préjugé contre les gays, discrimination sexuelle] | ant: []
+
+sexisme [ko] ipa=sɛksism | meanings: 성차별[명사]
+   e1: Le **sexisme** affecte souvent les opportunités professionnelles des femmes. || **성차별**은 종종 여성의 직업 기회에 영향을 미칩니다.
+   e2: Nous devons lutter contre le **sexisme** dans notre société. || 우리는 우리 사회의 **성차별**에 맞서 싸워야 합니다.
+   e3: Le livre explique comment le **sexisme** persiste dans la culture populaire. || 그 책은 대중문화에서 **성차별**이 지속되는 방식을 설명합니다.
+   syn: [discrimination sexuelle, privilège masculin] | ant: []
+
+féminisme [ko] ipa=feminism | meanings: 여성 해방 운동[명사]
+   e1: Le **féminisme** lutte pour les droits des femmes. || **페미니즘은** 여성의 권리를 위해 싸웁니다.
+   e2: Le **féminisme** a changé la société moderne. || **페미니즘은** 현대 사회를 변화시켰습니다.
+   syn: [mouvement féministe, droits des femmes, égalité des sexes] | ant: []
+
+harcèlement [ko] ipa=aʁsələmɑ̃ | meanings: 괴롭힘[명사]
+   e1: Le **harcèlement** au travail est un problème sérieux. || 직장에서의 **괴롭힘**은 심각한 문제입니다.
+   e2: Elle a parlé du **harcèlement** qu'elle a subi à l'école. || 그녀는 학교에서 겪은 **괴롭힘**에 대해 이야기했습니다.
+   e3: Le **harcèlement** en ligne peut nuire au bien-être mental. || 온라인 **괴롭힘**은 정신 건강에 해로울 수 있습니다.
+   syn: [intimidation, persécution, exploitation] | ant: []
+
+agression [ko] ipa=aɡʁɛsjɔ̃ | meanings: 공격[명사] | 침략[명사]
+   e1: L'**agression** a causé une blessure légère. || 그 **공격**은 가벼운 부상을 일으켰다.
+   e2: Le pays a condamné l'**agression** étrangère. || 그 나라는 외국의 **침략**을 비난했다.
+   syn: [attaque, violence, assaut] | ant: [défense, protection]
+
+victime [ko] ipa=vik.tim | meanings: 희생자[명사]
+   e1: La **victime** a reçu de l'aide rapidement. || **희생자**는 빠르게 도움을 받았다.
+   e2: Cette **victime** mérite notre compassion. || 이 **희생자**는 우리의 동정을 받을 만하다.
+   syn: [souffre-douleur, blessé, cas] | ant: []
+
+agresseur [ko] ipa=aɡʁɛsœʁ | meanings: 공격자[명사]
+   e1: L'**agresseur** a été arrêté par la police rapidement. || 그 **공격자**는 경찰에 의해 신속하게 체포되었다.
+   e2: La victime a pu identifier clairement l'**agresseur**. || 피해자는 분명하게 **공격자**를 식별할 수 있었다.
+   syn: [assaillant, attaquant] | ant: []
+
+économie [ko] ipa=ekɔnɔmi | meanings: 경제[명사] | 절약[명사]
+   e1: L'**économie** mondiale est en croissance. || 세계 **경제**가 성장하고 있다.
+   e2: Ils pratiquent l'**économie** d'énergie à la maison. || 그들은 집에서 에너지 **절약**을 실천한다.
+   e3: L'**économie** locale bénéficie du tourisme. || 지역 **경제**는 관광산업으로 이익을 본다.
+   syn: [finance, gestion, frugalité] | ant: []
+
+économique [ko] ipa=ekɔnɔmik | meanings: 경제의[형용사] | 경제학[명사]
+   e1: La situation **économique** du pays s'améliore. || 그 나라의 **경제적** 상황이 개선되고 있어요.
+   e2: Il étudie l'**économique** à l'université. || 그는 대학교에서 **경제학**을 공부해요.
+   syn: [financier, monétaire] | ant: []
+
+capitalisme [ko] ipa=kapitalism | meanings: 자본주의[명사]
+   e1: Le **capitalisme** encourage la libre entreprise. || **자본주의**는 자유 기업을 장려합니다.
+   e2: Le débat sur le **capitalisme** continue dans le monde entier. || 전 세계에서 **자본주의**에 대한 논쟁이 계속됩니다.
+   e3: Le **capitalisme** a influencé l’économie moderne. || **자본주의**는 현대 경제에 영향을 미쳤습니다.
+   syn: [économie de marché, libéralisme économique] | ant: []
+
+socialisme [ko] ipa=sɔ.sja.lism | meanings: 사회주의[명사]
+   e1: Le **socialisme** promeut la justice sociale. || **사회주의**는 사회 정의를 촉진합니다.
+   e2: Ils discutent du **socialisme** lors du débat politique. || 그들은 정치 토론에서 **사회주의**에 대해 논의합니다.
+   syn: [marxisme, communisme, progressisme] | ant: []
+
+libéralisme [ko] ipa=libeʁalism | meanings: 자유주의[명사]
+   e1: Le **libéralisme** valorise la liberté individuelle. || **자유주의**는 개인의 자유를 중시한다.
+   e2: Le débat sur le **libéralisme** économique continue. || **자유주의** 경제에 관한 논쟁이 계속된다.
+   syn: [libéralité, libéralisme économique, libéralisme politique] | ant: []
+
+concurrence [ko] ipa=kɔ̃.ky.ʁɑ̃s | meanings: 경쟁[명사] | 동시 발생[명사]
+   e1: La **concurrence** entre les entreprises est forte. || 기업들 사이의 **경쟁**이 치열하다.
+   e2: Il y a une **concurrence** de projets lors de la présentation. || 발표할 때 프로젝트들이 **동시에** 발생한다.
+   syn: [rivalité, compétition, conflit] | ant: []
+
+monopole [ko] ipa=mɔnɔpɔl | meanings: 독점[명사]
+   e1: Cette entreprise a un **monopole** sur le marché. || 이 기업은 시장에서 **독점**을 하고 있다.
+   e2: Le gouvernement régule le **monopole** des services publics. || 정부는 공공 서비스의 **독점**을 규제한다.
+   e3: Le **monopole** peut limiter la concurrence et l'innovation. || **독점**은 경쟁과 혁신을 제한할 수 있다.
+   syn: [exclusivité, souveraineté] | ant: []
+
+inflation [ko] ipa=ɛ̃fla.sjɔ̃ | meanings: 물가상승[명사]
+   e1: L'**inflation** augmente le coût de la vie chaque année. || **물가상승**은 매년 생활비를 올린다.
+   e2: Les salaires doivent suivre l'**inflation** pour rester équitables. || 임금은 공정성을 유지하기 위해 **물가상승**을 따라야 한다.
+   e3: L'**inflation** modère le pouvoir d'achat des consommateurs. || **물가상승**은 소비자의 구매력을 줄인다.
+   syn: [hausse des prix, augmentation des prix] | ant: [déflation]
+
+déflation [ko] ipa=deflasjɔ̃ | meanings: 통화수축[명사] | 가격하락[명사]
+   e1: La **déflation** affecte la croissance économique. || **통화수축**은 경제 성장에 영향을 준다.
+   e2: La **déflation** conduit à une baisse des prix des biens. || **가격하락**은 상품 가격 하락으로 이어진다.
+   syn: [désinflation, récession monétaire, baisse des prix] | ant: [inflation]
+
+récession [ko] ipa=ʁesesjɔ̃ | meanings: 경기 침체[명사] | 후퇴[명사]
+   e1: La **récession** dure depuis trois trimestres. || **경기 침체**가 3분기째 계속되고 있다.
+   e2: Une **récession** du marché a surpris les investisseurs. || 시장의 **후퇴**가 투자자들을 놀라게 했다.
+   syn: [dépression économique, ralentissement] | ant: []
+
+croissance [ko] ipa=kʁwasɑ̃s | meanings: 성장[명사] | 증가[명사]
+   e1: La **croissance** des enfants est importante. || 아이들의 **성장**은 중요합니다.
+   e2: La **croissance** économique progresse cette année. || 경제 **성장**이 올해 진전되고 있습니다.
+   e3: La **croissance** de la plante est rapide au printemps. || 식물의 **성장**은 봄에 빠릅니다.
+   syn: [développement, essor, augmentation] | ant: [décroissance, récession]
+
+développement [ko] ipa=de.vlɔp.mɑ̃ | meanings: 발전[명사] | 개발[명사]
+   e1: Le **développement** durable est important pour la planète. || 지속 가능한 **발전**은 지구에 중요합니다.
+   e2: Le **développement** de cette technologie est rapide. || 이 기술의 **개발**이 빠릅니다.
+   syn: [croissance, amorçage, évolution] | ant: []
+
+développer [ko] ipa=de.vɛ.lɔ.pe | meanings: 발전시키다[동사] | 현상하다[동사]
+   e1: L'entreprise veut **développer** ses activités internationales. || 그 회사는 국제적 활동을 **발전시키고** 싶어 한다.
+   e2: Le photographe va **développer** ses photos en laboratoire. || 그 사진작가는 실험실에서 사진을 **현상할** 것이다.
+   e3: Nous devons **développer** nos compétences chaque jour. || 우리는 매일 우리의 능력을 **발전시켜야** 한다.
+   syn: [améliorer, accroître, élargir] | ant: []
+
+produit intérieur brut [ko] ipa=- | meanings: 국내 총생산[명사]
+   e1: Le **produit intérieur brut** mesure la richesse d'un pays. || **국내 총생산**은 한 국가의 부를 측정합니다.
+   e2: Le **produit intérieur brut** augmente avec la croissance économique. || **국내 총생산**은 경제 성장과 함께 증가합니다.
+   e3: Le **produit intérieur brut** est un indicateur économique important. || **국내 총생산**은 중요한 경제 지표입니다.
+   syn: [] | ant: []
+
+production [ko] ipa=pʁɔ.dyk.sjɔ̃ | meanings: 생산[명사] | 제작[명사]
+   e1: La **production** de fruits a augmenté cette année. || 올해 **생산**이 증가했다.
+   e2: La **production** du film a pris plusieurs mois. || 그 영화의 **제작**에는 여러 달이 걸렸다.
+   syn: [fabrication, création, élaboration] | ant: []
+
+produire [ko] ipa=pʁɔ.dɥiʁ | meanings: 생산하다[동사] | 만들어 내다[동사]
+   e1: Cette usine **produit** beaucoup de voitures chaque année. || 이 공장은 매년 많은 차를 **생산**합니다.
+   e2: Elle **produit** des idées innovantes pour le projet. || 그녀는 프로젝트를 위해 혁신적인 아이디어를 **만듭니다**.
+   syn: [fabriquer, élaborer, engendrer] | ant: []
+
+consommer [ko] ipa=kɔ̃syme | meanings: 소비하다[동사] | 섭취하다[동사]
+   e1: Nous **consommons** beaucoup d'énergie en hiver. || 우리는 겨울에 많은 에너지를 **소비합니다**.
+   e2: Il faut **consommer** des fruits chaque jour. || 매일 과일을 **섭취해야** 합니다.
+   e3: Les voitures **consomment** de l'essence pour rouler. || 자동차는 달리기 위해 휘발유를 **소비합니다**.
+   syn: [utiliser, dépenser, absorber] | ant: []
+
+consommation [ko] ipa=kɔ̃sɔmasjɔ̃ | meanings: 소비[명사] | 소모[명사]
+   e1: La **consommation** d'eau a augmenté cet été. || 이 여름에 **소비**가 증가했다.
+   e2: La **consommation** d'électricité varie selon la saison. || 전기의 **소비**는 계절에 따라 다르다.
+   e3: La **consommation** de carburant a diminué grâce aux voitures hybrides. || 하이브리드 자동차 덕분에 연료 **소모**가 줄었다.
+   syn: [utilisation, emploi, usage] | ant: []
+
+industrie [ko] ipa=ɛ̃dystʁi | meanings: 산업[명사] | 공업[명사]
+   e1: L'**industrie** automobile crée de nombreux emplois. || **산업** 자동차는 많은 일자리를 만듭니다.
+   e2: L'**industrie** textile est importante dans cette région. || 이 지역에서 **공업** 섬유 산업이 중요합니다.
+   e3: L'**industrie** alimentaire connaît une croissance rapide. || **산업** 식품 산업은 빠르게 성장하고 있습니다.
+   syn: [manufacture, secteur, business] | ant: []
+
+industriel [ko] ipa=ɛ̃dystʁijɛl | meanings: 산업의[형용사] | 산업 노동자[명사]
+   e1: Le quartier **industriel** est très actif aujourd'hui. || 오늘 **산업** 구역이 매우 활발합니다.
+   e2: Cet **industriel** travaille dans une grande usine. || 이 **산업 노동자**는 큰 공장에서 일합니다.
+   syn: [manufacturier, usinal, ouvrier] | ant: []
+
+commerce [ko] ipa=kɔmɛʁs | meanings: 무역, 상업[명사] | 상점, 가게[명사]
+   e1: Le **commerce** international est en croissance. || 국제 **무역**이 성장하고 있다.
+   e2: J'ai ouvert un petit **commerce** en ville. || 나는 시내에 작은 **가게**를 열었다.
+   e3: Le **commerce** local soutient l'économie. || 지역 **상업**이 경제를 지지한다.
+   syn: [affaires, échange, boutique, magasin] | ant: []
+
+commerçant [ko] ipa=kɔmɛʁsɑ̃ | meanings: 상인[명사] | 상업의[형용사]
+   e1: Le **commerçant** vend des fruits frais. || **상인**이 신선한 과일을 팝니다.
+   e2: Cette rue est pleine d'activités **commerçantes**. || 이 거리는 **상업적인** 활동으로 가득합니다.
+   syn: [vendeur, marchand] | ant: []
+
+PME [ko] ipa=pe ɛm ə | meanings: 중소기업[명사]
+   e1: La **PME** a augmenté son chiffre d'affaires cette année. || 이 **중소기업**은 올해 매출을 늘렸다.
+   e2: Cette **PME** emploie 50 personnes dans la région. || 이 **중소기업**은 지역에서 50명을 고용하고 있다.
+   syn: [entreprise moyenne, petite entreprise] | ant: []
+
+multinationale [ko] ipa=mylti.nasjɔ.nal | meanings: 다국적기업[명사]
+   e1: Cette **multinationale** investit dans plusieurs pays. || 이 **다국적기업**은 여러 나라에 투자합니다.
+   e2: La **multinationale** emploie des milliers de personnes. || 그 **다국적기업**은 수천 명을 고용합니다.
+   e3: Cette **multinationale** produit des biens électroniques. || 이 **다국적기업**은 전자 제품을 생산합니다.
+   syn: [entreprise internationale, société multinationale] | ant: []
+
+actionnaire [ko] ipa=aksjɔnɛʁ | meanings: 주주[명사]
+   e1: L'**actionnaire** a assisté à l'assemblée générale. || **주주**가 총회에 참석했다.
+   e2: Chaque **actionnaire** reçoit un dividende annuel. || 각 **주주**는 연간 배당금을 받는다.
+   e3: L'**actionnaire** a décidé de vendre ses parts. || **주주**가 지분을 매각하기로 결정했다.
+   syn: [investisseur, porteur d'actions] | ant: []
+
+fusion [ko] ipa=fy.zjɔ̃ | meanings: 융합[명사] | 합병[명사]
+   e1: La **fusion** des couleurs crée de belles nuances. || 색깔의 **융합**이 아름다운 색조를 만듭니다.
+   e2: La **fusion** des deux entreprises a été officielle hier. || 두 회사의 **합병**이 어제 공식적으로 이루어졌습니다.
+   e3: La **fusion** nucléaire produit une grande quantité d'énergie. || 핵**융합**은 많은 양의 에너지를 생성합니다.
+   syn: [union, combinaison, mélange] | ant: []
+
+acquisition [ko] ipa=akisizjɔ̃ | meanings: 획득[명사] | 인수[명사]
+   e1: L'**acquisition** de compétences est essentielle. || 능력의 **획득**은 필수적입니다.
+   e2: L'**acquisition** de cette entreprise a été rapide. || 이 기업의 **인수**는 빠르게 이루어졌습니다.
+   syn: [obtention, achat, prise] | ant: []
+
+faillite [ko] ipa=fajit | meanings: 파산[명사]
+   e1: L'entreprise a déclaré **faillite** hier. || 그 회사는 어제 **파산**을 선언했습니다.
+   e2: La **faillite** a surpris tous les employés. || **파산**이 모든 직원들을 놀라게 했습니다.
+   e3: La banque redoute une **faillite** massive. || 은행은 대규모 **파산**을 우려하고 있습니다.
+   syn: [banqueroute, dépôt de bilan, insolvabilité] | ant: []
+
+employeur [ko] ipa=ɑ̃plwœʁ | meanings: 사용자[명사]
+   e1: L'**employeur** a organisé une réunion lundi. || **사용자**는 월요일에 회의를 조직했습니다.
+   e2: Chaque **employeur** doit respecter le droit du travail. || 모든 **사용자**는 노동법을 준수해야 합니다.
+   syn: [patron, entrepreneur, chef d'entreprise] | ant: []
+
+salarié [ko] ipa=salɑʁje | meanings: 근로자[명사] | 월급쟁이[명사]
+   e1: Le **salarié** a reçu une formation professionnelle. || **근로자**가 직업 교육을 받았어요.
+   e2: Ce **salarié** travaille dans une grande entreprise. || 이 **월급쟁이**는 큰 회사에서 일해요.
+   syn: [employé, travailleur, collaborateur] | ant: []
+
+ouvrier [ko] ipa=uvʁje | meanings: 노동자[명사]
+   e1: L'**ouvrier** termine son travail à l'heure. || **노동자**가 정시에 일을 끝냅니다.
+   e2: Les **ouvriers** fabriquent des meubles dans l'usine. || 공장에서는 **노동자**들이 가구를 만듭니다.
+   e3: Un **ouvrier** travaille avec soin dans le jardin. || 한 **노동자**가 정성스럽게 정원에서 일합니다.
+   syn: [travailleur, employé, manœuvre] | ant: []
+
+fonctionnaire [ko] ipa=fɔ̃ksjɔnɛʁ | meanings: 공무원[명사]
+   e1: Le **fonctionnaire** travaille au ministère. || **공무원**은 부처에서 일합니다.
+   e2: Chaque **fonctionnaire** a des responsabilités précises. || 각 **공무원**은 구체적인 책임이 있습니다.
+   syn: [agent public, employé de l'État, fonctionnaire d'État] | ant: []
+
+embaucher [ko] ipa=ɑ̃boʃe | meanings: 고용하다[동사]
+   e1: L'entreprise va **embaucher** de nouveaux employés. || 그 회사는 새로운 직원을 **고용**할 것이다.
+   e2: Ils veulent **embaucher** un designer talentueux. || 그들은 재능 있는 디자이너를 **고용**하고 싶어한다.
+   e3: Nous avons décidé d'**embaucher** trois stagiaires cet été. || 우리는 이번 여름에 세 명의 인턴을 **고용**하기로 결정했다.
+   syn: [recruter, engager, contracter] | ant: []
+
+licencier [ko] ipa=li.sɑ̃.sje | meanings: 해고하다[동사]
+   e1: L'entreprise a décidé de **licencier** plusieurs employés. || 회사는 여러 직원을 **해고**하기로 결정했다.
+   e2: Il a été **licencié** après la restructuration. || 그는 구조조정 후에 **해고**되었다.
+   syn: [remercier, mettre à la porte, congédier] | ant: []
+
+licenciement [ko] ipa=lisɑ̃sjamɑ̃ | meanings: 해고[명사] | 면직[명사]
+   e1: Le salarié a reçu un **licenciement** pour raisons économiques. || 그 직원은 경제적 사유로 **해고**를 받았다.
+   e2: Le **licenciement** de l'employé a été confirmé hier. || 그 직원의 **면직**이 어제 확정되었다.
+   syn: [renvoi, mise à pied] | ant: []
+
+démissionner [ko] ipa=demisjɔne | meanings: 사임하다, 사직하다[동사]
+   e1: Il a décidé de **démissionner** de son poste. || 그는 그의 직위에서 **사임하기로** 결정했다.
+   e2: Elle veut **démissionner** pour poursuivre ses rêves. || 그녀는 꿈을 이루기 위해 **사직하고** 싶어한다.
+   e3: Mon collègue va **démissionner** bientôt. || 내 동료가 곧 **사임할** 것이다.
+   syn: [quitter, abandonner, renoncer] | ant: []
+
+démission [ko] ipa=demisjɔ̃ | meanings: 사직[명사] | 사임[명사]
+   e1: La **démission** du directeur a surpris tout le monde. || 사장의 **사직**에 모두가 놀랐어요.
+   e2: Elle a envoyé sa **démission** hier soir. || 그녀는 어젯밤에 **사임**을 보냈어요.
+   syn: [renonciation, abandon, retraite] | ant: []
+
+négocier [ko] ipa=neɡɔsje | meanings: 협상하다, 교섭하다[동사]
+   e1: Ils **négocient** un contrat important. || 그들은 중요한 계약을 **협상하고** 있다.
+   e2: Nous devons **négocier** pour un meilleur prix. || 우리는 더 나은 가격을 위해 **교섭해야** 한다.
+   syn: [marchander, barguigner, traiter] | ant: []
+
+impôt [ko] ipa=ɛ̃po | meanings: 세금, 조세[명사]
+   e1: L'**impôt** sur le revenu augmente cette année. || 올해는 소득 **세금**이 오른다.
+   e2: Ils paient leur **impôt** chaque mois avec sérieux. || 그들은 매달 성실하게 **세금**을 낸다.
+   e3: L'**impôt** sert à financer les services publics. || **세금**은 공공 서비스를 지원하는 데 사용된다.
+   syn: [taxe, prélèvement, contribution] | ant: []
+
+impôts [ko] ipa=ɛ̃po | meanings: 세금[명사]
+   e1: Les **impôts** financent les écoles publiques. || **세금**은 공립학교를 지원해요.
+   e2: Chaque citoyen doit payer ses **impôts**. || 모든 시민은 자신의 **세금**을 내야 해요.
+   e3: Les **impôts** aident à construire des routes. || **세금**은 도로 건설에 도움이 돼요.
+   syn: [taxes, contributions, taxation] | ant: []
+
+fiscalité [ko] ipa=fiskalite | meanings: 조세제도[명사]
+   e1: La **fiscalité** influence le budget de la ville. || **조세제도**는 도시 예산에 영향을 줍니다.
+   e2: Les règles de la **fiscalité** changent souvent. || **조세제도**의 규칙은 자주 바뀝니다.
+   syn: [impôts, taxation, finances publiques] | ant: []
+
+taxe [ko] ipa=taks | meanings: 세금, 과세[명사]
+   e1: La **taxe** sur les produits est augmentée. || 제품에 대한 **세금**이 인상되었다.
+   e2: Il paie sa **taxe** chaque année. || 그는 매년 **세금**을 낸다.
+   e3: La **taxe** locale finance les écoles. || 지방**세**는 학교를 지원한다.
+   syn: [impôt, droit, prélèvement] | ant: []
+
+TVA [ko] ipa=te ve a | meanings: 부가가치세[명사]
+   e1: La **TVA** augmente le prix final des produits. || **부가가치세**는 상품의 최종 가격을 올린다.
+   e2: Le commerçant doit déclarer la **TVA** chaque mois. || 상인은 매달 **부가가치세**를 신고해야 한다.
+   e3: La réduction de la **TVA** aide les petits commerces. || **부가가치세** 인하는 소규모 상점을 돕는다.
+   syn: [] | ant: []
+
+déficit [ko] ipa=defisit | meanings: 적자[명사]
+   e1: Le budget affiche un **déficit** important cette année. || 예산이 올해 큰 **적자**를 보였다.
+   e2: L'entreprise lutte contre un **déficit** financier constant. || 회사가 끊임없는 재정 **적자**와 싸우고 있다.
+   e3: La réforme vise à réduire le **déficit** public. || 개혁은 공공 **적자**를 줄이는 것을 목표로 한다.
+   syn: [déficience, pénurie, manque] | ant: [excédent]
+
+crédit [ko] ipa=kʁedi | meanings: 신용[명사] | 대출[명사]
+   e1: Il a un **crédit** excellent auprès des banques. || 그는 은행들로부터 좋은 **신용**을 가지고 있어요.
+   e2: Nous avons contracté un **crédit** pour acheter la maison. || 우리는 집을 사기 위해 **대출**을 받았어요.
+   syn: [confiance, avance, prêt] | ant: []
+
+emprunt [ko] ipa=ɑ̃pʁœ̃ | meanings: 차용, 대출[명사] | 차용어, 외래어[명사]
+   e1: L'**emprunt** a été remboursé en cinq ans. || 그 **차용**은 5년 안에 상환되었다.
+   e2: Ce mot est un **emprunt** à l'anglais. || 이 단어는 영어에서 온 **차용어**이다.
+   e3: Ils ont contracté un **emprunt** pour acheter une maison. || 그들은 집을 사기 위해 **대출**을 했다.
+   syn: [prêt, loan, emprunt bancaire, emprunt immobilier, emprunt d'argent] | ant: []
+
+emprunter [ko] ipa=ɑ̃.pʁɔ̃.te | meanings: 빌리다[동사] | 차용하다[동사]
+   e1: Je vais **emprunter** un livre à la bibliothèque. || 나는 도서관에서 **빌릴** 거예요.
+   e2: Il a **emprunté** une idée d'un autre auteur. || 그는 다른 작가에게서 **차용했다**.
+   syn: [prendre, d'emprunter] | ant: []
+
+investir [ko] ipa=ɛ̃vɛstiʁ | meanings: 투자하다[동사] | 임명하다[동사]
+   e1: Il a décidé d'**investir** dans une nouvelle entreprise. || 그는 새 사업에 **투자하기로** 결정했다.
+   e2: Le président va **investir** un nouveau ministre ce soir. || 대통령이 오늘 밤 새 장관을 **임명할** 것이다.
+   syn: [placer, engager, nommer, confier] | ant: []
+
+investissement [ko] ipa=ɛ̃vɛstismɑ̃ | meanings: 투자[명사]
+   e1: L'**investissement** immobilier peut être rentable. || 부동산 **투자**는 수익성이 있을 수 있어요.
+   e2: Son **investissement** a permis la croissance de l'entreprise. || 그의 **투자**가 회사의 성장을 가능하게 했어요.
+   e3: Nous planifions un **investissement** dans les énergies renouvelables. || 우리는 재생 가능 에너지에 대한 **투자**를 계획하고 있어요.
+   syn: [placement, mise de fonds, engagement financier] | ant: []
+
+rendement [ko] ipa=ʁɑ̃dəmɑ̃ | meanings: 생산량[명사] | 수익률[명사]
+   e1: Le **rendement** de cette usine est très élevé. || 이 공장의 **생산량**은 매우 높아요.
+   e2: Le **rendement** des investissements a augmenté cette année. || 올해 투자들의 **수익률**이 상승했어요.
+   e3: Nous devons améliorer le **rendement** énergétique. || 우리는 에너지 **생산량**을 향상시켜야 해요.
+   syn: [production, efficacité, performance, profitabilité] | ant: []
+
+rentabilité [ko] ipa=ʁɑ̃.t‿a.bi.li.te | meanings: 수익성[명사]
+   e1: La **rentabilité** de l'entreprise a augmenté cette année. || 회사의 **수익성**이 올해 증가했다.
+   e2: Nous devons améliorer la **rentabilité** de ce projet. || 우리는 이 프로젝트의 **수익성**을 개선해야 한다.
+   syn: [profitabilité, lucrativité] | ant: []
+
+rentable [ko] ipa=ʁɑ̃tabl | meanings: 수익성 있는[형용사]
+   e1: Ce projet est **rentable** dès la première année. || 이 프로젝트는 첫해부터 **수익성**이 있습니다.
+   e2: L'entreprise a trouvé une méthode **rentable** pour produire. || 회사는 생산하는 데 있어 **수익성 있는** 방법을 찾았습니다.
+   syn: [lucratif, profitable, avantageux] | ant: [non rentable, déficitaire]
+
+action [ko] ipa=aksjɔ̃ | meanings: 행동[명사] | 주식[명사]
+   e1: Son **action** a aidé beaucoup de personnes. || 그의 **행동**은 많은 사람을 도왔어요.
+   e2: Elle a acheté des **actions** en bourse hier. || 그녀는 어제 **주식**을 샀어요.
+   e3: Chaque **action** compte dans cette entreprise. || 이 회사에서 각 **행동**은 중요해요.
+   syn: [acte, geste, opération, part] | ant: []
+
+obligation [ko] ipa=ɔbliɡasjɔ̃ | meanings: 의무[명사] | 채권[명사]
+   e1: Il a une **obligation** de payer ses impôts. || 그는 세금을 낼 **의무**가 있습니다.
+   e2: Cette **obligation** rapporte un intérêt fixe chaque année. || 이 **채권**은 매년 고정된 이자를 줍니다.
+   e3: Elle remplit son **obligation** envers la société. || 그녀는 회사에 대한 **의무**를 다합니다.
+   syn: [devoir, engagement, contrainte, charge] | ant: []
+
+bourse [ko] ipa=buʁs | meanings: 증권 거래소[명사] | 장학금[명사]
+   e1: La **bourse** a connu une forte hausse aujourd'hui. || 오늘 **증권 거래소**가 크게 상승했어요.
+   e2: Elle a reçu une **bourse** pour ses études universitaires. || 그녀는 대학 **장학금**을 받았어요.
+   e3: Il suit les cours à la **bourse** chaque matin. || 그는 매일 아침 **증권 거래소**에서 거래를 봐요.
+   syn: [marché boursier, bourse d'études] | ant: []
+
+banquier [ko] ipa=bɑ̃kje | meanings: 은행가[명사]
+   e1: Le **banquier** a aidé le client à gérer son compte. || **은행가**는 고객의 계좌 관리를 도왔다.
+   e2: Mon père travaille comme **banquier** dans une grande banque. || 우리 아버지는 대형은행에서 **은행가**로 일하신다.
+   syn: [gestionnaire de banque, financier] | ant: []
+
+devise [ko] ipa=dəviz | meanings: 화폐[명사] | 표어[명사]
+   e1: L'euro est la **devise** officielle de plusieurs pays. || 유로는 여러 나라의 공식 **화폐**입니다.
+   e2: Le cœur est la **devise** de cette organisation. || 하트는 이 단체의 **표어**입니다.
+   e3: La Chine utilise le yuan comme **devise** nationale. || 중국은 위안을 국가 **화폐**로 사용합니다.
+   syn: [monnaie, slogan] | ant: []
+
+monnaie unique [ko] ipa=- | meanings: 단일 통화[표현]
+   e1: L'euro est une **monnaie unique** en Europe. || 유로는 유럽에서 **단일 통화**입니다.
+   e2: La **monnaie unique** facilite les échanges commerciaux. || **단일 통화**는 상업 교류를 용이하게 합니다.
+   e3: De nombreux pays utilisent la **monnaie unique** pour leurs transactions. || 많은 나라들이 거래에 **단일 통화**를 사용합니다.
+   syn: [] | ant: []
+
+patrimoine [ko] ipa=patʁimwan | meanings: 유산, 상속 재산[명사] | 문화유산[명사]
+   e1: Elle a reçu un **patrimoine** important de ses parents. || 그녀는 부모님으로부터 중요한 **유산**을 받았다.
+   e2: La région préserve son **patrimoine** culturel ancien. || 그 지역은 오래된 **문화유산**을 보존한다.
+   e3: Le musée expose le **patrimoine** local aux visiteurs. || 박물관은 방문객들에게 지역 **문화유산**을 전시한다.
+   syn: [héritage, legs, biens culturels] | ant: []
+
+héritage [ko] ipa=eʁitaʒ | meanings: 유산[명사] | 상속[명사]
+   e1: L'**héritage** culturel est précieux pour la société. || **유산**은 사회에 소중합니다.
+   e2: Elle a reçu un grand **héritage** après la mort de son père. || 그녀는 아버지가 돌아가신 후 큰 **상속**을 받았습니다.
+   e3: L'**héritage** familial influence souvent nos choix. || 가족의 **유산**은 종종 우리의 선택에 영향을 줍니다.
+   syn: [patrimoine, succession] | ant: []
+
+hériter [ko] ipa=eʁite | meanings: 물려받다[동사] | 상속받다[동사]
+   e1: Elle va **hériter** de la maison de ses parents. || 그녀는 부모님으로부터 집을 **물려받을** 것이다.
+   e2: Il va **hériter** d'une fortune importante. || 그는 큰 재산을 **상속받을** 것이다.
+   syn: [recevoir, obtenir, acquérir] | ant: []
+
+succession [ko] ipa=syk.sɛ.sjɔ̃ | meanings: 상속[명사] | 연속[명사]
+   e1: La **succession** du grand-père est compliquée. || 할아버지의 **상속**이 복잡합니다.
+   e2: Une **succession** d'événements heureux est arrivée. || 행복한 일들의 **연속**이 있었습니다.
+   syn: [héritage, suite, enchaînement] | ant: []
+
+donation [ko] ipa=dɔnɑsjɔ̃ | meanings: 기부[명사] | 기증[명사]
+   e1: La **donation** a aidé l'hôpital local. || 그 **기부**는 지역 병원을 도왔습니다.
+   e2: Il a fait une **donation** d'organe après sa mort. || 그는 죽은 후에 **기증**을 했습니다.
+   syn: [cadeau, offrande] | ant: []
+
+entrepreneur [ko] ipa=ɑ̃tʁəpʁənœʁ | meanings: 사업가[명사] | 창업가[명사]
+   e1: L'**entrepreneur** a ouvert une nouvelle boutique en ville. || 그 **사업가**는 도시에 새 가게를 열었어요.
+   e2: Cette jeune **entrepreneure** a lancé sa propre startup. || 이 젊은 **창업가**는 자신의 스타트업을 시작했어요.
+   e3: Un **entrepreneur** doit prendre des risques calculés. || 한 **사업가**는 계산된 위험을 감수해야 해요.
+   syn: [chef d'entreprise, affairiste] | ant: []
+
+entreprise familiale [ko] ipa=- | meanings: 가족 기업[명사]
+   e1: Cette **entreprise familiale** existe depuis trois générations. || 이 **가족 기업**은 세 세대 동안 존재해 왔어요.
+   e2: L'**entreprise familiale** favorise souvent la transmission des métiers. || **가족 기업**은 종종 직업의 전수를 촉진합니다.
+   syn: [société familiale, affaire familiale, entreprise de famille] | ant: []
+
+innovation [ko] ipa=inɔvasjɔ̃ | meanings: 혁신[명사]
+   e1: L'**innovation** technologique change notre vie. || 기술 **혁신**이 우리의 삶을 바꿉니다.
+   e2: Cette entreprise valorise l'**innovation** constante. || 이 회사는 지속적인 **혁신**을 중요시합니다.
+   syn: [progrès, modernisation, renouveau] | ant: []
+
+innover [ko] ipa=inɔve | meanings: 혁신하다[동사]
+   e1: L'entreprise veut **innover** pour rester compétitive. || 그 회사는 경쟁력을 유지하기 위해 **혁신하**려고 합니다.
+   e2: **Innover** est essentiel dans le monde technologique. || 기술 세계에서 **혁신하는** 것이 필수적입니다.
+   syn: [révolutionner, créer, moderniser] | ant: []
+
+compétitivité [ko] ipa=kɔ̃petitivi.te | meanings: 경쟁력[명사]
+   e1: La **compétitivité** de cette entreprise est très forte. || 이 회사의 **경쟁력**은 매우 강하다.
+   e2: Améliorer la **compétitivité** est essentiel pour réussir. || **경쟁력**을 향상시키는 것은 성공에 필수적이다.
+   syn: [concurrence, compétition] | ant: []
+
+compétitif [ko] ipa=kɔ̃petitif | meanings: 경쟁적인[형용사]
+   e1: Le marché est très **compétitif** cette année. || 올해 시장은 매우 **경쟁적**입니다.
+   e2: Une équipe **compétitive** gagne souvent les tournois. || **경쟁력**이 있는 팀은 종종 토너먼트에서 승리합니다.
+   syn: [concurrentiel, rival, compétiteur] | ant: []
+
+productivité [ko] ipa=pʁɔ.dyk.ti.vi.te | meanings: 생산성[명사]
+   e1: La **productivité** de cette machine est très élevée. || 이 기계의 **생산성**은 매우 높아요.
+   e2: Une bonne organisation améliore la **productivité**. || 좋은 조직은 **생산성**을 향상시킵니다.
+   e3: La **productivité** a augmenté grâce au nouveau logiciel. || 새로운 소프트웨어 덕분에 **생산성**이 증가했어요.
+   syn: [rendement, efficacité, performance] | ant: []
+
+efficacité [ko] ipa=efikasite | meanings: 효율[명사]
+   e1: L'**efficacité** de cette méthode est remarquable. || 이 방법의 **효율**은 뛰어납니다.
+   e2: Son travail montre une grande **efficacité**. || 그의 일은 높은 **효율**을 보여줍니다.
+   syn: [rendement, productivité, performance] | ant: []
+
+efficace [ko] ipa=efikas | meanings: 효과적인[형용사] | 유능한[형용사]
+   e1: Ce médicament est très **efficace** contre la douleur. || 이 약은 통증에 매우 **효과적**입니다.
+   e2: Elle est une employée **efficace** et rapide. || 그녀는 **유능한** 직원이고 일도 빠릅니다.
+   e3: Une méthode **efficace** aide toujours à réussir. || **효과적인** 방법은 언제나 성공에 도움을 줍니다.
+   syn: [performant, productif, apte] | ant: [inefficace]
+
+inefficace [ko] ipa=inɛfisɑs | meanings: 효과없는[형용사] | 무능한[형용사]
+   e1: Ce médicament est **inefficace** contre le rhume. || 이 약은 감기에 **효과없다**.
+   e2: Son approche était **inefficace** pour résoudre le problème. || 그의 접근법은 문제를 해결하는 데 **무능했다**.
+   syn: [inepte, inopérant, improductif] | ant: [efficace]
+
+gestion [ko] ipa=ʒɛs.tjɔ̃ | meanings: 관리[명사] | 경영[명사]
+   e1: La **gestion** des dossiers est importante. || 서류의 **관리** 는 중요해요.
+   e2: Elle s'occupe de la **gestion** de l'équipe. || 그녀는 팀의 **경영**을 맡고 있어요.
+   e3: La bonne **gestion** évite les erreurs. || 잘 된 **관리** 는 실수를 막아요.
+   syn: [administration, direction, organisation] | ant: []
+
+gérer [ko] ipa=ʒe.ʁe | meanings: 관리하다, 경영하다, 운영하다[동사]
+   e1: Elle **gère** bien son entreprise familiale. || 그녀는 가족 회사를 잘 **관리**한다.
+   e2: Il **gère** les employés avec calme et patience. || 그는 직원들을 침착하고 인내심 있게 **운영**한다.
+   e3: Nous devons **gérer** le budget pour ce projet. || 우리는 이 프로젝트의 예산을 **관리**해야 한다.
+   syn: [administrer, diriger, organiser] | ant: []
+
+diriger [ko] ipa=diʁiʒe | meanings: 지도하다, 관리하다[동사]
+   e1: Il **dirige** une équipe de dix personnes. || 그는 10명의 팀을 **지도**한다.
+   e2: Elle **dirige** l'entreprise familiale avec soin. || 그녀는 가족 회사를 세심하게 **관리**한다.
+   syn: [gérer, administrer, contrôler] | ant: []
+
+direction [ko] ipa=diʁɛksjɔ̃ | meanings: 방향[명사] | 지도, 관리[명사]
+   e1: Elle a changé la **direction** de la voiture. || 그녀는 자동차의 **방향**을 바꿨어요.
+   e2: La **direction** de l'entreprise est très efficace. || 그 회사의 **경영진**은 매우 효율적이에요.
+   e3: Choisir la bonne **direction** est important en randonnée. || 등산할 때 올바른 **방향**을 선택하는 것이 중요해요.
+   syn: [sens, orientation, gouvernance, administration] | ant: []
+
+superviser [ko] ipa=sypɛʁvize | meanings: 감독하다[동사]
+   e1: Le chef doit **superviser** le projet attentivement. || 팀장은 그 프로젝트를 주의 깊게 **감독해야** 합니다.
+   e2: Elle **supervise** les travaux des étudiants avec patience. || 그녀는 학생들의 작업을 인내심 있게 **감독합니다**.
+   syn: [contrôler, diriger, surveiller] | ant: []
+
+supérieur hiérarchique [ko] ipa=- | meanings: 상사[명사]
+   e1: J'ai demandé conseil à mon **supérieur hiérarchique**. || 나는 내 **상사**에게 조언을 구했다.
+   e2: Le **supérieur hiérarchique** a organisé une réunion. || **상사**가 회의를 주최했다.
+   e3: Le rapport a été validé par le **supérieur hiérarchique**. || 보고서는 **상사**에 의해 승인되었다.
+   syn: [chef, patron, directeur] | ant: []
+
+subordonné [ko] ipa=sybɔʁdɔne | meanings: 종속된[형용사] | 부하[명사]
+   e1: Un employé **subordonné** suit les instructions du chef. || **부하** 직원은 상사의 지시를 따릅니다.
+   e2: Dans une phrase, une proposition **subordonnée** dépend de la principale. || 문장에서 **종속절은** 주절에 종속되어 있습니다.
+   syn: [inférieur, assujetti, subalterne, employé, collaborateur] | ant: []
+
+mentor [ko] ipa=mɑ̃tɔʁ | meanings: 멘토[명사]
+   e1: Le **mentor** lui a donné d'excellents conseils. || 그 **멘토**가 그에게 훌륭한 조언을 해주었다.
+   e2: Elle cherche un **mentor** pour sa carrière. || 그녀는 자신의 경력을 위한 **멘토**를 찾고 있다.
+   syn: [tuteur, conseiller, guide] | ant: []
+
+apprenti [ko] ipa=apʁɑ̃ti | meanings: 견습생[명사] | 수습자[명사]
+   e1: L'**apprenti** travaille dur dans l'atelier. || **견습생**은 작업장에서 열심히 일한다.
+   e2: L'**apprenti** apprend les techniques du métier. || **수습자**는 직업 기술을 배운다.
+   syn: [stagiaire, novice] | ant: []
+
+cadre [ko] ipa=kadʁ | meanings: 액자, 틀[명사] | 간부, 핵심 인물[명사]
+   e1: Le **cadre** du tableau est en bois. || 그 **액자**는 나무로 만들어졌어요.
+   e2: Elle est un **cadre** important dans l'entreprise. || 그녀는 회사의 중요한 **간부**예요.
+   e3: Le **cadre** de la porte est peint en blanc. || 문 **틀**은 흰색으로 칠해져 있어요.
+   syn: [structure, responsable, dirigeant] | ant: []
+
+CDI [ko] ipa=se de i | meanings: 무기한 고용 계약[명사]
+   e1: Il a signé un **CDI** après son stage. || 그는 인턴십 후에 **무기한 고용 계약**을 체결했어요.
+   e2: Un **CDI** offre une stabilité professionnelle. || **무기한 고용 계약**은 직업 안정성을 제공합니다.
+   e3: Elle cherche un **CDI** dans une grande entreprise. || 그녀는 대기업에서 **무기한 고용 계약**을 찾고 있어요.
+   syn: [] | ant: []
+
+CDD [ko] ipa=se de de | meanings: 기간제 근로계약[명사]
+   e1: Elle a signé un **CDD** de six mois. || 그녀는 6개월 **기간제** 계약을 체결했다.
+   e2: Le **CDD** est courant dans ce secteur. || 이 분야에서는 **기간제** 계약이 흔하다.
+   e3: Ils ont renouvelé son **CDD** l'année dernière. || 그들은 작년에 그의 **기간제** 계약을 갱신했다.
+   syn: [contrat temporaire, contrat à durée déterminée] | ant: []
+
+intérim [ko] ipa=ɛ̃teʁim | meanings: 임시직[명사] | 대행[명사]
+   e1: Il a un contrat d'**intérim** pour trois mois. || 그는 3개월 동안 **임시직** 계약을 했다.
+   e2: Elle assure l'**intérim** du directeur pendant son absence. || 그녀는 부재 중에 이사의 **대행**을 맡았다.
+   syn: [remplacement, provisoire, temporisation] | ant: []
+
+télétravail [ko] ipa=teletʁavaj | meanings: 재택근무[명사]
+   e1: Le **télétravail** est de plus en plus courant aujourd'hui. || **재택근무**가 점점 더 보편화되고 있습니다.
+   e2: Elle préfère le **télétravail** pour mieux gérer son temps. || 그녀는 시간을 더 잘 관리하기 위해 **재택근무**를 선호합니다.
+   syn: [travail à domicile, télétravail à domicile] | ant: []
+
+travail à distance [ko] ipa=- | meanings: 원격 근무[표현]
+   e1: Le **travail à distance** devient très populaire. || **원격 근무**가 매우 인기가 있어요.
+   e2: Elle préfère le **travail à distance** au bureau. || 그녀는 사무실보다 **원격 근무**를 선호해요.
+   syn: [télétravail, télécommuting] | ant: []
+
+heures supplémentaires [ko] ipa=- | meanings: 초과 근무 시간[명사]
+   e1: J'ai fait des **heures supplémentaires** cette semaine. || 나는 이번 주에 **초과 근무**를 했어요.
+   e2: Les **heures supplémentaires** sont souvent payées plus cher. || **초과 근무**는 보통 더 높은 급여를 받습니다.
+   e3: Elle préfère éviter les **heures supplémentaires** le week-end. || 그녀는 주말에 **초과 근무**를 피하는 것을 선호해요.
+   syn: [temps supplémentaire, travail supplémentaire] | ant: []
+
+congé maternité [ko] ipa=- | meanings: 출산 휴가[명사]
+   e1: Elle a pris un **congé maternité** après la naissance. || 그녀는 출산 후 **출산 휴가**를 썼다.
+   e2: Le **congé maternité** dure généralement plusieurs semaines. || **출산 휴가**는 보통 몇 주간 지속된다.
+   e3: Pendant son **congé maternité**, elle se repose beaucoup. || 그녀는 **출산 휴가** 동안 많이 쉬었다.
+   syn: [maternité, congé de maternité] | ant: []
+
+congé paternité [ko] ipa=- | meanings: 출산 전·후에 아버지에게 주어지는 휴가[명사]
+   e1: Il a pris son **congé paternité** après la naissance. || 그는 출산 후에 **출산 휴가**를 썼다.
+   e2: Le **congé paternité** aide à soutenir la famille. || **출산 휴가**는 가정을 지원하는 데 도움이 된다.
+   syn: [] | ant: []
+
+assurance maladie [ko] ipa=- | meanings: 건강 보험[명사]
+   e1: L'**assurance maladie** couvre mes frais médicaux. || 나는 **건강 보험**이 내 의료비를 보장해준다.
+   e2: Mon employeur offre une bonne **assurance maladie**. || 내 고용주는 좋은 **건강 보험**을 제공한다.
+   syn: [sécurité sociale, mutuelle] | ant: []
+
+sécurité sociale [ko] ipa=- | meanings: 사회 보장[명사]
+   e1: La **sécurité sociale** protège les travailleurs malades. || **사회 보장**은 아픈 근로자를 보호합니다.
+   e2: Je paie des cotisations à la **sécurité sociale** chaque mois. || 나는 매달 **사회 보장** 보험료를 납부합니다.
+   e3: La **sécurité sociale** aide les familles en difficulté. || **사회 보장**은 어려운 가정을 돕습니다.
+   syn: [] | ant: []
+
+pension [ko] ipa=pɑ̃sjɔ̃ | meanings: 연금, 연차수당[명사] | 하숙집[명사]
+   e1: Il reçoit une **pension** chaque mois. || 그는 매달 **연금**을 받습니다.
+   e2: Elle habite dans une petite **pension** proche du centre. || 그녀는 시내 근처 작은 **하숙집**에 삽니다.
+   e3: La **pension** de son grand-père est suffisante pour vivre. || 그 할아버지의 **연금**은 생활하기에 충분합니다.
+   syn: [retraite, allocation] | ant: []
+
+préretraite [ko] ipa=pʁe.ʁə.tʁɛt | meanings: 조기퇴직[명사]
+   e1: Il a pris une **préretraite** pour profiter de son temps. || 그는 시간을 즐기기 위해 **조기퇴직**했다.
+   e2: La société offre la **préretraite** aux employés âgés. || 회사는 나이 든 직원들에게 **조기퇴직**을 제공한다.
+   e3: La **préretraite** permet de quitter le travail plus tôt. || **조기퇴직**은 더 일찍 일을 그만둘 수 있게 한다.
+   syn: [départ anticipé, départ en préretraite] | ant: []
+
+mutation [ko] ipa=my.ta.sjɔ̃ | meanings: 변화[명사] | 이동, 전근[명사]
+   e1: La **mutation** climatique affecte toutes les régions. || 기후 **변화**가 모든 지역에 영향을 미칩니다.
+   e2: Il a reçu une **mutation** dans une autre ville. || 그는 다른 도시로 **전근**을 받았습니다.
+   e3: La **mutation** du virus inquiète les scientifiques. || 바이러스의 **변이**가 과학자들을 걱정하게 합니다.
+   syn: [changement, transformation, modification, transfert, déplacement] | ant: []
+
+concours [ko] ipa=kɔ̃kuʁ | meanings: 경쟁, 대회[명사] | 시험[명사]
+   e1: Le **concours** de chant aura lieu demain. || 노래 **경쟁**은 내일 열립니다.
+   e2: Elle a réussi le **concours** d'entrée à l'université. || 그녀는 대학 입학 **시험**에 합격했습니다.
+   syn: [compétition, épreuve, éxamen] | ant: []
+
+fonction publique [ko] ipa=- | meanings: 공무원 조직[명사] | 국가 행정 기관[명사]
+   e1: La **fonction publique** recrute de nouveaux agents chaque année. || **공무원 조직**은 매년 새로운 직원을 채용합니다.
+   e2: La réforme de la **fonction publique** vise à améliorer l'efficacité. || **국가 행정 기관**의 개혁은 효율성을 향상시키는 것을 목표로 한다.
+   syn: [administration publique, service public] | ant: []
+
+service public [ko] ipa=- | meanings: 공공 서비스[명사]
+   e1: Le **service public** garantit l'accès à l'eau potable. || **공공 서비스**는 식수 이용을 보장합니다.
+   e2: Le **service public** fonctionne même les jours fériés. || **공공 서비스**는 휴일에도 운영됩니다.
+   syn: [service administratif, service public essentiel] | ant: []
+
+pauvreté [ko] ipa=povʁəte | meanings: 빈곤[명사]
+   e1: La **pauvreté** affecte beaucoup de familles en ville. || 도시의 많은 가정이 **빈곤**에 영향을 받습니다.
+   e2: Ils travaillent dur pour sortir de la **pauvreté**. || 그들은 **빈곤**에서 벗어나기 위해 열심히 일합니다.
+   e3: La lutte contre la **pauvreté** est une priorité mondiale. || **빈곤** 퇴치는 전 세계적인 우선 과제입니다.
+   syn: [misère, indigence, précarité] | ant: [richesse, opulence]
+
+richesse [ko] ipa=ʁi.ʃɛs | meanings: 부[명사] | 재화[명사]
+   e1: La **richesse** de cette famille est impressionnante. || 이 가족의 **부**는 인상적이에요.
+   e2: Il a réussi à accumuler une grande **richesse** matérielle. || 그는 큰 **재화**를 축적하는 데 성공했어요.
+   e3: La culture apporte **richesse** et diversité à la société. || 문화는 사회에 **재화**와 다양성을 가져다줍니다.
+   syn: [fortune, opulence, prospérité] | ant: [pauvreté]
+
+classe sociale [ko] ipa=- | meanings: 사회 계급[명사]
+   e1: La **classe sociale** influence souvent l'éducation. || **사회 계급**은 종종 교육에 영향을 미친다.
+   e2: Ils ont étudié la mobilité dans la **classe sociale**. || 그들은 **사회 계급**의 이동성을 연구했다.
+   e3: Les différences de **classe sociale** créent des inégalités. || **사회 계급**의 차이는 불평등을 만든다.
+   syn: [caste, ordre social] | ant: []
+
+inégalité [ko] ipa=inalite | meanings: 불평등[명사]
+   e1: L'**inégalité** sociale affecte beaucoup de familles. || 사회적 **불평등**은 많은 가족에게 영향을 미칩니다.
+   e2: Ils travaillent pour réduire l'**inégalité** économique. || 그들은 경제적 **불평등**을 줄이기 위해 노력합니다.
+   e3: L'**inégalité** peut causer des tensions dans la société. || **불평등**은 사회에 긴장을 초래할 수 있습니다.
+   syn: [disparité, déséquilibre, iniquité] | ant: [égalité]
+
+égalitaire [ko] ipa=egaliteʁ | meanings: 평등주의의[형용사]
+   e1: La société doit être **égalitaire** pour tous. || 사회는 모두에게 **평등주의적인** 이여야 한다.
+   e2: Ils ont créé un système **égalitaire** dans l'école. || 그들은 학교에 **평등주의적인** 제도를 만들었다.
+   syn: [égalitariste, juste, équitable] | ant: []
+
+communauté [ko] ipa=kɔmynote | meanings: 공동체[명사] | 커뮤니티[명사]
+   e1: La **communauté** vit en harmonie dans ce village. || 그 **공동체**는 이 마을에서 조화롭게 산다.
+   e2: Cette **communauté** en ligne partage beaucoup d'intérêts. || 이 온라인 **커뮤니티**는 많은 관심사를 공유한다.
+   e3: La **communauté** locale organise une fête chaque année. || 지역 **공동체**는 매년 축제를 연다.
+   syn: [collectivité, société, groupe] | ant: []
+
+communautaire [ko] ipa=kɔ.myno.tɛʁ | meanings: 공동체의[형용사] | 커뮤니티 관련의[형용사]
+   e1: La solidarité **communautaire** est importante. || **공동체의** 연대가 중요합니다.
+   e2: Le centre **communautaire** organise des événements. || 그 **커뮤니티** 센터가 행사를 주최합니다.
+   syn: [collectif, social, public] | ant: []
+
+intégration [ko] ipa=ɛ̃teɡʁasjɔ̃ | meanings: 통합[명사] | 적분[명사]
+   e1: L'**intégration** des cultures crée l'harmonie. || 문화의 **통합**이 조화를 만듭니다.
+   e2: L'**intégration** est essentielle en mathématiques. || 수학에서 **적분**은 필수적입니다.
+   syn: [fusion, unification, assemblage] | ant: []
+
+intégrer [ko] ipa=ɛ̃teɡʁe | meanings: 합치다, 통합하다[동사] | 포함하다[동사]
+   e1: Ils veulent **intégrer** toutes les idées dans le projet. || 그들은 모든 아이디어를 프로젝트에 **통합**하려고 합니다.
+   e2: Cette option permet d'**intégrer** les données automatiquement. || 이 옵션은 데이터를 자동으로 **포함**할 수 있게 합니다.
+   syn: [unir, associer, fusionner, incorporer, comprendre] | ant: []
+
+immigration [ko] ipa=imiɡʁasjɔ̃ | meanings: 이민[명사]
+   e1: L'**immigration** favorise la diversité culturelle. || **이민**은 문화적 다양성을 촉진합니다.
+   e2: Le débat sur l'**immigration** est important pour le pays. || **이민**에 관한 논쟁은 국가에 중요합니다.
+   e3: Beaucoup choisissent l'**immigration** pour une vie meilleure. || 많은 사람이 더 나은 삶을 위해 **이민**을 선택합니다.
+   syn: [exode, migration] | ant: []
+
+immigrant [ko] ipa=imiɡʁɑ̃ | meanings: 이민자[명사]
+   e1: L'**immigrant** a trouvé un nouvel emploi en ville. || **이민자**가 도시에서 새 직업을 찾았다.
+   e2: Chaque année, de nombreux **immigrants** viennent étudier ici. || 매년 많은 **이민자**들이 여기서 공부하러 온다.
+   syn: [émigré, exilé] | ant: []
+
+émigrer [ko] ipa=e.mi.ɡʁe | meanings: 이주하다[동사]
+   e1: Ils ont décidé d'**émigrer** au Canada cet été. || 그들은 이번 여름에 캐나다로 **이주하기로** 결정했다.
+   e2: Beaucoup choisissent d'**émigrer** pour une vie meilleure. || 많은 사람들이 더 나은 삶을 위해 **이주하는** 것을 선택한다.
+   e3: Mon oncle va **émigrer** en Australie pour travailler. || 내 삼촌은 일하러 호주로 **이주할** 것이다.
+   syn: [partir, s'exiler, quitter] | ant: []
+
+émigration [ko] ipa=emigʁasjɔ̃ | meanings: 이주[명사]
+   e1: L'**émigration** vers la campagne a diminué cette année. || 올해는 시골로의 **이주**가 줄었다.
+   e2: L'**émigration** apporte souvent de nouveaux défis. || **이주**는 종종 새로운 도전을 가져온다.
+   syn: [exode, migration] | ant: []
+
+exilé [ko] ipa=ɛɡzile | meanings: 추방자[명사] | 추방된[형용사]
+   e1: L'**exilé** vit dans un pays lointain. || 그 **추방자**는 먼 나라에 살고 있어요.
+   e2: Il est **exilé** depuis plusieurs années. || 그는 몇 년 동안 **추방되어** 있습니다.
+   syn: [banni, déporté] | ant: []
+
+réfugié [ko] ipa=ʁe.fy.ʒje | meanings: 난민[명사]
+   e1: Le **réfugié** a trouvé un nouveau foyer. || **난민**이 새 집을 찾았다.
+   e2: Les **réfugiés** arrivent en courant. || **난민**들이 달려오고 있다.
+   syn: [exilé, émigré] | ant: []
+
+asile [ko] ipa=azil | meanings: 피난처[명사] | 정신병원[명사]
+   e1: Ils ont trouvé un **asile** sûr dans la montagne. || 그들은 산에서 안전한 **피난처**를 찾았다.
+   e2: Cet homme est interné à l'**asile** depuis plusieurs mois. || 이 남자는 몇 달 동안 **정신병원**에 입원해 있다.
+   syn: [refuge, sanctuaire, hôpital psychiatrique] | ant: []
+
+demande d'asile [ko] ipa=- | meanings: 망명신청[명사]
+   e1: Elle a fait une **demande d'asile** en France. || 그녀는 프랑스에 **망명신청**을 했다.
+   e2: La **demande d'asile** a été acceptée rapidement. || **망명신청**이 빠르게 승인되었다.
+   e3: Ils ont déposé une **demande d'asile** ensemble. || 그들은 함께 **망명신청**을 했다.
+   syn: [requête d'asile, demande de refuge] | ant: []
+
+démographie [ko] ipa=demɔgʁafi | meanings: 인구 통계학[명사]
+   e1: La **démographie** étudie les populations humaines. || **인구 통계학**은 인간 집단을 연구합니다.
+   e2: La **démographie** montre une croissance de la population. || **인구 통계학**은 인구 증가를 보여줍니다.
+   syn: [statistique démographique, étude de la population] | ant: []
+
+population [ko] ipa=pɔpylasjɔ̃ | meanings: 인구[명사]
+   e1: La **population** de cette ville augmente rapidement. || 이 도시의 **인구**가 빠르게 증가하고 있습니다.
+   e2: La **population** mondiale dépasse les huit milliards. || 세계 **인구**가 80억을 넘었습니다.
+   e3: La **population** locale célèbre le festival tous les ans. || 지역 **인구**는 매년 축제를 축하합니다.
+   syn: [peuple, habitants, citoyens] | ant: []
+
+statistique [ko] ipa=statistik | meanings: 통계[명사]
+   e1: La **statistique** montre une augmentation des ventes. || **통계**가 매출 증가를 보여줍니다.
+   e2: Cette **statistique** est importante pour le rapport. || 이 **통계**는 보고서에 중요합니다.
+   e3: Nous utilisons la **statistique** pour analyser les données. || 우리는 데이터를 분석하기 위해 **통계**를 사용합니다.
+   syn: [donnée, chiffre, information] | ant: []
+
+recensement [ko] ipa=ʁəsɑ̃smɑ̃ | meanings: 인구조사[명사]
+   e1: Le **recensement** a lieu tous les dix ans. || **인구조사**는 10년마다 실시됩니다.
+   e2: Le gouvernement prépare le **recensement** national. || 정부는 전국 **인구조사**를 준비하고 있습니다.
+   e3: Le **recensement** permet d’étudier la population. || **인구조사**는 인구를 연구할 수 있게 합니다.
+   syn: [décompte, enquête, statistique] | ant: []
+
+natalité [ko] ipa=natalite | meanings: 출생률[명사]
+   e1: La **natalité** a augmenté cette année. || 올해 **출생률**이 증가했다.
+   e2: La politique encourage la **natalité** chez les jeunes. || 정책은 젊은층의 **출생률**을 장려한다.
+   e3: Une bonne santé publique favorise la **natalité**. || 좋은 공중보건은 **출생률**을 촉진한다.
+   syn: [taux de natalité, fécondité] | ant: []
+
+mortalité [ko] ipa=mɔʁtalite | meanings: 사망률[명사]
+   e1: La **mortalité** infantile a diminué grâce aux progrès médicaux. || 의학 발전 덕분에 유아 **사망률**이 감소했다.
+   e2: L'amélioration de l'hygiène réduit la **mortalité** dans les pays en développement. || 위생 개선은 개발도상국에서 **사망률**을 낮춘다.
+   e3: La **mortalité** augmente en hiver à cause du froid. || 추위 때문에 겨울에 **사망률**이 증가한다.
+   syn: [taux de décès, décès] | ant: []
+
+espérance de vie [ko] ipa=- | meanings: 평균 기대 수명[명사]
+   e1: L'**espérance de vie** a augmenté grâce aux progrès médicaux. || 의학의 발전 덕분에 **평균 기대 수명**이 증가했습니다.
+   e2: L'**espérance de vie** varie selon les pays. || **평균 기대 수명**은 나라에 따라 다릅니다.
+   syn: [longévité] | ant: []
+
+vieillissement [ko] ipa=vjɛjisəmɑ̃ | meanings: 노화[명사]
+   e1: Le **vieillissement** affecte la qualité de la peau. || 피부의 질에 **노화**가 영향을 미칩니다.
+   e2: Le **vieillissement** naturel est un processus inévitable. || **노화**는 피할 수 없는 자연스러운 과정입니다.
+   e3: Ils étudient le **vieillissement** des cellules du cerveau. || 그들은 뇌 세포의 **노화**를 연구합니다.
+   syn: [décrépitude, détérioration] | ant: []
+
+génération [ko] ipa=ʒeneʁasjɔ̃ | meanings: 세대[명사] | 생성[명사]
+   e1: La **génération** actuelle utilise beaucoup la technologie. || 현재 **세대**는 기술을 많이 사용합니다.
+   e2: La **génération** d'électricité est essentielle pour la ville. || 도시에는 전기 **생성**이 필수적입니다.
+   e3: Chaque **génération** apporte de nouvelles idées. || 각 **세대**는 새로운 아이디어를 가져옵니다.
+   syn: [cohorte, descendance, production] | ant: []
+
+minorité ethnique [ko] ipa=- | meanings: 소수 민족[명사]
+   e1: La **minorité ethnique** célèbre sa culture chaque année. || 그 **소수 민족**은 매년 문화를 축하합니다.
+   e2: Cette région abrite plusieurs **minorités ethniques** différentes. || 이 지역에는 여러 다른 **소수 민족**이 있습니다.
+   syn: [] | ant: []
+
+majorité ethnique [ko] ipa=- | meanings: 주민 대다수 민족[명사]
+   e1: La **majorité ethnique** influence souvent la culture locale. || **주민 대다수 민족**은 종종 지역 문화를 영향을 미친다.
+   e2: Dans ce pays, la **majorité ethnique** parle une même langue. || 이 나라에서 **주민 대다수 민족**은 같은 언어를 사용한다.
+   e3: La politique reflète souvent les intérêts de la **majorité ethnique**. || 정치는 종종 **주민 대다수 민족**의 이익을 반영한다.
+   syn: [] | ant: []
+
+cohésion sociale [ko] ipa=- | meanings: 사회적 결속[표현]
+   e1: La **cohésion sociale** est essentielle dans cette communauté. || 이 공동체에서는 **사회적 결속**이 필수적이다.
+   e2: La **cohésion sociale** renforce les liens entre voisins. || **사회적 결속**은 이웃 간의 유대를 강화한다.
+   syn: [solidarité sociale, unité sociale, intégration sociale] | ant: []
+
+exclusion [ko] ipa=ɛksklyzjɔ̃ | meanings: 배제[명사] | 제외[명사]
+   e1: L'**exclusion** sociale est un problème sérieux. || **배제**는 심각한 문제입니다.
+   e2: L'**exclusion** de certains articles est nécessaire. || 일부 항목의 **제외**가 필요합니다.
+   syn: [rejet, ostracisme, mise à l'écart] | ant: []
+
+marginalisation [ko] ipa=maʁʒinalizasjɔ̃ | meanings: 소외[명사] | 배제[명사]
+   e1: La **marginalisation** affecte souvent les personnes âgées. || 노인들은 종종 **소외**를 겪어요.
+   e2: La **marginalisation** peut causer beaucoup de problèmes sociaux. || **소외**는 많은 사회 문제를 일으킬 수 있어요.
+   e3: La **marginalisation** des minorités réduit leur accès aux ressources. || 소수자들의 **배제**는 그들의 자원 접근을 줄여요.
+   syn: [exclusion, ostracisme] | ant: []
+
+mandat [ko] ipa=mɑ̃.da | meanings: 위임장[명사] | 수표[명사]
+   e1: Elle a signé un **mandat** pour la vente. || 그녀는 판매를 위한 **위임장**에 서명했다.
+   e2: Il a déposé un **mandat** au bureau de poste. || 그는 우체국에 **수표**를 맡겼다.
+   syn: [procuration, ordre, autorisation] | ant: []
+
+investiture [ko] ipa=ɛ̃vɛsti.tyʁ | meanings: 취임식[명사] | 임명[명사]
+   e1: L'**investiture** du président aura lieu demain. || 대통령의 **취임식**이 내일 열릴 거예요.
+   e2: L'**investiture** du nouveau ministre a été annoncée hier. || 새로운 장관의 **임명**이 어제 발표되었어요.
+   syn: [cérémonie d'investiture, nomination] | ant: []
+
+allocution [ko] ipa=alɔkysjɔ̃ | meanings: 간단한 연설[명사]
+   e1: Le président a fait une **allocution** ce matin. || 대통령이 오늘 아침에 **연설**을 했어요.
+   e2: Son **allocution** a touché beaucoup de gens. || 그의 **연설**은 많은 사람들에게 감동을 주었어요.
+   e3: L'enseignant a commencé la réunion par une courte **allocution**. || 교사는 짧은 **연설**로 회의를 시작했어요.
+   syn: [discours, adresse, intervention] | ant: []
+
+sondage [ko] ipa=sɔ̃daʒ | meanings: 설문조사[명사] | 탐사[명사]
+   e1: Le **sondage** montre l'opinion des habitants. || 그 **설문조사**는 주민들의 의견을 보여준다.
+   e2: Nous faisons un **sondage** dans cette région. || 우리는 이 지역에서 **탐사**를 하고 있다.
+   syn: [enquête, étude] | ant: []
+
+scrutin [ko] ipa=skʁutɛ̃ | meanings: 투표[명사] | 심사[명사]
+   e1: Le **scrutin** a duré toute la journée. || 하루 종일 **투표**가 지속되었다.
+   e2: Le **scrutin** des résultats a été impartial. || 결과에 대한 **심사**는 공정했다.
+   syn: [vote, élection, consultation, analyse, examen] | ant: []
+
+urne [ko] ipa=yʁn | meanings: 항아리, 투표함[명사]
+   e1: Elle a mis la lettre dans l'**urne**. || 그녀는 편지를 **항아리**에 넣었어요.
+   e2: Les bulletins sont déposés dans l'**urne**. || 투표용지가 **투표함**에 들어가요.
+   e3: L'**urne** est décorée avec des fleurs. || **항아리**가 꽃으로 장식되어 있어요.
+   syn: [vase, contenant] | ant: []
+
+isoloir [ko] ipa=izɔlwaʁ | meanings: 기표소[명사]
+   e1: Chaque électeur entre dans l'**isoloir** pour voter. || 모든 유권자가 투표를 위해 **기표소**에 들어갑니다.
+   e2: L'**isoloir** garantit le secret du vote. || **기표소**는 투표 비밀을 보장합니다.
+   e3: L'**isoloir** est installé dans toutes les écoles pour les élections. || 모든 학교에 선거를 위해 **기표소**가 설치됩니다.
+   syn: [cabine de vote, cabine électorale] | ant: []
+
+bulletin de vote [ko] ipa=- | meanings: 투표용지[명사]
+   e1: Je remplis mon **bulletin de vote** avec soin. || 나는 조심스럽게 **투표용지**를 작성해요.
+   e2: Le **bulletin de vote** est déposé dans l'urne. || **투표용지**가 투표함에 넣어져요.
+   e3: Chaque électeur reçoit un **bulletin de vote** propre. || 각 선거인은 깨끗한 **투표용지**를 받아요.
+   syn: [papier de vote, bulletin] | ant: []
+
+abstention [ko] ipa=apstɑ̃sjɔ̃ | meanings: 기권[명사] | 삼감[명사]
+   e1: L'**abstention** a augmenté lors des dernières élections. || 최근 선거에서 **기권**이 증가했다.
+   e2: Son **abstention** a surpris tout le groupe. || 그의 **삼감**은 모두를 놀라게 했다.
+   syn: [non-participation, défection] | ant: []
+
+abstentionniste [ko] ipa=abstɑ̃sjɔnist | meanings: 기권자[명사]
+   e1: L'**abstentionniste** ne participe pas aux élections. || **기권자**는 선거에 참여하지 않습니다.
+   e2: Un **abstentionniste** exprime parfois son mécontentement politique. || 어떤 **기권자**는 정치적 불만을 표현하기도 합니다.
+   syn: [non-votant, abstinent électoral] | ant: [électeur, votant]
+
+élu [ko] ipa=ely | meanings: 선출된 사람[명사] | 선출된[형용사]
+   e1: L'**élu** a remercié la communauté pour son soutien. || **선출된 사람**이 그의 지지를 위해 공동체에 감사했다.
+   e2: Les membres **élus** participeront à la réunion demain. || **선출된** 구성원들이 내일 회의에 참석할 것이다.
+   syn: [député, mandataire, candidat élu] | ant: []
+
+éluder [ko] ipa=elyde | meanings: 회피하다[동사] | 모면하다[동사]
+   e1: Il a essayé d'**éluder** la question difficile. || 그는 어려운 질문을 **회피하려고** 했다.
+   e2: Elle a réussi à **éluder** les sanctions. || 그녀는 제재를 **모면하는** 데 성공했다.
+   syn: [éviter, fuir, esquiver] | ant: [affronter]
+
+corruption [ko] ipa=kɔʁypsjɔ̃ | meanings: 부패[명사] | 부정 행위[명사]
+   e1: La **corruption** détruit la confiance dans la société. || **부패**는 사회에 대한 신뢰를 무너뜨립니다.
+   e2: La **corruption** dans le gouvernement est un problème grave. || 정부의 **부정 행위**는 심각한 문제입니다.
+   e3: Il lutte contre la **corruption** avec courage. || 그는 용기 있게 **부패**에 맞서 싸웁니다.
+   syn: [détérioration, décadence, fraude, malversation] | ant: []
+
+fraude [ko] ipa=fʁod | meanings: 사기[명사]
+   e1: La **fraude** fiscale est punie par la loi. || 세금 **사기**는 법에 의해 처벌받는다.
+   e2: Il a été arrêté pour **fraude** aux examens. || 그는 시험에서 **사기**를 쳐서 체포되었다.
+   e3: La banque lutte contre la **fraude** en ligne. || 은행은 온라인 **사기**와 싸운다.
+   syn: [escroquerie, tromperie, tricherie] | ant: []
+
+fraudeur [ko] ipa=fʁodœʁ | meanings: 사기꾼[명사]
+   e1: Le **fraudeur** a été arrêté rapidement. || 그 **사기꾼**은 빨리 체포되었다.
+   e2: Ce **fraudeur** utilise de fausses identités. || 이 **사기꾼**은 가짜 신원을 사용한다.
+   e3: Les **fraudeurs** causent beaucoup de pertes. || **사기꾼**들은 많은 손실을 초래한다.
+   syn: [escroc, tricheur, imposteur] | ant: []
+
+malversation [ko] ipa=malvɛʁsasjɔ̃ | meanings: 횡령[명사]
+   e1: Il a été accusé de **malversation** dans la gestion des fonds. || 그는 자금 관리에서 **횡령** 혐의를 받았다.
+   e2: La **malversation** a nui à la réputation de l'entreprise. || 그 **횡령**은 회사의 명성에 해를 끼쳤다.
+   syn: [détournement, corruption, abus] | ant: []
+
+scandale politique [ko] ipa=- | meanings: 정치적 스캔들[명사]
+   e1: Le gouvernement est impliqué dans un **scandale politique** majeur. || 정부가 큰 **정치적 스캔들**에 연루되었다.
+   e2: Ce **scandale politique** a changé la perception du public. || 이 **정치적 스캔들**은 국민의 인식을 바꾸었다.
+   syn: [affaire politique, controverse politique, polémique politique] | ant: []
+
+décentralisation [ko] ipa=desɑ̃tʁalizasjɔ̃ | meanings: 분산[명사]
+   e1: La **décentralisation** favorise la gestion locale. || **분산**은 지역 관리를 촉진합니다.
+   e2: La **décentralisation** permet plus d'autonomie aux régions. || **분산**은 지역에 더 많은 자율성을 제공합니다.
+   e3: Nous étudions les effets de la **décentralisation** politique. || 우리는 정치적 **분산**의 효과를 연구합니다.
+   syn: [déconcentration, dispersion, redistribution] | ant: []
+
+centralisation [ko] ipa=sɑ̃tʁalizasjɔ̃ | meanings: 중앙집권화[명사]
+   e1: La **centralisation** facilite la prise de décision rapide. || **중앙집권화**는 빠른 의사결정을 용이하게 한다.
+   e2: La **centralisation** du pouvoir change la structure gouvernementale. || 권력의 **중앙집권화**는 정부 구조를 변화시킨다.
+   e3: Ils discutent de la **centralisation** des ressources. || 그들은 자원의 **중앙집권화**에 대해 논의한다.
+   syn: [concentration, centralisme] | ant: []
+
+autonomie régionale [ko] ipa=- | meanings: 지역 자치[표현]
+   e1: L'**autonomie régionale** permet aux peuples de gérer leurs affaires. || **지역 자치**는 사람들이 그들의 일을 관리할 수 있게 합니다.
+   e2: Les discussions sur l'**autonomie régionale** ont duré toute la journée. || **지역 자치**에 관한 논의가 하루 종일 이어졌습니다.
+   syn: [autonomie locale, auto-gouvernance régionale] | ant: []
+
+fédéralisme [ko] ipa=fedeʁalism | meanings: 연방주의[명사]
+   e1: Le **fédéralisme** favorise l'autonomie des régions. || **연방주의**는 지역의 자치를 촉진한다.
+   e2: Le débat sur le **fédéralisme** a duré toute la soirée. || **연방주의**에 대한 토론이 밤새 계속되었다.
+   syn: [confédéralisme] | ant: []
+
+séparation des pouvoirs [ko] ipa=- | meanings: 권력 분립[표현]
+   e1: La **séparation des pouvoirs** garantit la démocratie. || **권력 분립**은 민주주의를 보장합니다.
+   e2: La constitution établit une **séparation des pouvoirs** claire. || 헌법은 명확한 **권력 분립**을 확립합니다.
+   e3: Cette loi renforce la **séparation des pouvoirs** entre les branches. || 이 법은 부문 간의 **권력 분립**을 강화합니다.
+   syn: [division des pouvoirs, partage des pouvoirs] | ant: []
+
+pouvoir exécutif [ko] ipa=- | meanings: 행정 권력[명사]
+   e1: Le **pouvoir exécutif** gère les affaires gouvernementales quotidiennes. || **행정 권력**은 일상적인 정부 업무를 관리합니다.
+   e2: Le président représente le **pouvoir exécutif** du pays. || 대통령은 국가의 **행정 권력**을 대표합니다.
+   syn: [] | ant: []
+
+pouvoir législatif [ko] ipa=- | meanings: 입법 권력[명사]
+   e1: Le **pouvoir législatif** crée les lois du pays. || **입법 권력**은 국가의 법을 만듭니다.
+   e2: Le Parlement détient le **pouvoir législatif**. || 국회가 **입법 권력**을 가집니다.
+   syn: [] | ant: []
+
+pouvoir judiciaire [ko] ipa=- | meanings: 사법권[명사]
+   e1: Le **pouvoir judiciaire** garantit l'indépendance des tribunaux. || **사법권**은 법원의 독립을 보장합니다.
+   e2: Le **pouvoir judiciaire** assure l'application des lois. || **사법권**은 법의 집행을 담당합니다.
+   e3: Le **pouvoir judiciaire** protège les droits des citoyens. || **사법권**은 시민의 권리를 보호합니다.
+   syn: [juridiction, autorité judiciaire, pouvoir judiciaire fédéral] | ant: []
+
+banque centrale [ko] ipa=- | meanings: 중앙은행[고유명사]
+   e1: La **banque centrale** ajuste les taux d'intérêt. || **중앙은행**은 금리를 조정합니다.
+   e2: La **banque centrale** émet la monnaie nationale. || **중앙은행**은 국가 화폐를 발행합니다.
+   e3: La politique de la **banque centrale** est importante pour l'économie. || **중앙은행**의 정책은 경제에 중요합니다.
+   syn: [] | ant: []
+
+taux directeur [ko] ipa=- | meanings: 기준 금리[명사] | 정책 금리[명사]
+   e1: Le **taux directeur** influence les taux d'intérêt bancaires. || **기준 금리**는 은행 금리에 영향을 미칩니다.
+   e2: La banque centrale ajuste le **taux directeur** chaque trimestre. || 중앙은행은 매 분기마다 **정책 금리**를 조정합니다.
+   syn: [] | ant: []
+
+taux de change [ko] ipa=- | meanings: 환율[명사]
+   e1: Le **taux de change** influence le coût des voyages. || **환율**이 여행 경비에 영향을 줍니다.
+   e2: Le **taux de change** varie selon le marché international. || **환율**은 국제 시장에 따라 변동합니다.
+   e3: Investir en tenant compte du **taux de change** est important. || **환율**을 고려한 투자가 중요합니다.
+   syn: [] | ant: []
+
+spéculation [ko] ipa=spekylasjɔ̃ | meanings: 투기[명사] | 추론[명사]
+   e1: La **spéculation** immobilière a augmenté cette année. || 올해 **투기**가 증가했다.
+   e2: Sa **spéculation** sur les causes du problème est intéressante. || 그의 문제 원인에 관한 **추론**은 흥미롭다.
+   syn: [pari, investissement, conjecture, hypothèse] | ant: []
+
+spéculer [ko] ipa=spɛkyle | meanings: 투기하다[동사]
+   e1: Il aime **spéculer** sur les marchés financiers. || 그는 금융 시장에서 **투기하는** 것을 좋아해요.
+   e2: Elle décide de **spéculer** sur des actions prometteuses. || 그녀는 유망한 주식에 **투기하기로** 결정했어요.
+   e3: Beaucoup de personnes **spéculent** sur les monnaies virtuelles. || 많은 사람들이 가상화폐에 **투기하고** 있어요.
+   syn: [parier, investir, risquer] | ant: []
+
+délocalisation [ko] ipa=delɔkalizasjɔ̃ | meanings: 해외 이전[명사]
+   e1: La **délocalisation** a affecté plusieurs emplois locaux. || 많은 지역 일자리에 **해외 이전**이 영향을 미쳤다.
+   e2: Cette entreprise évite la **délocalisation** pour soutenir l'économie. || 이 기업은 경제를 지원하기 위해 **해외 이전**을 피한다.
+   e3: Les débats sur la **délocalisation** sont fréquents dans notre pays. || 우리나라는 **해외 이전**에 관한 논쟁이 자주 있다.
+   syn: [externalisation, transfert, relèvement] | ant: []
+
+délocaliser [ko] ipa=de.lɔ.ka.li.ze | meanings: 이전하다, 이전시키다[동사]
+   e1: L'entreprise a décidé de **délocaliser** sa production. || 회사는 생산을 **이전하기로** 결정했다.
+   e2: Ils vont **délocaliser** l'usine à l'étranger. || 그들은 공장을 해외로 **이전할** 것이다.
+   e3: Nous devons **délocaliser** le bureau pour mieux servir les clients. || 우리는 고객들을 더 잘 서비스하기 위해 사무실을 **이전해야** 한다.
+   syn: [transférer, reléguer, exiler] | ant: []
+
+mondialisation [ko] ipa=mɔ̃djalizasjɔ̃ | meanings: 세계화[명사]
+   e1: La **mondialisation** influence les échanges culturels. || **세계화**는 문화 교류에 영향을 미친다.
+   e2: La **mondialisation** crée des opportunités économiques. || **세계화**는 경제적 기회를 창출한다.
+   e3: Les défis de la **mondialisation** sont complexes. || **세계화**의 도전들은 복잡하다.
+   syn: [globalisation, internationalisation] | ant: []
+
+mondialiser [ko] ipa=mɔ̃.dja.li.ze | meanings: 세계화하다[동사]
+   e1: Les entreprises veulent **mondialiser** leurs produits. || 기업들은 그들의 제품을 **세계화하고** 싶어합니다.
+   e2: La technologie aide à **mondialiser** les échanges. || 기술은 교류를 **세계화하는** 데 도움을 줍니다.
+   e3: Ils cherchaient à **mondialiser** leur activité rapidement. || 그들은 그들의 활동을 빠르게 **세계화하려고** 했습니다.
+   syn: [globaliser, internationnaliser, universaliser] | ant: []
+
+libre-échange [ko] ipa=libʁ‿eʃɑ̃ʒ | meanings: 자유 무역[명사]
+   e1: Le **libre-échange** stimule la croissance économique. || **자유 무역**은 경제 성장을 촉진합니다.
+   e2: Les pays signent un accord de **libre-échange**. || 각국은 **자유 무역** 협정을 체결합니다.
+   e3: Le marché bénéficiera du **libre-échange** entre régions. || 시장은 지역 간 **자유 무역**으로 혜택을 받습니다.
+   syn: [] | ant: []
+
+protectionnisme [ko] ipa=pʁɔ.tɛk.sjɔ.nism | meanings: 보호 무역 정책[명사]
+   e1: Le **protectionnisme** vise à protéger les industries locales. || **보호주의**는 지역 산업을 보호하는 것이다.
+   e2: Le débat sur le **protectionnisme** influence la politique économique. || **보호무역주의**에 대한 논쟁이 경제 정책에 영향을 준다.
+   e3: Le gouvernement adopte un **protectionnisme** modéré pour soutenir l'agriculture. || 정부는 농업 지원을 위해 완화된 **보호무역 정책**을 채택한다.
+   syn: [économie fermée, barrière commerciale] | ant: [libre-échange]
+
+protectionniste [ko] ipa=pʁɔtɛksjɔnist | meanings: 보호무역주의자[명사] | 보호무역의[형용사]
+   e1: Le **protectionniste** défend les industries locales. || **보호무역주의자**는 지역 산업을 지지해요.
+   e2: Une politique **protectionniste** peut limiter les importations. || **보호무역** 정책은 수입을 제한할 수 있어요.
+   syn: [interventionniste, nationaliste économique] | ant: []
+
+subvention [ko] ipa=sybvɑ̃sjɔ̃ | meanings: 보조금[명사]
+   e1: Le gouvernement offre une **subvention** aux agriculteurs. || 정부가 농민들에게 **보조금**을 제공합니다.
+   e2: La ville a décidé d'augmenter la **subvention** pour les écoles. || 도시는 학교에 대한 **보조금**을 늘리기로 결정했습니다.
+   e3: Cette association reçoit une **subvention** annuelle importante. || 이 단체는 매년 중요한 **보조금**을 받습니다.
+   syn: [aide financière, financement, allocation] | ant: []
+
+subventionner [ko] ipa=sybvɑ̃sjɔne | meanings: 보조금을 주다[동사]
+   e1: L'État **subventionne** les écoles publiques. || 국가는 공립학교에 **보조금을 준다**.
+   e2: Le gouvernement **subventionne** l'agriculture locale. || 정부는 지역 농업에 **보조금을 준다**.
+   e3: Ils veulent **subventionner** les transports en commun pour les étudiants. || 그들은 학생들에게 대중교통을 **보조금으로 지원하려고 한다**.
+   syn: [financer, aider, soutenir] | ant: []
+
+aide sociale [ko] ipa=- | meanings: 사회복지[명사]
+   e1: L'**aide sociale** améliore la vie des familles. || **사회복지**가 가정의 삶을 향상시킵니다.
+   e2: Il travaille dans le domaine de l'**aide sociale**. || 그는 **사회복지** 분야에서 일합니다.
+   e3: L'**aide sociale** offre un soutien financier aux personnes en difficulté. || **사회복지**는 어려운 사람들에게 재정 지원을 제공합니다.
+   syn: [assistance sociale, secours public] | ant: []
+
+allocation [ko] ipa=alɔkasjɔ̃ | meanings: 수당[명사] | 할당[명사]
+   e1: L'**allocation** familiale aide les parents. || 가족 **수당**은 부모님들을 돕습니다.
+   e2: L'**allocation** des ressources est importante. || 자원의 **할당**이 중요합니다.
+   e3: Il reçoit une **allocation** chômage chaque mois. || 그는 매달 실업 **수당**을 받습니다.
+   syn: [subvention, aide, dotation, répartition] | ant: []
+
+allocation chômage [ko] ipa=- | meanings: 실업 수당[명사]
+   e1: Elle reçoit une **allocation chômage** après son licenciement. || 그녀는 해고 후에 **실업 수당**을 받는다.
+   e2: L'**allocation chômage** aide les personnes sans emploi à vivre. || **실업 수당**은 실직자들이 생활하는 데 도움을 준다.
+   e3: Il demande une **allocation chômage** en attendant un nouveau travail. || 그는 새 직장을 찾는 동안 **실업 수당**을 신청했다.
+   syn: [indemnités chômage, aide au chômage] | ant: []
+
+minimum vital [ko] ipa=- | meanings: 최소 생활비[명사]
+   e1: Le **minimum vital** assure la subsistance des familles. || **최소 생활비**는 가계 생계를 보장합니다.
+   e2: Il est important d'atteindre le **minimum vital** chaque mois. || 매달 **최소 생활비**에 도달하는 것이 중요합니다.
+   syn: [revenu minimum, salaire minimum vital] | ant: []
+
+salaire minimum [ko] ipa=- | meanings: 최저 임금[명사]
+   e1: Le **salaire minimum** a augmenté cette année. || 올해 **최저 임금**이 인상되었다.
+   e2: Ils discutent du **salaire minimum** en politique. || 그들은 정치에서 **최저임금**에 대해 토론하고 있다.
+   e3: Le **salaire minimum** garantit un revenu de base. || **최저임금**은 기본 수입을 보장한다.
+   syn: [revenu minimum, SMIC, rémunération minimale] | ant: []
+
+précarité [ko] ipa=pʁekɑʁite | meanings: 불안정[명사]
+   e1: La **précarité** de cet emploi est préoccupante. || 이 직업의 **불안정**은 걱정스럽다.
+   e2: Il travaille pour lutter contre la **précarité** sociale. || 그는 사회적 **불안정**에 맞서 일한다.
+   e3: La **précarité** financière affecte beaucoup de familles. || 재정적 **불안정**은 많은 가정에 영향을 준다.
+   syn: [instabilité, fragilité, insécurité] | ant: []
+
+précaire [ko] ipa=pʁekɛʁ | meanings: 불안정한[형용사] | 위태로운[형용사]
+   e1: Le travail est **précaire** mais il permet de vivre. || 그 일은 **불안정한** 일이지만 생활할 수 있어요.
+   e2: Sa santé est **précaire** après l'opération. || 그의 건강은 수술 후에 **위태롭다**.
+   e3: Ils vivent dans un logement **précaire** au centre-ville. || 그들은 시내에 **불안정한** 집에서 살고 있다.
+   syn: [instable, fragile, temporaire] | ant: [stable, solide]
+
+auto-entrepreneur [ko] ipa=oto.ɑ̃.tʁə.pʁə.nœʁ | meanings: 개인사업자[명사]
+   e1: Il est devenu **auto-entrepreneur** pour gérer son activité. || 그는 자신의 활동을 관리하기 위해 **개인사업자**가 되었다.
+   e2: De nombreux jeunes choisissent le statut d'**auto-entrepreneur**. || 많은 젊은이들이 **개인사업자** 자격을 선택한다.
+   syn: [entrepreneur individuel, travailleur indépendant] | ant: []
+
+travail informel [ko] ipa=- | meanings: 비공식 노동[명사]
+   e1: Le **travail informel** est courant dans cette région. || 이 지역에서는 **비공식 노동**이 흔합니다.
+   e2: Elle trouve un revenu grâce au **travail informel**. || 그녀는 **비공식 노동**으로 수입을 얻습니다.
+   e3: Le gouvernement veut réduire le **travail informel**. || 정부는 **비공식 노동**을 줄이려고 합니다.
+   syn: [emploi informel, activité non déclarée] | ant: [travail formel, emploi déclaré]
+
+économie souterraine [ko] ipa=- | meanings: 지하경제[명사]
+   e1: L'**économie souterraine** influence les politiques fiscales. || **지하경제**가 세금 정책에 영향을 준다.
+   e2: Les travailleurs vivent souvent de l'**économie souterraine**. || 노동자들은 종종 **지하경제**로 생계를 유지한다.
+   syn: [économie informelle, marché noir] | ant: []

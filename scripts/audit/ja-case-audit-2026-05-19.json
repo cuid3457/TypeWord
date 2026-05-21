@@ -1,0 +1,2128 @@
+[
+  {
+    "word": "42",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "四十二",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は**42**歳で引退した。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7224,
+          "out": 121
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "四十二",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は**42**ページを読んだ。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3189,
+          "out": 134
+        }
+      }
+    }
+  },
+  {
+    "word": "1984",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "천구백팔십사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "千九百八十四",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は**1984**年に生まれました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7229,
+          "out": 131
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "천구백팔십사",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "소설",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "千九百八十四",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "小説",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は**1984**年に生まれた。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "ジョージ・オーウェルの**1984**は有名な小説だ。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3204,
+          "out": 234
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "アットマーク",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "メールアドレスに**@**を入れてください。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7170,
+          "out": 123
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이 기호",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "アットマーク",
+              "partOfSpeech": "記号",
+              "relevanceScore": 100
+            }
+          ],
+          "note": "non_word"
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "メールアドレスに**@**を入れる。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3189,
+          "out": 147
+        }
+      }
+    }
+  },
+  {
+    "word": "NHK",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "NHK",
+          "originalInput": "NHK",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "NHK, 방송국",
+              "partOfSpeech": "固有名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "NHK, 放送局",
+              "partOfSpeech": "固有名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "昨日、**NHK**のニュースを見ました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7165,
+          "out": 134
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "NHK",
+          "originalInput": "NHK",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일본방송협회, 방송국",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "日本放送協会、放送局",
+              "partOfSpeech": "固有名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "毎朝**NHK**のニュースを見ます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3200,
+          "out": 154
+        }
+      }
+    }
+  },
+  {
+    "word": "よろしくお願いします",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "よろしくお願いします",
+          "originalInput": "よろしくお願いします",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4185,
+          "out": 48
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "よろしくお願いします",
+          "reading": [
+            "よろしくおねがいします"
+          ],
+          "originalInput": "よろしくお願いします",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "정중한 부탁 인사(격식)",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "丁寧な依頼の挨拶",
+              "partOfSpeech": "表現",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "初めまして、どうぞ**よろしくお願いします**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5367,
+          "out": 172
+        }
+      }
+    }
+  },
+  {
+    "word": "いただきます",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "いただきます",
+          "originalInput": "いただきます",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "잘 먹겠습니다, 인사말",
+              "partOfSpeech": "감탄사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "식사 전 인사",
+              "partOfSpeech": "感嘆詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "いただきます"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "食事の前にみんなで**いただきます**と言った。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8377,
+          "out": 163
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "いただきます",
+          "reading": [
+            "いただきます"
+          ],
+          "originalInput": "いただきます",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "식사 전 인사(격식)",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "食事の前の挨拶",
+              "partOfSpeech": "表現",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "みんなでそろって**いただきます**と言った。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5366,
+          "out": 176
+        }
+      }
+    }
+  },
+  {
+    "word": "ありがとう",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "ありがとう",
+          "originalInput": "ありがとう",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "고마움, 감사",
+              "partOfSpeech": "感嘆詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "感謝, お礼",
+              "partOfSpeech": "感嘆詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "プレゼントをもらって、**ありがとう**と言った。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8373,
+          "out": 159
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "ありがとう",
+          "originalInput": "ありがとう",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "고마워",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "감사의 인사",
+              "partOfSpeech": "表現",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "友達に**ありがとう**と言った。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "どうも"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5350,
+          "out": 146
+        }
+      }
+    }
+  },
+  {
+    "word": "お疲れ様です",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "お疲れ様です",
+          "originalInput": "お疲れ様です",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "수고하셨습니다, 수고했어요",
+              "partOfSpeech": "表現"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "수고, 인사말",
+              "partOfSpeech": "表現",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "仕事が終わったら、みんなに**お疲れ様です**と言います。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8381,
+          "out": 176
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "お疲れ様です",
+          "reading": [
+            "おつかれさまです"
+          ],
+          "originalInput": "お疲れ様です",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "수고하셨습니다(격식)",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "労いの挨拶",
+              "partOfSpeech": "表現",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "会議の後、彼は**お疲れ様です**と声をかけた。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5370,
+          "out": 190
+        }
+      }
+    }
+  },
+  {
+    "word": "食べる",
+    "expectedCase": "verb_adj",
+    "classified": "verb_adj",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "食べる",
+          "reading": [
+            "たべる"
+          ],
+          "originalInput": "食べる",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "食事",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "朝ごはんにパンを**食べる**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "いただく",
+            "食す"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8367,
+          "out": 163
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "食べる",
+          "reading": [
+            "たべる"
+          ],
+          "originalInput": "食べる",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "食べる",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "子どもたちはりんごを**食べます**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6799,
+          "out": 165
+        }
+      }
+    }
+  },
+  {
+    "word": "美しい",
+    "expectedCase": "verb_adj",
+    "classified": "verb_adj",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "美しい",
+          "reading": [
+            "うつくしい"
+          ],
+          "originalInput": "美しい",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아름다운",
+              "partOfSpeech": "形容詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "美しい",
+              "partOfSpeech": "形容詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼女の笑顔はとても**美しい**です。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "綺麗",
+            "麗しい"
+          ],
+          "antonyms": [
+            "醜い"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8366,
+          "out": 164
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "美しい",
+          "reading": [
+            "うつくしい"
+          ],
+          "originalInput": "美しい",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아름답다",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "美しい",
+              "partOfSpeech": "形容詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "この庭の花がとても**美しい**です。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "綺麗",
+            "麗しい"
+          ],
+          "antonyms": [
+            "醜い"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6796,
+          "out": 177
+        }
+      }
+    }
+  },
+  {
+    "word": "する",
+    "expectedCase": "verb_adj",
+    "classified": "verb_adj",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "する",
+          "originalInput": "する",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "行う",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は毎朝ジョギングを**する**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8361,
+          "out": 147
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "する",
+          "originalInput": "する",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "する",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "毎朝ジョギングを**します**。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6791,
+          "out": 144
+        }
+      }
+    }
+  },
+  {
+    "word": "見る",
+    "expectedCase": "verb_adj",
+    "classified": "verb_adj",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "見る",
+          "reading": [
+            "みる"
+          ],
+          "originalInput": "見る",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "보다, 관찰하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "보다, 관찰하다",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "私は空を**見る**のが好きです。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "観る",
+            "眺める"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8367,
+          "out": 162
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "見る",
+          "reading": [
+            "みる"
+          ],
+          "originalInput": "見る",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "보다",
+              "partOfSpeech": "동사"
+            },
+            {
+              "definition": "돌보다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "見る",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "世話をする",
+              "partOfSpeech": "動詞",
+              "relevanceScore": 70
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "子どもたちが映画を**見ます**。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "彼は祖母の世話を**見ました**。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "観る",
+            "眺める"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6817,
+          "out": 249
+        }
+      }
+    }
+  },
+  {
+    "word": "コーヒー",
+    "expectedCase": "katakana_only",
+    "classified": "katakana_only",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "コーヒー",
+          "originalInput": "コーヒー",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "커피",
+              "partOfSpeech": "名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "コーヒー",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "こーひー"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "朝はいつも**コーヒー**を飲みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8374,
+          "out": 173
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "コーヒー",
+          "originalInput": "コーヒー",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "커피",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "コーヒー",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "朝に**コーヒー**を飲みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5687,
+          "out": 157
+        }
+      }
+    }
+  },
+  {
+    "word": "マンション",
+    "expectedCase": "katakana_only",
+    "classified": "katakana_only",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "マンション",
+          "originalInput": "マンション",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아파트, 맨션",
+              "partOfSpeech": "名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "アパート, マンション",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "まんしょん"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "新しい**マンション**に引っ越しました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "アパート"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8374,
+          "out": 178
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "マンション",
+          "originalInput": "マンション",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "고층 아파트, 콘도미니엄",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "高層アパートメント、分譲集合住宅",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "友達が新しい**マンション**に引っ越しました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "アパート"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5699,
+          "out": 176
+        }
+      }
+    }
+  },
+  {
+    "word": "クレーム",
+    "expectedCase": "katakana_only",
+    "classified": "katakana_only",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "クレーム",
+          "originalInput": "クレーム",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "불만, 항의",
+              "partOfSpeech": "名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "不満, 苦情",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "くれーむ"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "お客様から**クレーム**が来たので対応しています。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "苦情",
+            "不満"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8375,
+          "out": 166
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "クレーム",
+          "originalInput": "クレーム",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "불만, 항의",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "苦情, 抗議",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "お客様が**クレーム**を言いました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "苦情",
+            "抗議"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5690,
+          "out": 166
+        }
+      }
+    }
+  },
+  {
+    "word": "アメリカ",
+    "expectedCase": "katakana_only",
+    "classified": "katakana_only",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "アメリカ",
+          "originalInput": "アメリカ",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아메리카, 대륙",
+              "partOfSpeech": "固有名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "アメリカ, 大陸",
+              "partOfSpeech": "固有名詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "あめりか"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "夏休みに**アメリカ**へ旅行に行きました。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8381,
+          "out": 184
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "アメリカ",
+          "originalInput": "アメリカ",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미국",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "アメリカ合衆国",
+              "partOfSpeech": "固有名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "来年、**アメリカ**へ旅行します。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5694,
+          "out": 161
+        }
+      }
+    }
+  },
+  {
+    "word": "水",
+    "expectedCase": "single_kanji",
+    "classified": "single_kanji",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "水",
+          "reading": [
+            "みず"
+          ],
+          "originalInput": "水",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "물",
+              "partOfSpeech": "名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "물",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "夏は**水**をたくさん飲みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8359,
+          "out": 155
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "水",
+          "reading": [
+            "みず"
+          ],
+          "originalInput": "水",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "물",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "水",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "暑い日には**水**を飲みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5948,
+          "out": 149
+        }
+      }
+    }
+  },
+  {
+    "word": "月",
+    "expectedCase": "single_kanji",
+    "classified": "single_kanji",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "月",
+          "reading": [
+            "つき"
+          ],
+          "originalInput": "月",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "월",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "月, 天体",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "月, 月間",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "今夜は**月**がとても明るいです。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "彼は来月の**月**末に旅行します。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8389,
+          "out": 227
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "月",
+          "reading": [
+            "つき",
+            "がつ"
+          ],
+          "originalInput": "月",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "달(월)",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "月",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "月(カレンダーの単位)",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "夜空に**月**が輝いています。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "来週の**月**は忙しいです。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5980,
+          "out": 225
+        }
+      }
+    }
+  },
+  {
+    "word": "人",
+    "expectedCase": "single_kanji",
+    "classified": "single_kanji",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "人",
+          "reading": [
+            "ひと"
+          ],
+          "originalInput": "人",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사람",
+              "partOfSpeech": "名詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "人",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100,
+              "gender": "n"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "駅にたくさんの**人**がいます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8359,
+          "out": 154
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "人",
+          "reading": [
+            "ひと",
+            "にん"
+          ],
+          "originalInput": "人",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사람",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "사람 수, 인원",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "人",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "人数",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "公園に**人**がたくさんいます。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "明日は五**人**で食事に行きます。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5968,
+          "out": 225
+        }
+      }
+    }
+  },
+  {
+    "word": "一",
+    "expectedCase": "single_kanji",
+    "classified": "single_kanji",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "一",
+          "originalInput": "一",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "数字の1",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ],
+          "reading": [
+            "いち"
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "時計の針が**一**時を指している。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8365,
+          "out": 158
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "一",
+          "reading": [
+            "いち",
+            "ひと"
+          ],
+          "originalInput": "一",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "하나",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "一",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "一つ",
+              "partOfSpeech": "数詞",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "**一** 時に会いましょう。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5968,
+          "out": 187
+        }
+      }
+    }
+  },
+  {
+    "word": "日本語",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "日本語",
+          "reading": [
+            "にほんご"
+          ],
+          "originalInput": "日本語",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일본어",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "日本の言語",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "彼は**日本語**を勉強しています。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8368,
+          "out": 156
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "日本語",
+          "reading": [
+            "にほんご"
+          ],
+          "originalInput": "日本語",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "일본어",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "日本の言語",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "花子は**日本語**を毎日勉強します。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6078,
+          "out": 160
+        }
+      }
+    }
+  },
+  {
+    "word": "学校",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "学校",
+          "reading": [
+            "がっこう"
+          ],
+          "originalInput": "学校",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "학교",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "学校",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "毎朝、**学校**へ歩いて行きます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8361,
+          "out": 156
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "学校",
+          "reading": [
+            "がっこう"
+          ],
+          "originalInput": "学校",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "학교",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "学校",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "子どもたちは**学校**で遊びます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6071,
+          "out": 156
+        }
+      }
+    }
+  },
+  {
+    "word": "元気",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "元気",
+          "reading": [
+            "げんき"
+          ],
+          "originalInput": "元気",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "건강, 활기",
+              "partOfSpeech": "名詞"
+            },
+            {
+              "definition": "건강한, 활기찬",
+              "partOfSpeech": "形容詞"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "健康, 活力",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100,
+              "gender": "n"
+            },
+            {
+              "definition": "健康な, 活発な",
+              "partOfSpeech": "形容詞",
+              "relevanceScore": 90,
+              "gender": "n"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "子供たちの**元気**が公園にあふれている。",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "田中さんはいつも**元気**で明るいです。",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "健康",
+            "活力"
+          ],
+          "antonyms": [
+            "不健康",
+            "病気"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8406,
+          "out": 294
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "元気",
+          "reading": [
+            "げんき"
+          ],
+          "originalInput": "元気",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "건강, 활기",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "健康, 活力",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "子どもたちはみんな**元気**です。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "健康",
+            "活力"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6082,
+          "out": 171
+        }
+      }
+    }
+  },
+  {
+    "word": "お茶",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "お茶",
+          "reading": [
+            "おちゃ"
+          ],
+          "originalInput": "お茶",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "차",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "茶",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "午後に**お茶**を飲んで休みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8364,
+          "out": 145
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "お茶",
+          "reading": [
+            "おちゃ"
+          ],
+          "originalInput": "お茶",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "차",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "茶",
+              "partOfSpeech": "名詞",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "朝はいつも**お茶**を飲みます。",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "茶"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 6074,
+          "out": 159
+        }
+      }
+    }
+  }
+]

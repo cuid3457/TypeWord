@@ -1,0 +1,367 @@
+{
+  "summary": {
+    "schema": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "confidence": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "meaning_count": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "pos_terminology": {
+      "pass": 1399,
+      "total": 1400
+    },
+    "sentence_rejected": {
+      "pass": 1393,
+      "total": 1400
+    },
+    "typo_handled": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "cross_script_purity": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "example_distribution": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "syn_no_paren": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "headword_preserved": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "sensitive_metaling": {
+      "pass": 1400,
+      "total": 1400
+    }
+  },
+  "consistency_violations": [
+    {
+      "source": "en",
+      "word": "hand",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=1, zh-CN=2, fr=2, de=2, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "day",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=2, es=2, it=1"
+    },
+    {
+      "source": "en",
+      "word": "crane",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=1, es=2, it=1"
+    },
+    {
+      "source": "en",
+      "word": "mine",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=2, it=3"
+    },
+    {
+      "source": "en",
+      "word": "right",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "rock",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "present",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "star",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=3, zh-CN=3, fr=3, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "sole",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "table",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "7",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=1, zh-CN=1, fr=1, de=1, es=1, it=1"
+    },
+    {
+      "source": "en",
+      "word": "1",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=2, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "actual",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=2, de=2, es=1, it=2"
+    }
+  ],
+  "failures_by_check": {
+    "schema": [],
+    "confidence": [],
+    "meaning_count": [],
+    "pos_terminology": [
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "@",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "@",
+        "meanings": [
+          {
+            "definition": "arobase",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      }
+    ],
+    "sentence_rejected": [
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "이름을 묻는 질문",
+            "partOfSpeech": "표현",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "名前を尋ねる表現",
+            "partOfSpeech": "表現",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "询问身份的用语",
+            "partOfSpeech": "表达",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "question pour demander l'identité",
+            "partOfSpeech": "expression",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "Frage nach der Identität",
+            "partOfSpeech": "Ausdruck",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "pregunta para pedir la identidad",
+            "partOfSpeech": "expresión",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "espressione per chiedere l'identità",
+            "partOfSpeech": "espressione",
+            "relevanceScore": 100
+          }
+        ]
+      }
+    ],
+    "typo_handled": [],
+    "cross_script_purity": [],
+    "example_distribution": [],
+    "syn_no_paren": [],
+    "headword_preserved": [],
+    "sensitive_metaling": []
+  }
+}

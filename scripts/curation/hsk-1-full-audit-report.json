@@ -1,0 +1,155 @@
+{
+  "scanned": 300,
+  "flagsCount": 18,
+  "buckets": {
+    "H12": 20
+  },
+  "flags": [
+    {
+      "word": "同学",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "没关系",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "学生",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "不客气",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e0:borderline_long(13)",
+        "H12:e1:borderline_long(14)"
+      ]
+    },
+    {
+      "word": "下雨",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e2:borderline_long(14)"
+      ]
+    },
+    {
+      "word": "怎么样",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "后面",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e2:borderline_long(14)"
+      ]
+    },
+    {
+      "word": "杯子",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "买",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "苹果",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "时候",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "漂亮",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "商店",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e0:borderline_long(13)",
+        "H12:e1:borderline_long(14)"
+      ]
+    },
+    {
+      "word": "商店",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "岁",
+      "rk": "",
+      "lang": "ko",
+      "issues": [
+        "H12:e1:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "学习",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "医院",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e2:borderline_long(13)"
+      ]
+    },
+    {
+      "word": "桌子",
+      "rk": "",
+      "lang": "en",
+      "issues": [
+        "H12:e1:borderline_long(14)"
+      ]
+    }
+  ]
+}

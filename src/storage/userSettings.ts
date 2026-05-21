@@ -29,6 +29,8 @@ export interface UserSettings {
   voiceGender?: 'F' | 'M';
   /** TTS playback rate. 1.0 = natural per-voice speed (with correction); 0.8/1.2 = ±20%. */
   voiceRate?: 0.8 | 1.0 | 1.2;
+  /** Auto-play TTS at the start of each review card. Defaults to true. */
+  autoPlayTts?: boolean;
 }
 
 type Listener = (settings: UserSettings | null) => void;

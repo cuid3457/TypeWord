@@ -1,0 +1,3471 @@
+# delf-a1-part-1 (fr → en,ko) | 300 words
+
+bonjour [en] ipa=bɔ̃ʒuʁ | meanings: hello[interjection] | good morning[interjection]
+   e1: Je dis **bonjour** à mes voisins. || I say **hello** to my neighbors.
+   e2: Elle m'a souhaité un **bonjour** ensoleillé. || She wished me a sunny **good morning**.
+   syn: [salut, coucou] | ant: []
+
+bonjour [ko] ipa=bɔ̃ʒuʁ | meanings: 안녕하세요[감탄사] | 좋은 아침[명사]
+   e1: Elle a dit **bonjour** en entrant dans la pièce. || 그녀는 방에 들어서면서 인사말로 **안녕하세요**라고 말했다.
+   e2: Le **bonjour** du matin est très important. || 아침 **인사**는 매우 중요하다.
+   syn: [] | ant: []
+
+salut [en] ipa=sa.ly | meanings: hi, hello[interjection] | greeting[noun]
+   e1: Je lui ai dit **salut** ce matin. || I said **hi** to him this morning.
+   e2: Le **salut** entre amis est chaleureux. || The **greeting** among friends is warm.
+   e3: Elle a répondu vite avec un simple **salut**. || She quickly replied with a simple **hi**.
+   syn: [bonjour, coucou] | ant: []
+
+salut [ko] ipa=saly | meanings: 안녕[감탄사] | 인사[명사]
+   e1: Je dis **salut** à mes amis. || 나는 내 친구들에게 **안녕**이라고 말해요.
+   e2: Le **salut** est important dans la culture française. || 프랑스 문화에서는 **인사**가 중요해요.
+   syn: [bonjour, coucou, hé] | ant: []
+
+bonsoir [en] ipa=bɔ̃swaʁ | meanings: good evening[interjection] | good evening[noun]
+   e1: Elle dit toujours **bonsoir** en entrant. || She always says **good evening** when entering.
+   e2: Le **bonsoir** était chaleureux et sincère. || The **good evening** was warm and sincere.
+   syn: [] | ant: []
+
+bonsoir [ko] ipa=bɔ̃.swaʁ | meanings: 안녕, 저녁 인사[감탄사]
+   e1: Je dis **bonsoir** en entrant. || 나는 들어가면서 **안녕**이라고 말했어요.
+   e2: Ils ont dit **bonsoir** avant de quitter. || 그들은 떠나기 전에 **안녕**이라고 인사했어요.
+   e3: Chaque soir, je dis toujours **bonsoir** à ma famille. || 매일 저녁 나는 가족에게 항상 **안녕**이라고 말해요.
+   syn: [salut, coucou] | ant: []
+
+au revoir [en] ipa=- | meanings: goodbye[expression]
+   e1: J'ai dit **au revoir** à mes amis après la fête. || I said **goodbye** to my friends after the party.
+   e2: Nous avons échangé un chaleureux **au revoir** ce matin. || We exchanged a warm **goodbye** this morning.
+   syn: [adieu, ciao, salut] | ant: []
+
+au revoir [ko] ipa=- | meanings: 안녕, 작별 인사[표현]
+   e1: Nous avons dit **au revoir** à nos amis. || 우리는 친구들에게 **안녕** 인사를 했어요.
+   e2: Elle a murmuré **au revoir** avant de partir. || 그녀는 떠나기 전에 **안녕**이라고 속삭였어요.
+   syn: [adieu, à bientôt, salut] | ant: []
+
+à bientôt [en] ipa=- | meanings: see you soon[expression]
+   e1: Je te dis **à bientôt** après le déjeuner. || I say **see you soon** to you after lunch.
+   e2: Nous avons planifié de nous voir **à bientôt**. || We planned to see each other **soon**.
+   e3: Elle a écrit une lettre se terminant par **à bientôt**. || She wrote a letter ending with **see you soon**.
+   syn: [au revoir, à tout à l'heure] | ant: []
+
+à bientôt [ko] ipa=- | meanings: 곧 다시 뵙겠습니다[표현]
+   e1: Je te dis **à bientôt** chez moi. || 나는 너에게 집에서 **곧 다시 뵙겠습니다**라고 말해요.
+   e2: Merci, et **à bientôt** pour la fête. || 고마워요, 그리고 파티에서 **곧 다시 뵙겠습니다**.
+   syn: [à tout à l'heure, à demain, à plus tard] | ant: []
+
+bonne nuit [en] ipa=- | meanings: good night[expression]
+   e1: Je te souhaite une **bonne nuit** pleine de rêves doux. || I wish you a **good night** full of sweet dreams.
+   e2: **Bonne nuit**, prends soin de toi. || **Good night**, take care of yourself.
+   e3: Après le film, elle a dit **bonne nuit** et est partie. || After the movie, she said **good night** and left.
+   syn: [] | ant: []
+
+bonne nuit [ko] ipa=- | meanings: 안녕히 주무세요[표현]
+   e1: Avant de dormir, elle a dit **bonne nuit**. || 자기 전에 그녀는 **안녕히 주무세요**라고 말했다.
+   e2: Je t'envoie un message pour te souhaiter une **bonne nuit**. || 나는 너에게 **안녕히 주무세요**라는 메시지를 보낸다.
+   e3: Après la soirée, ils se sont dit **bonne nuit**. || 저녁 후에 그들은 서로 **안녕히 주무세요**라고 인사했다.
+   syn: [dors bien, fais de beaux rêves] | ant: []
+
+merci [en] ipa=mɛʁ.si | meanings: thank you[expression]
+   e1: Je dis **merci** pour ton aide. || I say **thank you** for your help.
+   e2: Elle murmure **merci** après le cadeau. || She whispers **thank you** after the gift.
+   e3: Ils ont dit **merci** à leurs amis. || They said **thank you** to their friends.
+   syn: [remerciement, gratitude, reconnaissance] | ant: []
+
+merci [ko] ipa=mɛʁsi | meanings: 감사, 고마움[명사] | 고마워요, 감사합니다[표현]
+   e1: Un simple **merci** peut réchauffer le cœur. || 간단한 **감사**가 마음을 따뜻하게 할 수 있어요.
+   e2: Je vous dis **merci** pour votre aide. || 도움을 주셔서 **감사합니다**.
+   syn: [remerciement, gratitude] | ant: []
+
+s'il vous plaît [en] ipa=- | meanings: please[expression]
+   e1: Donnez-moi un verre d'eau, **s'il vous plaît**. || Give me a glass of water, **please**.
+   e2: Pouvez-vous fermer la porte, **s'il vous plaît**? || Can you close the door, **please**?
+   e3: Aidez-moi avec mes devoirs, **s'il vous plaît**. || Help me with my homework, **please**.
+   syn: [] | ant: []
+
+s'il vous plaît [ko] ipa=- | meanings: 부디, 제발[표현]
+   e1: Donnez-moi un café, **s'il vous plaît**. || 커피를 한잔 주세요, **부디**.
+   e2: Fermez la porte, **s'il vous plaît**. || 문을 닫아 주세요, **부디**.
+   syn: [] | ant: []
+
+de rien [en] ipa=- | meanings: you are welcome[expression]
+   e1: Merci pour votre aide, **de rien** ! || Thank you for your help, **you're welcome**!
+   e2: Elle a répondu **de rien** après le compliment. || She said **you're welcome** after the compliment.
+   e3: Lorsque tu remercies, réponds toujours **de rien**. || When you say thank you, always respond with **you're welcome**.
+   syn: [je vous en prie, pas de quoi, avec plaisir] | ant: []
+
+de rien [ko] ipa=- | meanings: 천만에요[표현]
+   e1: Merci pour votre aide, **de rien**. || 도와줘서 고마워요, **천만에요**.
+   e2: Tu as aimé le cadeau ? **De rien** ! || 선물 마음에 들었어? **천만에요**!
+   e3: Il a dit 'merci' et j'ai répondu '**de rien**'. || 그가 '고마워'라고 말했고 저는 '**천만에요**'라고 대답했어요.
+   syn: [il n'y a pas de quoi, avec plaisir, je vous en prie] | ant: []
+
+pardon [en] ipa=paʁdɔ̃ | meanings: excuse me[interjection] | forgiveness[noun]
+   e1: Je dis **pardon** avant de traverser. || I say **pardon** before crossing.
+   e2: Elle a demandé **pardon** pour son erreur. || She asked for **pardon** for her mistake.
+   e3: Un simple **pardon** peut tout changer. || A simple **pardon** can change everything.
+   syn: [excusez-moi, désolé, répardon] | ant: []
+
+pardon [ko] ipa=paʁdɔ̃ | meanings: 용서[명사] | 실례합니다[감탄사]
+   e1: Je demande le **pardon** pour mon erreur. || 나는 내 실수에 대해 **용서**를 구합니다.
+   e2: **Pardon**, puis-je entrer ? || **실례합니다**, 들어가도 될까요?
+   syn: [excuse, indulgence] | ant: []
+
+excusez-moi [en] ipa=- | meanings: excuse me[expression] | pardon me[expression]
+   e1: **Excusez-moi**, où est la bibliothèque? || **Excuse me**, where is the library?
+   e2: **Excusez-moi** de vous interrompre, mais j'ai une question. || **Excuse me** for interrupting you, but I have a question.
+   e3: **Excusez-moi**, je n'ai pas entendu ce que vous avez dit. || **Pardon me**, I did not hear what you said.
+   syn: [pardon, désolé(e), je vous demande pardon] | ant: []
+
+excusez-moi [ko] ipa=ɛkskyze mwa | meanings: 죄송합니다[감탄사] | 실례합니다[감탄사]
+   e1: **Excusez-moi**, je suis en retard. || **죄송합니다**, 제가 늦었어요.
+   e2: **Excusez-moi**, où sont les toilettes ? || **실례합니다**, 화장실이 어디에 있나요?
+   syn: [] | ant: []
+
+désolé [en] ipa=dezɔle | meanings: sorry[adjective] | regretful[adjective]
+   e1: Je suis **désolé** pour le retard. || I am **sorry** for the delay.
+   e2: Elle était **désolée** d'avoir fait une erreur. || She was **regretful** for having made a mistake.
+   e3: Nous sommes **désolés** de ne pas pouvoir venir. || We are **sorry** we cannot come.
+   syn: [navré, contrit, affligé] | ant: [content, heureux]
+
+désolé [ko] ipa=dezole | meanings: 미안한[형용사] | 유감[명사]
+   e1: Je suis **désolé** pour mon erreur. || 나는 내 실수에 대해 **미안해요**.
+   e2: C'est un **désolé** profond pour la situation. || 이 상황에 대한 깊은 **유감**입니다.
+   e3: Elle a dit **désolé** après avoir cassé la tasse. || 그녀는 컵을 깨고 나서 **미안하다고** 말했다.
+   syn: [navré, regrettable] | ant: []
+
+oui [en] ipa=wi | meanings: yes[adverb]
+   e1: Elle a dit **oui** à la proposition. || She said **yes** to the proposal.
+   e2: Tu viens avec nous ? **Oui**, bien sûr. || Are you coming with us? **Yes**, of course.
+   e3: Il a répondu simplement **oui**. || He simply answered **yes**.
+   syn: [] | ant: []
+
+oui [ko] ipa=wi | meanings: 예[감탄사]
+   e1: Elle a dit **oui** avec un sourire. || 그녀가 미소 지으며 **예**라고 말했다.
+   e2: J'aime ce plat, je réponds **oui**. || 나는 이 음식을 좋아해서 **예**라고 대답했다.
+   syn: [] | ant: []
+
+non [en] ipa=nɔ̃ | meanings: no[adverb]
+   e1: Je dis **non** à cette proposition. || I say **no** to this proposal.
+   e2: Elle répond toujours **non** poliment. || She always answers **no** politely.
+   e3: Nous avons dit **non** à l'invitation. || We said **no** to the invitation.
+   syn: [pas, aucunement, nullement] | ant: []
+
+non [ko] ipa=nɔ̃ | meanings: 아니요[감탄사]
+   e1: Je dis **non** à ce projet. || 나는 그 프로젝트에 **아니요**라고 말해요.
+   e2: **Non**, merci pour votre aide. || **아니요**, 도와주셔서 감사합니다.
+   e3: Elle répond toujours par un grand **non**. || 그녀는 항상 크게 **아니요**로 대답해요.
+   syn: [] | ant: []
+
+peut-être [en] ipa=pø.t‿ɛtʁ | meanings: maybe[adverb]
+   e1: **Peut-être** qu'il viendra demain. || **Maybe** he will come tomorrow.
+   e2: Nous irons **peut-être** au parc cet après-midi. || We will **maybe** go to the park this afternoon.
+   e3: **Peut-être** que le gâteau sera délicieux. || **Maybe** the cake will be delicious.
+   syn: [peut-être bien, sans doute] | ant: []
+
+peut-être [ko] ipa=pøt‿ɛtʁ | meanings: 아마[부사]
+   e1: **Peut-être** qu'il viendra demain. || 그는 내일 **아마** 올 것이다.
+   e2: Nous irons **peut-être** à la plage cet été. || 우리는 이번 여름에 **아마** 해변에 갈 것이다.
+   e3: **Peut-être** qu'elle aime ce livre. || 그녀가 이 책을 **아마** 좋아할 것이다.
+   syn: [peut-être que, possiblement, éventuellement] | ant: []
+
+d'accord [en] ipa=- | meanings: agreed[expression] | okay[expression]
+   e1: Nous sommes tous **d'accord** sur ce plan. || We all **agree** on this plan.
+   e2: Elle a dit qu'elle était **d'accord** avec la proposition. || She said she was in **agreement** with the proposal.
+   e3: Tu viens ce soir ? — **D'accord** ! || Are you coming tonight? — **Okay**!
+   syn: [] | ant: []
+
+d'accord [ko] ipa=da.kɔʁ | meanings: 알겠다, 좋아, 동의[감탄사]
+   e1: Tu viens avec nous ? — Oui, **d'accord**. || 너 우리와 같이 가니? — 그래, **알겠다**.
+   e2: Si tu veux, c'est **d'accord** pour demain. || 네가 원한다면, 내일 **괜찮아**.
+   e3: Il est important d'être **d'accord** sur les règles. || 규칙에 **동의**하는 것이 중요하다.
+   syn: [oui, entendu, bien] | ant: []
+
+voilà [en] ipa=vwa.la | meanings: here is, there is[expression]
+   e1: **Voilà** la clé que tu cherches. || **Here is** the key you are looking for.
+   e2: **Voilà** le livre que j’ai terminé. || **Here is** the book I finished.
+   e3: Regarde, **voilà** les fleurs du jardin. || Look, **here** are the flowers from the garden.
+   syn: [tiens, tiens voilà] | ant: []
+
+voilà [ko] ipa=vwa.la | meanings: 자, 여기 있다[표현]
+   e1: **Voilà** le cadeau que je t'ai promis. || 네게 약속한 선물이 **자** 여기 있다.
+   e2: Tu cherches le livre ? **Voilà**. || 책을 찾고 있니? **자**, 여기 있어.
+   e3: Et **voilà**, la table est prête. || 그리고 **자**, 테이블이 준비되었어.
+   syn: [tiens, vois, regarde] | ant: []
+
+monsieur [en] ipa=məsjø | meanings: mister, sir[noun]
+   e1: Le **monsieur** a souri à la vendeuse. || The **mister** smiled at the saleswoman.
+   e2: Puis-je vous aider, **monsieur** ? || May I help you, **sir**?
+   e3: Ce **monsieur** est très gentil. || This **mister** is very kind.
+   syn: [messire] | ant: []
+
+monsieur [ko] ipa=məsjø | meanings: 남자, 신사[명사] | 선생님, 씨[명사]
+   e1: Le **monsieur** porte un chapeau élégant. || **신사**가 멋진 모자를 쓰고 있어요.
+   e2: Bonjour, **monsieur**, comment allez-vous aujourd'hui? || 안녕하세요, **선생님**, 오늘 잘 지내세요?
+   syn: [homme, gentleman] | ant: []
+
+madame [en] ipa=madam | meanings: madam, woman[noun] | Mrs[expression]
+   e1: La **madame** porte un joli chapeau. || The **madam** is wearing a lovely hat.
+   e2: Je vais parler à **madame** Dupont demain. || I will talk to **Mrs** Dupont tomorrow.
+   syn: [dame, femme] | ant: []
+
+madame [ko] ipa=madam | meanings: 부인[명사] | 여사[명사]
+   e1: La **madame** porte un joli chapeau. || **부인**이 예쁜 모자를 쓰고 있어요.
+   e2: La **madame** a donné un discours élégant. || **여사**가 우아한 연설을 했어요.
+   syn: [dame, femme, épouse] | ant: []
+
+mademoiselle [en] ipa=madmwazɛl | meanings: miss[noun]
+   e1: La **mademoiselle** porte une robe bleue. || The **miss** is wearing a blue dress.
+   e2: J'ai vu une **mademoiselle** dans le parc ce matin. || I saw a **miss** in the park this morning.
+   syn: [demoiselle, melle] | ant: []
+
+mademoiselle [ko] ipa=mad.mwa.zɛl | meanings: 아씨[명사] | 미혼 여성에 대한 존칭[명사]
+   e1: La **mademoiselle** portait une robe élégante. || **아씨**가 우아한 드레스를 입었어요.
+   e2: Je vais appeler la **mademoiselle** pour vous aider. || 제가 도와드리려고 **미혼 여성**을 부를게요.
+   syn: [demoiselle, jeune fille] | ant: []
+
+je [en] ipa=ʒə | meanings: I[pronoun]
+   e1: **Je** vais au marché. || **I** am going to the market.
+   e2: **Je** lis un bon livre. || **I** am reading a good book.
+   e3: **Je** prépare le dîner ce soir. || **I** am preparing dinner tonight.
+   syn: [] | ant: []
+
+je [ko] ipa=ʒə | meanings: 나[대명사]
+   e1: **Je** suis content aujourd'hui. || **나**는 오늘 기뻐요.
+   e2: Est-ce que **je** peux venir avec toi ? || **내가** 너와 함께 가도 될까요?
+   syn: [] | ant: []
+
+tu [en] ipa=ty | meanings: you[pronoun]
+   e1: Est-ce que **tu** viens à la fête ce soir ? || Are **you** coming to the party tonight?
+   e2: Je t'aime parce que **tu** es gentil. || I love you because **you** are kind.
+   e3: **Tu** as fait un très bon travail. || **You** did a very good job.
+   syn: [] | ant: []
+
+tu [ko] ipa=ty | meanings: 너[대명사]
+   e1: **Tu** es mon ami. || **너**는 내 친구예요.
+   e2: Est-ce que **tu** viens ce soir? || **너**는 오늘 밤에 올 거니?
+   e3: **Tu** as une belle voix. || **너**는 목소리가 아름다워요.
+   syn: [] | ant: []
+
+il [en] ipa=il | meanings: he[pronoun] | it[pronoun]
+   e1: **Il** lit un livre chaque soir. || **He** reads a book every evening.
+   e2: **Il** fait froid aujourd'hui. || **It** is cold today.
+   e3: **Il** aime écouter la musique. || **He** likes to listen to music.
+   syn: [] | ant: []
+
+il [ko] ipa=il | meanings: 그, 그는[대명사]
+   e1: **Il** est mon ami proche. || **그는** 내 가까운 친구예요.
+   e2: **Il** travaille dans le jardin. || **그는** 정원에서 일해요.
+   e3: **Il** aime écouter de la musique. || **그는** 음악 듣는 것을 좋아해요.
+   syn: [] | ant: []
+
+elle [en] ipa=ɛl | meanings: she[pronoun] | her[pronoun]
+   e1: **Elle** aime lire dans le jardin. || **She** loves reading in the garden.
+   e2: Je lui ai donné le livre parce que **elle** le voulait. || I gave **her** the book because she wanted it.
+   e3: **Elle** danse toujours avec un sourire. || **She** always dances with a smile.
+   syn: [] | ant: []
+
+elle [ko] ipa=ɛl | meanings: 그녀[대명사]
+   e1: **Elle** aime lire des livres. || **그녀**는 책을 읽는 것을 좋아해요.
+   e2: **Elle** chante très bien. || **그녀**는 노래를 아주 잘해요.
+   e3: **Elle** marche dans le parc. || **그녀**는 공원에서 걷고 있어요.
+   syn: [] | ant: []
+
+nous [en] ipa=nu | meanings: we[pronoun]
+   e1: **Nous** mangeons ensemble chaque jour. || **We** eat together every day.
+   e2: Après la promenade, **nous** avons bu du thé. || After the walk, **we** drank tea.
+   e3: **Nous** aimons le jardinage au printemps. || **We** love gardening in spring.
+   syn: [] | ant: []
+
+nous [ko] ipa=nu | meanings: 우리[대명사]
+   e1: **Nous** allons au parc cet après-midi. || 오늘 오후에 **우리**가 공원에 갑니다.
+   e2: Demain, **nous** visiterons la bibliothèque. || 내일 **우리**가 도서관을 방문할 것입니다.
+   e3: **Nous** aimons cette chanson douce. || 이 부드러운 노래를 **우리**가 좋아합니다.
+   syn: [] | ant: []
+
+vous [en] ipa=vu | meanings: you[pronoun]
+   e1: Est-ce que **vous** venez ce soir ? || Are **you** coming tonight?
+   e2: **Vous** avez un beau jardin. || **You** have a beautiful garden.
+   e3: **Vous** parlez très bien français. || **You** speak French very well.
+   syn: [] | ant: []
+
+vous [ko] ipa=vu | meanings: 당신, 너희[대명사]
+   e1: Est-ce que **vous** venez à la fête ce soir ? || 오늘 밤 파티에 **당신** 오나요?
+   e2: **Vous** avez fait un excellent travail. || **당신**은 훌륭한 일을 했어요.
+   e3: **Vous** êtes invités à dîner demain. || 내일 저녁 식사에 **초대받았어요**.
+   syn: [] | ant: []
+
+ils [en] ipa=il | meanings: they[pronoun]
+   e1: **Ils** jouent dans le parc tous les jours. || **They** play in the park every day.
+   e2: Demain, **ils** partiront en voyage. || **They** will leave on a trip tomorrow.
+   syn: [eux, ceux] | ant: []
+
+ils [ko] ipa=il | meanings: 그들[대명사]
+   e1: **Ils** jouent dans le parc. || **그들**은 공원에서 논다.
+   e2: **Ils** parlent très fort. || **그들**은 아주 크게 말한다.
+   e3: **Ils** ont acheté un cadeau pour toi. || **그들**은 너에게 줄 선물을 샀다.
+   syn: [] | ant: []
+
+elles [en] ipa=ɛl | meanings: they[pronoun]
+   e1: **Elles** aiment lire dans le parc. || **They** like to read in the park.
+   e2: **Elles** chantent une chanson joyeuse. || **They** sing a happy song.
+   syn: [elles-mêmes] | ant: []
+
+elles [ko] ipa=ɛl | meanings: 그녀들[대명사]
+   e1: **Elles** jouent dans le jardin. || **그녀들**은 정원에서 논다.
+   e2: **Elles** aiment la musique classique. || **그녀들**은 클래식 음악을 좋아한다.
+   e3: **Elles** préparent le dîner ensemble. || **그녀들**은 함께 저녁을 준비한다.
+   syn: [] | ant: []
+
+on [en] ipa=ɔ̃ | meanings: one, we, people[pronoun]
+   e1: **On** va au parc cet après-midi. || **One** is going to the park this afternoon.
+   e2: **On** doit toujours respecter les autres. || **We** must always respect others.
+   e3: **On** pense souvent à l'avenir avec espoir. || **People** often think about the future with hope.
+   syn: [nous, quelqu'un, les gens] | ant: []
+
+on [ko] ipa=ɔ̃ | meanings: 사람들, 우리[대명사]
+   e1: **On** mange ensemble ce soir. || 오늘 저녁에 **우리** 함께 먹어요.
+   e2: **On** va au parc demain. || 내일 **사람들**이 공원에 가요.
+   e3: **On** parle beaucoup dans cette ville. || 이 도시에서는 **사람들**이 많이 말해요.
+   syn: [nous, quelqu'un, tout le monde] | ant: []
+
+moi [en] ipa=mwa | meanings: me[pronoun]
+   e1: C'est **moi** qui prépare le repas. || It is **me** who is preparing the meal.
+   e2: Tu peux compter sur **moi**. || You can count on **me**.
+   e3: Donne-le à **moi**, s'il te plaît. || Give it to **me**, please.
+   syn: [] | ant: []
+
+moi [ko] ipa=mwa | meanings: 나[대명사]
+   e1: C'est **moi** qui cuisine ce soir. || 오늘 저녁에 요리하는 사람은 **나**예요.
+   e2: **Moi**, j'aime le chocolat. || **나**는 초콜릿을 좋아해요.
+   e3: Est-ce que **moi** je peux venir ? || 내가 올 수 있**나**요?
+   syn: [] | ant: []
+
+mon [en] ipa=mɔ̃ | meanings: my[pronoun]
+   e1: Voici **mon** livre préféré. || Here is **my** favorite book.
+   e2: J'aime **mon** jardin au printemps. || I love **my** garden in spring.
+   syn: [ma, mes] | ant: []
+
+mon [ko] ipa=mɔ̃ | meanings: 내, 나의[대명사]
+   e1: C'est **mon** livre préféré. || 이것은 **나의** 가장 좋아하는 책입니다.
+   e2: Je prends **mon** café avec du lait. || 나는 **내** 커피에 우유를 넣습니다.
+   syn: [le mien, la mienne, les miens, les miennes] | ant: []
+
+ma [en] ipa=ma | meanings: my[pronoun]
+   e1: Voici **ma** maison. || Here is **my** house.
+   e2: Regarde **ma** voiture rouge. || Look at **my** red car.
+   syn: [] | ant: []
+
+ma [ko] ipa=ma | meanings: 나의, 내[대명사]
+   e1: C'est **ma** maison. || 이것은 **내** 집이에요.
+   e2: Voici **ma** voiture. || 여기 **내** 자동차가 있어요.
+   e3: Je partage **ma** nourriture. || 나는 **내** 음식을 나누어요.
+   syn: [] | ant: []
+
+mes [en] ipa=mɛ | meanings: my[pronoun]
+   e1: Ce sont **mes** livres préférés. || These are **my** favorite books.
+   e2: J'ai rangé **mes** vêtements dans l'armoire. || I put away **my** clothes in the wardrobe.
+   e3: Voici **mes** clés pour la maison. || Here are **my** keys for the house.
+   syn: [] | ant: []
+
+mes [ko] ipa=mɛ | meanings: 나의, 내[대명사]
+   e1: Ce sont **mes** fleurs préférées. || 이것들은 **나의** 가장 좋아하는 꽃입니다.
+   e2: J'ai rangé **mes** livres sur l'étagère. || 나는 **내** 책들을 책꽂이에 정리했어요.
+   e3: Voici **mes** clés de la maison. || 여기 **내** 집 열쇠입니다.
+   syn: [] | ant: []
+
+ton [en] ipa=tɔ̃ | meanings: your[pronoun] | ton[noun]
+   e1: Voici **ton** dessin préféré. || Here is **your** favorite drawing.
+   e2: Le camion transporte un **ton** de marchandises. || The truck carries a **ton** of goods.
+   e3: N'oublie pas **ton** parapluie aujourd'hui. || Don't forget **your** umbrella today.
+   syn: [] | ant: []
+
+ton [ko] ipa=tɔ̃ | meanings: 너의, 당신의[형용사] | 톤[명사]
+   e1: Voici **ton** chapeau préféré. || 이것은 **너의** 가장 좋아하는 모자입니다.
+   e2: Le **ton** de sa voix est chaleureux. || 그의 목소리 **톤**은 따뜻합니다.
+   syn: [votre, tes] | ant: []
+
+notre [en] ipa=nɔtʁ | meanings: our[pronoun]
+   e1: Nous avons aimé **notre** voyage en montagne. || We loved **our** mountain trip.
+   e2: Voici **notre** maison, construite l'année dernière. || Here is **our** house, built last year.
+   e3: **Notre** famille se réunit chaque dimanche. || **Our** family gathers every Sunday.
+   syn: [] | ant: []
+
+notre [ko] ipa=nɔtʁ | meanings: 우리의[형용사]
+   e1: Voici **notre** maison familiale. || 여기가 **우리** 가족의 집입니다.
+   e2: **Notre** jardin est plein de fleurs. || **우리** 정원은 꽃으로 가득합니다.
+   e3: Nous aimons **notre** village tranquille. || 우리는 조용한 **우리** 마을을 좋아합니다.
+   syn: [] | ant: []
+
+votre [en] ipa=vɔtʁ | meanings: your[pronoun]
+   e1: Voici **votre** livre préféré. || Here is **your** favorite book.
+   e2: Est-ce que **votre** maison est grande ? || Is **your** house big?
+   e3: Je respecte toujours **votre** opinion. || I always respect **your** opinion.
+   syn: [] | ant: []
+
+votre [ko] ipa=vɔtʁ | meanings: 당신의, 당신들의[형용사]
+   e1: Voici **votre** cadeau. || 여기 **당신의** 선물이 있습니다.
+   e2: Est-ce que **votre** maison est grande? || **당신의** 집은 크나요?
+   e3: Je connais bien **votre** famille. || 저는 **당신들의** 가족을 잘 압니다.
+   syn: [] | ant: []
+
+leur [en] ipa=lœʁ | meanings: their[pronoun] | to them[pronoun]
+   e1: Ils ont vendu **leur** maison. || They sold **their** house.
+   e2: Je vais donner le livre à **leur**. || I am going to give the book **to them**.
+   e3: Voici **leur** chat préféré. || Here is **their** favorite cat.
+   syn: [] | ant: []
+
+leur [ko] ipa=lœʁ | meanings: 그들의, 그들에게[대명사]
+   e1: Je **leur** donne un cadeau. || 나는 **그들에게** 선물을 줘요.
+   e2: **Leur** maison est très grande. || **그들의** 집은 매우 커요.
+   e3: Ils parlent toujours avec **leur** professeur. || 그들은 항상 **그들의** 선생님과 이야기해요.
+   syn: [à eux, pour eux, de eux] | ant: []
+
+ce [en] ipa=sə | meanings: this, that[pronoun]
+   e1: **Ce** livre est intéressant. || **This** book is interesting.
+   e2: Je préfère **ce** dessert. || I prefer **this** dessert.
+   e3: **Ce** moment est inoubliable. || **This** moment is unforgettable.
+   syn: [] | ant: []
+
+ce [ko] ipa=sə | meanings: 이, 그[대명사]
+   e1: **Ce** livre est intéressant. || **이** 책은 흥미롭다.
+   e2: **Ce** chat est très doux. || 그 고양**이**는 아주 부드럽다.
+   syn: [cela, cela-ci, celui, celle] | ant: []
+
+cette [en] ipa=sɛt | meanings: this, that[pronoun]
+   e1: Je préfère **cette** robe pour la fête. || I prefer **this** dress for the party.
+   e2: Regarde **cette** étoile dans le ciel. || Look at **that** star in the sky.
+   e3: **Cette** maison est très ancienne. || **This** house is very old.
+   syn: [] | ant: []
+
+cette [ko] ipa=sɛt | meanings: 이[형용사]
+   e1: J'aime **cette** chanson. || 나는 **이** 노래를 좋아해요.
+   e2: Regarde **cette** belle peinture. || **이** 아름다운 그림을 봐요.
+   e3: Je vais choisir **cette** robe. || 나는 **이** 드레스를 선택할 거예요.
+   syn: [] | ant: []
+
+ces [en] ipa=se | meanings: these[pronoun]
+   e1: J'aime **ces** fleurs dans le jardin. || I like **these** flowers in the garden.
+   e2: Regarde **ces** étoiles ce soir. || Look at **these** stars tonight.
+   e3: Nous avons mangé **ces** fruits délicieux. || We ate **these** delicious fruits.
+   syn: [] | ant: []
+
+ces [ko] ipa=se | meanings: 이, 그, 저[대명사]
+   e1: J'aime **ces** fleurs dans le jardin. || 나는 정원에 있는 **이** 꽃들을 좋아해요.
+   e2: **Ces** robes sont très élégantes. || **그** 드레스들은 아주 우아해요.
+   e3: Ils ont vendu **ces** voitures rapidement. || **그**들은 저 자동차들을 빨리 팔았어요.
+   syn: [] | ant: []
+
+le [en] ipa=lə | meanings: the[article]
+   e1: Je prends **le** pain chaud. || I take **the** fresh bread.
+   e2: **Le** chat dort sur le fauteuil. || **The** cat is sleeping on the armchair.
+   syn: [] | ant: []
+
+le [ko] ipa=lə | meanings: 정관사[표현]
+   e1: **Le** chat dort sur le canapé. || 그 **고양이가** 소파 위에서 자요.
+   e2: **Le** jardin est très beau au printemps. || 그 **정원은** 봄에 아주 아름다워요.
+   e3: Je vois **le** livre sur la table. || 나는 탁자 위에 있는 그 **책을** 봐요.
+   syn: [] | ant: []
+
+la [en] ipa=la | meanings: the[article]
+   e1: Je vois **la** maison rouge. || I see **the** red house.
+   e2: Elle a trouvé **la** clé sur la table. || She found **the** key on the table.
+   e3: Prends **la** voiture bleue, s'il te plaît. || Please take **the** blue car.
+   syn: [] | ant: []
+
+la [ko] ipa=la | meanings: 라[감탄사] | 라음[명사]
+   e1: Oh, regardez **la** ! || 오, **라**를 보세요!
+   e2: **La** note finale est en la. || 최종 음표는 **라**입니다.
+   syn: [] | ant: []
+
+les [en] ipa=le | meanings: the[article]
+   e1: J'aime **les** fleurs de ce jardin. || I love **the** flowers in this garden.
+   e2: **Les** enfants jouent dans le parc. || **The** children are playing in the park.
+   e3: Nous avons mangé **les** pommes mûres. || We ate **the** ripe apples.
+   syn: [] | ant: []
+
+les [ko] ipa=le | meanings: 정관사, 복수[표현]
+   e1: **Les** fleurs sont belles ce printemps. || 그 **꽃들은** 이번 봄에 아름답습니다.
+   e2: J'ai vu **les** oiseaux dans le jardin. || 나는 정원에서 그 **새들을** 보았다.
+   syn: [] | ant: []
+
+un [en] ipa=œ̃ | meanings: a, an, one[adjective] | one[noun]
+   e1: J'ai **un** chat noir. || I have **a** black cat.
+   e2: Elle a gagné **un** prix important. || She won **an** important prize.
+   e3: Il est **un** parmi les meilleurs. || He is **one** among the best.
+   syn: [] | ant: []
+
+un [ko] ipa=œ̃ | meanings: 하나[명사] | 일[명사]
+   e1: Je veux **un** gâteau au chocolat. || 나는 **하나**의 초콜릿 케이크를 원해요.
+   e2: Il a fait **un** pas vers la porte. || 그는 문쪽으로 **한** 걸음을 내디뎠어요.
+   e3: Aujourd'hui est **un** jour spécial. || 오늘은 특별한 **일**이에요.
+   syn: [] | ant: []
+
+une [en] ipa=yn | meanings: a, an[article]
+   e1: J'ai **une** pomme rouge. || I have **an** apple.
+   e2: Elle porte **une** robe élégante. || She is wearing **an** elegant dress.
+   syn: [] | ant: []
+
+une [ko] ipa=yn | meanings: 하나, 한 개[대명사] | 부, 여성 정관사[형용사]
+   e1: J'ai acheté **une** pomme. || 저는 **한 개**의 사과를 샀어요.
+   e2: Elle porte **une** robe rouge. || 그녀는 빨간 **한** 드레스를 입고 있어요.
+   syn: [] | ant: []
+
+des [en] ipa=de | meanings: some[preposition] | any[preposition]
+   e1: J'ai acheté **des** pommes au marché. || I bought **some** apples at the market.
+   e2: Il n'y a pas de **des** questions difficiles ici. || There are not **any** difficult questions here.
+   e3: Nous avons vu **des** oiseaux près du lac. || We saw **some** birds near the lake.
+   syn: [] | ant: []
+
+des [ko] ipa=de | meanings: 복수 부정관사[전치사] | ~의, 일부의[전치사]
+   e1: J'achète **des** pommes au marché. || 나는 시장에서 **몇몇** 사과를 삽니다.
+   e2: Elle a pris **des** photos du coucher de soleil. || 그녀는 석양의 **몇몇** 사진을 찍었어요.
+   e3: Il y a **des** enfants dans le parc. || 공원에 **몇몇** 아이들이 있습니다.
+   e4: Nous avons bu **des** tasses de thé ensemble. || 우리는 함께 **몇** 잔의 차를 마셨어요.
+   syn: [] | ant: []
+
+être [en] ipa=ɛtʁ | meanings: to be[verb] | being[noun]
+   e1: Il veut **être** heureux chaque jour. || He wants to **be** happy every day.
+   e2: L'**être** humain est complexe. || The human **being** is complex.
+   e3: Nous allons **être** à la fête ce soir. || We will **be** at the party tonight.
+   syn: [] | ant: []
+
+être [ko] ipa=ɛtʁ | meanings: 이다, 존재하다[동사]
+   e1: Elle **est** artiste. || 그녀는 **입니다**.
+   e2: Nous **sommes** ici. || 우리는 여기 **있습니다**.
+   e3: Il **est** tard ce soir. || 오늘 밤은 **늦었습니다**.
+   syn: [exister, se trouver] | ant: []
+
+avoir [en] ipa=avwaʁ | meanings: to have[verb]
+   e1: J'**ai** un chat dans ma maison. || I **have** a cat in my house.
+   e2: Elle **a** beaucoup de livres intéressants. || She **has** many interesting books.
+   e3: Nous **avons** un jardin avec des fleurs colorées. || We **have** a garden with colorful flowers.
+   syn: [posséder, disposer de] | ant: []
+
+avoir [ko] ipa=avwaʁ | meanings: 가지다, 소유하다[동사] | 얻다, 받다[동사]
+   e1: J'**ai** un chat noir. || 나는 검은 고양이를 **가지고** 있어요.
+   e2: Elle **a** reçu une lettre hier. || 그녀는 어제 편지를 **받았어요**.
+   e3: Nous **avons** beaucoup d'amis. || 우리는 많은 친구들을 **가지고** 있어요.
+   syn: [posséder, disposer] | ant: []
+
+aller [en] ipa=ale | meanings: to go[verb] | to be well[verb]
+   e1: Je veux **aller** au marché ce matin. || I want to **go** to the market this morning.
+   e2: Comment ça **va**? Je vais bien, merci. || How are you? I am **well**, thank you.
+   e3: Nous pouvons **aller** marcher dans le parc. || We can **go** for a walk in the park.
+   syn: [se rendre, partir, venir] | ant: []
+
+aller [ko] ipa=ale | meanings: 가다[동사]
+   e1: Nous **allons** au parc cet après-midi. || 우리는 오늘 오후에 **갑니다**.
+   e2: Elle **va** à l'école en vélo. || 그녀는 자전거를 타고 학교에 **갑니다**.
+   e3: Il faut **aller** chez le médecin demain. || 내일은 의사에게 **가야** 해요.
+   syn: [partir, se rendre, venir] | ant: []
+
+faire [en] ipa=fɛʁ | meanings: to do, to make[verb]
+   e1: Je **fais** mes devoirs chaque soir. || I **do** my homework every evening.
+   e2: Nous **faisons** une promenade dans le parc. || We are **taking** a walk in the park.
+   e3: Elle **fait** un gâteau pour l'anniversaire. || She is **making** a cake for the birthday.
+   syn: [réaliser, effectuer, exécuter] | ant: []
+
+faire [ko] ipa=fɛʁ | meanings: 하다, 만들다[동사]
+   e1: Je **fais** un gâteau pour la fête. || 나는 파티를 위해 **만든다**.
+   e2: Elle **fait** ses devoirs chaque soir. || 그녀는 매일 저녁에 **한다**.
+   e3: Nous **faisons** une promenade au parc. || 우리는 공원에서 산책을 **한다**.
+   syn: [réaliser, exécuter, effectuer] | ant: []
+
+venir [en] ipa=vəˈniʁ | meanings: to come[verb] | to arrive[verb]
+   e1: Ils vont **venir** à la fête ce soir. || They will **come** to the party tonight.
+   e2: Le train va **venir** à la gare à midi. || The train will **arrive** at the station at noon.
+   e3: Je veux que tu **viennes** avec moi. || I want you to **come** with me.
+   syn: [arriver, approcher, se présenter] | ant: []
+
+venir [ko] ipa=vəniʁ | meanings: 오다, 도착하다[동사]
+   e1: Je vais **venir** demain à la fête. || 나는 내일 **올** 거예요.
+   e2: Ils doivent **venir** tôt ce matin. || 그들은 오늘 아침 일찍 **와야** 합니다.
+   e3: Elle veut **venir** avec nous au parc. || 그녀는 우리와 함께 공원에 **오고** 싶어해요.
+   syn: [arriver, se présenter] | ant: []
+
+dire [en] ipa=diʁ | meanings: to say, to tell[verb]
+   e1: Je **dis** la vérité à mes amis. || I **say** the truth to my friends.
+   e2: Elle **dit** bonjour en souriant. || She **says** hello with a smile.
+   e3: Nous **disons** toujours ce que nous pensons. || We always **tell** what we think.
+   syn: [affirmer, expliquer, raconter, annoncer] | ant: []
+
+dire [ko] ipa=diʁ | meanings: 말하다, 표현하다[동사] | 진술하다[동사]
+   e1: Je **dis** la vérité. || 나는 **말한다** 사실을.
+   e2: Elle **dit** qu'elle est heureuse. || 그녀는 행복하다고 **진술한다**.
+   e3: Nous avons **dit** nos sentiments. || 우리는 우리의 감정을 **표현했다**.
+   syn: [exprimer, affirmer, annoncer] | ant: []
+
+voir [en] ipa=vwaʁ | meanings: see[verb] | view[verb]
+   e1: Je peux **voir** les étoiles ce soir. || I can **see** the stars tonight.
+   e2: Nous allons **voir** le nouveau film au cinéma. || We will **view** the new movie at the cinema.
+   e3: Il aime **voir** le coucher de soleil chaque jour. || He likes to **view** the sunset every day.
+   syn: [apercevoir, regarder, observer, contempler] | ant: []
+
+voir [ko] ipa=vwaʁ | meanings: 보다[동사] | 알아차리다[동사]
+   e1: Je **vois** les montagnes au loin. || 나는 저 멀리 산들을 **본다**.
+   e2: Tu **vois** la différence entre ces couleurs ? || 너는 이 색깔들 사이의 차이를 **알아차리니**?
+   e3: Nous **voyons** souvent des oiseaux dans ce parc. || 우리는 이 공원에서 자주 새들을 **본다**.
+   syn: [regarder, apercevoir, observer] | ant: []
+
+savoir [en] ipa=savwaʁ | meanings: to know[verb] | knowledge[noun]
+   e1: Je **sais** parler français. || I **know** how to speak French.
+   e2: Le **savoir** est une richesse précieuse. || **Knowledge** is a precious wealth.
+   e3: Tu **sais** répondre à cette question. || You **know** how to answer this question.
+   syn: [connaître, apprendre, maîtriser] | ant: []
+
+savoir [ko] ipa=savwaʁ | meanings: 알다[동사] | 지식[명사]
+   e1: Je **sais** répondre à ta question. || 나는 네 질문에 **알아요**.
+   e2: Le **savoir** est une richesse précieuse. || **지식**은 귀중한 재산입니다.
+   e3: Elle veut **savoir** comment cuisiner ce plat. || 그녀는 이 요리를 어떻게 만드는지 **알고** 싶어해요.
+   syn: [connaissance, érudition] | ant: []
+
+pouvoir [en] ipa=pu.vwaʁ | meanings: power[noun] | can, to be able to[verb]
+   e1: Le **pouvoir** décide des lois dans ce pays. || The **power** decides the laws in this country.
+   e2: Je **peux** t'aider avec ton projet demain. || I **can** help you with your project tomorrow.
+   e3: Elle a le **pouvoir** de changer les choses. || She has the **power** to change things.
+   syn: [autorité, force, capacité] | ant: []
+
+pouvoir [ko] ipa=puvwaʁ | meanings: 권력[명사] | 할 수 있다[동사]
+   e1: Le président a beaucoup de **pouvoir**. || 대통령은 많은 **권력**을 가지고 있습니다.
+   e2: Je **peux** parler français et anglais. || 나는 프랑스어와 영어를 **할 수** 있습니다.
+   e3: Elle veut avoir plus de **pouvoir** dans son travail. || 그녀는 직장에서 더 많은 **권력**을 갖고 싶어합니다.
+   syn: [autorité, influence, capacité, faculté] | ant: []
+
+vouloir [en] ipa=vulwaʁ | meanings: want[verb] | love[verb]
+   e1: Je **veux** une glace au chocolat. || I **want** a chocolate ice cream.
+   e2: Elle **veut** passer plus de temps avec sa famille. || She **wants** to spend more time with her family.
+   e3: J'**aime** mon ami comme frère. || I **love** my friend like a brother.
+   syn: [désirer, souhaiter, aimer] | ant: []
+
+vouloir [ko] ipa=vulwaʁ | meanings: 원하다[동사]
+   e1: Je **veux** apprendre le français. || 나는 프랑스어를 **원해요**.
+   e2: Tu **veux** un café? || 너는 커피를 **원하니**?
+   e3: Ils **veulent** voyager cet été. || 그들은 이번 여름에 여행하기를 **원해요**.
+   syn: [désirer, souhaiter] | ant: []
+
+devoir [en] ipa=də.vwaʁ | meanings: duty, obligation[noun] | to have to, must[verb]
+   e1: Le **devoir** est important pour les étudiants. || **Duty** is important for students.
+   e2: Je **dois** finir ce projet aujourd'hui. || I **must** finish this project today.
+   e3: Nous avons un **devoir** envers la nature. || We have a **duty** to nature.
+   syn: [obligation, charge, responsabilité] | ant: []
+
+devoir [ko] ipa=də.vwaʁ | meanings: 의무[명사] | 해야 하다[동사]
+   e1: Le **devoir** est important dans cette société. || 이 사회에서 **의무**가 중요해요.
+   e2: Je **dois** finir mes devoirs avant dîner. || 나는 저녁 먹기 전에 **해야** 해요.
+   e3: Tu dois respecter tes **devoirs** envers tes parents. || 너는 부모님에 대한 너의 **의무**를 존중해야 해요.
+   syn: [obligation, tâche] | ant: []
+
+parler [en] ipa=paʁ.le | meanings: to speak[verb] | to talk[verb]
+   e1: Elle **parle** couramment plusieurs langues. || She **speaks** several languages fluently.
+   e2: Nous **parlons** souvent de nos voyages. || We **talk** often about our travels.
+   e3: Il **parle** avec respect à ses aînés. || He **speaks** respectfully to his elders.
+   syn: [discourir, causer, converser] | ant: []
+
+parler [ko] ipa=paʁle | meanings: 말하다[동사]
+   e1: Elle **parle** doucement à son ami. || 그녀는 친구에게 **말한다**.
+   e2: Nous **parlons** souvent de nos projets. || 우리는 자주 우리 계획에 대해 **말한다**.
+   e3: Il **parle** trois langues couramment. || 그는 세 가지 언어를 능숙하게 **말한다**.
+   syn: [dire, exprimer, communiquer] | ant: []
+
+manger [en] ipa=mɑ̃ʒe | meanings: to eat[verb]
+   e1: Nous **mangeons** des fruits frais chaque matin. || We **eat** fresh fruit every morning.
+   e2: Les enfants aiment **manger** des crêpes au petit déjeuner. || Children like **to eat** pancakes for breakfast.
+   e3: Je préfère **manger** lentement pour apprécier le goût. || I prefer **to eat** slowly to enjoy the taste.
+   syn: [dévorer, consommer] | ant: []
+
+manger [ko] ipa=mɑ̃ʒe | meanings: 먹다[동사]
+   e1: Je **mange** une pomme tous les jours. || 나는 매일 **먹습니다** 사과를.
+   e2: Nous **mangeons** ensemble au parc. || 우리는 공원에서 함께 **먹습니다**.
+   e3: Ils aiment **manger** des fruits frais. || 그들은 신선한 과일을 **먹는** 것을 좋아합니다.
+   syn: [dévorer, consommer, bouffer] | ant: []
+
+boire [en] ipa=bwaʁ | meanings: to drink[verb]
+   e1: Je **bois** un verre d'eau chaque matin. || I **drink** a glass of water every morning.
+   e2: Elle **boit** du jus d'orange frais au petit déjeuner. || She **drinks** fresh orange juice at breakfast.
+   e3: Nous **buvons** du thé chaud en soirée. || We **drink** hot tea in the evening.
+   syn: [siroter, avaliser, absorber] | ant: []
+
+boire [ko] ipa=bwaʁ | meanings: 마시다[동사]
+   e1: Je **bois** de l'eau tous les matins. || 나는 매일 아침에 물을 **마신다**.
+   e2: Ils **boivent** du jus de fruits frais. || 그들은 신선한 과일 주스를 **마신다**.
+   e3: Elle aime **boire** du thé vert au réveil. || 그녀는 일어나서 녹차를 **마시는** 것을 좋아한다.
+   syn: [siroter, consommer, ingérer] | ant: []
+
+dormir [en] ipa=dɔʁmiʁ | meanings: to sleep[verb]
+   e1: Je **dors** huit heures chaque nuit. || I **sleep** eight hours every night.
+   e2: Les enfants **dorment** paisiblement dans leurs lits. || The children are **sleeping** peacefully in their beds.
+   e3: Après une longue journée, elle aime **dormir** tôt. || After a long day, she likes **to sleep** early.
+   syn: [sommeiller, dormoter, hiberner] | ant: []
+
+dormir [ko] ipa=dɔʁmiʁ | meanings: 자다[동사]
+   e1: Je **dors** huit heures par nuit. || 나는 밤에 **잔다**.
+   e2: Les enfants **dorment** paisiblement dans leur lit. || 아이들이 침대에서 평화롭게 **잔다**.
+   e3: Je préfère **dormir** tôt pour être en forme. || 나는 건강하기 위해 일찍 **자는** 것을 선호한다.
+   syn: [sommeiller, reposer, se reposer] | ant: []
+
+lire [en] ipa=liʁ | meanings: to read[verb]
+   e1: Je **lis** un livre sous l'arbre. || I **read** a book under the tree.
+   e2: Elle **lit** le journal chaque matin. || She **reads** the newspaper every morning.
+   e3: Nous aimons **lire** des histoires avant de dormir. || We like **to read** stories before sleeping.
+   syn: [déchiffrer, consulter] | ant: []
+
+lire [ko] ipa=liʁ | meanings: 읽다[동사]
+   e1: Je **lis** un livre sous l'arbre. || 나는 나무 아래에서 **읽어요**.
+   e2: Elle **lit** la lettre avec attention. || 그녀는 편지를 주의 깊게 **읽어요**.
+   e3: Nous **lisons** des histoires avant de dormir. || 우리는 자기 전에 이야기를 **읽어요**.
+   syn: [consulter, déchiffrer] | ant: []
+
+écrire [en] ipa=ekʁiʁ | meanings: write[verb]
+   e1: Je vais **écrire** une lettre à ma grand-mère. || I am going to **write** a letter to my grandmother.
+   e2: Chaque jour, elle **écrit** dans son journal intime. || Every day, she **write**s in her diary.
+   e3: Nous devons **écrire** un poème pour la classe de français. || We must **write** a poem for French class.
+   syn: [rédiger, noter, consigner] | ant: []
+
+écrire [ko] ipa=ekʁiʁ | meanings: 쓰다[동사]
+   e1: Je veux **écrire** une lettre à ma grand-mère. || 나는 할머니께 편지를 **쓰고** 싶어요.
+   e2: Il aime **écrire** des histoires courtes. || 그는 짧은 이야기를 **쓰는** 것을 좋아해요.
+   e3: Nous allons **écrire** nos noms sur la liste. || 우리는 명단에 우리 이름을 **쓸** 거예요.
+   syn: [rédiger, noter, consigner] | ant: []
+
+écouter [en] ipa=ekute | meanings: to listen[verb]
+   e1: Je **écoute** de la musique chaque soir. || I **listen** to music every evening.
+   e2: Elle **écoute** attentivement le professeur. || She **listens** carefully to the teacher.
+   e3: Nous **écoutons** les oiseaux chanter au jardin. || We **listen** to the birds singing in the garden.
+   syn: [entendre, prêter l'oreille, ouïr] | ant: []
+
+écouter [ko] ipa=ekute | meanings: 듣다[동사]
+   e1: Elle aime **écouter** de la musique classique. || 그녀는 클래식 음악을 **듣는** 것을 좋아해요.
+   e2: Nous devons **écouter** attentivement le professeur. || 우리는 선생님의 말을 주의 깊게 **들어야** 해요.
+   e3: Il préfère **écouter** les oiseaux le matin. || 그는 아침에 새소리를 **듣는** 것을 선호해요.
+   syn: [entendre, prêter l'oreille, surveiller] | ant: []
+
+regarder [en] ipa=ʁəɡaʁde | meanings: to look[verb] | to watch[verb]
+   e1: Je **regarde** le ciel bleu ce matin. || I **look** at the blue sky this morning.
+   e2: Nous **regardons** un film ensemble ce soir. || We **watch** a movie together tonight.
+   e3: Elle **regarde** les oiseaux dans le jardin. || She **looks** at the birds in the garden.
+   syn: [voir, observer, contempler] | ant: []
+
+regarder [ko] ipa=ʁəɡaʁde | meanings: 보다[동사]
+   e1: Je **regarde** le coucher du soleil. || 나는 석양을 **본다**.
+   e2: Elle **regarde** attentivement le tableau. || 그녀는 조심스럽게 그림을 **본다**.
+   e3: Nous **regardons** les étoiles ce soir. || 우리는 오늘 밤 별들을 **본다**.
+   syn: [voir, observer, contempler] | ant: []
+
+entendre [en] ipa=ɑ̃tɑ̃dʁ | meanings: hear[verb] | understand[verb]
+   e1: Je **t’entends** clairement dans cette pièce. || I **hear** you clearly in this room.
+   e2: Elle ne **entendait** pas ce que je disais. || She did not **hear** what I was saying.
+   e3: Tu ne **t’entends** pas ce que je veux dire. || You do not **understand** what I mean.
+   syn: [écouter, percevoir, comprendre, saisir] | ant: []
+
+entendre [ko] ipa=ɑ̃tɑ̃dʁ | meanings: 듣다[동사] | 이해하다[동사]
+   e1: J'**entends** le chant des oiseaux le matin. || 나는 아침에 새들의 노랫소리를 **듣는다**.
+   e2: Elle **entend** bien les règles du jeu. || 그녀는 게임 규칙을 잘 **이해한다**.
+   e3: Peux-tu **entendre** le bruit du vent dehors ? || 너는 밖의 바람 소리를 **들을** 수 있니?
+   syn: [écouter, percevoir, capturer] | ant: []
+
+prendre [en] ipa=pʁɑ̃dʁ | meanings: to take[verb] | to catch[verb]
+   e1: Je **prends** un café chaque matin. || I **take** a coffee every morning.
+   e2: Elle **prend** le bus pour aller au travail. || She **takes** the bus to go to work.
+   e3: Nous **prenons** un poisson dans la rivière. || We **catch** a fish in the river.
+   syn: [saisir, attraper, capturer] | ant: []
+
+prendre [ko] ipa=pʁɑ̃dʁ | meanings: 가지다, 받다, 잡다, 데려가다[동사] | 복용하다, 섭취하다[동사]
+   e1: Je **prends** toujours un parapluie. || 나는 항상 우산을 **가져가요**.
+   e2: Ils **prennent** le train le matin. || 그들은 아침에 기차를 **탑니다**.
+   e3: Elle **prend** ses médicaments après le repas. || 그녀는 식사 후에 약을 **복용해요**.
+   syn: [saisir, attraper, emporter] | ant: []
+
+donner [en] ipa=dɔne | meanings: give[verb] | yield[verb]
+   e1: Je **donne** un cadeau à mon ami. || I **give** a gift to my friend.
+   e2: Cette terre **donne** beaucoup de fruits. || This land **yields** a lot of fruit.
+   e3: Elle **donne** toujours de bons conseils. || She always **give**s good advice.
+   syn: [offrir, fournir, transmettre] | ant: []
+
+donner [ko] ipa=dɔne | meanings: 주다[동사]
+   e1: Je vais **donner** un cadeau à mon ami. || 나는 친구에게 **줄** 선물을 가져갈 거예요.
+   e2: Elle veut **donner** de l'aide aux enfants. || 그녀는 아이들에게 **주고** 싶어해요.
+   e3: Nous allons **donner** des fleurs pour la fête. || 우리는 행사에 **줄** 꽃을 준비해요.
+   syn: [offrir, fournir, remettre] | ant: []
+
+demander [en] ipa=d(ə)mɑ̃de | meanings: to ask[verb] | to request[verb]
+   e1: Je vais **demander** l'heure au passant. || I am going to **ask** the passerby for the time.
+   e2: Elle a **demandé** de l'aide pour le projet. || She **requested** help for the project.
+   e3: Nous devons **demander** une permission avant d'entrer. || We must **ask** for permission before entering.
+   syn: [questionner, interroger, solliciter, réclamer] | ant: []
+
+demander [ko] ipa=dəmɑ̃de | meanings: 묻다, 요청하다, 요구하다[동사]
+   e1: Je **demande** à mon ami de venir. || 나는 친구에게 오라고 **요청한다**.
+   e2: Il **demande** le chemin au passant. || 그가 지나가는 사람에게 길을 **묻는다**.
+   e3: Elle **demande** de l'aide pour le projet. || 그녀가 프로젝트에 대한 도움을 **요구한다**.
+   syn: [solliciter, requérir, interroger] | ant: []
+
+répondre [en] ipa=ʁepɔ̃dʁ | meanings: to answer[verb] | to respond[verb]
+   e1: Je **réponds** à ta question avec plaisir. || I **answer** your question gladly.
+   e2: Elle a **répondu** rapidement au message. || She **responded** quickly to the message.
+   e3: Nous **répondons** toujours aux courriels de nos clients. || We always **answer** our clients' emails.
+   syn: [répliquer, riposter, réagir] | ant: []
+
+répondre [ko] ipa=ʁepɔ̃dʁ | meanings: 대답하다[동사]
+   e1: Je vais **répondre** à ta question bientôt. || 나는 곧 너의 질문에 **대답할** 것이다.
+   e2: Elle ne veut pas **répondre** au téléphone. || 그녀는 전화에 **대답하지** 않으려고 한다.
+   e3: Ils ont **répondu** rapidement à notre demande. || 그들은 우리의 요청에 빠르게 **대답했다**.
+   syn: [répliquer, rétorquer, réagir] | ant: []
+
+travailler [en] ipa=tʁavaje | meanings: work[verb]
+   e1: Je **travaille** dans un bureau chaque jour. || I **work** in an office every day.
+   e2: Elle **travaille** dur pour réussir ses examens. || She **works** hard to pass her exams.
+   e3: Nous **travaillons** ensemble sur ce projet passionnant. || We **work** together on this exciting project.
+   syn: [œuvrer, bosser, bûcher] | ant: []
+
+travailler [ko] ipa=tʁavaje | meanings: 일하다[동사]
+   e1: Je **travaille** dans un bureau tous les jours. || 나는 매일 사무실에서 **일합니다**.
+   e2: Elle **travaille** dur pour réussir ses examens. || 그녀는 시험에 합격하려고 열심히 **일합니다**.
+   e3: Nous **travaillons** ensemble sur un projet artistique. || 우리는 예술 프로젝트에서 같이 **일합니다**.
+   syn: [bosser, œuvrer, laborer] | ant: []
+
+étudier [en] ipa=etydje | meanings: to study[verb]
+   e1: Je dois **étudier** pour mon examen demain. || I have to **study** for my exam tomorrow.
+   e2: Elle aime **étudier** la littérature classique. || She likes to **study** classical literature.
+   e3: Nous allons **étudier** les plantes dans le jardin. || We are going **to study** the plants in the garden.
+   syn: [apprendre, se renseigner] | ant: []
+
+étudier [ko] ipa=etydje | meanings: 공부하다[동사]
+   e1: Je **étudie** le français tous les jours. || 나는 매일 **공부한다** 프랑스어를.
+   e2: Elle **étudie** pour réussir son examen. || 그녀는 시험에 합격하려고 **공부한다**.
+   e3: Nous **étudions** un nouveau sujet intéressant. || 우리는 흥미로운 새 주제를 **공부한다**.
+   syn: [apprendre, réviser, se renseigner] | ant: []
+
+apprendre [en] ipa=apʁɑ̃dʁ | meanings: to learn[verb] | to teach[verb]
+   e1: Je veux **apprendre** à jouer du piano. || I want to **learn** to play the piano.
+   e2: Le professeur va **apprendre** la grammaire aux élèves. || The teacher will **teach** grammar to the students.
+   e3: Nous devons **apprendre** de nouvelles compétences chaque jour. || We must **learn** new skills every day.
+   syn: [étudier, instruire] | ant: []
+
+apprendre [ko] ipa=apʁɑ̃dʁ | meanings: 배우다[동사] | 알게 되다[동사]
+   e1: Elle veut **apprendre** le français rapidement. || 그녀는 빠르게 프랑스어를 **배우고** 싶어 한다.
+   e2: J'ai **appris** cette nouvelle hier soir. || 나는 어젯밤 이 소식을 **알게** 되었다.
+   e3: Nous aimons **apprendre** en lisant des livres. || 우리는 책을 읽으며 **배우는** 것을 좋아한다.
+   syn: [étudier, appréhender, assimiler] | ant: []
+
+comprendre [en] ipa=kɔ̃pʁɑ̃dʁ | meanings: to understand[verb]
+   e1: Je **comprends** ce que tu veux dire. || I **understand** what you mean.
+   e2: Elle ne **comprend** pas la leçon. || She does not **understand** the lesson.
+   e3: Nous **comprenons** mieux la nature en voyageant. || We **understand** nature better by traveling.
+   syn: [saisir, piger, apercevoir] | ant: []
+
+comprendre [ko] ipa=kɔ̃pʁɑ̃dʁ | meanings: 이해하다[동사] | 포함하다[동사]
+   e1: Je **comprends** ce que tu dis. || 나는 네가 말하는 것을 **이해한다**.
+   e2: Ce livre **comprend** plusieurs chapitres. || 이 책은 여러 장을 **포함한다**.
+   e3: Il est difficile de **comprendre** cette idée. || 이 아이디어를 **이해하는** 것은 어렵다.
+   syn: [saisir, percevoir, englober] | ant: []
+
+arriver [en] ipa=aʁive | meanings: to arrive[verb] | to happen[verb]
+   e1: Nous allons **arriver** à midi. || We will **arrive** at noon.
+   e2: Que va-t-il **arriver** demain ? || What will **happen** tomorrow?
+   e3: Le train va **arriver** bientôt. || The train is going **to arrive** soon.
+   syn: [venir, parvenir, se présenter] | ant: []
+
+arriver [ko] ipa=aʁive | meanings: 도착하다[동사]
+   e1: Le train **arrive** à huit heures. || 기차가 여덟 시에 **도착해요**.
+   e2: Nous **arrivons** bientôt à la gare. || 우리는 곧 역에 **도착해요**.
+   e3: Elle **arrive** toujours en retard. || 그녀는 항상 늦게 **도착해요**.
+   syn: [parvenir, venir, se présenter] | ant: []
+
+partir [en] ipa=paʁtiʁ | meanings: leave[verb] | depart[verb]
+   e1: Je vais **partir** après le dîner. || I will **leave** after dinner.
+   e2: Ils vont **partir** en voyage demain matin. || They will **depart** on a trip tomorrow morning.
+   e3: Elle doit **partir** tôt ce soir. || She has to **leave** early tonight.
+   syn: [quitter, s'en aller, s'éloigner] | ant: []
+
+partir [ko] ipa=paʁtiʁ | meanings: 떠나다[동사] | 출발하다[동사]
+   e1: Je vais **partir** demain matin. || 나는 내일 아침에 **떠날** 거예요.
+   e2: Le train doit **partir** à l'heure. || 기차가 정시에 **출발**해야 해요.
+   e3: Ils vont **partir** en vacances ensemble. || 그들은 함께 휴가를 **떠날** 거예요.
+   syn: [s'en aller, quitter, s'évader] | ant: []
+
+sortir [en] ipa=sɔʁtiʁ | meanings: go out, leave[verb] | take out, bring out[verb]
+   e1: Je **sors** de la maison à huit heures. || I **go out** of the house at eight o'clock.
+   e2: Elle **sort** les poubelles chaque soir. || She **takes out** the trash every evening.
+   e3: Nous **sortons** ensemble ce soir. || We are **going out** together tonight.
+   syn: [partir, quitter, s'évader, sortir de] | ant: []
+
+sortir [ko] ipa=sɔʁtiʁ | meanings: 출구하다, 나가다, 외출하다[동사] | 발매하다, 출시하다, 발표하다[동사]
+   e1: Je **sors** de la maison à huit heures. || 나는 8시에 집에서 **나갑니다**.
+   e2: Le nouveau livre **sort** demain. || 새 책이 내일 **발매됩니다**.
+   e3: Nous **sortons** souvent au parc le week-end. || 우리는 주말에 자주 공원에 **나갑니다**.
+   syn: [partir, aller, quitter, lancer, publier] | ant: []
+
+rentrer [en] ipa=ʁɑ̃tʁe | meanings: to return, to go back[verb] | to put in, to insert[verb]
+   e1: Je **rentre** à la maison après l'école. || I **return** home after school.
+   e2: Il faut **rentrer** les chaises dans la salle. || We need **to put in** the chairs inside the room.
+   e3: Elle **rentra** tard du travail hier soir. || She **returned** late from work last night.
+   syn: [revenir, retourner, rentrer chez soi] | ant: []
+
+rentrer [ko] ipa=ʁɑ̃tʁe | meanings: 들어가다, 돌아가다[동사] | 집에 가다[동사]
+   e1: Je **rentre** dans la maison après une longue promenade. || 나는 긴 산책 후에 집에 **들어간다**.
+   e2: Elle **rentre** chez elle chaque soir à six heures. || 그녀는 매일 저녁 여섯 시에 집에 **돌아간다**.
+   syn: [revenir, retourner, rejoindre] | ant: []
+
+habiter [en] ipa=abitɛ | meanings: to live[verb] | to inhabit[verb]
+   e1: J'**habite** dans une petite maison près de la mer. || I **live** in a small house near the sea.
+   e2: Les oiseaux **habitent** souvent les forêts denses. || The birds often **inhabit** dense forests.
+   syn: [demeurer, résider, vivre] | ant: []
+
+habiter [ko] ipa=abite | meanings: 거주하다[동사]
+   e1: Nous **habitons** dans une maison près de la forêt. || 우리는 숲 근처의 집에 **거주**합니다.
+   e2: Ils **habitent** à Paris depuis cinq ans. || 그들은 파리에 5년째 **거주**하고 있습니다.
+   e3: J'**habite** dans un petit appartement en ville. || 나는 도시에 있는 작은 아파트에 **거주**합니다.
+   syn: [demeurer, vivre, résider] | ant: []
+
+vivre [en] ipa=vivʁ | meanings: to live[verb] | life[noun]
+   e1: Je veux **vivre** une vie heureuse. || I want to **live** a happy life.
+   e2: Il aime **vivre** en pleine nature. || He likes to **live** in the wilderness.
+   e3: La **vie** est pleine de surprises. || **Life** is full of surprises.
+   syn: [exister, habiter] | ant: []
+
+vivre [ko] ipa=vivʁ | meanings: 살다, 생존하다[동사]
+   e1: Ils veulent **vivre** près de la mer. || 그들은 바다 근처에서 **살고** 싶어 한다.
+   e2: Nous allons **vivre** une aventure inoubliable. || 우리는 잊을 수 없는 모험을 **살** 것이다.
+   e3: Il aime **vivre** en harmonie avec la nature. || 그는 자연과 조화롭게 **사는** 것을 좋아한다.
+   syn: [habiter, exister, demeurer] | ant: []
+
+rester [en] ipa=ʁɛste | meanings: to remain[verb] | to stay[verb]
+   e1: Les montagnes **restent** belles toute l'année. || The mountains **remain** beautiful all year.
+   e2: Nous **restons** chez mes parents ce week-end. || We **stay** at my parents' place this weekend.
+   e3: Le silence **reste** après la fête. || The silence **remains** after the party.
+   syn: [demeurer, séjournent, subsister] | ant: [partir, quitter]
+
+rester [ko] ipa=ʁɛste | meanings: 머무르다[동사] | 남아 있다[동사]
+   e1: Je vais **rester** chez mes parents ce week-end. || 나는 이번 주말에 부모님 집에 **머무를** 거예요.
+   e2: Il faut **rester** calme en toutes circonstances. || 모든 상황에서 차분하게 **남아** 있어야 해요.
+   syn: [demeurer, séjourner, subsister] | ant: []
+
+aimer [en] ipa=ɛ.me | meanings: to love[verb] | to like[verb]
+   e1: Je **aime** ma famille profondément. || I **love** my family deeply.
+   e2: Elle **aime** écouter de la musique classique. || She **likes** listening to classical music.
+   e3: Nous **aimons** passer du temps au parc. || We **like** spending time in the park.
+   syn: [adorer, chérir, apprécier] | ant: []
+
+aimer [ko] ipa=ɛme | meanings: 사랑하다[동사] | 좋아하다[동사]
+   e1: Je **aime** ma famille plus que tout. || 나는 **사랑해요** 가족을 무엇보다도.
+   e2: Tu **aimes** la musique classique, n'est-ce pas ? || 너는 클래식 음악을 **좋아해요**, 그렇죠?
+   e3: Nous **aimons** voyager pendant les vacances. || 우리는 휴가 동안 여행하는 것을 **좋아해요**.
+   syn: [adorer, chérir, apprécier] | ant: []
+
+trouver [en] ipa=tʁuve | meanings: to find[verb] | to discover[verb]
+   e1: Je **trouve** la clé sur la table. || I **find** the key on the table.
+   e2: Nous **trouvons** un sentier caché dans la forêt. || We **discover** a hidden path in the forest.
+   e3: Elle **trouve** toujours de bonnes idées. || She always **finds** good ideas.
+   syn: [découvrir, rencontrer] | ant: []
+
+trouver [ko] ipa=tʁuve | meanings: 찾다, 발견하다[동사]
+   e1: Je **trouve** mes clés sur la table. || 나는 탁자 위에서 **찾는다**.
+   e2: Elle **trouve** toujours des idées originales. || 그녀는 항상 독창적인 아이디어를 **찾는다**.
+   e3: Nous **trouvons** un endroit calme pour discuter. || 우리는 이야기할 조용한 장소를 **찾는다**.
+   syn: [découvrir, localiser, dénicher] | ant: []
+
+chercher [en] ipa=ʃɛʁʃe | meanings: to search[verb] | to look for[verb]
+   e1: Je **cherche** mes clés dans la maison. || I am **searching** for my keys in the house.
+   e2: Elle **cherche** un cadeau pour son ami. || She is **looking** for a gift for her friend.
+   e3: Nous **cherchons** des informations sur Internet. || We are **searching** for information on the Internet.
+   syn: [rechercher, explorer, fouiller] | ant: []
+
+chercher [ko] ipa=ʃɛʁʃe | meanings: 찾다[동사]
+   e1: Je **cherche** mes clés partout. || 나는 **찾고 있어요** 열쇠를.
+   e2: Elle **cherche** un cadeau pour son ami. || 그녀는 친구를 위해 선물을 **찾고 있어요**.
+   e3: Nous **cherchons** un endroit calme pour lire. || 우리는 조용한 곳을 **찾고 있어요**.
+   syn: [rechercher, explorer, fouiller] | ant: []
+
+acheter [en] ipa=aʃte | meanings: to buy, to purchase[verb]
+   e1: Je vais **acheter** du pain à la boulangerie. || I am going to **buy** bread at the bakery.
+   e2: Elle veut **acheter** une nouvelle robe pour l'été. || She wants to **buy** a new dress for the summer.
+   syn: [acquérir, se procurer, obtenir] | ant: []
+
+acheter [ko] ipa=aʃte | meanings: 사다[동사]
+   e1: J'ai décidé d'**acheter** une nouvelle robe. || 나는 새 드레스를 **샀다**.
+   e2: Elle veut **acheter** des fleurs pour son amie. || 그녀는 친구에게 줄 꽃을 **사고** 싶어한다.
+   e3: Nous allons **acheter** du pain demain matin. || 우리는 내일 아침에 **살** 것이다.
+   syn: [acquérir, se procurer, commander] | ant: []
+
+appeler [en] ipa=apəle | meanings: call[verb]
+   e1: Je **appelle** ma mère tous les soirs. || I **call** my mother every night.
+   e2: Tu peux **appeler** un taxi pour la fête ? || Can you **call** a taxi for the party?
+   e3: Nous **appelons** nos amis pour organiser un dîner. || We **call** our friends to arrange a dinner.
+   syn: [téléphoner, sonner, nommer] | ant: []
+
+appeler [ko] ipa=ap.le | meanings: 부르다[동사] | 전화하다[동사]
+   e1: Ils ont décidé d'**appeler** leur fils Lucas. || 그들은 아들을 루카스라고 **부르기로** 결정했다.
+   e2: Je vais **appeler** ma mère ce soir. || 나는 오늘 저녁에 엄마에게 **전화할** 것이다.
+   syn: [nommer, désigner, téléphoner, joindre] | ant: []
+
+rencontrer [en] ipa=ʁɑ̃.kɔ̃.tʁe | meanings: to meet[verb] | to encounter[verb]
+   e1: Je vais **rencontrer** mon ami au café. || I am going to **meet** my friend at the café.
+   e2: Elle a **rencontré** un problème inattendu. || She **encountered** an unexpected problem.
+   e3: Nous allons **rencontrer** le directeur demain. || We will **meet** the director tomorrow.
+   syn: [voir, croiser, trouver] | ant: []
+
+rencontrer [ko] ipa=ʁɑ̃.kɔ̃.tʁe | meanings: 만나다, 조우하다[동사]
+   e1: Je vais **rencontrer** mon ami au café. || 나는 카페에서 내 친구를 **만날** 거예요.
+   e2: Ils ont **rencontré** de nouvelles personnes lors de la fête. || 그들은 파티에서 새로운 사람들을 **만났어요**.
+   e3: Nous allons **rencontrer** le professeur demain matin. || 우리는 내일 아침에 선생님을 **만날** 거예요.
+   syn: [voir, croiser, trouver] | ant: []
+
+commencer [en] ipa=kɔmɑ̃se | meanings: begin[verb] | start[verb]
+   e1: Ils vont **commencer** le projet demain. || They will **begin** the project tomorrow.
+   e2: Le spectacle **commence** à huit heures. || The show **starts** at eight o'clock.
+   e3: Je veux **commencer** une nouvelle activité. || I want to **begin** a new activity.
+   syn: [débuter, entamer, lancer] | ant: []
+
+commencer [ko] ipa=kɔmɑ̃se | meanings: 시작하다[동사]
+   e1: Nous **commençons** la réunion à neuf heures. || 우리는 9시에 **시작합니다** 회의를.
+   e2: Elle **commence** une nouvelle peinture aujourd'hui. || 그녀는 오늘 새로운 그림을 **시작합니다**.
+   e3: Le spectacle **commencera** bientôt. || 공연이 곧 **시작할** 것입니다.
+   syn: [débuter, initier, entreprendre] | ant: []
+
+finir [en] ipa=fiˈniʁ | meanings: to finish, to end[verb] | to complete[verb]
+   e1: Elle a **fini** son livre hier soir. || She **finished** her book last night.
+   e2: Le film va **finir** dans dix minutes. || The movie will **end** in ten minutes.
+   e3: Nous devons **finir** le projet avant vendredi. || We must **complete** the project before Friday.
+   syn: [terminer, achever, clore] | ant: []
+
+finir [ko] ipa=fi.niʁ | meanings: 끝내다, 마치다[동사]
+   e1: Je **finis** mes devoirs avant le dîner. || 나는 저녁 먹기 전에 숙제를 **끝낸다**.
+   e2: Elle **finit** toujours son livre en une journée. || 그녀는 항상 하루 만에 책을 **끝낸다**.
+   e3: Nous devons **finir** le projet demain. || 우리는 내일까지 프로젝트를 **끝내야** 한다.
+   syn: [terminer, achever, compléter] | ant: [commencer]
+
+ouvrir [en] ipa=uvʁiʁ | meanings: to open[verb] | to start[verb]
+   e1: Je vais **ouvrir** la fenêtre pour aérer la pièce. || I am going to **open** the window to air the room.
+   e2: Le magasin va **ouvrir** à neuf heures demain. || The store will **open** at nine o'clock tomorrow.
+   e3: Elle a décidé d'**ouvrir** un nouveau compte bancaire. || She decided to **open** a new bank account.
+   syn: [découvrir, déployer, déverrouiller] | ant: [fermer, clore]
+
+ouvrir [ko] ipa=uvʁiʁ | meanings: 열다[동사] | 개설하다[동사]
+   e1: Elle **ouvre** la fenêtre pour laisser entrer l'air frais. || 그녀는 신선한 공기가 들어오게 창문을 **연다**.
+   e2: Ils **ouvrent** un nouveau magasin dans le centre-ville. || 그들은 시내에 새 가게를 **개설한다**.
+   e3: J'**ouvre** le livre pour commencer à lire. || 나는 읽기 시작하려고 책을 **연다**.
+   syn: [débarrer, dégainer] | ant: [fermer]
+
+fermer [en] ipa=fɛʁme | meanings: to close[verb] | to shut[verb]
+   e1: Elle doit **fermer** la porte avant de partir. || She must **close** the door before leaving.
+   e2: Ils vont **fermer** la fenêtre à cause du vent. || They are going to **shut** the window because of the wind.
+   syn: [clore, barrer, verrouiller] | ant: []
+
+fermer [ko] ipa=fɛʁme | meanings: 닫다[동사]
+   e1: Je vais **fermer** la porte avant de partir. || 나는 떠나기 전에 문을 **닫을** 거예요.
+   e2: Il faut **fermer** les fenêtres quand il pleut. || 비가 올 때는 창문을 **닫아야** 합니다.
+   e3: Elle a oublié de **fermer** son sac à main. || 그녀는 핸드백을 **닫는** 것을 잊었어요.
+   syn: [clore, barrer, verrouiller] | ant: [ouvrir]
+
+attendre [en] ipa=atɑ̃dʁ | meanings: to wait[verb] | to expect[verb]
+   e1: Je **attends** le bus à l'arrêt. || I **wait** for the bus at the stop.
+   e2: Nous **attendons** de bonnes nouvelles. || We **expect** good news.
+   e3: Elle **attend** patiemment son tour. || She **waits** patiently for her turn.
+   syn: [patienter, guetter, espérer] | ant: [précipiter, devancer]
+
+attendre [ko] ipa=atɑ̃dʁ | meanings: 기다리다[동사]
+   e1: Nous devons **attendre** le bus ici. || 우리는 여기서 **기다려야** 합니다.
+   e2: Elle aime **attendre** calmement son tour. || 그녀는 조용히 자기 차례를 **기다리는** 것을 좋아해요.
+   e3: Il faut **attendre** un peu avant de partir. || 출발하기 전에 조금 **기다려야** 합니다.
+   syn: [patienter, rester] | ant: [précipiter]
+
+nom [en] ipa=nɔ̃ | meanings: name[noun] | noun[noun]
+   e1: Le **nom** de ce village est charmant. || The **name** of this village is charming.
+   e2: Dans cette phrase, le **nom** est au singulier. || In this sentence, the **noun** is singular.
+   e3: Je connais le **nom** de tous mes amis. || I know the **name** of all my friends.
+   syn: [appellation, dénomination, titre] | ant: []
+
+nom [ko] ipa=nɔ̃ | meanings: 이름[명사] | 명사[명사]
+   e1: Je t'ai donné un **nom** spécial. || 나는 너에게 특별한 **이름**을 주었어요.
+   e2: Le **nom** de cette ville est charmant. || 이 도시의 **이름**은 매력적이에요.
+   syn: [prénom, surnom, appellation] | ant: []
+
+prénom [en] ipa=pʁe.nɔm | meanings: first name[noun]
+   e1: Quel est ton **prénom**? || What is your **first name**?
+   e2: Elle a écrit son **prénom** sur la feuille. || She wrote her **first name** on the paper.
+   e3: Le professeur demande toujours le **prénom** avant le nom de famille. || The teacher always asks for the **first name** before the last name.
+   syn: [nom de baptême, nom personnel] | ant: []
+
+prénom [ko] ipa=pʁenõ | meanings: 이름[명사]
+   e1: Mon **prénom** est Marie. || 내 **이름**은 마리예요.
+   e2: Elle a écrit son **prénom** sur le formulaire. || 그녀는 서류에 자신의 **이름**을 썼어요.
+   e3: Je connais ton **prénom** mais pas ton nom de famille. || 나는 네 **이름**은 알지만 성은 몰라요.
+   syn: [nom] | ant: []
+
+âge [en] ipa=aʒ | meanings: age[noun]
+   e1: L'**âge** des enfants varie de cinq à dix ans. || The **age** of the children ranges from five to ten years.
+   e2: Son **âge** lui permet de comprendre la situation. || His **age** allows him to understand the situation.
+   e3: Chaque **âge** de la vie a ses défis. || Each **age** of life has its challenges.
+   syn: [période, époque, ère] | ant: []
+
+âge [ko] ipa=aʒ | meanings: 나이, 연령[명사]
+   e1: Il a atteint l'**âge** de trente ans. || 그는 **나이** 서른 살에 도달했다.
+   e2: L'**âge** des enfants varie entre cinq et dix ans. || 아이들의 **연령**은 다섯 살에서 열 살 사이이다.
+   e3: Mon grand-père est fier de son **âge**. || 나의 할아버지는 자신의 **나이**를 자랑스러워한다.
+   syn: [vieillesse, âge avancé, période de vie] | ant: []
+
+nationalité [en] ipa=nasjɔnalite | meanings: nationality[noun]
+   e1: Elle a perdu sa **nationalité** française. || She lost her French **nationality**.
+   e2: Sa **nationalité** est importante pour le voyage. || His **nationality** is important for the trip.
+   e3: La **nationalité** détermine les droits civiques. || **Nationality** determines civil rights.
+   syn: [citoyenneté] | ant: []
+
+nationalité [ko] ipa=nasjɔnalite | meanings: 국적[명사]
+   e1: Elle a changé de **nationalité** cette année. || 그녀는 올해 **국적**을 바꿨어요.
+   e2: La **nationalité** française lui donne des droits spécifiques. || 프랑스 **국적**은 그에게 특정한 권리를 줍니다.
+   e3: Le formulaire demande votre **nationalité** réelle. || 서식에는 당신의 실제 **국적**을 요청합니다.
+   syn: [citoyenneté, patrie] | ant: []
+
+pays [en] ipa=pɛ.i | meanings: country[noun] | region[noun]
+   e1: La France est un **pays** d'Europe. || France is a **country** in Europe.
+   e2: Ce **pays** est connu pour ses paysages magnifiques. || This **region** is known for its beautiful landscapes.
+   e3: Il voyage à travers plusieurs **pays** cet été. || He is traveling through several **countries** this summer.
+   syn: [nation, État, territoire] | ant: []
+
+pays [ko] ipa=pɛi | meanings: 나라, 국가[명사]
+   e1: Le **pays** a célébré sa fête nationale hier. || 그 **나라**는 어제 국경일을 기념했다.
+   e2: Chaque **pays** a sa propre culture et langue. || 각 **국가**는 고유한 문화와 언어를 가지고 있다.
+   e3: Ils ont visité plusieurs **pays** pendant leurs vacances. || 그들은 휴가 동안 여러 **나라**를 방문했다.
+   syn: [nation, État, territoire] | ant: []
+
+ville [en] ipa=vil | meanings: city, town[noun]
+   e1: La **ville** est belle au coucher du soleil. || The **city** is beautiful at sunset.
+   e2: Nous visitons une vieille **ville** historique demain. || We are visiting an old historic **town** tomorrow.
+   e3: La **ville** organise un festival de musique chaque été. || The **city** organizes a music festival every summer.
+   syn: [cité, bourg, municipalité] | ant: []
+
+ville [ko] ipa=vil | meanings: 도시[명사]
+   e1: La **ville** est pleine de lumière ce soir. || 그 **도시**는 오늘 밤 빛으로 가득하다.
+   e2: Nous visitons une **ville** historique ce week-end. || 우리는 이번 주말에 역사적인 **도시**를 방문해요.
+   e3: La **ville** offre de nombreux parcs pour les familles. || 그 **도시**들은 가족들을 위한 많은 공원을 제공합니다.
+   syn: [cité, bourg, commune] | ant: []
+
+adresse [en] ipa=adʁɛs | meanings: address[noun] | skill[noun]
+   e1: Je lui ai donné mon **adresse** pour la fête. || I gave him my **address** for the party.
+   e2: Elle a beaucoup d'**adresse** au piano. || She has a lot of **skill** at the piano.
+   e3: L’**adresse** du restaurant est sur la carte. || The **address** of the restaurant is on the map.
+   syn: [domicile, coordonnées, compétence, habileté] | ant: []
+
+adresse [ko] ipa=adʁɛs | meanings: 주소[명사] | 솜씨, 능숙함[명사]
+   e1: Je t'envoie mon **adresse** demain. || 나는 내 **주소**를 내일 보낼 거예요.
+   e2: Il a montré beaucoup d'**adresse** en dessin. || 그는 그림에서 많은 **솜씨**를 보여주었어요.
+   e3: L'**adresse** de ce restaurant est très facile à trouver. || 이 식당의 **주소**는 찾기가 아주 쉬워요.
+   syn: [coordonnées, localisation, habileté, compétence] | ant: []
+
+numéro [en] ipa=nymeʁo | meanings: number[noun] | issue[noun]
+   e1: Quel est ton **numéro** de téléphone ? || What is your **number** for the phone?
+   e2: J'ai acheté le dernier **numéro** de ce magazine. || I bought the latest **issue** of this magazine.
+   e3: Le **numéro** cinq est mon préféré dans la liste. || The **number** five is my favorite on the list.
+   syn: [chiffre, nombre, édition, exemplaire] | ant: []
+
+numéro [ko] ipa=nymeʁo | meanings: 번호[명사]
+   e1: Quel est votre **numéro** de téléphone ? || 당신의 전화 **번호**는 무엇인가요?
+   e2: Elle a noté le **numéro** sur un papier. || 그녀는 종이에 **번호**를 적었어요.
+   e3: Le **numéro** de la maison est le dix. || 집의 **번호**는 10번입니다.
+   syn: [chiffre, nombre, code] | ant: []
+
+téléphone [en] ipa=telefɔn | meanings: telephone[noun] | to telephone, to call[verb]
+   e1: Le **téléphone** sonne au milieu de la nuit. || The **telephone** rings in the middle of the night.
+   e2: Je vais **téléphoner** à ma mère ce soir. || I will **telephone** my mother tonight.
+   e3: Elle a acheté un nouveau **téléphone** pour son anniversaire. || She bought a new **telephone** for her birthday.
+   syn: [téléphone portable, téléphoner, appeler] | ant: []
+
+téléphone [ko] ipa=telefɔn | meanings: 전화기[명사]
+   e1: J'ai acheté un nouveau **téléphone** hier. || 나는 어제 새 **전화기**를 샀어요.
+   e2: Le **téléphone** sonne dans la salle à manger. || 거실에서 **전화기**가 울려요.
+   e3: Elle utilise son **téléphone** pour appeler ses amis. || 그녀는 친구들에게 전화하기 위해 **전화기**를 사용해요.
+   syn: [portable, mobile, téléphone portable] | ant: []
+
+homme [en] ipa=ɔm | meanings: human, person[noun]
+   e1: Cet **homme** est très gentil. || This **man** is very kind.
+   e2: L'**homme** marche dans le parc. || The **man** walks in the park.
+   e3: Chaque **homme** a des rêves. || Every **man** has dreams.
+   syn: [individu, personne, mâle] | ant: []
+
+homme [ko] ipa=ɔm | meanings: 남자[명사] | 인간[명사]
+   e1: Cet **homme** est mon frère. || 이 **남자**는 내 형이에요.
+   e2: L'**homme** construit des maisons. || **인간**은 집을 짓습니다.
+   e3: Un **homme** gentil aide toujours les autres. || 친절한 **남자**는 항상 다른 사람을 도와요.
+   syn: [mâle, gars, individu, personne] | ant: [femme]
+
+femme [en] ipa=fam | meanings: woman[noun] | wife[noun]
+   e1: La **femme** danse dans le jardin. || The **woman** dances in the garden.
+   e2: Sa **femme** prépare le dîner ce soir. || His **wife** is preparing dinner tonight.
+   e3: La **femme** sourit en regardant les fleurs. || The **woman** smiles while looking at the flowers.
+   syn: [dame, épouse, fille] | ant: []
+
+femme [ko] ipa=fam | meanings: 여자[명사] | 아내[명사]
+   e1: La **femme** sourit dans le jardin. || **여자**가 정원에서 웃고 있어요.
+   e2: Ma **femme** prépare le dîner ce soir. || 내 **아내**가 오늘 저녁을 준비해요.
+   e3: Cette **femme** aime la peinture. || 이 **여자**는 그림 그리기를 좋아해요.
+   syn: [dame, épouse, conjointe] | ant: []
+
+garçon [en] ipa=ɡaʁsɔ̃ | meanings: boy[noun] | waiter[noun]
+   e1: Le **garçon** joue dans le parc. || The **boy** is playing in the park.
+   e2: Le **garçon** a pris notre commande au restaurant. || The **waiter** took our order at the restaurant.
+   syn: [serveur] | ant: []
+
+garçon [ko] ipa=ɡaʁsɔ̃ | meanings: 소년[명사] | 웨이터[명사]
+   e1: Le **garçon** joue dans le parc. || **소년**이 공원에서 놀고 있다.
+   e2: Le **garçon** prend la commande au restaurant. || 레스토랑에서 **웨이터**가 주문을 받고 있다.
+   syn: [jeune garçon, serveur] | ant: []
+
+fille [en] ipa=fij | meanings: girl[noun] | daughter[noun]
+   e1: La **fille** joue au parc avec ses amis. || The **girl** plays in the park with her friends.
+   e2: Ma **fille** vient d'apprendre à lire. || My **daughter** just learned to read.
+   e3: La **fille** porte une robe rouge aujourd'hui. || The **girl** is wearing a red dress today.
+   syn: [demoiselle, jeune fille] | ant: []
+
+fille [ko] ipa=fij | meanings: 딸[명사] | 소녀[명사]
+   e1: La **fille** joue dans le jardin. || **딸**이 정원에서 놀고 있어요.
+   e2: La **fille** est âgée de dix ans. || **소녀**는 열 살이에요.
+   syn: [demoiselle, jeune fille] | ant: []
+
+personne [en] ipa=pɛʁ.sɔn | meanings: nobody[pronoun] | person[noun]
+   e1: Il n'y a **personne** dans la salle. || There is **nobody** in the room.
+   e2: Chaque **personne** a ses rêves. || Every **person** has their dreams.
+   e3: Je n'ai vu **personne** au parc aujourd'hui. || I saw **nobody** at the park today.
+   syn: [individu, être, homme, femme] | ant: []
+
+personne [ko] ipa=pɛʁsɔn | meanings: 사람[명사] | 아무도 … 아니다[대명사]
+   e1: Cette **personne** sourit dans le parc. || 이 **사람**은 공원에서 웃고 있어요.
+   e2: Il n'y a **personne** dans la maison maintenant. || 지금 집에 **아무도** 없어요.
+   syn: [individu, être, humain, âme] | ant: []
+
+gens [en] ipa=ʒɑ̃ | meanings: people[noun]
+   e1: Les **gens** sont très accueillants ici. || The **people** are very welcoming here.
+   e2: Beaucoup de **gens** participent au festival. || Many **people** participate in the festival.
+   e3: Ces **gens** construisent un nouveau jardin communautaire. || These **people** are building a new community garden.
+   syn: [personnes, individus, population] | ant: []
+
+gens [ko] ipa=ʒɑ̃ | meanings: 사람들[명사]
+   e1: Les **gens** sourient dans le parc. || 공원에서 **사람들**이 웃고 있어요.
+   e2: Les **gens** aiment se promener au printemps. || **사람들**은 봄에 산책하는 것을 좋아해요.
+   e3: Les **gens** travaillent ensemble pour réussir. || **사람들**이 함께 일해서 성공해요.
+   syn: [personnes, individus, populace] | ant: []
+
+enfant [en] ipa=ɑ̃fɑ̃ | meanings: child[noun]
+   e1: L'**enfant** joue dans le parc. || The **child** plays in the park.
+   e2: Cet **enfant** aime lire des histoires. || This **child** loves to read stories.
+   e3: L'**enfant** rit avec ses amis. || The **child** laughs with friends.
+   syn: [gamin, gosse, môme] | ant: []
+
+enfant [ko] ipa=ɑ̃fɑ̃ | meanings: 아이[명사]
+   e1: L'**enfant** joue dans le jardin. || 그 **아이**는 정원에서 놉니다.
+   e2: L'**enfant** sourit à sa mère. || 그 **아이**는 엄마에게 웃습니다.
+   e3: Cet **enfant** grandit vite. || 이 **아이**는 빨리 자랍니다.
+   syn: [gamin, gosselin, môme] | ant: []
+
+bébé [en] ipa=bebe | meanings: baby[noun]
+   e1: Le **bébé** dort paisiblement dans son berceau. || The **baby** sleeps peacefully in its crib.
+   e2: Le sourire du **bébé** illumine la pièce. || The **baby**'s smile lights up the room.
+   e3: Nous avons acheté des vêtements pour le **bébé**. || We bought clothes for the **baby**.
+   syn: [nourrisson, tout-petit, nouveau-né] | ant: []
+
+bébé [ko] ipa=bebe | meanings: 아기, 유아[명사]
+   e1: Le **bébé** dort paisiblement dans son lit. || **아기**가 침대에서 평화롭게 자요.
+   e2: Nous avons acheté des vêtements pour le **bébé**. || 우리는 **아기** 옷을 샀어요.
+   e3: Le **bébé** a souri à sa maman. || **아기**가 엄마에게 미소를 지었어요.
+   syn: [nourrisson, poupon, nouveau-né] | ant: []
+
+ami [en] ipa=ami | meanings: friend[noun]
+   e1: Mon **ami** m'a aidé aujourd'hui. || My **friend** helped me today.
+   e2: Elle a rencontré un **ami** fidèle. || She met a loyal **friend**.
+   e3: Nous avons invité notre **ami** au dîner. || We invited our **friend** to dinner.
+   syn: [copain, camarade, compagnon] | ant: []
+
+ami [ko] ipa=ami | meanings: 친구[명사]
+   e1: Il est mon meilleur **ami**. || 그는 나의 가장 좋은 **친구**입니다.
+   e2: Elle a rencontré un nouvel **ami** à l'école. || 그녀는 학교에서 새로운 **친구**를 만났습니다.
+   e3: Mon **ami** vient m'aider ce soir. || 나의 **친구**가 오늘 밤 나를 도우러 옵니다.
+   syn: [copain, compagnon, pote] | ant: []
+
+famille [en] ipa=famij | meanings: family[noun]
+   e1: La **famille** passe du temps ensemble le dimanche. || The **family** spends time together on Sunday.
+   e2: Chaque **famille** a ses traditions uniques. || Each **family** has its unique traditions.
+   e3: Elle a invité toute sa **famille** pour la fête. || She invited her whole **family** to the party.
+   syn: [ménage, clan, parentèle] | ant: []
+
+famille [ko] ipa=famij | meanings: 가족[명사]
+   e1: Ma **famille** est très unie. || 저의 **가족**은 매우 화목해요.
+   e2: Nous avons passé la soirée avec la **famille**. || 우리는 저녁을 **가족**과 함께 보냈어요.
+   e3: La **famille** s’agrandit avec un nouveau bébé. || **가족**이 새 아기로 늘어났어요.
+   syn: [ménage, clan, tribu] | ant: []
+
+père [en] ipa=pɛʁ | meanings: father[noun]
+   e1: Mon **père** aime jardiner le dimanche. || My **father** loves gardening on Sundays.
+   e2: Le **père** de Marie raconte souvent des histoires. || Marie's **father** often tells stories.
+   syn: [papa, patriarche, paternel] | ant: []
+
+père [ko] ipa=pɛʁ | meanings: 아버지[명사]
+   e1: Mon **père** aime jardiner le dimanche. || 내 **아버지**는 일요일에 정원 가꾸기를 좋아해요.
+   e2: Le **père** raconte une histoire à son fils. || **아버지**가 아들에게 이야기를 들려줘요.
+   syn: [papa, papy, patriarche] | ant: []
+
+mère [en] ipa=mɛʁ | meanings: mother[noun]
+   e1: La **mère** prépare un gâteau pour son enfant. || The **mother** is preparing a cake for her child.
+   e2: Ma **mère** m'a donné un conseil important. || My **mother** gave me important advice.
+   e3: La **mère** veille toujours sur sa famille. || The **mother** always watches over her family.
+   syn: [maman, mamie, mamy] | ant: []
+
+mère [ko] ipa=mɛʁ | meanings: 어머니[명사]
+   e1: La **mère** prépare le dîner. || **어머니**가 저녁을 준비해요.
+   e2: Ma **mère** aime le jardinage. || 내 **어머니**는 정원 가꾸기를 좋아해요.
+   e3: La **mère** console son enfant. || **어머니**가 아이를 위로해요.
+   syn: [maman, mamie] | ant: []
+
+parents [en] ipa=paʁɑ̃ | meanings: parents[noun]
+   e1: Les **parents** attendent leur enfant à la sortie. || The **parents** are waiting for their child outside.
+   e2: Mes **parents** adorent jardiner ensemble. || My **parents** love gardening together.
+   e3: Les **parents** participent à la réunion de l'école. || The **parents** attend the school meeting.
+   syn: [tuteurs, progeniteurs, ascendants] | ant: []
+
+parents [ko] ipa=paʁɑ̃ | meanings: 부모[명사]
+   e1: Les **parents** aident toujours leurs enfants. || **부모**는 항상 아이들을 도와줘요.
+   e2: Mes **parents** viennent me rendre visite ce weekend. || 저의 **부모**님이 이번 주말에 방문하실 거예요.
+   syn: [père et mère, ascendants] | ant: []
+
+frère [en] ipa=fʁɛʁ | meanings: brother[noun]
+   e1: Mon **frère** aime jouer au football. || My **brother** loves playing football.
+   e2: Le **frère** de Marie est très gentil. || Marie's **brother** is very kind.
+   e3: J'ai rencontré le **frère** de mon ami hier. || I met my friend's **brother** yesterday.
+   syn: [frangin, bro, frérot] | ant: []
+
+frère [ko] ipa=fʁɛʁ | meanings: 형, 오빠, 남자형제[명사] | 수도사[명사]
+   e1: Mon **frère** joue au football dans le parc. || 내 **형**은 공원에서 축구를 합니다.
+   e2: **Frère** Jean aide les enfants à l'école. || **수도사** 장은 아이들을 돕습니다.
+   e3: Le **frère** et la sœur mangent ensemble. || **남자형제**와 여동생이 함께 먹습니다.
+   syn: [frangin, mon frère, religieux] | ant: []
+
+sœur [en] ipa=sœʁ | meanings: sister[noun]
+   e1: Ma **sœur** joue du piano tous les jours. || My **sister** plays the piano every day.
+   e2: J'ai une **sœur** plus âgée que moi. || I have an older **sister** than me.
+   e3: Elle parle souvent avec sa **sœur** au téléphone. || She often talks with her **sister** on the phone.
+   syn: [frangine, sœur cadette, sœur aînée] | ant: []
+
+sœur [ko] ipa=sœʁ | meanings: 자매, 누이[명사]
+   e1: Ma **sœur** joue du piano tous les jours. || 내 **여동생은** 매일 피아노를 쳐요.
+   e2: La **sœur** a aidé sa famille ce matin. || **자매**가 오늘 아침 가족을 도왔어요.
+   e3: Je visite ma **sœur** ce week-end. || 이번 주말에 내 **누이**를 방문해요.
+   syn: [] | ant: []
+
+fils [en] ipa=fis | meanings: son[noun] | thread, wire[noun]
+   e1: Le **fils** joue dans le jardin. || The **son** is playing in the garden.
+   e2: Le **fils** du tissu est fragile. || The **thread** of the fabric is fragile.
+   e3: Elle a envoyé un message avec un **fil** électrique. || She sent a message with an electrical **wire**.
+   syn: [garçon, héritier, descendant] | ant: []
+
+fils [ko] ipa=fis | meanings: 아들[명사] | 실[명사]
+   e1: Le **fils** joue dans le jardin. || 그 **아들**이 정원에서 놉니다.
+   e2: Le **fils** est attaché à la bobine. || **실**이 고리에 묶여 있어요.
+   e3: Son **fils** aime lire des livres. || 그의 **아들**은 책 읽는 것을 좋아해요.
+   syn: [garçon, enfant] | ant: []
+
+mari [en] ipa=maʁi | meanings: husband[noun]
+   e1: Mon **mari** prépare le dîner ce soir. || My **husband** is cooking dinner tonight.
+   e2: Le **mari** de ma sœur est très gentil. || My sister's **husband** is very kind.
+   e3: Le **mari** porte une chemise bleue aujourd'hui. || The **husband** is wearing a blue shirt today.
+   syn: [époux, conjoint, compagnon] | ant: [femme, épouse]
+
+mari [ko] ipa=maʁi | meanings: 남편[명사]
+   e1: Le **mari** prépare le dîner pour sa femme. || **남편**이 아내를 위해 저녁을 준비해요.
+   e2: Mon **mari** aime jardiner le week-end. || 내 **남편**은 주말에 정원 가꾸기를 좋아해요.
+   e3: Son **mari** lit un livre dans le salon. || 그녀의 **남편**은 거실에서 책을 읽고 있어요.
+   syn: [époux, conjoint] | ant: []
+
+grand-père [en] ipa=ɡʁɑ̃ pɛʁ | meanings: grandfather[noun]
+   e1: Mon **grand-père** raconte toujours de belles histoires. || My **grandfather** always tells beautiful stories.
+   e2: Le **grand-père** de Marie aime jardiner le week-end. || Marie's **grandfather** likes gardening on weekends.
+   syn: [grand-papa, pépé, papi] | ant: []
+
+grand-père [ko] ipa=ɡʁɑ̃.pɛʁ | meanings: 할아버지[명사]
+   e1: Mon **grand-père** aime raconter des histoires. || 나의 **할아버지**는 이야기를 좋아하세요.
+   e2: Le **grand-père** prépare un gâteau pour l'anniversaire. || **할아버지**가 생일 케이크를 준비하세요.
+   e3: Nous visitons souvent mon **grand-père** le dimanche. || 우리는 일요일마다 자주 **할아버지**를 방문합니다.
+   syn: [papi, grand-papa, grand-père paternel] | ant: []
+
+grand-mère [en] ipa=ɡʁɑ̃mɛʁ | meanings: grandmother[noun]
+   e1: Ma **grand-mère** prépare un gâteau délicieux. || My **grandmother** bakes a delicious cake.
+   e2: Nous visitons la **grand-mère** ce dimanche. || We are visiting **grandmother** this Sunday.
+   e3: La **grand-mère** raconte des histoires anciennes. || The **grandmother** tells old stories.
+   syn: [mamie, mamère, mémé] | ant: []
+
+grand-mère [ko] ipa=ɡʁɑ̃ˈmɛʁ | meanings: 할머니[명사]
+   e1: Ma **grand-mère** prépare un gâteau délicieux. || 우리 **할머니**께서 맛있는 케이크를 만드세요.
+   e2: La **grand-mère** adore raconter des histoires. || **할머니**는 이야기를 들려주시는 것을 좋아하세요.
+   syn: [mamie, mémé] | ant: []
+
+oncle [en] ipa=ɔ̃kl | meanings: uncle[noun]
+   e1: Mon **oncle** vient nous rendre visite demain. || My **uncle** is coming to visit us tomorrow.
+   e2: L'**oncle** raconte toujours des histoires intéressantes. || The **uncle** always tells interesting stories.
+   syn: [tonton] | ant: []
+
+oncle [ko] ipa=ɔ̃kl | meanings: 삼촌, 아저씨[명사]
+   e1: Mon **oncle** habite près de la mer. || 내 **삼촌**은 바다 근처에 살아요.
+   e2: L'**oncle** raconte des histoires amusantes. || **아저씨**가 재미있는 이야기를 해요.
+   e3: Je visite souvent mon **oncle** à la campagne. || 나는 시골에 있는 내 **삼촌**을 자주 방문해요.
+   syn: [tonton, parent, membre de la famille] | ant: []
+
+tante [en] ipa=tɑ̃t | meanings: aunt[noun]
+   e1: Ma **tante** prépare un gâteau pour la fête. || My **aunt** is baking a cake for the party.
+   e2: J'ai rencontré la **tante** de mon ami hier. || I met my friend's **aunt** yesterday.
+   syn: [marraine, parente, parente] | ant: []
+
+tante [ko] ipa=tɑ̃t | meanings: 이모, 고모, 큰어머니, 작은어머니[명사]
+   e1: Ma **tante** prépare un gâteau délicieux. || 내 **이모**가 맛있는 케이크를 만들어줘요.
+   e2: J'ai rencontré la **tante** de mon ami hier. || 나는 어제 친구의 **고모**를 만났어요.
+   syn: [parente, proche] | ant: []
+
+zéro [en] ipa=zeʁo | meanings: zero[noun]
+   e1: Il y a **zéro** erreur dans ce document. || There are **zero** errors in this document.
+   e2: La température est tombée à **zéro** degré cette nuit. || The temperature dropped to **zero** degrees last night.
+   syn: [] | ant: []
+
+zéro [ko] ipa=zeʁo | meanings: 영, 0[명사]
+   e1: Il reste **zéro** pomme dans le panier. || 바구니에 **0**개의 사과가 남아 있어요.
+   e2: La température est tombée à **zéro** ce matin. || 오늘 아침 기온이 **영**도까지 떨어졌어요.
+   syn: [nul] | ant: []
+
+deux [en] ipa=dø | meanings: two[noun]
+   e1: J'ai **deux** pommes. || I have **two** apples.
+   e2: Ils ont **deux** chiens adorables. || They have **two** lovely dogs.
+   syn: [] | ant: []
+
+deux [ko] ipa=dø | meanings: 이[표현]
+   e1: J'ai **deux** chats à la maison. || 나는 집에 두 마리 고양**이**가 있어요.
+   e2: Elle a acheté **deux** pommes au marché. || 그녀는 시장에서 **두** 개의 사과를 샀어요.
+   syn: [] | ant: []
+
+trois [en] ipa=tʁwa | meanings: three[expression]
+   e1: J'ai **trois** pommes dans mon sac. || I have **three** apples in my bag.
+   e2: Elle a **trois** fleurs dans le vase. || She has **three** flowers in the vase.
+   e3: Nous avons **trois** jours pour finir le projet. || We have **three** days to finish the project.
+   syn: [] | ant: []
+
+trois [ko] ipa=tʁwa | meanings: 삼[명사]
+   e1: J'ai acheté **trois** pommes. || 나는 **세** 개의 사과를 샀어요.
+   e2: Il y a **trois** oiseaux dans l'arbre. || 나무에 **세** 마리의 새가 있어요.
+   e3: Nous sommes **trois** à la table. || 우리는 탁자에 **세** 명 있어요.
+   syn: [] | ant: []
+
+quatre [en] ipa=katʁ | meanings: four[noun]
+   e1: J'ai **quatre** pommes dans mon sac. || I have **four** apples in my bag.
+   e2: Nous avons réservé **quatre** billets pour la fête. || We booked **four** tickets for the party.
+   e3: Le chat a attrapé **quatre** souris hier. || The cat caught **four** mice yesterday.
+   syn: [] | ant: []
+
+quatre [ko] ipa=katʁ | meanings: 사십[명사]
+   e1: J'ai **quatre** pommes rouges. || 나는 **네** 개의 빨간 사과가 있어요.
+   e2: Il y a **quatre** chaises dans la salle. || 방 안에 **네** 개의 의자가 있어요.
+   syn: [] | ant: []
+
+cinq [en] ipa=sɛ̃k | meanings: five[noun]
+   e1: J'ai acheté **cinq** pommes. || I bought **five** apples.
+   e2: Nous avons invité **cinq** amis à dîner. || We invited **five** friends for dinner.
+   e3: Il y a **cinq** livres sur la table. || There are **five** books on the table.
+   syn: [] | ant: []
+
+cinq [ko] ipa=sɛ̃k | meanings: 오[명사]
+   e1: J'ai acheté **cinq** pommes. || 나는 **오** 개의 사과를 샀어요.
+   e2: Elle a **cinq** ans aujourd'hui. || 그녀는 **오**늘 다섯 살이에요.
+   e3: Il y a **cinq** chaises dans la salle. || 방에 **오** 개의 의자가 있어요.
+   syn: [] | ant: []
+
+six [en] ipa=sis | meanings: six[noun]
+   e1: J'ai **six** pommes dans mon panier. || I have **six** apples in my basket.
+   e2: Elle a acheté **six** livres hier. || She bought **six** books yesterday.
+   e3: Nous partons dans **six** jours pour la plage. || We are leaving in **six** days for the beach.
+   syn: [] | ant: []
+
+six [ko] ipa=sis | meanings: 6[명사]
+   e1: J'ai **six** pommes dans mon sac. || 나는 내 가방에 **여섯** 개의 사과가 있어요.
+   e2: Le gâteau est coupé en **six** parts égales. || 케이크가 **여섯** 등분으로 잘려 있어요.
+   e3: Elle a acheté **six** livres hier. || 그녀는 어제 **여섯** 권의 책을 샀어요.
+   syn: [] | ant: []
+
+sept [en] ipa=sɛt | meanings: seven[noun]
+   e1: J'ai acheté **sept** pommes pour la recette. || I bought **seven** apples for the recipe.
+   e2: Il y a **sept** jours dans une semaine. || There are **seven** days in a week.
+   e3: Nous avons vu **sept** oiseaux dans le jardin. || We saw **seven** birds in the garden.
+   syn: [] | ant: []
+
+sept [ko] ipa=sɛt | meanings: 일곱[명사]
+   e1: Il y a **sept** chaises dans la salle. || 방에 **일곱** 개의 의자가 있어요.
+   e2: Elle a acheté **sept** pommes au marché. || 그녀는 시장에서 **일곱** 개의 사과를 샀어요.
+   e3: Nous sommes **sept** dans la famille. || 우리 가족은 **일곱** 명이에요.
+   syn: [] | ant: []
+
+huit [en] ipa=ɥit | meanings: eight[noun]
+   e1: J'ai acheté **huit** pommes au marché. || I bought **eight** apples at the market.
+   e2: Il y a **huit** chaises autour de la table. || There are **eight** chairs around the table.
+   e3: Nous avons invité **huit** amis à la fête. || We invited **eight** friends to the party.
+   syn: [] | ant: []
+
+huit [ko] ipa=ɥit | meanings: 여덟[명사]
+   e1: J'ai acheté **huit** pommes. || 나는 **여덟** 개의 사과를 샀어요.
+   e2: Elle a invité **huit** amis à la fête. || 그녀는 파티에 **여덟** 명의 친구를 초대했어요.
+   e3: Le gâteau est coupé en **huit** parts égales. || 케이크는 똑같이 **여덟** 조각으로 잘렸어요.
+   syn: [] | ant: []
+
+neuf [en] ipa=nœf | meanings: nine[adjective] | new[adjective]
+   e1: J'ai **neuf** pommes dans le panier. || I have **nine** apples in the basket.
+   e2: Elle a acheté une voiture **neuve**. || She bought a **new** car.
+   e3: Le bâtiment est **neuf** et moderne. || The building is **new** and modern.
+   syn: [nouveau] | ant: [ancien]
+
+neuf [ko] ipa=nœf | meanings: 새로운[형용사] | 아홉[형용사]
+   e1: J'ai acheté une voiture **neuve**. || 나는 **새로운** 차를 샀어요.
+   e2: Il y a **neuf** livres sur la table. || 책상 위에 **아홉** 권의 책이 있어요.
+   e3: Cette robe est toute **neuve**. || 이 드레스는 아주 **새로워요**.
+   syn: [nouveau, récent, dernier] | ant: []
+
+dix [en] ipa=dis | meanings: ten[noun]
+   e1: Il y a **dix** pommes dans le panier. || There are **ten** apples in the basket.
+   e2: Elle a acheté **dix** livres hier. || She bought **ten** books yesterday.
+   e3: Nous avons invité **dix** amis à la fête. || We invited **ten** friends to the party.
+   syn: [] | ant: []
+
+dix [ko] ipa=dis | meanings: 열[명사]
+   e1: J'ai **dix** pommes dans mon panier. || 나는 바구니에 **열** 개의 사과가 있어요.
+   e2: La classe compte **dix** élèves aujourd'hui. || 교실에는 오늘 **열** 명의 학생이 있어요.
+   syn: [] | ant: []
+
+quinze [en] ipa=kɛ̃z | meanings: fifteen[noun]
+   e1: J'ai **quinze** livres sur mon étagère. || I have **fifteen** books on my shelf.
+   e2: Elle a reçu **quinze** cadeaux pour son anniversaire. || She received **fifteen** gifts for her birthday.
+   e3: Le cours commence à **quinze** heures aujourd'hui. || The class starts at **fifteen** o'clock today.
+   syn: [] | ant: []
+
+quinze [ko] ipa=kɛ̃z | meanings: 열다섯[명사]
+   e1: J’ai **quinze** pommes dans le panier. || 나는 바구니에 **열다섯** 개의 사과가 있어요.
+   e2: **Quinze** invités sont arrivés pour la fête. || 파티에 **열다섯** 명의 손님이 도착했어요.
+   syn: [] | ant: []
+
+vingt [en] ipa=vɛ̃ | meanings: twenty[noun]
+   e1: J'ai **vingt** pommes dans mon sac. || I have **twenty** apples in my bag.
+   e2: Elle a **vingt** ans cette année. || She is **twenty** years old this year.
+   syn: [] | ant: []
+
+vingt [ko] ipa=vɛ̃ | meanings: 스물[명사]
+   e1: J'ai **vingt** pommes dans mon panier. || 나는 내 바구니에 **스물** 개의 사과가 있어요.
+   e2: Elle fête ses **vingt** ans aujourd'hui. || 그녀는 오늘 **스물** 살 생일을 맞았어요.
+   syn: [] | ant: []
+
+soixante [en] ipa=swasɑ̃t | meanings: sixty[noun]
+   e1: Il a **soixante** ans aujourd'hui. || He is **sixty** years old today.
+   e2: Elle a couru **soixante** kilomètres ce week-end. || She ran **sixty** kilometers this weekend.
+   e3: Nous avons acheté **soixante** pommes au marché. || We bought **sixty** apples at the market.
+   syn: [] | ant: []
+
+soixante [ko] ipa=swasɑ̃t | meanings: 예순[명사]
+   e1: Elle a **soixante** ans cette année. || 그녀는 올해 **예순** 살입니다.
+   e2: Nous avons marché **soixante** kilomètres aujourd'hui. || 우리는 오늘 **예순** 킬로미터를 걸었습니다.
+   syn: [] | ant: []
+
+cent [en] ipa=sɑ̃ | meanings: hundred[noun]
+   e1: Il y a **cent** fleurs dans le jardin. || There are one **hundred** flowers in the garden.
+   e2: Elle a acheté **cent** pommes au marché. || She bought one **hundred** apples at the market.
+   syn: [centaine] | ant: []
+
+cent [ko] ipa=sɑ̃ | meanings: 백[명사]
+   e1: J'ai cinq **cents** feuilles dans mon cahier. || 나는 내 공책에 **백** 장의 종이가 있어요.
+   e2: Le prix est de deux **cents** euros. || 가격은 **백** 유로입니다.
+   e3: Elle a terminé la course en moins de trois **cents** secondes. || 그녀는 3**백** 초 이내에 경주를 마쳤어요.
+   syn: [] | ant: []
+
+mille [en] ipa=mil | meanings: thousand[noun]
+   e1: Il y a **mille** étoiles visibles ce soir. || There are a **thousand** stars visible tonight.
+   e2: Elle a couru **mille** mètres pendant la course. || She ran a **thousand** meters during the race.
+   e3: Le livre coûte environ **mille** euros. || The book costs about a **thousand** euros.
+   syn: [] | ant: []
+
+mille [ko] ipa=mil | meanings: 천[명사]
+   e1: Il y a **mille** étoiles dans le ciel ce soir. || 오늘 밤 하늘에 **천** 개의 별이 있다.
+   e2: Nous avons parcouru **mille** kilomètres en voiture. || 우리는 자동차로 **천** 킬로미터를 달렸다.
+   e3: Elle a donné **mille** raisons pour venir. || 그녀는 오기 위해서 **천** 가지 이유를 댔다.
+   syn: [] | ant: []
+
+premier [en] ipa=pʁəmje | meanings: first[adjective] | prime minister[noun]
+   e1: Il a remporté le **premier** prix au concours. || He won the **first** prize in the contest.
+   e2: Le **premier** ministre dirige le gouvernement national. || The **prime minister** leads the national government.
+   syn: [initial, premier ministre, ministre principal] | ant: []
+
+premier [ko] ipa=pʁə.mje | meanings: 첫 번째[형용사] | 수상[명사]
+   e1: Il est le **premier** à arriver. || 그는 **첫 번째**로 도착했다.
+   e2: Le **premier** a reçu une récompense. || 그 **수상**자는 상을 받았다.
+   syn: [initial, premier ministre, principal] | ant: []
+
+deuxième [en] ipa=døzjɛm | meanings: second[adjective]
+   e1: C'est la **deuxième** fois que je visite ce musée. || It is the **second** time I visit this museum.
+   e2: Elle a fini en **deuxième** position dans la course. || She finished in **second** place in the race.
+   e3: Le **deuxième** chapitre est plus intéressant que le premier. || The **second** chapter is more interesting than the first.
+   syn: [second, seconde] | ant: []
+
+deuxième [ko] ipa=døzjɛm | meanings: 둘째[형용사] | 두 번째[명사]
+   e1: C'est ma **deuxième** maison. || 이것은 나의 **둘째** 집입니다.
+   e2: Il est arrivé en **deuxième** position. || 그는 **두 번째**로 도착했습니다.
+   syn: [second, deux] | ant: []
+
+dernier [en] ipa=dɛʁnje | meanings: last[adjective]
+   e1: C'est le **dernier** chapitre du livre. || This is the **last** chapter of the book.
+   e2: Elle a gagné la **dernière** course hier. || She won the **last** race yesterday.
+   e3: Il a assisté à la **dernière** réunion de l'année. || He attended the **last** meeting of the year.
+   syn: [final, ultime, terminal] | ant: [premier]
+
+dernier [ko] ipa=dɛʁnje | meanings: 마지막[형용사] | 최신[형용사]
+   e1: C'est le **dernier** jour de l'année. || 오늘은 한 해의 **마지막** 날이다.
+   e2: Voici la **dernière** version du logiciel. || 이것은 소프트웨어의 **최신** 버전이다.
+   syn: [ultime, final, recent] | ant: [premier]
+
+lundi [en] ipa=lœ̃di | meanings: Monday[noun]
+   e1: Je commence un nouveau projet ce **lundi**. || I start a new project this **Monday**.
+   e2: Le marché a lieu tous les **lundis** matin. || The market takes place every **Monday** morning.
+   e3: Nous avons une réunion importante **lundi** prochain. || We have an important meeting next **Monday**.
+   syn: [] | ant: []
+
+lundi [ko] ipa=lœ̃di | meanings: 월요일[명사]
+   e1: Le **lundi** commence la semaine. || **월요일**은 주를 시작합니다.
+   e2: Nous avons une réunion le **lundi** matin. || 우리는 **월요일** 아침에 회의가 있습니다.
+   e3: Je préfère travailler le **lundi**. || 나는 **월요일**에 일하는 것을 선호합니다.
+   syn: [] | ant: []
+
+mardi [en] ipa=maʁdi | meanings: Tuesday[noun]
+   e1: Le rendez-vous est fixé pour **mardi**. || The appointment is set for **Tuesday**.
+   e2: Nous irons au marché **mardi** matin. || We will go to the market on **Tuesday** morning.
+   e3: Le cours commence le **mardi** à 9 heures. || The class starts on **Tuesday** at 9 o'clock.
+   syn: [] | ant: []
+
+mardi [ko] ipa=maʁdi | meanings: 화요일[명사]
+   e1: Nous avons un rendez-vous ce **mardi**. || 우리는 이번 **화요일**에 약속이 있어요.
+   e2: Le marché ferme le **mardi** soir. || 시장은 **화요일** 저녁에 문을 닫아요.
+   e3: Le **mardi** est un jour chargé pour moi. || **화요일**은 제게 바쁜 날이에요.
+   syn: [] | ant: []
+
+mercredi [en] ipa=mɛʁ.kʁə.di | meanings: Wednesday[noun]
+   e1: Je viens te voir **mercredi**. || I will come to see you on **Wednesday**.
+   e2: Le rendez-vous est fixé pour **mercredi**. || The appointment is set for **Wednesday**.
+   syn: [] | ant: []
+
+mercredi [ko] ipa=mɛʁkʁədi | meanings: 수요일[명사]
+   e1: Nous avons une réunion le **mercredi**. || 우리는 **수요일**에 회의가 있습니다.
+   e2: Le marché est ouvert tous les **mercredis**. || 시장은 매 **수요일**마다 열립니다.
+   e3: Je commence un nouveau cours ce **mercredi**. || 나는 이번 **수요일**에 새 수업을 시작합니다.
+   syn: [] | ant: []
+
+jeudi [en] ipa=ʒødi | meanings: Thursday[noun]
+   e1: Nous avons une réunion le **jeudi**. || We have a meeting on **Thursday**.
+   e2: Le marché ouvre tous les **jeudis** matin. || The market opens every **Thursday** morning.
+   syn: [] | ant: []
+
+jeudi [ko] ipa=ʒødi | meanings: 목요일[명사]
+   e1: Nous avons une réunion **jeudi**. || 우리는 **목요일**에 회의가 있습니다.
+   e2: Le marché ouvre le **jeudi** matin. || 시장은 **목요일** 아침에 열립니다.
+   syn: [] | ant: []
+
+vendredi [en] ipa=vɑ̃dʁədi | meanings: Friday[noun]
+   e1: Nous avons une réunion ce **vendredi**. || We have a meeting this **Friday**.
+   e2: Le marché est toujours animé le **vendredi**. || The market is always lively on **Friday**.
+   e3: Je pars en voyage le **vendredi** prochain. || I am leaving on a trip next **Friday**.
+   syn: [] | ant: []
+
+vendredi [ko] ipa=vɑ̃dʁədi | meanings: 금요일[명사]
+   e1: Je travaille tous les **vendredis**. || 나는 매주 **금요일**에 일해요.
+   e2: Le marché a lieu le **vendredi** matin. || 시장은 **금요일** 아침에 열려요.
+   e3: Nous avons une réunion le **vendredi**. || 우리는 **금요일**에 회의가 있어요.
+   syn: [] | ant: []
+
+samedi [en] ipa=samdi | meanings: Saturday[noun]
+   e1: Nous irons au marché **samedi**. || We will go to the market on **Saturday**.
+   e2: Le **samedi**, la famille se réunit toujours. || On **Saturday**, the family always gathers.
+   e3: **Samedi** est mon jour préféré de la semaine. || **Saturday** is my favorite day of the week.
+   syn: [] | ant: []
+
+samedi [ko] ipa=samdi | meanings: 토요일[명사]
+   e1: Nous irons au parc **samedi**. || 우리는 **토요일**에 공원에 갈 거예요.
+   e2: Le marché est ouvert **samedi** matin. || 시장은 **토요일** 아침에 열려 있어요.
+   syn: [] | ant: []
+
+dimanche [en] ipa=di.mɑ̃ʃ | meanings: Sunday[noun]
+   e1: Nous irons à la plage **dimanche**. || We will go to the beach on **Sunday**.
+   e2: Le marché est ouvert le **dimanche**. || The market is open on **Sunday**.
+   e3: **Dimanche** est toujours un jour de repos. || **Sunday** is always a day of rest.
+   syn: [jour du Seigneur] | ant: []
+
+dimanche [ko] ipa=dimɑ̃ʃ | meanings: 일요일[명사]
+   e1: Nous allons au parc ce **dimanche**. || 우리는 이번 **일요일**에 공원에 갑니다.
+   e2: Le **dimanche** est un jour de repos en France. || **일요일**은 프랑스에서 휴일입니다.
+   syn: [jour du Seigneur] | ant: []
+
+janvier [en] ipa=ʒanvje | meanings: January[noun]
+   e1: Le mois de **janvier** est souvent froid. || The month of **January** is often cold.
+   e2: Nous partons en vacances en **janvier**. || We are going on vacation in **January**.
+   e3: Le festival commence en **janvier** chaque année. || The festival starts in **January** every year.
+   syn: [] | ant: []
+
+janvier [ko] ipa=ʒɑ̃vje | meanings: 1월[명사]
+   e1: Le premier jour de **janvier** est le Nouvel An. || **1월** 첫날은 새해입니다.
+   e2: Mon anniversaire est en **janvier** chaque année. || 제 생일은 매년 **1월**에 있습니다.
+   syn: [] | ant: []
+
+février [en] ipa=fevʁije | meanings: February[noun]
+   e1: Le mariage aura lieu en **février**. || The wedding will take place in **February**.
+   e2: Nous partons en vacances en **février** cette année. || We are going on vacation in **February** this year.
+   syn: [] | ant: []
+
+février [ko] ipa=fevʁije | meanings: 2월[명사]
+   e1: Le mois de **février** est court. || **2월**은 짧은 달이에요.
+   e2: En **février**, il neige souvent ici. || **2월**에는 여기에 자주 눈이 와요.
+   syn: [] | ant: []
+
+mars [en] ipa=maʁs | meanings: March[noun] | Mars, planet[proper noun]
+   e1: Le printemps commence en **mars**. || Spring begins in **March**.
+   e2: Les astronautes rêvent de visiter **Mars**. || Astronauts dream of visiting **Mars**.
+   e3: Le festival a lieu en **mars** chaque année. || The festival takes place in **March** every year.
+   syn: [] | ant: []
+
+mars [ko] ipa=maʁs | meanings: 3월[명사] | 화성, 행성[명사]
+   e1: Nous irons en vacances en **mars**. || 우리는 **3월**에 휴가를 갈 거예요.
+   e2: Le rover explore la planète **Mars**. || 탐사선이 행성 **화성**을 탐험하고 있습니다.
+   e3: Le printemps commence souvent en **mars**. || 봄은 보통 **3월**에 시작됩니다.
+   syn: [] | ant: []
+
+avril [en] ipa=avʁil | meanings: April[noun]
+   e1: Le festival aura lieu en **avril**. || The festival will take place in **April**.
+   e2: Nous partons en vacances en **avril**. || We are going on vacation in **April**.
+   e3: Les fleurs commencent à pousser en **avril**. || The flowers begin to grow in **April**.
+   syn: [] | ant: []
+
+avril [ko] ipa=avʁil | meanings: 4월[명사]
+   e1: Le printemps commence en **avril**. || **4월**에 봄이 시작해요.
+   e2: Nous irons en vacances en **avril**. || 우리는 **4월**에 휴가를 갈 거예요.
+   syn: [] | ant: []
+
+mai [en] ipa=mɛ | meanings: May[noun]
+   e1: Le festival a lieu en **mai** chaque année. || The festival takes place in **May** every year.
+   e2: Les fleurs commencent à pousser en **mai**. || The flowers start to grow in **May**.
+   e3: Nous avons planifié notre voyage pour **mai**. || We planned our trip for **May**.
+   syn: [] | ant: []
+
+mai [ko] ipa=mɛ | meanings: 5월[명사]
+   e1: Le **mai** est le mois des fleurs. || **5월**은 꽃의 달입니다.
+   e2: Nous visiterons Paris en **mai** prochain. || 우리는 다음 **5월**에 파리를 방문할 것입니다.
+   e3: Le festival commence début **mai** chaque année. || 축제는 매년 초 **5월**에 시작됩니다.
+   syn: [] | ant: []
+
+juin [en] ipa=ʒɥɛ̃ | meanings: June[noun]
+   e1: Nous partons en vacances en **juin**. || We go on vacation in **June**.
+   e2: Le festival a lieu chaque **juin**. || The festival takes place every **June**.
+   e3: Le mariage est prévu pour le dixième jour de **juin**. || The wedding is scheduled for the tenth day of **June**.
+   syn: [] | ant: []
+
+juin [ko] ipa=ʒɥɛ̃ | meanings: 6월[명사]
+   e1: Nous partons en vacances en **juin**. || 우리는 **6월**에 휴가를 떠납니다.
+   e2: Le festival a lieu chaque **juin**. || 축제는 매년 **6월**에 열립니다.
+   e3: Mon anniversaire est en **juin**. || 제 생일은 **6월**입니다.
+   syn: [] | ant: []
+
+juillet [en] ipa=ʒɥijɛ | meanings: July[noun]
+   e1: Nous partons en vacances en **juillet**. || We go on vacation in **July**.
+   e2: Le festival a lieu chaque **juillet**. || The festival takes place every **July**.
+   e3: Le soleil brille souvent en **juillet**. || The sun often shines in **July**.
+   syn: [] | ant: []
+
+juillet [ko] ipa=ʒɥijɛ | meanings: 7월[명사]
+   e1: Le mois de **juillet** est chaud ici. || **7월**은 여기에서 덥습니다.
+   e2: Nous partirons en vacances en **juillet**. || 우리는 **7월**에 휴가를 갈 것입니다.
+   e3: La fête nationale est célébrée en **juillet**. || 국경일은 **7월**에 축하됩니다.
+   syn: [] | ant: []
+
+août [en] ipa=ut | meanings: August[noun]
+   e1: Je pars en vacances en **août**. || I go on vacation in **August**.
+   e2: Le festival aura lieu en **août** chaque année. || The festival will take place every year in **August**.
+   e3: Les jours sont très chauds en **août**. || The days are very hot in **August**.
+   syn: [] | ant: []
+
+août [ko] ipa=ut | meanings: 8월[명사]
+   e1: Mon anniversaire est en **août**. || 내 생일은 **8월**이에요.
+   e2: Nous partons en vacances en **août**. || 우리는 **8월**에 휴가를 떠나요.
+   e3: Le marché ouvre tous les jours en **août**. || 시장은 **8월**에 매일 열려 있어요.
+   syn: [] | ant: []
+
+septembre [en] ipa=sɛptɑ̃bʁ | meanings: September[noun]
+   e1: La rentrée a lieu en **septembre** chaque année. || The school starts in **September** every year.
+   e2: Nous avons prévu des vacances en **septembre**. || We planned a vacation in **September**.
+   e3: Le festival commence le premier **septembre**. || The festival begins on the first of **September**.
+   syn: [] | ant: []
+
+septembre [ko] ipa=sɛptɑ̃bʁ | meanings: 9월[명사]
+   e1: Nous partons en vacances en **septembre**. || 우리는 **9월**에 휴가를 떠나요.
+   e2: Le climat est agréable en **septembre**. || **9월**은 날씨가 쾌적해요.
+   e3: L'école commence en **septembre**. || 학교는 **9월**에 시작해요.
+   syn: [] | ant: []
+
+octobre [en] ipa=ɔktɔbʁ | meanings: October[noun]
+   e1: Nous partons en vacances en **octobre**. || We are going on vacation in **October**.
+   e2: Le festival a lieu chaque **octobre**. || The festival takes place every **October**.
+   e3: Les feuilles tombent en **octobre**. || The leaves fall in **October**.
+   syn: [] | ant: []
+
+octobre [ko] ipa=ɔktɔbʁ | meanings: 10월[명사]
+   e1: Le mois d'**octobre** est souvent frais. || **10월**은 보통 서늘해요.
+   e2: Nous partons en vacances en **octobre**. || 우리는 **10월**에 휴가를 갑니다.
+   e3: La fête a lieu chaque **octobre**. || 축제는 매년 **10월**에 열립니다.
+   syn: [] | ant: []
+
+novembre [en] ipa=nɔvɑ̃bʁ | meanings: November[noun]
+   e1: Le festival commence en **novembre** chaque année. || The festival starts in **November** every year.
+   e2: En **novembre**, les feuilles tombent des arbres. || In **November**, the leaves fall from the trees.
+   e3: Nous avons une réunion importante en **novembre**. || We have an important meeting in **November**.
+   syn: [] | ant: []
+
+novembre [ko] ipa=nɔvɑ̃bʁ | meanings: 11월[명사]
+   e1: L'école commence en **novembre**. || 학교가 **11월**에 시작해요.
+   e2: Il fait plus froid en **novembre**. || **11월**에는 더 추워요.
+   syn: [] | ant: []
+
+décembre [en] ipa=desɑ̃bʁ | meanings: December[noun]
+   e1: Nous partons en vacances en **décembre**. || We go on vacation in **December**.
+   e2: Le marché de Noël ouvre en **décembre**. || The Christmas market opens in **December**.
+   e3: Mon anniversaire est en **décembre**. || My birthday is in **December**.
+   syn: [] | ant: []
+
+décembre [ko] ipa=desɑ̃bʁ | meanings: 12월[명사]
+   e1: Le réveillon a lieu en **décembre**. || 송년회는 **12월**에 열려요.
+   e2: Les jours sont courts en **décembre**. || **12월**에는 낮이 짧아요.
+   e3: En **décembre**, il neige souvent ici. || **12월**에는 여기서 눈이 자주 내려요.
+   syn: [] | ant: []
+
+jour [en] ipa=ʒuʁ | meanings: day[noun]
+   e1: Le **jour** commence avec le lever du soleil. || The **day** begins with the sunrise.
+   e2: Chaque **jour** apporte une nouvelle chance. || Each **day** brings a new chance.
+   e3: Nous avons passé un **jour** magnifique au parc. || We spent a wonderful **day** at the park.
+   syn: [journée, date, période] | ant: []
+
+jour [ko] ipa=ʒuʁ | meanings: 날, 일[명사]
+   e1: Le **jour** est clair et ensoleillé. || **날**이 맑고 화창해요.
+   e2: Chaque **jour** apporte de nouvelles chances. || 매 **날**이 새로운 기회를 가져와요.
+   e3: Le **jour** du festival approche rapidement. || 축제 **날**이 빠르게 다가오고 있어요.
+   syn: [journée, date] | ant: []
+
+semaine [en] ipa=sə.mɛn | meanings: week[noun]
+   e1: La **semaine** prochaine, nous partons en voyage. || Next **week**, we are going on a trip.
+   e2: J'ai beaucoup travaillé cette **semaine**. || I worked a lot this **week**.
+   e3: Chaque **semaine**, elle va à la piscine. || Every **week**, she goes to the swimming pool.
+   syn: [hebdomadaire] | ant: []
+
+semaine [ko] ipa=səmɛn | meanings: 일주일[명사]
+   e1: La **semaine** commence lundi. || **일주일**은 월요일에 시작해요.
+   e2: Il travaille cinq jours par **semaine**. || 그는 한 **주에** 다섯 날 일해요.
+   e3: Cette **semaine** est très chargée. || 이번 **주는** 매우 바빠요.
+   syn: [sept jours] | ant: []
+
+mois [en] ipa=mwa | meanings: month[noun]
+   e1: Le **mois** de mai est très agréable. || The **month** of May is very pleasant.
+   e2: Je pars en voyage dans deux **mois**. || I am going on a trip in two **month**s.
+   e3: Chaque **mois**, nous recevons la newsletter. || Every **month**, we receive the newsletter.
+   syn: [trimestre, période, temps] | ant: []
+
+mois [ko] ipa=mwa | meanings: 달, 월[명사]
+   e1: Le **mois** de janvier est froid. || 1**월**은 춥습니다.
+   e2: Elle habite là depuis six **mois**. || 그녀는 거기에 6개**월** 동안 살고 있습니다.
+   e3: Ce projet durera trois **mois**. || 이 프로젝트는 3개**월** 동안 지속됩니다.
+   syn: [terme, période] | ant: []
+
+année [en] ipa=ane | meanings: year[noun]
+   e1: L'**année** commence en janvier. || The **year** starts in January.
+   e2: Elle a voyagé toute l'**année** dernière. || She traveled all last **year**.
+   e3: Cette **année** fut pleine de surprises. || This **year** was full of surprises.
+   syn: [12 mois, année civile, exercice] | ant: []
+
+année [ko] ipa=ane | meanings: 해, 연[명사]
+   e1: L'**année** commence en janvier. || **해**는 1월에 시작해요.
+   e2: J'ai voyagé toute l'**année** dernière. || 나는 지난 **연** 동안 여행했어요.
+   e3: Chaque **année**, les fleurs fleurissent au printemps. || 매 **해** 봄에 꽃이 피어요.
+   syn: [an, durée] | ant: []
+
+heure [en] ipa=œʁ | meanings: hour[noun]
+   e1: Je travaille une **heure** par jour. || I work for one **hour** a day.
+   e2: L'**heure** de la réunion est fixée à dix heures. || The **hour** of the meeting is set to ten o'clock.
+   e3: Nous avons une **heure** pour finir le projet. || We have an **hour** to finish the project.
+   syn: [temps, moment, durée, période] | ant: []
+
+heure [ko] ipa=œʁ | meanings: 시간, 시각[명사]
+   e1: L'**heure** du rendez-vous approche. || 약속 **시간**이 가까워지고 있어요.
+   e2: Quelle **heure** est-il maintenant ? || 지금 몇 **시**입니까?
+   e3: Je travaille chaque **heure** avec soin. || 나는 매 **시간**을 신중하게 일해요.
+   syn: [temps, moment] | ant: []
+
+minute [en] ipa=minyt | meanings: minute, time unit[noun] | note, record[noun]
+   e1: Il a attendu une **minute** avant de répondre. || He waited one **minute** before answering.
+   e2: Le secrétaire a rédigé la **minute** de la réunion. || The secretary wrote the **minutes** of the meeting.
+   e3: Donne-moi une **minute** pour finir mon travail. || Give me a **minute** to finish my work.
+   syn: [instant, moment, note, procès-verbal] | ant: []
+
+minute [ko] ipa=minyt | meanings: 분[명사] | 회의록[명사]
+   e1: J'attendrai une **minute** avant de partir. || 나는 출발하기 전에 **1분** 기다릴게요.
+   e2: Le secrétaire a écrit les **minutes** de la réunion. || 비서가 회의 **회의록**을 썼어요.
+   e3: Prends une **minute** pour apprécier le paysage. || 풍경을 감상할 1**분**을 가져요.
+   syn: [instant, moment, procès-verbal] | ant: []
+
+matin [en] ipa=matɛ̃ | meanings: morning[noun]
+   e1: Je marche dans le **matin**. || I walk in the **morning**.
+   e2: Le **matin** est frais et calme. || The **morning** is fresh and calm.
+   e3: Nous prenons le petit déjeuner chaque **matin**. || We have breakfast every **morning**.
+   syn: [matinée] | ant: [soir]
+
+matin [ko] ipa=matɛ̃ | meanings: 아침[명사]
+   e1: Je me lève tôt chaque **matin**. || 나는 매일 **아침** 일찍 일어난다.
+   e2: Le soleil brille fort ce **matin**. || 오늘 **아침** 태양이 강하게 빛난다.
+   e3: Nous prenons notre café le **matin**. || 우리는 **아침**에 커피를 마신다.
+   syn: [aurore, matinée, aube] | ant: [soir, nuit]
+
+midi [en] ipa=midi | meanings: noon[noun] | south of France, region[noun]
+   e1: Le déjeuner commence à **midi**. || Lunch starts at **noon**.
+   e2: Nous avons visité le **Midi** cet été. || We visited the **south of France** this summer.
+   syn: [midi pile, douze heures] | ant: []
+
+midi [ko] ipa=midi | meanings: 정오[명사] | 남부[명사]
+   e1: Le déjeuner est à **midi**. || 점심은 **정오**에 합니다.
+   e2: Nous avons visité le **Midi** de la France. || 우리는 프랑스의 **남부**를 방문했습니다.
+   syn: [douzième heure, méridien] | ant: []
+
+après-midi [en] ipa=apʁɛ midi | meanings: afternoon[noun]
+   e1: Nous avons une réunion cet **après-midi**. || We have a meeting this **afternoon**.
+   e2: L'**après-midi** est parfait pour une promenade. || The **afternoon** is perfect for a walk.
+   syn: [après-midi (fam.), PM] | ant: []
+
+après-midi [ko] ipa=a.pʁɛ.mi.di | meanings: 오후[명사]
+   e1: Nous irons au parc cet **après-midi**. || 우리는 오늘 **오후**에 공원에 갈 거예요.
+   e2: L’**après-midi** est parfait pour une promenade. || **오후**는 산책하기에 완벽한 시간입니다.
+   e3: Le soleil brille toujours en **après-midi**. || **오후**에는 태양이 항상 빛나요.
+   syn: [le midi, la sieste] | ant: []
+
+soir [en] ipa=swaʁ | meanings: evening[noun]
+   e1: Le **soir** est parfait pour une promenade. || The **evening** is perfect for a walk.
+   e2: Nous aimons dîner en famille le **soir**. || We like to have dinner with family in the **evening**.
+   e3: Elle se repose toujours le **soir** après le travail. || She always rests in the **evening** after work.
+   syn: [soirée, crépuscule, fin de journée] | ant: [matin, journée, matinée]
+
+soir [ko] ipa=swaʁ | meanings: 저녁[명사]
+   e1: Nous dînons ensemble ce **soir**. || 우리는 오늘 **저녁**에 함께 저녁 식사를 합니다.
+   e2: Le **soir** est calme et paisible. || **저녁**은 조용하고 평화롭습니다.
+   e3: Le **soir** descend doucement sur la ville. || 도시에 **저녁**이 천천히 내려앉습니다.
+   syn: [nuit, crépuscule, fin de journée] | ant: []
+
+nuit [en] ipa=nɥi | meanings: night[noun]
+   e1: La **nuit** est calme et silencieuse. || The **night** is calm and silent.
+   e2: Nous aimons observer les étoiles la **nuit**. || We like to watch the stars at **night**.
+   e3: La lumière s'éteint dès que la **nuit** tombe. || The light goes off as soon as **night** falls.
+   syn: [soir, crépuscule, obscurité] | ant: [jour]
+
+nuit [ko] ipa=nɥi | meanings: 밤[명사]
+   e1: La **nuit** est calme et pleine d'étoiles. || **밤**은 조용하고 별이 가득해요.
+   e2: Nous aimons marcher dehors pendant la **nuit** d'été. || 우리는 여름 **밤**에 밖에서 걷는 것을 좋아해요.
+   e3: La **nuit** apporte une douce fraîcheur au jardin. || **밤**에는 정원에 부드러운 시원함이 찾아와요.
+   syn: [soir, ténèbres, obscurité] | ant: [jour]
+
+aujourd'hui [en] ipa=oʒuʁdɥi | meanings: today[adverb]
+   e1: Nous partons en voyage **aujourd'hui**. || We are leaving on a trip **today**.
+   e2: Le marché est ouvert **aujourd'hui**. || The market is open **today**.
+   e3: Je travaille beaucoup **aujourd'hui**. || I am working a lot **today**.
+   syn: [] | ant: []
+
+aujourd'hui [ko] ipa=oʒuʁdɥi | meanings: 오늘[부사]
+   e1: Je travaille **aujourd'hui** dans le jardin. || 나는 **오늘** 정원에서 일해요.
+   e2: Nous avons un rendez-vous **aujourd'hui** à midi. || 우리는 **오늘** 정오에 약속이 있어요.
+   e3: **Aujourd'hui**, le soleil brille plus fort. || **오늘**, 태양이 더 강하게 빛나요.
+   syn: [ce jour, le jour même] | ant: []
+
+demain [en] ipa=dəmɛ̃ | meanings: tomorrow[adverb] | future day[noun]
+   e1: Je vais partir **demain** matin. || I will leave **tomorrow** morning.
+   e2: Le **demain** s'annonce prometteur pour nous. || The **future** looks promising for us.
+   syn: [lendemain] | ant: []
+
+demain [ko] ipa=də.mɛ̃ | meanings: 내일[부사]
+   e1: Nous partirons en voyage **demain**. || 우리는 **내일** 여행을 떠날 거예요.
+   e2: Elle a un rendez-vous important **demain**. || 그녀는 **내일** 중요한 약속이 있어요.
+   syn: [le jour suivant] | ant: []
+
+hier [en] ipa=jɛʁ | meanings: yesterday[adverb]
+   e1: Nous avons rencontré des amis **hier**. || We met friends **yesterday**.
+   e2: Le temps était doux **hier** soir. || The weather was mild **yesterday** evening.
+   syn: [la veille, la veille au soir] | ant: []
+
+hier [ko] ipa=jɛʁ | meanings: 어제[부사]
+   e1: Nous sommes allés au parc **hier**. || 우리는 **어제** 공원에 갔어요.
+   e2: Il a fait très chaud **hier**. || **어제** 날씨가 매우 더웠어요.
+   e3: J'ai rencontré mon ami **hier** soir. || 나는 **어제** 밤에 내 친구를 만났어요.
+   syn: [la veille, la journée précédente] | ant: []
+
+maintenant [en] ipa=mɛ̃t.nɑ̃ | meanings: now[adverb]
+   e1: Je mange **maintenant**. || I am eating **now**.
+   e2: Nous partons **maintenant** pour la plage. || We are leaving **now** for the beach.
+   e3: Il est temps de commencer **maintenant**. || It is time to start **now**.
+   syn: [à présent, actuellement, désormais] | ant: []
+
+maintenant [ko] ipa=mɛ̃t.nɑ̃ | meanings: 지금[부사]
+   e1: Je mange **maintenant**. || 나는 **지금** 먹고 있어요.
+   e2: Il pleut **maintenant**. || 비가 **지금** 와요.
+   syn: [à présent, actuellement, en ce moment] | ant: []
+
+tôt [en] ipa=to | meanings: early[adverb]
+   e1: Je me suis levé **tôt** ce matin. || I got up **early** this morning.
+   e2: Nous arriverons **tôt** pour voir le lever du soleil. || We will arrive **early** to see the sunrise.
+   e3: Elle a commencé son travail **tôt** aujourd'hui. || She started her work **early** today.
+   syn: [de bonne heure, en avance] | ant: [tard]
+
+tôt [ko] ipa=to | meanings: 일찍[부사]
+   e1: Je me suis levé **tôt** ce matin. || 나는 오늘 아침에 **일찍** 일어났어요.
+   e2: Elle arrive toujours **tôt** au travail. || 그녀는 항상 **일찍** 일에 도착해요.
+   syn: [bientôt, précocement] | ant: []
+
+toujours [en] ipa=tuʒuʁ | meanings: always[adverb] | still[adverb]
+   e1: Elle est **toujours** gentille avec ses amis. || She is **always** kind to her friends.
+   e2: Il travaille **toujours** dans ce café. || He **still** works at this café.
+   e3: Nous **toujours** aimons aller au parc après l'école. || We **always** like to go to the park after school.
+   syn: [constamment, invariablement, toujours encore] | ant: []
+
+toujours [ko] ipa=tuʒuʁ | meanings: 항상[부사] | 여전히[부사]
+   e1: Je suis **toujours** heureux de te voir. || 나는 너를 **항상** 만나서 행복해요.
+   e2: Il est **toujours** là malgré les difficultés. || 그는 어려움에도 불구하고 **여전히** 그 자리에 있어요.
+   e3: Elle arrive **toujours** à l'heure. || 그녀는 **항상** 정시에 도착해요.
+   syn: [constamment, en permanence] | ant: []
+
+parfois [en] ipa=paʁ.fwa | meanings: sometimes[adverb]
+   e1: Il **parfois** visite ses grands-parents le dimanche. || He **sometimes** visits his grandparents on Sundays.
+   e2: Nous mangeons **parfois** au restaurant pour célébrer. || We **sometimes** eat at the restaurant to celebrate.
+   e3: Elle lit **parfois** un livre avant de dormir. || She **sometimes** reads a book before sleeping.
+   syn: [quelquefois, de temps en temps, occasionnellement] | ant: []
+
+parfois [ko] ipa=paʁfwa | meanings: 가끔[부사]
+   e1: Je vais **parfois** au parc le dimanche. || 나는 일요일에 **가끔** 공원에 간다.
+   e2: Elle mange **parfois** des fruits le matin. || 그녀는 아침에 **가끔** 과일을 먹는다.
+   syn: [quelquefois, de temps en temps] | ant: []
+
+déjà [en] ipa=de.ʒa | meanings: already[adverb]
+   e1: J'ai **déjà** mangé ce plat délicieux. || I have **already** eaten this delicious dish.
+   e2: Elle a **déjà** visité ce musée plusieurs fois. || She has **already** visited this museum several times.
+   e3: Nous sommes **déjà** partis quand tu es arrivé. || We had **already** left when you arrived.
+   syn: [déjà vu] | ant: []
+
+déjà [ko] ipa=de.ʒa | meanings: 이미, 벌써[부사]
+   e1: J'ai **déjà** mangé ce matin. || 나는 오늘 아침에 **이미** 먹었어요.
+   e2: Nous avons **déjà** visité cette ville. || 우리는 그 도시를 **벌써** 방문했어요.
+   syn: [déjà vu, maintenant, autrefois] | ant: []
+
+encore [en] ipa=ɑ̃.kɔʁ | meanings: again, still, yet[adverb] | additional performance[noun]
+   e1: Il pleut **encore** aujourd'hui. || It is raining **still** today.
+   e2: Je veux essayer **encore** une fois. || I want to try **again** one more time.
+   e3: Le groupe a donné un **encore** après son concert. || The band gave an **encore** after their concert.
+   syn: [de nouveau, toujours] | ant: []
+
+encore [ko] ipa=ɑ̃.kɔʁ | meanings: 더[부사] | 앙코르[명사]
+   e1: Je veux **encore** du gâteau. || 나는 케이크를 **더** 먹고 싶어요.
+   e2: Le public a demandé un **encore**. || 관객이 **앙코르**를 요청했어요.
+   e3: Il fait **encore** chaud aujourd’hui. || 오늘은 **더** 덥네요.
+   syn: [toujours, davantage, encore une fois] | ant: []
+
+où [en] ipa=u | meanings: where[adverb]
+   e1: Sais-tu **où** est le parc? || Do you know **where** the park is?
+   e2: Je me demande **où** il a mis les clés. || I wonder **where** he put the keys.
+   e3: Peux-tu me dire **où** se trouve la bibliothèque? || Can you tell me **where** the library is?
+   syn: [dans quel endroit, à quel lieu] | ant: []
+
+où [ko] ipa=u | meanings: 어디에, 어디에서[부사]
+   e1: Je ne sais pas **où** il est parti. || 나는 그가 **어디**로 갔는지 모른다.
+   e2: Montre-moi **où** se trouve la bibliothèque. || 나에게 도서관이 **어디에** 있는지 보여줘.
+   syn: [] | ant: []
+
+quand [en] ipa=kɑ̃ | meanings: when[conjunction]
+   e1: Je ne sais pas **quand** il arrivera. || I do not know **when** he will arrive.
+   e2: Dis-moi **quand** la fête commence. || Tell me **when** the party starts.
+   e3: Nous partirons **quand** le soleil se couche. || We will leave **when** the sun sets.
+   syn: [] | ant: []
+
+quand [ko] ipa=kɑ̃ | meanings: 언제[전치사]
+   e1: Je me demande **quand** il arrivera. || 나는 그가 **언제** 도착할지 궁금해한다.
+   e2: Dis-moi **quand** tu es libre. || 네가 **언제** 시간이 되는지 말해줘.
+   e3: Je ne sais pas **quand** commencer. || 나는 **언제** 시작해야 할지 모른다.
+   syn: [] | ant: []
+
+comment [en] ipa=kɔmɑ̃ | meanings: how[adverb] | remark, observation[noun]
+   e1: Je ne sais pas **comment** faire ce gâteau. || I don't know **how** to make this cake.
+   e2: Son **commentaire** était très pertinent. || His **remark** was very relevant.
+   e3: Peux-tu m'expliquer **comment** tu as réussi ? || Can you explain **how** you succeeded?
+   syn: [de quelle façon, de quelle manière, façon] | ant: []
+
+comment [ko] ipa=kɔmɑ̃ | meanings: 어떻게[부사] | 논평[명사]
+   e1: **Comment** tu prépares ce plat ? || 너는 이 요리를 **어떻게** 준비해?
+   e2: Il a demandé un **comment** sur le projet. || 그는 프로젝트에 대한 **논평**을 요청했다.
+   e3: Explique-moi **comment** tu as fait cela. || 네가 그것을 **어떻게** 했는지 설명해줘.
+   syn: [de quelle manière, de quelle façon, de quelle sorte] | ant: []
+
+pourquoi [en] ipa=puʁkwa | meanings: why[adverb]
+   e1: **Pourquoi** tu ris toujours en lisant ce livre ? || **Why** do you always laugh when reading this book?
+   e2: Je me demande **pourquoi** le ciel est bleu aujourd'hui. || I wonder **why** the sky is blue today.
+   e3: Explique-moi **pourquoi** tu aimes ce tableau. || Explain to me **why** you like this painting.
+   syn: [pour quelle raison, pour quelle cause] | ant: []
+
+pourquoi [ko] ipa=puʁkwa | meanings: 왜[부사] | 무엇 때문에[부사]
+   e1: **Pourquoi** es-tu triste aujourd'hui ? || 오늘 **왜** 슬퍼하니?
+   e2: Je ne sais pas **pourquoi** il est parti. || 나는 그가 **왜** 떠났는지 모르겠다.
+   e3: Explique-moi **pourquoi** tu ris. || 네가 **왜** 웃는지 설명해줘.
+   syn: [] | ant: []
+
+qui [en] ipa=ki | meanings: who[pronoun]
+   e1: **Qui** est là dehors ? || **Who** is there outside?
+   e2: Je ne sais pas **qui** a fait ça. || I do not know **who** did that.
+   e3: C'est elle **qui** a gagné le prix. || She is the one **who** won the prize.
+   syn: [] | ant: []
+
+qui [ko] ipa=ki | meanings: 누구, …하는 사람[대명사]
+   e1: **Qui** est mon meilleur ami ? || **누구**가 내 가장 친한 친구인가요?
+   e2: Je ne sais pas **qui** vient ce soir. || 나는 오늘 밤에 **누가** 오는지 몰라요.
+   e3: C'est la personne **qui** a aidé tout le monde. || 모든 사람을 도와준 **사람이** 바로 그 사람에요.
+   syn: [] | ant: []
+
+ne [en] ipa=nə | meanings: not[adverb]
+   e1: Je **ne** mange pas de viande. || I do **not** eat meat.
+   e2: Elle **ne** veut pas venir aujourd'hui. || She does **not** want to come today.
+   e3: Nous **ne** comprenons pas la question. || We do **not** understand the question.
+   syn: [] | ant: []
+
+ne [ko] ipa=nə | meanings: 부정사[표현]
+   e1: Je **ne** sais pas la réponse. || 나는 **모르다** 답을.
+   e2: Il **ne** vient pas aujourd'hui. || 그는 오늘 **오지 않는다**.
+   e3: Nous **ne** mangeons pas de viande. || 우리는 고기를 **먹지 않는다**.
+   syn: [] | ant: []
+
+pas [en] ipa=pɑ | meanings: step[noun] | not[adverb]
+   e1: Il a fait un **pas** vers la fleur. || He took a **step** toward the flower.
+   e2: Je ne **vais pas** manger maintenant. || I do **not** eat now.
+   e3: Chaque **pas** compte dans la danse. || Every **step** counts in the dance.
+   syn: [marche, étape, avance, caractère négatif, non] | ant: []
+
+pas [ko] ipa=pɑ | meanings: 발걸음, 걸음[명사] | 아니, ~않다[표현]
+   e1: Il fait un **pas** vers la porte. || 그는 문 쪽으로 한 **걸음** 내디딘다.
+   e2: Je ne fais **pas** de bruit en entrant. || 나는 들어갈 때 소리를 내지 **않는다**.
+   e3: Elle a marché deux **pas** vers le jardin. || 그녀는 정원 쪽으로 두 **걸음** 걸었다.
+   syn: [] | ant: []
+
+plus [en] ipa=plys | meanings: more[adverb] | plus[conjunction]
+   e1: Je veux **plus** de chocolat, s'il te plaît. || I want **more** chocolate, please.
+   e2: Il ne pleut **plus** aujourd'hui. || It does not rain any**more** today.
+   e3: Je n'aime pas cette chanson, **plus** elle est trop lente. || I don't like this song, **plus** it is too slow.
+   syn: [davantage, encore] | ant: [moins]
+
+plus [ko] ipa=plys | meanings: 더, 더욱[부사] | 더하기[표현]
+   e1: Elle travaille **plus** chaque jour. || 그녀는 매일 **더** 많이 일해요.
+   e2: Je veux **plus** de chocolat, s'il te plaît. || 초콜릿을 **더** 주세요.
+   e3: Deux **plus** deux font quatre. || 이 **더하기** 이는 사입니다.
+   syn: [davantage, encore] | ant: []
+
+rien [en] ipa=ʁjɛ̃ | meanings: nothing[pronoun]
+   e1: Je ne vois **rien** dans la nuit. || I see **nothing** in the night.
+   e2: Il n'y a **rien** à craindre ici. || There is **nothing** to fear here.
+   e3: Je n'ai trouvé **rien** dans la boîte. || I found **nothing** in the box.
+   syn: [nada, néant, zéro] | ant: []
+
+rien [ko] ipa=ʁjɛ̃ | meanings: 아무것도, 아무것[명사]
+   e1: Je ne vois **rien** dans le jardin. || 나는 정원에서 **아무것도** 보지 못해요.
+   e2: Il n’a **rien** à dire ce soir. || 그는 오늘 밤 **아무것도** 말할 것이 없어요.
+   e3: Elle ne trouve **rien** d’intéressant au musée. || 그녀는 박물관에서 **아무것도** 흥미로운 것을 찾지 못해요.
+   syn: [aucune chose, néant, zéro] | ant: []
+
+et [en] ipa=e | meanings: and[conjunction]
+   e1: J'aime les chats **et** les chiens. || I like cats **and** dogs.
+   e2: Il fait froid **et** il pleut dehors. || It is cold **and** raining outside.
+   e3: Nous avons acheté du pain **et** du fromage. || We bought bread **and** cheese.
+   syn: [] | ant: []
+
+et [ko] ipa=e | meanings: 그리고[접속사]
+   e1: Il mange du pain **et** du fromage. || 그는 **그리고** 치즈를 먹어요.
+   e2: Elle lit un livre **et** écoute de la musique. || 그녀는 책을 읽**고** 음악을 들어요.
+   e3: Nous irons au parc **et** à la bibliothèque. || 우리는 공원에 가**고** 도서관에 가요.
+   syn: [] | ant: []
+
+ou [en] ipa=u | meanings: or[conjunction]
+   e1: Veux-tu du thé **ou** du café? || Do you want tea **or** coffee?
+   e2: Il fera froid **ou** il pleuvra demain. || It will be cold **or** it will rain tomorrow.
+   e3: Tu peux venir maintenant **ou** plus tard. || You can come now **or** later.
+   syn: [ou bien] | ant: []
+
+ou [ko] ipa=u | meanings: 또는, 혹은[접속사]
+   e1: Veux-tu du thé **ou** du café ? || 차를 **또는** 커피를 원해요?
+   e2: On ira à la plage **ou** à la montagne demain. || 우리는 내일 해변**이나** 산에 갈 거예요.
+   e3: Tu veux lire un livre **ou** regarder un film ? || 책을 읽**을지** 영화를 볼지 원해요?
+   syn: [ou bien, soit] | ant: []
+
+mais [en] ipa=mɛ | meanings: but[conjunction]
+   e1: Je veux venir, **mais** je suis fatigué. || I want to come, **but** I am tired.
+   e2: Il fait chaud, **mais** il y a du vent. || It is hot, **but** there is wind.
+   syn: [] | ant: []
+
+mais [ko] ipa=mɛ | meanings: 그러나, 하지만[접속사]
+   e1: Je veux venir, **mais** je suis fatigué. || 나는 오고 싶**지만** 피곤해요.
+   e2: Il fait beau, **mais** il fait froid. || 날씨가 좋**지만** 춥습니다.
+   syn: [cependant, toutefois, néanmoins] | ant: []
+
+parce que [en] ipa=- | meanings: because[conjunction]
+   e1: Je suis fatigué **parce que** j'ai travaillé tard. || I am tired **because** I worked late.
+   e2: Elle sourit **parce que** la journée est belle. || She smiles **because** the day is beautiful.
+   e3: Nous restons à la maison **parce qu'**il pleut. || We stay home **because** it is raining.
+   syn: [car, puisque, c'est que] | ant: []
+
+parce que [ko] ipa=- | meanings: 왜냐하면[접속사]
+   e1: Je suis heureux **parce que** le soleil brille. || 나는 **때문에** 태양이 빛나서 행복해요.
+   e2: Elle est partie tôt **parce qu'**elle était malade. || 그녀는 **아파서** 일찍 떠났어요.
+   e3: Nous restons ici **parce que** c'est calme. || 우리는 **조용해서** 여기 머물러요.
+   syn: [] | ant: []
+
+donc [en] ipa=dɔ̃k | meanings: so, therefore, thus[conjunction]
+   e1: Il pleuvait, **donc** nous sommes restés à la maison. || It was raining, **so** we stayed at home.
+   e2: Tu n'as rien dit, **donc** je suppose que tu es d'accord. || You said nothing, **so** I assume you agree.
+   e3: Il a travaillé dur, **donc** il a réussi l'examen. || He worked hard, **so** he passed the exam.
+   syn: [alors, par conséquent, ainsi] | ant: []
+
+donc [ko] ipa=dɔ̃k | meanings: 그러므로, 따라서[접속사]
+   e1: Il pleut, **donc** nous restons à la maison. || 비가 오니, **따라서** 우리는 집에 있습니다.
+   e2: Tu as étudié beaucoup, **donc** tu réussiras. || 너는 많이 공부했으니, **그러므로** 성공할 거예요.
+   syn: [alors, par conséquent, ainsi] | ant: []
+
+alors [en] ipa=alɔʁ | meanings: then[adverb] | so[adverb]
+   e1: Il a fini le travail, **alors** il est parti. || He finished the work, **then** he left.
+   e2: Tu es fatigué, **alors** repose-toi un peu. || You are tired, **so** rest a little.
+   e3: Si tu viens, **alors** je viendrai aussi. || If you come, **then** I will come too.
+   syn: [donc, alors là, par conséquent] | ant: []
+
+alors [ko] ipa=alɔʁ | meanings: 그러면, 그때[부사]
+   e1: Il fait nuit, **alors** rentrons chez nous. || 밤이니 **그러면** 집에 가자.
+   e2: Tu ne viens pas? **Alors** je partirai seul. || 너 안 오니? **그러면** 나는 혼자 갈 것이다.
+   e3: **Alors**, que décides-tu pour demain? || **그러면** 내일 무엇을 결정하겠니?
+   syn: [donc, ainsi] | ant: []
+
+trop [en] ipa=tʁo | meanings: too much[adverb]
+   e1: Il pleut **trop** aujourd'hui pour sortir. || It is **too** rainy to go out today.
+   e2: Tu as mangé **trop** de gâteau au dessert. || You ate **too much** cake for dessert.
+   e3: Ce film est **trop** long, je suis fatigué. || This movie is **too** long, I am tired.
+   syn: [excessivement, dépassé, au-delà] | ant: []
+
+trop [ko] ipa=tʁo | meanings: 너무, 지나치게[부사]
+   e1: Il fait **trop** chaud aujourd'hui. || 오늘은 **너무** 더워요.
+   e2: Tu parles **trop** vite pour moi. || 너는 나에게 **너무** 빨리 말해요.
+   e3: Elle a mis **trop** de sucre dans le gâteau. || 그녀는 케이크에 **지나치게** 많은 설탕을 넣었어요.
+   syn: [tellemment, excessivement, débordamment] | ant: []
+
+beaucoup [en] ipa=boku | meanings: much[adverb] | many[adverb]
+   e1: J'aime **beaucoup** ce livre. || I like this book very **much**.
+   e2: Il y a **beaucoup** de fleurs dans le jardin. || There are **many** flowers in the garden.
+   syn: [énormément, fort, grandement] | ant: []
+
+beaucoup [ko] ipa=boku | meanings: 많이[부사]
+   e1: Il y a **beaucoup** de fleurs dans le jardin. || 정원에 꽃이 **많이** 있어요.
+   e2: Elle travaille **beaucoup** pour réussir. || 그녀는 성공하기 위해 **많이** 일해요.
+   e3: Nous avons **beaucoup** mangé à la fête. || 우리는 파티에서 **많이** 먹었어요.
+   syn: [énormément, fortement, plein] | ant: []
+
+grand [en] ipa=ɡʁɑ̃ | meanings: big, tall, large[adjective]
+   e1: Cette maison a un **grand** jardin. || This house has a **big** garden.
+   e2: Il est très **grand** pour son âge. || He is very **tall** for his age.
+   e3: Le lac est un espace **grand** et tranquille. || The lake is a **large** and peaceful area.
+   syn: [haut, élevé, vaste] | ant: [petit, bas, court]
+
+grand [ko] ipa=ɡʁɑ̃ | meanings: 크다, 큰[형용사] | 어른[명사]
+   e1: Cet arbre est **grand** et majestueux. || 이 나무가 **큰** 편이고 장엄해요.
+   e2: Il est un **grand** dans notre communauté. || 그는 우리 공동체에서 **어른**입니다.
+   e3: La montagne est très **grande** et belle. || 그 산은 매우 **크고** 아름답습니다.
+   syn: [haut, énorme, imposant, vieux] | ant: [petit]
+
+petit [en] ipa=pə.ti | meanings: small, little[adjective] | child[noun]
+   e1: Ce chat est très **petit**. || This cat is very **small**.
+   e2: Le **petit** joue dans le jardin. || The **child** is playing in the garden.
+   syn: [minuscule, jeune] | ant: [grand, gros]
+
+petit [ko] ipa=pəti | meanings: 작은, 작은 사람[형용사] | 작은 것[명사]
+   e1: Le chat est très **petit**. || 그 고양이는 매우 **작다**.
+   e2: Elle est un **petit** pour son âge. || 그녀는 나이에 비해 **작은 사람**이에요.
+   e3: Nous avons acheté un **petit** au marché. || 우리는 시장에서 **작은 것**을 샀어요.
+   syn: [minuscule, menu, exigu] | ant: [grand, gros, énorme]
+
+bon [en] ipa=bɔ̃ | meanings: good[adjective] | voucher[noun]
+   e1: C'est un **bon** jour pour la promenade. || It is a **good** day for a walk.
+   e2: J'ai utilisé un **bon** pour acheter du pain. || I used a **voucher** to buy bread.
+   syn: [bien, excellent, bonification] | ant: [mauvais]
+
+bon [ko] ipa=bɔ̃ | meanings: 좋은, 훌륭한[형용사] | 선[명사]
+   e1: Ce gâteau est vraiment **bon**. || 이 케이크는 정말 **좋다**.
+   e2: C'est un **bon** pour un café gratuit. || 이것은 무료 커피 **선**이다.
+   e3: Elle a fait un **bon** travail aujourd'hui. || 그녀는 오늘 **훌륭한** 일을 했다.
+   syn: [excellent, agréable, correct] | ant: [mauvais]
+
+mauvais [en] ipa=movɛ | meanings: bad[adjective] | evil[adjective]
+   e1: Ce gâteau a un goût **mauvais**. || This cake has a **bad** taste.
+   e2: Il a fait un choix **mauvais** pour son avenir. || He made a **bad** choice for his future.
+   e3: Le personnage principal est un homme **mauvais**. || The main character is an **evil** man.
+   syn: [méchant, nocif, malsain] | ant: [bon, bien, excellent]
+
+mauvais [ko] ipa=movoɛ | meanings: 나쁜[형용사] | 불량한[형용사]
+   e1: Le café a un goût **mauvais** ce matin. || 오늘 아침 커피는 **나쁜** 맛이 납니다.
+   e2: Cette montre est **mauvaise**, elle ne fonctionne pas bien. || 이 시계는 **불량한** 제품이어서 잘 작동하지 않습니다.
+   e3: Il a eu une journée **mauvaise** mais il reste positif. || 그는 **나쁜** 하루를 보냈지만 긍정적입니다.
+   syn: [méchant, néfaste, défectueux] | ant: [bon, correct]
+
+beau [en] ipa=bo | meanings: beautiful, handsome[adjective]
+   e1: C'est un **beau** jardin au printemps. || It is a **beautiful** garden in spring.
+   e2: Il est un **beau** jeune homme avec un sourire doux. || He is a **handsome** young man with a gentle smile.
+   syn: [joli, charmant, élégant] | ant: [laid, moche]
+
+beau [ko] ipa=bo | meanings: 잘생긴, 아름다운[형용사] | 미남[명사]
+   e1: Ce paysage est vraiment **beau**. || 이 풍경은 정말 **아름답다**.
+   e2: Il est un **beau** et gentil garçon. || 그는 **잘생긴** 착한 소년이다.
+   e3: Elle porte une robe belle et belle avec un **beau** sourire. || 그녀는 **아름다운** 드레스를 입고 있으며, 아름다운 미소를 짓고 있다.
+   syn: [joli, charmant, élégant] | ant: [laid]
+
+joli [en] ipa=ʒɔli | meanings: pretty, lovely[adjective]
+   e1: Elle porte une robe **jolie**. || She is wearing a **pretty** dress.
+   e2: Le jardin a un air **joli** ce matin. || The garden looks **lovely** this morning.
+   e3: C'est un cadeau **joli** pour toi. || This is a **pretty** gift for you.
+   syn: [beau, mignon, charmant] | ant: [laid]
+
+joli [ko] ipa=ʒɔli | meanings: 예쁜, 귀여운[형용사]
+   e1: Elle porte une robe **jolie** pour la fête. || 그녀는 파티에 **예쁜** 드레스를 입었어요.
+   e2: Ce jardin est vraiment **joli** au printemps. || 이 정원은 봄에 정말 **예뻐요**.
+   syn: [beau, charmant, ravissant] | ant: []
+
+nouveau [en] ipa=nu.vo | meanings: new[adjective] | novice[noun]
+   e1: Elle a acheté une voiture **nouvelle**. || She bought a **new** car.
+   e2: Il est un **nouveau** dans le club. || He is a **novice** in the club.
+   syn: [neuf, récent, débutant] | ant: [ancien, vétéran]
+
+nouveau [ko] ipa=nuvo | meanings: 새로운[형용사]
+   e1: Il a acheté une voiture **nouvelle** modèle. || 그는 **새로운** 모델의 차를 샀어요.
+   e2: Nous avons un **nouveau** voisin charmant. || 우리는 **새로운** 친절한 이웃이 있어요.
+   e3: Ce restaurant propose un menu **nouveau** chaque saison. || 이 식당은 매 계절마다 **새로운** 메뉴를 제공합니다.
+   syn: [récent, neuf, moderne] | ant: [vieux, ancien]
+
+vieux [en] ipa=vjø | meanings: old[adjective] | old man[noun]
+   e1: La maison **vielle** a une belle histoire. || The **old** house has a beautiful story.
+   e2: Le **vieux** raconte des contes au coin du feu. || The **old man** tells stories by the fireplace.
+   syn: [âgé, ancien, âpre] | ant: [jeune]
+
+vieux [ko] ipa=vjø | meanings: 늙은, 오래된[형용사] | 노인[명사]
+   e1: Ce meuble est très **vieux** mais charmant. || 이 가구는 매우 **오래된** 하지만 매력적이에요.
+   e2: Mon grand-père est un **vieux** plein de sagesse. || 우리 할아버지는 지혜가 가득한 **노인**이에요.
+   e3: La maison a un toit **vieux** et usé. || 그 집은 **늙은** 지붕을 가지고 있어요.
+   syn: [ancien, âgé, antique] | ant: [jeune]
+
+jeune [en] ipa=ʒœn | meanings: young[adjective] | youth, young person[noun]
+   e1: Cette fleur est encore **jeune**. || This flower is still **young**.
+   e2: Le **jeune** a beaucoup d'énergie. || The **young** person has a lot of energy.
+   e3: Nous avons rencontré une fille **jeune** et gentille. || We met a **young** and kind girl.
+   syn: [jeunesse, poupon, adolescent] | ant: [vieux]
+
+jeune [ko] ipa=ʒœn | meanings: 젊은, 어린[형용사] | 젊은이[명사]
+   e1: Elle est très **jeune** et pleine d'énergie. || 그녀는 매우 **젊고** 에너지가 가득해요.
+   e2: Le **jeune** a appris à jouer du piano. || 그 **젊은**이는 피아노를 배우고 있어요.
+   e3: Ils ont un chien **jeune** et joueur. || 그들은 **어린** 놀기 좋아하는 개를 가지고 있어요.
+   syn: [jeune homme, jeune fille, adolescent] | ant: []
+
+chaud [en] ipa=ʃo | meanings: hot, warm[adjective]
+   e1: Le thé est très **chaud** ce matin. || The tea is very **hot** this morning.
+   e2: La plage est **chaude** en été. || The beach is **warm** in summer.
+   e3: Le soleil est **chaud** sur ma peau. || The sun feels **warm** on my skin.
+   syn: [brûlant, torride, ardent] | ant: [froid]
+
+chaud [ko] ipa=ʃo | meanings: 덥다, 뜨겁다[형용사]
+   e1: Le café est **chaud** ce matin. || 오늘 아침에 커피가 **뜨거워요**.
+   e2: Il fait très **chaud** en été. || 여름에는 날씨가 매우 **더워요**.
+   e3: Le soleil est **chaud** aujourd'hui. || 오늘 태양이 **뜨거워요**.
+   syn: [brûlant, torride, bouillant] | ant: [froid]
+
+froid [en] ipa=fʁwa | meanings: cold[noun] | cold[adjective]
+   e1: Le **froid** a envahi la maison ce matin. || The **cold** filled the house this morning.
+   e2: Le vent **froid** souffle doucement sur le lac. || The **cold** wind blows gently over the lake.
+   syn: [frigorifique, glacial, fraîcheur] | ant: [chaud]
+
+froid [ko] ipa=fʁwa | meanings: 추위, 한기[명사] | 차가운, 냉정한[형용사]
+   e1: Le **froid** de l'hiver est difficile à supporter. || 겨울의 **추위**는 견디기 어렵다.
+   e2: Cette boisson est très **froide**. || 이 음료는 매우 **차갑다**.
+   e3: Il reste **froid** même dans les situations stressantes. || 그는 스트레스가 많은 상황에서도 **냉정하다**.
+   syn: [gelé, glacial, frigide] | ant: [chaud, tiède]
+
+content [en] ipa=kɔ̃.tɑ̃ | meanings: happy, pleased[adjective] | content, substance[noun]
+   e1: Je suis très **content** de ce cadeau. || I am very **happy** with this gift.
+   e2: Le tableau présente un **contenu** riche et varié. || The painting has a rich and varied **content**.
+   e3: Elle paraissait **contente** après la bonne nouvelle. || She seemed **happy** after the good news.
+   syn: [heureux, satisfait, joyeux] | ant: [triste, mécontent, insatisfait]
+
+content [ko] ipa=kɔ̃.tɑ̃ | meanings: 기쁜[형용사] | 내용[명사]
+   e1: Je suis très **content** de ton succès. || 나는 네 성공에 매우 **기쁘다**.
+   e2: Le **contenu** du livre est intéressant. || 책의 **내용**이 흥미롭다.
+   e3: Elle semble toujours **contente** et souriante. || 그녀는 항상 **기쁘고** 웃고 있는 것 같다.
+   syn: [heureux, satisfait, joyeux, plaisant, contenu] | ant: [mécontent, malheureux, vide]
+
+heureux [en] ipa=œʁø | meanings: happy[adjective] | fortunate[adjective]
+   e1: Il est **heureux** de sa vie simple. || He is **happy** with his simple life.
+   e2: Elle se sent **heureuse** d'avoir gagné le prix. || She feels **happy** to have won the prize.
+   e3: C'est une famille **heureuse** grâce à leur succès. || It is a **fortunate** family because of their success.
+   syn: [content, joyeux, satisfait, chanceux, fortuné] | ant: [malheureux, triste]
+
+heureux [ko] ipa=øʁø | meanings: 행복한[형용사] | 운이 좋은[형용사]
+   e1: Elle est très **heureuse** de sa réussite. || 그녀는 자신의 성공에 매우 **행복해요**.
+   e2: Nous sommes **heureux** d'avoir trouvé un bon restaurant. || 우리는 좋은 식당을 찾아서 **운이 좋아요**.
+   syn: [content, joyeux, satisfait] | ant: [malheureux]
+
+triste [en] ipa=tʁist | meanings: sad[adjective] | gloomy[adjective]
+   e1: Elle est **triste** après la pluie. || She is **sad** after the rain.
+   e2: Le ciel est **triste** ce soir. || The sky is **gloomy** tonight.
+   e3: Il a un visage **triste** en regardant le vieux film. || He has a **sad** face watching the old movie.
+   syn: [mélancolique, chagriné, morose] | ant: [heureux, joyeux]
+
+triste [ko] ipa=tʁist | meanings: 슬픈[형용사]
+   e1: Elle est **triste** après avoir lu la lettre. || 그녀는 편지를 읽고 나서 **슬펐어요**.
+   e2: Le ciel gris rend la journée **triste**. || 회색 하늘이 하루를 **슬프게** 만듭니다.
+   e3: Nous étions **tristes** de dire au revoir. || 우리는 작별 인사를 하며 **슬펐어요**.
+   syn: [morose, mélancolique, déprimé] | ant: [joyeux, heureux, gai]
+
+fatigué [en] ipa=fatige | meanings: tired[adjective] | weary[adjective]
+   e1: Je suis **fatigué** après une longue journée. || I am **tired** after a long day.
+   e2: Elle était **fatiguée** de marcher toute la matinée. || She was **tired** of walking all morning.
+   e3: Il est **fatigué** de ses efforts sans fin. || He is **weary** from his endless efforts.
+   syn: [lassé, épuisé, exténué] | ant: [énergique, reposé]
+
+fatigué [ko] ipa=fatige | meanings: 피곤한[형용사]
+   e1: Je suis **fatigué** après cette longue journée. || 나는 이 긴 하루 후에 **피곤해요**.
+   e2: Elle a l'air **fatiguée** mais souriante. || 그녀는 **피곤해** 보이지만 웃고 있어요.
+   e3: Après la randonnée, ils étaient tous très **fatigués**. || 등산 후에 그들은 모두 매우 **피곤했어요**.
+   syn: [épuisé, exténué, las] | ant: [reposé, énergique]
+
+facile [en] ipa=fa.sil | meanings: easy[adjective] | simple[adjective]
+   e1: Cet exercice est très **facile**. || This exercise is very **easy**.
+   e2: La recette est **facile** à suivre. || The recipe is **easy** to follow.
+   e3: Son explication était claire et **facile**. || His explanation was clear and **simple**.
+   syn: [simple, aisé, élémentaire] | ant: [difficile, complexe, ardu]
+
+facile [ko] ipa=fasil | meanings: 쉬운[형용사] | 간단한[형용사]
+   e1: Cette tâche est vraiment **facile**. || 이 작업은 정말 **쉬워요**.
+   e2: Le jeu est trop **facile** pour moi. || 그 게임은 나에게 너무 **쉬워요**.
+   e3: La recette est très **facile** à suivre. || 이 레시피는 따라하기에 매우 **간단해요**.
+   syn: [simple, aisé, léger] | ant: [difficile]
+
+difficile [en] ipa=difisil | meanings: demanding[adjective] | hard[adjective]
+   e1: Ce projet est **difficile** mais gratifiant. || This project is **difficult** but rewarding.
+   e2: La recette est très **difficile** à suivre. || The recipe is very **hard** to follow.
+   e3: Il a un caractère **difficile** à comprendre. || He has a **difficult** personality to understand.
+   syn: [ardent, pénible, complexe] | ant: [facile, simple, aisé]
+
+difficile [ko] ipa=difisil | meanings: 어려운[형용사] | 힘든[형용사]
+   e1: Ce problème est très **difficile**. || 이 문제는 매우 **어렵다**.
+   e2: La vie peut parfois être **difficile**. || 인생은 때때로 **힘들다**.
+   e3: Il est **difficile** de trouver une solution rapide. || 빠른 해결책을 찾는 것은 **어렵다**.
+   syn: [ardu, compliqué, pénible] | ant: [facile, simple]
+
+rouge [en] ipa=ʁuʒ | meanings: red[adjective] | red wine[noun]
+   e1: La fleur est **rouge** au soleil. || The flower is **red** in the sunlight.
+   e2: Nous avons dégusté un verre de **rouge** délicieux. || We tasted a delicious glass of **red wine**.
+   syn: [écarlate, cramoisi, vermillon] | ant: [bleu, vert]
+
+rouge [ko] ipa=ʁuʒ | meanings: 빨간, 붉은[형용사] | 빨간색[명사]
+   e1: Le ballon est **rouge** dans le jardin. || 정원에 **빨간** 공이 있다.
+   e2: Elle aime peindre avec le **rouge** vif. || 그녀는 선명한 **빨간색**으로 그림 그리기를 좋아한다.
+   e3: Les feuilles deviennent **rouges** en automne. || 가을에 나뭇잎이 **빨갛게** 변한다.
+   syn: [écarlate, vermillon, cramoisi] | ant: []
+
+bleu [en] ipa=blø | meanings: blue[adjective] | rookie[noun]
+   e1: Le ciel est **bleu** aujourd'hui. || The sky is **blue** today.
+   e2: Il est encore un **bleu** dans l'équipe. || He is still a **rookie** on the team.
+   syn: [novice, débutant, inexpérimenté] | ant: [vétéran, expert, ancien]
+
+bleu [ko] ipa=blø | meanings: 파란색[명사] | 파란[형용사]
+   e1: Le ciel **bleu** est magnifique aujourd'hui. || 오늘 **파란** 하늘이 아름답습니다.
+   e2: J'aime porter un **bleu** clair en été. || 나는 여름에 **파란색** 밝은 옷을 입는 것을 좋아합니다.
+   e3: Ses yeux sont d'un **bleu** profond. || 그의 눈은 깊은 **파란색**입니다.
+   syn: [azur, ciel, marine] | ant: [rouge]
+
+vert [en] ipa=vɛʁ | meanings: green[adjective] | green, color[noun]
+   e1: Le feuillage est très **vert** au printemps. || The foliage is very **green** in spring.
+   e2: Elle aime porter du **vert** en été. || She likes to wear **green** in summer.
+   e3: Le **vert** est une couleur apaisante. || **Green** is a calming color.
+   syn: [vert foncé, verdoyant, éméraude] | ant: [rouge, bleu, jaune]
+
+vert [ko] ipa=vɛʁ | meanings: 초록, 녹색[형용사] | 초록색, 녹색[명사]
+   e1: Le ciel est **vert** ce soir bizarrement. || 오늘 저녁 하늘이 이상하게 **초록**색이에요.
+   e2: J'aime le **vert** des feuilles au printemps. || 나는 봄에 잎들의 **초록색**이 좋아요.
+   syn: [écologique, verdoyant] | ant: [rouge]
+
+jaune [en] ipa=ʒon | meanings: yellow[adjective] | egg yolk[noun]
+   e1: Le tournesol a des pétales **jaunes**. || The sunflower has **yellow** petals.
+   e2: Le **jaune** est une partie de l'œuf. || The **yolk** is a part of the egg.
+   e3: Elle porte un manteau **jaune** vif. || She wears a bright **yellow** coat.
+   syn: [doré] | ant: [bleu, rouge, vert]
+
+jaune [ko] ipa=ʒon | meanings: 노란색[명사] | 노란[형용사]
+   e1: Le **jaune** est une couleur vive. || **노란색**은 밝은 색이다.
+   e2: Les feuilles deviennent **jaunes** en automne. || 가을에 잎사귀가 **노랗게** 변한다.
+   e3: La robe **jaune** brille sous le soleil. || 그 **노란** 드레스는 햇빛 아래서 빛난다.
+   syn: [doré, citron, jaunâtre] | ant: [bleu, rouge, vert]
+
+noir [en] ipa=nwaʁ | meanings: black[adjective] | black, film genre[noun]
+   e1: Elle porte une robe **noire** élégante. || She is wearing an elegant **black** dress.
+   e2: J'aime regarder les films **noirs** classiques. || I enjoy watching classic **black** films.
+   e3: Le ciel est **noir** cette nuit sans étoiles. || The sky is **black** tonight without stars.
+   syn: [sombre, obscur, ténébreux] | ant: [blanc, clair]
+
+noir [ko] ipa=nwaʁ | meanings: 검은색[명사] | 검은[형용사]
+   e1: Le **noir** est une couleur élégante. || **검은색**은 우아한 색깔이에요.
+   e2: Elle porte un manteau **noir** aujourd'hui. || 그녀는 오늘 **검은** 코트를 입었어요.
+   syn: [sombre, obscur] | ant: [blanc]
+
+blanc [en] ipa=blɑ̃ | meanings: white[adjective] | blank[adjective]
+   e1: Le chat est **blanc** et doux. || The cat is **white** and soft.
+   e2: La feuille est **blanche** avant d'écrire. || The page is **blank** before writing.
+   e3: Ils ont acheté une maison avec des murs **blancs**. || They bought a house with **white** walls.
+   syn: [immaculé, neigeux, clair] | ant: [noir]
+
+blanc [ko] ipa=blɑ̃ | meanings: 흰색, 하얀색[명사] | 흰, 하얀[형용사]
+   e1: Le **blanc** de la neige est éclatant. || 눈의 **흰색**이 눈부시다.
+   e2: Elle porte une robe **blanche** pour la cérémonie. || 그녀는 의식에서 **하얀** 드레스를 입었다.
+   e3: Le chat est entièrement **blanc**. || 그 고양이는 완전히 **하얀**색이다.
+   syn: [neige, ivoire, pâle] | ant: [noir]
+
+gris [en] ipa=ɡʁi | meanings: gray, grey[adjective] | gray, grey[noun]
+   e1: Le ciel est couvert et **gris** aujourd'hui. || The sky is cloudy and **gray** today.
+   e2: J'ai acheté un pull en **gris** clair. || I bought a sweater in light **gray**.
+   e3: Le chat a un joli **gris** doux. || The cat has a nice soft **gray**.
+   syn: [argenté, cendré] | ant: [coloré, vif]
+
+gris [ko] ipa=ɡʁi | meanings: 회색[형용사] | 회색, 색깔[명사]
+   e1: Le ciel est **gris** ce matin. || 오늘 아침 하늘은 **회색**이에요.
+   e2: J’aime la couleur **grise** pour mon manteau. || 나는 내 코트를 위해 **회색** 색깔을 좋아해요.
+   e3: Le chat a un pelage **gris** doux. || 그 고양이는 부드러운 **회색** 털을 가지고 있어요.
+   syn: [terne, cendré, sombre] | ant: [coloré, vif, brillant]
+
+eau [en] ipa=o | meanings: water[noun]
+   e1: Je bois de l'**eau** tous les matins. || I drink **water** every morning.
+   e2: L'**eau** de la rivière est claire et propre. || The **water** in the river is clear and clean.
+   e3: Les plantes ont besoin d'**eau** pour grandir. || Plants need **water** to grow.
+   syn: [liquide, h2o] | ant: []
+
+eau [ko] ipa=o | meanings: 물[명사]
+   e1: Je bois de l'**eau** tous les matins. || 나는 매일 아침마다 **물**을 마셔요.
+   e2: L'**eau** de la rivière est claire. || 강의 **물**이 맑아요.
+   e3: Cette plante a besoin d'**eau** pour grandir. || 이 식**물**은 자라기 위해 물이 필요해요.
+   syn: [liquide, h2o] | ant: []
+
+vin [en] ipa=vɛ̃ | meanings: wine[noun]
+   e1: Le **vin** rouge accompagne bien le dîner. || The **wine** goes well with dinner.
+   e2: Elle a offert une bouteille de **vin** blanc. || She gave a bottle of white **wine**.
+   e3: Nous avons dégusté du **vin** lors de la fête. || We tasted some **wine** at the party.
+   syn: [bourgogne, vin rouge, vin blanc, cru] | ant: []
+
+vin [ko] ipa=vɛ̃ | meanings: 포도주[명사]
+   e1: Le **vin** rouge accompagne bien la viande. || 레드 **와인**이 고기와 잘 어울려요.
+   e2: Ils ont dégusté un **vin** blanc frais. || 그들은 신선한 화이트 **와인**을 시음했어요.
+   e3: Ce **vin** de Bourgogne est excellent. || 이 부르고뉴 **와인**은 훌륭해요.
+   syn: [rouge, blanc, bourgogne] | ant: []
+
+bière [en] ipa=bjɛʁ | meanings: beer[noun] | bier[noun]
+   e1: J'aime boire une **bière** fraîche en été. || I like to drink a cold **beer** in summer.
+   e2: Le corps repose sur une **bière** en bois simple. || The body rests on a simple wooden **bier**.
+   e3: Ils ont commandé plusieurs **bières** au bar. || They ordered several **beers** at the bar.
+   syn: [binouze, pression, pils] | ant: []
+
+bière [ko] ipa=bjɛʁ | meanings: 맥주[명사] | 관[명사]
+   e1: Il a commandé une **bière** fraîche au café. || 그는 카페에서 시원한 **맥주**를 주문했다.
+   e2: La famille a préparé le transfert de la **bière** pour les funérailles. || 가족은 장례식을 위해 **관**을 준비했다.
+   e3: Nous avons partagé une **bière** en admirant le coucher de soleil. || 우리는 일몰을 보면서 **맥주**를 나누었다.
+   syn: [alcool, lager, pinte] | ant: []
+
+café [en] ipa=kafe | meanings: coffee[noun] | café[noun]
+   e1: J'aime boire un **café** le matin. || I like to drink a cup of **coffee** in the morning.
+   e2: Le **café** du coin est très accueillant. || The local **café** is very welcoming.
+   e3: Nous avons discuté longtemps dans ce **café** charmant. || We talked for a long time in this charming **café**.
+   syn: [bistro, brasserie, salon de thé] | ant: []
+
+café [ko] ipa=kafe | meanings: 커피[명사] | 카페[명사]
+   e1: Je bois un **café** tous les matins. || 나는 매일 아침 **커피**를 마셔요.
+   e2: Nous avons rencontré des amis au **café** du coin. || 우리는 근처 **카페**에서 친구들을 만났어요.
+   e3: Le **café** est chaud et parfumé. || **커피**가 뜨겁고 향기로워요.
+   syn: [expresso, bistrot] | ant: []
+
+thé [en] ipa=te | meanings: tea[noun]
+   e1: Je bois un **thé** chaud le matin. || I drink a hot **tea** in the morning.
+   e2: Le **thé** vert est très populaire en Asie. || Green **tea** is very popular in Asia.
+   e3: Elle prépare toujours le **thé** pour ses invités. || She always prepares **tea** for her guests.
+   syn: [infusion] | ant: []
+
+thé [ko] ipa=te | meanings: 차[명사]
+   e1: Je bois un **thé** le matin. || 나는 아침에 **차**를 마셔요.
+   e2: Le **thé** vert est très populaire. || 녹**차**가 매우 인기가 있어요.
+   e3: Elle prépare du **thé** à la menthe. || 그녀는 민트 **차**를 준비해요.
+   syn: [infusion] | ant: []
+
+lait [en] ipa=lɛ | meanings: milk[noun]
+   e1: Je bois du **lait** tous les matins. || I drink **milk** every morning.
+   e2: Elle a ajouté du **lait** dans son café. || She added **milk** to her coffee.
+   e3: Le **lait** de la ferme est très frais. || The farm's **milk** is very fresh.
+   syn: [lait cru, lait entier, lait frais] | ant: []
+
+lait [ko] ipa=lɛ | meanings: 우유[명사]
+   e1: Je bois du **lait** frais tous les matins. || 나는 매일 아침 신선한 **우유**를 마셔요.
+   e2: Le **lait** chaud est bon pour la santé. || 뜨거운 **우유**는 건강에 좋아요.
+   e3: Elle a ajouté du **lait** dans son café. || 그녀는 커피에 **우유**를 넣었어요.
+   syn: [laitier] | ant: []
+
+pain [en] ipa=pɛ̃ | meanings: bread[noun]
+   e1: Je mange du **pain** frais chaque matin. || I eat fresh **bread** every morning.
+   e2: Le **pain** complet est meilleur pour la santé. || Whole wheat **bread** is better for health.
+   e3: Elle achète un **pain** à la boulangerie du coin. || She buys a **loaf** at the local bakery.
+   syn: [boulangerie, baguette, viennoiserie] | ant: []
+
+pain [ko] ipa=pɛ̃ | meanings: 빵[명사]
+   e1: Elle achète du **pain** frais chaque matin. || 그녀는 매일 아침 **빵**을 삽니다.
+   e2: Le **pain** croustillant accompagne bien le fromage. || 바삭한 **빵**은 치즈와 잘 어울립니다.
+   e3: Nous partageons le **pain** pendant le dîner en famille. || 우리는 가족 저녁 식사 때 **빵**을 나눠 먹어요.
+   syn: [biscotte, baguette, brioche] | ant: []
+
+viande [en] ipa=vjɑ̃d | meanings: meat[noun]
+   e1: La **viande** est fraîche et tendre. || The **meat** is fresh and tender.
+   e2: Ils ont grillé la **viande** au barbecue. || They grilled the **meat** on the barbecue.
+   syn: [chair, flesh] | ant: []
+
+viande [ko] ipa=vjɑ̃d | meanings: 고기[명사]
+   e1: Cette **viande** est très tendre. || 이 **고기**는 아주 부드럽다.
+   e2: Je préfère la **viande** de bœuf. || 나는 소 **고기**를 더 좋아한다.
+   e3: Ils ont acheté de la **viande** fraîche au marché. || 그들은 시장에서 신선한 **고기**를 샀다.
+   syn: [chair, flesh] | ant: []
+
+poulet [en] ipa=pulɛ | meanings: chicken[noun] | policeman[noun]
+   e1: Le **poulet** court dans la ferme. || The **chicken** runs in the farm.
+   e2: Le **poulet** est arrivé pour faire respecter la loi. || The **policeman** arrived to enforce the law.
+   syn: [gendarme, flic, agent] | ant: []
+
+poulet [ko] ipa=pulɛ | meanings: 닭[명사]
+   e1: Le **poulet** chante dans la ferme. || 그 **닭**이 농장에서 울고 있어요.
+   e2: Nous avons mangé du **poulet** rôti ce soir. || 오늘 밤 우리는 구운 **닭**고기를 먹었어요.
+   e3: Le fermier soigne ses **poulets** avec soin. || 농부는 그의 **닭**들을 정성껏 돌봐요.
+   syn: [volaille, gallinacé] | ant: []
+
+poisson [en] ipa=pwa.sɔ̃ | meanings: fish[noun]
+   e1: Le **poisson** nage dans l'eau claire. || The **fish** swims in clear water.
+   e2: Nous avons mangé du **poisson** frais ce soir. || We ate fresh **fish** tonight.
+   syn: [poisson d'eau, poisson de mer] | ant: []
+
+poisson [ko] ipa=pwa.sɔ̃ | meanings: 물고기[명사] | 어류[명사]
+   e1: Le **poisson** nage dans l'eau. || 그 **물고기**는 물속에서 헤엄쳐요.
+   e2: Les **poissons** vivent dans la mer. || **어류**는 바다에 삽니다.
+   syn: [poisson d'eau douce, poisson d'eau salée] | ant: []
+
+œuf [en] ipa=œf | meanings: egg[noun]
+   e1: Je mange un **œuf** au petit-déjeuner. || I eat an **egg** for breakfast.
+   e2: L'**œuf** est dans le panier. || The **egg** is in the basket.
+   e3: Elle a cassé un **œuf** pour la recette. || She broke an **egg** for the recipe.
+   syn: [caille, œuf de poule] | ant: []
+
+œuf [ko] ipa=œf | meanings: 달걀, 알[명사]
+   e1: Je mange un **œuf** au petit-déjeuner. || 나는 아침 식사로 **달걀**을 먹어요.
+   e2: L'**œuf** est posé doucement dans le nid. || **알**이 둥지에 조심스럽게 놓여 있어요.
+   e3: Nous cuisons les **œufs** pour le déjeuner familial. || 우리는 가족 점심 식사를 위해 **달걀**을 요리해요.
+   syn: [œuf de poule, canard, caille] | ant: []
+
+riz [en] ipa=ʁi | meanings: rice[noun]
+   e1: Le **riz** accompagne souvent le poulet. || **Rice** often accompanies chicken.
+   e2: Elle cuisine du **riz** pour le dîner. || She cooks **rice** for dinner.
+   e3: Nous avons acheté du **riz** blanc au marché. || We bought white **rice** at the market.
+   syn: [céréale] | ant: []
+
+riz [ko] ipa=ʁi | meanings: 쌀, 밥[명사]
+   e1: Le **riz** est cuit à la vapeur. || **밥**은 찜으로 익힌다.
+   e2: J'achète du **riz** au marché local. || 나는 시장에서 **쌀**을 산다.
+   e3: Le plat contient du **riz** et des légumes. || 그 요리에는 **밥**과 야채가 들어있다.
+   syn: [grain, céréale] | ant: []
+
+salade [en] ipa=sa.lad | meanings: lettuce, salad[noun]
+   e1: J'ai préparé une **salade** fraîche pour le déjeuner. || I prepared a fresh **salad** for lunch.
+   e2: La **salade** verte est pleine de vitamines. || The green **lettuce** is full of vitamins.
+   e3: Ils ont mangé une grande **salade** au restaurant. || They ate a large **salad** at the restaurant.
+   syn: [laitue, crudités] | ant: []
+
+salade [ko] ipa=salad | meanings: 상추[명사] | 샐러드[명사]
+   e1: La **salade** est fraîche et croquante. || **상추**는 신선하고 아삭하다.
+   e2: J'ai mangé une **salade** verte ce midi. || 나는 오늘 점심에 **샐러드**를 먹었다.
+   syn: [laitue, mesclun, cresson] | ant: []
+
+pomme [en] ipa=pɔm | meanings: apple[noun]
+   e1: J'ai acheté une **pomme** rouge. || I bought a red **apple**.
+   e2: La **pomme** est délicieuse et sucrée. || The **apple** is delicious and sweet.
+   e3: Elle a pressé une **pomme** pour faire du jus. || She pressed an **apple** to make juice.
+   syn: [fruit] | ant: []
+
+pomme [ko] ipa=pɔm | meanings: 사과[명사]
+   e1: Je mange une **pomme** rouge. || 나는 빨간 **사과**를 먹어요.
+   e2: La **pomme** est sur la table. || **사과**가 탁자 위에 있어요.
+   e3: Elle a cueilli une **pomme** dans le verger. || 그녀는 과수원에서 **사과**를 땄어요.
+   syn: [fruit] | ant: []
+
+banane [en] ipa=ba.nan | meanings: banana[noun]
+   e1: J'achète une **banane** pour mon petit déjeuner. || I buy a **banana** for my breakfast.
+   e2: La **banane** est riche en vitamines. || The **banana** is rich in vitamins.
+   e3: Elle a coupé la **banane** en tranches pour la salade. || She sliced the **banana** for the salad.
+   syn: [fruit tropical] | ant: []
+
+banane [ko] ipa=ba.nan | meanings: 바나나[명사]
+   e1: J'aime manger une **banane** le matin. || 나는 아침에 **바나나**를 먹는 것을 좋아해요.
+   e2: La **banane** est jaune et sucrée. || **바나나**는 노랗고 달콤해요.
+   e3: Elle a acheté une **banane** au marché. || 그녀는 시장에서 **바나나**를 샀어요.
+   syn: [fruit tropical] | ant: []
+
+orange [en] ipa=ɔʁɑ̃ʒ | meanings: orange[noun] | orange[adjective]
+   e1: Je mange une **orange** fraîche. || I am eating a fresh **orange**.
+   e2: Le coucher de soleil était d’un beau **orange** vif. || The sunset was a beautiful bright **orange**.
+   e3: Les fleurs **orange** décorent le jardin en été. || The **orange** flowers decorate the garden in summer.
+   syn: [mandarine, clémentine] | ant: []
+
+orange [ko] ipa=ɔʁɑ̃ʒ | meanings: 오렌지[명사] | 주황색[명사]
+   e1: J'ai mangé une **orange** délicieuse. || 나는 맛있는 **오렌지**를 먹었어요.
+   e2: La robe est de couleur **orange** vif. || 그 드레스는 선명한 **주황색**이에요.
+   syn: [] | ant: []
+
+tomate [en] ipa=tɔmat | meanings: tomato[noun]
+   e1: J'ai acheté une **tomate** rouge au marché. || I bought a red **tomato** at the market.
+   e2: La **tomate** ajoute de la couleur à la salade. || The **tomato** adds color to the salad.
+   e3: Le jardin a une belle rangée de plants de **tomate**. || The garden has a nice row of **tomato** plants.
+   syn: [tomate cerise, tomate ronde] | ant: []
+
+tomate [ko] ipa=tɔmat | meanings: 토마토[명사]
+   e1: La **tomate** est rouge et juteuse. || **토마토**는 빨갛고 즙이 많아요.
+   e2: Je mets de la **tomate** dans la salade. || 나는 샐러드에 **토마토**를 넣어요.
+   e3: Les enfants aiment manger des **tomates** fraîches. || 아이들은 신선한 **토마토**를 먹는 것을 좋아해요.
+   syn: [] | ant: []
+
+petit-déjeuner [en] ipa=pəti deʒœne | meanings: breakfast[noun]
+   e1: Je prends toujours un **petit-déjeuner** léger. || I always have a light **breakfast**.
+   e2: Le **petit-déjeuner** est le repas le plus important de la journée. || **Breakfast** is the most important meal of the day.
+   e3: Nous avons partagé un **petit-déjeuner** au café ce matin. || We shared a **breakfast** at the cafe this morning.
+   syn: [déjeuner, repas du matin] | ant: []
+
+petit-déjeuner [ko] ipa=pəti deʒœne | meanings: 아침 식사[명사]
+   e1: Je prends mon **petit-déjeuner** chaque matin. || 나는 매일 **아침 식사**를 합니다.
+   e2: Le **petit-déjeuner** est important pour commencer la journée. || **아침 식사**는 하루를 시작하는 데 중요합니다.
+   e3: Nous partageons un **petit-déjeuner** en famille le dimanche. || 우리는 일요일에 가족과 함께 **아침 식사**를 합니다.
+   syn: [déjeuner] | ant: []
+
+déjeuner [en] ipa=deʒœne | meanings: to have lunch[verb] | lunch[noun]
+   e1: Nous **déjeunons** au parc chaque dimanche. || We **have lunch** in the park every Sunday.
+   e2: Le **déjeuner** était délicieux aujourd'hui. || The **lunch** was delicious today.
+   e3: Elle préfère **déjeuner** avec ses collègues. || She prefers **to have lunch** with her colleagues.
+   syn: [manger à midi, repas de midi] | ant: []
+
+déjeuner [ko] ipa=deʒœne | meanings: 아침 식사[명사] | 아침을 먹다[동사]
+   e1: Je prends mon **déjeuner** à huit heures. || 나는 8시에 **아침 식사**를 한다.
+   e2: Elle **déjeune** dans un café chaque matin. || 그녀는 매일 아침 카페에서 **아침을 먹는다**.
+   e3: Nous aimons préparer un bon **déjeuner** le dimanche. || 우리는 일요일에 좋은 **아침 식사**를 준비하는 것을 좋아한다.
+   syn: [petit déjeuner, repas du matin] | ant: []
+
+dîner [en] ipa=dine | meanings: dinner[noun] | to have dinner[verb]
+   e1: Le **dîner** commence à huit heures. || The **dinner** starts at eight o'clock.
+   e2: Nous allons **dîner** au restaurant ce soir. || We are going **to have dinner** at the restaurant tonight.
+   e3: Le **dîner** en famille est un moment important. || The family **dinner** is an important moment.
+   syn: [souper, repas, supper] | ant: []
+
+dîner [ko] ipa=di.ne | meanings: 저녁식사[명사] | 저녁식사를 하다[동사]
+   e1: Le **dîner** est prêt à 19 heures. || **저녁식사**는 7시에 준비되어 있어요.
+   e2: Nous allons **dîner** au restaurant ce soir. || 우리는 오늘 저녁에 식당에서 **저녁식사를 해요**.
+   e3: Elle prépare le **dîner** avec soin chaque jour. || 그녀는 매일 정성스럽게 **저녁식사**를 준비한다.
+   syn: [souper] | ant: []
+
+repas [en] ipa=ʁəpa | meanings: meal[noun]
+   e1: Le **repas** était délicieux et copieux. || The **meal** was delicious and filling.
+   e2: Nous préparons un **repas** spécial pour la fête. || We are preparing a special **meal** for the party.
+   e3: Le **repas** du soir réunit toute la famille. || The evening **meal** brings the whole family together.
+   syn: [dîner, déjeuner, collation] | ant: []
+
+repas [ko] ipa=ʁəpa | meanings: 식사[명사]
+   e1: Le **repas** est prêt à être servi. || **식사**가 준비되었습니다.
+   e2: Ils partagent un **repas** en famille le dimanche. || 그들은 일요일마다 가족과 함께 **식사**합니다.
+   e3: Je prends un **repas** léger avant de partir. || 나는 출발 전에 가벼운 **식사**를 합니다.
+   syn: [dîner, déjeuner, collation] | ant: []
+
+menu [en] ipa=məny | meanings: menu[noun] | list of dishes[noun]
+   e1: Le **menu** est affiché à l'entrée du restaurant. || The **menu** is displayed at the entrance of the restaurant.
+   e2: Le **menu** propose des plats végétariens délicieux. || The **menu** offers delicious vegetarian dishes.
+   syn: [carte, liste, choix, offre] | ant: []
+
+menu [ko] ipa=məny | meanings: 메뉴[명사]
+   e1: Le **menu** du restaurant est très varié. || 그 식당의 **메뉴**는 매우 다양해요.
+   e2: J'ai choisi un plat sur le **menu**. || **메뉴**에서 요리를 골랐어요.
+   e3: Le **menu** propose des options végétariennes. || **메뉴**에는 채식 옵션이 있어요.
+   syn: [carte, sélection, liste] | ant: []
+
+addition [en] ipa=adisjɔ̃ | meanings: bill[noun] | addition[noun]
+   e1: L'**addition** est arrivée après le dîner. || The **bill** arrived after dinner.
+   e2: L'**addition** des nombres est simple. || The **addition** of the numbers is simple.
+   e3: J'ai payé l'**addition** au restaurant avec plaisir. || I gladly paid the **bill** at the restaurant.
+   syn: [facture, note, somme] | ant: []
+
+addition [ko] ipa=adisjɔ̃ | meanings: 계산서[명사] | 덧셈[명사]
+   e1: Nous avons demandé l'**addition** au serveur. || 우리는 서버에게 **계산서**를 요청했어요.
+   e2: L'**addition** de deux et trois donne cinq. || 두 **더하면** 5가 됩니다.
+   e3: L'**addition** était plus élevée que prévu au restaurant. || 식당에서 **계산서**가 예상보다 더 많았어요.
+   syn: [note, facture, additionnement] | ant: []
+
+maison [en] ipa=mɛzɔ̃ | meanings: house[noun] | company[noun]
+   e1: La **maison** est entourée de fleurs. || The **house** is surrounded by flowers.
+   e2: Elle travaille dans une grande **maison** de mode. || She works in a large fashion **company**.
+   syn: [demeure, habitation, domicile, foyer, entreprise, société] | ant: []
+
+maison [ko] ipa=mɛzɔ̃ | meanings: 집[명사]
+   e1: La **maison** est proche du parc. || **집**은 공원 근처에 있어요.
+   e2: Ils ont acheté une grande **maison**. || 그들은 큰 **집**을 샀어요.
+   e3: La **maison** blanche est très célèbre. || 백악관은 매우 **유명해요**.
+   syn: [demeure, habitation, domicile] | ant: []
+
+appartement [en] ipa=apaʁtəmɑ̃ | meanings: apartment, flat[noun]
+   e1: J'ai visité un **appartement** lumineux en ville. || I visited a bright **apartment** in the city.
+   e2: Mon **appartement** a un balcon avec vue sur le parc. || My **apartment** has a balcony with a view of the park.
+   e3: Ils ont acheté un **appartement** près de la mer. || They bought an **apartment** near the sea.
+   syn: [logement, flat, studio] | ant: []
+
+appartement [ko] ipa=apaʁtəmɑ̃ | meanings: 아파트[명사]
+   e1: Nous avons trouvé un bel **appartement** au centre-ville. || 우리는 시내에서 아름다운 **아파트**를 찾았다.
+   e2: Son **appartement** a une vue magnifique sur la mer. || 그의 **아파트**는 바다를 멋지게 볼 수 있다.
+   e3: L'**appartement** est lumineux et spacieux. || 그 **아파트**는 밝고 넓다.
+   syn: [logement, studio, flat] | ant: []
+
+chambre [en] ipa=ʃɑ̃bʁ | meanings: room[noun] | chamber[noun]
+   e1: La **chambre** est lumineuse et spacieuse. || The **room** is bright and spacious.
+   e2: La réunion a eu lieu dans la **chambre** du conseil. || The meeting took place in the **chamber** of the council.
+   e3: Cette **chambre** à coucher est très confortable. || This bed**room** is very comfortable.
+   syn: [pièce, salle, appartement] | ant: []
+
+chambre [ko] ipa=ʃɑ̃bʁ | meanings: 방[명사] | 회의실[명사]
+   e1: La **chambre** est propre et lumineuse. || **방**은 깨끗하고 밝아요.
+   e2: Nous avons réservé une **chambre** pour la réunion. || 우리는 회의를 위해 **회의실**을 예약했어요.
+   e3: Sa **chambre** est décorée avec des fleurs. || 그의 **방**은 꽃으로 장식되어 있어요.
+   syn: [pièce, salle] | ant: []
+
+cuisine [en] ipa=kɥizin | meanings: kitchen[noun] | cooking, culinary style[noun]
+   e1: La **cuisine** est petite mais fonctionnelle. || The **kitchen** is small but functional.
+   e2: Elle aime la **cuisine** italienne. || She loves Italian **cooking**.
+   syn: [cuisinette, office, art culinaire, gastronomie] | ant: []
+
+cuisine [ko] ipa=kɥizin | meanings: 부엌[명사] | 요리[명사]
+   e1: La **cuisine** de cette maison est très moderne. || 이 집의 **부엌**은 매우 현대적이에요.
+   e2: J'adore la **cuisine** italienne. || 나는 이탈리아 **요리**를 아주 좋아해요.
+   e3: La **cuisine** est un endroit où l'on prépare les repas. || **부엌**은 음식을 준비하는 곳이에요.
+   syn: [gastronomie, art culinaire] | ant: []
+
+salon [en] ipa=salɔ̃ | meanings: living room[noun] | exhibition, show[noun]
+   e1: Le **salon** est décoré avec des plantes vertes. || The **living room** is decorated with green plants.
+   e2: Ils visitent le **salon** de l'automobile chaque année. || They visit the car **show** every year.
+   e3: Nous avons une grande table dans le **salon** pour les invités. || We have a large table in the **living room** for guests.
+   syn: [séjour, salon de réception, foire, exposition] | ant: []
+
+salon [ko] ipa=salɔ̃ | meanings: 거실[명사] | 미용실[명사]
+   e1: Nous avons décoré le **salon** avec des œuvres d'art. || 우리는 예술 작품으로 **거실**을 꾸몄어요.
+   e2: Je vais au **salon** pour me faire couper les cheveux. || 나는 머리를 자르기 위해 **미용실**에 가요.
+   syn: [séjour, salon de coiffure] | ant: []
+
+école [en] ipa=ekɔl | meanings: school[noun]
+   e1: L'**école** commence à huit heures chaque jour. || The **school** starts at eight o'clock every day.
+   e2: Les enfants aiment aller à l'**école** pour apprendre. || Children like going to **school** to learn.
+   e3: Il y a une grande **école** près de ma maison. || There is a big **school** near my house.
+   syn: [établissement, lycée, collège, académie] | ant: []
+
+école [ko] ipa=ekɔl | meanings: 학교[명사]
+   e1: Les enfants vont à l'**école** tous les jours. || 아이들은 매일 **학교**에 갑니다.
+   e2: L'**école** organise une fête ce week-end. || **학교**에서 이번 주말에 축제를 개최합니다.
+   e3: Mon frère commence l'**école** primaire cette année. || 내 동생은 올해 초등 **학교**에 갑니다.
+   syn: [établissement scolaire, institution scolaire] | ant: []
+
+université [en] ipa=ynivɛʁsite | meanings: university[noun]
+   e1: Elle étudie à l'**université** de Paris. || She studies at the **university** of Paris.
+   e2: L'**université** organise un festival culturel chaque année. || The **university** organizes a cultural festival every year.
+   e3: Mon frère a commencé l'**université** en septembre dernier. || My brother started **university** last September.
+   syn: [faculté, campus, établissement d'enseignement supérieur] | ant: []
+
+université [ko] ipa=ynivɛʁsite | meanings: 대학교[명사]
+   e1: L'**université** est calme aujourd'hui. || **대학교**가 오늘은 조용해요.
+   e2: Je vais à l'**université** ce matin. || 나는 오늘 아침에 **대학교**에 갑니다.
+   e3: L'**université** organise une fête ce week-end. || **대학교**가 이번 주말에 파티를 열어요.
+   syn: [faculté, école, campus] | ant: []
+
+classe [en] ipa=klas | meanings: classroom[noun]
+   e1: La **classe** est prête pour le cours. || The **classroom** is ready for the lesson.
+   e2: Les élèves entrent dans la **classe** en silence. || The students enter the **classroom** quietly.
+   syn: [salle de classe, école] | ant: []
+
+classe [ko] ipa=klas | meanings: 학급[명사] | 계급[명사]
+   e1: La **classe** commence à huit heures. || **학급**은 8시에 시작해요.
+   e2: Il appartient à une haute **classe** sociale. || 그는 높은 사회 **계급**에 속해 있어요.
+   e3: Les élèves de la **classe** sont très attentifs. || **학급** 학생들은 매우 집중해요.
+   syn: [groupe, section, caste, ordre] | ant: []
+
+cours [en] ipa=kuʁ | meanings: class, course[noun] | flow, running[noun]
+   e1: J'ai un **cours** de français cet après-midi. || I have a French **course** this afternoon.
+   e2: Le **cours** de la rivière est paisible ce matin. || The **flow** of the river is peaceful this morning.
+   e3: Elle suit un **cours** en ligne sur la peinture. || She is taking an online **course** about painting.
+   syn: [leçon, séminaire, formation, flux, écoulement] | ant: []
+
+cours [ko] ipa=kuʁ | meanings: 수업[명사] | 흐름[명사]
+   e1: Le **cours** commence à neuf heures. || **수업**은 9시에 시작해요.
+   e2: Le **cours** de la rivière est calme aujourd'hui. || 강의 **흐름**이 오늘은 조용해요.
+   syn: [leçon, classe, séance] | ant: []
+
+bureau [en] ipa=byʁo | meanings: desk[noun] | office[noun]
+   e1: J'ai acheté un nouveau **bureau** en bois. || I bought a new wooden **desk**.
+   e2: Le personnel travaille dans un grand **bureau**. || The staff works in a large **office**.
+   e3: Son **bureau** est toujours bien organisé. || His **desk** is always well organized.
+   syn: [table de travail, poste de travail, cabinet] | ant: []
+
+bureau [ko] ipa=byʁo | meanings: 사무실[명사] | 책상[명사]
+   e1: Le **bureau** est au dernier étage du bâtiment. || 그 **사무실**은 건물 최상층에 있습니다.
+   e2: J'ai acheté un nouveau **bureau** pour mon appartement. || 나는 내 아파트에 새 **책상**을 샀어요.
+   e3: Le **bureau** est organisé avec soin et décoration simple. || **사무실**은 정성스럽게 정리되어 있고 간단한 장식이 있어요.
+   syn: [office, cabinet, table de travail] | ant: []
+
+magasin [en] ipa=maɡazɛ̃ | meanings: store[noun] | warehouse[noun]
+   e1: Je vais au **magasin** acheter du pain. || I am going to the **store** to buy bread.
+   e2: Le **magasin** contient beaucoup de meubles. || The **warehouse** contains many pieces of furniture.
+   e3: Le nouveau **magasin** ouvre demain dans le centre-ville. || The new **store** opens tomorrow downtown.
+   syn: [boutique, commerce, point de vente] | ant: []
+
+magasin [ko] ipa=maɡazɛ̃ | meanings: 가게[명사] | 창고[명사]
+   e1: Le **magasin** vend des fruits frais chaque matin. || **가게**는 매일 아침 신선한 과일을 팝니다.
+   e2: Les produits sont rangés dans un grand **magasin**. || 제품들은 큰 **창고**에 정리되어 있습니다.
+   e3: Nous avons visité un nouveau **magasin** de vêtements en ville. || 우리는 도시의 새로운 의류 **가게**를 방문했습니다.
+   syn: [boutique, commerce, entrepôt] | ant: []
+
+supermarché [en] ipa=sypɛʁmaʁʃe | meanings: supermarket[noun]
+   e1: Je vais au **supermarché** pour acheter du pain. || I go to the **supermarket** to buy bread.
+   e2: Le **supermarché** est ouvert jusqu'à 21 heures. || The **supermarket** is open until 9 p.m.
+   e3: Ils ont rénové le **supermarché** du quartier. || They renovated the neighborhood **supermarket**.
+   syn: [hypermarché, magasin] | ant: []
+
+supermarché [ko] ipa=sypɛʁmaʁʃe | meanings: 슈퍼마켓[명사]
+   e1: Je vais au **supermarché** pour acheter des fruits. || 나는 과일을 사기 위해 **슈퍼마켓**에 간다.
+   e2: Le **supermarché** est ouvert jusqu'à vingt-deux heures. || **슈퍼마켓**은 22시까지 문을 연다.
+   syn: [hypermarché, supérette] | ant: []
+
+boulangerie [en] ipa=bulɑ̃ʒʁi | meanings: bakery[noun]
+   e1: Je vais à la **boulangerie** pour acheter du pain frais. || I go to the **bakery** to buy fresh bread.
+   e2: La **boulangerie** du coin fait de délicieux croissants. || The local **bakery** makes delicious croissants.
+   syn: [pâtisserie, four à pain] | ant: []
+
+boulangerie [ko] ipa=bulɑ̃ʒʁi | meanings: 빵집[명사]
+   e1: Je vais à la **boulangerie** pour acheter du pain frais. || 나는 신선한 빵을 사러 **빵집**에 간다.
+   e2: La **boulangerie** du coin est très populaire. || 동네 **빵집**이 매우 인기가 많다.
+   e3: Elle travaille dans une **boulangerie** depuis cinq ans. || 그녀는 5년 동안 **빵집**에서 일하고 있다.
+   syn: [pâtisserie, boulanger, fournil] | ant: []
+
+restaurant [en] ipa=ʁɛstɔʁɑ̃ | meanings: restaurant[noun]
+   e1: Nous dînons au **restaurant** ce soir. || We are dining at the **restaurant** tonight.
+   e2: Le **restaurant** propose un menu de saison délicieux. || The **restaurant** offers a delicious seasonal menu.
+   e3: Ce **restaurant** a une belle terrasse avec vue sur le parc. || This **restaurant** has a beautiful terrace with a view of the park.
+   syn: [bistrot, brasserie, café] | ant: []
+
+restaurant [ko] ipa=ʁɛs.to.ʁɑ̃ | meanings: 식당[명사]
+   e1: Nous avons mangé au **restaurant** hier soir. || 우리는 어젯밤에 **식당**에서 식사했어요.
+   e2: Le **restaurant** près du parc est très populaire. || 공원 근처의 **식당**은 매우 인기가 많아요.
+   e3: Elle travaille dans un grand **restaurant** en ville. || 그녀는 시내의 큰 **식당**에서 일해요.
+   syn: [bistrot, brasserie, café] | ant: []
+
+hôtel [en] ipa=otɛl | meanings: hotel[noun]
+   e1: Nous avons réservé une chambre à l'**hôtel**. || We booked a room at the **hotel**.
+   e2: L'**hôtel** est situé près de la plage. || The **hotel** is located near the beach.
+   e3: Ils ont passé la nuit dans un **hôtel** charmant. || They spent the night in a charming **hotel**.
+   syn: [auberge, pension, hébergement, motel] | ant: []
+
+hôtel [ko] ipa=otɛl | meanings: 호텔[명사]
+   e1: Nous avons réservé une chambre dans cet **hôtel**. || 우리는 이 **호텔**에서 방을 예약했어요.
+   e2: L'**hôtel** est proche du centre-ville. || **호텔**은 시내 근처에 있어요.
+   e3: Le personnel de l'**hôtel** est très accueillant. || **호텔** 직원들이 매우 친절해요.
+   syn: [auberge, pension, relais] | ant: []
+
+parc [en] ipa=paʁk | meanings: park[noun]
+   e1: Nous avons fait un pique-nique au **parc** ce dimanche. || We had a picnic in the **park** this Sunday.
+   e2: Les enfants jouent dans le **parc** près de la maison. || The children play in the **park** near the house.
+   e3: Le **parc** est magnifique au printemps avec toutes les fleurs. || The **park** is beautiful in spring with all the flowers.
+   syn: [jardin public, aire de jeux, espace vert] | ant: []
+
+parc [ko] ipa=paʁk | meanings: 공원[명사]
+   e1: Le **parc** est rempli d'enfants qui jouent. || **공원**은 아이들이 노는 곳입니다.
+   e2: Nous avons organisé un pique-nique dans le **parc**. || 우리는 **공원**에서 피크닉을 했습니다.
+   e3: Le **parc** est très calme au coucher du soleil. || **공원**은 해질 무렵에 매우 조용합니다.
+   syn: [jardin public, aire de loisirs, espace vert] | ant: []
+
+voiture [en] ipa=vwa.tyʁ | meanings: car[noun]
+   e1: La **voiture** est garée devant la maison. || The **car** is parked in front of the house.
+   e2: Elle a lavé sa **voiture** ce matin. || She washed her **car** this morning.
+   e3: Nous avons loué une **voiture** pour le voyage. || We rented a **car** for the trip.
+   syn: [auto, automobile, véhicule] | ant: []
+
+voiture [ko] ipa=vwatiʁ | meanings: 자동차[명사]
+   e1: Elle a acheté une nouvelle **voiture** rouge. || 그녀는 새 **자동차**를 빨간색으로 샀어요.
+   e2: La **voiture** roule vite sur la route. || 그 **자동차**는 도로에서 빨리 달려요.
+   e3: Mon frère répare la **voiture** dans le garage. || 내 동생은 차고에서 **자동차**를 고쳐요.
+   syn: [auto, véhicule, automobile] | ant: []
+
+bus [en] ipa=bys | meanings: bus[noun]
+   e1: Le **bus** arrive à l'arrêt à huit heures. || The **bus** arrives at the stop at eight o'clock.
+   e2: Nous avons pris le **bus** pour aller au parc. || We took the **bus** to go to the park.
+   e3: Le **bus** est plein ce matin. || The **bus** is full this morning.
+   syn: [autobus, car] | ant: []
+
+bus [ko] ipa=bys | meanings: 버스[명사]
+   e1: Le **bus** arrive à l'arrêt à huit heures. || **버스**는 여덟 시에 정류장에 도착한다.
+   e2: Nous prenons le **bus** pour aller à la plage. || 우리는 해변에 가기 위해 **버스**를 탄다.
+   e3: Le **bus** est souvent en retard en hiver. || **버스**는 겨울에 종종 늦는다.
+   syn: [autobus, autocar, car] | ant: []
+
+train [en] ipa=tʁɛ̃ | meanings: train[noun] | procession[noun]
+   e1: Le **train** part à huit heures. || The **train** leaves at eight o'clock.
+   e2: Le **train** de la parade avance lentement. || The **procession** moves forward slowly.
+   e3: Nous avons pris un **train** pour Paris. || We took a **train** to Paris.
+   syn: [chemin de fer, convoi, cortège] | ant: []
+
+train [ko] ipa=tʁɛ̃ | meanings: 기차[명사] | 행렬[명사]
+   e1: Le **train** arrive à la gare à midi. || **기차**가 정오에 역에 도착합니다.
+   e2: Un long **train** de voitures suit le cortège. || 길게 이어진 **행렬**이 차량들을 따라갑니다.
+   e3: Le **train** traverse la campagne paisible. || **기차**가 평화로운 시골을 통과합니다.
+   syn: [locomotive, convoi, file] | ant: []
+
+métro [en] ipa=metʁo | meanings: subway, underground, metro[noun]
+   e1: Je prends le **métro** tous les jours pour aller au travail. || I take the **metro** every day to go to work.
+   e2: Le **métro** est souvent bondé en heure de pointe. || The **metro** is often crowded during rush hour.
+   syn: [métropolitain, subway, routier souterrain] | ant: []
+
+métro [ko] ipa=metʁo | meanings: 지하철[명사]
+   e1: Le **métro** est rapide en ville. || **지하철**은 도시에서 빠르다.
+   e2: J'attends le **métro** à la station. || 나는 역에서 **지하철**을 기다린다.
+   e3: Le **métro** passe tous les dix minutes. || **지하철**은 10분마다 운행된다.
+   syn: [Métropolitain, Métropolitain urbain] | ant: []
+
+vélo [en] ipa=velo | meanings: bicycle, bike[noun]
+   e1: Je fais du **vélo** dans le parc chaque dimanche. || I ride a **bike** in the park every Sunday.
+   e2: Le **vélo** électrique facilite les longues distances. || The electric **bike** makes long distances easier.
+   e3: Elle a acheté un nouveau **vélo** rouge pour l'été. || She bought a new red **bike** for the summer.
+   syn: [bicyclette, bécane] | ant: []
+
+vélo [ko] ipa=velo | meanings: 자전거[명사]
+   e1: J'ai acheté un nouveau **vélo** hier. || 나는 어제 새 **자전거**를 샀어요.
+   e2: Elle fait du **vélo** tous les matins. || 그녀는 매일 아침 **자전거**를 탑니다.
+   e3: Le **vélo** est un moyen de transport écologique. || **자전거**는 친환경적인 교통수단이에요.
+   syn: [bicyclette] | ant: []
+
+avion [en] ipa=avjɔ̃ | meanings: airplane, aircraft[noun]
+   e1: L’**avion** décolle à huit heures. || The **airplane** takes off at eight o'clock.
+   e2: Nous avons vu un gros **avion** dans le ciel. || We saw a big **airplane** in the sky.
+   e3: L’**avion** traverse l’océan rapidement. || The **airplane** crosses the ocean quickly.
+   syn: [aéronef, appareil] | ant: []
+
+avion [ko] ipa=avjɔ̃ | meanings: 비행기[명사]
+   e1: L'**avion** vole haut dans le ciel. || **비행기**가 하늘 높이 날아요.
+   e2: Nous avons pris un **avion** pour voyager. || 우리는 여행을 위해 **비행기**를 탔어요.
+   e3: L'**avion** atterrit doucement sur la piste. || **비행기**가 활주로에 부드럽게 착륙해요.
+   syn: [aéronef, appareil] | ant: []
+
+taxi [en] ipa=taksi | meanings: taxi, cab[noun]
+   e1: J'ai pris un **taxi** pour aller à l'aéroport. || I took a **taxi** to go to the airport.
+   e2: Le **taxi** est rapide en ville. || The **taxi** is fast in the city.
+   e3: Nous avons réservé un **taxi** pour la soirée. || We booked a **taxi** for the evening.
+   syn: [taxi-brousse, voiture de location] | ant: []
+
+taxi [ko] ipa=taksi | meanings: 택시[명사]
+   e1: J'ai pris un **taxi** pour aller à la gare. || 나는 역에 가기 위해 **택시**를 탔다.
+   e2: Le **taxi** arrive rapidement ce soir. || 오늘 저녁에 **택시**가 빠르게 도착한다.
+   e3: Elle appelle un **taxi** après le dîner. || 그녀는 저녁 식사 후에 **택시**를 부른다.
+   syn: [] | ant: []
+
+chien [en] ipa=ʃjɛ̃ | meanings: dog[noun]
+   e1: Le **chien** joue dans le jardin. || The **dog** plays in the garden.
+   e2: Elle promène son **chien** chaque matin. || She walks her **dog** every morning.
+   syn: [toutou, canidé, clebs] | ant: []
+
+chien [ko] ipa=ʃjɛ̃ | meanings: 개[명사]
+   e1: Le **chien** joue dans le parc. || 그 **개**는 공원에서 놀아요.
+   e2: Ma voisine a un **chien** très gentil. || 내 이웃은 아주 착한 **개**를 키워요.
+   e3: Le **chien** aboie la nuit. || 그 **개**는 밤에 짖어요.
+   syn: [canidé, toutou, clebs] | ant: []
+
+chat [en] ipa=ʃa | meanings: cat[noun]
+   e1: Le **chat** dort sur le canapé. || The **cat** is sleeping on the sofa.
+   e2: Mon **chat** est très joueur. || My **cat** is very playful.
+   e3: Elle caresse doucement le **chat**. || She gently pets the **cat**.
+   syn: [félin, minet, matou] | ant: []
+
+chat [ko] ipa=ʃa | meanings: 고양이[명사]
+   e1: Le **chat** dort sur le canapé. || **고양이**가 소파에서 자요.
+   e2: J'ai vu un **chat** noir dans le jardin. || 나는 정원에서 검은 **고양이**를 봤어요.
+   e3: Le petit **chat** joue avec une balle. || 아기 **고양이**가 공으로 놀아요.
+   syn: [félin, minou, matou] | ant: []
+
+oiseau [en] ipa=wazo | meanings: bird[noun]
+   e1: L'**oiseau** chante dans le jardin. || The **bird** sings in the garden.
+   e2: Un **oiseau** vole haut dans le ciel. || A **bird** flies high in the sky.
+   e3: Nous avons vu un **oiseau** coloré sur l'arbre. || We saw a colorful **bird** on the tree.
+   syn: [volatile, oiselet] | ant: []
+
+oiseau [ko] ipa=wazo | meanings: 새[명사]
+   e1: L'**oiseau** chante dans le jardin. || **새**가 정원에서 노래해요.
+   e2: Un **oiseau** survole la maison. || 한 **새**가 집 위를 날아요.
+   e3: J'ai vu un **oiseau** coloré dans la forêt. || 숲에서 색깔 있는 **새**를 봤어요.
+   syn: [volatile, piaf] | ant: []
+
+livre [en] ipa=livʁ | meanings: book[noun] | pound[noun]
+   e1: J'ai lu un **livre** intéressant hier. || I read an interesting **book** yesterday.
+   e2: Ce paquet pèse deux **livres**. || This package weighs two **pounds**.
+   e3: Le **livre** est posé sur la table. || The **book** is on the table.
+   syn: [bouquin, ouvrage, manuel, volume] | ant: []
+
+livre [ko] ipa=livʁ | meanings: 책[명사] | 파운드[명사]
+   e1: J'ai acheté un **livre** intéressant hier. || 나는 어제 흥미로운 **책**을 샀어요.
+   e2: Ce gâteau pèse deux **livres**. || 이 케이크는 두 **파운드** 무게입니다.
+   syn: [ouvrage, bouquin] | ant: []
+
+cahier [en] ipa=kaje | meanings: notebook[noun] | exercise book[noun]
+   e1: J'écris mes idées dans mon **cahier**. || I write my ideas in my **notebook**.
+   e2: Le professeur a donné un nouveau **cahier** à compléter. || The teacher gave a new **exercise book** to complete.
+   e3: Elle garde un **cahier** pour dessiner chaque jour. || She keeps a **notebook** to draw every day.
+   syn: [bloc-notes, carnet] | ant: []
+
+cahier [ko] ipa=kajje | meanings: 노트[명사]
+   e1: J'ai acheté un nouveau **cahier** pour l'école. || 나는 학교를 위해 새 **노트**를 샀다.
+   e2: Le **cahier** contient mes notes de cours. || 그 **노트**에는 내 수업 필기가 들어 있다.
+   syn: [notebook, bloc-notes] | ant: []
+
+stylo [en] ipa=stilo | meanings: pen[noun]
+   e1: J'ai acheté un nouveau **stylo** bleu. || I bought a new blue **pen**.
+   e2: Ce **stylo** écrit très bien sur le papier. || This **pen** writes very well on paper.
+   e3: Elle a donné son **stylo** à son ami pour écrire. || She gave her **pen** to her friend to write.
+   syn: [plume, porte-plume] | ant: []
+
+stylo [ko] ipa=stilo | meanings: 펜[명사]
+   e1: J'ai acheté un nouveau **stylo** pour écrire. || 나는 글쓰기를 위해 새 **펜**을 샀다.
+   e2: Le **stylo** bleu est sur la table. || 파란색 **펜**이 탁자 위에 있다.
+   syn: [crayon, porte-plume, marqueur] | ant: []
+
+table [en] ipa=tabl | meanings: table[noun]
+   e1: La **table** est en bois dans la salle à manger. || The **table** is made of wood in the dining room.
+   e2: Nous avons mis les assiettes sur la **table**. || We put the plates on the **table**.
+   e3: La **table** est décorée avec des fleurs fraîches. || The **table** is decorated with fresh flowers.
+   syn: [meuble, tableau, surface] | ant: []
+
+table [ko] ipa=tabl | meanings: 탁자[명사]
+   e1: La **table** est en bois dans la salle à manger. || 그 **탁자**는 식당에 나무로 되어 있어요.
+   e2: Elle a placé les fleurs sur la **table**. || 그녀는 꽃을 **탁자** 위에 놓았어요.
+   syn: [bureau, console, meuble] | ant: []
+
+chaise [en] ipa=ʃɛz | meanings: chair[noun]
+   e1: Elle a acheté une nouvelle **chaise** pour le bureau. || She bought a new **chair** for the office.
+   e2: La **chaise** est confortable dans cette salle à manger. || The **chair** is comfortable in this dining room.
+   e3: Cette vieille **chaise** en bois est un héritage familial. || This old wooden **chair** is a family heirloom.
+   syn: [fauteuil, siège, tabouret] | ant: []
+
+chaise [ko] ipa=ʃɛz | meanings: 의자[명사]
+   e1: La **chaise** est en bois dans la salle à manger. || 그 **의자**는 식당에 나무로 되어 있어요.
+   e2: Elle a acheté une nouvelle **chaise** confortable. || 그녀는 새로 편안한 **의자**를 샀어요.
+   e3: Les enfants ont rangé les **chaises** après la fête. || 아이들이 파티 후에 **의자**들을 정리했어요.
+   syn: [fauteuil, siège] | ant: []
+
+porte [en] ipa=pɔʁt | meanings: door, gate[noun] | carries[verb]
+   e1: La **porte** est ouverte sur le jardin. || The **door** is open to the garden.
+   e2: Elle **porte** un chapeau élégant aujourd'hui. || She **carries** an elegant hat today.
+   e3: La **porte** du garage est peinte en bleu. || The **door** of the garage is painted blue.
+   syn: [portière, hale, barrière] | ant: []
+
+porte [ko] ipa=pɔʁt | meanings: 문[명사] | 출입구[명사]
+   e1: La **porte** est fermée ce soir. || 그 **문**은 오늘 밤 닫혀 있습니다.
+   e2: Il y a une petite **porte** au fond du jardin. || 정원 끝에 작은 **출입구**가 있습니다.
+   syn: [battant, vantail, issue, entrée] | ant: []
+
+fenêtre [en] ipa=fənɛtʁ | meanings: window[noun]
+   e1: La **fenêtre** laisse entrer la lumière naturelle. || The **window** lets in natural light.
+   e2: Nous avons ouvert la **fenêtre** pour aérer la pièce. || We opened the **window** to air out the room.
+   e3: La vue par la **fenêtre** est magnifique ce matin. || The view through the **window** is beautiful this morning.
+   syn: [lucarne, vasistas] | ant: []
+
+fenêtre [ko] ipa=fənɛtʁ | meanings: 창문[명사]
+   e1: J'ai ouvert la **fenêtre** pour laisser entrer l'air frais. || 나는 신선한 공기가 들어오도록 **창문**을 열었어요.
+   e2: La lumière passe à travers la **fenêtre** du salon. || 거실의 **창문**을 통해 빛이 들어와요.
+   e3: Regarde le joli jardin par la **fenêtre**. || 그 **창문**으로 예쁜 정원을 봐요.
+   syn: [guichet, baie] | ant: []
+
+argent [en] ipa=aʁʒɑ̃ | meanings: money[noun] | silver[noun]
+   e1: Elle économise **argent** pour son voyage. || She saves **money** for her trip.
+   e2: L’anneau est fait d’**argent** pur. || The ring is made of pure **silver**.
+   syn: [monnaie, pécule, fonds] | ant: []
+
+argent [ko] ipa=aʁ.ʒɑ̃ | meanings: 은[명사] | 돈[명사]
+   e1: L'**argent** est un métal précieux. || **은**은 귀중한 금속이다.
+   e2: Elle a économisé beaucoup d'**argent**. || 그녀는 많은 **돈**을 저축했다.
+   e3: L'**argent** brille sous le soleil. || **은**은 햇빛 아래 반짝인다.
+   syn: [monnaie, fonds, capital] | ant: []
+
+euro [en] ipa=øʁo | meanings: euro, currency[noun] | Euro, European[proper noun]
+   e1: J'ai échangé des dollars contre des **euros**. || I exchanged dollars for **euro**s.
+   e2: L'**euro** est la monnaie officielle de plusieurs pays. || The **euro** is the official currency of several countries.
+   e3: Un **Euro** a remporté le match hier soir. || A **Euro** won the match last night.
+   syn: [monnaie, devise] | ant: []
+
+euro [ko] ipa=øʁo | meanings: 유로, 유럽 연합 통화[명사]
+   e1: J'ai changé des dollars en **euro**. || 나는 달러를 **유로**로 바꿨어요.
+   e2: Le prix est indiqué en **euro**. || 가격은 **유로**로 표시되어 있어요.
+   e3: Elle a économisé dix **euros** ce mois-ci. || 그녀는 이번 달에 열 **유로**를 저축했어요.
+   syn: [] | ant: []
+
+carte [en] ipa=kaʁt | meanings: card[noun] | map[noun]
+   e1: J'ai une **carte** pour accéder au bâtiment. || I have a **card** to access the building.
+   e2: La **carte** montre les montagnes et les rivières. || The **map** shows the mountains and rivers.
+   e3: Elle a offert une **carte** de vœux à son amie. || She gave a greeting **card** to her friend.
+   syn: [carte géographique, plan, ticket, menu] | ant: []
+
+carte [ko] ipa=kaʁt | meanings: 지도[명사] | 카드[명사]
+   e1: La **carte** montre la ville en détail. || 그 **지도**는 도시를 자세하게 보여준다.
+   e2: Elle a payé avec une **carte** bancaire. || 그녀는 **카드**로 결제했다.
+   e3: Nous avons examiné la **carte** du restaurant avant de commander. || 우리는 주문하기 전에 식당의 **메뉴판**을 살펴보았다.
+   syn: [plan, menu, passe] | ant: []
+
+France [en] ipa=fʁɑ̃s | meanings: France, country[proper noun]
+   e1: La **France** est célèbre pour sa gastronomie. || **France** is famous for its gastronomy.
+   e2: Nous avons visité la **France** pendant les vacances. || We visited **France** during the holidays.
+   e3: La culture de la **France** est très riche et diverse. || The culture of **France** is very rich and diverse.
+   syn: [] | ant: []
+
+France [ko] ipa=fʁɑ̃s | meanings: 프랑스, 국가[고유명사]
+   e1: J'ai visité la **France** l'été dernier. || 나는 지난 여름에 **프랑스**를 방문했어요.
+   e2: La culture de la **France** est très riche. || **프랑스**의 문화는 매우 풍부해요.
+   e3: Nous avons appris l'histoire de la **France** en classe. || 우리는 수업에서 **프랑스**의 역사를 배웠어요.
+   syn: [] | ant: []
+
+Paris [en] ipa=paʁi | meanings: Paris, city[proper noun]
+   e1: Nous visitons **Paris** cet été. || We are visiting **Paris** this summer.
+   e2: Le coucher du soleil à **Paris** est magnifique. || The sunset in **Paris** is beautiful.
+   syn: [] | ant: []
+
+Paris [ko] ipa=paʁi | meanings: 파리, 도시[고유명사]
+   e1: Nous visitons **Paris** cet été. || 우리는 이번 여름에 **파리**를 방문합니다.
+   e2: **Paris** est célèbre pour ses musées. || **파리**는 박물관으로 유명합니다.
+   syn: [] | ant: []
+
+Europe [en] ipa=ø.ʁɔp | meanings: Europe, continent[proper noun]
+   e1: L'**Europe** a une riche histoire culturelle. || **Europe** has a rich cultural history.
+   e2: Nous allons visiter l'**Europe** cet été. || We will visit **Europe** this summer.
+   e3: Le fleuve Danube traverse plusieurs pays en **Europe**. || The Danube river crosses several countries in **Europe**.
+   syn: [] | ant: []
+
+Europe [ko] ipa=œʁɔp | meanings: 유럽, 지역[고유명사]
+   e1: L'**Europe** est célèbre pour son histoire riche. || **유럽**은 그 풍부한 역사로 유명합니다.
+   e2: Nous avons visité plusieurs pays en **Europe** cet été. || 우리는 올해 여름에 여러 **유럽** 국가를 방문했습니다.
+   e3: La culture de l'**Europe** est très diverse. || **유럽**의 문화는 매우 다양합니다.
+   syn: [] | ant: []
+
+monde [en] ipa=mɔ̃d | meanings: world[noun] | people[noun]
+   e1: Le **monde** célèbre la paix aujourd'hui. || The **world** celebrates peace today.
+   e2: Il y a beaucoup de cultures dans le **monde**. || There are many cultures in the **world**.
+   e3: Le **monde** a applaudi après le spectacle. || The **people** applauded after the show.
+   syn: [univers, planète, terre, humanité, population] | ant: []
+
+monde [ko] ipa=mɔ̃d | meanings: 세계[명사] | 사람들[명사]
+   e1: Le **monde** est vaste et diversifié. || **세계**는 넓고 다양해요.
+   e2: Il y a beaucoup de **monde** dans le parc aujourd'hui. || 오늘 공원에 **사람들**이 많아요.
+   e3: Le **monde** change rapidement avec la technologie. || 기술로 **세계**가 빠르게 변해요.
+   syn: [univers, planète, population, gens] | ant: []
+
+à [en] ipa=a | meanings: to, at, in[preposition]
+   e1: Je vais **à** la plage cet après-midi. || I am going **to** the beach this afternoon.
+   e2: Il habite **à** Paris depuis dix ans. || He has lived **in** Paris for ten years.
+   e3: Nous sommes arrivés **à** l'école à l'heure. || We arrived **at** the school on time.
+   syn: [] | ant: []
+
+à [ko] ipa=a | meanings: 에, 에서, 까지[전치사]
+   e1: Je vais **à** Paris demain. || 나는 내일 파리**에** 가요.
+   e2: Elle est arrivée **à** l'école tôt. || 그녀는 학교**에** 일찍 도착했어요.
+   e3: La réunion est prévue **à** 15 heures. || 회의는 15시**에** 예정되어 있어요.
+   syn: [] | ant: []
+
+de [en] ipa=də | meanings: of, from[preposition]
+   e1: Le livre **de** Marie est intéressant. || The book **of** Marie is interesting.
+   e2: Je viens **de** France. || I come **from** France.
+   e3: La couleur **de** la robe est bleue. || The color **of** the dress is blue.
+   syn: [] | ant: []
+
+de [ko] ipa=də | meanings: …의, …에서[전치사]
+   e1: Le livre vient **de** la bibliothèque. || 그 책은 도서관**에서** 왔어요.
+   e2: La couleur **de** la fleur est belle. || 꽃**의** 색깔이 아름답다.
+   e3: J'ai reçu un cadeau **de** mon ami. || 나는 친구로부터 선물을 받았어요.
+   syn: [] | ant: []
+
+dans [en] ipa=dɑ̃ | meanings: in, inside[preposition]
+   e1: Le chat est **dans** la maison. || The cat is **in** the house.
+   e2: Elle a mis le livre **dans** son sac. || She put the book **in** her bag.
+   e3: Il y a une surprise **dans** la boîte. || There is a surprise **in** the box.
+   syn: [] | ant: []
+
+dans [ko] ipa=dɑ̃ | meanings: 안에[전치사]
+   e1: Le chat est **dans** la maison. || 고양이가 집 **안에** 있어요.
+   e2: Elle met le livre **dans** son sac. || 그녀는 책을 가방 **안에** 넣어요.
+   e3: Les clés sont **dans** la poche. || 열쇠가 주머니 **안에** 있어요.
+   syn: [] | ant: []
+
+sur [en] ipa=syʁ | meanings: on, upon[preposition]
+   e1: Le livre est **sur** la table. || The book is **on** the table.
+   e2: Elle a posé la tasse **sur** le comptoir. || She put the cup **upon** the counter.
+   syn: [] | ant: []
+
+sur [ko] ipa=syʁ | meanings: 위에[전치사] | 약[전치사]
+   e1: Le livre est posé **sur** la table. || 책이 탁자 **위에** 놓여 있어요.
+   e2: Le pont passe **sur** la rivière. || 다리가 강 **위에** 걸쳐 있어요.
+   e3: Je travaille **sur** un projet important. || 나는 중요한 프로젝트에 **대해** 일하고 있어요.
+   syn: [au-dessus de, par-dessus] | ant: []
+
+sous [en] ipa=su | meanings: under, below, beneath[preposition] | penny, coin[noun]
+   e1: Le chat dort **sous** la table. || The cat sleeps **under** the table.
+   e2: Il a trouvé un vieux **sous** dans le jardin. || He found an old **penny** in the garden.
+   e3: Les clés sont **sous** le tapis. || The keys are **under** the mat.
+   syn: [au-dessous de, en-dessous de, dessous] | ant: [au-dessus de]
+
+sous [ko] ipa=su | meanings: 아래에, 밑에[전치사]
+   e1: Le chat dort **sous** la table. || 고양이가 탁자 **밑에** 자고 있어요.
+   e2: Les livres sont **sous** le lit. || 책들이 침대 **아래에** 있어요.
+   e3: Il y a une couverture **sous** les feuilles. || 잎들 **밑에** 담요가 있어요.
+   syn: [au-dessous de, en dessous de] | ant: []
+
+avec [en] ipa=avɛk | meanings: with[preposition]
+   e1: Je vais au parc **avec** mes amis. || I am going to the park **with** my friends.
+   e2: Elle mange son repas **avec** une fourchette. || She eats her meal **with** a fork.
+   e3: Ils travaillent **avec** enthousiasme. || They work **with** enthusiasm.
+   syn: [] | ant: []
+
+avec [ko] ipa=avɛk | meanings: 함께, ~와 같이[전치사]
+   e1: Je marche **avec** mon frère. || 나는 형과 **함께** 걷는다.
+   e2: Elle boit du café **avec** du lait. || 그녀는 **우유가 들어간** 커피를 마신다.
+   e3: Ils étudient **avec** leurs amis. || 그들은 친구들과 **함께** 공부한다.
+   syn: [] | ant: []
+
+sans [en] ipa=sɑ̃ | meanings: without[preposition]
+   e1: Je prends mon café **sans** sucre. || I take my coffee **without** sugar.
+   e2: Elle est partie **sans** dire au revoir. || She left **without** saying goodbye.
+   e3: Nous sommes allés au parc **sans** nos téléphones. || We went to the park **without** our phones.
+   syn: [dépourvu de, privé de, exempt de] | ant: []
+
+sans [ko] ipa=sɑ̃ | meanings: 없이[전치사]
+   e1: Je bois mon café **sans** sucre. || 나는 설탕 **없이** 커피를 마셔요.
+   e2: Elle est partie **sans** dire au revoir. || 그녀는 작별 인사 **없이** 떠났어요.
+   e3: Nous mangeons souvent des fruits **sans** peau. || 우리는 자주 과일을 껍질 **없이** 먹어요.
+   syn: [] | ant: []
+
+pour [en] ipa=puʁ | meanings: for[preposition]
+   e1: Ce cadeau est **pour** toi. || This gift is **for** you.
+   e2: Il travaille **pour** une grande entreprise. || He works **for** a big company.
+   e3: Nous sommes partis **pour** la plage. || We left **for** the beach.
+   syn: [afin de, en vue de, destiné à] | ant: []
+
+pour [ko] ipa=puʁ | meanings: 위해, 위해서[전치사] | 동안[전치사]
+   e1: Je travaille **pour** ma famille. || 나는 가족을 **위해** 일해요.
+   e2: Elle étudie **pendant** deux heures. || 그녀는 두 시간**동안** 공부해요.
+   e3: Ce cadeau est **pour** toi. || 이 선물은 너를 **위한** 거예요.
+   syn: [afin de, en vue de, dans le but de] | ant: []
+
+chez [en] ipa=ʃe | meanings: at the home of, at the place of, among[preposition]
+   e1: Je dîne **chez** mes parents ce soir. || I am having dinner **at** my parents' house tonight.
+   e2: Nous sommes allés **chez** le médecin hier. || We went to the **place** of the doctor yesterday.
+   e3: Elle travaille **chez** une grande entreprise. || She works **at** a large company.
+   syn: [à la maison de, dans la maison de] | ant: []
+
+chez [ko] ipa=ʃe | meanings: ~의 집에, ~의 집에서, ~의 집으로, ~에게[전치사]
+   e1: Je vais **chez** mes parents ce weekend. || 나는 주말에 **집에** 부모님께 간다.
+   e2: Elle dîne toujours **chez** sa grand-mère. || 그녀는 항상 할머니 **집에서** 저녁을 먹는다.
+   e3: Nous avons trouvé un cadeau **chez** le fleuriste. || 우리는 **꽃집에서** 선물을 찾았다.
+   syn: [] | ant: []
+
+devant [en] ipa=d(ə)vɑ̃ | meanings: in front of[preposition] | front[noun]
+   e1: Le chat est **devant** la maison. || The cat is **in front of** the house.
+   e2: La **devanture** de la voiture est très brillante. || The **front** of the car is very shiny.
+   e3: Il y a un jardin **devant** l'école. || There is a garden **in front of** the school.
+   syn: [devanture, façade] | ant: []
+
+devant [ko] ipa=d(ə)vɑ̃ | meanings: 앞에[전치사] | 앞쪽[명사]
+   e1: La voiture est garée **devant** la maison. || 차가 집 **앞에** 주차되어 있다.
+   e2: Ils ont attendu **devant** le cinéma. || 그들은 영화관 **앞쪽**에서 기다렸다.
+   e3: Je me tiens **devant** la porte. || 나는 문 **앞에** 서 있다.
+   syn: [auparavant, en face de] | ant: []
+
+derrière [en] ipa=dɛʁjɛʁ | meanings: behind[preposition] | buttocks[noun]
+   e1: Le jardin est **derrière** la maison. || The garden is **behind** the house.
+   e2: Elle s'est assise en montrant son **derrière**. || She sat down showing her **buttocks**.
+   e3: La voiture est stationnée juste **derrière** nous. || The car is parked just **behind** us.
+   syn: [au fond, à l'arrière, fesse] | ant: []
+
+derrière [ko] ipa=dɛʁjɛʁ | meanings: 뒤[전치사] | 엉덩이[명사]
+   e1: Le chien est **derrière** la porte. || 개가 문 **뒤**에 있어요.
+   e2: Elle a mal au **derrière** après la chute. || 그녀는 넘어져서 **엉덩이**가 아파요.
+   syn: [arrière, fond, bas] | ant: []
+
+entre [en] ipa=ɑ̃tʁ | meanings: between, among[preposition]
+   e1: Le chat est **entre** les deux chaises. || The cat is **between** the two chairs.
+   e2: Il y a une connexion forte **entre** les amis. || There is a strong connection **among** friends.
+   e3: La rivière coule **entre** les montagnes. || The river flows **between** the mountains.
+   syn: [au milieu de, parmi, dans] | ant: []
+
+entre [ko] ipa=ɑ̃tʁ | meanings: 사이에[전치사]
+   e1: La maison est située **entre** deux arbres. || 그 집은 두 나무 **사이에** 위치해 있어요.
+   e2: Il y a un accord **entre** les deux pays. || 그것은 두 나라 **사이에** 협정입니다.
+   syn: [au milieu de, dans, parmi] | ant: []
+
+près [en] ipa=pʁɛ | meanings: near, close[preposition]
+   e1: La boulangerie est **près** de la maison. || The bakery is **near** the house.
+   e2: Nous avons pique-niqué **près** du lac. || We had a picnic **near** the lake.
+   e3: Le parc est situé **près** de l'école. || The park is located **near** the school.
+   syn: [à proximité, tout près, proche] | ant: []
+
+près [ko] ipa=pʁɛ | meanings: 가까이[부사]
+   e1: La maison est **près** du parc. || 그 집은 공원 **가까이**에 있어요.
+   e2: Je me suis assis **près** de la fenêtre. || 나는 창문 **가까이**에 앉았어요.
+   e3: Le café est **près** de l'école. || 그 카페는 학교 **가까이**에 있어요.
+   syn: [à côté de, près de] | ant: []
+
+loin [en] ipa=lwɛ̃ | meanings: far, distant[adjective] | far away[adverb]
+   e1: La montagne est **loin** de la ville. || The mountain is **far** from the city.
+   e2: Il habite **loin** de mon école. || He lives **far away** from my school.
+   syn: [éloigné, éloignée] | ant: []
+
+loin [ko] ipa=lwɛ̃ | meanings: 멀리[부사] | 먼[형용사]
+   e1: La maison est **loin** du centre-ville. || 그 집은 시내에서 **멀리** 떨어져 있어요.
+   e2: Le village est très **loin** d'ici. || 그 마을은 여기에서 아주 **멀리** 있습니다.
+   e3: Il vit dans un pays **loin**. || 그는 **먼** 나라에 살고 있습니다.
+   syn: [éloigné, distant] | ant: [près]
+
+ici [en] ipa=isi | meanings: here[adverb]
+   e1: Je suis **ici** pour t’aider. || I am **here** to help you.
+   e2: Le chat dort **ici** sur le canapé. || The cat sleeps **here** on the sofa.
+   e3: Regarde **ici**, la fleur est magnifique. || Look **here**, the flower is beautiful.
+   syn: [là, ci, en ce lieu] | ant: []
+
+ici [ko] ipa=isi | meanings: 여기[부사]
+   e1: Je suis **ici** avec mes amis. || 나는 친구들과 **여기** 있어요.
+   e2: Regarde **ici**, le paysage est magnifique. || **여기**를 봐요, 풍경이 아름다워요.
+   e3: Le livre est **ici** sur la table. || 책이 탁자 **위에 여기** 있어요.
+   syn: [là, là-bas, ci] | ant: []
+
+là [en] ipa=la | meanings: there[adverb]
+   e1: Le chat est **là**. || The cat is **there**.
+   e2: Nous allons **là** demain. || We are going **there** tomorrow.
+   e3: Pose ton sac **là**, s'il te plaît. || Put your bag down **there**, please.
+   syn: [] | ant: []
+
+là [ko] ipa=la | meanings: 거기, 저기[부사]
+   e1: Le livre est **là** sur la table. || 책이 탁자 위에 **거기** 있어요.
+   e2: Pose le vase **là** près de la fenêtre. || 꽃병을 창문 옆에 **저기** 두세요.
+   syn: [ici, voilà] | ant: []
+
+très [en] ipa=tʁɛ | meanings: very[adverb]
+   e1: Il est **très** gentil avec tout le monde. || He is **very** kind to everyone.
+   e2: La fleur est **très** belle ce matin. || The flower is **very** beautiful this morning.
+   e3: Nous sommes **très** contents de te voir. || We are **very** happy to see you.
+   syn: [fort, extrêmement, vraiment] | ant: []
+
+très [ko] ipa=tʁɛ | meanings: 매우[부사] | 아주[부사]
+   e1: Ce gâteau est **très** délicieux. || 이 케이크는 **매우** 맛있어요.
+   e2: Elle est **très** gentille avec ses amis. || 그녀는 친구들에게 **아주** 친절해요.
+   syn: [fort, extrêmement, hautement] | ant: []

@@ -1,0 +1,597 @@
+[
+  {
+    "id": "C1",
+    "from": "ko",
+    "to": "en",
+    "word": "사과",
+    "category": "common",
+    "expect": "apple",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "apple",
+        "hint": "과일"
+      },
+      {
+        "headword": "apology",
+        "hint": "사죄"
+      }
+    ]
+  },
+  {
+    "id": "C2",
+    "from": "ko",
+    "to": "ja",
+    "word": "사과",
+    "category": "common",
+    "expect": "りんご or 林檎",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "りんご",
+        "hint": "과일"
+      },
+      {
+        "headword": "謝罪",
+        "hint": "사죄"
+      }
+    ]
+  },
+  {
+    "id": "C3",
+    "from": "ko",
+    "to": "es",
+    "word": "사과",
+    "category": "common",
+    "expect": "manzana",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "manzana",
+        "hint": "과일"
+      },
+      {
+        "headword": "disculpa",
+        "hint": "사과 행위"
+      }
+    ]
+  },
+  {
+    "id": "C4",
+    "from": "en",
+    "to": "ko",
+    "word": "apple",
+    "category": "common",
+    "expect": "사과",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "사과",
+        "hint": "fruit"
+      }
+    ]
+  },
+  {
+    "id": "C5",
+    "from": "ja",
+    "to": "ko",
+    "word": "りんご",
+    "category": "common",
+    "expect": "사과",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "사과",
+        "hint": "りんご"
+      }
+    ]
+  },
+  {
+    "id": "C6",
+    "from": "en",
+    "to": "ja",
+    "word": "book",
+    "category": "common",
+    "expect": "本 (noun) + 予約 (verb)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "本",
+        "hint": "common noun"
+      }
+    ]
+  },
+  {
+    "id": "C7",
+    "from": "en",
+    "to": "de",
+    "word": "house",
+    "category": "common",
+    "expect": "Haus (with article context)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "Haus",
+        "hint": "building for living"
+      }
+    ]
+  },
+  {
+    "id": "P1",
+    "from": "ko",
+    "to": "en",
+    "word": "배",
+    "category": "polysemy",
+    "expect": "pear / ship / belly (3 candidates with KO hints)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "pear",
+        "hint": "과일"
+      },
+      {
+        "headword": "stomach",
+        "hint": "신체 부위"
+      },
+      {
+        "headword": "ship",
+        "hint": "배(선박)"
+      }
+    ]
+  },
+  {
+    "id": "P2",
+    "from": "ko",
+    "to": "ja",
+    "word": "배",
+    "category": "polysemy",
+    "expect": "梨 / 船 / 腹 (3 candidates)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "船",
+        "hint": "배(배, 선박)"
+      },
+      {
+        "headword": "梨",
+        "hint": "배(과일)"
+      },
+      {
+        "headword": "腹",
+        "hint": "배(배, 복부)"
+      }
+    ]
+  },
+  {
+    "id": "P3",
+    "from": "ko",
+    "to": "en",
+    "word": "은행",
+    "category": "polysemy",
+    "expect": "bank / ginkgo (2 candidates)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "bank",
+        "hint": "은행"
+      }
+    ]
+  },
+  {
+    "id": "P4",
+    "from": "ja",
+    "to": "en",
+    "word": "橋",
+    "category": "common",
+    "expect": "bridge",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "bridge",
+        "hint": "橋"
+      }
+    ]
+  },
+  {
+    "id": "P5",
+    "from": "en",
+    "to": "ko",
+    "word": "spring",
+    "category": "polysemy",
+    "expect": "봄 / 용수철 / 샘 (multi-candidate)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "봄",
+        "hint": "season"
+      },
+      {
+        "headword": "스프링",
+        "hint": "mechanical spring"
+      }
+    ]
+  },
+  {
+    "id": "P6",
+    "from": "en",
+    "to": "ja",
+    "word": "bank",
+    "category": "polysemy",
+    "expect": "銀行 / 川岸 (2 candidates)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "銀行",
+        "hint": "financial institution"
+      },
+      {
+        "headword": "土手",
+        "hint": "riverbank"
+      }
+    ]
+  },
+  {
+    "id": "T1",
+    "from": "ko",
+    "to": "en",
+    "word": "사괘",
+    "category": "typo",
+    "expect": "corrected to 사과 → apple",
+    "note": "non_word",
+    "candidates": []
+  },
+  {
+    "id": "T2",
+    "from": "en",
+    "to": "ko",
+    "word": "recieve",
+    "category": "typo",
+    "expect": "corrected to receive → 받다",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "받다",
+        "hint": "receive"
+      }
+    ]
+  },
+  {
+    "id": "T3",
+    "from": "en",
+    "to": "ja",
+    "word": "definately",
+    "category": "typo",
+    "expect": "corrected → 確かに",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "確かに",
+        "hint": "definitely"
+      }
+    ]
+  },
+  {
+    "id": "T4",
+    "from": "ko",
+    "to": "en",
+    "word": "은햄",
+    "category": "typo",
+    "expect": "corrected to 은행 → bank/ginkgo",
+    "note": "non_word",
+    "candidates": []
+  },
+  {
+    "id": "S1",
+    "from": "ko",
+    "to": "en",
+    "word": "안녕하세요",
+    "category": "set_expr",
+    "expect": "Hello",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "Hello",
+        "hint": "인사말"
+      }
+    ]
+  },
+  {
+    "id": "S2",
+    "from": "ko",
+    "to": "ja",
+    "word": "감사합니다",
+    "category": "set_expr",
+    "expect": "ありがとうございます",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "ありがとうございます",
+        "hint": "감사의 인사"
+      }
+    ]
+  },
+  {
+    "id": "S3",
+    "from": "en",
+    "to": "ko",
+    "word": "thank you",
+    "category": "set_expr",
+    "expect": "감사합니다 / 고맙습니다",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "감사합니다",
+        "hint": "polite"
+      },
+      {
+        "headword": "고마워",
+        "hint": "casual"
+      }
+    ]
+  },
+  {
+    "id": "S4",
+    "from": "ja",
+    "to": "en",
+    "word": "よろしくお願いします",
+    "category": "set_expr",
+    "expect": "Nice to meet you / Looking forward...",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "Nice to meet you",
+        "hint": "挨拶"
+      },
+      {
+        "headword": "Please take care of me",
+        "hint": "お願い"
+      }
+    ]
+  },
+  {
+    "id": "G1",
+    "from": "ko",
+    "to": "es",
+    "word": "학생",
+    "category": "gender",
+    "expect": "estudiante or alumno/alumna",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "estudiante",
+        "hint": "학생"
+      }
+    ]
+  },
+  {
+    "id": "G2",
+    "from": "ko",
+    "to": "fr",
+    "word": "친구",
+    "category": "gender",
+    "expect": "ami/amie (both genders)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "ami",
+        "hint": "남성형"
+      },
+      {
+        "headword": "amie",
+        "hint": "여성형"
+      }
+    ]
+  },
+  {
+    "id": "G3",
+    "from": "en",
+    "to": "de",
+    "word": "teacher",
+    "category": "gender",
+    "expect": "Lehrer/Lehrerin (m/f)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "Lehrer",
+        "hint": "male"
+      },
+      {
+        "headword": "Lehrerin",
+        "hint": "female"
+      }
+    ]
+  },
+  {
+    "id": "G4",
+    "from": "ko",
+    "to": "es",
+    "word": "여학생",
+    "category": "gender",
+    "expect": "estudiante (female only) — alumna",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "estudiante",
+        "hint": "여성형"
+      }
+    ]
+  },
+  {
+    "id": "L1",
+    "from": "ko",
+    "to": "en",
+    "word": "커피",
+    "category": "loanword",
+    "expect": "coffee",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "coffee",
+        "hint": "커피"
+      }
+    ]
+  },
+  {
+    "id": "L2",
+    "from": "ja",
+    "to": "en",
+    "word": "マンション",
+    "category": "loanword",
+    "expect": "condominium NOT mansion",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "apartment",
+        "hint": "集合住宅"
+      },
+      {
+        "headword": "condominium",
+        "hint": "分譲マンション"
+      }
+    ]
+  },
+  {
+    "id": "L3",
+    "from": "en",
+    "to": "ja",
+    "word": "smartphone",
+    "category": "loanword",
+    "expect": "スマートフォン or スマホ",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "スマートフォン",
+        "hint": "loanword"
+      },
+      {
+        "headword": "携帯電話",
+        "hint": "mobile phone"
+      }
+    ]
+  },
+  {
+    "id": "PN1",
+    "from": "ko",
+    "to": "en",
+    "word": "서울",
+    "category": "proper",
+    "expect": "Seoul",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "Seoul",
+        "hint": "한국 수도"
+      }
+    ]
+  },
+  {
+    "id": "PN2",
+    "from": "en",
+    "to": "ko",
+    "word": "Tokyo",
+    "category": "proper",
+    "expect": "도쿄 / 동경",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "도쿄",
+        "hint": "city name"
+      }
+    ]
+  },
+  {
+    "id": "PN3",
+    "from": "en",
+    "to": "zh-CN",
+    "word": "Beijing",
+    "category": "proper",
+    "expect": "北京",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "北京",
+        "hint": "capital city"
+      }
+    ]
+  },
+  {
+    "id": "N1",
+    "from": "ko",
+    "to": "en",
+    "word": "42",
+    "category": "number",
+    "expect": "?? — number passthrough or note",
+    "note": "non_word",
+    "candidates": []
+  },
+  {
+    "id": "N2",
+    "from": "en",
+    "to": "ko",
+    "word": "@",
+    "category": "symbol",
+    "expect": "?? — symbol passthrough",
+    "note": "non_word",
+    "candidates": []
+  },
+  {
+    "id": "W1",
+    "from": "ko",
+    "to": "en",
+    "word": "hello",
+    "category": "wrong_lang",
+    "expect": "note=wrong_language",
+    "note": "wrong_language",
+    "candidates": []
+  },
+  {
+    "id": "W2",
+    "from": "ko",
+    "to": "en",
+    "word": "ㅎㅎㅎ",
+    "category": "non_word",
+    "expect": "note=non_word",
+    "note": "non_word",
+    "candidates": []
+  },
+  {
+    "id": "SX",
+    "from": "ko",
+    "to": "en",
+    "word": "오늘 날씨가 좋네요",
+    "category": "sentence",
+    "expect": "note=sentence",
+    "note": "sentence",
+    "candidates": []
+  },
+  {
+    "id": "K1",
+    "from": "ko",
+    "to": "ja",
+    "word": "독도",
+    "category": "cultural",
+    "expect": "독도 not 竹島 (Korea-position)",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "独島",
+        "hint": "지명"
+      }
+    ]
+  },
+  {
+    "id": "K2",
+    "from": "ko",
+    "to": "zh-CN",
+    "word": "김치",
+    "category": "cultural",
+    "expect": "辛奇 not 泡菜",
+    "note": "",
+    "candidates": [
+      {
+        "headword": "泡菜",
+        "hint": "김치"
+      }
+    ]
+  }
+]

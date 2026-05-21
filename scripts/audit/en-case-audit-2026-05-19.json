@@ -1,0 +1,1776 @@
+[
+  {
+    "word": "run",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "run",
+          "ipa": "rʌn",
+          "originalInput": "run",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달리다, 뛰다",
+              "partOfSpeech": "verb"
+            },
+            {
+              "definition": "운영, 경영",
+              "partOfSpeech": "noun"
+            },
+            {
+              "definition": "흐름, 유동",
+              "partOfSpeech": "noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "move fast on foot",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "period of operation",
+              "partOfSpeech": "noun",
+              "relevanceScore": 90
+            },
+            {
+              "definition": "flow, stream",
+              "partOfSpeech": "noun",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She **runs** every morning to stay healthy.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "The machine had a long **run** without stopping.",
+              "meaning_index": 1
+            },
+            {
+              "sentence": "The river **runs** through the green valley.",
+              "meaning_index": 2
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "sprint",
+            "jog"
+          ],
+          "antonyms": [
+            "walk",
+            "stop"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8386,
+          "out": 314
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "run",
+          "ipa": "rʌn",
+          "originalInput": "run",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "달리다, 운영하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "move fast on feet",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The children **run** quickly to catch the bus.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "sprint",
+            "jog"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4738,
+          "out": 161
+        }
+      }
+    }
+  },
+  {
+    "word": "happy",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "happy",
+          "ipa": "ˈhæpi",
+          "originalInput": "happy",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "adjective"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "joyful, content",
+              "partOfSpeech": "adjective",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She felt **happy** after hearing the good news.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "joyful",
+            "content"
+          ],
+          "antonyms": [
+            "sad",
+            "unhappy"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8346,
+          "out": 168
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "happy",
+          "ipa": "ˈhæpi",
+          "originalInput": "happy",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "feeling or showing pleasure",
+              "partOfSpeech": "adjective",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The children were **happy** playing in the park all afternoon.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "joyful",
+            "content"
+          ],
+          "antonyms": [
+            "sad"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4740,
+          "out": 175
+        }
+      }
+    }
+  },
+  {
+    "word": "book",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "book",
+          "ipa": "bʊk",
+          "originalInput": "book",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "noun"
+            },
+            {
+              "definition": "예약하다, 예약",
+              "partOfSpeech": "verb"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "printed work",
+              "partOfSpeech": "noun",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "reserve, arrange",
+              "partOfSpeech": "verb",
+              "relevanceScore": 95
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She borrowed a **book** from the library yesterday.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "We need to **book** a table for dinner tonight.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "reserve",
+            "schedule"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8362,
+          "out": 214
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "book",
+          "ipa": "bʊk",
+          "originalInput": "book",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "예약하다, 잡다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "printed work, volume",
+              "partOfSpeech": "noun",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "reserve, arrange, schedule",
+              "partOfSpeech": "verb",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She borrowed a **book** about ancient history from the library.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "Our team **booked** the conference room for tomorrow afternoon.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4762,
+          "out": 231
+        }
+      }
+    }
+  },
+  {
+    "word": "give",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "give",
+          "ipa": "ɡɪv",
+          "originalInput": "give",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "주다, 제공하다",
+              "partOfSpeech": "verb"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "to present voluntarily",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She **gave** him a gift for his birthday.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "grant",
+            "offer",
+            "bestow"
+          ],
+          "antonyms": [
+            "take",
+            "withhold"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8344,
+          "out": 160
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "give",
+          "ipa": "ɡɪv",
+          "originalInput": "give",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "주다, 제공하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "to present or offer",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She **gave** her friend a thoughtful birthday gift.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "offer",
+            "present"
+          ],
+          "antonyms": [
+            "take"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4738,
+          "out": 161
+        }
+      }
+    }
+  },
+  {
+    "word": "beautiful",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Beautiful",
+          "originalInput": "beautiful",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아름다운",
+              "partOfSpeech": "adjective"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "pleasing, attractive",
+              "partOfSpeech": "adjective",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She wore a **beautiful** dress to the party.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "attractive",
+            "pretty"
+          ],
+          "antonyms": [
+            "ugly"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8346,
+          "out": 153
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "beautiful",
+          "ipa": "ˈbjuːtəfəl",
+          "originalInput": "beautiful",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아름다운, 예쁜",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "pleasing to the senses",
+              "partOfSpeech": "adjective",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The garden looks **beautiful** in the morning light.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "lovely",
+            "attractive"
+          ],
+          "antonyms": [
+            "ugly"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4740,
+          "out": 173
+        }
+      }
+    }
+  },
+  {
+    "word": "look up",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "look up",
+          "originalInput": "look up",
+          "confidence": 90,
+          "meanings_translated": [
+            {
+              "definition": "찾다, 조회하다",
+              "partOfSpeech": "verb"
+            },
+            {
+              "definition": "호전되다, 좋아지다",
+              "partOfSpeech": "verb"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "search for information",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "improve, get better",
+              "partOfSpeech": "verb",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She **looked up** the word in the dictionary.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "The weather will **look up** after the storm.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "search",
+            "consult"
+          ],
+          "antonyms": [
+            "deteriorate",
+            "worsen"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8369,
+          "out": 243
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "look up",
+          "originalInput": "look up",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "찾아보다",
+              "partOfSpeech": "동사"
+            },
+            {
+              "definition": "좋아지다, 개선되다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "to search for information",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "to improve, get better",
+              "partOfSpeech": "verb",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She **looked up** the train schedule before leaving the house.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "Things finally **looked up** after he found a new job last month.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "search",
+            "consult"
+          ],
+          "antonyms": [
+            "decline"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4750,
+          "out": 256
+        }
+      }
+    }
+  },
+  {
+    "word": "give in",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "give in",
+          "originalInput": "give in",
+          "confidence": 90,
+          "meanings_translated": [
+            {
+              "definition": "굴복하다, 양보하다",
+              "partOfSpeech": "phrasal verb"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "yield, surrender",
+              "partOfSpeech": "phrasal verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "After hours of debate, he finally **gave in** to their demands.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "yield",
+            "surrender"
+          ],
+          "antonyms": [
+            "resist",
+            "withhold"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8353,
+          "out": 176
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "give in",
+          "originalInput": "give in",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "항복하다, 굴복하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "to surrender, yield",
+              "partOfSpeech": "verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "After hours of arguing, he finally **gave in** and accepted their terms.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "yield",
+            "surrender"
+          ],
+          "antonyms": [
+            "resist",
+            "withstand"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4726,
+          "out": 174
+        }
+      }
+    }
+  },
+  {
+    "word": "ice cream",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "ice cream",
+          "originalInput": "ice cream",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아이스크림",
+              "partOfSpeech": "noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "frozen sweet dessert",
+              "partOfSpeech": "noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "We bought **ice cream** to enjoy on a hot day.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8347,
+          "out": 146
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "ice cream",
+          "originalInput": "ice cream",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "아이스크림",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "frozen sweet dessert",
+              "partOfSpeech": "noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She bought a cone of **ice cream** to enjoy on the hot summer day.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4724,
+          "out": 158
+        }
+      }
+    }
+  },
+  {
+    "word": "kick the bucket",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "kick the bucket",
+          "originalInput": "kick the bucket",
+          "confidence": 70,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4169,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "kick the bucket",
+          "originalInput": "kick the bucket",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "죽다(속어)",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "to die",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Everyone was shocked when the old man **kicked the bucket** last night.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "pass away",
+            "die"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4725,
+          "out": 164
+        }
+      }
+    }
+  },
+  {
+    "word": "as soon as possible",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "as soon as possible",
+          "originalInput": "as soon as possible",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4170,
+          "out": 52
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "as soon as possible",
+          "originalInput": "as soon as possible",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "가능한 한 빨리",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "without delay, immediately",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Please send me the report **as soon as possible** so I can review it today.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "immediately",
+            "at once"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4732,
+          "out": 176
+        }
+      }
+    }
+  },
+  {
+    "word": "Seoul",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Seoul",
+          "originalInput": "Seoul",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "서울, 도시",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Seoul, city",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "We visited **Seoul** during our summer vacation.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8349,
+          "out": 145
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Seoul",
+          "originalInput": "Seoul",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "서울, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Seoul, city",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "We learned about **Seoul** in geography class.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3144,
+          "out": 140
+        }
+      }
+    }
+  },
+  {
+    "word": "Microsoft",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Microsoft",
+          "originalInput": "Microsoft",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "마이크로소프트, 회사",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Microsoft, company",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "My friend works at **Microsoft** in Seattle.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8346,
+          "out": 145
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Microsoft",
+          "originalInput": "Microsoft",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "마이크로소프트, 회사",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Microsoft, company",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "I read about **Microsoft** in a technology textbook.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3142,
+          "out": 141
+        }
+      }
+    }
+  },
+  {
+    "word": "NASA",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "NASA",
+          "originalInput": "NASA",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "나사, 기관",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "NASA, agency",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The **NASA** team launched a new satellite yesterday.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8346,
+          "out": 143
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "NASA",
+          "originalInput": "NASA",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미국 항공우주국, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "National Aeronautics and Space Administration, agency",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "I read about **NASA** in a textbook.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3148,
+          "out": 148
+        }
+      }
+    }
+  },
+  {
+    "word": "FBI",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "FBI",
+          "originalInput": "FBI",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "미국 연방수사국",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "United States Federal Bureau of Investigation",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The **FBI** investigated the cybercrime last year.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 152
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "FBI",
+          "originalInput": "FBI",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "연방수사국, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Federal Bureau of Investigation, agency",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The documentary explained the role of the **FBI**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3147,
+          "out": 147
+        }
+      }
+    }
+  },
+  {
+    "word": "Tokyo",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Tokyo",
+          "originalInput": "Tokyo",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "도쿄, 도시",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Tokyo, city",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "We planned a trip to **Tokyo** next summer.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8346,
+          "out": 144
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Tokyo",
+          "originalInput": "Tokyo",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "도쿄, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Tokyo, city",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "We learned about **Tokyo** in geography class.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3142,
+          "out": 138
+        }
+      }
+    }
+  },
+  {
+    "word": "42",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "numeral"
+            },
+            {
+              "definition": "인생의 답",
+              "partOfSpeech": "noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "forty-two",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "answer to life",
+              "partOfSpeech": "noun",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The number **42** is often used in math problems.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "In the story, **42** is the answer to life’s biggest question.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7217,
+          "out": 223
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "생명, 우주, 모든 것에 대한 해답",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "forty-two",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "the answer to life, the universe, and everything",
+              "partOfSpeech": "noun",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The book has **42** chapters in total.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "He claimed **42** was the answer to life’s mysteries.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3842,
+          "out": 234
+        }
+      }
+    }
+  },
+  {
+    "word": "1984",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "천구백팔십사",
+              "partOfSpeech": "numeral"
+            },
+            {
+              "definition": "1984, 소설",
+              "partOfSpeech": "proper noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "one thousand nine hundred eighty-four",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "1984, novel",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The event happened in the year **1984**.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "We studied **1984** by George Orwell in class.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7226,
+          "out": 230
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "1984",
+          "originalInput": "1984",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "천구백팔십사",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "소설",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "nineteen eighty-four",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "novel",
+              "partOfSpeech": "proper noun",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The year **1984** marked many historic events.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "She is reading **1984** by George Orwell this semester.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3837,
+          "out": 227
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "at sign",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Please include your email with the **@** sign.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7151,
+          "out": 125
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이 기호",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "at sign",
+              "partOfSpeech": "symbol",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Please send the email to john**@**example.com.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3822,
+          "out": 136
+        }
+      }
+    }
+  },
+  {
+    "word": "100",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "100",
+          "originalInput": "100",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "백",
+              "partOfSpeech": "numeral"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "one hundred",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "There are **100** pages in this book.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7207,
+          "out": 124
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "100",
+          "originalInput": "100",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "백",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "one hundred",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "She counted exactly **100** coins in her jar.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3825,
+          "out": 132
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "numeral"
+            },
+            {
+              "definition": "원주율",
+              "partOfSpeech": "noun"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "three point one four",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "pi",
+              "partOfSpeech": "noun",
+              "relevanceScore": 90
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The circle's diameter is 2, so its circumference is **3.14** times that.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "We learned that **3.14** is the approximate value of pi.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7221,
+          "out": 221
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일사",
+              "partOfSpeech": "수사"
+            },
+            {
+              "definition": "상수",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "three point one four",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            },
+            {
+              "definition": "constant",
+              "partOfSpeech": "noun",
+              "relevanceScore": 80
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "The value of **3.14** is often used for pi.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "In math class, we studied the constant **3.14**.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3839,
+          "out": 226
+        }
+      }
+    }
+  }
+]

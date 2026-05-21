@@ -47,9 +47,25 @@ function normalize(s: string, lang: string): string {
   return lower.replace(/\s+/g, ' ');
 }
 
+/**
+ * Strip combining diacritics: é → e, ñ → n, ü → u, etc. Used so missing
+ * accents grade as 'typo' (close-enough, with watch-the-accents hint) rather
+ * than as 'wrong'. Most learners on English keyboards can't easily type
+ * accents and treating that as failure is needlessly punishing.
+ */
+function stripDiacritics(s: string): string {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
 function compareLatin(a: string, b: string): DictationResult {
+  const aStripped = stripDiacritics(a);
+  const bStripped = stripDiacritics(b);
+  // Diacritics-only difference: accept as typo regardless of length.
+  if (a !== b && aStripped === bStripped) return 'typo';
   if (b.length < 5) return 'wrong';
-  return levenshtein(a, b) === 1 ? 'typo' : 'wrong';
+  // Allow one stray edit anywhere (typo or single missing diacritic on a
+  // word that has additional spelling errors).
+  return levenshtein(aStripped, bStripped) === 1 ? 'typo' : 'wrong';
 }
 
 function compareKorean(a: string, b: string): DictationResult {

@@ -100,25 +100,22 @@ const GENDER_LABEL: Record<string, { m: string; f: string; n: string; mf: string
 };
 
 /**
- * Build the parenthetical text shown before each meaning's definition. Combines
- * partOfSpeech with grammatical gender when present, in the UI locale. Returns
- * just the inner text (no parens) so call sites control the wrapping.
- *
- * Format:
- *   - With gender: `<pos>/<gender>`  (e.g. "명사/남성")
- *   - Without:     `<pos>`            (e.g. "명사")
+ * Build the marker text shown before each meaning's definition. As a learning
+ * tool (not a dictionary), we no longer surface part-of-speech to users.
+ * Grammatical gender, however, is grammatically essential for gendered
+ * languages (de/fr/es/it/pt/ru) so we keep it. Returns the inner text
+ * (no parens) so call sites control wrapping — empty string means "skip".
  */
 export function formatPOS(
-  pos: string,
+  _pos: string,
   gender: 'm' | 'f' | 'n' | 'mf' | undefined,
   uiLang: string,
 ): string {
-  const localizedPos = translatePOS(pos, uiLang);
-  if (!gender) return localizedPos;
+  if (!gender) return '';
   const labels = GENDER_LABEL[uiLang]
     ?? GENDER_LABEL[uiLang.split('-')[0]]
     ?? GENDER_LABEL.en;
-  return `${localizedPos}/${labels[gender]}`;
+  return labels[gender];
 }
 
 function fixPOS(result: WordLookupResult, targetLang: string): WordLookupResult {

@@ -1,0 +1,1662 @@
+# delf-b1-part-4 (fr → ko) | 300 words
+
+angoisse [ko] ipa=ɑ̃ɡwas | meanings: 불안[명사] | 고통[명사]
+   e1: Elle ressent une grande **angoisse** avant l'examen. || 그녀는 시험 전에 큰 **불안**을 느껴요.
+   e2: L'**angoisse** l'a envahi après la mauvaise nouvelle. || 나쁜 소식 후에 그는 **고통**에 휩싸였어요.
+   e3: Son visage exprime une profonde **angoisse**. || 그의 얼굴은 깊은 **불안**을 표현해요.
+   syn: [anxiété, inquiétude, peur, souci, tourment] | ant: []
+
+anxiété [ko] ipa=ɑ̃ksjete | meanings: 불안[명사]
+   e1: L'**anxiété** diminue après la méditation. || 명상 후에 **불안**이 줄어든다.
+   e2: Elle ressent une forte **anxiété** avant son exam. || 그녀는 시험 전에 강한 **불안**을 느낀다.
+   e3: L'**anxiété** peut parfois inspirer la créativité. || **불안**은 때때로 창의성을 자극할 수 있다.
+   syn: [angoisse, inquiétude, stress] | ant: []
+
+anxieux [ko] ipa=ɑ̃ksjø | meanings: 불안한[형용사] | 걱정하는[형용사]
+   e1: Elle est **anxieuse** avant son examen. || 그녀는 시험 전에 **불안하다**.
+   e2: Il devient **anxieux** quand il ne trouve pas ses clés. || 그는 열쇠를 못 찾으면 **걱정한다**.
+   syn: [inquiet, préoccupé, nerveux] | ant: [calme, détendu, serein]
+
+panique [ko] ipa=pa.nik | meanings: 공포[명사] | 혼란[명사]
+   e1: La foule a ressenti une **panique** soudaine. || 군중은 갑작스러운 **공포**를 느꼈어요.
+   e2: Il y avait une **panique** totale après l'annonce. || 발표 후에 완전한 **혼란**이 있었어요.
+   syn: [terreur, crainte, effroi, désarroi, confusion] | ant: []
+
+paniquer [ko] ipa=panike | meanings: 당황하다[동사] | 공황 상태에 빠지다[동사]
+   e1: Elle a commencé à **paniquer** devant le problème. || 그녀는 문제 앞에서 **당황했다**.
+   e2: Il a tendance à **paniquer** en situation d'urgence. || 그는 긴급 상황에서 **공황 상태에 빠진다**.
+   syn: [s'affoler, s'inquiéter] | ant: []
+
+terreur [ko] ipa=tɛʁœʁ | meanings: 공포[명사] | 테러[명사]
+   e1: La **terreur** s'est répandue dans la ville après l'orage. || 폭풍 후에 도시에는 **공포**가 퍼졌다.
+   e2: Les habitants vivent dans la **terreur** des attaques. || 주민들은 공격에 대한 **공포** 속에서 생활한다.
+   e3: La police a arrêté un groupe responsable de la **terreur**. || 경찰이 **테러**를 일으킨 단체를 체포했다.
+   syn: [peur, crainte, effroi, anxiété, panique] | ant: []
+
+effrayé [ko] ipa=ɛfʁɛje | meanings: 겁먹은[형용사]
+   e1: Le chat est **effrayé** par le bruit. || 고양이는 소리에 **겁먹었다**.
+   e2: L'enfant est **effrayé** dans le noir. || 그 아이는 어둠 속에서 **겁먹었다**.
+   syn: [apeuré, terrifié, effaré] | ant: [courageux, insouciant, calme]
+
+horrifié [ko] ipa=ɔʁi.fi.e | meanings: 몹시 깜짝 놀란[형용사]
+   e1: Elle est **horrifiée** par le film effrayant. || 그녀는 무서운 영화에 **깜짝 놀랐다**.
+   e2: Ils étaient **horrifiés** par la nouvelle soudaine. || 그들은 갑작스러운 소식에 **깜짝 놀랐다**.
+   e3: Il était **horrifié** de voir l'accident. || 그는 사고를 보고 **깜짝 놀랐다**.
+   syn: [terrifié, effrayé, épouvanté] | ant: []
+
+épouvanté [ko] ipa=epuvɑ̃te | meanings: 겁먹은[형용사]
+   e1: Il est resté **épouvanté** devant le film d'horreur. || 그는 공포 영화 앞에서 **겁먹었다**.
+   e2: Elle semblait **épouvantée** par le bruit soudain. || 그녀는 갑작스런 소리에 **겁먹은** 것 같았다.
+   syn: [effrayé, terrifié, apeuré] | ant: []
+
+frayeur [ko] ipa=fʁɛ.jœʁ | meanings: 공포[명사] | 겁[명사]
+   e1: La **frayeur** a disparu après la tempête. || 태풍 후에 **공포**가 사라졌어요.
+   e2: Il a eu une **frayeur** en voyant l’ombre. || 그는 그림자를 보고 **겁**을 먹었어요.
+   e3: Sa voix tremblait de **frayeur**. || 그의 목소리는 **공포**로 떨렸어요.
+   syn: [peur, crainte, terreur] | ant: []
+
+appréhension [ko] ipa=apʁehɑ̃sjɔ̃ | meanings: 근심[명사] | 체포[명사]
+   e1: Elle a ressenti une **appréhension** avant l'examen. || 그녀는 시험 전에 **근심**을 느꼈어요.
+   e2: L'**appréhension** du suspect a eu lieu hier soir. || 용의자의 **체포**가 어젯밤에 있었습니다.
+   e3: Son **appréhension** s'est calmée après la discussion. || 그의 **근심**은 대화 후에 가라앉았어요.
+   syn: [inquiétude, crainte, anxiété, arrestation, capture] | ant: []
+
+appréhender [ko] ipa=apʁeɑ̃de | meanings: 체포하다[동사] | 이해하다[동사]
+   e1: La police a **appréhendé** le suspect hier soir. || 경찰이 어젯밤에 용의자를 **체포했다**.
+   e2: Il faut **appréhender** ce concept pour réussir. || 성공하려면 이 개념을 **이해해야** 한다.
+   syn: [arrêter, capturer, comprendre, saisir] | ant: []
+
+doute [ko] ipa=dut | meanings: 의심, 의문[명사]
+   e1: J'ai un **doute** sur la réponse. || 나는 답에 대해 **의심**이 있어요.
+   e2: Son discours a semé le **doute** dans mon esprit. || 그의 연설은 내 마음에 **의문**을 불러일으켰어요.
+   e3: Sans **doute**, elle réussira cet examen. || **의심**할 여지없이, 그녀는 이 시험에 합격할 거예요.
+   syn: [incertitude, suspicion, méfiance] | ant: [certitude, conviction, foi]
+
+incertitude [ko] ipa=ɛ̃sɛʁtidyd | meanings: 불확실성[명사]
+   e1: L'**incertitude** plane sur le résultat final. || 최종 결과에 **불확실성**이 감돌고 있다.
+   e2: Ils ressentent une grande **incertitude** dans leur avenir. || 그들은 자신의 미래에 큰 **불확실성**을 느낀다.
+   e3: L'**incertitude** du temps rend le voyage excitant. || 날씨의 **불확실성**이 여행을 흥미롭게 만든다.
+   syn: [doute, hésitation, flou] | ant: [certitude, confiance]
+
+incertain [ko] ipa=ɛ̃sɛʁtɛ̃ | meanings: 불확실한[형용사]
+   e1: Le résultat de l'examen est **incertain**. || 시험 결과가 **불확실하다**.
+   e2: Le temps restera **incertain** toute la semaine. || 날씨가 일주일 내내 **불확실하다**.
+   syn: [douteux, flou, équivoque] | ant: [certain, sûr, clair]
+
+indécision [ko] ipa=ɛ̃desizjɔ̃ | meanings: 우유부단[명사]
+   e1: Son **indécision** ralentit le projet. || 그의 **우유부단**이 프로젝트를 늦추고 있다.
+   e2: L'**indécision** cause souvent du stress. || **우유부단**은 종종 스트레스를 유발한다.
+   e3: Elle a dépassé son **indécision** et agi vite. || 그녀는 자신의 **우유부단**을 극복하고 신속하게 행동했다.
+   syn: [hésitation, indétermination, perplexité] | ant: [décision, résolution, certitude]
+
+indécis [ko] ipa=ɛ̃de.si | meanings: 우유부단한[형용사]
+   e1: Il est souvent **indécis** face aux choix. || 그는 선택 앞에서 자주 **우유부단하다**.
+   e2: Elle reste **indécise** malgré les conseils donnés. || 그녀는 조언을 받아도 여전히 **우유부단하다**.
+   syn: [hésitant, indéterminé] | ant: [décis, certain]
+
+perplexité [ko] ipa=pɛʁ.plɛk.si.te | meanings: 당혹감[명사]
+   e1: Sa **perplexité** était visible sur son visage. || 그의 얼굴에 **당혹감**이 보였다.
+   e2: La **perplexité** augmente quand on ne comprend pas. || 이해하지 못할 때 **당혹감**이 커진다.
+   e3: Elle a exprimé sa **perplexité** devant la situation. || 그녀는 상황에 대해 **당혹감**을 표현했다.
+   syn: [hésitation, doute, incertitude] | ant: [certitude, confiance]
+
+perplexe [ko] ipa=pɛʁplɛks | meanings: 당황한[형용사] | 혼란스러운[형용사]
+   e1: Elle était **perplexe** devant la question inattendue. || 그녀는 뜻밖의 질문에 **당황했다**.
+   e2: Ils sont tous **perplexes** face aux instructions complexes. || 그들은 복잡한 지시에 대해 모두 **혼란스러워한다**.
+   syn: [déconcerté, troublé, embarrassé, confus] | ant: []
+
+confusion [ko] ipa=kɔ̃.fy.zjɔ̃ | meanings: 혼란[명사] | 혼동[명사]
+   e1: La **confusion** règne après le gros orage. || 큰 폭풍 후에 **혼란**이 지배해요.
+   e2: Il y a souvent de la **confusion** entre ces deux mots. || 이 두 단어 사이에 자주 **혼동**이 있어요.
+   e3: La **confusion** dans son esprit est visible. || 그의 마음속 **혼란**이 보입니다.
+   syn: [désordre, pagaille, brouillard] | ant: [ordre, clarté]
+
+confus [ko] ipa=kɔ̃fys | meanings: 혼란스러운[형용사] | 당황한[형용사]
+   e1: Le message était trop compliqué, je suis **confus**. || 메시지가 너무 복잡해서 나는 **혼란스러워요**.
+   e2: Elle était **confuse** après la question inattendue. || 그녀는 예상치 못한 질문에 **당황했어요**.
+   syn: [désorienté, perplexe, embarrassé, déconcerté] | ant: [clair, sûr]
+
+embarras [ko] ipa=ɑ̃bʁaʁ | meanings: 당황, 곤란[명사] | 폐해, 어려움[명사]
+   e1: Elle a ressenti un grand **embarras** devant la foule. || 그녀는 군중 앞에서 큰 **당황**을 느꼈다.
+   e2: L'**embarras** financier complique ses projets de voyage. || 재정적 **곤란**이 그의 여행 계획을 복잡하게 한다.
+   syn: [gêne, difficulté, confusion] | ant: []
+
+embarrassé [ko] ipa=ɑ̃baʁase | meanings: 당황한[형용사] | 난처한[형용사]
+   e1: Il est **embarrassé** par la question. || 그는 그 질문에 **당황**했다.
+   e2: Elle était **embarrassée** de demander de l'aide. || 그녀는 도움을 요청하기에 **난처**했다.
+   syn: [gêné, confus, mal à l'aise] | ant: []
+
+honte [ko] ipa=ɔ̃t | meanings: 수치, 부끄러움[명사]
+   e1: Elle a ressenti une grande **honte** après l'erreur. || 그녀는 실수 후에 큰 **수치**를 느꼈다.
+   e2: Il a parlé de sa **honte** en public. || 그는 공개석상에서 자신의 **부끄러움**에 대해 말했다.
+   syn: [confusion, embarras, déshonneur] | ant: []
+
+honteux [ko] ipa=ɔ̃tø | meanings: 부끄러운[형용사] | 창피한[형용사]
+   e1: Il est **honteux** de ses erreurs passées. || 그는 과거의 실수를 **부끄러워한다**.
+   e2: Elle était **honteuse** devant toute la classe. || 그녀는 반 전체 앞에서 **창피했다**.
+   syn: [embarrassant, confus, déshonorant] | ant: [fier, honorable]
+
+scrupule [ko] ipa=skʁypyl | meanings: 양심의 가책[명사] | 세심한 주의[명사]
+   e1: Elle a un **scrupule** avant de prendre cette décision. || 그녀는 이 결정을 하기 전에 **양심의 가책**을 느낍니다.
+   e2: Il travaille avec beaucoup de **scrupule**. || 그는 많은 **세심한 주의**를 기울여 일합니다.
+   syn: [conscience, hésitation, doute, prudence, méticulosité] | ant: []
+
+remords [ko] ipa=ʁəmɔʁ | meanings: 양심의 가책[명사] | 후회[명사]
+   e1: Il éprouve un profond **remords** pour ses erreurs. || 그는 자신의 실수에 대해 깊은 **양심의 가책**을 느낀다.
+   e2: Elle ressent un léger **remords** d'avoir quitté tôt. || 그녀는 일찍 떠난 것에 대해 약간의 **후회**를 느낀다.
+   e3: Les **remords** peuvent apaiser une conscience troublée. || **양심의 가책**은 괴로운 양심을 달랠 수 있다.
+   syn: [culpabilité, repentir, contrition] | ant: []
+
+regret [ko] ipa=ʁəɡʁɛ | meanings: 후회[명사] | 유감[명사]
+   e1: J'ai un profond **regret** de ne pas l'avoir aidé. || 나는 그를 도와주지 않은 것에 깊은 **후회**가 있다.
+   e2: Nous exprimons notre **regret** pour le retard. || 우리는 지연에 대해 **유감**을 표합니다.
+   e3: Son **regret** l'a poussé à changer sa décision. || 그의 **후회**가 그의 결정을 바꾸게 했다.
+   syn: [remords, chagrin, désolation, lamentation, peine] | ant: []
+
+regretter [ko] ipa=ʁə.ɡʁɛ.te | meanings: 후회하다[동사] | 유감스럽게 여기다[동사]
+   e1: Je **regrette** de ne pas avoir étudié plus tôt. || 나는 더 일찍 공부하지 않은 것을 **후회한다**.
+   e2: Elle **regrette** son erreur passée. || 그녀는 지난 실수를 **후회한다**.
+   e3: Nous **regrettons** la perte de ce bel arbre. || 우리는 이 아름다운 나무의 상실을 **유감스럽게 여긴다**.
+   syn: [désoler, lamenter, déplorer] | ant: []
+
+amertume [ko] ipa=amɛʁtym | meanings: 쓴맛[명사] | 쓴슬픔[명사]
+   e1: L'**amertume** de ce café est très forte. || 이 커피의 **쓴맛**이 매우 강해요.
+   e2: Il ressent une profonde **amertume** après sa défaite. || 그는 패배 후에 깊은 **쓴슬픔**을 느꼈어요.
+   e3: L'**amertume** dans ses paroles était évidente. || 그의 말 속에는 **쓴슬픔**이 분명했어요.
+   syn: [âcreté, âpreté, rancune] | ant: [douceur]
+
+rancune [ko] ipa=ʁɑ̃.kyn | meanings: 원한[명사]
+   e1: Elle garde une **rancune** depuis longtemps. || 그녀는 오랫동안 **원한**을 품고 있다.
+   e2: Ne laisse pas la **rancune** gâcher ton bonheur. || 네 행복을 망치지 않도록 **원한**을 품지 마라.
+   syn: [ressentiment, hostilité, grudge] | ant: []
+
+rancunier [ko] ipa=ʁɑ̃kynje | meanings: 원한을 품는[형용사] | 앙심을 품는 사람[명사]
+   e1: Elle est très **rancunière** après cette dispute. || 그녀는 그 다툼 이후로 매우 **원한을 품는** 상태입니다.
+   e2: Il est un **rancunier** qui n'oublie jamais une offense. || 그는 결코 모욕을 잊지 않는 **앙심을 품는 사람**입니다.
+   syn: [resentiment, revanchard, vengeur] | ant: []
+
+ressentiment [ko] ipa=ʁɛsɑ̃timɑ̃ | meanings: 원한[명사] | 분노[명사]
+   e1: Il garde un **ressentiment** contre son ancien ami. || 그는 그의 옛 친구에 대해 **원한**을 품고 있다.
+   e2: Son **ressentiment** a grandi après la dispute. || 다툼 후에 그의 **분노**가 커졌다.
+   e3: Le **ressentiment** peut détruire l'amitié. || **원한**은 우정을 파괴할 수 있다.
+   syn: [rancune, haine, amertume, colère] | ant: []
+
+haine [ko] ipa=ɛn | meanings: 증오, 혐오[명사]
+   e1: La **haine** ne résout jamais les problèmes. || **증오**는 결코 문제를 해결하지 않는다.
+   e2: Il a ressenti une profonde **haine** pour l'injustice. || 그는 불의에 대해 깊은 **증오**를 느꼈다.
+   e3: La **haine** peut détruire la paix intérieure. || **혐오**는 내면의 평화를 파괴할 수 있다.
+   syn: [répulsion, aversion, antipathie] | ant: [amour, affection, sympathie]
+
+haïr [ko] ipa=a.iʁ | meanings: 미워하다[동사]
+   e1: Elle **haït** toute forme d'injustice. || 그녀는 모든 형태의 부정을 **미워한다**.
+   e2: Je **haïs** quand les gens ne sont pas honnêtes. || 나는 사람들이 정직하지 않을 때를 **미워한다**.
+   syn: [détester, exécrer, abhorrer] | ant: [aimer]
+
+détester [ko] ipa=detɛste | meanings: 혐오하다[동사] | 싫어하다[동사]
+   e1: Je **déteste** la violence. || 나는 폭력을 **혐오한다**.
+   e2: Elle **déteste** les épinards. || 그녀는 시금을 **싫어한다**.
+   syn: [haïr, abhorer, exécrer] | ant: [aimer]
+
+mépris [ko] ipa=mepʁi | meanings: 경멸[명사] | 모욕[명사]
+   e1: Elle a montré un **mépris** total pour ses ennemis. || 그녀는 적들에 대해 완전한 **경멸**을 나타냈다.
+   e2: Son sourire contenait un certain **mépris**. || 그의 미소에는 약간의 **경멸**이 담겨 있었다.
+   e3: Il a ressenti un profond **mépris** après cette moquerie. || 그는 그 조롱 후 깊은 **모욕**을 느꼈다.
+   syn: [dédain, insulte] | ant: []
+
+mépriser [ko] ipa=me.pʁi.ze | meanings: 경멸하다[동사]
+   e1: Elle **méprise** ceux qui ne respectent pas les règles. || 그녀는 규칙을 존중하지 않는 사람들을 **경멸한다**.
+   e2: Il **méprise** la tricherie dans le sport. || 그는 스포츠에서 부정을 **경멸한다**.
+   syn: [dédaigner, ignorer, exécrer] | ant: []
+
+dédain [ko] ipa=dedɛ̃ | meanings: 경멸[명사]
+   e1: Il regarde le tableau avec un **dédain** évident. || 그는 명백한 **경멸**을 가지고 그 그림을 본다.
+   e2: Elle a exprimé son **dédain** pour cette idée. || 그녀는 이 생각에 대해 자신의 **경멸**을 표현했다.
+   e3: Son **dédain** pour les règles a surpris tous ses amis. || 그의 규칙에 대한 **경멸**은 모든 친구들을 놀라게 했다.
+   syn: [mépris, arrogance] | ant: [respect, estime]
+
+indifférence [ko] ipa=ɛ̃difɛʁɑ̃s | meanings: 무관심[명사]
+   e1: Son **indifférence** face au problème était surprenante. || 그는 문제에 대해 **무관심**했다.
+   e2: L'**indifférence** des passants m'a touché. || 지나가는 사람들의 **무관심**이 나를 감동시켰다.
+   e3: Elle montre son **indifférence** sans le cacher. || 그녀는 숨기지 않고 **무관심**을 드러낸다.
+   syn: [mépris, désintérêt, nonchalance] | ant: [intérêt, attention, engagement]
+
+indifférent [ko] ipa=ɛ̃difɛʁɑ̃ | meanings: 무관심한[형용사] | 차별이 없는[형용사]
+   e1: Elle est **indifférente** aux commérages du bureau. || 그녀는 사무실 소문에 **무관심하다**.
+   e2: Le juge doit rester **indifférent** face à toutes les preuves. || 판사는 모든 증거에 대해 **차별이 없어야** 한다.
+   syn: [apathetique, neutre, insensible] | ant: [intéressé, passionné, engagé]
+
+froideur [ko] ipa=fʁwaduʁ | meanings: 차가움[명사] | 냉담함[명사]
+   e1: La **froideur** de l'eau m'a surpris. || 물의 **차가움**이 나를 놀라게 했어요.
+   e2: Sa **froideur** m'a blessé profondément. || 그의 **냉담함**은 나를 깊이 상처 입혔어요.
+   e3: La **froideur** de l'air hivernal est apaisante. || 겨울 공기의 **차가움**은 마음을 차분하게 해 줘요.
+   syn: [froid, glacialité, indifférence, détachement] | ant: [chaleur, cordialité, chaleureux]
+
+distant [ko] ipa=dis.tɑ̃ | meanings: 먼[형용사] | 냉담한[형용사]
+   e1: Le village est **distant** de la ville principale. || 그 마을은 주요 도시에서 **먼** 곳에 있습니다.
+   e2: Il est souvent **distant** avec ses collègues. || 그는 동료들과 자주 **냉담한** 편입니다.
+   e3: La montagne est très **distante** d'ici. || 그 산은 여기에서 매우 **먼** 거리입니다.
+   syn: [lointain, éloigné, froid, réservé] | ant: [proche, chaleureux]
+
+détachement [ko] ipa=detɑʃmɑ̃ | meanings: 파견[명사] | 분리[명사]
+   e1: Le **détachement** des employés est prévu la semaine prochaine. || 직원들의 **파견**은 다음 주에 예정되어 있다.
+   e2: Il y a un **détachement** évident entre les deux faits. || 두 사실 사이에 명백한 **분리**가 있다.
+   e3: Le soldat a demandé un **détachement** temporaire. || 그 군인은 임시 **파견**을 요청했다.
+   syn: [affectation, isolement, séparation] | ant: []
+
+désintérêt [ko] ipa=dezɛ̃tɛʁɛ | meanings: 무관심[명사] | 이익을 바라지 않음[명사]
+   e1: Son **désintérêt** pour le sport était évident. || 그의 **무관심**은 스포츠에서 명백했다.
+   e2: Elle a montré du **désintérêt** envers les gains financiers. || 그녀는 금전적 수익에 대해 **이익을 바라지 않음**을 보였다.
+   syn: [indifférence, apathie] | ant: []
+
+désintéressé [ko] ipa=dez‿ɛ̃teʁese | meanings: 이기심 없는[형용사] | 무관심한[형용사]
+   e1: Elle a donné de l'argent de façon **désintéressée**. || 그녀는 **이기심** 없이 돈을 기부했다.
+   e2: Il est resté **désintéressé** face à la décision. || 그는 그 결정에 대해 **무관심**했다.
+   syn: [altruiste, non intéressé, indifférent] | ant: []
+
+lassitude [ko] ipa=lasityd | meanings: 권태, 피로[명사]
+   e1: Après une longue journée, il ressent une grande **lassitude**. || 긴 하루 후에 그는 큰 **권태**를 느낀다.
+   e2: La **lassitude** vient souvent après trop de travail. || 과도한 작업 후에 종종 **피로**가 온다.
+   e3: Elle parle de la **lassitude** qu'elle éprouve envers la routine. || 그녀는 일상에 대한 **권태**를 느낀다고 말한다.
+   syn: [fatigue, épuisement, ennui] | ant: []
+
+las [ko] ipa=lɑ | meanings: 지친, 피곤한[형용사]
+   e1: Elle est **las** après une longue journée. || 그녀는 긴 하루 후에 **피곤하다**.
+   e2: Je me sens **las** après la randonnée. || 나는 등산 후에 **지쳤다**.
+   e3: Il devient **las** de ses tâches répétitives. || 그는 반복되는 일들에 **지쳤다**.
+   syn: [fatigué, épuisé, exténué] | ant: []
+
+épuisement [ko] ipa=epɥizmɑ̃ | meanings: 고갈[명사] | 탈진[명사]
+   e1: L'**épuisement** des ressources naturelles est préoccupant. || 자연 자원의 **고갈**이 우려된다.
+   e2: Après la course, il a ressenti un grand **épuisement**. || 경기 후에 그는 큰 **탈진**을 느꼈다.
+   e3: L'**épuisement** du sol nuit à l'agriculture locale. || 토양의 **고갈**은 지역 농업에 해롭다.
+   syn: [épuisage, exténuation, affaiblissement] | ant: []
+
+épuisé [ko] ipa=epɥize | meanings: 지친[형용사] | 소모된[형용사]
+   e1: Après la course, il est **épuisé**. || 경주 후에 그는 **지친** 상태다.
+   e2: Le stock est complètement **épuisé**. || 재고가 완전히 **소모된** 상태다.
+   e3: Elle semble très **épuisée** après la longue journée. || 긴 하루를 보내고 그녀는 매우 **지친** 모습이다.
+   syn: [fatigué, exténué, lassé, usé] | ant: [plein d'énergie, reposé]
+
+découragement [ko] ipa=dekuʁaʒmɑ̃ | meanings: 낙담[명사] | 실망[명사]
+   e1: Son **découragement** a disparu après la bonne nouvelle. || 그의 **낙담**은 좋은 소식 후에 사라졌다.
+   e2: Le **découragement** face aux échecs est normal. || 실패에 대한 **실망**은 정상이다.
+   syn: [déprime, désespoir, abattement] | ant: []
+
+découragé [ko] ipa=dekuʁaʒe | meanings: 낙담한[형용사] | 의욕을 잃은[형용사]
+   e1: Il est **découragé** après l'examen difficile. || 그는 어려운 시험 후에 **낙담했다**.
+   e2: Elle s'**est découragée** par ce long projet. || 그녀는 긴 프로젝트 때문에 **의욕을 잃었다**.
+   syn: [abattu, démoralisé, désespéré] | ant: [encouragé, motivé, inspiré]
+
+désespoir [ko] ipa=dezɛspwaʁ | meanings: 절망[명사]
+   e1: Elle a crié son **désespoir** dans la nuit silencieuse. || 그녀는 고요한 밤에 자신의 **절망**을 외쳤다.
+   e2: Le poème exprime le profond **désespoir** de l'auteur. || 그 시는 시인의 깊은 **절망**을 표현한다.
+   syn: [abattement, détresse, tristesse] | ant: [espoir, optimisme]
+
+désespéré [ko] ipa=dezɛspeʁe | meanings: 절망한[형용사] | 자포자기한 사람[명사]
+   e1: Il est **désespéré** après cette mauvaise nouvelle. || 그는 그 나쁜 소식 후에 **절망한** 상태이다.
+   e2: Le **désespéré** a cherché de l'aide auprès de ses amis. || **자포자기한 사람**은 친구들에게 도움을 구했다.
+   syn: [désespérant, abattu, anéanti, désillusionné] | ant: [espérant, optimiste]
+
+résignation [ko] ipa=ʁe.ziɲa.sjɔ̃ | meanings: 체념[명사] | 사직[명사]
+   e1: La **résignation** face aux défis est parfois nécessaire. || 도전에 대한 **체념**이 때때로 필요하다.
+   e2: Il a présenté sa **résignation** au poste hier. || 그는 어제 직위에 대한 **사직서**를 제출했다.
+   syn: [abandon, démission] | ant: []
+
+résigné [ko] ipa=ʁeziɲe | meanings: 체념한[형용사] | 사직한[형용사]
+   e1: Il est **résigné** face à la situation difficile. || 그는 어려운 상황에 **체념**했다.
+   e2: Elle a écrit une lettre **résignée** pour quitter son poste. || 그녀는 직장을 그만두기 위해 **사직** 서한을 썼다.
+   syn: [abdiqué, démissionnaire, soumis] | ant: [combatif, déterminé]
+
+abattement [ko] ipa=abatmɑ̃ | meanings: 우울[명사] | 감소[명사]
+   e1: Après la perte, elle ressent un profond **abattement**. || 그녀는 상실 후 깊은 **우울**을 느꼈어요.
+   e2: L'entreprise a connu un **abattement** des coûts cette année. || 그 회사는 올해 비용의 **감소**를 경험했어요.
+   e3: L'**abattement** général affecte son moral. || 일반적인 **우울**이 그의 기분에 영향을 줘요.
+   syn: [dépression, découragement, baisse, réduction] | ant: [joie, augmentation]
+
+abattu [ko] ipa=abatɥi | meanings: 기진맥진한[형용사] | 죽인[형용사]
+   e1: Après la longue course, il est **abattu**. || 긴 달리기 후에 그는 **기진맥진했습니다**.
+   e2: Le chasseur a **abattu** le cerf dans la forêt. || 사냥꾼이 숲에서 사슴을 **죽였습니다**.
+   syn: [épuisé, fatigué, terrassé, tué, exécuté] | ant: []
+
+mélancolie [ko] ipa=melɑ̃koli | meanings: 우울[명사]
+   e1: La **mélancolie** s'installe pendant les jours gris. || 회색인 날에는 **우울**이 찾아옵니다.
+   e2: Elle écrivit un poème rempli de **mélancolie** douce. || 그녀는 부드러운 **우울**로 가득 찬 시를 썼어요.
+   syn: [tristesse, chagrin, dépression] | ant: []
+
+mélancolique [ko] ipa=melɑ̃kɔlik | meanings: 우울한[형용사] | 멜랑콜리의[형용사]
+   e1: Elle avait un regard **mélancolique** ce soir. || 그녀는 오늘 밤 **우울한** 표정을 지었어요.
+   e2: Sa voix avait une tonalité **mélancolique** et douce. || 그의 목소리는 **멜랑콜리의** 부드러운 톤을 가지고 있었다.
+   e3: Le paysage d'automne est souvent **mélancolique**. || 가을 풍경은 종종 **우울한** 느낌이 든다.
+   syn: [triste, nostalgique, sombre] | ant: [joyeux, heureux]
+
+nostalgie [ko] ipa=nɔstalʒi | meanings: 향수[명사]
+   e1: Elle ressent une profonde **nostalgie** pour son enfance. || 그녀는 자신의 어린 시절에 대한 깊은 **향수**를 느낀다.
+   e2: La musique évoque la **nostalgie** des années passées. || 그 음악은 지난 시절의 **향수**를 불러일으킨다.
+   e3: Il a écrit un poème sur la **nostalgie** du pays natal. || 그는 고향에 대한 **향수**를 주제로 시를 썼다.
+   syn: [mélancolie, regret, remords] | ant: []
+
+nostalgique [ko] ipa=nɔstalʒik | meanings: 향수를 느끼는[형용사]
+   e1: Elle est toujours **nostalgique** en regardant les vieilles photos. || 그녀는 오래된 사진을 보며 항상 **향수를 느낀다**.
+   e2: Il a un air **nostalgique** quand il pense à son enfance. || 그는 어린 시절을 생각할 때 **향수를 느끼는** 표정이다.
+   syn: [mélancolique, rétro, émotif] | ant: []
+
+tendresse [ko] ipa=tɑ̃dʁɛs | meanings: 다정함[명사] | 애정[명사]
+   e1: Il montre toujours beaucoup de **tendresse** aux enfants. || 그는 아이들에게 항상 많은 **다정함**을 보여줍니다.
+   e2: Leur **tendresse** est visible dans chaque regard. || 그들의 **애정**은 모든 시선에 보입니다.
+   syn: [affection, douceur, chaleur] | ant: []
+
+affection [ko] ipa=afɛksjɔ̃ | meanings: 애정[명사] | 좋아함[명사]
+   e1: Elle a beaucoup d'**affection** pour ses amis. || 그녀는 친구들에게 많은 **애정**을 가지고 있어요.
+   e2: L'**affection** pour cet animal est évidente. || 이 동물에 대한 **좋아함**이 분명해요.
+   syn: [amour, tendresse, attachement] | ant: []
+
+affectueux [ko] ipa=afɛktɥø | meanings: 다정한[형용사] | 애정 어린[형용사]
+   e1: Il est très **affectueux** avec ses enfants. || 그는 아이들에게 매우 **다정하다**.
+   e2: Elle a un regard **affectueux** quand elle parle. || 그녀는 말할 때 **애정 어린** 눈빛을 가졌다.
+   syn: [tendre, doux, chaleureux] | ant: []
+
+compassion [ko] ipa=kɔ̃pasjɔ̃ | meanings: 연민[명사]
+   e1: Elle a montré beaucoup de **compassion** pour les réfugiés. || 그녀는 난민들에게 많은 **연민**을 보였다.
+   e2: Le médecin traite ses patients avec **compassion**. || 의사는 환자들을 **연민**으로 치료한다.
+   e3: Nous devons avoir de la **compassion** envers les animaux. || 우리는 동물들에게 **연민**을 가져야 한다.
+   syn: [empathie, pitié, sympathie] | ant: []
+
+compatir [ko] ipa=kɔ̃pa.tiʁ | meanings: 공감하다[동사] | 연민을 느끼다[동사]
+   e1: Je **compatirs** à ta joie ce soir. || 나는 오늘 밤 네 기쁨에 **공감한다**.
+   e2: Elle **compatit** avec les victimes de la tempête. || 그녀는 폭풍 피해자들에게 **연민을 느낀다**.
+   e3: Nous devons **compatir** aux émotions des autres. || 우리는 다른 사람들의 감정에 **공감해야 한다**.
+   syn: [ressentir, partager, avoir de la compassion] | ant: []
+
+empathie [ko] ipa=ɑ̃pati | meanings: 공감[명사]
+   e1: L'**empathie** renforce nos liens avec les autres. || **공감**은 우리 사이의 유대를 강화합니다.
+   e2: Elle a montré beaucoup d'**empathie** envers ses amis. || 그녀는 친구들에게 많은 **공감**을 표현했다.
+   e3: L'**empathie** est essentielle pour une bonne communication. || **공감**은 좋은 의사소통에 필수적입니다.
+   syn: [compassion, sympathie, compréhension] | ant: []
+
+empathique [ko] ipa=ɑ̃.pa.tik | meanings: 공감하는[형용사]
+   e1: Elle est très **empathique** avec ses amis. || 그녀는 친구들에게 매우 **공감하는** 사람이다.
+   e2: Un leader **empathique** comprend les émotions des autres. || **공감하는** 리더는 다른 사람들의 감정을 이해한다.
+   e3: Il a un caractère **empathique** qui apaise les tensions. || 그는 긴장을 완화하는 **공감적인** 성격을 가지고 있다.
+   syn: [compatissant, compréhensif, sensible] | ant: [indifférent, insensible]
+
+sympathie [ko] ipa=sɛ̃pa.ti | meanings: 호감[명사] | 공감[명사]
+   e1: Elle a une grande **sympathie** pour son voisin. || 그녀는 이웃에 대해 큰 **호감**을 가지고 있어요.
+   e2: J'ai ressenti une réelle **sympathie** pour son histoire. || 나는 그의 이야기에 진정한 **공감**을 느꼈어요.
+   e3: Sa **sympathie** rend les discussions agréables. || 그의 **호감** 덕분에 대화가 즐거워요.
+   syn: [affection, amitié, compassion, empathie] | ant: []
+
+bienveillance [ko] ipa=bjɛ̃vɛljɑ̃s | meanings: 친절[명사] | 호의[명사]
+   e1: La **bienveillance** est importante dans notre communauté. || 우리 공동체에서는 **친절**이 중요합니다.
+   e2: Sa **bienveillance** envers les enfants est touchante. || 아이들에 대한 그의 **호의**가 감동적입니다.
+   syn: [amabilité, gentillesse, humanité] | ant: []
+
+bienveillant [ko] ipa=bjɛ̃vɛjɑ̃ | meanings: 친절한[형용사] | 호의적인[형용사]
+   e1: Elle a un regard **bienveillant** envers les enfants. || 그녀는 아이들에게 **친절한** 시선을 가지고 있어요.
+   e2: Le professeur est toujours **bienveillant** avec ses élèves. || 선생님은 항상 학생들에게 **호의적**이에요.
+   syn: [clément, compatissant, amical] | ant: []
+
+indulgence [ko] ipa=ɛ̃.dy.l.ʒɑ̃s | meanings: 관용[명사] | 사치[명사]
+   e1: Il montre beaucoup d'**indulgence** envers les erreurs des autres. || 그는 다른 사람들의 실수에 대해 많은 **관용**을 보여준다.
+   e2: Son goût pour l'**indulgence** se manifeste dans ses achats luxueux. || 그의 **사치**는 호화로운 구매에서 나타난다.
+   syn: [clémence, tolerance, magnanimité, laxisme] | ant: []
+
+indulgent [ko] ipa=ɛ̃dylʒɑ̃ | meanings: 관대한[형용사] | 너그러운[형용사]
+   e1: Le professeur est très **indulgent** avec ses élèves. || 교수님은 학생들에게 매우 **관대하다**.
+   e2: Elle est **indulgente** envers ses amis quand ils font des erreurs. || 그녀는 친구들의 실수에 대해 매우 **너그럽다**.
+   e3: Il fait preuve d'**indulgence** dans ses jugements. || 그는 판단할 때 **관대함**을 보인다.
+   syn: [clément, tolérant, bienveillant] | ant: [strict, rigide]
+
+patience [ko] ipa=pasjɑ̃s | meanings: 인내[명사] | 참을성[명사]
+   e1: La **patience** est importante dans ce travail. || 이 작업에서는 **인내**가 중요해요.
+   e2: Il a montré beaucoup de **patience** avec les enfants. || 그는 아이들에게 많은 **참을성**을 보였어요.
+   e3: La **patience** aide à surmonter les difficultés. || **인내**는 어려움을 극복하는 데 도움이 돼요.
+   syn: [tolérance, endurance, forbearance] | ant: []
+
+impatience [ko] ipa=ɛ̃pasjeɑ̃s | meanings: 참을성 없음[명사]
+   e1: Son **impatience** grandit en attendant le train. || 그는 기차를 기다리며 **참을성 없음**이 커졌다.
+   e2: L'**impatience** de l'enfant est visible avant la fête. || 아이의 **참을성 없음**이 잔치 전에 보인다.
+   e3: Elle a montré son **impatience** face au retard du bus. || 그녀는 버스 지연에 대해 **참을성 없음** 을 보였다.
+   syn: [énervement, nervosité, agitation] | ant: [patience]
+
+impatient [ko] ipa=ɛ̃.pa.sjɑ̃ | meanings: 조바심 내는[형용사] | 참을성 없는[형용사]
+   e1: Il est **impatient** d'arriver au parc. || 그는 공원에 도착하기를 **조바심** 내요.
+   e2: Elle devient **impatiente** quand le bus tarde. || 그녀는 버스가 늦을 때 **참을성 없어요**.
+   syn: [pressé, énervé, agité] | ant: [patient, calme]
+
+enthousiasme [ko] ipa=ɑ̃.tu.zjasm | meanings: 열광[명사] | 열의[명사]
+   e1: Son **enthousiasme** pour la musique est contagieux. || 그의 음악에 대한 **열광**은 전염성이 있다.
+   e2: Elle montre beaucoup d'**enthousiasme** dans son travail. || 그녀는 일에 많은 **열의**를 보인다.
+   syn: [ardeur, passion, zèle] | ant: []
+
+enthousiaste [ko] ipa=ɑ̃tuzjast | meanings: 열광적인[형용사] | 열성자[명사]
+   e1: Elle est très **enthousiaste** pour le projet. || 그녀는 그 프로젝트에 매우 **열광적이에요**.
+   e2: Un **enthousiaste** de la musique classique m'a recommandé ce concert. || 클래식 음악 **열성자**가 이 공연을 추천해 주었어요.
+   e3: Les enfants étaient **enthousiastes** pendant la visite au zoo. || 아이들은 동물원 방문 동안 **열광적이었어요**.
+   syn: [passionné, exalté, fervent] | ant: [indifférent, blasé]
+
+passion [ko] ipa=pa.sjɔ̃ | meanings: 열정[명사] | 격정[명사]
+   e1: Elle a une **passion** pour la peinture. || 그녀는 그림에 대한 **열정**이 있어요.
+   e2: Sa **passion** pour la musique inspire tout le monde. || 그의 음악에 대한 **열정**은 모두에게 영감을 줘요.
+   e3: Ils ont discuté avec **passion** de leur projet. || 그들은 그들의 프로젝트에 대해 **격정**적으로 이야기했어요.
+   syn: [ardeur, enthousiasme, ferveur] | ant: []
+
+passionné [ko] ipa=pa.si.o.ne | meanings: 열정적인[형용사] | 팬, 애호가[명사]
+   e1: Elle est très **passionnée** de musique classique. || 그녀는 클래식 음악에 매우 **열정적이다**.
+   e2: Il est un **passionné** de randonnée en montagne. || 그는 등산의 **팬**이다.
+   e3: Le peintre est **passionné** par son art. || 그 화가는 자신의 예술에 **열정적이다**.
+   syn: [enthousiaste, ardent, fervent] | ant: []
+
+fascination [ko] ipa=fasinasjɔ̃ | meanings: 매혹[명사] | 매료[명사]
+   e1: La **fascination** pour la nature est profonde. || 자연에 대한 **매혹**이 깊어요.
+   e2: Il a ressenti une **fascination** pour ce tableau ancien. || 그는 오래된 그림에 대한 **매혹**을 느꼈어요.
+   e3: La **fascination** pour la musique classique grandit chez elle. || 그녀의 고전 음악에 대한 **매료**가 커지고 있어요.
+   syn: [captivation, envoûtement, charme] | ant: []
+
+fasciné [ko] ipa=fasine | meanings: 매료된[형용사] | 매료시키다[동사]
+   e1: Il est **fasciné** par le spectacle de la nature. || 그는 자연의 광경에 **매료되었다**.
+   e2: La musique a **fasciné** tous les invités lors de la soirée. || 그 음악은 저녁 모임의 모든 손님들을 **매료시켰다**.
+   syn: [captivé, enchanté, émerveillé] | ant: []
+
+admiration [ko] ipa=admiʁasjɔ̃ | meanings: 감탄[명사] | 칭찬[명사]
+   e1: Elle ressent une grande **admiration** pour son professeur. || 그녀는 선생님에 대해 큰 **감탄**을 느낀다.
+   e2: Son travail a reçu beaucoup d'**admiration**. || 그의 작업은 많은 **칭찬**을 받았다.
+   syn: [estime, émerveillement, adulation] | ant: []
+
+admirer [ko] ipa=admiʁe | meanings: 감탄하다[동사] | 존경하다[동사]
+   e1: Je **admire** la beauté de ce paysage. || 나는 이 풍경의 아름다움에 **감탄한다**.
+   e2: Nous **admirons** son courage exceptionnel. || 우리는 그의 뛰어난 용기를 **존경한다**.
+   syn: [ressentir de l'admiration, apprécier, révérer] | ant: []
+
+vénération [ko] ipa=venaʁasjɔ̃ | meanings: 숭배[명사]
+   e1: La **vénération** pour les anciens est importante. || 조상에 대한 **숭배**는 중요하다.
+   e2: Ils montrent une grande **vénération** envers les sages. || 그들은 현자들에 대해 큰 **숭배**를 보인다.
+   syn: [adoration, culte, révérence] | ant: []
+
+respect mutuel [ko] ipa=- | meanings: 상호 존중[표현]
+   e1: Ils ont construit une relation basée sur le **respect mutuel**. || 그들은 **상호 존중**에 기반을 둔 관계를 구축했다.
+   e2: Le **respect mutuel** crée un environnement de travail harmonieux. || **상호 존중**은 조화로운 작업 환경을 만든다.
+   syn: [réalité mutuelle, estime réciproque] | ant: []
+
+estime [ko] ipa=ɛstim | meanings: 존경[명사] | 평가하다[동사]
+   e1: Il a beaucoup d'**estime** pour son professeur. || 그는 선생님을 많이 **존경**해요.
+   e2: J'**estime** que ce projet est réussi. || 나는 이 프로젝트가 성공적이라고 **평가해요**.
+   e3: Elle reçoit beaucoup d'**estime** de ses collègues. || 그녀는 동료들로부터 많은 **존경**을 받아요.
+   syn: [respect, appréciation, considération] | ant: [mépris]
+
+estimer [ko] ipa=ɛs.ti.me | meanings: 평가하다[동사] | 존경하다[동사]
+   e1: Je **estime** la valeur de ce tableau. || 나는 이 그림의 가치를 **평가한다**.
+   e2: Ils **estiment** beaucoup leur professeur. || 그들은 선생님을 매우 **존경한다**.
+   e3: Nous devons **estimer** les coûts du projet. || 우리는 프로젝트 비용을 **평가해야** 한다.
+   syn: [évaluer, apprécier, considérer] | ant: []
+
+noblesse [ko] ipa=nɔ.blɛs | meanings: 귀족[명사]
+   e1: La **noblesse** portait des titres anciens et respectés. || **귀족**은 오래되고 존경받는 칭호를 가지고 있었다.
+   e2: Il admire la dignité de la **noblesse** moderne. || 그는 현대 **귀족**의 고귀함을 존경한다.
+   e3: La **noblesse** jouait un rôle important dans l'histoire. || **귀족**은 역사에서 중요한 역할을 했다.
+   syn: [aristocratie, noblesse d'épée, haute société] | ant: []
+
+humilité [ko] ipa=ymilite | meanings: 겸손[명사]
+   e1: Il a montré beaucoup d'**humilité** face à ses succès. || 그는 성공 앞에서 많은 **겸손**을 보였다.
+   e2: L'**humilité** est une qualité importante dans la vie. || **겸손**은 삶에서 중요한 가치입니다.
+   syn: [modestie, simplicité, retenue] | ant: [orgueil, arrogance, fierté]
+
+humble [ko] ipa=œ̃bl | meanings: 겸손한[형용사] | 천한[형용사]
+   e1: Elle est toujours **humble** malgré son succès. || 그녀는 성공에도 불구하고 항상 **겸손하다**.
+   e2: Il vit dans une maison **humble** à la campagne. || 그는 시골의 **천한** 집에서 산다.
+   e3: Un chef **humble** partage la gloire avec son équipe. || 한 **겸손한** 지도자가 자신의 팀과 영광을 나눈다.
+   syn: [modeste, simple] | ant: [orgueilleux, prétentieux]
+
+modestie [ko] ipa=mɔdɛsti | meanings: 겸손[명사]
+   e1: Sa **modestie** est admirable dans toutes les situations. || 그의 **겸손**은 모든 상황에서 감탄할 만하다.
+   e2: Elle montre toujours beaucoup de **modestie** malgré ses succès. || 그녀는 성공에도 불구하고 항상 많은 **겸손**을 보여 준다.
+   e3: La **modestie** est une qualité importante dans la vie. || **겸손**은 삶에서 중요한 덕목이다.
+   syn: [humilité, sobriété, retenue] | ant: [orgueil]
+
+vanité [ko] ipa=vanite | meanings: 허영[명사]
+   e1: La **vanité** peut nuire aux relations amicales. || **허영**은 우정에 해로울 수 있다.
+   e2: Sa **vanité** l'empêche d'accepter des critiques. || 그의 **허영**은 비판을 받아들이지 못하게 한다.
+   e3: La statue symbolise la **vanité** humaine. || 그 조각상은 인간의 **허영**을 상징한다.
+   syn: [orgueil, fierté, arrogance] | ant: []
+
+vaniteux [ko] ipa=vanitø | meanings: 허영심 많은[형용사] | 자만하는[형용사]
+   e1: Il est très **vaniteux** à propos de son apparence. || 그는 자신의 외모에 대해 매우 **허영심이** 많아요.
+   e2: Cette actrice est connue pour être **vaniteuse**. || 그 여배우는 **자만하는** 것으로 알려져 있어요.
+   syn: [orgueilleux, prétentieux] | ant: [modeste, humble]
+
+orgueil [ko] ipa=ɔʁɡœj | meanings: 자존심[명사] | 오만[명사]
+   e1: Son **orgueil** l’empêche de demander de l’aide. || 그의 **자존심** 때문에 도움을 청하지 못한다.
+   e2: L'**orgueil** peut causer des conflits inutiles. || **오만**은 불필요한 갈등을 일으킬 수 있다.
+   e3: Elle a perdu son ami à cause de son **orgueil**. || 그녀는 자신의 **오만** 때문에 친구를 잃었다.
+   syn: [fierté, vanité, suffisance] | ant: [humilité]
+
+orgueilleux [ko] ipa=ɔʁɡɥɛjø | meanings: 거만한[형용사]
+   e1: Il est trop **orgueilleux** pour accepter de l'aide. || 그는 도움을 받기에는 너무 **거만하다**.
+   e2: Elle est devenue **orgueilleuse** après sa réussite. || 그녀는 성공 후에 **거만해졌다**.
+   e3: Ne sois pas **orgueilleux**, reste humble. || **거만하지** 말고, 겸손하게 있어라.
+   syn: [hautain, prétentieux, arrogant] | ant: [humble, modeste]
+
+arrogance [ko] ipa=aʁɔɡɑ̃s | meanings: 거만함[명사]
+   e1: Son **arrogance** a blessé ses amis. || 그의 **거만함**은 친구들을 상처 입혔다.
+   e2: L'**arrogance** ne mène jamais au succès durable. || **거만함**은 결코 지속적인 성공으로 이어지지 않는다.
+   e3: Ils ont ignoré son **arrogance** avec patience. || 그들은 그의 **거만함**을 인내심 있게 무시했다.
+   syn: [orgueil, prétention, fierté] | ant: [humilité, modestie, simplicité]
+
+arrogant [ko] ipa=aʁɔɡɑ̃ | meanings: 거만한[형용사]
+   e1: Il est très **arrogant** avec ses collègues. || 그는 동료들에게 매우 **거만하다**.
+   e2: Son comportement **arrogant** surprend tout le monde. || 그의 **거만한** 행동은 모두를 놀라게 한다.
+   e3: Une attitude **arrogante** ne fait jamais bonne impression. || **거만한** 태도는 결코 좋은 인상을 주지 않는다.
+   syn: [prétentieux, hautain, condescendant] | ant: [modeste, humble]
+
+prétention [ko] ipa=pʁetɑ̃sjɔ̃ | meanings: 자만[명사] | 요구[명사]
+   e1: Sa **prétention** dépasse souvent la réalité. || 그의 **자만**은 종종 현실을 초과한다.
+   e2: Ils ont une **prétention** de meilleure qualité. || 그들은 더 나은 품질을 **요구**한다.
+   e3: La **prétention** excessive peut blesser les autres. || 과도한 **자만**은 다른 사람을 상처 입힐 수 있다.
+   syn: [orgueil, arrogance, ambition, exigence, revendication] | ant: []
+
+prétentieux [ko] ipa=pʁetɑ̃tjø | meanings: 거만한[형용사] | 자만하는[형용사]
+   e1: Il a un comportement **prétentieux** en réunion. || 그는 회의에서 **거만한** 태도를 보였다.
+   e2: Cette actrice semble très **prétentieuse** parfois. || 이 여배우는 때때로 매우 **자만하는** 것 같다.
+   syn: [arrogant, hautain, orgueilleux] | ant: [modeste, humble]
+
+naïveté [ko] ipa=naivte | meanings: 순진함[명사]
+   e1: Son **naïveté** le rendait vulnérable. || 그의 **순진함**은 그를 취약하게 만들었다.
+   e2: Elle montrait une grande **naïveté** face au monde. || 그녀는 세상에 대해 큰 **순진함**을 보였다.
+   syn: [innocence, candeur, simplicité] | ant: [sophistication, ruse]
+
+naïf [ko] ipa=na.if | meanings: 순진한, 순진한 사람[형용사] | 천진난만한[형용사]
+   e1: Il est trop **naïf** pour se méfier des inconnus. || 그는 낯선 사람들을 경계하기에는 너무 **순진하다**.
+   e2: Son sourire **naïf** illumine toute la pièce. || 그의 **천진난만한** 미소가 방 전체를 밝힌다.
+   syn: [candide, ingénu, simple] | ant: [sophistiqué, cynique, expérimenté]
+
+candeur [ko] ipa=kɑ̃dœʁ | meanings: 순진함[명사] | 솔직함[명사]
+   e1: La **candeur** de cet enfant est touchante. || 그 아이의 **순진함**이 감동적이에요.
+   e2: Il parle avec une grande **candeur**. || 그는 큰 **솔직함**으로 말합니다.
+   e3: Sa **candeur** lui attire souvent des ennuis. || 그의 **순진함**은 종종 문제를 일으켜요.
+   syn: [innocence, naïveté, franchise, simplicité] | ant: []
+
+lucidité [ko] ipa=lysidite | meanings: 명료함[명사] | 명석함[명사]
+   e1: La **lucidité** de ses explications aide tout le monde. || 그의 설명의 **명료함**이 모두를 돕는다.
+   e2: Elle garde sa **lucidité** même dans les moments difficiles. || 그녀는 어려운 순간에도 **명석함**을 유지한다.
+   syn: [clarté, perspicacité, sagacité] | ant: []
+
+lucide [ko] ipa=lysid | meanings: 명료한[형용사] | 명석한[형용사]
+   e1: Son esprit **lucide** comprend bien la situation. || 그의 **명석한** 정신은 상황을 잘 이해해요.
+   e2: Elle a une vision **lucide** de ses objectifs. || 그녀는 자신의 목표에 대해 **명료한** 시각을 가지고 있어요.
+   syn: [clair, éveillé, conscient] | ant: [obscur, confus]
+
+perspicacité [ko] ipa=pɛʁspiɡasite | meanings: 통찰력[명사]
+   e1: Sa **perspicacité** l'a aidé à résoudre le problème rapidement. || 그의 **통찰력**은 문제를 빠르게 해결하는 데 도움이 되었다.
+   e2: La **perspicacité** du professeur a impressionné tous les étudiants. || 교수님의 **통찰력**이 모든 학생들에게 깊은 인상을 주었다.
+   e3: Avec beaucoup de **perspicacité**, elle a compris la situation cachée. || 그녀는 많은 **통찰력**으로 숨겨진 상황을 이해했다.
+   syn: [clairvoyance, acuité, lucidité] | ant: []
+
+perspicace [ko] ipa=pɛʁspiˈkas | meanings: 통찰력 있는[형용사] | 명민한[형용사]
+   e1: Un détective **perspicace** découvre toujours la vérité. || **통찰력 있는** 탐정은 항상 진실을 발견해요.
+   e2: Elle est très **perspicace** dans ses décisions rapides. || 그녀는 빠른 결정에서 매우 **명민해요**.
+   e3: Son regard **perspicace** remarque les détails cachés. || 그의 **통찰력 있는** 시선은 숨겨진 세부 사항을 알아차려요.
+   syn: [avisé, clairvoyant, lucide] | ant: []
+
+intuition [ko] ipa=ɛ̃tɥisjɔ̃ | meanings: 직감[명사]
+   e1: Elle a eu une **intuition** forte sur ce choix. || 그녀는 이 선택에 대해 강한 **직감**을 느꼈다.
+   e2: Son **intuition** lui a permis d'éviter le danger. || 그의 **직감**은 위험을 피하는 데 도움이 되었다.
+   e3: L'**intuition** ne se base pas toujours sur des faits. || **직감**은 항상 사실에 근거하지는 않는다.
+   syn: [pressentiment, sixième sens, coup de cœur] | ant: []
+
+intuitif [ko] ipa=ɛ̃tɥitif | meanings: 직관적인[형용사]
+   e1: Ce logiciel est très **intuitif** pour les débutants. || 이 소프트웨어는 초보자들에게 매우 **직관적이에요**.
+   e2: Elle a une approche **intuitive** dans son travail créatif. || 그녀는 창의적인 작업에서 **직관적인** 접근 방식을 가지고 있어요.
+   e3: Le design est simple et **intuitif** à utiliser. || 디자인은 단순하고 사용하기에 **직관적이에요**.
+   syn: [instinctif, spontané, naturel] | ant: [rationnel, logique]
+
+réflexion [ko] ipa=ʁeflɛksjɔ̃ | meanings: 반성[명사] | 반사[명사]
+   e1: La **réflexion** sur nos actions est importante. || 우리 행동에 대한 **반성**이 중요해요.
+   e2: La **réflexion** de la lumière crée des ombres. || 빛의 **반사**가 그림자를 만들어요.
+   e3: Après une longue **réflexion**, j'ai changé d'avis. || 오랜 **반성** 후에 의견을 바꿨어요.
+   syn: [consideration, méditation, contemplation] | ant: []
+
+réflexif [ko] ipa=ʁe.flɛk.sif | meanings: 재귀적인[형용사] | 반사적인[형용사]
+   e1: Le verbe est **réflexif** dans cette phrase. || 이 문장에서 동사는 **재귀적**이다.
+   e2: Il a une réponse **réflexive** rapide au danger. || 그는 위험에 대해 빠른 **반사적** 반응을 한다.
+   syn: [auto-référentiel, autoréfléchi] | ant: []
+
+méditation [ko] ipa=meditasjɔ̃ | meanings: 명상[명사] | 심사숙고[명사]
+   e1: La **méditation** calme le corps et l’esprit chaque matin. || 매일 아침 **명상**은 몸과 마음을 차분하게 합니다.
+   e2: La **méditation** profonde l’aide à prendre une décision importante. || 깊은 **심사숙고**가 그가 중요한 결정을 내리는 데 도움을 준다.
+   syn: [contemplation, réflexion, prière] | ant: []
+
+méditer [ko] ipa=medite | meanings: 명상하다[동사] | 심사숙고하다[동사]
+   e1: Chaque matin, je **méditer** pour calme l'esprit. || 매일 아침, 나는 마음을 가라앉히기 위해 **명상한다**.
+   e2: Chaque matin, je **méditais** pour calmer l'esprit. || 매일 아침, 나는 마음을 가라앉히기 위해 **명상한다**.
+   e3: Elle a dû **méditer** longuement avant de décider. || 그녀는 결정하기 전에 오래 **심사숙고했다**.
+   syn: [contempler, réfléchir] | ant: []
+
+contemplation [ko] ipa=kɔ̃tɑ̃plasjɔ̃ | meanings: 관상[명사] | 명상[명사]
+   e1: La **contemplation** de la nature est apaisante. || 자연에 대한 **관상**은 마음을 편안하게 해줍니다.
+   e2: Il pratique la **contemplation** chaque matin. || 그는 매일 아침 **명상**을 합니다.
+   syn: [observation, méditation] | ant: []
+
+contempler [ko] ipa=kɔ̃tɑ̃ple | meanings: 응시하다[동사] | 바라보다[동사]
+   e1: Elle **contemple** le tableau avec admiration. || 그녀는 감탄하며 그림을 **응시**한다.
+   e2: Il aime **contempler** le coucher du soleil. || 그는 해지는 것을 **바라보는** 것을 좋아한다.
+   syn: [regarder, observer, fixer] | ant: []
+
+introspection [ko] ipa=ɛ̃tʁɔspɛksjɔ̃ | meanings: 내성[명사] | 자기성찰[명사]
+   e1: L'**introspection** aide à mieux comprendre ses émotions. || **내성**은 자신의 감정을 더 잘 이해하는 데 도움이 됩니다.
+   e2: Après l'échec, elle a fait une profonde **introspection**. || 실패 후에 그녀는 깊은 **자기성찰**을 했습니다.
+   e3: L'**introspection** régulière favorise le développement personnel. || 정기적인 **자기성찰**은 개인의 성장을 촉진합니다.
+   syn: [réflexion, méditation, examen de conscience] | ant: []
+
+raisonner [ko] ipa=ʁɛzɔne | meanings: 추리하다[동사] | 논리적으로 생각하다[동사]
+   e1: Elle **raisonne** rapidement face au problème. || 그녀는 문제에 대해 빠르게 **추리한다**.
+   e2: Il **raisonne** toujours avec logique. || 그는 항상 **논리적으로 생각한다**.
+   e3: Nous devons **raisonner** ensemble pour trouver la solution. || 우리는 해결책을 찾기 위해 함께 **추리해야 한다**.
+   syn: [déduire, penser, logiquer] | ant: []
+
+raisonnement [ko] ipa=ʁɛ.zɔn.mɑ̃ | meanings: 추론[명사] | 논리적 사고[명사]
+   e1: Son **raisonnement** est basé sur des faits solides. || 그의 **추론**은 확실한 사실에 기초합니다.
+   e2: Le **raisonnement** logique est essentiel en philosophie. || **논리적 사고**는 철학에서 필수적입니다.
+   e3: Elle a expliqué son **raisonnement** clairement au groupe. || 그녀는 그룹에게 자신의 **추론**을 명확하게 설명했습니다.
+   syn: [déduction, argumentation, logique] | ant: []
+
+déduction [ko] ipa=dekysjɔ̃ | meanings: 추론[명사] | 공제[명사]
+   e1: La **déduction** logique est essentielle en science. || 과학에서 **추론**은 필수적이다.
+   e2: La **déduction** fiscale réduit le montant à payer. || 세금 **공제**는 납부할 금액을 줄인다.
+   e3: Sa **déduction** était basée sur des preuves solides. || 그의 **추론**은 확실한 증거에 기반했다.
+   syn: [inférence, raisonnement, soustraction] | ant: []
+
+déduire [ko] ipa=dedɥiʁ | meanings: 추론하다[동사]
+   e1: Je peux **déduire** la réponse de cette équation. || 나는 이 방정식에서 답을 **추론하다** 수 있다.
+   e2: On **déduit** que le problème est résolu. || 우리는 문제가 해결되었다고 **추론**한다.
+   e3: Elle **déduit** ses idées d'observations précises. || 그녀는 정확한 관찰에서 아이디어를 **추론**한다.
+   syn: [inférer, conclure] | ant: []
+
+induction [ko] ipa=ɛ̃dyksjɔ̃ | meanings: 유도[명사] | 귀납법[명사]
+   e1: L'**induction** magnétique est un phénomène physique. || **유도** 자기 현상입니다.
+   e2: La méthode d'**induction** permet de généraliser un résultat. || **귀납법**은 결과를 일반화하는 방법입니다.
+   syn: [initiation, déclenchement, raisonnement inductif] | ant: []
+
+hypothèse [ko] ipa=ipɔtez | meanings: 가설[명사]
+   e1: L'**hypothèse** semble logique dans ce contexte. || 이 **가설**은 이 상황에서 논리적으로 보입니다.
+   e2: Nous avons testé l'**hypothèse** avec soin. || 우리는 신중하게 **가설**을 시험해 보았습니다.
+   e3: L'**hypothèse** doit être vérifiée par l'expérience. || **가설**은 실험으로 검증되어야 합니다.
+   syn: [supposition, postulat, proposition] | ant: []
+
+supposition [ko] ipa=sypozisjɔ̃ | meanings: 가정[명사] | 추측[명사]
+   e1: La **supposition** de base est correcte. || 기본 **가정**이 맞아요.
+   e2: Cette **supposition** semble plausible. || 이 **추측**은 타당해 보여요.
+   e3: Il fait une **supposition** sur le résultat. || 그는 결과에 대해 **추측**을 해요.
+   syn: [hypothèse, présomption, conjecture] | ant: []
+
+présomption [ko] ipa=pʁe.zɔ̃p.sjɔ̃ | meanings: 추정[명사]
+   e1: La **présomption** d'innocence est fondamentale en droit. || 무죄에 대한 **추정**은 법에서 기본입니다.
+   e2: Il y a une **présomption** de faute sans preuve solide. || 확실한 증거 없이 **추정**되는 과실이 있습니다.
+   syn: [supposition, hypothèse, conjecture] | ant: []
+
+conclusion [ko] ipa=kɔ̃.kly.zjɔ̃ | meanings: 결론[명사]
+   e1: La **conclusion** du livre est très claire. || 그 책의 **결론**은 매우 명확하다.
+   e2: Nous avons discuté la **conclusion** ensemble. || 우리는 함께 **결론**을 논의했다.
+   e3: La réunion a abouti à une **conclusion** positive. || 회의는 긍정적인 **결론**에 이르렀다.
+   syn: [fin, résultat, dénouement] | ant: []
+
+conclure [ko] ipa=kɔ̃klyʁ | meanings: 결론짓다[동사] | 맺다[동사]
+   e1: Nous **concluons** que le projet est réussi. || 우리는 그 프로젝트가 성공했다고 **결론지었다**.
+   e2: Ils ont **conclu** un accord important hier. || 그들은 어제 중요한 협정을 **맺었다**.
+   syn: [terminer, finir, aboutir, déduire, résumer] | ant: []
+
+argument [ko] ipa=aʁɡymɑ̃ | meanings: 논증[명사] | 주장[명사]
+   e1: L'**argument** du professeur était convaincant. || 교수님의 **논증**은 설득력이 있었다.
+   e2: Son **argument** a changé mon avis. || 그의 **주장**이 내 의견을 바꿨다.
+   syn: [raison, preuve, motif, justification] | ant: []
+
+argumenter [ko] ipa=aʁɡymɑ̃te | meanings: 논쟁하다[동사] | 주장하다[동사]
+   e1: Ils aiment **argumenter** sur des idées profondes. || 그들은 깊은 아이디어에 대해 **논쟁한다**.
+   e2: Elle sait bien **argumenter** son point de vue. || 그녀는 자기 의견을 잘 **주장한다**.
+   syn: [discuter, débattre, raisonner] | ant: []
+
+argumentation [ko] ipa=aʁɡymɑ̃tasjɔ̃ | meanings: 논증[명사] | 주장[명사]
+   e1: Son **argumentation** était claire et convaincante. || 그의 **논증**은 명확하고 설득력이 있었다.
+   e2: L'**argumentation** du conférencier a captivé le public. || 강연자의 **논증**이 청중을 사로잡았다.
+   e3: Son **argumentation** en faveur de l'écologie est forte. || 그의 환경 보호에 대한 **주장**은 강하다.
+   syn: [raisonnement, preuve, débat] | ant: []
+
+thèse [ko] ipa=tɛz | meanings: 논문[명사] | 명제[명사]
+   e1: J'ai soutenu **la thèse** hier à l'université. || 나는 어제 대학에서 **논문**을 발표했어요.
+   e2: Sa **thèse** défend une idée innovante. || 그의 **명제**는 혁신적인 생각을 지지한다.
+   e3: La rédaction de la **thèse** demande du temps. || **논문** 작성에는 시간이 걸린다.
+   syn: [mémoire, dissertation] | ant: []
+
+antithèse [ko] ipa=ɑ̃.ti.tɛz | meanings: 대조[명사] | 대립[명사]
+   e1: Le blanc est l'**antithèse** du noir en art. || 하얀색은 예술에서 검은색의 **대조**입니다.
+   e2: Leur idée est l'**antithèse** de la mienne. || 그들의 생각은 제 생각의 **대립**입니다.
+   syn: [opposé, contraste, antagonisme] | ant: []
+
+synthèse [ko] ipa=sɛ̃tɛz | meanings: 종합[명사] | 개요[명사]
+   e1: La **synthèse** des données aide à comprendre le problème. || 데이터의 **종합**은 문제를 이해하는 데 도움이 됩니다.
+   e2: La **synthèse** du rapport est claire et concise. || 보고서의 **개요**는 명확하고 간결합니다.
+   syn: [résumé, compilation, condensé] | ant: []
+
+contre-argument [ko] ipa=kɔ̃tʁaʁɡymɑ̃ | meanings: 반박[명사]
+   e1: Il a présenté un **contre-argument** solide lors du débat. || 그는 토론에서 강력한 **반박**을 제시했습니다.
+   e2: Son **contre-argument** a changé l'avis du groupe. || 그의 **반박**이 그룹의 의견을 바꾸었습니다.
+   syn: [objection, réfutation] | ant: []
+
+réfuter [ko] ipa=refyte | meanings: 논박하다[동사]
+   e1: Il peut **réfuter** cette accusation avec des preuves solides. || 그는 확실한 증거로 이 비난을 **논박할** 수 있다.
+   e2: Elle a réussi à **réfuter** les arguments lors du débat. || 그녀는 토론 중에 주장을 **논박하는** 데 성공했다.
+   e3: Nous devons **réfuter** cette idée fausse ensemble. || 우리는 함께 이 잘못된 생각을 **논박해야**  한다.
+   syn: [contredire, démentir, discuter] | ant: []
+
+réfutation [ko] ipa=ʁefytasjɔ̃ | meanings: 반박[명사]
+   e1: La **réfutation** était claire et convaincante. || 그 **반박**은 명확하고 설득력이 있었다.
+   e2: Elle a présenté une **réfutation** détaillée du rapport. || 그녀는 그 보고서에 대한 상세한 **반박**을 제시했다.
+   syn: [contradiction, réponse, démenti] | ant: []
+
+objection [ko] ipa=ɔb‿ʒɛksjɔ̃ | meanings: 이의[명사] | 반대[명사]
+   e1: Il a exprimé une **objection** claire au projet. || 그는 그 계획에 대해 명확한 **이의**를 제기했다.
+   e2: Son **objection** a changé le cours de la discussion. || 그의 **반대**가 토론의 흐름을 바꾸었다.
+   syn: [contestations, réserves, protestations] | ant: [acceptation]
+
+objecter [ko] ipa=ɔbʒɛkte | meanings: 반대하다[동사]
+   e1: Elle a **objecté** à la décision sans hésiter. || 그녀는 주저하지 않고 그 결정에 **반대했다**.
+   e2: Ils ont **objecté** durant la réunion sur ce point. || 그들은 그 점에 대해 회의 중에 **반대했다**.
+   syn: [contester, réfuter, s'opposer] | ant: []
+
+concession [ko] ipa=kɔ̃sɛsjɔ̃ | meanings: 양보[명사] | 특허, 허가[명사]
+   e1: Ils ont fait une **concession** pour éviter le conflit. || 그들은 갈등을 피하기 위해 **양보**했다.
+   e2: La société a obtenu une **concession** pour exploiter le terrain. || 그 회사는 토지를 개발할 **특허**를 받았다.
+   e3: Chaque partie doit accepter une **concession** pour avancer. || 각 당사자는 나아가기 위해 **양보**를 받아들여야 한다.
+   syn: [compromis, céder, accord] | ant: []
+
+concéder [ko] ipa=kɔ̃sede | meanings: 양보하다[동사] | 인정하다[동사]
+   e1: Ils ont dû **concéder** la victoire à l’autre équipe. || 그들은 다른 팀에 **양보했다**.
+   e2: Je **conçois** qu’il a raison sur ce point. || 나는 그가 그 점에서 옳다고 **인정한다**.
+   syn: [céder, abandonner, admettre, avouer] | ant: []
+
+nuance [ko] ipa=nɥɑ̃s | meanings: 미묘한 차이[명사] | 뉘앙스[명사]
+   e1: Elle a perçu une **nuance** dans sa voix. || 그녀는 그의 목소리에서 **뉘앙스**를 감지했어요.
+   e2: Il y a une légère **nuance** entre ces couleurs. || 이 색들 사이에는 **미묘한 차이**가 있어요.
+   e3: Chaque artiste exprime une **nuance** unique. || 각 예술가는 독특한 **미묘한 차이**를 표현합니다.
+   syn: [subtilité, différence, variante] | ant: []
+
+nuancer [ko] ipa=nɥɑ̃se | meanings: 미묘한 차이를 만들다[동사] | 뉘앙스를 달리하다[동사]
+   e1: Le peintre a su **nuancer** les couleurs avec délicatesse. || 화가는 섬세하게 색을 **뉘앙스** 있게 만들었다.
+   e2: Nous devons **nuancer** notre discours selon l'auditoire. || 우리는 청중에 따라 우리의 말을 **뉘앙스**를 달리해야 한다.
+   syn: [moduler, atténuer, varier] | ant: []
+
+généralisation [ko] ipa=ʒeneʁalizasjɔ̃ | meanings: 일반화[명사]
+   e1: La **généralisation** peut mener à des erreurs de jugement. || **일반화**는 잘못된 판단으로 이어질 수 있다.
+   e2: Il faut éviter la **généralisation** sans preuves suffisantes. || 충분한 증거 없이 **일반화**를 피해야 한다.
+   syn: [simplification, stéréotype, exagération] | ant: []
+
+généraliser [ko] ipa=ʒeneʁalize | meanings: 일반화하다[동사]
+   e1: Il ne faut pas **généraliser** à partir d'un cas unique. || 하나의 사례로부터 **일반화해서는** 안 돼요.
+   e2: Les chercheurs veulent **généraliser** leurs résultats. || 연구자들은 그들의 결과를 **일반화하려고** 합니다.
+   syn: [uniformiser, standardiser] | ant: []
+
+exception [ko] ipa=ɛksɛpsjɔ̃ | meanings: 예외 조항[명사]
+   e1: Son cas est une **exception** à la règle. || 그의 경우는 규칙에 대한 **예외**입니다.
+   e2: Nous faisons une **exception** pour cette fois. || 이번에는 **예외**로 하겠습니다.
+   e3: L'**exception** confirme la validité de la loi. || **예외**는 법의 유효성을 확인합니다.
+   syn: [dérogation, anomalie, irrégularité] | ant: []
+
+exceptionnel [ko] ipa=ɛksɛpsjɔnɛl | meanings: 예외적인[형용사]
+   e1: Ce film est vraiment **exceptionnel**. || 이 영화는 정말 **예외적인** 영화입니다.
+   e2: Elle a un talent **exceptionnel** en musique. || 그녀는 음악에 **예외적인** 재능이 있습니다.
+   e3: Le coucher de soleil était **exceptionnel** ce soir. || 오늘 저녁의 노을은 정말 **예외적**이었습니다.
+   syn: [remarquable, unique, hors du commun] | ant: [ordinaire, commun, habituel]
+
+particularité [ko] ipa=paʁ.ti.ky.la.ʁi.te | meanings: 특징[명사] | 특수성[명사]
+   e1: La **particularité** de cette fleur est sa couleur vive. || 이 꽃의 **특징**은 선명한 색깔이에요.
+   e2: Chaque région a sa **particularité** culturelle unique. || 각 지역은 고유한 **특수성**을 가지고 있어요.
+   syn: [caractéristique, spécificité] | ant: []
+
+particulier [ko] ipa=paʁ.ti.kyl.je | meanings: 특별한[형용사] | 개인[명사]
+   e1: Ce gâteau a un goût **particulier**. || 이 케이크는 **특별한** 맛이 있어요.
+   e2: Chaque **particulier** doit payer ses impôts. || 각 **개인**은 세금을 내야 합니다.
+   e3: Elle a une façon **particulière** de dessiner. || 그녀는 **특별한** 방식으로 그림을 그립니다.
+   syn: [spécial, unique, singulier, individuel] | ant: []
+
+néanmoins [ko] ipa=neanmwɛ̃ | meanings: 그럼에도 불구하고[부사]
+   e1: Il fait froid, **néanmoins** nous sortons. || 날씨가 춥지만, 우리는 **그럼에도 불구하고** 외출합니다.
+   e2: Le projet est difficile, **néanmoins** il avance. || 그 프로젝트는 어렵지만, **그럼에도 불구하고** 진행되고 있습니다.
+   e3: Elle est fatiguée, **néanmoins** elle sourit. || 그녀는 피곤하지만, **그럼에도 불구하고** 웃고 있습니다.
+   syn: [cependant, toutefois, pourtant] | ant: []
+
+toutefois [ko] ipa=tutfwa | meanings: 그러나[부사] | 하지만[부사]
+   e1: Il pleuvait, **toutefois** nous avons promené. || 비가 왔습니다, **그러나** 우리는 산책했습니다.
+   e2: Le film est bon, **toutefois** un peu long. || 영화는 **좋았지만** 조금 길었어요.
+   syn: [cependant, néanmoins, pourtant] | ant: []
+
+pourtant [ko] ipa=puʁtɑ̃ | meanings: 그러나, 그렇지만[부사]
+   e1: Il pleut, **pourtant** ils jouent dehors. || 비가 오는데도 **그들은** 밖에서 놀고 있다.
+   e2: Elle est fatiguée, **pourtant** elle travaille encore. || 그녀는 피곤한데도 아직도 **일한다**.
+   e3: Il disait non, **pourtant** il est venu. || 그는 아니라고 말했는데도 **왔다**.
+   syn: [cependant, toutefois, néanmoins] | ant: []
+
+or [ko] ipa=ɔʁ | meanings: 금[명사] | 그러나[접속사]
+   e1: Le collier est fait en **or** pur. || 목걸이는 순수한 **금**으로 만들어졌어요.
+   e2: Je voulais venir, **or** j'étais malade. || 나는 오고 싶었어요, **그러나** 아팠어요.
+   syn: [] | ant: []
+
+en revanche [ko] ipa=- | meanings: 반대로, 그 대신에[부사]
+   e1: Je n'aime pas ce film, **en revanche** j'adore la bande sonore. || 나는 그 영화를 좋아하지 않지만, **반대로** 사운드트랙은 좋아해요.
+   e2: Il fait froid aujourd'hui, **en revanche** le ciel est clair. || 오늘은 춥지만, **그 대신에** 하늘은 맑아요.
+   syn: [par contre, au contraire] | ant: []
+
+par contre [ko] ipa=- | meanings: 반면에, 그러나[표현]
+   e1: J'aime le thé, **par contre** je n'aime pas le café. || 나는 차를 좋아해요. **반면에** 나는 커피를 좋아하지 않아요.
+   e2: Il fait froid aujourd'hui, **par contre** hier il faisait chaud. || 오늘은 춥네요. **반면에** 어제는 따뜻했어요.
+   e3: Elle est patiente, **par contre** son frère est impatient. || 그녀는 참을성이 있어요. **반면에** 그녀의 형제는 참을성이 없어요.
+   syn: [en revanche, toutefois, néanmoins] | ant: []
+
+au contraire [ko] ipa=- | meanings: 반대로[표현]
+   e1: Il pense que c'est facile, mais **au contraire**, c'est difficile. || 그는 그것이 쉽다고 생각하지만, **반대로** 어렵습니다.
+   e2: Tu croyais qu'il allait perdre, **au contraire**, il a gagné. || 너는 그가 질 거라고 생각했지만, **반대로** 그는 이겼다.
+   syn: [au contraire de, par opposition, en revanche] | ant: []
+
+tandis que [ko] ipa=- | meanings: 반면에[접속사]
+   e1: Il travaille, **tandis que** je me repose. || 그는 일하는 **반면에** 나는 쉰다.
+   e2: **Tandis que** tu lis, je prépare le dîner. || 네가 읽는 **반면에** 나는 저녁을 준비한다.
+   syn: [alors que, mais] | ant: []
+
+alors que [ko] ipa=- | meanings: 〜인데, ~하는데[접속사] | 반면에[접속사]
+   e1: Il travaille, **alors que** tu te reposes. || 그는 일하는, **~인데** 너는 쉬고 있어요.
+   e2: **Alors que** je lisais, il regardait la télé. || 내가 책을 읽고 **있을 때** 그가 TV를 보고 있었어요.
+   e3: Tu aimes le café, **alors que** moi, je préfère le thé. || 네가 커피를 좋아하는 **반면에** 나는 차를 더 좋아해요.
+   syn: [pendant que, tandis que] | ant: []
+
+bien que [ko] ipa=- | meanings: 비록 ~일지라도[접속사]
+   e1: **Bien que** fatigué, il continue à travailler. || **피곤하지만** 그는 계속 일해요.
+   e2: **Bien que** le temps soit mauvais, ils sortent. || **나쁘지만** 그들은 나가요.
+   e3: **Bien que** tu sois occupé, viens me voir. || **바빠도** 나를 보러 와요.
+   syn: [] | ant: []
+
+quoique [ko] ipa=kɔk | meanings: 비록 ~일지라도[접속사]
+   e1: **Quoique** fatigué, il a continué à travailler. || 비록 **피곤했지만**, 그는 계속 일했다.
+   e2: Elle sourit, **quoique** triste à l'intérieur. || 그녀는 속으로 **슬펐지만** 미소를 지었다.
+   e3: **Quoique** la pluie tombe, la fête aura lieu. || 비록 **비가** 오더라도, 축제는 열릴 것이다.
+   syn: [bien que, encore que, malgré que] | ant: []
+
+même si [ko] ipa=- | meanings: 비록 ~일지라도[접속사]
+   e1: Elle sourit **même si** elle est fatiguée. || 그녀는 **비록** 피곤해도 웃어요.
+   e2: Nous sortons **même si** il pleut. || 비가 와도 우리는 나가요.
+   e3: Il réussit **même si** c’est très difficile. || 아주 힘들어도 그는 **성공해요**.
+   syn: [bien que, quoique] | ant: []
+
+à condition que [ko] ipa=- | meanings: 만약 ~라면[접속사]
+   e1: Tu peux venir **à condition que** tu sois gentil. || 네가 **~면** 올 수 있어.
+   e2: Je t'aiderai **à condition que** tu me le demandes. || 네가 나에게 부탁하는 **~면** 도와줄게.
+   e3: Elle accepte **à condition que** tout soit prêt. || 모든 것이 준비된 **~면** 그녀는 받아들여.
+   syn: [pourvu que, si] | ant: []
+
+à moins que [ko] ipa=- | meanings: 하지 않는 한[접속사]
+   e1: Je n'irai pas à la fête **à moins que** tu viennes. || 너가 오지 **않는 한** 나는 파티에 가지 않을 거야.
+   e2: Nous resterons ici **à moins que** la météo change. || 날씨가 변하지 **않는 한** 우리는 여기 머물 것이다.
+   e3: Tu ne réussiras pas **à moins que** tu travailles dur. || 네가 열심히 일하지 **않는 한** 성공하지 못할 거야.
+   syn: [] | ant: []
+
+pourvu que [ko] ipa=- | meanings: 만약 ~라면, ~하기만 하면[표현]
+   e1: **Pourvu que** tu viennes, tout ira bien. || **~하기만 하면** 모든 일이 잘 될 거예요.
+   e2: **Pourvu que** le temps soit beau demain. || 내일 **날씨가** 맑았으면 좋겠어요.
+   e3: **Pourvu que** nous réussissions cet examen. || 우리가 이 시험을 **통과하기만** 하면 좋겠어요.
+   syn: [à condition que, pour autant que] | ant: []
+
+afin que [ko] ipa=- | meanings: …하기 위해서[접속사]
+   e1: Je travaille dur **afin que** tu sois fier de moi. || 나는 네가 나를 자랑스럽게 여기도록 **하기 위해서** 열심히 일해요.
+   e2: Elle étudie chaque jour **afin que** ses notes s'améliorent. || 그녀는 성적이 향상되도록 **하기 위해서** 매일 공부해요.
+   syn: [pour que, de sorte que] | ant: []
+
+de sorte que [ko] ipa=- | meanings: 그래서, ~하도록[표현]
+   e1: Il parle **de sorte que** tout le monde comprenne. || 그는 모두가 **이해할 수 있도록** 말한다.
+   e2: Elle organise la salle **de sorte que** les invités soient à l'aise. || 그녀는 손님들이 **편안하게 있도록** 방을 배치한다.
+   syn: [de manière que, de façon que, afin que] | ant: []
+
+si bien que [ko] ipa=- | meanings: 그 결과[표현]
+   e1: Il a plu toute la nuit, **si bien que** la route est glissante. || 밤새 비가 와서 **도로가** 미끄럽습니다.
+   e2: Elle a beaucoup travaillé, **si bien que** ses notes ont augmenté. || 그녀는 열심히 공부해서 **성적이** 올랐습니다.
+   syn: [de sorte que, au point que] | ant: []
+
+de telle manière que [ko] ipa=- | meanings: 그렇게 ~하도록[표현]
+   e1: Elle parle **de telle manière que** tout le monde comprend. || 그녀는 모두가 이해할 수 **있도록** 그런 방식으로 말한다.
+   e2: Il agit **de telle manière que** la paix règne. || 그는 평화가 유지**되도록** 그런 방식으로 행동한다.
+   syn: [de façon que, de manière que, de sorte que] | ant: []
+
+au point que [ko] ipa=- | meanings: 어떤 일의 결과가 특정한 정도에 이르도록[표현]
+   e1: Il pleuvait **au point que** la route était inondée. || 비가 너무 많이 와서 도로가 **물에 잠길 정도**였다.
+   e2: Elle travaille dur **au point que** ses collègues la remarquent. || 그녀는 너무 열심히 일해서 동료들이 그녀를 **알아차릴 정도**이다.
+   e3: Le bruit était fort **au point que** je ne pouvais pas dormir. || 소음이 너무 커서 나는 잠을 잘 수 없을 **정도였다**.
+   syn: [à tel point que, de sorte que, au degré que] | ant: []
+
+tellement que [ko] ipa=- | meanings: 너무 ~해서[표현] | ~할 정도로[표현]
+   e1: Il pleure **tellement que** tout le monde s'inquiète. || 그는 **너무** 많이 울어서 모두가 걱정해요.
+   e2: Elle était **tellement que** personne ne pouvait l'arrêter. || 그녀는 **너무** 강해서 아무도 막을 수 없었어요.
+   e3: Il est **tellement** grand que je le remarque de loin. || 그는 **너무** 커서 멀리서도 눈에 띄어요.
+   syn: [] | ant: []
+
+à tel point que [ko] ipa=- | meanings: 어떤 결과나 상태가 매우 강렬하거나 극단적인 수준에 이른 것을 나타내는 접속부[접속사]
+   e1: Il pleuvait **à tel point que** la rivière a débordé. || 비가 **너무** 심하게 와서 강이 넘쳤다.
+   e2: Elle travaillait **à tel point que** sa santé en souffrait. || 그녀는 **매우** 열심히 일해서 건강에 문제가 생겼다.
+   e3: La musique était forte **à tel point que** nous ne pouvions pas parler. || 음악이 **너무** 커서 우리가 말할 수 없었다.
+   syn: [au point que, de telle sorte que] | ant: []
+
+d'une part [ko] ipa=- | meanings: 한편[표현]
+   e1: **D'une part**, il fait beau. || **한편**, 날씨가 좋습니다.
+   e2: **D'une part**, j'aime le thé, mais d'autre part, je préfère le café. || **한편**, 나는 차를 좋아하지만 다른 한편으로는 커피를 더 좋아합니다.
+   syn: [d'abord, premièrement] | ant: []
+
+d'autre part [ko] ipa=- | meanings: 게다가, 또한[부사] | 다른 한편으로는[부사]
+   e1: Il est intelligent et, **d'autre part**, très gentil. || 그는 똑똑하고, **게다가** 매우 친절해요.
+   e2: **D'autre part**, il faut penser aux conséquences futures. || **다른 한편으로는** 미래의 결과를 생각해야 해요.
+   syn: [en outre, également] | ant: []
+
+premièrement [ko] ipa=pʁəmjɛmɑ̃ | meanings: 첫째로[부사]
+   e1: **Premièrement**, nous devons préparer les ingrédients. || **첫째로**, 우리는 재료를 준비해야 합니다.
+   e2: **Premièrement**, il faut écouter attentivement. || **첫째로**, 주의 깊게 들어야 합니다.
+   e3: **Premièrement**, je voudrais remercier tout le monde. || **첫째로**, 모두에게 감사를 표하고 싶습니다.
+   syn: [d'abord, en premier, initialement] | ant: []
+
+deuxièmement [ko] ipa=døzjɛmɑ̃ | meanings: 둘째로[부사]
+   e1: **Deuxièmement**, nous devons vérifier les résultats. || **둘째로**, 우리는 결과를 확인해야 합니다.
+   e2: Je parlerai, **deuxièmement**, de l'importance de l'école. || 나는 **둘째로** 학교의 중요성에 대해 이야기할 것이다.
+   syn: [ensuite, de plus] | ant: []
+
+troisièmement [ko] ipa=tʁwazjɛmɑ̃ | meanings: 셋째로[부사]
+   e1: **Troisièmement**, nous devons protéger la nature. || **셋째로**, 우리는 자연을 보호해야 합니다.
+   e2: Il expliqua **troisièmement** les résultats du projet. || 그는 **셋째로** 프로젝트 결과를 설명했습니다.
+   e3: **Troisièmement**, le repas était délicieux. || **셋째로**, 식사는 맛있었습니다.
+   syn: [en troisième lieu, dans un troisième temps] | ant: []
+
+tout d'abord [ko] ipa=- | meanings: 먼저, 우선[표현]
+   e1: **Tout d'abord**, merci pour votre aide. || **먼저**, 도와주셔서 감사합니다.
+   e2: Il faut **tout d'abord** comprendre la situation. || 상황을 **먼저** 이해해야 합니다.
+   e3: **Tout d'abord**, je vais présenter le projet. || **우선**, 프로젝트를 소개하겠습니다.
+   syn: [en premier lieu, d'abord, premièrement] | ant: []
+
+pour conclure [ko] ipa=- | meanings: 결론적으로[표현]
+   e1: **Pour conclure**, ce fut une belle expérience. || **결론적으로**, 그것은 아름다운 경험이었어요.
+   e2: Nous devons réfléchir, **pour conclure** notre discussion. || 우리는 생각해야 해요, 토론을 **결론내기** 위해서.
+   e3: **Pour conclure**, tout le monde a apprécié la fête. || **결론적으로**, 모두가 파티를 즐겼어요.
+   syn: [] | ant: []
+
+en conclusion [ko] ipa=- | meanings: 결론적으로[부사]
+   e1: **En conclusion**, c'était une journée merveilleuse. || **결론적으로**, 그것은 멋진 하루였다.
+   e2: Ils ont discuté longtemps et **en conclusion**, ils ont accepté. || 그들은 오랫동안 토론했고 **결론적으로** 동의했다.
+   syn: [en résumé, finalement, pour conclure] | ant: []
+
+en résumé [ko] ipa=- | meanings: 요약하면[부사]
+   e1: **En résumé**, le projet est un succès. || **요약하면** 그 프로젝트는 성공입니다.
+   e2: **En résumé**, nous devons changer notre approche. || **요약하면** 우리는 접근 방식을 바꿔야 합니다.
+   syn: [en bref, pour résumer, en conclusion] | ant: []
+
+en bref [ko] ipa=- | meanings: 간단히 말해서[표현]
+   e1: Il a expliqué le projet en **bref**. || 그는 프로젝트를 **간단히 말해서** 설명했다.
+   e2: **En bref**, tout s'est bien passé. || **간단히 말해서**, 모든 것이 잘 진행되었다.
+   e3: Elle a résumé sa journée en **bref**. || 그녀는 하루를 **간단히 말해서** 요약했다.
+   syn: [en résumé, en conclusion, en un mot] | ant: []
+
+autrement dit [ko] ipa=- | meanings: 즉[표현]
+   e1: Il a réussi, **autrement dit**, il a gagné. || 그는 성공했다, **즉** 그가 이겼다.
+   e2: **Autrement dit**, il faut commencer maintenant. || **즉** 지금 시작해야 한다.
+   e3: Cette décision est injuste, **autrement dit**, inacceptable. || 이 결정은 불공평하다, **즉** 받아들일 수 없다.
+   syn: [c'est-à-dire, en d'autres termes, dit autrement] | ant: []
+
+c'est-à-dire [ko] ipa=- | meanings: 즉, 다시 말해[표현]
+   e1: Il est professeur, **c'est-à-dire** qu'il enseigne. || 그는 교수다, **즉** 가르친다.
+   e2: Je pars à huit heures, **c'est-à-dire** maintenant. || 나는 8시에 떠난다, **즉** 지금이다.
+   syn: [] | ant: []
+
+à savoir [ko] ipa=- | meanings: 즉[표현]
+   e1: Il faut visiter deux villes, **à savoir** Paris et Lyon. || 방문해야 할 도시는 **즉** 파리와 리옹입니다.
+   e2: Le projet comprend trois phases, **à savoir** planification, exécution et évaluation. || 프로젝트는 세 단계로 구성되어 있습니다 **즉** 계획, 실행, 평가입니다.
+   e3: Sa spécialité est la littérature, **à savoir** le romantisme français. || 그의 전문 분야는 문학, **즉** 프랑스 낭만주의입니다.
+   syn: [c'est-à-dire, autrement dit, plus précisément] | ant: []
+
+notamment [ko] ipa=nɔtamɑ̃ | meanings: 특히, 구체적으로[부사]
+   e1: Nous aimons **notamment** les plats épicés. || 우리는 **특히** 매운 음식을 좋아해요.
+   e2: Elle a visité Paris, **notamment** le Louvre. || 그녀는 파리를 방문했는데, **구체적으로** 루브르 박물관을 갔어요.
+   syn: [en particulier, spécialement, principalement] | ant: []
+
+en particulier [ko] ipa=- | meanings: 특히, 특별히[부사]
+   e1: J'aime la musique, **en particulier** le jazz. || 나는 음악을 좋아하는데, **특히** 재즈를 좋아해요.
+   e2: **En particulier**, cette peinture attire mon attention. || **특히** 이 그림이 내 관심을 끌어요.
+   syn: [spécialement, notamment, expressément] | ant: []
+
+en fait [ko] ipa=- | meanings: 실제로, 사실은[표현]
+   e1: **En fait**, il pleut depuis ce matin. || **사실은**, 오늘 아침부터 비가 오고 있어요.
+   e2: Je pensais le voir demain, **en fait** c'est aujourd'hui. || 나는 그를 내일 볼 줄 알았는데, **사실은** 오늘이에요.
+   e3: **En fait**, ce livre est très intéressant. || **사실** 이 책은 매우 흥미로워요.
+   syn: [en réalité, effectivement] | ant: []
+
+effectivement [ko] ipa=efɛktivmɑ̃ | meanings: 확실히[부사] | 실제로[부사]
+   e1: Il a **effectivement** réussi son examen. || 그는 **확실히** 시험에 합격했습니다.
+   e2: Cette idée fonctionne **effectivement** mieux. || 이 아이디어가 **실제로** 더 잘 작동합니다.
+   e3: Elle est **effectivement** très compétente. || 그녀는 **확실히** 매우 능숙합니다.
+   syn: [réellement, vraiment, réellement] | ant: []
+
+certes [ko] ipa=sɛʁt | meanings: 틀림없이[부사] | 확실히[부사]
+   e1: Il réussira **certes** son examen. || 그는 **틀림없이** 시험에 합격할 것이다.
+   e2: Ce vin est **certes** délicieux. || 이 와인은 **확실히** 맛있다.
+   e3: Elle est **certes** la meilleure candidate. || 그녀는 **확실히** 최고의 후보자이다.
+   syn: [assurément, sûrement, évidemment] | ant: []
+
+véracité [ko] ipa=ve.ʁa.si.te | meanings: 정직[명사] | 진실성[명사]
+   e1: La **véracité** de son témoignage est indéniable. || 그의 증언의 **정직**함은 부인할 수 없습니다.
+   e2: Nous cherchons la **véracité** dans chaque histoire entendue. || 우리는 듣는 모든 이야기에서 **진실성**을 찾습니다.
+   syn: [exactitude, authenticité, fiabilité] | ant: []
+
+aveu [ko] ipa=avø | meanings: 고백, 자백, 인정[명사]
+   e1: Il a fait un **aveu** sincère à ses amis. || 그는 친구들에게 진심 어린 **고백**을 했어요.
+   e2: Son **aveu** a changé la situation. || 그의 **자백**이 상황을 바꾸었어요.
+   e3: L'**aveu** de ses erreurs est important. || 그의 실수에 대한 **인식**이 중요해요.
+   syn: [confession, déclaration, reconnaissance] | ant: []
+
+force est de constater [ko] ipa=- | meanings: 어쩔 수 없이 인정해야 한다[표현]
+   e1: **Force est de constater** que le projet a réussi. || 그 프로젝트가 성공했다는 것을 어쩔 수 없이 **인정해야** 합니다.
+   e2: **Force est de constater** son talent exceptionnel. || 그의 뛰어난 재능을 어쩔 수 없이 **인정해야** 합니다.
+   e3: **Force est de constater** l'ampleur des dégâts après la tempête. || 폭풍 후에 피해의 규모를 어쩔 수 없이 **인정해야** 합니다.
+   syn: [] | ant: []
+
+à supposer que [ko] ipa=- | meanings: 만약 ~라면, 가정하여[표현]
+   e1: **À supposer que** tu viennes, nous commencerons. || 만약 **네가 온다면**, 우리는 시작할 거예요.
+   e2: **À supposer que** cela soit vrai, que ferons-nous ? || 만약 **그것이 사실이라면**, 우리는 무엇을 할까요?
+   e3: Il réussira, **à supposer qu'**il travaille dur. || 그가 **열심히 일한다면**, 그는 성공할 거예요.
+   syn: [] | ant: []
+
+conjecture [ko] ipa=kɔ̃ʒɛk.tyʁ | meanings: 추측[명사] | 추측하다[동사]
+   e1: La **conjecture** est basée sur des indices limités. || **추측**은 제한된 단서에 기반한다.
+   e2: Il **conjecture** le résultat du concours. || 그는 대회의 결과를 **추측한다**.
+   e3: Cette **conjecture** ouvre la voie à une nouvelle étude. || 이 **추측**은 새로운 연구로 길을 연다.
+   syn: [supposition, hypothèse, prédiction] | ant: []
+
+souvenir [ko] ipa=suv.niʁ | meanings: 기억[명사] | 기념품[명사]
+   e1: Le **souvenir** de cette fête est très fort. || 이 축제에 대한 **기억**이 매우 강해요.
+   e2: J'ai acheté un **souvenir** pour mes amis. || 친구들에게 줄 **기념품**을 샀어요.
+   e3: Cet vieil album est plein de **souvenirs** précieux. || 이 오래된 앨범은 소중한 **기억**으로 가득해요.
+   syn: [mémoire, réminiscence, memento] | ant: []
+
+se souvenir de [ko] ipa=- | meanings: 기억하다[동사]
+   e1: Je **me souviens** de ce jour avec joie. || 나는 기쁜 마음으로 그날을 **기억한다**.
+   e2: Elle **se souvient** de son premier voyage. || 그녀는 첫 여행을 **기억한다**.
+   e3: Nous **nous souvenons** de nos amis d'enfance. || 우리는 어린 시절 친구들을 **기억한다**.
+   syn: [se rappeler, se remémorer] | ant: []
+
+se rappeler de [ko] ipa=- | meanings: 기억하다[동사]
+   e1: Je **me rappelle** notre voyage en été. || 나는 우리의 여름 여행을 **기억한다**.
+   e2: Elle **se rappelle** son enfance avec joie. || 그녀는 기쁘게 그녀의 어린 시절을 **기억한다**.
+   e3: Nous **nous rappelons** cette chanson ensemble. || 우리는 함께 그 노래를 **기억한다**.
+   syn: [se souvenir de, garder en mémoire, se remémorer] | ant: []
+
+se remémorer [ko] ipa=- | meanings: 떠올리다[동사]
+   e1: Elle **se remémore** son enfance avec nostalgie. || 그녀는 향수를 느끼며 어린 시절을 **떠올린다**.
+   e2: Je **me remémore** ce jour spécial chaque année. || 나는 매년 그 특별한 날을 **떠올린다**.
+   syn: [se souvenir, rappeler, remémorer] | ant: []
+
+remémorer [ko] ipa=ʁəme.mɔʁe | meanings: 상기하다[동사] | 회상하다[동사]
+   e1: Elle **remémore** les jours heureux de son enfance. || 그녀는 어린 시절의 행복한 날들을 **상기한다**.
+   e2: Il **remémore** ses aventures passées avec nostalgie. || 그는 지난 모험들을 향수에 젖어 **회상한다**.
+   e3: Le vieil homme **remémore** les événements de sa jeunesse. || 노인은 젊은 시절의 사건들을 **회상한다**.
+   syn: [se souvenir, rappeler] | ant: []
+
+rappeler à [ko] ipa=- | meanings: 상기시키다[동사]
+   e1: Ce parfum me **rappelle** mon enfance. || 이 향기는 나의 어린 시절을 **상기시킨다**.
+   e2: Le professeur a **rappelé à** l'élève ses devoirs. || 선생님이 학생에게 숙제를 **상기시켰다**.
+   e3: Cette chanson nous **rappelle** des moments heureux. || 이 노래는 우리에게 행복한 순간들을 **상기시킨다**.
+   syn: [faire penser à, évoquer, ramener à la mémoire] | ant: []
+
+évoquer [ko] ipa=e.vɔ.ke | meanings: 떠올리다[동사] | 암시하다[동사]
+   e1: Ce parfum **évoque** des souvenirs d'enfance. || 이 향기는 어린 시절을 **떠올리게** 한다.
+   e2: Son discours **évoque** un avenir plein d'espoir. || 그의 연설은 희망찬 미래를 **암시한다**.
+   syn: [mentionner, rappeler, suggérer] | ant: []
+
+évocation [ko] ipa=evɔkasjɔ̃ | meanings: 상기[명사] | 암시[명사]
+   e1: L'**évocation** de ce lieu m'a rempli de nostalgie. || 이 장소의 **상기**가 나를 향수에 젖게 했다.
+   e2: Son discours était plein d'**évocations** subtiles. || 그의 연설은 미묘한 **암시**로 가득했다.
+   syn: [rappel, souvenir, allusion, insinuation] | ant: []
+
+réminiscence [ko] ipa=ʁemiˈnisɑ̃s | meanings: 회상[명사] | 연상[명사]
+   e1: La **réminiscence** des vacances me rend heureux. || 휴가의 **회상**이 나를 행복하게 한다.
+   e2: Cette musique provoque une **réminiscence** de mon enfance. || 이 음악은 내 어린 시절의 **연상**을 불러일으킨다.
+   e3: La **réminiscence** des anciens amis m'intéresse beaucoup. || 옛 친구들에 대한 **회상**이 나에게 매우 관심을 끈다.
+   syn: [souvenir, évocation, mémoire] | ant: []
+
+anecdote [ko] ipa=anɛkdɔt | meanings: 짧은 이야기[명사] | 일화[명사]
+   e1: Il a raconté une **anecdote** drôle lors du dîner. || 그는 저녁 식사 중에 **일화**를 이야기했다.
+   e2: L'**anecdote** est courte mais intéressante. || **짧은 이야기**가 짧지만 흥미롭다.
+   e3: Cette **anecdote** illustre bien sa personnalité. || 이 **일화**는 그의 성격을 잘 보여준다.
+   syn: [récit, histoire, chronique] | ant: []
+
+récit personnel [ko] ipa=- | meanings: 개인적인 이야기[명사]
+   e1: Elle a écrit un **récit personnel** touchant. || 그녀는 감동적인 **개인적인 이야기**를 썼어요.
+   e2: Le professeur demande un **récit personnel** en classe. || 선생님은 수업 시간에 **개인적인 이야기**를 요청했어요.
+   e3: Son **récit personnel** parle de ses voyages. || 그의 **개인적인 이야기**는 그가 여행한 것에 관한 거예요.
+   syn: [témoignage, histoire personnelle] | ant: []
+
+narrateur omniscient [ko] ipa=- | meanings: 전지적 작가[명사]
+   e1: Le **narrateur omniscient** connaît tous les secrets des personnages. || **전지적 작가**는 등장인물들의 모든 비밀을 알고 있다.
+   e2: Dans ce roman, le **narrateur omniscient** raconte l'histoire sans se limiter. || 이 소설에서 **전지적 작가**는 제한 없이 이야기를 전한다.
+   syn: [narrateur tout-puissant, narrateur à la troisième personne] | ant: []
+
+narrateur subjectif [ko] ipa=- | meanings: 주관적 내레이터[표현]
+   e1: Le **narrateur subjectif** partage ses émotions profondes. || **주관적 내레이터**가 그의 깊은 감정을 나눕니다.
+   e2: Le style du **narrateur subjectif** rend l'histoire vivante. || **주관적 내레이터**의 스타일이 이야기를 생생하게 만듭니다.
+   e3: Un **narrateur subjectif** exprime souvent une perspective unique. || 독특한 관점을 종종 표현하는 것이 **주관적 내레이터**입니다.
+   syn: [] | ant: []
+
+perspective [ko] ipa=pɛʁspɛktiv | meanings: 관점[명사] | 원근법[명사]
+   e1: Elle a une nouvelle **perspective** sur la vie. || 그녀는 인생에 대해 새로운 **관점**을 가지고 있어요.
+   e2: Le peintre maîtrise parfaitement la **perspective**. || 그 화가는 **원근법**을 완벽하게 다룹니다.
+   e3: Changer de **perspective** aide à mieux comprendre. || **관점**을 바꾸면 더 잘 이해하는 데 도움이 됩니다.
+   syn: [point de vue, angle, vue] | ant: []
+
+point de vue [ko] ipa=- | meanings: 관점[명사]
+   e1: Son **point de vue** est très intéressant. || 그의 **관점**은 매우 흥미롭다.
+   e2: Je respecte ton **point de vue**. || 나는 네 **관점**을 존중한다.
+   e3: Elle a changé son **point de vue** après la discussion. || 그녀는 토론 후에 자신의 **관점**을 바꿨다.
+   syn: [angle, optique, perspective] | ant: []
+
+témoigner [ko] ipa=temwaɲe | meanings: 증언하다[동사] | 증거가 되다[동사]
+   e1: Elle a **témoigné** au tribunal hier. || 그녀는 어제 법정에서 **증언했다**.
+   e2: Cette lettre **témoigne** de son innocence. || 이 편지는 그의 무죄를 **증거한다**.
+   e3: Il a courageusement **témoigné** lors du procès. || 그는 재판에서 용감하게 **증언했다**.
+   syn: [attester, déclarer, certifier] | ant: []
+
+témoignage personnel [ko] ipa=- | meanings: 개인적인 증언[표현]
+   e1: Son **témoignage personnel** a touché tout le monde. || 그의 **개인적인 증언**은 모두를 감동시켰어요.
+   e2: Elle a donné un **témoignage personnel** émouvant. || 그녀는 감동적인 **개인적인 증언**을 했어요.
+   syn: [] | ant: []
+
+souvenir d'enfance [ko] ipa=- | meanings: 유년 시절 기억[명사]
+   e1: Ce **souvenir d'enfance** me rend toujours heureux. || 이 **유년 시절 기억**은 항상 나를 행복하게 한다.
+   e2: Elle partage un **souvenir d'enfance** avec son frère. || 그녀는 남동생과 **유년 시절 기억**을 나눈다.
+   syn: [] | ant: []
+
+mémoire collective [ko] ipa=- | meanings: 집단 기억[명사]
+   e1: La **mémoire collective** façonne l'identité d'une communauté. || **집단 기억**은 공동체의 정체성을 형성합니다.
+   e2: La guerre reste gravée dans la **mémoire collective** des habitants. || 전쟁은 주민들의 **집단 기억**에 깊이 새겨져 있습니다.
+   e3: La transmission orale nourrit la **mémoire collective** locale. || 구전은 지역의 **집단 기억**을 풍부하게 합니다.
+   syn: [culture collective, mémoire sociale, mémoire partagée] | ant: []
+
+histoire personnelle [ko] ipa=- | meanings: 개인적인 이야기[표현]
+   e1: Elle a partagé son **histoire personnelle** avec ses amis. || 그녀는 친구들과 자신의 **개인적인 이야기**를 나누었어요.
+   e2: Son **histoire personnelle** est pleine de défis et de succès. || 그의 **개인적인 이야기**는 도전과 성공으로 가득해요.
+   syn: [récit personnel, témoignage, confession] | ant: []
+
+trajectoire [ko] ipa=tʁa.ʒɛk.twaʁ | meanings: 탄도, 궤적[명사]
+   e1: La **trajectoire** de l'avion est visible dans le ciel. || 비행기의 **탄도**가 하늘에 보인다.
+   e2: Cette fusée suit une **trajectoire** précise vers l'espace. || 이 로켓은 우주로 향하는 정확한 **궤적**을 따른다.
+   syn: [parcours, route, voie] | ant: []
+
+parcours [ko] ipa=paʁkuʁ | meanings: 경로, 코스[명사] | 경력, 이력[명사]
+   e1: Le **parcours** dans la forêt est très beau. || 숲속의 **경로**가 매우 아름답다.
+   e2: Son **parcours** professionnel est impressionnant. || 그의 직업적 **경력**은 인상적이다.
+   e3: Le guide explique le **parcours** de la randonnée. || 가이드가 하이킹의 **코스**를 설명한다.
+   syn: [itinéraire, trajet, chemin, expérience, carrière] | ant: []
+
+péripétie [ko] ipa=peʁipet.i | meanings: 예기치 않은 사건[명사] | 극적 전환[명사]
+   e1: La **péripétie** a surpris tout le monde lors du dîner. || 그 **예기치 않은 사건**은 저녁 식사 중 모두를 놀라게 했어요.
+   e2: La **péripétie** finale a changé l'issue de l'histoire. || 마지막 **극적 전환**이 이야기의 결말을 바꿨어요.
+   syn: [incident, événement, rebondissement] | ant: []
+
+moment décisif [ko] ipa=- | meanings: 중대한 순간[명사]
+   e1: Le **moment décisif** de la compétition est arrivé. || 경쟁의 **중대한 순간**이 왔어요.
+   e2: Ce film montre un **moment décisif** dans sa vie. || 이 영화는 그의 삶의 **중대한 순간**을 보여줘요.
+   e3: Le **moment décisif** du match a été intense. || 경기의 **중대한 순간**은 매우 긴장감 있었어요.
+   syn: [moment crucial, instant décisif, point critique] | ant: []
+
+tournant [ko] ipa=tuʁnɑ̃ | meanings: 전환점[명사] | 코너, 굽이[명사]
+   e1: Ce moment a été un vrai **tournant** dans sa vie. || 이 순간은 그의 인생에 진정한 **전환점**이었어요.
+   e2: La voiture a ralenti au **tournant** de la route. || 자동차가 길의 **코너**에서 속도를 줄였어요.
+   syn: [virage, changement, angle] | ant: []
+
+bouleverser [ko] ipa=bulvɛʁse | meanings: 뒤흔들다, 혼란시키다[동사] | 충격을 주다[동사]
+   e1: La nouvelle a **bouleversé** toute la communauté. || 그 소식이 전체 공동체를 **뒤흔들었다**.
+   e2: Son départ a **bouleversé** mes plans. || 그의 떠남이 내 계획에 **충격을 주었다**.
+   e3: La tempête a **bouleversé** la vie du village. || 폭풍이 마을의 삶을 **혼란시키었다**.
+   syn: [perturber, désorganiser, choquer] | ant: []
+
+bouleversement [ko] ipa=bulvɛʁsmɑ̃ | meanings: 격변[명사] | 혼란[명사]
+   e1: Le **bouleversement** climatique menace notre planète. || 기후 **격변**이 우리 지구를 위협합니다.
+   e2: Le **bouleversement** politique a duré plusieurs années. || 정치적 **격변**이 여러 해 동안 지속되었습니다.
+   e3: Le **bouleversement** dans la famille a été difficile à gérer. || 가족 내 **혼란**을 관리하기가 어려웠습니다.
+   syn: [changement radical, catastrophe, désordre, perturbation] | ant: []
+
+transformer [ko] ipa=tʁɑ̃sfɔʁme | meanings: 변형하다, 변화시키다[동사]
+   e1: Le magicien peut **transformer** la pierre en or. || 마술사는 돌을 **변형**시킬 수 있어요.
+   e2: L'architecte va **transformer** cette vieille maison. || 건축가는 이 오래된 집을 **변화시킬** 거예요.
+   e3: Cette machine **transforme** l'énergie solaire en électricité. || 이 기계는 태양 에너지를 전기로 **변환해요**.
+   syn: [modifier, changer, adapter] | ant: [conserver]
+
+transformation [ko] ipa=tʁɑ̃sfɔʁmasjɔ̃ | meanings: 변형[명사] | 변환[명사]
+   e1: La **transformation** de la matière est visible. || 물질의 **변형**이 보입니다.
+   e2: La **transformation** du plan en réalité est réussie. || 계획의 **변환**이 성공했습니다.
+   syn: [mutation, modification, changement] | ant: []
+
+métamorphose [ko] ipa=me.ta.mɔʁ.fɔz | meanings: 변태[명사] | 변형[명사]
+   e1: La chenille subit une **métamorphose** en papillon. || 애벌레가 나비로 **변태**한다.
+   e2: La **métamorphose** de la ville est impressionnante. || 그 도시의 **변형**이 인상적이다.
+   syn: [transformation, mutation, changement] | ant: []
+
+évoluer [ko] ipa=evo.lye | meanings: 발전하다, 진화하다[동사]
+   e1: La technologie **évolue** rapidement chaque année. || 기술은 매년 빠르게 **발전한다**.
+   e2: Les espèces **évoluent** pour s'adapter à leur environnement. || 종들은 환경에 적응하기 위해 **진화한다**.
+   syn: [progresser, avancer, se transformer] | ant: []
+
+évolution [ko] ipa=e.vɔ.ly.sjɔ̃ | meanings: 진화[명사] | 발전[명사]
+   e1: L'**évolution** des espèces est fascinante. || 종의 **진화**는 흥미롭다.
+   e2: L'**évolution** de la technologie change notre vie. || 기술의 **발전**은 우리 삶을 바꾼다.
+   e3: L'**évolution** du projet est rapide et positive. || 프로젝트의 **발전**은 빠르고 긍정적이다.
+   syn: [développement, progrès, transformation] | ant: []
+
+mûrir [ko] ipa=my.ʁiʁ | meanings: 익다[동사] | 성숙해지다[동사]
+   e1: Les fruits **mûrissent** au soleil. || 과일들은 햇볕에서 **익습니다**.
+   e2: Avec le temps, il **mûrit** dans sa pensée. || 시간이 지나면서 그는 생각이 **성숙해집니다**.
+   syn: [se développer, s'affiner, se perfectionner] | ant: []
+
+maturité [ko] ipa=matyʁite | meanings: 성숙[명사] | 만기[명사]
+   e1: La **maturité** apporte souvent plus de sagesse. || **성숙**은 종종 더 많은 지혜를 가져온다.
+   e2: Le prêt est remboursable à la **maturité**. || 대출금은 **만기**에 상환할 수 있다.
+   e3: La **maturité** du fruit dépend du climat. || 과일의 **성숙**은 기후에 달려 있다.
+   syn: [achèvement, complétion, échéance] | ant: []
+
+épreuve [ko] ipa=epʁœv | meanings: 시험[명사] | 고난[명사]
+   e1: L'**épreuve** durera trois heures. || **시험**은 3시간 동안 지속될 거예요.
+   e2: Ils ont surmonté cette **épreuve** ensemble. || 그들은 이 **고난**을 함께 극복했어요.
+   e3: Cette **épreuve** est importante pour ton avenir. || 이 **시험**은 네 미래에 중요해요.
+   syn: [test, examen, difficulté, adversité] | ant: []
+
+défi [ko] ipa=defi | meanings: 도전[명사]
+   e1: Ils ont relevé le **défi** avec courage. || 그들은 용기를 가지고 **도전**에 응했습니다.
+   e2: Ce problème est un vrai **défi** pour moi. || 이 문제는 나에게 진짜 **도전**입니다.
+   syn: [enjeu, combat, confrontation] | ant: []
+
+défier [ko] ipa=defje | meanings: 도전하다[동사]
+   e1: Il a décidé de **défier** ses limites. || 그는 자신의 한계를 **도전하다**고 결심했다.
+   e2: Les athlètes vont **défier** leurs adversaires demain. || 운동선수들이 내일 상대에게 **도전할** 것이다.
+   e3: Elle aime **défier** les règles pour progresser. || 그녀는 발전하기 위해 규칙에 **도전하는** 것을 좋아한다.
+   syn: [provoker, affronter, contester] | ant: []
+
+surmonter [ko] ipa=syʁmɔ̃te | meanings: 극복하다[동사] | 넘어서다[동사]
+   e1: Elle a réussi à **surmonter** sa peur. || 그녀는 자신의 두려움을 **극복했다**.
+   e2: Ils doivent **surmonter** les obstacles sur la route. || 그들은 길에 있는 장애물을 **넘어야** 한다.
+   e3: Nous allons **surmonter** cette difficulté ensemble. || 우리는 이 어려움을 함께 **극복할** 것이다.
+   syn: [vaincre, dominer, triompher, franchir, dépasser] | ant: []
+
+obstacle [ko] ipa=ɔpstakl | meanings: 장애물[명사]
+   e1: L'**obstacle** bloque le chemin de la rivière. || 그 **장애물**이 강의 길을 막고 있다.
+   e2: Elle a franchi tous les **obstacles** avec courage. || 그녀는 모든 **장애물**을 용기 있게 넘었다.
+   e3: Cet arbre est un grand **obstacle** dans le jardin. || 이 나무는 정원에 큰 **장애물**이다.
+   syn: [barrière, obstruction, entrave] | ant: []
+
+embûche [ko] ipa=ɑ̃.byʃ | meanings: 함정[명사]
+   e1: Nous avons évité une **embûche** sur le chemin. || 우리는 길에서 **함정**을 피했어요.
+   e2: L'expérience nous prépare à chaque **embûche**. || 경험은 우리를 모든 **함정**에 대비하게 해 줍니다.
+   syn: [piège, trarpa, difficulté] | ant: []
+
+leçon de vie [ko] ipa=- | meanings: 삶의 교훈[표현]
+   e1: Cette expérience était une **leçon de vie** importante. || 이 경험은 중요한 **삶의 교훈**이었다.
+   e2: Chaque échec apporte une nouvelle **leçon de vie**. || 모든 실패는 새로운 **삶의 교훈**을 준다.
+   syn: [] | ant: []
+
+tirer des leçons [ko] ipa=- | meanings: 교훈을 얻다[표현]
+   e1: Nous devons **tirer des leçons** de nos erreurs. || 우리는 우리 실수에서 **교훈을 얻어야** 합니다.
+   e2: Il faut toujours **tirer des leçons** des expériences passées. || 항상 과거의 경험에서 **교훈을 얻어야** 합니다.
+   e3: Elle a su **tirer des leçons** de cette situation difficile. || 그녀는 그 어려운 상황에서 **교훈을 얻을** 수 있었습니다.
+   syn: [apprendre, retenir une leçon, comprendre] | ant: []
+
+désillusion [ko] ipa=dezilysjɔ̃ | meanings: 환멸[명사]
+   e1: La **désillusion** est apparue après l'échec du projet. || 프로젝트 실패 후에 **환멸**이 나타났다.
+   e2: Sa **désillusion** a transformé sa vision de la vie. || 그의 **환멸**은 그의 인생관을 바꾸었다.
+   syn: [désenchantement, déception, désappointement] | ant: []
+
+remords du passé [ko] ipa=- | meanings: 과거에 대한 후회[표현]
+   e1: Il vit avec les **remords du passé** chaque jour. || 그는 매일 **과거에 대한 후회**를 안고 산다.
+   e2: Les **remords du passé** le rendaient triste. || **과거에 대한 후회**가 그를 슬프게 했다.
+   e3: Elle a exprimé ses **remords du passé** en pleurant. || 그녀는 울면서 **과거에 대한 후회**를 표현했다.
+   syn: [] | ant: []
+
+satisfaction [ko] ipa=sat‿is.fak.sjɔ̃ | meanings: 만족[명사]
+   e1: J'ai ressenti une grande **satisfaction** après le repas. || 나는 식사 후에 큰 **만족**을 느꼈다.
+   e2: Le sourire montre sa **satisfaction**. || 그 미소는 그의 **만족**을 보여준다.
+   e3: La réussite apporte toujours de la **satisfaction**. || 성공은 항상 **만족**을 가져온다.
+   syn: [plaisir, contentement, joie] | ant: []
+
+exploit [ko] ipa=ɛksplwa | meanings: 위업[명사] | 착취하다[동사]
+   e1: Il a réalisé un **exploit** incroyable aujourd'hui. || 그는 오늘 놀라운 **위업**을 이루었어요.
+   e2: L'entreprise a **exploité** ses ressources naturelles avec soin. || 그 기업은 자원을 신중하게 **착취했다**.
+   e3: Son **exploit** sportif a inspiré toute la ville. || 그의 스포츠 **위업**이 도시 전체에 영감을 주었어요.
+   syn: [accomplissement, réussite, extraction] | ant: []
+
+déconfiture [ko] ipa=dekɔ̃fi.tyʁ | meanings: 파산[명사] | 완패[명사]
+   e1: La **déconfiture** de l'entreprise a surpris tout le monde. || 그 회사의 **파산**은 모두를 놀라게 했다.
+   e2: L'équipe a subi une lourde **déconfiture** lors du match. || 그 팀은 경기에서 큰 **완패**를 당했다.
+   syn: [faillite, effondrement, déroute] | ant: []
+
+rebondir [ko] ipa=ʁəbɔ̃diʁ | meanings: 튀다, 반등하다[동사] | 재기하다, 회복하다[동사]
+   e1: La balle a **rebondi** sur le mur. || 공이 벽에서 **튕겼다**.
+   e2: Après l’échec, il a su **rebondir** rapidement. || 실패 후에 그는 **재기했다**.
+   e3: Le marché commence à **rebondir** doucement. || 시장이 서서히 **반등하고** 있다.
+   syn: [sauter, ricochetter, reprendre] | ant: []
+
+rebond [ko] ipa=ʁəbɔ̃ | meanings: 튀김[명사] | 반동[명사]
+   e1: Le ballon fait un fort **rebond** sur le sol. || 공이 바닥에서 강하게 **튀긴다**.
+   e2: Le marché a connu un **rebond** après la crise. || 시장은 위기 후에 **반동**을 경험했다.
+   e3: Le **rebond** de la balle est imprévisible. || 공의 **튀김**은 예측할 수 없다.
+   syn: [ricochet, repli, réaction] | ant: []
+
+recommencement [ko] ipa=ʁəkɔmɑ̃smɑ̃ | meanings: 재개[명사] | 다시 시작함[명사]
+   e1: Le **recommencement** de la saison est attendu. || 시즌의 **재개**가 기대된다.
+   e2: Le **recommencement** apporte de nouvelles opportunités. || **다시 시작함**은 새로운 기회를 가져온다.
+   syn: [redémarrage, renouveau] | ant: []
+
+renaissance personnelle [ko] ipa=- | meanings: 개인의재생,회복[표현]
+   e1: Après la crise, elle a connu une **renaissance personnelle**. || 그녀는 위기 후에 **부흥**을 경험했어요.
+   e2: La méditation a favorisé une **renaissance personnelle** profonde. || 명상은 깊은 개인적인 **회복**을 촉진했어요.
+   e3: Il partage son parcours de **renaissance personnelle** avec ses amis. || 그는 친구들과 그의 개인적인 **재생** 과정을 나눴어요.
+   syn: [renouveau personnel, réveil personnel, épanouissement personnel] | ant: []
+
+second souffle [ko] ipa=- | meanings: 재기, 체력 회복[표현]
+   e1: Après une pause, il a trouvé un **second souffle** pour courir. || 한 휴식 후, 그는 달리기를 위한 **재기**를 찾았다.
+   e2: Le chanteur a eu un **second souffle** sur scène ce soir. || 가수는 오늘 밤 무대에서 **재기**를 얻었다.
+   syn: [ressourcement, relance] | ant: []
+
+tournant décisif [ko] ipa=- | meanings: 결정적인 전환점[표현]
+   e1: Le **tournant décisif** du match a changé le destin de l'équipe. || 경기의 **결정적인 전환점**이 팀의 운명을 바꾸었다.
+   e2: Ce film montre le **tournant décisif** dans la vie du héros. || 이 영화는 주인공 인생의 **결정적인 전환점**을 보여준다.
+   e3: La découverte a marqué un **tournant décisif** dans la recherche. || 그 발견은 연구에서 **결정적인 전환점**을 의미했다.
+   syn: [moment clé, point tournant, moment décisif] | ant: []
+
+rebondissement [ko] ipa=ʁəbɔ̃dismɑ̃ | meanings: 반전[명사] | 튀어 오름[명사]
+   e1: Le film a un **rebondissement** inattendu à la fin. || 그 영화는 마지막에 예상치 못한 **반전**이 있어요.
+   e2: Le ballon a fait un **rebondissement** élevé sur le sol. || 공이 바닥에서 높게 **튕겼어요**.
+   e3: Un nouveau **rebondissement** change soudainement l’histoire. || 새로운 **반전**이 갑자기 이야기를 바꿔요.
+   syn: [revirement, changement, surprise] | ant: []
+
+résilience [ko] ipa=ʁe.zi.ljɑ̃s | meanings: 회복력[명사]
+   e1: La **résilience** est essentielle après une période difficile. || 어려운 시기 후에는 **회복력**이 중요해요.
+   e2: Cette plante montre une grande **résilience** au climat sec. || 이 식물은 건조한 기후에 대해 높은 **회복력**을 보여줍니다.
+   e3: La **résilience** d’un enfant peut être renforcée par le soutien familial. || 아이의 **회복력**은 가족의 지원으로 강화될 수 있습니다.
+   syn: [endurabilité, ténacité, solidité] | ant: []
+
+résilient [ko] ipa=ʁe.zi.ljɑ̃ | meanings: 탄력 있는[형용사] | 회복력 있는[형용사]
+   e1: Ce matériau est très **résilient** sous pression. || 이 재료는 압력에 매우 **탄력적**입니다.
+   e2: Elle est **résiliente** après les difficultés. || 그녀는 어려움 후에 매우 **회복력**이 있습니다.
+   syn: [élastique, endurant, robuste] | ant: []
+
+persévérance [ko] ipa=pɛʁseveʁɑ̃s | meanings: 인내[명사] | 끈기[명사]
+   e1: La **persévérance** est essentielle pour réussir. || **인내**는 성공하는 데 필수적이다.
+   e2: Elle montre beaucoup de **persévérance** dans son travail. || 그녀는 일에서 많은 **끈기**를 보인다.
+   syn: [constance, détermination, endurance] | ant: []
+
+persévérer [ko] ipa=pɛʁseveʁe | meanings: 끈기 있게 계속하다[동사]
+   e1: Elle doit **persévérer** pour réussir ses examens. || 그녀는 시험에 합격하기 위해 **계속해야** 해요.
+   e2: Même difficile, il a **persévéré** dans son projet. || 어려워도 그는 그의 프로젝트를 **계속했어요**.
+   e3: Pour apprendre une langue, il faut **persévérer** chaque jour. || 언어를 배우려면 매일 **계속해야** 해요.
+   syn: [tenir, continuer, soutenir] | ant: []
+
+détermination [ko] ipa=detɛʁminasjɔ̃ | meanings: 결심[명사] | 결정[명사]
+   e1: Sa **détermination** à réussir est admirable. || 그의 성공에 대한 **결심**은 감탄스럽다.
+   e2: La **détermination** de la date est importante. || 날짜의 **결정**이 중요하다.
+   e3: Elle montre beaucoup de **détermination** dans son travail. || 그녀는 자기 일에 많은 **결심**을 보인다.
+   syn: [résolution, fermeté, décision] | ant: []
+
+volonté [ko] ipa=vɔ.lɔ̃.te | meanings: 의지[명사] | 뜻[명사]
+   e1: Elle montre une grande **volonté** de réussir. || 그녀는 큰 **의지**를 보여줍니다.
+   e2: La **volonté** de changer est importante. || 변화에 대한 **의지**가 중요합니다.
+   e3: Sa **volonté** est claire et forte. || 그의 **뜻**은 명확하고 강합니다.
+   syn: [détermination, résolution, intention] | ant: [indécision]
+
+ténacité [ko] ipa=tenasite | meanings: 끈기[명사] | 집요함[명사]
+   e1: Elle a montré une grande **ténacité** au travail. || 그녀는 직장에서 큰 **끈기**를 보였다.
+   e2: Sa **ténacité** a permis de résoudre le problème rapidement. || 그의 **끈기** 덕분에 문제를 빠르게 해결했다.
+   e3: Il agit avec une **ténacité** incroyable pour atteindre ses buts. || 그는 목표를 달성하기 위해 놀라운 **집요함**으로 행동한다.
+   syn: [persévérance, détermination, acharnement] | ant: []
+
+tenace [ko] ipa=tənas | meanings: 끈질긴[형용사] | 완고한[형용사]
+   e1: Elle est **tenace** dans ses études malgré les obstacles. || 그녀는 장애물에도 불구하고 학업에 **끈질기다**.
+   e2: Il reste **tenace** sur ses idées sans changer d'avis. || 그는 자신의 생각에 대해 **완고하다** 변하지 않는다.
+   syn: [obstiné, déterminé, persistant] | ant: [faible, indécis]
+
+obstination [ko] ipa=ɔpstinasjɔ̃ | meanings: 완고함, 고집[명사]
+   e1: Son **obstination** l'a aidé à réussir. || 그의 **완고함**이 성공하는 데 도움이 되었어요.
+   e2: Elle fait preuve d'**obstination** dans son travail. || 그녀는 일에서 **고집**을 보입니다.
+   syn: [entêtement, ténacité, persévérance] | ant: []
+
+obstiné [ko] ipa=ɔps.tine | meanings: 완고한[형용사] | 고집 센[형용사]
+   e1: Il est **obstiné** à ne pas changer d'avis. || 그는 의견을 바꾸지 않으려는 **완고한** 태도이다.
+   e2: Elle est très **obstinée** dans ses décisions. || 그녀는 결정에 매우 **고집 센** 사람이다.
+   syn: [têtu, entêté, inflexible] | ant: [flexible, docile, souple]
+
+engagement personnel [ko] ipa=- | meanings: 개인적 약속[표현] | 개인의 책무[표현]
+   e1: Son **engagement personnel** est très important pour sa famille. || 그의 **개인적 약속**은 가족에게 매우 중요해요.
+   e2: Elle prend son **engagement personnel** au travail au sérieux. || 그녀는 일에서 자신의 **개인적인 책무**를 진지하게 받아들여요.
+   syn: [promesse personnelle, obligation personnelle] | ant: []
+
+s'engager [ko] ipa=s‿ɑ̃ɡaʒe | meanings: 참여하다, 약속하다[동사]
+   e1: Il **s'engage** dans ce projet important. || 그는 이 중요한 프로젝트에 **참여**한다.
+   e2: Nous **nous engageons** à respecter les règles. || 우리는 규칙을 지키기로 **약속**한다.
+   e3: Elle **s'engage** toujours pour aider les autres. || 그녀는 항상 다른 사람을 돕는 데 **참여**한다.
+   syn: [participer, promettre, se dévouer] | ant: []
+
+dévouement [ko] ipa=de.vu.mɑ̃ | meanings: 헌신[명사] | 희생[명사]
+   e1: Le **dévouement** de l'infirmière est admirable. || 간호사의 **헌신**은 감탄할 만하다.
+   e2: Son **dévouement** pour sa famille est profond. || 그의 가족에 대한 **헌신**은 깊다.
+   e3: Elle a montré un grand **dévouement** en aidant les autres. || 그녀는 다른 사람들을 돕는 데 큰 **희생**을 보였다.
+   syn: [altruisme, abnégation, sacrifice] | ant: []
+
+dévoué [ko] ipa=de.vwe | meanings: 헌신적인[형용사] | 충성된[형용사]
+   e1: Il est un employé **dévoué** à son travail. || 그는 자신의 일에 **헌신적인** 직원입니다.
+   e2: Elle est toujours **dévouée** à sa famille. || 그녀는 항상 가족에게 **충성된** 마음을 가지고 있습니다.
+   syn: [fidèle, engagé, loyal, attaché] | ant: []
+
+sacrifice [ko] ipa=sakʁifis | meanings: 희생[명사] | 제물[명사]
+   e1: Il a fait un grand **sacrifice** pour sa famille. || 그는 가족을 위해 큰 **희생**을 했다.
+   e2: Le prêtre prépare un **sacrifice** pour la cérémonie. || 사제가 의식을 위해 **제물**을 준비한다.
+   e3: Son **sacrifice** dans le travail est admirable. || 그의 일에 대한 **희생**은 존경스럽다.
+   syn: [abnégation, renoncement, offrande] | ant: []
+
+se sacrifier [ko] ipa=- | meanings: 희생하다[동사] | 자신을 바치다[동사]
+   e1: Il a **sacrifié** son temps pour aider ses amis. || 그는 친구들을 돕기 위해 자신의 시간을 **희생했다**.
+   e2: Elle est prête à **se sacrifier** pour sa famille. || 그녀는 가족을 위해 **자신을 바칠** 준비가 되어 있다.
+   syn: [s'abandonner, offrir, se dévouer] | ant: []
+
+altruisme [ko] ipa=altʁɥism | meanings: 이타주의[명사]
+   e1: L'**altruisme** est important dans toutes les communautés. || **이타주의**는 모든 공동체에서 중요하다.
+   e2: Elle montre toujours de l'**altruisme** envers les autres. || 그녀는 항상 다른 사람들에게 **이타주의**를 보여준다.
+   e3: L'**altruisme** peut inspirer de belles actions. || **이타주의**는 아름다운 행동에 영감을 줄 수 있다.
+   syn: [générosité, désintéressement, bonté] | ant: []
+
+altruiste [ko] ipa=altʁist | meanings: 이타적인 사람[명사] | 이타적인[형용사]
+   e1: Il est un **altruiste** dévoué à sa communauté. || 그는 자신의 공동체에 헌신하는 **이타적인 사람**입니다.
+   e2: Son comportement est très **altruiste**. || 그의 행동은 매우 **이타적**입니다.
+   syn: [généreux, désintéressé, humanitaire] | ant: [égoïste]
+
+magnanimité [ko] ipa=maɲanimi.te | meanings: 관대함[명사] | 도량[명사]
+   e1: La **magnanimité** de cette actrice est admirable. || 이 배우의 **관대함**은 감탄할 만해요.
+   e2: Sa **magnanimité** lui permet de pardonner facilement. || 그의 **관대함**은 쉽게 용서하게 만든다.
+   e3: La **magnanimité** est une qualité appréciée chez un leader. || **도량**은 지도자에게서 존중받는 자질이다.
+   syn: [générosité, clémence, largesse] | ant: []
+
+gratitude [ko] ipa=ɡʁati.tyd | meanings: 감사[명사]
+   e1: Je ressens une profonde **gratitude** envers mes parents. || 나는 부모님에 대한 깊은 **감사**를 느낀다.
+   e2: La **gratitude** éclaire son visage après le cadeau. || 선물 후에 그의 얼굴에 **감사**가 빛난다.
+   syn: [reconnaissance, remerciement, appréciation] | ant: []
+
+reconnaissance [ko] ipa=ʁəkɔnɛsɑ̃s | meanings: 인지,인식[명사] | 감사[명사]
+   e1: La **reconnaissance** des erreurs est importante. || 실수를 **인지**하는 것은 중요합니다.
+   e2: Elle a exprimé sa **reconnaissance** pour le cadeau. || 그녀는 선물에 대한 **감사**를 표현했습니다.
+   syn: [gratitude, remerciement, appréciation, identification, perception] | ant: []
+
+reconnaissant [ko] ipa=ʁəkɔnɛsɑ̃ | meanings: 감사하는[형용사] | 알아보는[형용사]
+   e1: Je suis **reconnaissant** pour ton aide sincère. || 나는 너의 진심 어린 도움에 **감사합니다**.
+   e2: Elle est **reconnaissante** envers ceux qui l'ont soutenue. || 그녀는 자신을 지지해준 사람들에게 **감사하고** 있다.
+   e3: Le professeur est **reconnaissant** pour les efforts des étudiants. || 교수님은 학생들의 노력에 **감사하고** 계십니다.
+   syn: [gratifiant, obligeant, merci] | ant: []
+
+ingratitude [ko] ipa=ɛ̃ɡʁatityd | meanings: 배은망덕[명사]
+   e1: Son **ingratitude** a blessé le cœur de sa mère. || 그의 **배은망덕**은 어머니의 마음을 상하게 했다.
+   e2: L'**ingratitude** est difficile à pardonner. || **배은망덕**은 용서하기 어렵다.
+   e3: Ils ont vécu l'**ingratitude** après tant de bienfaits. || 그들은 많은 은혜 후에 **배은망덕**을 경험했다.
+   syn: [médisance, indifférence, déloyauté] | ant: []
+
+ingrat [ko] ipa=ɛ̃ɡʁa | meanings: 은혜를 모르는[형용사] | 배은망덕한 사람[명사]
+   e1: Il est **ingrat** malgré toute l'aide reçue. || 그는 받은 모든 도움에도 불구하고 **은혜를 모르는** 사람이다.
+   e2: Il agit comme un véritable **ingrat** envers ses parents. || 그는 부모님에게 진정한 **배은망덕한 사람**처럼 행동한다.
+   syn: [méprisant, dévoyé] | ant: [reconnaissant]
+
+jalousie maladive [ko] ipa=- | meanings: 병적인 질투[표현]
+   e1: Il souffre de **jalousie maladive** envers son ami. || 그는 친구에 대한 **병적인 질투**를 겪고 있다.
+   e2: La **jalousie maladive** détruit souvent les relations. || **병적인 질투**는 종종 관계를 파괴한다.
+   e3: Son comportement révèle une **jalousie maladive** profonde. || 그의 행동은 깊은 **병적인 질투**를 드러낸다.
+   syn: [] | ant: []
+
+convoitise [ko] ipa=kɔ̃vwa.tiz | meanings: 탐욕[명사] | 열망[명사]
+   e1: La **convoitise** de l'argent peut causer des problèmes. || 돈에 대한 **탐욕**은 문제를 일으킬 수 있어요.
+   e2: Elle a exprimé sa **convoitise** pour ce poste important. || 그녀는 그 중요한 직책에 대한 **열망**을 표현했어요.
+   e3: La **convoitise** mène parfois à des conflits entre amis. || **탐욕**은 때때로 친구들 사이의 갈등으로 이어져요.
+   syn: [avidité, désir, appétit, envie] | ant: []
+
+rivalité [ko] ipa=ʁi.va.li.te | meanings: 경쟁[명사]
+   e1: La **rivalité** entre les équipes est intense. || 팀들 사이의 **경쟁**은 매우 치열하다.
+   e2: Ils ont une forte **rivalité** depuis des années. || 그들은 여러 해 동안 강한 **경쟁**을 해왔다.
+   syn: [compétition, conflit, antagonisme] | ant: []
+
+rival [ko] ipa=ʁi.val | meanings: 경쟁자[명사]
+   e1: Il est un **rival** redoutable en course. || 그는 경주에서 강력한 **경쟁자**다.
+   e2: Les deux entreprises sont des **rivals** sur le marché. || 두 회사는 시장에서 **경쟁자**들이다.
+   e3: Son **rival** l'a félicité pour sa victoire. || 그의 **경쟁자**가 그의 승리를 축하했다.
+   syn: [adversaire, concurrent, compétiteur] | ant: []
+
+émulation [ko] ipa=emylasjɔ̃ | meanings: 모방[명사] | 경쟁[명사]
+   e1: L'**émulation** entre artistes stimule la créativité. || 예술가들 사이의 **모방**은 창의력을 자극한다.
+   e2: L'**émulation** sportive rend le match passionnant. || 스포츠에서의 **경쟁**은 경기를 흥미롭게 만든다.
+   syn: [imitation, rivalité] | ant: []
+
+esprit d'équipe [ko] ipa=- | meanings: 팀워크[명사] | 단결심[명사]
+   e1: L'**esprit d'équipe** est essentiel pour réussir un projet. || **팀워크**는 프로젝트를 성공하는 데 필수적이다.
+   e2: Son **esprit d'équipe** a renforcé la motivation du groupe. || 그의 **단결심**은 그룹의 동기를 강화했다.
+   syn: [cohésion, solidarité, collaboration] | ant: []
+
+humanisme [ko] ipa=ymanisme | meanings: 인문주의[명사]
+   e1: L'**humanisme** valorise la dignité humaine. || **인문주의**는 인간의 존엄을 중요시합니다.
+   e2: L'**humanisme** encourage l'éducation et la culture. || **인문주의**는 교육과 문화를 장려합니다.
+   syn: [philosophie humaniste, pensée humaniste] | ant: []
+
+malentendu [ko] ipa=malɑ̃tɑ̃dy | meanings: 오해[명사]
+   e1: Le **malentendu** a été vite clarifié. || 그 **오해**는 곧바로 명확해졌다.
+   e2: Un **malentendu** peut gâcher une amitié. || **오해**는 우정을 망칠 수 있다.
+   syn: [quiproquo, méprise, confusion] | ant: []
+
+quiproquo [ko] ipa=kipʁɔko | meanings: 오해[명사] | 착각[명사]
+   e1: Le **quiproquo** a causé un malentendu entre eux. || 그 **오해**는 그들 사이에 오해를 일으켰다.
+   e2: Il y a un **quiproquo** sur le sens de cette phrase. || 이 문장의 의미에 **오해**가 있다.
+   e3: Elle a eu un **quiproquo** en pensant que j'étais en colère. || 그녀는 내가 화났다고 **착각**했다.
+   syn: [malentendu, confusion] | ant: []
+
+réconciliation [ko] ipa=ʁekɔ̃siljasjɔ̃ | meanings: 화해[명사]
+   e1: La **réconciliation** a été célébrée par toute la communauté. || **화해**는 모든 공동체에 의해 축하받았습니다.
+   e2: Ils ont réussi à trouver la **réconciliation** après le conflit. || 그들은 갈등 후에 **화해**를 찾는 데 성공했습니다.
+   syn: [rapprochement, conciliation, pacification] | ant: []
+
+absolution [ko] ipa=apsɔlysjɔ̃ | meanings: 면죄[명사]
+   e1: Le prêtre a donné l'**absolution** au pénitent. || 신부가 참회자에게 **면죄**를 주었다.
+   e2: Elle cherche l'**absolution** pour ses erreurs passées. || 그녀는 자신의 과거 실수에 대한 **면죄**를 찾고 있다.
+   e3: L'**absolution** apporte la paix au cœur troublé. || **면죄**는 괴로운 마음에 평화를 가져온다.
+   syn: [pardon, réhabilitation, excuse] | ant: []
+
+rancœur [ko] ipa=ʁɑ̃kœʁ | meanings: 원한[명사]
+   e1: Elle garde une **rancœur** contre lui depuis longtemps. || 그녀는 그에게 오랫동안 **원한**을 가지고 있어요.
+   e2: La **rancœur** ne mène jamais à la paix. || **원한**은 결코 평화로 이어지지 않아요.
+   syn: [ressentiment, grudge] | ant: []
+
+oubli [ko] ipa=ubli | meanings: 망각[명사]
+   e1: L'**oubli** est courant avec l'âge. || 나이가 들면서 **망각**이 흔합니다.
+   e2: Il y a un risque d'**oubli** des détails importants. || 중요한 세부 사항을 **잊을** 위험이 있습니다.
+   e3: L'**oubli** des clés a causé un léger problème. || 열쇠를 **잊어버려서** 작은 문제가 생겼어요.
+   syn: [amnésie, négligence, néant] | ant: []
+
+tourner la page [ko] ipa=- | meanings: 새로운 시작을 하다, 잊고 앞을 보다[표현]
+   e1: Il est temps de **tourner la page** et de commencer une nouvelle vie. || 새로운 시작을 위해 **페이지를 넘길** 시간이에요.
+   e2: Après cette épreuve, elle a décidé de **tourner la page**. || 그 일 후에 그녀는 **페이지를 넘기기로** 결심했어요.
+   e3: Pour avancer, il faut parfois savoir **tourner la page**. || 앞으로 나아가려면 때때로 **페이지를 넘기는** 법을 알아야 해요.
+   syn: [passer à autre chose, aller de l'avant] | ant: []
+
+avancer [ko] ipa=avɑ̃se | meanings: 앞으로 나아가다[동사] | 진보하다[동사]
+   e1: Le train **avance** lentement sur la voie. || 기차가 선로 위에서 천천히 **나아가고** 있다.
+   e2: La recherche scientifique **avance** grâce aux nouvelles technologies. || 과학 연구는 새로운 기술 덕분에 **진보한다**.
+   syn: [progresser, évoluer] | ant: []
+
+progrès [ko] ipa=pʁɔ.ɡʁɛ | meanings: 발전[명사] | 진보[명사]
+   e1: Le **progrès** de la science est fascinant. || 과학의 **발전**은 매혹적입니다.
+   e2: Les **progrès** sociaux sont importants pour la paix. || 사회적 **진보**는 평화를 위해 중요합니다.
+   e3: Nous devons célébrer le **progrès** technologique. || 우리는 기술 **발전**을 축하해야 합니다.
+   syn: [avancement, amélioration, développement] | ant: []
+
+régénération [ko] ipa=ʁeʒeneʁasjɔ̃ | meanings: 재생[명사]
+   e1: La **régénération** de la peau est naturelle. || 피부의 **재생**은 자연스러워요.
+   e2: Cette plante favorise la **régénération** après l'hiver. || 이 식물은 겨울 후에 **재생**을 촉진해요.
+   syn: [renouvellement, restauration, revitalisation] | ant: []
+
+reconstruire [ko] ipa=ʁəkɔ̃stʁɥiʁ | meanings: 재건하다[동사] | 복구하다[동사]
+   e1: Ils vont **reconstruire** la maison après l'incendie. || 그들은 화재 후에 집을 **재건**할 것이다.
+   e2: Nous devons **reconstruire** la ville détruite par la tempête. || 우리는 폭풍으로 파괴된 도시를 **재건**해야 한다.
+   e3: Le gouvernement aide à **reconstruire** les routes endommagées. || 정부는 손상된 도로들을 **복구하는** 데 도움을 준다.
+   syn: [rebâtir, réhabiliter, restaurer] | ant: []
+
+cheminement [ko] ipa=ʃəminmɑ̃ | meanings: 진행[명사] | 경로[명사]
+   e1: Le **cheminement** du projet est satisfaisant. || 프로젝트의 **진행**이 만족스럽습니다.
+   e2: Le **cheminement** dans la forêt est sûr. || 숲속 **경로**가 안전합니다.
+   syn: [avancement, parcours, progression] | ant: []
+
+discernement [ko] ipa=disɛʁnmɑ̃ | meanings: 판단력[명사] | 분별력[명사]
+   e1: Le juge a utilisé son **discernement** pour décider. || 판사는 자신의 **판단력**을 사용하여 결정했다.
+   e2: Il montre beaucoup de **discernement** dans ses choix. || 그는 선택에서 많은 **분별력**을 보여준다.
+   e3: Le **discernement** est essentiel en situation difficile. || **판단력**은 어려운 상황에서 꼭 필요하다.
+   syn: [jugement, prudence, sagacité] | ant: []
+
+remise en question [ko] ipa=- | meanings: 재고, 재검토[표현]
+   e1: La **remise en question** des idées est souvent nécessaire. || 아이디어의 **재검토**는 종종 필요해요.
+   e2: Elle a fait une **remise en question** approfondie de son projet. || 그녀는 자신의 프로젝트에 대해 깊은 **재고**를 했어요.
+   syn: [réexamen, révision, contestacion] | ant: []
+
+se remettre en question [ko] ipa=- | meanings: 스스로를 되돌아보다[표현] | 자기 반성하다[표현]
+   e1: Elle a décidé de **se remettre en question** après l'échec. || 그녀는 실패 후에 **되돌아보기로** 결정했다.
+   e2: Il faut parfois **se remettre en question** pour grandir. || 성장하기 위해 때로는 **반성하는** 것이 필요하다.
+   syn: [se questionner, se douter, se critiquer] | ant: []
+
+éveil de conscience [ko] ipa=- | meanings: 자각[표현]
+   e1: L'**éveil de conscience** a changé sa vie. || 그의 삶을 바꾼 것은 **자각**이었습니다.
+   e2: Un **éveil de conscience** peut inspirer le changement. || **자각**은 변화를 영감을 줄 수 있습니다.
+   syn: [prise de conscience, réveil] | ant: []
+
+prise de conscience [ko] ipa=- | meanings: 자각[명사]
+   e1: La **prise de conscience** a changé sa vie. || 그의 삶을 바꾼 **자각**이 있었다.
+   e2: La **prise de conscience** est le début du changement. || **자각**은 변화의 시작이다.
+   syn: [réalisation, compréhension] | ant: []
+
+prendre conscience [ko] ipa=- | meanings: 깨닫다[동사]
+   e1: Elle a **pris conscience** de l'importance du projet. || 그녀는 그 프로젝트의 중요성을 **깨달았다**.
+   e2: Nous devons **prendre conscience** des effets du changement climatique. || 우리는 기후 변화의 영향을 **깨달아야** 한다.
+   e3: Il a progressivement **pris conscience** de ses responsabilités. || 그는 점차 자신의 책임을 **깨달았다**.
+   syn: [réaliser, s'apercevoir, se rendre compte] | ant: []
+
+révélation [ko] ipa=ʁeve.la.sjɔ̃ | meanings: 폭로[명사] | 계시[명사]
+   e1: La **révélation** du secret a surpris tout le monde. || 비밀의 **폭로**가 모두를 놀라게 했어요.
+   e2: Cette **révélation** divine a changé sa vie. || 이 신성한 **계시**가 그의 삶을 바꾸었어요.
+   e3: La **révélation** de la vérité a apporté la paix. || 진실이 **밝혀지면서** 평화가 찾아왔어요.
+   syn: [divulgation, aveu, dévoilement, manifestation] | ant: []
+
+illumination [ko] ipa=iluminasjɔ̃ | meanings: 조명[명사] | 계몽[명사]
+   e1: L'**illumination** de la chambre est douce le soir. || 방의 **조명**이 저녁에 부드럽다.
+   e2: Une soudaine **illumination** lui a apporté la solution. || 갑작스러운 **깨달음**이 그에게 해답을 가져다주었다.
+   syn: [éclairage, lumière, clarté, révélation, compréhension] | ant: []
+
+épiphanie [ko] ipa=epifan.i | meanings: 주현절[명사] | 직관적인 깨달음[명사]
+   e1: L'**épiphanie** est célébrée en janvier. || **주현절**은 1월에 기념된다.
+   e2: Il a eu une **épiphanie** soudaine sur le problème. || 그는 문제에 대해 갑작스러운 **직관적인 깨달음**을 얻었다.
+   syn: [manifestation, révélation, illumination] | ant: []
+
+auto-critique [ko] ipa=otokʁitik | meanings: 자기비판[명사]
+   e1: L'**auto-critique** aide à grandir. || **자기비판**은 성장에 도움이 된다.
+   e2: Elle pratique l'**auto-critique** chaque soir. || 그녀는 매일 저녁 **자기비판**을 한다.
+   e3: L'**auto-critique** est essentielle au progrès. || **자기비판**은 발전에 필수적이다.
+   syn: [autocritique, auto-analyse, autoévaluation] | ant: []

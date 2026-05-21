@@ -20,8 +20,8 @@
   "source_lang": "en",
   "exam_type": "AWL",
   "level": "1",
-  "category": "academic",
-  "display_order": 100,
+  "category": "exam",
+  "display_order": 40,
   "target_langs": [
     "ko",
     "en"

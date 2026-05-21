@@ -12,7 +12,7 @@ export default function OnboardingWelcome() {
       <View className="flex-1 justify-between px-6 pb-8 pt-12">
         <View>
           <Text className="text-4xl font-bold text-black dark:text-white">
-            TypeWord
+            MoaVoca
           </Text>
           <Text className="mt-3 text-lg text-gray-600 dark:text-gray-300">
             {t('onboarding.welcome.description')}

@@ -5,7 +5,7 @@
  * Schema changes: bump SCHEMA_VERSION and add a migration block to runMigrations().
  */
 
-export const SCHEMA_VERSION = 15;
+export const SCHEMA_VERSION = 19;
 
 export const SCHEMA_V1 = `
 PRAGMA journal_mode = WAL;
@@ -127,4 +127,46 @@ export const SCHEMA_V15 = `
 DROP INDEX IF EXISTS idx_user_words_unique;
 CREATE UNIQUE INDEX idx_user_words_unique
   ON user_words(COALESCE(book_id, ''), word, reading_key);
+`;
+
+// V16: persistent study-date table. Streak qualification used to be derived
+// from user_words on the fly, which meant deleting wordlists wiped past
+// activity from the calendar. study_dates stores qualified streak-dates
+// independently so calendar/streak survive any wordlist deletion.
+export const SCHEMA_V16 = `
+CREATE TABLE IF NOT EXISTS study_dates (
+  date          TEXT PRIMARY KEY NOT NULL,
+  qualified_at  INTEGER NOT NULL
+);
+`;
+
+// V17: distinguish manually-typed vs bulk-curated word adds for streak.
+// Bulk import of a curated wordlist (e.g. tapping "add HSK 1 to my library")
+// creates many rows at once with a single button press — counting those
+// toward the streak's add path makes the streak trivially gameable. The
+// `source` column is set to 'curated' for those imports so the streak query
+// can exclude them. Default 'manual' preserves prior behavior for existing
+// rows.
+export const SCHEMA_V17 = `
+ALTER TABLE user_words ADD COLUMN source TEXT NOT NULL DEFAULT 'manual';
+`;
+
+// V18: curated wordlist sync state. Track which curated wordlist a book
+// originated from (curated_wordlist_id) plus the last content_version we
+// pulled (content_version) and the server timestamp of the newest row we
+// applied (last_synced_at). Together these let the launch-time sync ask
+// "anything new for this list since I last looked?" and pull only the
+// diff. NULL curated_wordlist_id = manual book (never synced from curated).
+export const SCHEMA_V18 = `
+ALTER TABLE books ADD COLUMN curated_wordlist_id TEXT;
+ALTER TABLE books ADD COLUMN content_version INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE books ADD COLUMN last_synced_at INTEGER NOT NULL DEFAULT 0;
+`;
+
+// V19: report context for Phase 8 (AI judge + auto-fix loop). source_lang
+// and target_lang let the server group reports by lang pair and pass that
+// context to the judge prompt.
+export const SCHEMA_V19 = `
+ALTER TABLE pending_reports ADD COLUMN source_lang TEXT;
+ALTER TABLE pending_reports ADD COLUMN target_lang TEXT;
 `;

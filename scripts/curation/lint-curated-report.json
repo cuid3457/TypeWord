@@ -1,0 +1,456 @@
+{
+  "totalEntries": 7287,
+  "scanned": 7287,
+  "flagsCount": 53,
+  "byType": {
+    "MARKER_HAS_PARTICLE": 20,
+    "HEADWORD_OFF": 19,
+    "KO_SOV": 23,
+    "SELF_SYN_PAREN": 1,
+    "SYN_LANG_MIX": 3,
+    "FALSE_FRIEND": 1,
+    "ELISION_VIOLATION": 2
+  },
+  "flags": [
+    {
+      "slug": "hsk-1",
+      "word": "个",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:휴대전화를"
+      ]
+    },
+    {
+      "slug": "delf-a1-part-1",
+      "word": "devoir",
+      "lang": "en",
+      "issues": [
+        "HEADWORD_OFF:e3:\"doive\"≠devoir"
+      ]
+    },
+    {
+      "slug": "delf-a1-part-1",
+      "word": "être",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:이다«학생"
+      ]
+    },
+    {
+      "slug": "delf-a1-part-2",
+      "word": "mer",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:바다«가 잔잔하다",
+        "KO_SOV:바다«에서 수영하는 것을 좋아한다",
+        "KO_SOV:바다«위를 항해한다"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "apporter",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:도움을"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "blessé",
+      "lang": "en",
+      "issues": [
+        "SELF_SYN_PAREN:blessé(e)"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "consulter",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"ai consulté\"≠consulter"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "glace",
+      "lang": "en",
+      "issues": [
+        "HEADWORD_OFF:e2:\"miroir\"≠glace"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "lit",
+      "lang": "en",
+      "issues": [
+        "HEADWORD_OFF:e2:\"est lue\"≠lit"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "s'arrêter",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e3:\"s'est arrêtée\"≠s'arrêter"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "se dépêcher",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e3:\"s'est dépêchée\"≠se dépêcher"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-1",
+      "word": "se tromper",
+      "lang": "en",
+      "issues": [
+        "HEADWORD_OFF:e1:\"me suis trompé\"≠se tromper"
+      ]
+    },
+    {
+      "slug": "hsk-2",
+      "word": "好吃",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:맛있다«고 생각한다"
+      ]
+    },
+    {
+      "slug": "hsk-2",
+      "word": "打篮球",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:농구를",
+        "MARKER_HAS_PARTICLE:농구를"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "décider",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"ai décidé\"≠décider"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "dépenser",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"ai dépensé\"≠dépenser"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "e-mail",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:이메일을",
+        "MARKER_HAS_PARTICLE:이메일을",
+        "MARKER_HAS_PARTICLE:이메일을"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "faire la bise",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e3:\"font la bise\"≠faire la bise"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "master",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"maître\"≠master"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "mémoriser",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"ai mémorisé\"≠mémoriser"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "nier",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:부인할«수 없다"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "payer",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"paie\"≠payer;e2:\"paie\"≠payer"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "persuader",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"ai persuadé\"≠persuader"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "raconter",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:이야기했다«웃긴 이야기를"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "réservation",
+      "lang": "ko",
+      "issues": [
+        "SYN_LANG_MIX:booking"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "retenir",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:기억할«수 있다"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "se réconcilier",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"se sont réconciliés\"≠se réconcilier"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "se rencontrer",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e2:\"se sont rencontrés\"≠se rencontrer"
+      ]
+    },
+    {
+      "slug": "delf-a2-part-2",
+      "word": "téléphoner",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:전화를",
+        "MARKER_HAS_PARTICLE:전화를",
+        "MARKER_HAS_PARTICLE:전화를"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-1",
+      "word": "hériter",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:상속받을"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-2",
+      "word": "laideur",
+      "lang": "ko",
+      "issues": [
+        "SYN_LANG_MIX:ugliness"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-2",
+      "word": "lecture",
+      "lang": "ko",
+      "issues": [
+        "FALSE_FRIEND:lecture has forbidden meaning \"강의\" (correct: 읽기)"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-2",
+      "word": "mécénat",
+      "lang": "ko",
+      "issues": [
+        "SYN_LANG_MIX:sponsoring"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-2",
+      "word": "rôle",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:역할«이 중요해요",
+        "KO_SOV:역할«은 가르치는 것입니다",
+        "KO_SOV:역할«을 잘 해요"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-2",
+      "word": "titulariser",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:정규직으로 임명하기를"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-3",
+      "word": "déchet toxique",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"des déchets toxiques\"≠déchet toxique;e2:\"Les déchets toxiques\"≠déchet toxique;e3:\"les déchets toxiques\"≠déchet toxique"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-3",
+      "word": "domotique",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:도모티크를"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-3",
+      "word": "hashtag",
+      "lang": "ko",
+      "issues": [
+        "ELISION_VIOLATION:Le hashtag"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "se sacrifier",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e2:\"s'est sacrifiée\"≠se sacrifier"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "d'autre part",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:한편으로"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "pour conclure",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:결론으로",
+        "MARKER_HAS_PARTICLE:마지막으로",
+        "MARKER_HAS_PARTICLE:마지막으로"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "haïr",
+      "lang": "ko",
+      "issues": [
+        "ELISION_VIOLATION:Je haïs"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "généraliser",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:일반화할«때 조심해야 합니다"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "obstiné",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:고집을"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "prendre conscience",
+      "lang": "ko",
+      "issues": [
+        "HEADWORD_OFF:e1:\"pris conscience\"≠prendre conscience;e3:\"pris conscience\"≠prendre conscience"
+      ]
+    },
+    {
+      "slug": "delf-b1-part-4",
+      "word": "à condition que",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:조건으로"
+      ]
+    },
+    {
+      "slug": "jlpt-n5-part-1",
+      "word": "まずい",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:곤란할«수 있다",
+        "KO_SOV:맛없다«고 들었다"
+      ]
+    },
+    {
+      "slug": "jlpt-n5-part-1",
+      "word": "海",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:바다«에서 수영해요",
+        "KO_SOV:바다«를 건넜어요",
+        "KO_SOV:바다«는 조용해요"
+      ]
+    },
+    {
+      "slug": "toeic-600",
+      "word": "cause",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:야기할«수 있다"
+      ]
+    },
+    {
+      "slug": "toeic-600",
+      "word": "choose",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:선택할«수 있어요"
+      ]
+    },
+    {
+      "slug": "toeic-600",
+      "word": "forward",
+      "lang": "ko",
+      "issues": [
+        "MARKER_HAS_PARTICLE:앞으로"
+      ]
+    },
+    {
+      "slug": "toeic-600",
+      "word": "role",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:역할«했다",
+        "KO_SOV:역할«은 팀을 지원하는 것이다"
+      ]
+    },
+    {
+      "slug": "awl-part-1",
+      "word": "role",
+      "lang": "ko",
+      "issues": [
+        "KO_SOV:역할«을 했다",
+        "KO_SOV:역할«을 가지고 있다"
+      ]
+    }
+  ]
+}

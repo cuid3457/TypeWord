@@ -11,49 +11,49 @@ const POS_MAP: Record<string, Record<string, string>> = {
     preposition: "전치사", conjunction: "접속사", interjection: "감탄사",
     pronoun: "대명사", determiner: "관형사", particle: "조사",
     "proper noun": "고유명사", abbreviation: "약어", prefix: "접두사", suffix: "접미사",
-    expression: "수식",
+    expression: "표현", numeral: "수사", symbol: "기호",
   },
   ja: {
     noun: "名詞", verb: "動詞", adjective: "形容詞", adverb: "副詞",
     preposition: "前置詞", conjunction: "接続詞", interjection: "感嘆詞",
     pronoun: "代名詞", determiner: "連体詞", particle: "助詞",
     "proper noun": "固有名詞", abbreviation: "略語", prefix: "接頭辞", suffix: "接尾辞",
-    expression: "数式",
+    expression: "表現", numeral: "数詞", symbol: "記号",
   },
   zh: {
     noun: "名词", verb: "动词", adjective: "形容词", adverb: "副词",
     preposition: "介词", conjunction: "连词", interjection: "叹词",
     pronoun: "代词", determiner: "限定词", particle: "助词",
     "proper noun": "专有名词", abbreviation: "缩写", prefix: "前缀", suffix: "后缀",
-    expression: "表达式",
+    expression: "表达", numeral: "数词", symbol: "符号",
   },
   es: {
     noun: "sustantivo", verb: "verbo", adjective: "adjetivo", adverb: "adverbio",
     preposition: "preposición", conjunction: "conjunción", interjection: "interjección",
     pronoun: "pronombre", determiner: "determinante",
     "proper noun": "nombre propio", abbreviation: "abreviatura",
-    expression: "expresión",
+    expression: "expresión", numeral: "numeral", symbol: "símbolo",
   },
   fr: {
     noun: "nom", verb: "verbe", adjective: "adjectif", adverb: "adverbe",
     preposition: "préposition", conjunction: "conjonction", interjection: "interjection",
     pronoun: "pronom", determiner: "déterminant",
     "proper noun": "nom propre", abbreviation: "abréviation",
-    expression: "expression",
+    expression: "expression", numeral: "numéral", symbol: "symbole",
   },
   de: {
     noun: "Nomen", verb: "Verb", adjective: "Adjektiv", adverb: "Adverb",
     preposition: "Präposition", conjunction: "Konjunktion", interjection: "Interjektion",
     pronoun: "Pronomen", determiner: "Artikel",
     "proper noun": "Eigenname", abbreviation: "Abkürzung",
-    expression: "Ausdruck",
+    expression: "Ausdruck", numeral: "Numerale", symbol: "Symbol",
   },
   it: {
     noun: "nome", verb: "verbo", adjective: "aggettivo", adverb: "avverbio",
     preposition: "preposizione", conjunction: "congiunzione", interjection: "interiezione",
     pronoun: "pronome", determiner: "determinante",
     "proper noun": "nome proprio", abbreviation: "abbreviazione",
-    expression: "espressione",
+    expression: "espressione", numeral: "numerale", symbol: "simbolo",
   },
   pt: {
     noun: "substantivo", verb: "verbo", adjective: "adjetivo", adverb: "advérbio",
@@ -153,10 +153,15 @@ function fixPos(pos: string, validPos: Set<string>): string {
   return bestDist <= Math.ceil(Math.max(pos.length, best.length) * 0.4) ? best : pos;
 }
 
-/** Minimum relevanceScore to keep a meaning. */
-const MIN_RELEVANCE = 40;
-/** Cap meanings — language learners only need the most common senses. */
-const MAX_MEANINGS = 2;
+/** Minimum relevanceScore to keep a meaning. Raised from 40 → 60 (2026-05-20)
+ *  so only everyday-frequency senses survive — archaic / literary / compound-
+ *  only senses get filtered. The relevance threshold (not a hard count cap)
+ *  is now the primary filter for "is this sense worth showing a learner". */
+const MIN_RELEVANCE = 60;
+/** Runaway safety net only. Real filtering is via MIN_RELEVANCE. Set
+ *  generous so true polysemy (배 belly/pear/ship, 차다 cold/kick/fill) survives
+ *  while still capping pathological runs of archaic glosses. */
+const MAX_MEANINGS = 5;
 
 /** Languages with grammatical gender on nouns. */
 const GENDERED_LANGS = new Set(["de", "fr", "es", "it", "pt", "ru"]);
@@ -559,24 +564,77 @@ function deduplicateMarkers(text: string, word: string, lang: string): string {
   return result;
 }
 
+/**
+ * Extends a marker rightward when the AI clipped an inflectional suffix.
+ * Pattern: `**X**Y` where Y starts with letter chars and there's NO
+ * whitespace between closing ** and Y → join into `**XY**`.
+ *
+ * Common case: "She **promote**s him." → "She **promotes** him."
+ * Also: "Ich **arbeit**ete" → "Ich **arbeitete**"; "Elle **promo**ut" →
+ * "Elle **promout**" (technically wrong tense but at least the marker is whole).
+ *
+ * CJK with particles (ja/zh) is intentionally skipped — particles like
+ * は/が/を/的/了 are also \p{L} characters and would cause false-joins.
+ * Korean is special-cased: only verb-stem endings (하다/되다/이다/지다/...)
+ * are joined, since 을/를/이/가/은/는 are particles, not verb endings.
+ */
+function extendMarkerForInflection(text: string, lang: string): string {
+  if (!text || !text.includes("**")) return text;
+  if (lang === "ja" || lang === "zh" || lang === "zh-CN" || lang === "zh-TW") {
+    return text;
+  }
+  // Linear scan via split-on-** to avoid regex cross-marker matches
+  // (a naive `\*\*(.+?)\*\*(\p{L}+)` greedily spans across marker pairs).
+  // Even-indexed segments are unmarked; odd-indexed are inside markers.
+  const parts = text.split("**");
+  for (let i = 1; i < parts.length - 1; i += 2) {
+    const after = parts[i + 1];
+    if (!after) continue;
+    let extension = "";
+    if (lang === "ko") {
+      // Korean: verb-stem endings only. Particles (을/를/이/가/은/는/에/의/...)
+      // are letters too but must stay OUTSIDE the marker.
+      const m = after.match(/^(하다|되다|이다|시키다|지다|드리다|하기|되기|시키기|지기|하는|되는|시키는|지는|한|된|시킨|시켰|했|됐|졌|했다|됐다|졌다)/);
+      if (m) extension = m[1];
+    } else {
+      // Latin / Cyrillic / Greek / etc: take immediate letter chars.
+      const m = after.match(/^(\p{L}+)/u);
+      if (m) extension = m[1];
+    }
+    if (extension) {
+      parts[i] = parts[i] + extension;
+      parts[i + 1] = after.slice(extension.length);
+    }
+  }
+  return parts.join("**");
+}
+
 function fixMarkersInText(
   text: string,
   word: string,
   lang: string,
+  preserveExistingMarkers = false,
 ): string {
   if (!text) return text;
 
   if (text.includes("**")) {
     let result = deduplicateMarkers(text, word, lang);
+    // Pull clipped inflectional suffixes inside the marker before
+    // validation, so the marker contains the full inflected form.
+    result = extendMarkerForInflection(result, lang);
     // Validate that the marked content is actually a (case-insensitive,
     // diacritic-stripped) substring of the target `word`. If not, the
     // model has marked the wrong word — strip the existing markers and
     // fall through to re-add them at the correct position. Skips the
     // check for empty `word` (translation cases where the def is empty).
+    // preserveExistingMarkers=true: trust the AI's mark even if literal
+    // match fails. Used for source-language sentences where the headword
+    // appears in conjugated/inflected form (e.g. "vais" for "aller") and
+    // the AI's mark is the only reliable signal.
     if (word) {
       const parts = result.split("**");
       const marked = parts.length >= 3 ? parts[1] : "";
-      if (marked && !markerMatchesWord(marked, word)) {
+      if (marked && !markerMatchesWord(marked, word) && !preserveExistingMarkers) {
         result = result.replace(/\*\*/g, "");
       } else {
         for (let i = 1; i < result.split("**").length; i += 2) {
@@ -704,19 +762,19 @@ export function fixExampleMarkers(
     }
 
     // Sentence is in the SOURCE language and must contain the lookup word
-    // verbatim — apply marker fix only. The dispute rewriter would distort
-    // the headword presence requirement here, so it's skipped.
-    const sentence = fixMarkersInText(sent, headword, sourceLang);
-    const def = definitions?.[ex.meaningIndex ?? 0] ?? definitions?.[0] ?? "";
-    // Translation is in the TARGET language — apply dispute rewrites so
-    // disputed naming (e.g. 일본해 → 동해 in Korean output) gets normalized
-    // even when the AI ignores the prompt instruction. Contextual rewrites
-    // run alongside (e.g. 김치/泡菜 disambiguation when headword matches).
+    // verbatim or in inflected form. The dispute rewriter would distort the
+    // headword presence requirement here, so it's skipped.
+    // preserveExistingMarkers=true: when the AI fix pass has already marked
+    // an inflected form (e.g. "vais" for "aller"), the literal-substring
+    // markerMatchesWord would otherwise strip it as "wrong word". Trust the
+    // AI's source-side mark since it has full context (POS, meanings).
+    const sentence = fixMarkersInText(sent, headword, sourceLang, true);
+    // Translation is plain prose — strip any ** markers the AI might still
+    // emit despite the prompt rule, then apply dispute rewrites so disputed
+    // naming (e.g. 일본해 → 동해 in Korean output) gets normalized regardless.
+    const transStripped = (trans ?? "").replace(/\*\*/g, "");
     const translation = applyContextualDisputeRewrites(
-      applyDisputeRewrites(
-        fixMarkersInText(trans, def, targetLang),
-        targetLang,
-      ),
+      applyDisputeRewrites(transStripped, targetLang),
       targetLang,
       headword,
     );

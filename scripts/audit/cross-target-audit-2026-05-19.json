@@ -1,0 +1,3331 @@
+[
+  {
+    "source": "ko",
+    "target": "en",
+    "word": "학교",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "school"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 93
+  },
+  {
+    "source": "ko",
+    "target": "ja",
+    "word": "학교",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "学校"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 94
+  },
+  {
+    "source": "ko",
+    "target": "zh-CN",
+    "word": "학교",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "学校"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3498,
+    "tokensOut": 94
+  },
+  {
+    "source": "ko",
+    "target": "es",
+    "word": "학교",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "escuela"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 101
+  },
+  {
+    "source": "ko",
+    "target": "fr",
+    "word": "학교",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "école"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 95
+  },
+  {
+    "source": "ko",
+    "target": "de",
+    "word": "학교",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "Schule"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 95
+  },
+  {
+    "source": "ko",
+    "target": "it",
+    "word": "학교",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "scuola"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3476,
+    "tokensOut": 96
+  },
+  {
+    "source": "ko",
+    "target": "en",
+    "word": "약속",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "promise, appointment"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 101
+  },
+  {
+    "source": "ko",
+    "target": "ja",
+    "word": "약속",
+    "translatedPOS": [
+      ""
+    ],
+    "translatedDef": [
+      "約束, 名詞"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 94
+  },
+  {
+    "source": "ko",
+    "target": "zh-CN",
+    "word": "약속",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "约定，承诺"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3499,
+    "tokensOut": 96
+  },
+  {
+    "source": "ko",
+    "target": "es",
+    "word": "약속",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "promesa, compromiso"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 105
+  },
+  {
+    "source": "ko",
+    "target": "fr",
+    "word": "약속",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "promesse, rendez-vous"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 107
+  },
+  {
+    "source": "ko",
+    "target": "de",
+    "word": "약속",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "Versprechen, Abmachung"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 105
+  },
+  {
+    "source": "ko",
+    "target": "it",
+    "word": "약속",
+    "translatedPOS": [
+      "명사"
+    ],
+    "translatedDef": [
+      "promessa, impegno"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3477,
+    "tokensOut": 93
+  },
+  {
+    "source": "ko",
+    "target": "en",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "to operate, manage"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 102
+  },
+  {
+    "source": "ko",
+    "target": "ja",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "運営する"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 101
+  },
+  {
+    "source": "ko",
+    "target": "zh-CN",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "经营,管理"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3082,
+    "tokensOut": 102
+  },
+  {
+    "source": "ko",
+    "target": "es",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "operar, administrar"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 102
+  },
+  {
+    "source": "ko",
+    "target": "fr",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "gérer, administrer"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 105
+  },
+  {
+    "source": "ko",
+    "target": "de",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "betreiben, führen, verwalten"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 105
+  },
+  {
+    "source": "ko",
+    "target": "it",
+    "word": "운영하다",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "gestire, amministrare"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3054,
+    "tokensOut": 103
+  },
+  {
+    "source": "en",
+    "target": "ja",
+    "word": "book",
+    "translatedPOS": [
+      "名詞",
+      "動詞"
+    ],
+    "translatedDef": [
+      "本, 書籍",
+      "予約する, 予約"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 166
+  },
+  {
+    "source": "en",
+    "target": "zh-CN",
+    "word": "book",
+    "translatedPOS": [
+      "名词",
+      "动词"
+    ],
+    "translatedDef": [
+      "书,册子",
+      "预订,预约"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2108,
+    "tokensOut": 167
+  },
+  {
+    "source": "en",
+    "target": "es",
+    "word": "book",
+    "translatedPOS": [
+      "sustantivo",
+      "verbo"
+    ],
+    "translatedDef": [
+      "libro",
+      "reservar, contratar"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 166
+  },
+  {
+    "source": "en",
+    "target": "fr",
+    "word": "book",
+    "translatedPOS": [
+      "nom",
+      "verbe"
+    ],
+    "translatedDef": [
+      "livre",
+      "réserver, retenir"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 163
+  },
+  {
+    "source": "en",
+    "target": "de",
+    "word": "book",
+    "translatedPOS": [
+      "Substantiv",
+      "Verb"
+    ],
+    "translatedDef": [
+      "Buch",
+      "buchen, reservieren"
+    ],
+    "posInTargetList": [
+      false,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 166
+  },
+  {
+    "source": "en",
+    "target": "it",
+    "word": "book",
+    "translatedPOS": [
+      "sostantivo"
+    ],
+    "translatedDef": [
+      "libro"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 109
+  },
+  {
+    "source": "en",
+    "target": "ja",
+    "word": "happy",
+    "translatedPOS": [
+      "形容詞"
+    ],
+    "translatedDef": [
+      "幸せな, 嬉しい"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 116
+  },
+  {
+    "source": "en",
+    "target": "zh-CN",
+    "word": "happy",
+    "translatedPOS": [
+      "形容词"
+    ],
+    "translatedDef": [
+      "快乐的，幸福的"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2108,
+    "tokensOut": 113
+  },
+  {
+    "source": "en",
+    "target": "es",
+    "word": "happy",
+    "translatedPOS": [
+      "adjetivo"
+    ],
+    "translatedDef": [
+      "feliz, contento"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 113
+  },
+  {
+    "source": "en",
+    "target": "fr",
+    "word": "happy",
+    "translatedPOS": [
+      "adjectif"
+    ],
+    "translatedDef": [
+      "heureux, content, joyeux"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 115
+  },
+  {
+    "source": "en",
+    "target": "de",
+    "word": "happy",
+    "translatedPOS": [
+      "Adjektiv"
+    ],
+    "translatedDef": [
+      "glücklich, froh, zufrieden"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 114
+  },
+  {
+    "source": "en",
+    "target": "it",
+    "word": "happy",
+    "translatedPOS": [
+      "aggettivo"
+    ],
+    "translatedDef": [
+      "felice, contento, soddisfatto"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 117
+  },
+  {
+    "source": "en",
+    "target": "ja",
+    "word": "check",
+    "translatedPOS": [
+      "名詞",
+      "動詞"
+    ],
+    "translatedDef": [
+      "点検、検査",
+      "確認する、検査する"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 152
+  },
+  {
+    "source": "en",
+    "target": "zh-CN",
+    "word": "check",
+    "translatedPOS": [
+      "动词",
+      "名词"
+    ],
+    "translatedDef": [
+      "检查,核对",
+      "支票,账单"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2108,
+    "tokensOut": 167
+  },
+  {
+    "source": "en",
+    "target": "es",
+    "word": "check",
+    "translatedPOS": [
+      "verbo",
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "verificar, comprobar",
+      "cheque, comprobante"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 167
+  },
+  {
+    "source": "en",
+    "target": "fr",
+    "word": "check",
+    "translatedPOS": [
+      "verbe",
+      "nom"
+    ],
+    "translatedDef": [
+      "vérifier, contrôler",
+      "chèque"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 162
+  },
+  {
+    "source": "en",
+    "target": "de",
+    "word": "check",
+    "translatedPOS": [
+      "Substantiv",
+      "Verb"
+    ],
+    "translatedDef": [
+      "Prüfung, Kontrolle",
+      "prüfen, kontrollieren"
+    ],
+    "posInTargetList": [
+      false,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 168
+  },
+  {
+    "source": "en",
+    "target": "it",
+    "word": "check",
+    "translatedPOS": [
+      "sostantivo",
+      "verbo"
+    ],
+    "translatedDef": [
+      "controllo, verifica",
+      "controllare, verificare"
+    ],
+    "posInTargetList": [
+      false,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2044,
+    "tokensOut": 154
+  },
+  {
+    "source": "ja",
+    "target": "en",
+    "word": "学校",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "school"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3243,
+    "tokensOut": 102
+  },
+  {
+    "source": "ja",
+    "target": "zh-CN",
+    "word": "学校",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "学校"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3318,
+    "tokensOut": 103
+  },
+  {
+    "source": "ja",
+    "target": "es",
+    "word": "学校",
+    "translatedPOS": [
+      "nombre"
+    ],
+    "translatedDef": [
+      "escuela"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3243,
+    "tokensOut": 103
+  },
+  {
+    "source": "ja",
+    "target": "fr",
+    "word": "学校",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "école"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3243,
+    "tokensOut": 103
+  },
+  {
+    "source": "ja",
+    "target": "de",
+    "word": "学校",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "Schule"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3243,
+    "tokensOut": 104
+  },
+  {
+    "source": "ja",
+    "target": "it",
+    "word": "学校",
+    "translatedPOS": [
+      "nome"
+    ],
+    "translatedDef": [
+      "scuola"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3243,
+    "tokensOut": 104
+  },
+  {
+    "source": "ja",
+    "target": "en",
+    "word": "約束",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "promise, agreement"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3244,
+    "tokensOut": 108
+  },
+  {
+    "source": "ja",
+    "target": "zh-CN",
+    "word": "約束",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "约定,承诺"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3319,
+    "tokensOut": 115
+  },
+  {
+    "source": "ja",
+    "target": "es",
+    "word": "約束",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "promesa, compromiso"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3244,
+    "tokensOut": 112
+  },
+  {
+    "source": "ja",
+    "target": "fr",
+    "word": "約束",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "promesse, accord"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3244,
+    "tokensOut": 109
+  },
+  {
+    "source": "ja",
+    "target": "de",
+    "word": "約束",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "Versprechen, Abmachung"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3244,
+    "tokensOut": 112
+  },
+  {
+    "source": "ja",
+    "target": "it",
+    "word": "約束",
+    "translatedPOS": [
+      "nome"
+    ],
+    "translatedDef": [
+      "promessa, accordo"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3244,
+    "tokensOut": 110
+  },
+  {
+    "source": "ja",
+    "target": "en",
+    "word": "食べる",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "to eat"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3972,
+    "tokensOut": 109
+  },
+  {
+    "source": "ja",
+    "target": "zh-CN",
+    "word": "食べる",
+    "translatedPOS": [
+      "动词"
+    ],
+    "translatedDef": [
+      "吃，食用"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 4056,
+    "tokensOut": 112
+  },
+  {
+    "source": "ja",
+    "target": "es",
+    "word": "食べる",
+    "translatedPOS": [
+      "verbo"
+    ],
+    "translatedDef": [
+      "comer"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3972,
+    "tokensOut": 110
+  },
+  {
+    "source": "ja",
+    "target": "fr",
+    "word": "食べる",
+    "translatedPOS": [
+      "verbe"
+    ],
+    "translatedDef": [
+      "manger"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3972,
+    "tokensOut": 110
+  },
+  {
+    "source": "ja",
+    "target": "de",
+    "word": "食べる",
+    "translatedPOS": [
+      "動詞"
+    ],
+    "translatedDef": [
+      "essen"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3972,
+    "tokensOut": 109
+  },
+  {
+    "source": "ja",
+    "target": "it",
+    "word": "食べる",
+    "translatedPOS": [
+      "verbo"
+    ],
+    "translatedDef": [
+      "mangiare"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3972,
+    "tokensOut": 111
+  },
+  {
+    "source": "zh-CN",
+    "target": "en",
+    "word": "学校",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "school, educational institution"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 109
+  },
+  {
+    "source": "zh-CN",
+    "target": "ja",
+    "word": "学校",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "がっこう"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 106
+  },
+  {
+    "source": "zh-CN",
+    "target": "es",
+    "word": "学校",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "escuela, colegio"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 107
+  },
+  {
+    "source": "zh-CN",
+    "target": "fr",
+    "word": "学校",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "école"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 108
+  },
+  {
+    "source": "zh-CN",
+    "target": "de",
+    "word": "学校",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "Schule"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 109
+  },
+  {
+    "source": "zh-CN",
+    "target": "it",
+    "word": "学校",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "scuola, istituto"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 109
+  },
+  {
+    "source": "zh-CN",
+    "target": "en",
+    "word": "朋友",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "friend"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 105
+  },
+  {
+    "source": "zh-CN",
+    "target": "ja",
+    "word": "朋友",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "友達"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 107
+  },
+  {
+    "source": "zh-CN",
+    "target": "es",
+    "word": "朋友",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "amigo, compañero"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 112
+  },
+  {
+    "source": "zh-CN",
+    "target": "fr",
+    "word": "朋友",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "ami, copain"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 108
+  },
+  {
+    "source": "zh-CN",
+    "target": "de",
+    "word": "朋友",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "Freund, Kamerad"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 110
+  },
+  {
+    "source": "zh-CN",
+    "target": "it",
+    "word": "朋友",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "amico, amica"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 110
+  },
+  {
+    "source": "zh-CN",
+    "target": "en",
+    "word": "经济",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "economy, economic"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 107
+  },
+  {
+    "source": "zh-CN",
+    "target": "ja",
+    "word": "经济",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "けいざい"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 108
+  },
+  {
+    "source": "zh-CN",
+    "target": "es",
+    "word": "经济",
+    "translatedPOS": [
+      "nombre"
+    ],
+    "translatedDef": [
+      "economía"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 105
+  },
+  {
+    "source": "zh-CN",
+    "target": "fr",
+    "word": "经济",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "économie"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 105
+  },
+  {
+    "source": "zh-CN",
+    "target": "de",
+    "word": "经济",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "Wirtschaft, Ökonomie"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 110
+  },
+  {
+    "source": "zh-CN",
+    "target": "it",
+    "word": "经济",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "economia, economia politica"
+    ],
+    "posInTargetList": [
+      false
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 3399,
+    "tokensOut": 109
+  },
+  {
+    "source": "es",
+    "target": "en",
+    "word": "hola",
+    "translatedPOS": [
+      "interjection"
+    ],
+    "translatedDef": [
+      "hello, hi"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2346,
+    "tokensOut": 99
+  },
+  {
+    "source": "es",
+    "target": "ja",
+    "word": "hola",
+    "translatedPOS": [
+      "感嘆詞"
+    ],
+    "translatedDef": [
+      "こんにちは、やあ"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2363,
+    "tokensOut": 114
+  },
+  {
+    "source": "es",
+    "target": "zh-CN",
+    "word": "hola",
+    "translatedPOS": [
+      "叹词"
+    ],
+    "translatedDef": [
+      "你好"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2401,
+    "tokensOut": 97
+  },
+  {
+    "source": "es",
+    "target": "fr",
+    "word": "hola",
+    "translatedPOS": [
+      "interjection"
+    ],
+    "translatedDef": [
+      "salut, bonjour"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2350,
+    "tokensOut": 104
+  },
+  {
+    "source": "es",
+    "target": "de",
+    "word": "hola",
+    "translatedPOS": [
+      "Interjektion"
+    ],
+    "translatedDef": [
+      "Hallo, Hi, Guten Tag"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2355,
+    "tokensOut": 106
+  },
+  {
+    "source": "es",
+    "target": "it",
+    "word": "hola",
+    "translatedPOS": [
+      "interiezione"
+    ],
+    "translatedDef": [
+      "ciao, saluto"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2355,
+    "tokensOut": 104
+  },
+  {
+    "source": "es",
+    "target": "en",
+    "word": "mañana",
+    "translatedPOS": [
+      "noun",
+      "noun"
+    ],
+    "translatedDef": [
+      "morning",
+      "tomorrow"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2347,
+    "tokensOut": 163
+  },
+  {
+    "source": "es",
+    "target": "ja",
+    "word": "mañana",
+    "translatedPOS": [
+      "名詞",
+      "名詞"
+    ],
+    "translatedDef": [
+      "明日, あす",
+      "朝, 午前"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2364,
+    "tokensOut": 171
+  },
+  {
+    "source": "es",
+    "target": "zh-CN",
+    "word": "mañana",
+    "translatedPOS": [
+      "名词",
+      "名词",
+      "名词"
+    ],
+    "translatedDef": [
+      "明天",
+      "早晨,上午",
+      "将来"
+    ],
+    "posInTargetList": [
+      true,
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      "",
+      ""
+    ],
+    "tokensIn": 2402,
+    "tokensOut": 223
+  },
+  {
+    "source": "es",
+    "target": "fr",
+    "word": "mañana",
+    "translatedPOS": [
+      "nom",
+      "nom"
+    ],
+    "translatedDef": [
+      "demain",
+      "matin"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2351,
+    "tokensOut": 164
+  },
+  {
+    "source": "es",
+    "target": "de",
+    "word": "mañana",
+    "translatedPOS": [
+      "Nomen",
+      "Adverb"
+    ],
+    "translatedDef": [
+      "Morgen",
+      "morgen"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2356,
+    "tokensOut": 158
+  },
+  {
+    "source": "es",
+    "target": "it",
+    "word": "mañana",
+    "translatedPOS": [
+      "avverbio",
+      "nome"
+    ],
+    "translatedDef": [
+      "domani",
+      "mattina"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2356,
+    "tokensOut": 159
+  },
+  {
+    "source": "es",
+    "target": "en",
+    "word": "correr",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "run, race, flow"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2347,
+    "tokensOut": 117
+  },
+  {
+    "source": "es",
+    "target": "ja",
+    "word": "correr",
+    "translatedPOS": [
+      "動詞"
+    ],
+    "translatedDef": [
+      "走る,駆ける"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2364,
+    "tokensOut": 119
+  },
+  {
+    "source": "es",
+    "target": "zh-CN",
+    "word": "correr",
+    "translatedPOS": [
+      "动词"
+    ],
+    "translatedDef": [
+      "跑，奔跑"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2402,
+    "tokensOut": 106
+  },
+  {
+    "source": "es",
+    "target": "fr",
+    "word": "correr",
+    "translatedPOS": [
+      "verbe"
+    ],
+    "translatedDef": [
+      "courir"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2351,
+    "tokensOut": 112
+  },
+  {
+    "source": "es",
+    "target": "de",
+    "word": "correr",
+    "translatedPOS": [
+      "Verb"
+    ],
+    "translatedDef": [
+      "laufen, rennen"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2356,
+    "tokensOut": 114
+  },
+  {
+    "source": "es",
+    "target": "it",
+    "word": "correr",
+    "translatedPOS": [
+      "verbo"
+    ],
+    "translatedDef": [
+      "correre"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2356,
+    "tokensOut": 112
+  },
+  {
+    "source": "fr",
+    "target": "en",
+    "word": "bonjour",
+    "translatedPOS": [
+      "interjection"
+    ],
+    "translatedDef": [
+      "greeting, hello"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2459,
+    "tokensOut": 115
+  },
+  {
+    "source": "fr",
+    "target": "ja",
+    "word": "bonjour",
+    "translatedPOS": [
+      "感嘆詞"
+    ],
+    "translatedDef": [
+      "こんにちは, おはよう"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2476,
+    "tokensOut": 118
+  },
+  {
+    "source": "fr",
+    "target": "zh-CN",
+    "word": "bonjour",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "问候，您好"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2514,
+    "tokensOut": 120
+  },
+  {
+    "source": "fr",
+    "target": "es",
+    "word": "bonjour",
+    "translatedPOS": [
+      "interjección"
+    ],
+    "translatedDef": [
+      "saludo, buenos días"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 117
+  },
+  {
+    "source": "fr",
+    "target": "de",
+    "word": "bonjour",
+    "translatedPOS": [
+      "Interjektion"
+    ],
+    "translatedDef": [
+      "Begrüßung, Guten Tag"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 111
+  },
+  {
+    "source": "fr",
+    "target": "it",
+    "word": "bonjour",
+    "translatedPOS": [
+      "interiezione"
+    ],
+    "translatedDef": [
+      "saluto, buongiorno"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 118
+  },
+  {
+    "source": "fr",
+    "target": "en",
+    "word": "main",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "hand"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2459,
+    "tokensOut": 108
+  },
+  {
+    "source": "fr",
+    "target": "ja",
+    "word": "main",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "手"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2476,
+    "tokensOut": 115
+  },
+  {
+    "source": "fr",
+    "target": "zh-CN",
+    "word": "main",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "手"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2514,
+    "tokensOut": 105
+  },
+  {
+    "source": "fr",
+    "target": "es",
+    "word": "main",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "mano"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 111
+  },
+  {
+    "source": "fr",
+    "target": "de",
+    "word": "main",
+    "translatedPOS": [
+      "Nomen"
+    ],
+    "translatedDef": [
+      "Hand"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 109
+  },
+  {
+    "source": "fr",
+    "target": "it",
+    "word": "main",
+    "translatedPOS": [
+      "nome"
+    ],
+    "translatedDef": [
+      "mano"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2468,
+    "tokensOut": 113
+  },
+  {
+    "source": "fr",
+    "target": "en",
+    "word": "libre",
+    "translatedPOS": [
+      "adjective"
+    ],
+    "translatedDef": [
+      "free, available"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2460,
+    "tokensOut": 111
+  },
+  {
+    "source": "fr",
+    "target": "ja",
+    "word": "libre",
+    "translatedPOS": [
+      "形容詞"
+    ],
+    "translatedDef": [
+      "自由な、解放された"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2477,
+    "tokensOut": 115
+  },
+  {
+    "source": "fr",
+    "target": "zh-CN",
+    "word": "libre",
+    "translatedPOS": [
+      "形容词"
+    ],
+    "translatedDef": [
+      "自由的,空闲的"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2515,
+    "tokensOut": 115
+  },
+  {
+    "source": "fr",
+    "target": "es",
+    "word": "libre",
+    "translatedPOS": [
+      "adjetivo",
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "libre, disponible, gratuito",
+      "libertad"
+    ],
+    "posInTargetList": [
+      true,
+      true
+    ],
+    "defScriptClean": [
+      true,
+      true
+    ],
+    "badChars": [
+      "",
+      ""
+    ],
+    "tokensIn": 2469,
+    "tokensOut": 162
+  },
+  {
+    "source": "fr",
+    "target": "de",
+    "word": "libre",
+    "translatedPOS": [
+      "Adjektiv"
+    ],
+    "translatedDef": [
+      "frei, unabhängig, ungebunden"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2469,
+    "tokensOut": 119
+  },
+  {
+    "source": "fr",
+    "target": "it",
+    "word": "libre",
+    "translatedPOS": [
+      "aggettivo"
+    ],
+    "translatedDef": [
+      "libero, disponibile, gratuito"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2469,
+    "tokensOut": 108
+  },
+  {
+    "source": "de",
+    "target": "en",
+    "word": "Haus",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "house, building, home"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2487,
+    "tokensOut": 120
+  },
+  {
+    "source": "de",
+    "target": "ja",
+    "word": "Haus",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "家、住宅、建物"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2504,
+    "tokensOut": 123
+  },
+  {
+    "source": "de",
+    "target": "zh-CN",
+    "word": "Haus",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "房子,住宅"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2542,
+    "tokensOut": 121
+  },
+  {
+    "source": "de",
+    "target": "es",
+    "word": "Haus",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "casa"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 121
+  },
+  {
+    "source": "de",
+    "target": "fr",
+    "word": "Haus",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "maison, bâtiment, domicile"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2491,
+    "tokensOut": 123
+  },
+  {
+    "source": "de",
+    "target": "it",
+    "word": "Haus",
+    "translatedPOS": [
+      "nome"
+    ],
+    "translatedDef": [
+      "casa, edificio"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 118
+  },
+  {
+    "source": "de",
+    "target": "en",
+    "word": "gehen",
+    "translatedPOS": [
+      "verb"
+    ],
+    "translatedDef": [
+      "to go, walk"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2487,
+    "tokensOut": 111
+  },
+  {
+    "source": "de",
+    "target": "ja",
+    "word": "gehen",
+    "translatedPOS": [
+      "動詞"
+    ],
+    "translatedDef": [
+      "行く, 歩く, 進む"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2504,
+    "tokensOut": 121
+  },
+  {
+    "source": "de",
+    "target": "zh-CN",
+    "word": "gehen",
+    "translatedPOS": [
+      "动词"
+    ],
+    "translatedDef": [
+      "走，步行"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2542,
+    "tokensOut": 115
+  },
+  {
+    "source": "de",
+    "target": "es",
+    "word": "gehen",
+    "translatedPOS": [
+      "verbo"
+    ],
+    "translatedDef": [
+      "ir, caminar"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 111
+  },
+  {
+    "source": "de",
+    "target": "fr",
+    "word": "gehen",
+    "translatedPOS": [
+      "verbe"
+    ],
+    "translatedDef": [
+      "aller, marcher"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2491,
+    "tokensOut": 102
+  },
+  {
+    "source": "de",
+    "target": "it",
+    "word": "gehen",
+    "translatedPOS": [
+      "verbo"
+    ],
+    "translatedDef": [
+      "andare, camminare"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 114
+  },
+  {
+    "source": "de",
+    "target": "en",
+    "word": "Gift",
+    "translatedPOS": [
+      "noun"
+    ],
+    "translatedDef": [
+      "poison"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2487,
+    "tokensOut": 115
+  },
+  {
+    "source": "de",
+    "target": "ja",
+    "word": "Gift",
+    "translatedPOS": [
+      "名詞"
+    ],
+    "translatedDef": [
+      "毒"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2504,
+    "tokensOut": 115
+  },
+  {
+    "source": "de",
+    "target": "zh-CN",
+    "word": "Gift",
+    "translatedPOS": [
+      "名词"
+    ],
+    "translatedDef": [
+      "毒药, 毒素"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2542,
+    "tokensOut": 120
+  },
+  {
+    "source": "de",
+    "target": "es",
+    "word": "Gift",
+    "translatedPOS": [
+      "sustantivo"
+    ],
+    "translatedDef": [
+      "veneno"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 118
+  },
+  {
+    "source": "de",
+    "target": "fr",
+    "word": "Gift",
+    "translatedPOS": [
+      "nom"
+    ],
+    "translatedDef": [
+      "poison"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2491,
+    "tokensOut": 115
+  },
+  {
+    "source": "de",
+    "target": "it",
+    "word": "Gift",
+    "translatedPOS": [
+      "nome"
+    ],
+    "translatedDef": [
+      "veleno"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2496,
+    "tokensOut": 115
+  },
+  {
+    "source": "it",
+    "target": "en",
+    "word": "ciao",
+    "translatedPOS": [
+      "interjection"
+    ],
+    "translatedDef": [
+      "hello, hi, bye"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2360,
+    "tokensOut": 111
+  },
+  {
+    "source": "it",
+    "target": "ja",
+    "word": "ciao",
+    "translatedPOS": [
+      "感嘆詞"
+    ],
+    "translatedDef": [
+      "やあ, こんにちは, さようなら"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2377,
+    "tokensOut": 117
+  },
+  {
+    "source": "it",
+    "target": "zh-CN",
+    "word": "ciao",
+    "translatedPOS": [
+      "叹词"
+    ],
+    "translatedDef": [
+      "你好,再见"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2415,
+    "tokensOut": 109
+  },
+  {
+    "source": "it",
+    "target": "es",
+    "word": "ciao",
+    "translatedPOS": [
+      "interjección"
+    ],
+    "translatedDef": [
+      "saludo, adiós"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2369,
+    "tokensOut": 110
+  },
+  {
+    "source": "it",
+    "target": "fr",
+    "word": "ciao",
+    "translatedPOS": [
+      "interjection"
+    ],
+    "translatedDef": [
+      "salut, bonjour, au revoir"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2364,
+    "tokensOut": 116
+  },
+  {
+    "source": "it",
+    "target": "de",
+    "word": "ciao",
+    "translatedPOS": [
+      "Interjektion"
+    ],
+    "translatedDef": [
+      "Hallo, Tschüss"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2369,
+    "tokensOut": 110
+  },
+  {
+    "source": "it",
+    "target": "en",
+    "word": "morbido",
+    "translatedPOS": [
+      "adjective"
+    ],
+    "translatedDef": [
+      "soft"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2361,
+    "tokensOut": 112
+  },
+  {
+    "source": "it",
+    "target": "ja",
+    "word": "morbido",
+    "translatedPOS": [
+      "形容詞"
+    ],
+    "translatedDef": [
+      "柔らかい"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2378,
+    "tokensOut": 122
+  },
+  {
+    "source": "it",
+    "target": "zh-CN",
+    "word": "morbido",
+    "translatedPOS": [
+      "形容词"
+    ],
+    "translatedDef": [
+      "柔软的，软的"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2416,
+    "tokensOut": 124
+  },
+  {
+    "source": "it",
+    "target": "es",
+    "word": "morbido",
+    "translatedPOS": [
+      "adjetivo"
+    ],
+    "translatedDef": [
+      "suave, blando, tierno"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2370,
+    "tokensOut": 129
+  },
+  {
+    "source": "it",
+    "target": "fr",
+    "word": "morbido",
+    "translatedPOS": [
+      "adjectif"
+    ],
+    "translatedDef": [
+      "doux, moelleux, tendre"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2365,
+    "tokensOut": 117
+  },
+  {
+    "source": "it",
+    "target": "de",
+    "word": "morbido",
+    "translatedPOS": [
+      "Adjektiv"
+    ],
+    "translatedDef": [
+      "weich, sanft, zart"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2370,
+    "tokensOut": 118
+  },
+  {
+    "source": "it",
+    "target": "en",
+    "word": "grande",
+    "translatedPOS": [
+      "adjective"
+    ],
+    "translatedDef": [
+      "big, large, great"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2360,
+    "tokensOut": 112
+  },
+  {
+    "source": "it",
+    "target": "ja",
+    "word": "grande",
+    "translatedPOS": [
+      "形容詞"
+    ],
+    "translatedDef": [
+      "大きい, 偉大な"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2377,
+    "tokensOut": 115
+  },
+  {
+    "source": "it",
+    "target": "zh-CN",
+    "word": "grande",
+    "translatedPOS": [
+      "形容词"
+    ],
+    "translatedDef": [
+      "大, 巨大, 伟大"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2415,
+    "tokensOut": 123
+  },
+  {
+    "source": "it",
+    "target": "es",
+    "word": "grande",
+    "translatedPOS": [
+      "adjetivo"
+    ],
+    "translatedDef": [
+      "grande, importante, mayor"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2369,
+    "tokensOut": 120
+  },
+  {
+    "source": "it",
+    "target": "fr",
+    "word": "grande",
+    "translatedPOS": [
+      "adjectif"
+    ],
+    "translatedDef": [
+      "grand, gros, important"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2364,
+    "tokensOut": 112
+  },
+  {
+    "source": "it",
+    "target": "de",
+    "word": "grande",
+    "translatedPOS": [
+      "Adjektiv"
+    ],
+    "translatedDef": [
+      "groß, bedeutend, wichtig"
+    ],
+    "posInTargetList": [
+      true
+    ],
+    "defScriptClean": [
+      true
+    ],
+    "badChars": [
+      ""
+    ],
+    "tokensIn": 2369,
+    "tokensOut": 107
+  }
+]

@@ -20,7 +20,6 @@ import { getUserSettings } from '@src/storage/userSettings';
 import { captureError } from './sentry';
 
 const LAST_SYNC_KEY = 'typeword.lastSync';
-const LAST_CACHE_CHECK_KEY = 'typeword.lastCacheCheck';
 const BATCH_SIZE = 100;
 const PULL_PAGE_SIZE = 1000;
 
@@ -70,11 +69,26 @@ export async function syncAll(): Promise<void> {
     await pushDeletes();
     await pushBooks(since);
     await pushWords(since);
+    await pushStudyDates(since);
 
     const pendingDeleteIds = await getPendingDeleteIds();
     await pullBooks(since, pendingDeleteIds);
     await pullWords(since, pendingDeleteIds);
-    await pullCacheUpdates();
+    await pullStudyDates(since);
+    // pullCacheUpdates removed 2026-05-14 — v1's check_word_updates RPC
+    // queried global_word_cache, which v2 doesn't write to. userWordsSync
+    // (services/userWordsSyncService.ts) is the v2 equivalent and
+    // covers all locally-stored words.
+
+    // Pull curated wordlist content updates (server-side re-curation
+    // patches need to reach phones without forcing users to delete and
+    // re-add the book). 6h-throttled internally.
+    try {
+      const { syncCuratedBooks } = await import('./curatedSyncService');
+      await syncCuratedBooks();
+    } catch (e) {
+      captureError(e, { service: 'syncService', fn: 'syncCuratedBooks' });
+    }
 
     await AsyncStorage.setItem(LAST_SYNC_KEY, syncStartTime);
   } finally {
@@ -180,6 +194,7 @@ interface LocalBookRow {
   notif_hour: number | null;
   notif_minute: number;
   notif_days: number;
+  curated_wordlist_id: string | null;
   created_at: number;
   updated_at: number;
 }
@@ -209,6 +224,7 @@ async function pushBooks(since: string) {
     notif_hour: r.notif_hour,
     notif_minute: r.notif_minute ?? 0,
     notif_days: r.notif_days ?? 127,
+    curated_wordlist_id: r.curated_wordlist_id ?? null,
     created_at: new Date(r.created_at).toISOString(),
     updated_at: new Date(r.updated_at).toISOString(),
   }));
@@ -320,8 +336,8 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
       if (existing && existing.updated_at >= updatedAt) continue;
 
       await db.runAsync(
-        `INSERT INTO books (id, title, source_lang, target_lang, bidirectional, study_lang, sort_order, pinned, notif_enabled, notif_hour, notif_minute, notif_days, created_at, updated_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `INSERT INTO books (id, title, source_lang, target_lang, bidirectional, study_lang, sort_order, pinned, notif_enabled, notif_hour, notif_minute, notif_days, curated_wordlist_id, created_at, updated_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT(id) DO UPDATE SET
            title = excluded.title,
            source_lang = excluded.source_lang,
@@ -334,6 +350,7 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
            notif_hour = excluded.notif_hour,
            notif_minute = excluded.notif_minute,
            notif_days = excluded.notif_days,
+           curated_wordlist_id = excluded.curated_wordlist_id,
            updated_at = excluded.updated_at`,
         [
           row.id,
@@ -348,6 +365,7 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
           row.notif_hour ?? null,
           row.notif_minute ?? 0,
           row.notif_days ?? 127,
+          row.curated_wordlist_id ?? null,
           new Date(row.created_at).getTime(),
           updatedAt,
         ],
@@ -432,63 +450,87 @@ async function pullWords(since: string, pendingDeleteIds: Set<string>) {
 }
 
 // ---------------------------------------------------------------------------
-// Cache update propagation — detect admin-edited cache entries and merge
+// study_dates — append-only streak/calendar history.
+//
+// Local SQLite study_dates records "user qualified for streak on day X"
+// independently of wordlist deletion. We mirror that to a per-user server
+// table so iPad ↔ Galaxy on the same account converge: each device pushes
+// its own qualified days and pulls anything new from the other device.
+//
+// Sync is simple because the data is append-only on both sides — no
+// updates, no deletes (the table has no DELETE policy). UPSERT with
+// PRIMARY KEY (user_id, date) is idempotent.
 // ---------------------------------------------------------------------------
 
-async function pullCacheUpdates() {
-  const lastCheck = await AsyncStorage.getItem(LAST_CACHE_CHECK_KEY);
-  const since = lastCheck || new Date().toISOString();
-  const userId = await getSessionUserId();
+const STUDY_DATES_BACKFILL_KEY = 'typeword.studyDatesBackfilled';
 
-  const { data, error } = await supabase.rpc('check_word_updates', {
-    p_user_id: userId,
-    p_since: since,
-  });
-
-  if (error || !data?.length) {
-    if (!lastCheck) await AsyncStorage.setItem(LAST_CACHE_CHECK_KEY, new Date().toISOString());
+async function pushStudyDates(since: string) {
+  const db = await getDb();
+  // One-time historical backfill: study_dates sync was added 2026-05-16;
+  // for existing installs, the first sync pushes ALL local study_dates
+  // (not just rows newer than `since`) so the user's pre-feature streak
+  // history reaches the server. After the first successful push we set
+  // a flag so subsequent syncs use the normal since-cursor.
+  const backfilled = await AsyncStorage.getItem(STUDY_DATES_BACKFILL_KEY);
+  const rows = backfilled
+    ? await db.getAllAsync<{ date: string; qualified_at: number }>(
+        'SELECT date, qualified_at FROM study_dates WHERE qualified_at > ?',
+        [new Date(since).getTime()],
+      )
+    : await db.getAllAsync<{ date: string; qualified_at: number }>(
+        'SELECT date, qualified_at FROM study_dates',
+      );
+  if (rows.length === 0) {
+    if (!backfilled) await AsyncStorage.setItem(STUDY_DATES_BACKFILL_KEY, '1');
     return;
   }
 
-  const db = await getDb();
+  const userId = await getSessionUserId();
+  const records = rows.map((r) => ({
+    user_id: userId,
+    date: r.date,
+    qualified_at: new Date(r.qualified_at).toISOString(),
+  }));
 
-  const byWord = new Map<string, { quick?: Record<string, unknown>; enrich?: Record<string, unknown> }>();
-  for (const row of data as { word_id: string; cache_result: Record<string, unknown>; cache_mode: string }[]) {
-    if (!byWord.has(row.word_id)) byWord.set(row.word_id, {});
-    const entry = byWord.get(row.word_id)!;
-    if (row.cache_mode === 'quick') entry.quick = row.cache_result;
-    else if (row.cache_mode === 'enrich') entry.enrich = row.cache_result;
+  for (const batch of chunks(records, BATCH_SIZE)) {
+    const { error } = await supabase
+      .from('study_dates')
+      .upsert(batch, { onConflict: 'user_id,date', ignoreDuplicates: true });
+    if (error) throw new Error(`pushStudyDates: ${error.message} (${error.code})`);
   }
-
-  const now = Date.now();
-  for (const [wordId, updates] of byWord) {
-    const existing = await db.getFirstAsync<{ result_json: string }>(
-      'SELECT result_json FROM user_words WHERE id = ?',
-      [wordId],
-    );
-    if (!existing) continue;
-
-    let result: Record<string, unknown>;
-    try { result = JSON.parse(existing.result_json); } catch { continue; }
-
-    if (updates.quick) {
-      const q = updates.quick;
-      if (q.headword) result.headword = q.headword;
-      if (q.meanings) result.meanings = q.meanings;
-      if (q.reading) result.reading = q.reading;
-    }
-    if (updates.enrich) {
-      const e = updates.enrich;
-      if (e.examples) result.examples = e.examples;
-      if (e.synonyms) result.synonyms = e.synonyms;
-      if (e.antonyms) result.antonyms = e.antonyms;
-    }
-
-    await db.runAsync(
-      'UPDATE user_words SET result_json = ?, cache_synced_at = ? WHERE id = ?',
-      [JSON.stringify(result), now, wordId],
-    );
-  }
-
-  await AsyncStorage.setItem(LAST_CACHE_CHECK_KEY, new Date().toISOString());
+  await AsyncStorage.setItem(STUDY_DATES_BACKFILL_KEY, '1');
 }
+
+async function pullStudyDates(since: string) {
+  const db = await getDb();
+  const userId = await getSessionUserId();
+  let from = 0;
+
+  while (true) {
+    const { data, error } = await supabase
+      .from('study_dates')
+      .select('date, qualified_at')
+      .eq('user_id', userId)
+      .gt('qualified_at', since)
+      .order('qualified_at', { ascending: true })
+      .range(from, from + PULL_PAGE_SIZE - 1);
+
+    if (error) throw new Error(`pullStudyDates: ${error.message} (${error.code})`);
+    if (!data || data.length === 0) break;
+
+    for (const row of data) {
+      const ts = new Date(row.qualified_at as string).getTime();
+      await db.runAsync(
+        'INSERT OR IGNORE INTO study_dates (date, qualified_at) VALUES (?, ?)',
+        [row.date as string, ts],
+      );
+    }
+
+    if (data.length < PULL_PAGE_SIZE) break;
+    from += PULL_PAGE_SIZE;
+  }
+}
+
+// Cache update propagation: v1's pullCacheUpdates was removed 2026-05-14.
+// userWordsSyncService is the v2 equivalent (compares word_entries.updated_at
+// + prompt_version against local cache_synced_at and refreshes the diff).

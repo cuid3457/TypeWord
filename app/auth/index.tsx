@@ -15,8 +15,10 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import * as AppleAuthentication from 'expo-apple-authentication';
+
 import { Toast } from '@/components/toast';
-import { signUpWithEmail, signInWithEmail, signInWithGoogle, signOut, ensureSession } from '@src/services/authService';
+import { signUpWithEmail, signInWithEmail, signInWithGoogle, signInWithApple, signOut, ensureSession } from '@src/services/authService';
 import { isTimeoutError, withTimeout } from '@src/utils/timeout';
 
 const AUTH_TIMEOUT_MS = 20000;
@@ -38,6 +40,7 @@ export default function AuthScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
   const [signedUpEmail, setSignedUpEmail] = useState<string | null>(null);
   const [resending, setResending] = useState(false);
@@ -129,8 +132,9 @@ export default function AuthScreen() {
                 if (isTimeoutError(err)) showToast(t('error.slow_network'));
               }
             }}
-            disabled={googleLoading || loading}
-            className="mt-8 flex-row items-center justify-center rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+            disabled={googleLoading || appleLoading || loading}
+            style={{ height: 52 }}
+            className="mt-8 flex-row items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700"
           >
             {googleLoading ? (
               <ActivityIndicator color="#6b7280" />
@@ -146,6 +150,38 @@ export default function AuthScreen() {
               </>
             )}
           </Pressable>
+
+          {/* Apple Sign-In — iOS only. App Store Guideline 4.8 requires it
+              when other third-party logins (Google) are present. */}
+          {Platform.OS === 'ios' ? (
+            appleLoading ? (
+              <View style={{ height: 52, marginTop: 12 }} className="items-center justify-center rounded-xl border border-black">
+                <ActivityIndicator color="#000" />
+              </View>
+            ) : (
+              <AppleAuthentication.AppleAuthenticationButton
+                buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+                buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+                cornerRadius={12}
+                style={{ marginTop: 12, height: 52 }}
+                onPress={async () => {
+                  try {
+                    setAppleLoading(true);
+                    const result = await withTimeout(signInWithApple(), AUTH_TIMEOUT_MS);
+                    setAppleLoading(false);
+                    if (result.error) {
+                      if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
+                    } else {
+                      router.back();
+                    }
+                  } catch (err) {
+                    setAppleLoading(false);
+                    if (isTimeoutError(err)) showToast(t('error.slow_network'));
+                  }
+                }}
+              />
+            )
+          ) : null}
 
           <View className="my-6 flex-row items-center">
             <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />

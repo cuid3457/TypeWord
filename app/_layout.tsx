@@ -6,11 +6,22 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DeviceEventEmitter, Modal, Pressable, Text, View } from 'react-native';
+import { AppState, DeviceEventEmitter, Modal, Platform, Pressable, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { rem } from 'react-native-css-interop';
 import 'react-native-reanimated';
+import { enableFreeze, enableScreens } from 'react-native-screens';
 import '../global.css';
+import '@src/services/uiDefaults';
+
+// Disable react-native-screens optimizations. Default behavior
+// detaches inactive screens from the native view hierarchy and
+// freezes their React tree; the first time the user switches to a
+// tab, both must be reversed, producing a single-frame flicker even
+// with `lazy: false`. Turning both off keeps every tab fully attached
+// and rendered for the lifetime of the session.
+enableScreens(false);
+enableFreeze(false);
 import { deviceLang, ensureLanguageLoaded } from '@src/i18n';
 
 import MaterialIconsFont from '@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialIcons.ttf';
@@ -23,7 +34,11 @@ import { useColorScheme, syncTheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { requestAdsConsent } from '@src/services/adsConsent';
 import { setupAudioMode } from '@src/services/audio';
-import { ensureSession } from '@src/services/authService';
+import { ensureSession, confirmAndSetSessionFromDeepLink } from '@src/services/authService';
+import { refreshDashboard } from '@src/services/dashboardCache';
+import { refreshHome } from '@src/services/homeCache';
+import { refreshLibrary } from '@src/services/libraryCache';
+import { refreshReview } from '@src/services/reviewCache';
 import { supabase } from '@src/api/supabase';
 import { captureError, initSentry, setUser } from '@src/services/sentry';
 import { initEdgeWarmup } from '@src/services/edgeWarmup';
@@ -33,7 +48,13 @@ import { getTodayStreakDate } from '@src/services/streakService';
 import { initSubscription, identifyUser, resetUser, refreshBonusPremium } from '@src/services/subscriptionService';
 import { initXP } from '@src/services/xpService';
 import { syncAll } from '@src/services/syncService';
+import { syncUserWordsContent } from '@src/services/userWordsSyncService';
+import { sweepTtsPrefetch } from '@src/services/ttsPrefetchSweeper';
 
+// iOS renders SF Pro slightly tighter than Roboto on Android at the same
+// numerical size, so users perceive iPhone text as smaller than Galaxy.
+// Bump the iOS base by 10% to bring the two platforms closer together.
+const PLATFORM_FONT_MULTIPLIER = Platform.OS === 'ios' ? 1.10 : 1.0;
 const REM_SCALE = { small: 14, medium: 17, large: 20 } as const;
 
 export const unstable_settings = {
@@ -57,17 +78,110 @@ export default function RootLayout() {
 
   useEffect(() => {
     initSentry();
-    SplashScreen.hideAsync();
     Font.loadAsync({ material: MaterialIconsFont }).catch(captureError);
     setupAudioMode().catch(captureError);
-    ensureSession().catch(captureError);
     getDb().catch(captureError);
+
+    // Hold the splash until SQLite-only caches (home/review) are
+    // populated so the default-route mount doesn't render a spinner.
+    // Auth-dependent caches (dashboard/library) prefetch in parallel
+    // without blocking splash — for an existing session ensureSession
+    // resolves near-instantly and the prefetches complete well before
+    // the user taps another tab.
+    const splashTimeout = setTimeout(() => {
+      SplashScreen.hideAsync().catch(() => {});
+    }, 2000);
+    Promise.allSettled([
+      refreshHome().catch(() => {}),
+      refreshReview().catch(() => {}),
+    ]).finally(() => {
+      clearTimeout(splashTimeout);
+      SplashScreen.hideAsync().catch(() => {});
+    });
+
+    ensureSession()
+      .then(() => Promise.allSettled([refreshDashboard(), refreshLibrary()]))
+      .catch(captureError);
+
+    // Push token registration is deferred so it can never block startup
+    // (iOS native push registration can throw during bridge teardown,
+    // which would surface as a launch crash). 4-second delay clears the
+    // boot-critical window.
+    const pushTimer = setTimeout(() => {
+      (async () => {
+        try {
+          const { supabase } = await import('@src/api/supabase');
+          const { data: session } = await supabase.auth.getSession();
+          const u = session.session?.user;
+          if (!u || u.is_anonymous) return;
+          const { getDevicePushToken } = await import('@src/services/notificationService');
+          const { syncPushTokenToProfile } = await import('@src/services/friendsService');
+          const tok = await getDevicePushToken();
+          if (tok) await syncPushTokenToProfile(tok.token, tok.platform);
+        } catch { /* silent — push is best-effort */ }
+      })();
+    }, 4000);
+
     requestAdsConsent().catch(() => {});
     initSubscription().catch(captureError);
     refreshBonusPremium().catch(captureError);
     initXP().catch(captureError);
     syncAll().catch(captureError);
+    // Refresh all locally-stored user_words against the server's canonical
+    // word_entries cache via the bulk sync-user-words RPC. Throttled to
+    // once per 24h, deferred 6s so it doesn't compete with first-paint.
+    // (curatedSync was removed 2026-05-14 — this single mechanism covers
+    // both curated and non-curated words.)
+    setTimeout(() => { syncUserWordsContent().catch(() => {}); }, 6000);
+    // Ensure every user_word's mp3 is locally cached. On the originating
+    // device the import paths already prefetched; this catches the
+    // cross-device sync case where pullWords brings down data without
+    // audio. Throttled to once per 24h; deferred further (4s) so it
+    // never competes with sync or first-paint work.
+    setTimeout(() => { sweepTtsPrefetch().catch(() => {}); }, 4000);
     initEdgeWarmup();
+
+    // Hydrate points + inventory, then reconcile any freezes the user
+    // should have consumed for past missed days while offline. Deferred
+    // so it never delays boot-critical work.
+    setTimeout(() => {
+      (async () => {
+        try {
+          const { refreshInventory } = await import('@src/services/pointsService');
+          await refreshInventory();
+          const { reconcileStreakFreezeConsumption } = await import('@src/services/streakService');
+          await reconcileStreakFreezeConsumption();
+        } catch { /* silent */ }
+      })();
+    }, 3000);
+  }, []);
+
+  // Push tap handler. When the user taps a friend-request / poke /
+  // friend-accepted push notification, route them to the notifications
+  // page. Fires whether the app was backgrounded or cold-started by the
+  // tap.
+  useEffect(() => {
+    let sub: { remove: () => void } | null = null;
+    let cancelled = false;
+    (async () => {
+      try {
+        const Notifications = await import('expo-notifications');
+        const handle = (data: unknown) => {
+          if (!data || typeof data !== 'object') return;
+          const type = (data as { type?: unknown }).type;
+          if (type === 'friend_request' || type === 'poke' || type === 'friend_accepted') {
+            router.push('/notifications');
+          }
+        };
+        // Cold-start case: the app was launched by tapping a notification.
+        const last = await Notifications.getLastNotificationResponseAsync();
+        if (!cancelled && last) handle(last.notification.request.content.data);
+        sub = Notifications.addNotificationResponseReceivedListener((resp) => {
+          handle(resp.notification.request.content.data);
+        });
+      } catch { /* expo-notifications unavailable — silent */ }
+    })();
+    return () => { cancelled = true; sub?.remove(); };
   }, []);
 
   useEffect(() => {
@@ -78,6 +192,10 @@ export default function RootLayout() {
           setUser(session.user.id);
           if (!session.user.is_anonymous) {
             identifyUser(session.user.id).catch(captureError);
+            // Push token registration is deferred to the boot-time setTimeout
+            // (see ensureSession block) so we never run native push
+            // registration synchronously off the critical path. Fresh
+            // sign-ins also pick it up on the next app launch.
             // Resume pending invite flow: a user who tapped a typeword://invite/...
             // link while anonymous is sent through auth; once they're signed up
             // we re-route them back to the invite screen so the friend add +
@@ -114,17 +232,66 @@ export default function RootLayout() {
     return unsub;
   }, []);
 
+  // Refresh on foreground return:
+  //   1. syncAll (60s throttled here) — picks up new books/words from
+  //      other devices or server-side seed scripts. Without this the
+  //      app only catches new top-level rows on cold-restart.
+  //   2. syncUserWordsContent — 12h-throttled internally; refreshes
+  //      result_json of rows already present locally.
+  //   3. syncCuratedBooks — 5-min throttled internally; admin
+  //      re-curations propagate without waiting for next launch.
+  // syncAll itself is cheap when nothing changed (the gt('updated_at',
+  // since) pull queries return empty fast) but the network round-trip
+  // adds up across rapid task-switching, so we cap the foreground
+  // trigger to one call per minute.
+  useEffect(() => {
+    let lastFgSyncAllAt = 0;
+    const FG_SYNCALL_THROTTLE_MS = 60_000;
+    const sub = AppState.addEventListener('change', (state) => {
+      if (state === 'active') {
+        const now = Date.now();
+        if (now - lastFgSyncAllAt >= FG_SYNCALL_THROTTLE_MS) {
+          lastFgSyncAllAt = now;
+          syncAll()
+            .then(() => {
+              // useFocusEffect only refires on tab change. When the user
+              // is sitting on the wordlist/review tab as the app returns
+              // to foreground, the cache stays stale until they navigate
+              // away and back. Refresh both SQLite-backed caches here so
+              // newly-pulled books/words surface immediately.
+              refreshHome().catch(() => {});
+              refreshReview().catch(() => {});
+            })
+            .catch(captureError);
+        }
+        syncUserWordsContent().catch(() => {});
+        (async () => {
+          try {
+            const { syncCuratedBooks } = await import('@src/services/curatedSyncService');
+            await syncCuratedBooks();
+          } catch { /* silent */ }
+        })();
+      }
+    });
+    return () => sub.remove();
+  }, []);
+
   useEffect(() => {
     const handleUrl = async (url: string) => {
       if (!url.includes('auth/callback')) return;
-      const fragment = url.split('#')[1];
+      const [path, fragment] = url.split('#');
       if (!fragment) return;
-      const params = new URLSearchParams(fragment);
-      const accessToken = params.get('access_token');
-      const refreshToken = params.get('refresh_token');
+      const fragParams = new URLSearchParams(fragment);
+      const accessToken = fragParams.get('access_token');
+      const refreshToken = fragParams.get('refresh_token');
+      // The state nonce arrives in the query (it's part of redirect_to,
+      // preserved by Supabase verbatim) while the tokens arrive in the
+      // fragment. Pull it from the path side.
+      const queryStr = path.split('?')[1] ?? '';
+      const state = new URLSearchParams(queryStr).get('state');
       if (accessToken && refreshToken) {
-        await supabase.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
-        router.replace('/(tabs)/settings');
+        const { applied } = await confirmAndSetSessionFromDeepLink(accessToken, refreshToken, state);
+        if (applied) router.replace('/(tabs)/settings');
       }
     };
 
@@ -151,7 +318,7 @@ export default function RootLayout() {
   // Scale all rem-based sizes (text, spacing) based on user's font preference
   useEffect(() => {
     const size = settings?.fontSize ?? 'medium';
-    rem.set(REM_SCALE[size]);
+    rem.set(REM_SCALE[size] * PLATFORM_FONT_MULTIPLIER);
   }, [settings?.fontSize]);
 
   useEffect(() => {
@@ -165,7 +332,6 @@ export default function RootLayout() {
       router.replace('/onboarding');
     } else if (settings && onOnboarding) {
       router.replace('/(tabs)');
-      router.push('/wordlist/new');
     }
   }, [loading, settings, segments]);
 

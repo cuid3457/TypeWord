@@ -22,6 +22,8 @@ import { enforceAllLimits, RateLimitError, BudgetExhaustedError } from "../_shar
 const ENDPOINT = "tts-synthesize";
 
 const ALLOWED_ORIGINS = new Set([
+  "https://moavoca.com",
+  "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
 ]);
@@ -269,6 +271,21 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ error: "TTS not configured" }, 500);
   }
 
+  // Lightweight JWT-payload reader for service-role gate on the debug branch.
+  // The token itself is validated by getUser() below; this is a claim peek only.
+  function parseJwtRole(token: string): string | null {
+    try {
+      const parts = token.split(".");
+      if (parts.length !== 3) return null;
+      const payload = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+      const padded = payload + "=".repeat((4 - (payload.length % 4)) % 4);
+      const decoded = JSON.parse(atob(padded)) as Record<string, unknown>;
+      return typeof decoded.role === "string" ? decoded.role : null;
+    } catch {
+      return null;
+    }
+  }
+
   // Auth
   const authHeader = req.headers.get("Authorization") ?? "";
   const jwt = authHeader.replace(/^Bearer\s+/i, "");
@@ -287,7 +304,15 @@ Deno.serve(async (req: Request) => {
   }
 
   // Voice listing mode (admin/debug): { action: "list_voices", locale?: "ko-KR" }
+  // Service-role gate (audit M-8): an ordinary authenticated user shouldn't
+  // be able to dump Azure's full voice catalog via this debug endpoint.
+  // Detect via the raw JWT payload — supabase-js getUser() already validated
+  // the token; here we just read the role claim to gate this branch.
   if (rawBody.action === "list_voices") {
+    const role = parseJwtRole(jwt);
+    if (role !== "service_role") {
+      return jsonResponse({ error: "Forbidden" }, 403);
+    }
     const localeFilter = typeof rawBody.locale === "string" ? rawBody.locale : null;
     const resp = await fetch(
       `https://${azureRegion}.tts.speech.microsoft.com/cognitiveservices/voices/list`,
@@ -358,7 +383,7 @@ Deno.serve(async (req: Request) => {
 
   // ── 2. Rate-limit before paying for Azure call ──────────────────────
   try {
-    await enforceAllLimits(admin, userId);
+    await enforceAllLimits(admin, userId, "tts-synthesize");
   } catch (err) {
     if (err instanceof RateLimitError || err instanceof BudgetExhaustedError) {
       fireAndForget(

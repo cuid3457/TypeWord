@@ -12,6 +12,8 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabletContainer } from '@/components/tablet-container';
+import { useTablet } from '@src/hooks/useTablet';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AppModal } from '@/components/app-modal';
@@ -23,7 +25,7 @@ import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { showAdsPrivacyOptions } from '@src/services/adsConsent';
 import { clearUserSettings } from '@src/storage/userSettings';
-import { getEmail, signOut } from '@src/services/authService';
+import { getEmail, isApplePrivateRelay, signOut } from '@src/services/authService';
 import { clearLocalData } from '@src/db';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import {
@@ -40,6 +42,7 @@ export default function SettingsScreen() {
   const { t, i18n } = useTranslation();
   const { settings, save } = useUserSettings();
   const premium = usePremium();
+  const { isTablet } = useTablet();
   const [editing, setEditing] = useState<EditingField>(null);
   const [adModal, setAdModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
@@ -136,10 +139,15 @@ export default function SettingsScreen() {
 
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
-      <ScrollView contentContainerStyle={{ padding: 24 }}>
-        <Text className="text-3xl font-bold text-black dark:text-white">
-          {t('settings.title')}
-        </Text>
+      <TabletContainer>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 24 }}>
+        <View className="pt-6">
+          <View className="h-11 justify-center">
+            <Text className="text-3xl font-bold text-black dark:text-white">
+              {t('settings.title')}
+            </Text>
+          </View>
+        </View>
 
         {/* Premium card */}
         <Pressable
@@ -178,7 +186,9 @@ export default function SettingsScreen() {
             onPress={() => router.push('/profile')}
             className="mt-6 flex-row items-center justify-between rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
           >
-            <Text className="flex-1 text-base text-black dark:text-white">{userEmail}</Text>
+            <Text className="flex-1 text-base text-black dark:text-white">
+              {isApplePrivateRelay(userEmail) ? t('auth.apple_signed_in') : userEmail}
+            </Text>
             <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
           </Pressable>
         ) : (
@@ -358,83 +368,57 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        <Pressable
-          onPress={() => router.push('/terms')}
-          className="mt-6 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+        {/* Secondary action buttons. On tablets, lay out as a 2-column
+            grid via flex-wrap + 48% basis; phones stay as a vertical
+            stack with the original mt-3 spacing. */}
+        <View
+          className={isTablet ? 'mt-6 flex-row flex-wrap' : 'mt-6'}
+          style={isTablet ? { gap: 12 } : undefined}
         >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.terms')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => router.push('/privacy')}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.privacy')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => router.push('/business-info')}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.business_info')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={async () => {
-            const shown = await showAdsPrivacyOptions();
-            if (!shown) setAdModal(true);
-          }}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.ad_privacy')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => router.push('/inquiry')}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.contact')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={async () => {
-            try {
-              const StoreReview = require('expo-store-review');
-              const available = await StoreReview.isAvailableAsync();
-              if (available) {
-                await StoreReview.requestReview();
-              } else {
-                setRateModal(true);
-              }
-            } catch {
-              setRateModal(true);
-            }
-          }}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.rate_app')}
-          </Text>
-        </Pressable>
-
-        <Pressable
-          onPress={() => router.push('/licenses')}
-          className="mt-3 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
-        >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
-            {t('settings.licenses')}
-          </Text>
-        </Pressable>
+          {[
+            {
+              key: 'rate_app',
+              onPress: async () => {
+                try {
+                  const StoreReview = require('expo-store-review');
+                  const available = await StoreReview.isAvailableAsync();
+                  if (available) {
+                    await StoreReview.requestReview();
+                  } else {
+                    setRateModal(true);
+                  }
+                } catch {
+                  setRateModal(true);
+                }
+              },
+            },
+            { key: 'contact', onPress: () => router.push('/inquiry') },
+            { key: 'terms', onPress: () => router.push('/terms') },
+            { key: 'privacy', onPress: () => router.push('/privacy') },
+            { key: 'business_info', onPress: () => router.push('/business-info') },
+            {
+              key: 'ad_privacy',
+              onPress: async () => {
+                const shown = await showAdsPrivacyOptions();
+                if (!shown) setAdModal(true);
+              },
+            },
+            { key: 'licenses', onPress: () => router.push('/licenses') },
+          ].map((b, i) => (
+            <Pressable
+              key={b.key}
+              onPress={b.onPress}
+              className={`rounded-xl border border-gray-300 py-4 dark:border-gray-700 ${
+                isTablet ? '' : i === 0 ? '' : 'mt-3'
+              }`}
+              style={isTablet ? { width: '48.5%' } : undefined}
+            >
+              <Text className="text-center text-sm font-medium text-black dark:text-white">
+                {t(`settings.${b.key}`)}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
 
         <Pressable
           onPress={() => setResetModal(true)}
@@ -445,6 +429,7 @@ export default function SettingsScreen() {
           </Text>
         </Pressable>
       </ScrollView>
+      </TabletContainer>
 
       <AppModal
         visible={adModal}

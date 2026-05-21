@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   BackHandler,
   FlatList,
+  Platform,
   Pressable,
   Text,
   TextInput,
@@ -24,6 +25,7 @@ import * as Clipboard from 'expo-clipboard';
 import { TextActionPopover, type PopoverPosition } from '@/components/text-action-popover';
 import { getTtsText, speakWord, phonemeForChinese } from '@src/utils/ttsLocale';
 import { formatPOS } from '@src/utils/normalizeResult';
+import { ipaSupported } from '@src/services/ipaService';
 import { ReadingDisplay } from '@/components/reading-display';
 import { findLanguage } from '@src/constants/languages';
 import {
@@ -36,8 +38,8 @@ import {
   updateWordResult,
   type StoredWord,
 } from '@src/db/queries';
-import { lookupWord, checkWordFreshness } from '@src/services/wordService';
-import { exportWordlistCsv, exportWordlistPdf } from '@src/services/exportService';
+import { lookupWord } from '@src/services/wordService';
+import { exportWordlistCsv, exportWordlistPdf, PaidFeatureRequiredError } from '@src/services/exportService';
 import { usePremium } from '@src/hooks/usePremium';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { Paywall } from '@/components/paywall';
@@ -48,20 +50,31 @@ import type { Book } from '@src/types/book';
 
 import { useFocusEffect } from 'expo-router';
 
-const AD_INTERVAL = 30;
-const MAX_TITLE_LENGTH = 40;
-type ListItem = { type: 'word'; data: StoredWord } | { type: 'ad'; key: string };
+const MAX_TITLE_LENGTH = 30;
 
-function buildListWithAds(words: StoredWord[]): ListItem[] {
-  const items: ListItem[] = [];
-  for (let i = 0; i < words.length; i++) {
-    items.push({ type: 'word', data: words[i] });
-    if ((i + 1) % AD_INTERVAL === 0 && i + 1 < words.length) {
-      items.push({ type: 'ad', key: `ad-${i}` });
-    }
-  }
-  return items;
-}
+// Word card visual style toggle.
+//   • 'border'    : original — single border line.
+//   • 'shadow'    : soft shadow + hairline border (Material 3 vibe).
+//   • 'luminance' : light-mode shadow, dark-mode luminance lift
+//                   (Linear / Notion / Vercel style). Premium feel
+//                   without shadow on dark — depth via bg contrast.
+// Rollback: change the const to 'border'.
+const WORD_CARD_STYLE: 'border' | 'shadow' | 'luminance' = 'border';
+
+const WORD_CARD_CLASS_BY_STYLE: Record<typeof WORD_CARD_STYLE, string> = {
+  border: 'mb-2 rounded-xl border border-gray-300 p-4 dark:border-gray-800',
+  shadow: 'mb-2 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950',
+  // Luminance: light mode uses subtle white-on-gray-50 lift + soft shadow.
+  //            dark mode uses gray-900 card on the (typically gray-950) bg
+  //            so the card reads as elevated purely via brightness.
+  luminance: 'mb-2 rounded-2xl border border-gray-200 bg-white p-4 dark:border-transparent dark:bg-[#161616]',
+};
+
+const WORD_CARD_INLINE_STYLE = WORD_CARD_STYLE === 'shadow' || WORD_CARD_STYLE === 'luminance'
+  ? (Platform.OS === 'ios'
+      ? { shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.05, shadowRadius: 3 }
+      : { elevation: 1 })
+  : undefined;
 
 export default function WordlistDetailScreen() {
   const { t, i18n } = useTranslation();
@@ -146,6 +159,10 @@ export default function WordlistDetailScreen() {
           });
         }
       } catch (err) {
+        if (err instanceof PaidFeatureRequiredError) {
+          setPaywallVisible(true);
+          return;
+        }
         console.error('Export failed:', err);
         setExportToast(t('wordlist.export_failed'));
       } finally {
@@ -337,11 +354,11 @@ export default function WordlistDetailScreen() {
                 }
                 setEditing(false);
               }}
-              className="rounded-xl bg-black px-4 py-2.5 dark:bg-white"
+              className="rounded-xl bg-black p-2.5 dark:bg-white"
+              accessibilityLabel={t('wordlist.rename_save')}
+              accessibilityRole="button"
             >
-              <Text className="text-sm font-semibold text-white dark:text-black">
-                {t('wordlist.rename_save')}
-              </Text>
+              <MaterialIcons name="check" size={20} color={colorScheme === 'dark' ? '#000' : '#fff'} />
             </Pressable>
           </View>
         ) : (
@@ -513,19 +530,12 @@ export default function WordlistDetailScreen() {
           </Text>
         </View>
       ) : (
-        <FlatList<ListItem>
-          data={buildListWithAds(sortedWords)}
-          keyExtractor={(item) => (item.type === 'ad' ? item.key : item.data.id)}
+        <FlatList<StoredWord>
+          data={sortedWords}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={{ padding: 24, paddingBottom: editMode ? 100 : 80 }}
           renderItem={({ item }) => {
-            if (item.type === 'ad') {
-              return (
-                <View className="my-2" style={{ marginHorizontal: -24 }}>
-                  <AdBanner />
-                </View>
-              );
-            }
-            const w = item.data;
+            const w = item;
             return (
               <WordRow
                 word={w}
@@ -607,11 +617,15 @@ export default function WordlistDetailScreen() {
           <Pressable
             onPress={() => setShowDeleteConfirm(true)}
             disabled={selectedIds.size === 0}
-            className={`rounded-xl px-5 py-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+            className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+            accessibilityLabel={t('wordlist.delete_selected')}
+            accessibilityRole="button"
           >
-            <Text className={`text-sm font-semibold ${selectedIds.size > 0 ? 'text-white' : 'text-gray-400'}`}>
-              {t('wordlist.delete_selected')}
-            </Text>
+            <MaterialIcons
+              name="delete-outline"
+              size={22}
+              color={selectedIds.size > 0 ? '#fff' : '#9ca3af'}
+            />
           </Pressable>
         </View>
       ) : null}
@@ -636,6 +650,8 @@ export default function WordlistDetailScreen() {
           word={reportWord.word}
           wordId={reportWord.id}
           context="detail"
+          sourceLang={book.sourceLang}
+          targetLang={book.targetLang}
           onSubmitted={(msg) => setReportToast(msg)}
         />
       ) : null}
@@ -724,8 +740,8 @@ function WordRow({
   const { i18n } = useTranslation();
   const [enriching, setEnriching] = useState(false);
   const meanings = word.result.meanings ?? [];
-  const { examples, synonyms, antonyms } = word.result;
-  const hasDetails = !!(examples?.length || synonyms?.length || antonyms?.length);
+  const { examples } = word.result;
+  const hasDetails = !!examples?.length;
 
   const handlePress = async () => {
     if (editMode) {
@@ -733,13 +749,8 @@ function WordRow({
       return;
     }
     onPress();
-    if (!expanded) {
-      checkWordFreshness(
-        word.id, word.word,
-        book.sourceLang, book.targetLang ?? 'en',
-        word.cacheSyncedAt,
-      ).then((updated) => { if (updated) onEnriched(updated); }).catch(() => {});
-    }
+    // Per-word freshness probe removed 2026-05-14 — userWordsSyncService
+    // handles server↔local content sync on app launch + foreground.
     if (!expanded && !hasDetails && !enriching) {
       setEnriching(true);
       try {
@@ -768,16 +779,17 @@ function WordRow({
     <Pressable
       onPress={handlePress}
       onLongPress={editMode ? undefined : onLongPress}
-      className="mb-2 rounded-xl border border-gray-300 p-4 dark:border-gray-800"
+      className={WORD_CARD_CLASS_BY_STYLE[WORD_CARD_STYLE]}
+      style={WORD_CARD_INLINE_STYLE}
     >
-      {/* Header — word + reading share the bounded left column (icons take the
-          right edge), but IPA renders on its OWN row below the header so it
-          can use the card's full width before wrapping. IPA's left edge
-          aligns with the word's because both start at the card's content
-          padding origin. */}
-      <View className="flex-row items-start">
+      {/* Header — word/reading + IPA in left column. Icons (speaker/flag/▼)
+          are absolutely positioned so they vertically center against the
+          ENTIRE card (header + meanings + expanded extras), not just the
+          header. paddingRight on the content reserves the icon strip's
+          width so text doesn't run under it. */}
+      <View className="flex-row items-center" style={{ paddingRight: editMode ? 0 : 90 }}>
         {editMode ? (
-          <View className="mr-3 mt-1">
+          <View className="mr-3">
             <MaterialIcons
               name={selected ? 'check-box' : 'check-box-outline-blank'}
               size={22}
@@ -786,84 +798,50 @@ function WordRow({
           </View>
         ) : null}
 
-        <View className="flex-1" style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 6, rowGap: 4 }}>
-          <Pressable
-            onLongPress={(e) => onShowTextActions(word.word, e)}
-            delayLongPress={350}
-            className="shrink"
-          >
-            <Text className="shrink text-lg font-semibold text-black dark:text-white">
+        <View className="flex-1">
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 6, rowGap: 4 }}>
+            <Text
+              className="text-lg font-semibold text-black dark:text-white"
+              onLongPress={(e) => onShowTextActions(word.word, e)}
+            >
               {word.word}
             </Text>
-          </Pressable>
-          {word.result.reading ? (
-            <ReadingDisplay reading={word.result.reading} sourceLang={book.sourceLang} word={word.word} compact />
+            {word.result.reading ? (
+              <ReadingDisplay reading={word.result.reading} sourceLang={book.sourceLang} word={word.word} compact />
+            ) : null}
+          </View>
+          {word.result.ipa && ipaSupported(book.sourceLang) ? (
+            <Text className="mt-1 text-sm text-gray-400">{word.result.ipa}</Text>
           ) : null}
         </View>
-
-        {!editMode ? (
-          <View className="flex-row items-center shrink-0 ml-2 mt-1">
-            <Pressable
-              onPress={(e) => {
-                e.stopPropagation?.();
-                speakWord(
-                  getTtsText(word.word, book.sourceLang, word.result.reading),
-                  book.sourceLang,
-                  // Phoneme override only for polysemy-disambiguated entries
-                  // (readingKey set during curated-list add). Non-polysemy words
-                  // pronounce correctly via Azure's default — overriding them
-                  // breaks playback entirely for single-char hanzi.
-                  word.readingKey
-                    ? phonemeForChinese(book.sourceLang, word.result.reading, word.word) ?? undefined
-                    : undefined,
-                );
-              }}
-              className="mr-3 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800"
-              accessibilityLabel={t('common.speak')}
-              accessibilityRole="button"
-            >
-              <MaterialIcons name="volume-up" size={16} color="#10b981" />
-            </Pressable>
-            <Pressable
-              onPress={(e) => {
-                e.stopPropagation?.();
-                onReport();
-              }}
-              className="mr-3 p-1"
-              accessibilityLabel={t('report.title')}
-              accessibilityRole="button"
-              hitSlop={8}
-            >
-              <MaterialIcons name="flag" size={16} color="#9ca3af" />
-            </Pressable>
-            <Text className="text-xs text-gray-400">{expanded ? '▲' : '▼'}</Text>
-          </View>
-        ) : null}
       </View>
 
-      {word.result.ipa ? (
-        <Text className="mt-1 text-sm text-gray-400">{word.result.ipa}</Text>
-      ) : null}
-
-      {/* Meanings — show 1 when collapsed, all when expanded */}
-      {!editMode ? (
-        <>
-          {(expanded ? meanings : meanings.slice(0, 1)).map((m, i) => (
-            <Text key={i} className="mt-1 text-sm text-gray-600 dark:text-gray-300">
-              {meanings.length > 1 ? `${i + 1}. ` : ''}
-              {m.partOfSpeech ? `(${formatPOS(m.partOfSpeech, m.gender, i18n.language)}) ` : ''}
-              {m.definition}
-            </Text>
-          ))}
-          {!expanded && meanings.length > 1 ? (
-            <Text className="mt-1 text-xs text-gray-400">+{meanings.length - 1}</Text>
-          ) : null}
-        </>
-      ) : meanings.length > 0 ? (
-        <Text className="mt-1 text-sm text-gray-500" numberOfLines={1}>
-          {meanings[0].definition}
-        </Text>
-      ) : null}
+      {/* Meanings — show 1 when collapsed, all when expanded.
+          Wrapper reserves right space so the absolutely-positioned icons
+          below don't overlap text. */}
+      <View style={{ paddingRight: editMode ? 0 : 90 }}>
+        {!editMode ? (
+          <>
+            {(expanded ? meanings : meanings.slice(0, 1)).map((m, i) => {
+              const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+              return (
+                <Text key={i} className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                  {meanings.length > 1 ? `${i + 1}. ` : ''}
+                  {marker ? `(${marker}) ` : ''}
+                  {m.definition}
+                </Text>
+              );
+            })}
+            {!expanded && meanings.length > 1 ? (
+              <Text className="mt-1 text-xs text-gray-400">+{meanings.length - 1}</Text>
+            ) : null}
+          </>
+        ) : meanings.length > 0 ? (
+          <Text className="mt-1 text-sm text-gray-500" numberOfLines={1}>
+            {meanings[0].definition}
+          </Text>
+        ) : null}
+      </View>
 
       {/* Expanded details */}
       {expanded && !editMode ? (
@@ -903,18 +881,12 @@ function WordRow({
                           accessibilityLabel={t('common.speak')}
                           accessibilityRole="button"
                         >
-                          <MaterialIcons name="volume-up" size={14} color="#10b981" />
+                          <MaterialIcons name="volume-up" size={14} color="#2EC4A5" />
                         </Pressable>
                       </View>
                       {e.translation ? (
                         <Text className="mt-1 text-sm text-gray-500">
-                          {e.translation.includes('**')
-                            ? e.translation.split('**').map((seg, si) =>
-                                si % 2 === 1
-                                  ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                                  : <Text key={si}>{seg}</Text>
-                              )
-                            : e.translation}
+                          {e.translation.replace(/\*\*/g, '')}
                         </Text>
                       ) : null}
                     </View>
@@ -922,52 +894,58 @@ function WordRow({
                 </View>
               ) : null}
 
-              {synonyms && synonyms.length > 0 ? (
-                <View className="mb-3">
-                  <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                    {t('add_word.synonyms')}
-                  </Text>
-                  <View className="mt-1 flex-row flex-wrap">
-                    {synonyms.map((s, i) => (
-                      <Pressable
-                        key={`syn-${i}`}
-                        onPress={() => navigateAndSearch(s)}
-                        onLongPress={(evt) => onShowTextActions(s, evt, () => navigateAndSearch(s))}
-                        delayLongPress={350}
-                      >
-                        <Text className="text-sm text-black dark:text-white">
-                          {s}{i < synonyms.length - 1 ? ', ' : ''}
-                        </Text>
-                      </Pressable>
-                    ))}
-                  </View>
-                </View>
-              ) : null}
-
-              {antonyms && antonyms.length > 0 ? (
-                <View className="mb-3">
-                  <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                    {t('add_word.antonyms')}
-                  </Text>
-                  <View className="mt-1 flex-row flex-wrap">
-                    {antonyms.map((a, i) => (
-                      <Pressable
-                        key={`ant-${i}`}
-                        onPress={() => navigateAndSearch(a)}
-                        onLongPress={(evt) => onShowTextActions(a, evt, () => navigateAndSearch(a))}
-                        delayLongPress={350}
-                      >
-                        <Text className="text-sm text-black dark:text-white">
-                          {a}{i < antonyms.length - 1 ? ', ' : ''}
-                        </Text>
-                      </Pressable>
-                    ))}
-                  </View>
-                </View>
-              ) : null}
-
             </>
           )}
+        </View>
+      ) : null}
+
+      {/* Right-side icons — anchored to the TOP of the card (aligned with
+          the header line). Top:16 matches the card's p-4 padding so the
+          icons sit on the same line as the headword. Previously we used
+          top:0/bottom:0 + justifyContent:center, which made the icons
+          drift to the vertical middle of the WHOLE card on expand — so
+          they'd overlap with the first example's speaker icon. */}
+      {!editMode ? (
+        <View
+          style={{
+            position: 'absolute',
+            right: 16,
+            top: 16,
+          }}
+          pointerEvents="box-none"
+        >
+          <View className="flex-row items-center">
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation?.();
+                speakWord(
+                  getTtsText(word.word, book.sourceLang, word.result.reading),
+                  book.sourceLang,
+                  word.readingKey
+                    ? phonemeForChinese(book.sourceLang, word.result.reading, word.word) ?? undefined
+                    : undefined,
+                );
+              }}
+              className="mr-3 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800"
+              accessibilityLabel={t('common.speak')}
+              accessibilityRole="button"
+            >
+              <MaterialIcons name="volume-up" size={16} color="#2EC4A5" />
+            </Pressable>
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation?.();
+                onReport();
+              }}
+              className="mr-3 p-1"
+              accessibilityLabel={t('report.title')}
+              accessibilityRole="button"
+              hitSlop={8}
+            >
+              <MaterialIcons name="flag" size={16} color="#9ca3af" />
+            </Pressable>
+            <Text className="text-xs text-gray-400">{expanded ? '▲' : '▼'}</Text>
+          </View>
         </View>
       ) : null}
     </Pressable>

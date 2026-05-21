@@ -55,6 +55,38 @@ export async function requestNotificationPermission(): Promise<boolean> {
   }
 }
 
+export type PushPlatform = 'android' | 'ios-sandbox' | 'ios-production';
+
+export interface DevicePushToken {
+  token: string;
+  platform: PushPlatform;
+}
+
+/**
+ * Returns the raw device push token (FCM on Android, APNs on iOS) along
+ * with a platform tag the edge functions use to pick the delivery route.
+ * iOS distinguishes sandbox vs production because the APNs endpoints
+ * differ; we infer from __DEV__, which is true for debug builds (expo
+ * run:ios) and false for Release/TestFlight/App Store builds.
+ */
+export async function getDevicePushToken(): Promise<DevicePushToken | null> {
+  if (!Notifications) return null;
+  try {
+    const granted = await requestNotificationPermission();
+    if (!granted) return null;
+    const tokenData = await Notifications.getDevicePushTokenAsync();
+    const token = tokenData?.data;
+    if (!token) return null;
+    const platform: PushPlatform = Platform.OS === 'ios'
+      ? (__DEV__ ? 'ios-sandbox' : 'ios-production')
+      : 'android';
+    return { token, platform };
+  } catch (e) {
+    captureError(e as Error);
+    return null;
+  }
+}
+
 export interface NotificationTranslations {
   reviewTitle: string;
   reviewBody: string;

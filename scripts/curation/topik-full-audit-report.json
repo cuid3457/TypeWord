@@ -1,0 +1,55 @@
+{
+  "totalScanned": 900,
+  "flagsCount": 6,
+  "byCategory": {
+    "S1": 1,
+    "S3": 8
+  },
+  "flags": [
+    {
+      "slug": "topik-1-part-1",
+      "word": "년",
+      "issues": [
+        "S1:only_1_examples"
+      ]
+    },
+    {
+      "slug": "topik-1-part-1",
+      "word": "앉다",
+      "issues": [
+        "S3:e1:marker_off(\"앉아 있다\"≠앉다)",
+        "S3:e2:marker_off(\"앉아 있다\"≠앉다)"
+      ]
+    },
+    {
+      "slug": "topik-1-part-1",
+      "word": "먹다",
+      "issues": [
+        "S3:e1:marker_off(\"먹어야 한다\"≠먹다)"
+      ]
+    },
+    {
+      "slug": "topik-1-part-2",
+      "word": "둥글다",
+      "issues": [
+        "S3:e1:marker_off(\"둥글어지고 있다\"≠둥글다)"
+      ]
+    },
+    {
+      "slug": "topik-1-part-3",
+      "word": "기억하다",
+      "issues": [
+        "S3:e2:marker_off(\"기억할 것이다\"≠기억하다)"
+      ]
+    },
+    {
+      "slug": "topik-1-part-3",
+      "word": "인기있다",
+      "issues": [
+        "S3:e0:marker_off(\"인기 있다\"≠인기있다)",
+        "S3:e1:marker_off(\"인기 있다\"≠인기있다)",
+        "S3:e2:marker_off(\"인기 있다\"≠인기있다)"
+      ]
+    }
+  ]
+}

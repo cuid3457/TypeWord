@@ -95,7 +95,7 @@ export async function getBooksForNotifications(defaultHour: number): Promise<Not
        WHERE book_id = ? AND (next_review IS NULL OR next_review <= ?)`,
       [r.id, now],
     );
-    const reviewableCount = dueRows.filter((d) => !isExpression(d.word)).length;
+    const reviewableCount = dueRows.length;
     result.push({
       id: r.id,
       title: r.title,
@@ -114,6 +114,30 @@ export interface BookWithCount extends Omit<Book, 'userId'> {
 }
 
 export type BookSortMode = 'recent' | 'created' | 'words';
+
+/**
+ * Books that contain at least one user-created (source='manual') word.
+ * Pure-download books (all words came from curated/community import) are
+ * excluded so they don't show up in the community upload picker — re-
+ * uploading those would just re-publish someone else's wordlist.
+ */
+export async function listOriginalBooks(): Promise<BookWithCount[]> {
+  const db = await getDb();
+  const rows = await db.getAllAsync<BookRow & { word_count: number; manual_count: number }>(
+    `SELECT b.*,
+            COUNT(w.id) AS word_count,
+            SUM(CASE WHEN COALESCE(w.source, 'manual') = 'manual' THEN 1 ELSE 0 END) AS manual_count
+     FROM books b
+     LEFT JOIN user_words w ON w.book_id = b.id
+     GROUP BY b.id
+     HAVING manual_count > 0`,
+  );
+  return rows.map((row) => ({
+    ...rowToBook(row),
+    wordCount: row.word_count,
+    pinned: !!row.pinned,
+  }));
+}
 
 export async function listBooks(sort: BookSortMode = 'recent', reversed = false): Promise<BookWithCount[]> {
   const db = await getDb();
@@ -167,12 +191,23 @@ export async function insertBook(params: {
   studyLang?: string | null;
   isbn?: string | null;
   coverUrl?: string | null;
+  /** Server curated_wordlists.id when this book originated from a curated
+   * import. NULL for manually-created books. Drives launch-time content
+   * refresh. */
+  curatedWordlistId?: string | null;
+  /** Server's content_version at import time; sync compares this to the
+   * server's current value to decide whether to pull a diff. */
+  contentVersion?: number;
+  /** Newest curated_words.updated_at applied locally, as millis-since-
+   * epoch. Used as the WHERE updated_at > ? bound for incremental fetch.
+   * Defaults to now() for new imports (everything is already current). */
+  lastSyncedAt?: number;
 }): Promise<void> {
   const db = await getDb();
   const now = Date.now();
   await db.runAsync(
-    `INSERT INTO books (id, title, author, source_lang, target_lang, bidirectional, study_lang, isbn, cover_url, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO books (id, title, author, source_lang, target_lang, bidirectional, study_lang, isbn, cover_url, curated_wordlist_id, content_version, last_synced_at, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       params.id,
       params.title,
@@ -183,11 +218,48 @@ export async function insertBook(params: {
       params.studyLang ?? null,
       params.isbn ?? null,
       params.coverUrl ?? null,
+      params.curatedWordlistId ?? null,
+      params.contentVersion ?? 0,
+      params.lastSyncedAt ?? 0,
       now,
       now,
     ],
   );
   scheduleSync();
+}
+
+// Sync helpers removed 2026-05-14. The previous client-side curated
+// sync + per-word lookup loop was replaced by the single server-side
+// `sync-user-words` edge function (services/userWordsSyncService.ts).
+
+/** Patch an existing user_word's result_json in place. Does NOT touch
+ * review state (next_review, ease_factor, etc.). Bumps updated_at so the
+ * row is included in the next pushWords cycle — otherwise pullWords from
+ * the (still-stale) server later overwrites our patch. Matched by
+ * (book_id, word, reading_key). Returns true when the row existed and
+ * was patched. */
+export async function patchUserWordResult(params: {
+  bookId: string;
+  word: string;
+  readingKey: string;
+  result: WordLookupResult;
+}): Promise<boolean> {
+  const db = await getDb();
+  const now = Date.now();
+  const res = await db.runAsync(
+    `UPDATE user_words
+     SET result_json = ?, cache_synced_at = ?, updated_at = ?
+     WHERE book_id = ? AND word = ? AND reading_key = ?`,
+    [
+      JSON.stringify(params.result),
+      now,
+      now,
+      params.bookId,
+      params.word,
+      params.readingKey,
+    ],
+  );
+  return (res.changes ?? 0) > 0;
 }
 
 export async function updateBookTitle(id: string, title: string): Promise<void> {
@@ -315,13 +387,18 @@ export async function saveWord(params: {
   readingKey?: string;
   result: WordLookupResult;
   sourceSentence?: string | null;
+  /** 'manual' (default) for user-typed adds; 'curated' for bulk-import from a
+   * curated wordlist. Used by the streak query to exclude bulk imports from
+   * the add-path qualifier. */
+  source?: 'manual' | 'curated';
 }): Promise<void> {
   const db = await getDb();
   const now = Date.now();
   const readingKey = params.readingKey ?? '';
+  const source = params.source ?? 'manual';
   await db.runAsync(
-    `INSERT INTO user_words (id, book_id, word, reading_key, result_json, source_sentence, cache_synced_at, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `INSERT INTO user_words (id, book_id, word, reading_key, result_json, source_sentence, cache_synced_at, source, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ON CONFLICT(COALESCE(book_id, ''), word, reading_key) DO UPDATE SET
        result_json = excluded.result_json,
        source_sentence = excluded.source_sentence,
@@ -335,6 +412,7 @@ export async function saveWord(params: {
       JSON.stringify(params.result),
       params.sourceSentence ?? null,
       now,
+      source,
       now,
       now,
     ],
@@ -466,8 +544,6 @@ export async function listWordsByBook(
 
 // ---------- SRS Review ----------
 
-import { isExpression } from '@src/utils/pure';
-export { isExpression };
 
 import { DAY_MS, HOUR_MS, calculateNextReview } from '@src/utils/sm2';
 
@@ -502,11 +578,17 @@ export async function getReviewableWords(
     [now, ...bookParams, CANDIDATE_LIMIT],
   );
 
+  // Random sample for new cards. Created-time ordering would bias the
+  // candidate pool toward whichever words happened to be imported last —
+  // for an alphabetically-ordered curated list (TOEIC 600, HSK …), every
+  // session's selected new cards would all sit at the tail end of the
+  // alphabet until those words graduate, while early-alphabet cards
+  // never appear. RANDOM() gives every eligible new card equal chance.
   const newRows = await db.getAllAsync<UserWordRow>(
     `SELECT w.* FROM user_words w
      INNER JOIN books b ON w.book_id = b.id
      WHERE w.review_count = 0 AND (w.next_review IS NULL OR w.next_review <= ?) ${bookFilter}
-     ORDER BY w.created_at DESC
+     ORDER BY RANDOM()
      LIMIT ?`,
     [now, ...bookParams, CANDIDATE_LIMIT],
   );
@@ -516,7 +598,6 @@ export async function getReviewableWords(
   const scoredNew: Scored[] = [];
 
   for (const row of dueRows) {
-    if (isExpression(row.word)) continue;
     if (row.interval_days === 0) {
       scoredDue.push({ row, score: Infinity, category: 'failed' });
     } else {
@@ -527,14 +608,15 @@ export async function getReviewableWords(
   }
 
   for (const row of newRows) {
-    if (isExpression(row.word)) continue;
     const ageMs = now - row.created_at;
     let score: number;
     if (ageMs < HOUR_MS) score = 0.9;
     else if (ageMs < DAY_MS) score = 0.7;
     else if (ageMs < 3 * DAY_MS) score = 0.4;
     else score = 0.2;
-    scoredNew.push({ row, score, category: 'new' });
+    // Random tiebreak so equal-bucket cards don't fall back to a stable
+    // SQL order that biases selection within the bucket.
+    scoredNew.push({ row, score: score + Math.random() * 0.0001, category: 'new' });
   }
 
   scoredDue.sort((a, b) => b.score - a.score);
@@ -567,21 +649,21 @@ export async function getReviewableCount(bookId?: string | null): Promise<number
   const db = await getDb();
   const now = Date.now();
   if (bookId) {
-    const rows = await db.getAllAsync<{ word: string }>(
-      `SELECT w.word FROM user_words w
+    const row = await db.getFirstAsync<{ cnt: number }>(
+      `SELECT COUNT(*) as cnt FROM user_words w
        INNER JOIN books b ON w.book_id = b.id
        WHERE w.book_id = ? AND (w.next_review IS NULL OR w.next_review <= ?)`,
       [bookId, now],
     );
-    return rows.filter((r) => !isExpression(r.word)).length;
+    return row?.cnt ?? 0;
   }
-  const rows = await db.getAllAsync<{ word: string }>(
-    `SELECT w.word FROM user_words w
+  const row = await db.getFirstAsync<{ cnt: number }>(
+    `SELECT COUNT(*) as cnt FROM user_words w
      INNER JOIN books b ON w.book_id = b.id
      WHERE w.next_review IS NULL OR w.next_review <= ?`,
     [now],
   );
-  return rows.filter((r) => !isExpression(r.word)).length;
+  return row?.cnt ?? 0;
 }
 
 export async function getRecentBookName(): Promise<string | null> {
@@ -632,7 +714,6 @@ export async function getReviewableCountsByBook(sort: BookSortMode = 'recent', r
        b.updated_at, b.created_at
      FROM user_words w
      INNER JOIN books b ON w.book_id = b.id
-     WHERE w.word NOT GLOB '[0-9 +\\-*/^!=<>().%]*'
      GROUP BY b.id
      HAVING due_count > 0 OR reloadable_count > 0`,
     [now, now],
@@ -661,6 +742,13 @@ export async function getReviewableCountsByBook(sort: BookSortMode = 'recent', r
 
 
 export const FREE_BOOK_LIMIT = 5;
+export const PLUS_BOOK_LIMIT = 30;
+/** Per-tier wordlist count cap. Pro = unlimited. */
+export const BOOK_LIMIT_BY_TIER = {
+  free: FREE_BOOK_LIMIT,
+  plus: PLUS_BOOK_LIMIT,
+  pro: Number.POSITIVE_INFINITY,
+} as const;
 
 export async function getBookCount(): Promise<number> {
   const db = await getDb();

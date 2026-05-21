@@ -1,0 +1,1669 @@
+# delf-b1-part-3 (fr → ko) | 300 words
+
+changement climatique [ko] ipa=- | meanings: 기후 변화[표현]
+   e1: Le **changement climatique** affecte la biodiversité mondiale. || **기후 변화**가 전 세계 생물 다양성에 영향을 미칩니다.
+   e2: Nous devons agir contre le **changement climatique** rapidement. || 우리는 **기후 변화**에 신속하게 대응해야 합니다.
+   syn: [] | ant: []
+
+réchauffement [ko] ipa=ʁeʃofmɑ̃ | meanings: 가열[명사] | 지구 온난화[명사]
+   e1: Le **réchauffement** du four est rapide. || 오븐의 **가열**이 빠릅니다.
+   e2: Le **réchauffement** climatique inquiète les scientifiques. || 기후 **온난화**가 과학자들을 걱정하게 합니다.
+   syn: [chauffage, augmentation de la température, réchauffage] | ant: []
+
+effet de serre [ko] ipa=- | meanings: 온실 효과[명사]
+   e1: L'**effet de serre** provoque le réchauffement de la planète. || **온실 효과**가 지구 온난화를 일으킵니다.
+   e2: Les gaz à **effet de serre** augmentent l'effet de serre. || 온실가스가 **온실 효과**를 증가시킵니다.
+   syn: [réchauffement climatique, effet de serre thermique] | ant: []
+
+gaz à effet de serre [ko] ipa=- | meanings: 온실가스[명사]
+   e1: Les **gaz à effet de serre** contribuent au changement climatique. || **온실가스**는 기후 변화에 기여합니다.
+   e2: Nous devons réduire les émissions de **gaz à effet de serre**. || 우리는 **온실가스** 배출을 줄여야 합니다.
+   e3: Les **gaz à effet de serre** augmentent la température de la Terre. || **온실가스**는 지구의 온도를 상승시킵니다.
+   syn: [] | ant: []
+
+carbone [ko] ipa=kaʁbɔn | meanings: 탄소[명사]
+   e1: Le **carbone** est essentiel à la vie sur Terre. || **탄소**는 지구상의 생명에 필수적입니다.
+   e2: L'atmosphère contient du **carbone** en faible quantité. || 대기에는 적은 양의 **탄소**가 포함되어 있습니다.
+   e3: Ce matériau est composé principalement de **carbone** pur. || 이 재료는 주로 순수한 **탄소**로 구성되어 있습니다.
+   syn: [] | ant: []
+
+neutralité carbone [ko] ipa=- | meanings: 탄소 중립[표현]
+   e1: L'entreprise vise la **neutralité carbone** en 2050. || 그 회사는 2050년까지 **탄소 중립**을 목표로 한다.
+   e2: La **neutralité carbone** réduit l'impact environnemental. || **탄소 중립**은 환경 영향을 줄인다.
+   e3: Atteindre la **neutralité carbone** demande des efforts collectifs. || **탄소 중립**을 달성하려면 공동의 노력이 필요하다.
+   syn: [neutralité climatique, équilibre carbone] | ant: []
+
+empreinte carbone [ko] ipa=- | meanings: 탄소 배출량[명사] | 환경 영향[명사]
+   e1: Nous devons réduire notre **empreinte carbone**. || 우리는 우리의 **탄소 배출량**을 줄여야 합니다.
+   e2: L'**empreinte carbone** affecte la qualité de vie. || **탄소 배출량**은 삶의 질에 영향을 미칩니다.
+   e3: Les entreprises surveillent leur **empreinte carbone**. || 기업들은 그들의 **탄소 배출량**을 감시합니다.
+   syn: [empreinte écologique, impact carbone] | ant: []
+
+écobilan [ko] ipa=ekobilɑ̃ | meanings: 생태 발자국[명사]
+   e1: L'**écobilan** mesure l'impact environnemental d'une entreprise. || **에코빌란**은 기업의 환경 영향을 측정합니다.
+   e2: Faire un **écobilan** aide à réduire la pollution. || **에코빌란**을 하면 오염을 줄일 수 있습니다.
+   e3: Cet **écobilan** révèle une consommation énergétique élevée. || 이 **에코빌란**은 높은 에너지 소비를 보여줍니다.
+   syn: [bilan écologique, empreinte écologique] | ant: []
+
+atmosphère [ko] ipa=atmɔsfɛʁ | meanings: 대기[명사] | 분위기[명사]
+   e1: L’**atmosphère** est claire ce matin. || 오늘 아침의 **대기**는 깨끗해요.
+   e2: Cette pièce a une **atmosphère** chaleureuse. || 이 방은 따뜻한 **분위기**를 가지고 있어요.
+   e3: L’**atmosphère** autour du lac est paisible. || 호수 주변의 **대기**는 평화로워요.
+   syn: [air, climat, milieu, ambiance, environnement] | ant: []
+
+ozone [ko] ipa=ozon | meanings: 오존[명사]
+   e1: L'**ozone** protège la Terre des rayons UV. || **오존**은 지구를 자외선으로부터 보호한다.
+   e2: La couche d'**ozone** est essentielle pour la vie. || **오존**층은 생명에 필수적이다.
+   e3: Le laboratoire mesure l'**ozone** dans l'atmosphère. || 실험실에서는 대기의 **오존**을 측정한다.
+   syn: [] | ant: []
+
+couche d'ozone [ko] ipa=- | meanings: 오존층[명사]
+   e1: La **couche d'ozone** protège la Terre des rayons UV. || **오존층**은 지구를 자외선으로부터 보호해요.
+   e2: La diminution de la **couche d'ozone** inquiète les scientifiques. || **오존층**의 감소는 과학자들을 걱정하게 합니다.
+   e3: Les efforts protègent la **couche d'ozone** chaque année. || 매년 **오존층**을 보호하는 노력이 이어집니다.
+   syn: [] | ant: []
+
+biodiversité [ko] ipa=bjɔdivɛʁsite | meanings: 생물 다양성[명사]
+   e1: La **biodiversité** est essentielle pour l'équilibre naturel. || **생물 다양성**은 자연의 균형에 필수적입니다.
+   e2: Les forêts tropicales ont une grande **biodiversité**. || 열대 우림은 높은 **생물 다양성**을 가지고 있습니다.
+   e3: La protection de la **biodiversité** protège les espèces menacées. || **생물 다양성** 보호는 멸종 위기 종을 보호합니다.
+   syn: [diversité biologique, variabilité biologique] | ant: []
+
+écosystème [ko] ipa=ekosistɛm | meanings: 생태계[명사]
+   e1: L'**écosystème** de la forêt est très diversifié. || 숲의 **생태계**는 매우 다양하다.
+   e2: Nous devons protéger l'**écosystème** marin fragile. || 우리는 연약한 해양 **생태계**를 보호해야 한다.
+   e3: L'**écosystème** urbain présente des défis uniques. || 도시 **생태계**는 독특한 도전을 보여준다.
+   syn: [milieu naturel, biome, environnement] | ant: []
+
+espèce [ko] ipa=ɛspɛs | meanings: 종[명사] | 현금[명사]
+   e1: Cette **espèce** d'oiseau est rare en Europe. || 이 **종**의 새는 유럽에서 희귀합니다.
+   e2: Je paie en **espèces** au marché. || 나는 시장에서 **현금**으로 지불합니다.
+   e3: Plusieurs **espèces** marines vivent dans cet océan. || 이 바다에는 여러 해양 **종**이 살고 있습니다.
+   syn: [type, variété, genre] | ant: []
+
+espèce menacée [ko] ipa=- | meanings: 멸종 위기 종[명사]
+   e1: Le tigre est une **espèce menacée** en Asie. || 호랑이는 아시아에서 **멸종 위기 종**입니다.
+   e2: Les efforts protègent plusieurs **espèces menacées**. || 노력은 여러 **멸종 위기 종**을 보호합니다.
+   e3: Cette réserve accueille des **espèces menacées**. || 이 자연 보호구역은 **멸종 위기 종**을 수용합니다.
+   syn: [] | ant: []
+
+espèce protégée [ko] ipa=- | meanings: 보호종[명사]
+   e1: Le tigre est une **espèce protégée** en danger. || 호랑이는 위기에 처한 **보호종**입니다.
+   e2: Cette plante est une **espèce protégée** dans cette région. || 이 식물은 이 지역에서 **보호종**입니다.
+   syn: [] | ant: []
+
+extinction [ko] ipa=ɛkstɛ̃ksjɔ̃ | meanings: 소멸[명사] | 멸종[명사]
+   e1: L'**extinction** du feu a été rapide. || 불의 **소멸**이 빨랐어요.
+   e2: L'**extinction** des espèces menace la biodiversité. || 종들의 **멸종**이 생물 다양성을 위협해요.
+   e3: L'**extinction** naturelle est un phénomène ancien. || 자연적인 **소멸**은 오래된 현상입니다.
+   syn: [anéantissement, disparition, éteinte] | ant: []
+
+habitat [ko] ipa=abitɑ | meanings: 서식지[명사] | 주거지[명사]
+   e1: L'**habitat** de cette espèce est la forêt tropicale. || 이 종의 **서식지**는 열대우림입니다.
+   e2: Ils ont construit un nouvel **habitat** près du lac. || 그들은 호수 근처에 새로운 **주거지**를 지었습니다.
+   syn: [loge, demeure, domicile] | ant: []
+
+préserver [ko] ipa=pʁezɛʁve | meanings: 보호하다, 지키다[동사]
+   e1: Nous devons **préserver** la nature pour l'avenir. || 우리는 미래를 위해 자연을 **보호**해야 합니다.
+   e2: Elle **préserve** ses souvenirs dans un album. || 그녀는 앨범에 추억을 **지켜요**.
+   e3: Ils veulent **préserver** la paix dans la région. || 그들은 그 지역에서 평화를 **지키고** 싶어한다.
+   syn: [protéger, conserver, sauvegarder] | ant: []
+
+préservation [ko] ipa=pʁezɛʁvasjɔ̃ | meanings: 보존[명사]
+   e1: La **préservation** de la nature est essentielle. || 자연의 **보존**은 필수적입니다.
+   e2: Ils travaillent à la **préservation** des monuments anciens. || 그들은 고대 건축물 **보존**에 노력을 기울입니다.
+   e3: La **préservation** de la culture locale est importante. || 지역 문화 **보존**은 중요합니다.
+   syn: [conservation, protection, maintien] | ant: []
+
+déforestation [ko] ipa=defɔʁɛstasjɔ̃ | meanings: 삼림 벌채[명사]
+   e1: La **déforestation** menace la biodiversité locale. || **삼림 벌채**는 지역 생물 다양성을 위협합니다.
+   e2: Les campagnes alertent sur la vitesse de la **déforestation**. || 캠페인들은 **삼림 벌채** 속도에 대해 경고합니다.
+   syn: [déboisement] | ant: []
+
+reboisement [ko] ipa=ʁə.bwaz.mɑ̃ | meanings: 재조림[명사]
+   e1: Le **reboisement** aide à restaurer les forêts dégradées. || **재조림**은 황폐한 숲을 복원하는 데 도움이 된다.
+   e2: Le projet de **reboisement** a amélioré la qualité de l'air local. || **재조림** 프로젝트가 지역 공기 질을 향상시켰다.
+   e3: Ils ont travaillé dur pour réussir le **reboisement** après l'incendie. || 그들은 산불 후에 **재조림**을 성공시키기 위해 열심히 일했다.
+   syn: [replantation, reboisement forestier] | ant: []
+
+désertification [ko] ipa=dezɛʁtifikasjɔ̃ | meanings: 사막화[명사]
+   e1: La **désertification** menace les zones agricoles. || 농업 지역을 위협하는 **사막화**입니다.
+   e2: La lutte contre la **désertification** est essentielle. || **사막화** 방지가 매우 중요합니다.
+   e3: La **désertification** réduit la biodiversité locale. || **사막화**는 지역 생물 다양성을 줄입니다.
+   syn: [aridification, ensablement] | ant: []
+
+érosion [ko] ipa=eʁɔzjɔ̃ | meanings: 침식[명사]
+   e1: L'**érosion** du sol affecte les plantations. || 토양의 **침식**이 식물에 영향을 준다.
+   e2: La côte subit une forte **érosion** chaque année. || 해안은 매년 심한 **침식**을 겪는다.
+   syn: [usure, détérioration] | ant: []
+
+sécheresse [ko] ipa=sek.ʁɛs | meanings: 가뭄[명사]
+   e1: La **sécheresse** dure depuis deux mois dans la région. || 그 지역에서는 두 달째 **가뭄**이 계속되고 있다.
+   e2: Les plantes souffrent de la **sécheresse** cet été. || 이번 여름에 식물들은 **가뭄**으로 고통받고 있다.
+   e3: La **sécheresse** affecte la récolte des fermiers. || **가뭄**이 농부들의 수확에 영향을 준다.
+   syn: [aridité, manque d'eau] | ant: []
+
+inondation [ko] ipa=inɔ̃dasjɔ̃ | meanings: 홍수[명사]
+   e1: L'**inondation** a détruit plusieurs maisons au village. || **홍수**가 마을의 여러 집을 파괴했다.
+   e2: La rivière a causé une **inondation** après la pluie. || 비가 온 후 강이 **홍수**를 일으켰다.
+   syn: [déluge, crue] | ant: []
+
+ouragan [ko] ipa=uʁaɡɑ̃ | meanings: 태풍[명사]
+   e1: L'**ouragan** a détruit la côte hier. || 어제 **태풍**이 해안을 파괴했어요.
+   e2: Les secours sont prêts pour l'**ouragan**. || 구조대는 **태풍**에 대비하고 있어요.
+   syn: [tempête tropicale, cyclone] | ant: []
+
+typhon [ko] ipa=tipɔ̃ | meanings: 태풍[명사]
+   e1: Le **typhon** a causé des dégâts importants. || **태풍**이 큰 피해를 입혔어요.
+   e2: Le village se prépare au passage du **typhon**. || 마을은 **태풍** 통과에 대비하고 있어요.
+   syn: [ouragan, tempête] | ant: []
+
+catastrophe naturelle [ko] ipa=- | meanings: 자연재해[표현]
+   e1: Une **catastrophe naturelle** a touché la région ce matin. || 오늘 아침에 **자연재해**가 그 지역을 강타했다.
+   e2: Ils préparent un plan pour réagir à une **catastrophe naturelle**. || 그들은 **자연재해**에 대응할 계획을 준비한다.
+   e3: La **catastrophe naturelle** a détruit de nombreuses maisons. || **자연재해**가 많은 집을 파괴했다.
+   syn: [] | ant: []
+
+catastrophe écologique [ko] ipa=- | meanings: 생태계 파괴[표현]
+   e1: La déforestation cause une **catastrophe écologique** grave. || 산림 벌채가 심각한 **생태계 파괴**를 초래합니다.
+   e2: Nous devons agir pour éviter la **catastrophe écologique**. || 우리는 **생태계 파괴**를 막기 위해 행동해야 합니다.
+   syn: [désastre environnemental, dommage écologique] | ant: []
+
+marée noire [ko] ipa=- | meanings: 기름 유출[명사]
+   e1: La **marée noire** a contaminé les plages environnantes. || **기름 유출**로 해변이 오염되었어요.
+   e2: Ils ont travaillé dur pour nettoyer la **marée noire**. || 그들은 **기름 유출**을 청소하기 위해 열심히 일했어요.
+   syn: [pollution pétrolière, déversement de pétrole] | ant: []
+
+déversement [ko] ipa=devɛʁsmɑ̃ | meanings: 방출[명사] | 유출[명사]
+   e1: Le **déversement** de l'eau a nettoyé le jardin. || 물의 **방출**이 정원을 청소했어요.
+   e2: Le **déversement** de pétrole a pollué la mer. || 기름의 **유출**이 바다를 오염시켰어요.
+   syn: [écoulement, rejet] | ant: []
+
+fuite [ko] ipa=fɥit | meanings: 누수, 도망[명사]
+   e1: La **fuite** d'eau a été réparée rapidement. || 물이 새는 **누수**가 빠르게 수리되었다.
+   e2: Il y a une **fuite** d'informations dans le bureau. || 사무실에 정보 **누수**가 있다.
+   e3: La **fuite** du prisonnier a surpris les gardiens. || 죄수의 **도망**이 경비원을 놀라게 했다.
+   syn: [écoulement, débit, évasion] | ant: []
+
+contaminer [ko] ipa=kɔ̃tamine | meanings: 오염시키다[동사]
+   e1: L'eau peut **contaminer** les plantes autour. || 물이 주변 식물을 **오염시킬** 수 있어요.
+   e2: La rivière est **contaminée** par des déchets industriels. || 강이 산업 폐기물로 **오염되었어요**.
+   e3: Nous devons éviter de **contaminer** le sol avec des produits chimiques. || 우리는 화학물질로 토양을 **오염시키는** 것을 피해야 합니다.
+   syn: [polluer, infecter, souiller] | ant: []
+
+contamination [ko] ipa=kɔ̃ta.mine.sjɔ̃ | meanings: 오염[명사]
+   e1: La **contamination** a touché toute l'eau du lac. || 그 **오염**은 호수의 전체 물에 영향을 미쳤다.
+   e2: Le laboratoire surveille la **contamination** des échantillons. || 실험실은 시료의 **오염**을 감시한다.
+   e3: La **contamination** des aliments peut provoquer des maladies. || 음식의 **오염**은 질병을 유발할 수 있다.
+   syn: [pollution, infection, pollinisation] | ant: []
+
+polluant [ko] ipa=pɔ.ly.ɑ̃ | meanings: 오염물질[명사] | 오염시키는[형용사]
+   e1: Le dioxyde de soufre est un **polluant** dangereux. || 이산화황은 위험한 **오염물질**입니다.
+   e2: L'eau a été contaminée par un **polluant** chimique. || 물은 화학적 **오염물질**에 의해 오염되었습니다.
+   e3: Les émissions **polluantes** affectent la qualité de l'air. || **오염을** 일으키는 배출물은 공기 질에 영향을 줍니다.
+   syn: [contaminant, toxique, nocif] | ant: []
+
+pollution atmosphérique [ko] ipa=- | meanings: 대기 오염[명사]
+   e1: La **pollution atmosphérique** affecte la santé des habitants. || **대기 오염**은 주민들의 건강에 영향을 준다.
+   e2: Nous surveillons la **pollution atmosphérique** chaque jour. || 우리는 매일 **대기 오염**을 관찰한다.
+   syn: [contamination de l'air, dégradation de l'atmosphère] | ant: []
+
+pollution sonore [ko] ipa=- | meanings: 소음 공해[명사]
+   e1: La **pollution sonore** affecte la qualité de vie. || **소음 공해**는 삶의 질에 영향을 미친다.
+   e2: Nous devons réduire la **pollution sonore** en ville. || 도시에서 **소음 공해**를 줄여야 한다.
+   e3: Les habitants se plaignent souvent de la **pollution sonore**. || 주민들은 종종 **소음 공해**에 대해 불평한다.
+   syn: [bruit, nuisance sonore] | ant: []
+
+pollution lumineuse [ko] ipa=- | meanings: 광공해[명사]
+   e1: La **pollution lumineuse** gêne l'observation des étoiles. || 별 관측을 방해하는 **광공해**입니다.
+   e2: La **pollution lumineuse** affecte la faune nocturne. || 야행성 동물에게 영향을 미치는 **광공해**입니다.
+   e3: Nous réduisons la **pollution lumineuse** dans notre ville. || 우리 도시는 **광공해**를 줄이고 있습니다.
+   syn: [éclairage excessif, lumière parasite] | ant: []
+
+déchet [ko] ipa=deʃɛ | meanings: 쓰레기[명사]
+   e1: Il faut trier les **déchets** ménagers. || 가정용 **쓰레기**는 분리수거해야 해요.
+   e2: Les **déchets** doivent être recyclés correctement. || **쓰레기**는 올바르게 재활용해야 해요.
+   e3: La ville collecte les **déchets** chaque semaine. || 도시는 매주 **쓰레기**를 수거해요.
+   syn: [ordure, rebuts, débris] | ant: []
+
+déchet ménager [ko] ipa=- | meanings: 생활 쓰레기[명사]
+   e1: Le camion collecte les **déchets ménagers** chaque semaine. || 트럭이 매주 **생활 쓰레기**를 수거합니다.
+   e2: Triez vos **déchets ménagers** pour le recyclage. || 재활용을 위해 **생활 쓰레기**를 분리하세요.
+   syn: [ordures ménagères, rebuts domestiques, déchets domestiques] | ant: []
+
+déchet industriel [ko] ipa=- | meanings: 산업 폐기물[명사]
+   e1: L'usine produit beaucoup de **déchets industriels**. || 그 공장은 많은 **산업 폐기물**을 생산합니다.
+   e2: Le gouvernement contrôle le traitement des **déchets industriels**. || 정부는 **산업 폐기물** 처리를 감독합니다.
+   syn: [] | ant: []
+
+déchet toxique [ko] ipa=- | meanings: 유독 폐기물[명사]
+   e1: Les usines doivent traiter les **déchets toxiques** correctement. || 공장들은 **유독 폐기물**을 올바르게 처리해야 합니다.
+   e2: Les **déchets toxiques** menacent souvent l'environnement. || **유독 폐기물**은 종종 환경을 위협합니다.
+   syn: [déchet dangereux, résidu toxique] | ant: []
+
+tri sélectif [ko] ipa=- | meanings: 분리수거[표현]
+   e1: Le **tri sélectif** aide à protéger l'environnement. || **분리수거**는 환경 보호에 도움이 됩니다.
+   e2: Nous faisons toujours le **tri sélectif** à la maison. || 우리는 집에서 항상 **분리수거**를 합니다.
+   syn: [recyclage sélectif, tri des déchets] | ant: []
+
+trier [ko] ipa=tʁije | meanings: 분류하다, 정리하다[동사]
+   e1: Je **trie** les papiers sur mon bureau. || 나는 내 책상 위의 서류를 **분류한다**.
+   e2: Elle **trie** les vêtements par couleur. || 그녀는 옷을 색깔별로 **분류한다**.
+   e3: Nous **trions** les déchets pour le recyclage. || 우리는 재활용을 위해 쓰레기를 **분류한다**.
+   syn: [classer, organiser, sélectionner] | ant: []
+
+recyclage [ko] ipa=ʁəsiklaʒ | meanings: 재활용[명사]
+   e1: Le **recyclage** du papier est important pour l'environnement. || 종이의 **재활용**은 환경에 중요합니다.
+   e2: Nous faisons le **recyclage** des bouteilles en plastique chaque semaine. || 우리는 매주 플라스틱 병을 **재활용**합니다.
+   e3: Le centre de **recyclage** accepte différents matériaux. || **재활용** 센터는 여러 가지 재료를 받습니다.
+   syn: [réutilisation, valorisation] | ant: []
+
+recyclable [ko] ipa=ʁəsikliabl | meanings: 재활용 가능한[형용사]
+   e1: Cette bouteille est **recyclable**. || 이 병은 **재활용** 가능하다.
+   e2: Nous utilisons des sacs **recyclables** au marché. || 우리는 시장에서 **재활용 가능한** 가방을 사용한다.
+   syn: [écologique, réutilisable] | ant: []
+
+compostage [ko] ipa=kɔ̃pɔstaʒ | meanings: 퇴비화[명사]
+   e1: Le **compostage** aide à réduire les déchets ménagers. || **퇴비화**는 가정 쓰레기를 줄이는 데 도움이 됩니다.
+   e2: Nous avons installé un bac pour le **compostage** dans le jardin. || 우리는 정원에 **퇴비화**용 통을 설치했습니다.
+   syn: [fertilisation organique, décomposition] | ant: []
+
+composter [ko] ipa=kɔ̃pɔste | meanings: 표를 찍다[동사]
+   e1: N'oublie pas de **composter** ton ticket avant de monter. || 타기 전에 **찍으세요**.
+   e2: Il faut toujours **composter** les billets dans la machine. || 기계에 항상 **찍어야** 합니다.
+   syn: [valider, enregistrer] | ant: []
+
+décharge [ko] ipa=deʃaʁʒ | meanings: 배출, 하역[명사] | 방전, 전기방전[명사]
+   e1: La **décharge** du camion s'est déroulée rapidement. || 트럭의 **하역**은 빠르게 진행되었다.
+   e2: La batterie subit une **décharge** complète cette nuit. || 배터리는 오늘 밤에 완전한 **방전**을 겪는다.
+   syn: [débordement, vidage, émission] | ant: []
+
+incinération [ko] ipa=ɛ̃sineʁasjɔ̃ | meanings: 화장[명사]
+   e1: L'**incinération** des cendres a eu lieu hier. || 어제 **화장**이 진행되었다.
+   e2: Le rituel d'**incinération** s'est déroulé en paix. || 평화롭게 **화장** 의식이 치러졌다.
+   syn: [crémation] | ant: []
+
+incinérer [ko] ipa=ɛ̃sinɛʁe | meanings: 태우다[동사]
+   e1: Ils vont **incinérer** les feuilles tombées. || 그들은 떨어진 나뭇잎을 **태울** 거예요.
+   e2: L'hôpital doit **incinérer** les déchets médicaux. || 병원은 의료 폐기물을 **태워야** 합니다.
+   e3: Le feu est assez fort pour **incinérer** le bois sec. || 불이 마른 나무를 **태우기에** 충분히 뜨거워요.
+   syn: [brûler, embraser] | ant: []
+
+réutiliser [ko] ipa=ʁe.y.ti.li.ze | meanings: 재사용하다[동사]
+   e1: Je préfère **réutiliser** les sacs plastiques. || 나는 비닐봉지를 **재사용하는** 것을 선호해요.
+   e2: Nous devons **réutiliser** l'eau pour économiser. || 우리는 절약을 위해 물을 **재사용해야** 해요.
+   syn: [réemployer, recycler, employer de nouveau] | ant: []
+
+réutilisation [ko] ipa=ʁe.y.ti.li.za.sjɔ̃ | meanings: 재사용[명사]
+   e1: La **réutilisation** des bouteilles réduit les déchets. || 병의 **재사용**은 쓰레기를 줄입니다.
+   e2: Nous encourageons la **réutilisation** des sacs en tissu. || 우리는 천 가방 **재사용**을 장려합니다.
+   e3: La **réutilisation** des matériaux économise de l'énergie. || 재료 **재사용**은 에너지를 절약합니다.
+   syn: [réemploi, recyclage] | ant: []
+
+économie circulaire [ko] ipa=- | meanings: 순환 경제[명사]
+   e1: L'**économie circulaire** réduit les déchets et préserve les ressources. || **순환 경제**는 폐기물을 줄이고 자원을 보존합니다.
+   e2: De nombreuses entreprises adoptent l'**économie circulaire** aujourd'hui. || 많은 기업들이 오늘날 **순환 경제**를 채택하고 있습니다.
+   e3: L'**économie circulaire** favorise le réemploi des matériaux usagés. || **순환 경제**는 사용된 재료의 재사용을 촉진합니다.
+   syn: [] | ant: []
+
+consommation responsable [ko] ipa=- | meanings: 책임 있는 소비[표현]
+   e1: La **consommation responsable** protège l'environnement. || **책임 있는 소비**는 환경을 보호합니다.
+   e2: La campagne promeut la **consommation responsable** chaque jour. || 캠페인은 매일 **책임 있는 소비**를 홍보합니다.
+   syn: [achat responsable, consommation éthique, consommation durable] | ant: []
+
+agriculture biologique [ko] ipa=- | meanings: 유기농업[명사]
+   e1: L'**agriculture biologique** protège l'environnement. || **유기농업**은 환경을 보호합니다.
+   e2: Les produits issus de l'**agriculture biologique** sont sains. || **유기농업**에서 나온 제품은 건강에 좋습니다.
+   e3: L'**agriculture biologique** favorise la biodiversité. || **유기농업**은 생물 다양성을 촉진합니다.
+   syn: [agriculture écologique, agriculture durable, culture biologique] | ant: []
+
+pesticide [ko] ipa=pɛstisiːd | meanings: 농약[명사]
+   e1: Les agriculteurs utilisent un **pesticide** pour protéger les cultures. || 농부들은 작물을 보호하기 위해 **농약**을 사용합니다.
+   e2: Le **pesticide** peut affecter les insectes bénéfiques. || **농약**은 유익한 곤충에 영향을 줄 수 있습니다.
+   syn: [insecticide, herbicide, fongicide] | ant: []
+
+engrais chimique [ko] ipa=- | meanings: 화학 비료[명사]
+   e1: Les agriculteurs utilisent **l'engrais chimique** pour augmenter les récoltes. || 농부들은 수확량을 늘리기 위해 **화학 비료**를 사용합니다.
+   e2: L'usage excessif de **l'engrais chimique** peut endommager le sol. || 과도한 **화학 비료** 사용은 토양을 손상시킬 수 있습니다.
+   syn: [fertilisant chimique, engrais synthétique] | ant: []
+
+OGM [ko] ipa=o ʒe ɛm | meanings: 유전자 변형 생물[명사]
+   e1: Les **OGM** suscitent un débat mondial. || **유전자 변형 생물**는 전 세계적으로 논란을 일으킨다.
+   e2: Cette plante est un **OGM** créé en laboratoire. || 이 식물은 실험실에서 만들어진 **유전자 변형 생물**이다.
+   e3: On étudie les effets des **OGM** sur la santé. || 우리는 건강에 대한 **OGM**의 영향을 연구하고 있다.
+   syn: [] | ant: []
+
+circuit court [ko] ipa=- | meanings: 단계가 적은 유통 방식[표현]
+   e1: Le **circuit court** favorise les producteurs locaux. || 이 **단계가 적은 유통** 방식은 지역 생산자를 지원합니다.
+   e2: Ce marché fonctionne avec un **circuit court** efficace. || 이 시장은 효율적인 **단계가 적은 유통 방식**을 사용합니다.
+   e3: Le café est vendu en **circuit court** pour garantir la fraîcheur. || 커피는 신선함을 보장하기 위해 **단계가 적은 유통 방식**으로 판매됩니다.
+   syn: [circuits courts, distribution locale, vente directe] | ant: []
+
+produit local [ko] ipa=- | meanings: 지역산품[명사]
+   e1: Je préfère acheter un **produit local** au marché. || 나는 시장에서 **지역산품**을 사는 것을 선호해요.
+   e2: Ce restaurant sert uniquement des **produits locaux** frais. || 이 식당은 신선한 **지역산품**만 제공합니다.
+   e3: Les **produits locaux** soutiennent l'économie de la région. || **지역산품**은 지역 경제를 지원합니다.
+   syn: [denrée locale, produit du terroir] | ant: []
+
+saisonnalité [ko] ipa=sɛzɔnalite | meanings: 계절성[명사]
+   e1: La **saisonnalité** des fruits influence les marchés locaux. || 과일의 **계절성**은 지역 시장에 영향을 미친다.
+   e2: Nous analysons la **saisonnalité** pour mieux planifier la production. || 우리는 생산을 더 잘 계획하기 위해 **계절성**을 분석한다.
+   syn: [caractère saisonnier, variation saisonnière, cyclicité] | ant: []
+
+végétarisme [ko] ipa=veʒetaʁism | meanings: 채식주의[명사]
+   e1: Le **végétarisme** est bon pour la santé. || **채식주의**는 건강에 좋다.
+   e2: Elle pratique le **végétarisme** depuis deux ans. || 그녀는 2년 전부터 **채식주의**를 실천해요.
+   e3: Le **végétarisme** réduit la consommation de viande. || **채식주의**는 고기 소비를 줄인다.
+   syn: [régime végétarien] | ant: []
+
+véganisme [ko] ipa=veɡanism | meanings: 비건주의[명사]
+   e1: Le **véganisme** respecte la vie des animaux. || **비건주의**는 동물의 생명을 존중합니다.
+   e2: Elle pratique le **véganisme** pour protéger la planète. || 그녀는 지구를 보호하기 위해 **비건주의**를 실천합니다.
+   e3: Le **véganisme** exclut tout produit d'origine animale. || **비건주의**는 모든 동물성 제품을 배제합니다.
+   syn: [alimentation végétalienne, régime végan] | ant: []
+
+élevage intensif [ko] ipa=- | meanings: 집약적 축산[명사]
+   e1: L'**élevage intensif** améliore la production de viande. || **집약적 축산**은 육류 생산을 향상시킨다.
+   e2: Les fermes pratiquent l'**élevage intensif** pour répondre à la demande. || 농장은 수요를 충족하기 위해 **집약적 축산**을 한다.
+   syn: [] | ant: []
+
+bien-être animal [ko] ipa=- | meanings: 동물 복지[표현]
+   e1: Le **bien-être animal** est important dans notre ferme. || 우리 농장에서는 **동물 복지**가 중요해요.
+   e2: Ils travaillent pour améliorer le **bien-être animal**. || 그들은 **동물 복지**를 향상시키기 위해 일해요.
+   syn: [] | ant: []
+
+énergie renouvelable [ko] ipa=- | meanings: 재생 가능 에너지[명사]
+   e1: L'**énergie renouvelable** est une ressource propre. || **재생 가능 에너지**는 청정 자원입니다.
+   e2: Les panneaux solaires produisent de l'**énergie renouvelable**. || 태양광 패널은 **재생 가능 에너지**를 생산합니다.
+   e3: Nous devons investir dans l'**énergie renouvelable**. || 우리는 **재생 가능 에너지**에 투자해야 합니다.
+   syn: [énergie durable, énergie verte] | ant: []
+
+énergie fossile [ko] ipa=- | meanings: 화석 연료[명사]
+   e1: Les voitures utilisent souvent de l'**énergie fossile**. || 자동차는 종종 **화석 연료**를 사용해요.
+   e2: L'**énergie fossile** contribue au réchauffement climatique. || **화석 연료**는 지구 온난화에 영향을 줍니다.
+   syn: [carburant fossile, combustible fossile] | ant: []
+
+énergie solaire [ko] ipa=- | meanings: 태양 에너지[명사] | 태양광[명사]
+   e1: L'**énergie solaire** est une ressource renouvelable. || **태양 에너지**는 재생 가능한 자원입니다.
+   e2: Ils ont installé des panneaux pour capter l'**énergie solaire**. || 그들은 **태양광**을 모으기 위해 패널을 설치했습니다.
+   syn: [] | ant: []
+
+énergie éolienne [ko] ipa=- | meanings: 풍력 에너지[명사]
+   e1: L'**énergie éolienne** est une source renouvelable. || **풍력 에너지**는 재생 가능한 에너지원입니다.
+   e2: Le village utilise l'**énergie éolienne** pour produire de l'électricité. || 그 마을은 전기를 생산하기 위해 **풍력 에너지**를 사용합니다.
+   e3: L'**énergie éolienne** aide à protéger l'environnement. || **풍력 에너지**는 환경 보호에 도움이 됩니다.
+   syn: [énergie du vent] | ant: []
+
+énergie hydraulique [ko] ipa=- | meanings: 수력 에너지[명사]
+   e1: L'**énergie hydraulique** fournit de l'électricité propre. || **수력 에너지**는 청정 전기를 제공합니다.
+   e2: Cette région utilise beaucoup d'**énergie hydraulique**. || 이 지역은 많은 **수력 에너지**를 사용합니다.
+   syn: [hydroélectricité, puissance hydraulique] | ant: []
+
+énergie géothermique [ko] ipa=- | meanings: 지열 에너지[명사]
+   e1: L'**énergie géothermique** chauffe la maison efficacement. || **지열 에너지**가 집을 효율적으로 데운다.
+   e2: Ils étudient l'**énergie géothermique** pour produire de l'électricité. || 그들은 전기를 생산하기 위해 **지열 에너지**를 연구한다.
+   syn: [] | ant: []
+
+biomasse [ko] ipa=bjamɑs | meanings: 바이오매스[명사]
+   e1: La **biomasse** est une source d'énergie renouvelable. || **바이오매스**는 재생 가능한 에너지 원입니다.
+   e2: Nous utilisons la **biomasse** pour chauffer la maison. || 우리는 집을 데우기 위해 **바이오매스**를 사용합니다.
+   e3: La production de **biomasse** aide à réduire les déchets. || **바이오매스** 생산은 폐기물 감소에 도움이 됩니다.
+   syn: [] | ant: []
+
+centrale nucléaire [ko] ipa=- | meanings: 원자력 발전소[명사]
+   e1: La **centrale nucléaire** fournit de l'électricité à la ville. || 그 **원자력 발전소**는 도시의 전기를 공급합니다.
+   e2: La sécurité à la **centrale nucléaire** est très importante. || **원자력 발전소**의 안전이 매우 중요합니다.
+   e3: Ils ont visité une **centrale nucléaire** pendant leur voyage scolaire. || 그들은 학교 여행 중에 **원자력 발전소**를 방문했습니다.
+   syn: [usine nucléaire] | ant: []
+
+centrale thermique [ko] ipa=- | meanings: 화력 발전소[명사]
+   e1: La **centrale thermique** produit beaucoup d'électricité. || **화력 발전소**가 많은 전기를 생산합니다.
+   e2: La pollution de la **centrale thermique** inquiète les habitants. || **화력 발전소**의 오염이 주민들을 걱정하게 합니다.
+   syn: [usine thermique] | ant: []
+
+panneau solaire [ko] ipa=- | meanings: 태양 전지판[명사]
+   e1: Le **panneau solaire** capte la lumière du soleil. || **태양 전지판**이 햇빛을 받습니다.
+   e2: Ils ont installé un **panneau solaire** sur le toit. || 그들은 지붕에 **태양 전지판**을 설치했습니다.
+   e3: Le **panneau solaire** produit de l'électricité propre. || **태양 전지판**은 청정 전기를 생산합니다.
+   syn: [] | ant: []
+
+éolienne [ko] ipa=eɔljɛn | meanings: 풍력 발전기[명사]
+   e1: L'**éolienne** tourne doucement sous le vent frais. || 부드러운 바람 아래에서 **풍력 발전기**가 천천히 돌고 있다.
+   e2: Les champs sont remplis d'**éoliennes** blanches. || 들판은 하얀 **풍력 발전기**들로 가득 차 있다.
+   syn: [moulin à vent, turbine éolienne] | ant: []
+
+barrage [ko] ipa=baʁaʒ | meanings: 댐[명사] | 포화사격[명사]
+   e1: Le **barrage** retient l'eau de la rivière. || 그 **댐**은 강의 물을 막아요.
+   e2: Les soldats ont ouvert un **barrage** de feu. || 군인들이 **포화사격**을 시작했어요.
+   e3: Le **barrage** hydraulique produit de l'électricité. || 그 수력 **댐**은 전기를 생산해요.
+   syn: [digues, retenue, close] | ant: []
+
+réseau électrique [ko] ipa=- | meanings: 전기망[명사] | 전력망[명사]
+   e1: Le **réseau électrique** alimente toutes les maisons du quartier. || 그 **전기망**은 이 지역의 모든 집에 전력을 공급합니다.
+   e2: Le gouvernement investit pour renforcer le **réseau électrique** national. || 정부는 국가 **전력망** 강화에 투자하고 있습니다.
+   syn: [grille électrique, infrastructure électrique] | ant: []
+
+consommation énergétique [ko] ipa=- | meanings: 에너지 소비[명사]
+   e1: La **consommation énergétique** diminue avec les nouvelles technologies. || 새로운 기술로 **에너지 소비**가 줄어듭니다.
+   e2: La maison a une faible **consommation énergétique** grâce à son isolation. || 그 집은 단열 덕분에 **에너지 소비**가 적습니다.
+   syn: [utilisation d'énergie, dépense énergétique] | ant: []
+
+économie d'énergie [ko] ipa=- | meanings: 에너지 절약[표현]
+   e1: L'**économie d'énergie** est importante pour la planète. || **에너지 절약**은 지구에 중요합니다.
+   e2: Nous faisons de l'**économie d'énergie** en éteignant les lumières. || 우리는 불을 끔으로써 **에너지 절약**을 합니다.
+   e3: Cette maison utilise des technologies d'**économie d'énergie**. || 이 집은 **에너지 절약** 기술을 사용합니다.
+   syn: [réduction de la consommation, économie d'électricité] | ant: []
+
+isolation thermique [ko] ipa=- | meanings: 단열[명사]
+   e1: L'**isolation thermique** améliore le confort de la maison. || **단열**은 집의 안락함을 향상시킨다.
+   e2: Une bonne **isolation thermique** réduit les factures d'énergie. || 좋은 **단열**은 에너지 비용을 줄인다.
+   syn: [isolation énergétique, isolation thermique par l'extérieur] | ant: []
+
+rénovation énergétique [ko] ipa=- | meanings: 에너지 절약 공사[명사]
+   e1: La **rénovation énergétique** augmente la performance de la maison. || 주택의 성능을 높이는 **에너지 절약 공사**입니다.
+   e2: Ils ont fait une **rénovation énergétique** pour réduire la facture. || 그들은 요금 절감을 위해 **에너지 절약 공사**를 했어요.
+   syn: [travaux d'efficacité énergétique, amélioration énergétique] | ant: []
+
+biocarburant [ko] ipa=bjo.kaʁ.by.ʁɑ̃ | meanings: 바이오연료[명사]
+   e1: Les voitures utilisent des **biocarburants** pour réduire la pollution. || 자동차들은 오염을 줄이기 위해 **바이오연료**를 사용해요.
+   e2: La production de **biocarburant** aide à protéger l'environnement. || **바이오연료** 생산은 환경 보호에 도움이 됩니다.
+   e3: Le **biocarburant** est une source d'énergie renouvelable. || **바이오연료**는 재생 가능한 에너지원입니다.
+   syn: [] | ant: []
+
+voiture électrique [ko] ipa=- | meanings: 전기 자동차[명사]
+   e1: La **voiture électrique** est très silencieuse. || **전기 자동차**는 매우 조용해요.
+   e2: Ma **voiture électrique** est écologique. || 내 **전기 자동차**는 친환경적이에요.
+   syn: [] | ant: []
+
+borne de recharge [ko] ipa=- | meanings: 충전소[명사] | 전기차 충전기[명사]
+   e1: La nouvelle **borne de recharge** est installée près du parking. || 새로운 **충전소**가 주차장 근처에 설치되었다.
+   e2: Je cherche une **borne de recharge** pour mon véhicule électrique. || 나는 내 전기차에 사용할 **전기차 충전기**를 찾고 있다.
+   e3: Cette ville a ajouté plusieurs **bornes de recharge** publiques. || 이 도시는 여러 개의 공용 **충전소**를 추가했다.
+   syn: [station-service électrique, point de recharge] | ant: []
+
+covoiturage [ko] ipa=kovoityʁaʒ | meanings: 카풀[명사]
+   e1: Le **covoiturage** est écologique et économique. || **카풀**은 친환경적이고 경제적입니다.
+   e2: Nous faisons du **covoiturage** pour aller au travail. || 우리는 일하러 갈 때 **카풀**을 합니다.
+   e3: Le **covoiturage** réduit le nombre de voitures en ville. || **카풀**은 도시 내 차량 수를 줄입니다.
+   syn: [partage de voiture, auto-partage] | ant: []
+
+mobilité douce [ko] ipa=- | meanings: 친환경 교통수단[표현]
+   e1: La ville encourage la **mobilité douce** pour réduire la pollution. || 도시는 오염을 줄이기 위해 **친환경 교통수단**을 장려한다.
+   e2: La **mobilité douce** inclut le vélo et la marche à pied. || **친환경 교통수단**에는 자전거와 도보가 포함된다.
+   e3: Les habitants préfèrent la **mobilité douce** pour les trajets courts. || 주민들은 짧은 거리에는 **친환경 교통수단**을 선호한다.
+   syn: [transport écologique, transport doux] | ant: []
+
+transport en commun [ko] ipa=- | meanings: 대중교통[명사]
+   e1: Je prends le **transport en commun** pour aller au travail. || 나는 출근하기 위해 **대중교통**을 이용해요.
+   e2: Le **transport en commun** est écologique et économique. || **대중교통**은 친환경적이고 경제적이에요.
+   syn: [transports publics, moyens de transport collectif] | ant: []
+
+vélo en libre-service [ko] ipa=- | meanings: 공공 자전거[명사]
+   e1: Le **vélo en libre-service** est utile en ville. || 도시에서 **공공 자전거**는 유용해요.
+   e2: J'ai pris un **vélo en libre-service** ce matin. || 나는 오늘 아침에 **공공 자전거**를 탔어요.
+   e3: Le **vélo en libre-service** aide à réduire la pollution. || **공공 자전거**는 오염을 줄이는 데 도움이 됩니다.
+   syn: [vélos partagés, vélos publics] | ant: []
+
+trottinette électrique [ko] ipa=- | meanings: 전동 스쿠터[명사]
+   e1: La **trottinette électrique** est pratique pour la ville. || **전동 스쿠터**는 도시에서 편리해요.
+   e2: Je charge la **trottinette électrique** ce soir. || 나는 오늘 밤 **전동 스쿠터**를 충전해요.
+   e3: Nous avons loué une **trottinette électrique** pour visiter. || 우리는 관광을 위해 **전동 스쿠터**를 빌렸어요.
+   syn: [] | ant: []
+
+transition écologique [ko] ipa=- | meanings: 환경 전환[표현]
+   e1: La **transition écologique** change notre façon de vivre. || **환경 전환**이 우리의 생활 방식을 바꿉니다.
+   e2: La **transition écologique** améliore la qualité de l'air. || **환경 전환**이 공기질을 개선합니다.
+   syn: [] | ant: []
+
+développement durable [ko] ipa=- | meanings: 지속 가능한 발전[표현]
+   e1: Le **développement durable** protège l'environnement. || **지속 가능한 발전**은 환경을 보호합니다.
+   e2: Nous devons encourager le **développement durable** en ville. || 우리는 도시에서 **지속 가능한 발전**을 장려해야 합니다.
+   e3: Le **développement durable** favorise une vie équilibrée. || **지속 가능한 발전**은 균형 잡힌 삶을 촉진합니다.
+   syn: [croissance durable, économie durable] | ant: []
+
+durabilité [ko] ipa=dyʁabilite | meanings: 내구성[명사]
+   e1: La **durabilité** de ce matériau est impressionnante. || 이 재료의 **내구성**이 인상적이에요.
+   e2: Nous privilégions la **durabilité** dans notre production. || 우리는 생산에서 **내구성**을 중시해요.
+   e3: La **durabilité** du bâtiment garantit sa longévité. || 그 건물의 **내구성**은 장수를 보장해요.
+   syn: [pérennité, longévité, solidité] | ant: []
+
+durable [ko] ipa=dyʁabl | meanings: 내구성 있는[형용사] | 지속 가능한[형용사]
+   e1: Cette montre est très **durable**. || 이 시계는 매우 **내구성 있는** 제품입니다.
+   e2: Ils utilisent des matériaux **durables** pour construire. || 그들은 **지속 가능한** 재료를 사용하여 건설합니다.
+   syn: [résistant, solide, pérenne, pérenne] | ant: [fragile, éphémère]
+
+durablement [ko] ipa=dyʁabləmɑ̃ | meanings: 지속적으로[부사] | 견고하게[부사]
+   e1: Elle travaille **durablement** pour atteindre ses objectifs. || 그녀는 목표를 달성하기 위해 **지속적으로** 일해요.
+   e2: Les fondations du bâtiment sont **durablement** construites. || 그 건물의 기초는 **견고하게** 지어졌어요.
+   syn: [pérennement] | ant: []
+
+responsabilité environnementale [ko] ipa=- | meanings: 환경적 책임[명사]
+   e1: La **responsabilité environnementale** guide nos projets de construction. || 우리의 건설 프로젝트를 **환경적 책임**이 이끈다.
+   e2: Les entreprises ont une **responsabilité environnementale** croissante. || 기업들은 증가하는 **환경적 책임**을 가지고 있다.
+   e3: Adopter la **responsabilité environnementale** protège la nature. || **환경적 책임**을 수용하는 것은 자연을 보호한다.
+   syn: [devoir écologique, obligation environnementale, engagement écologique] | ant: []
+
+ONG environnementale [ko] ipa=- | meanings: 환경 단체[고유명사]
+   e1: L'**ONG environnementale** protège la forêt locale. || **환경 단체**가 지역 산림을 보호합니다.
+   e2: Cette **ONG environnementale** publie des rapports annuels. || 이 **환경 단체**는 연례 보고서를 발표합니다.
+   e3: Une **ONG environnementale** organise des nettoyages de plage. || 한 **환경 단체**가 해변 정화를 주관합니다.
+   syn: [association écologique, organisation verte, groupe environnemental] | ant: []
+
+accord de Paris [ko] ipa=- | meanings: 파리 협정, 환경 협약[고유명사]
+   e1: L'**accord de Paris** vise à protéger le climat mondial. || **파리 협정**은 전 세계 기후를 보호하는 것을 목표로 합니다.
+   e2: Les pays signent l'**accord de Paris** pour limiter les émissions. || 국가들은 배출량을 제한하기 위해 **파리 협정**에 서명합니다.
+   syn: [] | ant: []
+
+COP [ko] ipa=kɔp | meanings: 중앙아프리카 프랑[명사]
+   e1: Le prix est de 10 **COP** pour chaque produit. || 각 제품 가격은 10 **COP**입니다.
+   e2: J'ai échangé des euros contre des **COP** au marché. || 시장에서 유로를 **COP**으로 환전했어요.
+   e3: Le taux de conversion pour le **COP** a changé. || **COP** 환율이 변경되었습니다.
+   syn: [] | ant: []
+
+sommet climatique [ko] ipa=- | meanings: 기후 정상 회의[고유명사]
+   e1: Le **sommet climatique** se tient chaque année à divers endroits. || **기후 정상 회의**는 매년 여러 곳에서 열린다.
+   e2: Le **sommet climatique** réunit des dirigeants pour discuter du changement. || **기후 정상 회의**는 변화에 대해 논의하기 위해 지도자들을 모은다.
+   syn: [] | ant: []
+
+négociation internationale [ko] ipa=- | meanings: 국제 협상[명사]
+   e1: La **négociation internationale** a abouti à un accord de paix. || **국제 협상**은 평화 협정으로 끝났어요.
+   e2: Ils participent à une **négociation internationale** sur le climat. || 그들은 기후에 관한 **국제 협상**에 참여해요.
+   e3: La **négociation internationale** peut favoriser la coopération entre pays. || **국제 협상**은 국가 간 협력을 촉진할 수 있어요.
+   syn: [pourparlers internationaux, dialogue international, traité international] | ant: []
+
+règlement européen [ko] ipa=- | meanings: 유럽 연합 법규[명사]
+   e1: Le **règlement européen** protège les consommateurs. || **유럽 연합 법규**는 소비자들을 보호합니다.
+   e2: Le Parlement applique le **règlement européen**. || 의회는 **유럽 연합 법규**를 적용합니다.
+   syn: [directive européenne, loi européenne] | ant: []
+
+réglementation [ko] ipa=ʁeɡlmɑ̃tasjɔ̃ | meanings: 규제[명사] | 법규[명사]
+   e1: La **réglementation** protège l'environnement. || 환경을 보호하는 **규제**입니다.
+   e2: La **réglementation** impose des sanctions en cas de violation. || 위반 시 처벌을 부과하는 **법규**입니다.
+   syn: [règles, normes, lois] | ant: []
+
+label écologique [ko] ipa=- | meanings: 친환경 인증[표현]
+   e1: Le produit porte un **label écologique** reconnu. || 그 제품은 인정받은 **친환경 인증**을 받았다.
+   e2: Ce fromage a obtenu le **label écologique** national. || 이 치즈는 국가 **친환경 인증**을 획득했다.
+   e3: Le **label écologique** garantit des pratiques durables. || **친환경 인증**은 지속 가능한 방식을 보장한다.
+   syn: [étiquette écologique, certification environnementale] | ant: []
+
+certification [ko] ipa=sɛʁ.ti.fi.ka.sjɔ̃ | meanings: 증명서[명사] | 인증[명사]
+   e1: La **certification** garantit la qualité du produit. || 제품의 품질을 **인증**합니다.
+   e2: Il a reçu une **certification** après la formation. || 그는 교육 후에 **증명서**를 받았다.
+   syn: [attestation, homologation, validation] | ant: []
+
+certifier [ko] ipa=sɛʁ.ti.fje | meanings: 증명하다[동사] | 인증하다[동사]
+   e1: Le notaire peut **certifier** ce document officiel. || 공증인은 이 공식 문서를 **증명**할 수 있습니다.
+   e2: L'entreprise doit **certifier** la conformité de ses produits. || 회사는 제품의 적합성을 **인증**해야 합니다.
+   syn: [attester, garantir, authentifier] | ant: []
+
+actualité [ko] ipa=aktɥalite | meanings: 뉴스, 시사[명사] | 현실성[명사]
+   e1: Je regarde l'**actualité** chaque matin. || 나는 매일 아침 **뉴스**를 본다.
+   e2: L'**actualité** de ce roman le rend intéressant. || 이 소설의 **현실성**이 그것을 흥미롭게 만든다.
+   e3: L'**actualité** politique est très chargée aujourd'hui. || 오늘 정치 **시사**가 매우 많다.
+   syn: [information, nouveauté, actualité brûlante, contemporanéité] | ant: []
+
+actualités [ko] ipa=aktyalite | meanings: 뉴스[명사] | 시사[명사]
+   e1: Je regarde les **actualités** à la télévision chaque soir. || 나는 매일 저녁 **뉴스**를 텔레비전으로 본다.
+   e2: Les **actualités** du jour parlent de l'économie mondiale. || 오늘의 **시사**는 세계 경제에 관한 내용이다.
+   e3: Les enfants apprennent les **actualités** dans leur classe. || 아이들은 수업에서 **시사**를 배운다.
+   syn: [nouvelles, informations] | ant: []
+
+information [ko] ipa=ɛ̃fɔʁmasjɔ̃ | meanings: 정보[명사]
+   e1: Je cherche des **informations** sur ce sujet. || 나는 이 주제에 관한 **정보**를 찾고 있어요.
+   e2: Cette **information** est très utile pour le projet. || 이 **정보**는 프로젝트에 매우 유용해요.
+   e3: Les **informations** arrivent rapidement par internet. || **정보**는 인터넷을 통해 빠르게 도착해요.
+   syn: [donnée, renseignement, nouvelle] | ant: []
+
+fait divers [ko] ipa=- | meanings: 사회면 기사[명사] | 단신[명사]
+   e1: Le journal publie un **fait divers** chaque jour. || 신문은 매일 **사회면 기사**를 싣습니다.
+   e2: Elle lit les **faits divers** dans le train. || 그녀는 기차에서 **단신**을 읽습니다.
+   syn: [nouvelle, petite histoire, incident] | ant: []
+
+scoop [ko] ipa=skup | meanings: 특종[명사]
+   e1: Le journaliste a obtenu un **scoop** incroyable. || 기자가 놀라운 **특종**을 얻었어요.
+   e2: Ce **scoop** a surpris tout le monde. || 이 **특종**은 모두를 놀라게 했어요.
+   syn: [actualité exclusive, exclusivité] | ant: []
+
+exclusivité [ko] ipa=ɛksklyzivite | meanings: 독점[명사] | 전용권[명사]
+   e1: Cette entreprise a l'**exclusivité** du marché. || 이 회사는 시장의 **독점**을 가지고 있습니다.
+   e2: Il a obtenu l'**exclusivité** de la distribution. || 그는 유통에 대한 **전용권**을 얻었습니다.
+   syn: [monopole, prérogative, droit exclusif] | ant: []
+
+reportage [ko] ipa=ʁəpɔʁtaʒ | meanings: 보도[명사] | 현장 취재[명사]
+   e1: Le **reportage** a été diffusé ce soir à la télévision. || 그 **보도**는 오늘 밤 텔레비전에서 방영되었다.
+   e2: Le journaliste a réalisé un **reportage** sur le terrain. || 기자가 현장에서 **현장 취재**를 했다.
+   syn: [compte rendu, journal, article] | ant: []
+
+reporter [ko] ipa=ʁə.pɔʁ.te | meanings: 기자[명사] | 연기하다, 미루다[동사]
+   e1: Le **reporter** a interviewé des personnes au marché. || 그 **기자**는 시장에서 사람들을 인터뷰했다.
+   e2: Elle doit **reporter** la réunion à demain. || 그녀는 회의를 내일로 **연기해야** 한다.
+   e3: Le **reporter** couvre les événements culturels de la ville. || 그 **기자**는 도시의 문화 행사를 취재한다.
+   syn: [chroniqueur, journaliste, correspondant, postposer, différer, ajourner] | ant: [anticiper, avancer]
+
+correspondant [ko] ipa=kɔʁɛspɔ̃dɑ̃ | meanings: 기자[명사] | 상응하는 것[명사]
+   e1: Le **correspondant** a envoyé un rapport depuis la ville. || **기자**가 도시에서 보고서를 보냈어요.
+   e2: Chaque élève a un **correspondant** dans une autre classe. || 각 학생은 다른 반에 **상응하는 것**이 있어요.
+   syn: [journaliste, envoyé] | ant: []
+
+rédacteur [ko] ipa=ʁedeaktœʁ | meanings: 편집자[명사] | 기자[명사]
+   e1: Le **rédacteur** corrige les articles avant publication. || **편집자**는 출판 전에 글을 수정합니다.
+   e2: La **rédactrice** a interviewé l'artiste célèbre. || **기자**가 유명한 예술가를 인터뷰했습니다.
+   syn: [éditeur, journaliste, contributeur] | ant: []
+
+rédactrice [ko] ipa=ʁedaˈktʁis | meanings: 여성 편집자[명사]
+   e1: La **rédactrice** prépare l'article avec soin. || 그 여성 **편집자**는 신중하게 기사를 준비한다.
+   e2: Une **rédactrice** expérimentée travaille dans ce journal. || 경험 많은 여성 **편집자**가 이 신문사에서 일한다.
+   syn: [journaliste, écrivaine, auteur] | ant: []
+
+directeur de la publication [ko] ipa=- | meanings: 발행 책임자[명사]
+   e1: Le **directeur de la publication** supervise le contenu du magazine. || **발행 책임자**가 잡지 내용을 감독합니다.
+   e2: Le **directeur de la publication** signe le journal chaque semaine. || **발행 책임자**가 매주 신문에 서명합니다.
+   syn: [] | ant: []
+
+rédacteur en chef [ko] ipa=- | meanings: 편집장[명사]
+   e1: Le **rédacteur en chef** dirige l'équipe du journal. || **편집장**이 신문 팀을 이끈다.
+   e2: Le **rédacteur en chef** a approuvé l'article final. || **편집장**이 최종 기사를 승인했다.
+   syn: [chef de rédaction] | ant: []
+
+édition spéciale [ko] ipa=- | meanings: 특별판[표현]
+   e1: Cette **édition spéciale** du livre est très recherchée. || 이 책의 **특별판**은 매우 인기가 있다.
+   e2: J'ai acheté l'**édition spéciale** du magazine ce mois-ci. || 나는 이번 달 **특별판** 잡지를 샀다.
+   syn: [tirage spécial, version limitée] | ant: []
+
+supplément [ko] ipa=syplɛmɑ̃ | meanings: 추가분, 보충[명사] | 부록[명사]
+   e1: Le train demande un **supplément** pour le bagage. || 기차는 수하물에 대해 **추가분**을 요구합니다.
+   e2: Le magazine inclut un **supplément** spécial ce mois-ci. || 그 잡지는 이번 달에 특별 **부록**을 포함합니다.
+   e3: Je prends un **supplément** pour plus de protéines. || 나는 더 많은 단백질을 위해 **추가분**을 섭취해요.
+   syn: [addition, extra, annexe] | ant: []
+
+encart [ko] ipa=ɑ̃kaʁ | meanings: 광고[명사] | 삽입물[명사]
+   e1: L'**encart** publicitaire est très visible dans ce magazine. || 이 잡지에 **광고**가 아주 잘 보여요.
+   e2: Un **encart** sur l'histoire locale a été ajouté au journal. || 신문에 지역 역사에 관한 **삽입물**이 추가되었어요.
+   syn: [publicité, annonce, insert] | ant: []
+
+gros titre [ko] ipa=- | meanings: 대형 제목[명사]
+   e1: Le journal a un **gros titre** pour attirer l'attention. || 신문은 주의를 끌기 위해 **대형 제목**을 사용했다.
+   e2: Le **gros titre** de la page est coloré et visible. || 페이지의 **대형 제목**은 색깔이 있고 눈에 띈다.
+   syn: [titre principal, titre en gros caractères] | ant: []
+
+dépêche [ko] ipa=depɛʃ | meanings: 속보[명사] | 특사[명사]
+   e1: La **dépêche** annonce une nouvelle importante. || 그 **속보**는 중요한 소식을 알렸다.
+   e2: Le roi a envoyé une **dépêche** spéciale. || 왕은 특별한 **특사**를 보냈다.
+   e3: La **dépêche** est arrivée rapidement ce matin. || 그 **속보**가 오늘 아침에 빠르게 도착했다.
+   syn: [bulletin, communiqué, message, émissaire, envoyé] | ant: []
+
+agence de presse [ko] ipa=- | meanings: 통신사[명사]
+   e1: L'**agence de presse** a publié un nouveau rapport ce matin. || **통신사**가 오늘 아침 새로운 보고서를 발표했어요.
+   e2: Cette **agence de presse** couvre les actualités internationales. || 이 **통신사**는 국제 뉴스를 보도해요.
+   syn: [service de presse, bureau d'information] | ant: []
+
+AFP [ko] ipa=a.ɛf.pe | meanings: AFP, 프랑스 통신사[고유명사]
+   e1: L'article a été publié par **AFP**. || 그 기사는 **AFP**에 의해 출판되었다.
+   e2: J'ai regardé le reportage de **AFP** ce matin. || 나는 오늘 아침에 **AFP** 보도를 보았다.
+   e3: La nouvelle a été confirmée par **AFP**. || 그 뉴스는 **AFP**에 의해 확인되었다.
+   syn: [] | ant: []
+
+presse écrite [ko] ipa=- | meanings: 인쇄 매체[명사]
+   e1: La **presse écrite** informe les lecteurs chaque matin. || **인쇄 매체**는 매일 아침 독자들에게 소식을 전합니다.
+   e2: La **presse écrite** a un grand rôle dans la société. || **인쇄 매체**는 사회에서 큰 역할을 합니다.
+   e3: Je lis souvent la **presse écrite** pour me tenir informé. || 나는 자주 **인쇄 매체**를 읽으며 정보를 얻습니다.
+   syn: [journaux, médias imprimés] | ant: []
+
+presse en ligne [ko] ipa=- | meanings: 온라인 신문[명사]
+   e1: Je lis la **presse en ligne** tous les matins. || 나는 매일 아침 **온라인 신문**을 읽어요.
+   e2: La **presse en ligne** offre des mises à jour rapides. || **온라인 신문**은 빠른 업데이트를 제공합니다.
+   e3: La **presse en ligne** change la façon dont nous consommons l'information. || **온라인 신문**은 우리가 정보를 소비하는 방식을 바꾸고 있어요.
+   syn: [journal en ligne, média numérique] | ant: []
+
+presse gratuite [ko] ipa=- | meanings: 무료 신문[명사]
+   e1: Je lis la **presse gratuite** dans le métro chaque matin. || 나는 매일 아침 지하철에서 **무료 신문**을 읽어요.
+   e2: La **presse gratuite** offre des informations rapides et accessibles. || **무료 신문**은 빠르고 접근하기 쉬운 정보를 제공합니다.
+   syn: [journal gratuit, bulletin gratuit] | ant: []
+
+tabloïd [ko] ipa=ta.blɔ.id | meanings: 대중 신문[명사] | 타블로이드[명사]
+   e1: Le **tabloïd** couvre surtout des nouvelles de célébrités. || **타블로이드**는 주로 연예인 뉴스를 다룹니다.
+   e2: Le format du **tabloïd** est plus petit que celui du grand journal. || **타블로이드** 형식은 대형 신문보다 더 작습니다.
+   syn: [presse à sensation, journal populaire] | ant: []
+
+quotidien [ko] ipa=kɔtidjɛ̃ | meanings: 일상[명사] | 매일의[형용사]
+   e1: Le **quotidien** au village est paisible. || 그 마을의 **일상**은 평화롭다.
+   e2: Elle lit le journal **quotidien** chaque matin. || 그녀는 매일 아침 **매일** 신문을 읽어요.
+   syn: [journée, routine, civil] | ant: []
+
+hebdomadaire [ko] ipa=ɛbdɔmadɛʁ | meanings: 주간의[형용사] | 주간지[명사]
+   e1: Elle lit le journal **hebdomadaire** chaque dimanche. || 그녀는 매주 일요일에 **주간지**를 읽어요.
+   e2: La réunion **hebdomadaire** est prévue pour lundi. || 그 **주간** 회의는 월요일에 예정되어 있어요.
+   e3: Il apprécie les articles dans ce magazine **hebdomadaire**. || 그는 그 **주간지**의 기사들을 좋아해요.
+   syn: [hebdomadairement] | ant: []
+
+mensuel [ko] ipa=mɑ̃sɥɛl | meanings: 월간의[형용사] | 월간 간행물[명사]
+   e1: Le rapport **mensuel** est prêt. || 월간 **보고서**가 준비되었습니다.
+   e2: Ce **mensuel** traite de la mode. || 이 **월간지**는 패션에 관한 것입니다.
+   syn: [mensuel(le)] | ant: []
+
+trimestriel [ko] ipa=tʁimɛstʁjɛl | meanings: 분기별의[형용사]
+   e1: Le rapport **trimestriel** est publié chaque avril. || **분기별** 보고서는 매년 4월에 발행됩니다.
+   e2: Nous avons une réunion **trimestrielle** importante demain. || 우리는 내일 중요한 **분기별** 회의가 있습니다.
+   syn: [quadrimestriel] | ant: []
+
+publication numérique [ko] ipa=- | meanings: 전자 출판[명사]
+   e1: La **publication numérique** facilite l'accès aux livres. || **전자 출판**은 책 접근을 쉽게 해요.
+   e2: La bibliothèque propose une nouvelle **publication numérique**. || 도서관은 새로운 **전자 출판**을 제공합니다.
+   e3: La **publication numérique** est populaire auprès des jeunes. || **전자 출판**은 젊은 층에게 인기가 많아요.
+   syn: [] | ant: []
+
+abonnement numérique [ko] ipa=- | meanings: 디지털 구독[명사]
+   e1: J'ai souscrit un **abonnement numérique** à ce journal. || 나는 이 신문에 **디지털 구독**을 신청했어요.
+   e2: L'**abonnement numérique** permet d'accéder aux articles partout. || **디지털 구독**은 어디서든 기사에 접속할 수 있게 해요.
+   syn: [abonnement en ligne, service numérique] | ant: []
+
+média audiovisuel [ko] ipa=- | meanings: 시청각 매체[명사]
+   e1: Le **média audiovisuel** diffuse des images et du son. || **시청각 매체**는 영상과 소리를 방송합니다.
+   e2: Ce festival célèbre le **média audiovisuel** innovant. || 이 축제는 혁신적인 **시청각 매체**를 기념합니다.
+   syn: [média audiovisuelle, médias électroniques] | ant: []
+
+chaîne d'information [ko] ipa=- | meanings: 뉴스 채널[명사]
+   e1: Cette **chaîne d'information** diffuse les nouvelles en continu. || 이 **뉴스 채널**은 계속 뉴스를 방송합니다.
+   e2: La **chaîne d'information** couvre les événements internationaux. || **뉴스 채널**은 국제 사건을 보도합니다.
+   syn: [station d'information, réseau d'information] | ant: []
+
+journal télévisé [ko] ipa=- | meanings: 텔레비전 뉴스[명사]
+   e1: Le **journal télévisé** commence à 20 heures. || **텔레비전 뉴스**는 8시에 시작합니다.
+   e2: Je regarde le **journal télévisé** après le dîner. || 나는 저녁 식사 후에 **텔레비전 뉴스**를 봅니다.
+   e3: Le **journal télévisé** informe sur les événements internationaux. || **텔레비전 뉴스**는 국제 사건에 대해 보도합니다.
+   syn: [JT, édition du soir, bulletin télévisé] | ant: []
+
+présentateur [ko] ipa=pʁezɑ̃tatœʁ | meanings: 진행자[명사] | 사회자[명사]
+   e1: Le **présentateur** a commencé l'émission avec un sourire. || **진행자**는 웃으며 방송을 시작했다.
+   e2: Le **présentateur** a remercié les invités avant de conclure. || **사회자**는 마무리 전에 손님들에게 감사를 표했다.
+   syn: [animateur, modérateur] | ant: []
+
+présentatrice [ko] ipa=pʁe.zɑ̃.ta.tʁis | meanings: 여성 진행자[명사]
+   e1: La **présentatrice** annonce les nouvelles du jour. || **프레젠터가** 오늘 뉴스를 전해요.
+   e2: La **présentatrice** sourit pendant l'émission télévisée. || 방송 중에 **프레젠터가** 웃고 있어요.
+   e3: Une célèbre **présentatrice** présente le talk-show. || 유명한 **프레젠터가** 토크쇼를 진행해요.
+   syn: [animatrice, commentatrice] | ant: []
+
+interview [ko] ipa=ɛ̃tɛʁvju | meanings: 인터뷰[명사]
+   e1: Elle a réussi son **interview** télévisée hier. || 그녀는 어제 **인터뷰** 방송에 성공했다.
+   e2: L'**interview** du journaliste a duré trente minutes. || 기자의 **인터뷰**는 30분 동안 계속되었다.
+   e3: Nous préparons une **interview** avec l'acteur célèbre. || 우리는 유명 배우와의 **인터뷰**를 준비 중이다.
+   syn: [entretien, coulisse, rencontre] | ant: []
+
+interviewer [ko] ipa=ɛ̃tɛʁvjuœʁ | meanings: 면접관[명사] | 인터뷰하다[동사]
+   e1: L'**interviewer** a posé des questions précises. || 그 **면접관**은 정확한 질문을 했어요.
+   e2: Je vais **interviewer** l'artiste demain. || 나는 내일 그 예술가를 **인터뷰할** 거예요.
+   syn: [enquêteur, interviewer (verbe)] | ant: []
+
+interviewé [ko] ipa=ɛ̃tɛʁvjwe | meanings: 인터뷰 대상자[명사]
+   e1: L'**interviewé** a répondu avec confiance. || 그 **인터뷰 대상자**는 자신감 있게 대답했다.
+   e2: L'**interviewé** a partagé son histoire unique. || 그 **인터뷰 대상자**는 자신의 특별한 이야기를 나누었다.
+   syn: [interviewé(e)] | ant: []
+
+déclaration [ko] ipa=deklaʁasjɔ̃ | meanings: 선언[명사] | 신고[명사]
+   e1: La **déclaration** officielle a surpris tout le monde. || 공식 **선언**이 모두를 놀라게 했어요.
+   e2: Il a fait une **déclaration** en douane à son arrivée. || 그는 도착할 때 세관에 **신고**를 했어요.
+   e3: Sa **déclaration** de paix fut bienvenue. || 그의 평화에 관한 **선언**은 환영받았어요.
+   syn: [annonce, proclamation, affirmation, rapport, notification] | ant: []
+
+communiqué [ko] ipa=kɔ.my.ni.ke | meanings: 성명서[명사] | 공식 발표[명사]
+   e1: Le gouvernement a publié un **communiqué**. || 정부가 **성명서**를 발표했다.
+   e2: Le **communiqué** officiel sera diffusé demain. || **공식 발표**는 내일 방송될 것이다.
+   e3: Ils ont envoyé un **communiqué** aux médias. || 그들은 언론에 **성명서**를 보냈다.
+   syn: [avis, déclaration, note] | ant: []
+
+communiqué de presse [ko] ipa=- | meanings: 보도 자료[명사]
+   e1: Le **communiqué de presse** annonce une nouvelle expo. || **보도 자료**는 새 전시회를 알린다.
+   e2: Ils ont publié un **communiqué de presse** ce matin. || 그들은 오늘 아침에 **보도 자료**를 발표했다.
+   e3: Le directeur a lu le **communiqué de presse** devant les médias. || 이사는 언론 앞에서 **보도 자료**를 읽었다.
+   syn: [note de presse, dépêche, communiqué officiel] | ant: []
+
+porte-parole [ko] ipa=pɔʁt paʁɔl | meanings: 대변인[명사]
+   e1: Le **porte-parole** a expliqué la décision clairement. || **대변인**이 결정을 명확히 설명했다.
+   e2: Le **porte-parole** a parlé lors de la conférence de presse. || **대변인**이 기자회견에서 말했다.
+   e3: Notre **porte-parole** est toujours disponible pour répondre. || 우리 **대변인**은 항상 답변할 준비가 되어 있다.
+   syn: [représentant, interprète] | ant: []
+
+conférence de presse [ko] ipa=- | meanings: 기자 회견[표현]
+   e1: La **conférence de presse** commence à dix heures. || **기자 회견**은 10시에 시작합니다.
+   e2: Ils ont organisé une **conférence de presse** pour annoncer la nouvelle. || 그들은 소식을 알리기 위해 **기자 회견**을 열었습니다.
+   e3: La **conférence de presse** a attiré beaucoup de journalistes. || **기자 회견**에 많은 기자들이 모였습니다.
+   syn: [point de presse, rassemblement médiatique] | ant: []
+
+désinformation [ko] ipa=dezɛ̃fɔʁmasjɔ̃ | meanings: 잘못된 정보[명사]
+   e1: La **désinformation** peut nuire à la démocratie. || 그 **허위 정보**는 민주주의에 해를 끼칠 수 있다.
+   e2: Les réseaux sociaux diffusent souvent la **désinformation**. || 소셜 미디어는 자주 **잘못된 정보**를 퍼뜨린다.
+   syn: [fausse information, infox, propagande] | ant: []
+
+fausse nouvelle [ko] ipa=- | meanings: 거짓 뉴스[표현]
+   e1: Cette **fausse nouvelle** a circulé rapidement sur les réseaux. || 이 **거짓 뉴스**는 SNS에서 빠르게 퍼졌어요.
+   e2: Il faut toujours vérifier une **fausse nouvelle** avant de la partager. || 공유하기 전에 항상 **거짓 뉴스**를 확인해야 해요.
+   e3: La radio a démenti la **fausse nouvelle** concernant le maire. || 라디오는 시장에 관한 **거짓 뉴스**를 부인했어요.
+   syn: [infox, désinformation, canular] | ant: []
+
+rumeur [ko] ipa=ʁymœʁ | meanings: 소문[명사]
+   e1: La **rumeur** court dans tout le village. || 그 **소문**이 마을 전체에 퍼지고 있다.
+   e2: Je n'ai entendu que des **rumeurs** sur leur voyage. || 나는 그들의 여행에 대한 **소문**만 들었다.
+   e3: La **rumeur** annonce une fête ce soir. || 그 **소문**은 오늘 밤 파티가 있다고 전한다.
+   syn: [bruit, on-dit, info, nouvelle] | ant: []
+
+vérification des faits [ko] ipa=- | meanings: 사실 확인[표현]
+   e1: La **vérification des faits** est essentielle pour le journalisme. || **사실 확인**은 언론에서 필수입니다.
+   e2: Ils font la **vérification des faits** avant la publication. || 그들은 출판 전에 **사실 확인**을 합니다.
+   e3: La **vérification des faits** aide à éviter les rumeurs. || **사실 확인**은 소문을 피하는 데 도움을 줍니다.
+   syn: [] | ant: []
+
+fact-checking [ko] ipa=faktʃɛkiŋ | meanings: 사실검증[명사]
+   e1: Le **fact-checking** améliore la qualité de l'information. || **팩트체킹**은 정보의 질을 향상시켜요.
+   e2: Elle pratique le **fact-checking** pour chaque article publié. || 그녀는 출판된 각 기사에 대해 **팩트체킹**을 수행해요.
+   syn: [vérification des faits, contrôle des faits] | ant: []
+
+média alternatif [ko] ipa=- | meanings: 대안 매체[명사]
+   e1: Le **média alternatif** offre un point de vue indépendant. || **대안 매체**는 독립적인 관점을 제공합니다.
+   e2: Les jeunes utilisent souvent le **média alternatif** pour s'informer. || 젊은이들은 정보를 얻기 위해 종종 **대안 매체**를 사용합니다.
+   syn: [] | ant: []
+
+pluralisme [ko] ipa=ply.ʁa.lism | meanings: 다원주의[명사]
+   e1: Le **pluralisme** favorise la coexistence pacifique. || **다원주의**는 평화로운 공존을 촉진한다.
+   e2: Ils défendent le **pluralisme** dans la société moderne. || 그들은 현대 사회에서 **다원주의**를 옹호한다.
+   syn: [diversité, multiplicité, hétérogénéité] | ant: []
+
+ligne éditoriale [ko] ipa=- | meanings: 편집 방침[표현]
+   e1: La **ligne éditoriale** définit le ton du journal. || 그 신문의 **편집 방침**이 톤을 정의한다.
+   e2: Chaque média a sa propre **ligne éditoriale** claire. || 각 매체는 자신만의 명확한 **편집 방침**을 가지고 있다.
+   syn: [orientation éditoriale, politique éditoriale] | ant: []
+
+biais [ko] ipa=bjɛ | meanings: 비스듬함, 편향[명사]
+   e1: Le mur a un **biais** léger vers la gauche. || 벽이 왼쪽으로 **비스듬하게** 기울어져 있어요.
+   e2: Le sondage présente un **biais** dans les résultats. || 설문조사 결과에 **편향**이 있습니다.
+   e3: Elle a corrigé le **biais** de son jugement. || 그녀는 자신의 판단에서 **편향**을 수정했습니다.
+   syn: [inclinaison, tendance, déviation] | ant: []
+
+objectivité [ko] ipa=ɔbʒɛktivite | meanings: 객관성[명사]
+   e1: Il est important de garder l'**objectivité** en toute situation. || 모든 상황에서 **객관성**을 유지하는 것이 중요해요.
+   e2: Son analyse montre une grande **objectivité**. || 그의 분석은 큰 **객관성**을 보여줍니다.
+   e3: L'**objectivité** aide à comprendre les faits sans préjugés. || **객관성**은 편견 없이 사실을 이해하는 데 도움이 돼요.
+   syn: [impartialité, neutralité, justesse] | ant: [subjectivité, biais]
+
+subjectivité [ko] ipa=sʏbʒɛkti.vite | meanings: 주관성[명사]
+   e1: La **subjectivité** influence souvent nos décisions. || **주관성**은 종종 우리의 결정을 좌우한다.
+   e2: Il faut reconnaître la **subjectivité** dans l'art. || 예술에서 **주관성**을 인정해야 한다.
+   syn: [perspective, point de vue, opinion] | ant: []
+
+neutralité [ko] ipa=nøtʁalite | meanings: 중립[명사]
+   e1: La **neutralité** est essentielle dans ce débat. || 이 토론에서는 **중립**이 필수입니다.
+   e2: Ils respectent la **neutralité** politique du pays. || 그들은 그 나라의 정치적 **중립**을 존중합니다.
+   e3: La **neutralité** aide à maintenir la paix. || **중립**은 평화 유지를 돕습니다.
+   syn: [impartialité, objectivité, équanimité] | ant: []
+
+couverture médiatique [ko] ipa=- | meanings: 언론 보도[표현]
+   e1: La **couverture médiatique** de l'événement a été très complète. || 그 사건에 대한 **언론 보도**가 매우 완벽했다.
+   e2: Ils ont critiqué la **couverture médiatique** biaisée du débat. || 그들은 토론회의 편향된 **언론 보도**를 비판했다.
+   e3: La **couverture médiatique** augmente l'intérêt du public. || **언론 보도**가 대중의 관심을 높인다.
+   syn: [reportage, diffusion médiatique, présentation médiatique] | ant: []
+
+couvrir [ko] ipa=kuvʁiʁ | meanings: 덮다[동사] | 보호하다[동사]
+   e1: Elle **couvre** le gâteau de chocolat. || 그녀는 초콜릿으로 케이크를 **덮는다**.
+   e2: Le parapluie **couvre** la personne de la pluie. || 우산은 사람을 비로부터 **보호한다**.
+   syn: [recouvrir, protéger] | ant: []
+
+déontologie journalistique [ko] ipa=- | meanings: 언론 윤리학[명사]
+   e1: La **déontologie journalistique** guide les reporters. || **언론 윤리학**은 기자들을 안내합니다.
+   e2: Respecter la **déontologie journalistique** est essentiel. || **언론 윤리학**을 준수하는 것은 중요합니다.
+   e3: Les étudiants apprennent la **déontologie journalistique**. || 학생들은 **언론 윤리학**을 배웁니다.
+   syn: [éthique journalistique] | ant: []
+
+confidentialité [ko] ipa=kɔ̃fidɑ̃sjalite | meanings: 기밀성[명사]
+   e1: La **confidentialité** des données est très importante. || 데이터의 **기밀성**이 매우 중요합니다.
+   e2: Nous garantissons la **confidentialité** de vos informations. || 우리는 당신의 정보의 **기밀성**을 보장합니다.
+   e3: La **confidentialité** protège la vie privée des utilisateurs. || **기밀성**은 사용자의 사생활을 보호합니다.
+   syn: [secret, discrétion, intimité] | ant: []
+
+informateur [ko] ipa=ɛ̃fɔʁmatœʁ | meanings: 정보 제공자[명사] | 첩자[명사]
+   e1: L'**informateur** a donné des détails utiles. || **정보 제공자**가 유용한 세부 정보를 제공했어요.
+   e2: L'**informateur** travaillait secrètement pour l'ennemi. || **첩자**가 적을 위해 몰래 일했어요.
+   syn: [renseignant, source, mouchard, traître] | ant: []
+
+lanceur d'alerte [ko] ipa=- | meanings: 내부 고발자[명사]
+   e1: Le **lanceur d'alerte** a publié un rapport important. || **내부 고발자**가 중요한 보고서를 발표했어요.
+   e2: Un **lanceur d'alerte** protège la transparence dans l'entreprise. || **내부 고발자**는 회사의 투명성을 보호해요.
+   e3: Le gouvernement soutient le rôle du **lanceur d'alerte**. || 정부는 **내부 고발자**의 역할을 지지해요.
+   syn: [] | ant: []
+
+réseau social [ko] ipa=- | meanings: 소셜 네트워크[명사]
+   e1: Elle utilise un **réseau social** pour partager ses photos. || 그녀는 사진을 공유하기 위해 **소셜 네트워크**를 사용해요.
+   e2: Les jeunes passent beaucoup de temps sur les **réseaux sociaux**. || 젊은이들은 **소셜 네트워크**들에서 많은 시간을 보내요.
+   syn: [plateforme sociale, site social] | ant: []
+
+plateforme [ko] ipa=platfɔʁm | meanings: 플랫폼[명사] | 연단[명사]
+   e1: Cette **plateforme** numérique facilite le travail à distance. || 이 **플랫폼**은 원격 작업을 용이하게 합니다.
+   e2: L'orateur est monté sur la **plateforme** pour parler. || 연설자는 말하기 위해 **연단**에 올라갔다.
+   syn: [estrade, podium] | ant: []
+
+utilisateur [ko] ipa=ytilizatœʁ | meanings: 사용자[명사]
+   e1: L'**utilisateur** se connecte à son compte chaque jour. || **사용자**가 매일 자신의 계정에 로그인한다.
+   e2: Chaque **utilisateur** a accès à des services personnalisés. || 각각의 **사용자**는 맞춤형 서비스에 접근할 수 있다.
+   syn: [usager, consommateur] | ant: []
+
+utilisatrice [ko] ipa=y.ti.li.za.tʁis | meanings: 사용자[명사]
+   e1: L'**utilisatrice** apprécie cette application simple. || **사용자**는 이 간단한 앱을 좋아해요.
+   e2: Chaque **utilisatrice** doit créer un compte sécurisé. || 각 **사용자**는 안전한 계정을 만들어야 해요.
+   e3: La nouvelle version satisfait toutes les **utilisatrices**. || 새 버전은 모든 **사용자**를 만족시켜요.
+   syn: [utilisatrice finale, cliente, consommatrice] | ant: []
+
+profil [ko] ipa=pʁɔ.fil | meanings: 윤곽[명사] | 프로필[명사]
+   e1: Le **profil** de la montagne est très distinct. || 산의 **윤곽**이 매우 뚜렷하다.
+   e2: Elle a créé un **profil** complet en ligne. || 그녀는 온라인에 완전한 **프로필**을 만들었다.
+   syn: [contour, silhouette, caractéristique, description] | ant: []
+
+post [ko] ipa=pɔst | meanings: 기둥[명사] | 우편[명사]
+   e1: Le **poteau** soutient la clôture du jardin. || 그 **기둥**은 정원의 울타리를 지탱한다.
+   e2: J'ai envoyé un **post** important ce matin. || 나는 오늘 아침에 중요한 **우편**을 보냈다.
+   syn: [] | ant: []
+
+tweet [ko] ipa=twit | meanings: 트윗, 메시지[명사]
+   e1: J'ai envoyé un **tweet** sur la nature ce matin. || 나는 오늘 아침 자연에 대한 **트윗**을 보냈어요.
+   e2: Ce **tweet** a reçu beaucoup de likes. || 이 **트윗**은 많은 좋아요를 받았어요.
+   e3: Elle a partagé un **tweet** inspirant hier. || 그녀는 어제 영감을 주는 **트윗**을 공유했어요.
+   syn: [message, publication, post] | ant: []
+
+fil [ko] ipa=fil | meanings: 실, 선[명사]
+   e1: Le **fil** de laine est doux pour tricoter. || **실**은 부드러워서 뜨개질하기 좋아요.
+   e2: Le **fil** électrique est caché dans le mur. || 전기**선**은 벽 속에 숨겨져 있어요.
+   e3: Elle a coupé le **fil** pour réparer son vêtement. || 그녀는 옷을 고치기 위해 **실**을 잘랐어요.
+   syn: [câble, corde, laine] | ant: []
+
+reel [ko] ipa=ʁe.ɛl | meanings: 현실, 실재[명사] | 실제의, 현실의[형용사]
+   e1: Le **réel** est plus complexe que la fiction. || **실재**는 소설보다 더 복잡해요.
+   e2: C'est une émotion **réelle** et profonde. || 그것은 깊고 **실제적인** 감정이에요.
+   e3: Le problème **réel** demande une solution immédiate. || **현실적인** 문제는 즉각적인 해결책이 필요해요.
+   syn: [véritable, authentique] | ant: [imaginaire, fictif]
+
+live [ko] ipa=liv | meanings: 라이브, 생방송[명사] | 생방송의, 실황의[형용사]
+   e1: J'ai regardé un **live** hier soir. || 나는 어젯밤에 **라이브**를 봤어요.
+   e2: Ils ont diffusé un événement **live**. || 그들은 행사를 **실황**으로 방송했어요.
+   e3: Le chanteur a fait un **live** impressionnant. || 그 가수는 인상적인 **라이브**를 했어요.
+   syn: [] | ant: []
+
+diffusion en direct [ko] ipa=- | meanings: 실시간 방송[표현]
+   e1: La **diffusion en direct** commence à 20 heures. || **실시간 방송**은 8시에 시작합니다.
+   e2: Nous regardons une **diffusion en direct** du concert. || 우리는 콘서트의 **실시간 방송**을 보고 있습니다.
+   e3: La **diffusion en direct** permet d'interagir avec le public. || **실시간 방송**은 시청자와 소통할 수 있게 합니다.
+   syn: [streaming en direct, transmission en temps réel] | ant: []
+
+abonné [ko] ipa=abɔne | meanings: 구독자[명사] | 가입자[명사]
+   e1: Il est un **abonné** fidèle à ce magazine. || 그는 이 잡지의 충실한 **구독자**이다.
+   e2: Les **abonnés** ont reçu une invitation spéciale. || **가입자**들은 특별 초대를 받았다.
+   e3: Chaque **abonné** reçoit une notification mensuelle. || 각 **구독자**는 매달 알림을 받는다.
+   syn: [abonnement, client] | ant: []
+
+amateur [ko] ipa=amatœʁ | meanings: 아마추어[명사] | 취미로 하는 사람[명사]
+   e1: Il est un **amateur** de photographie. || 그는 사진을 좋아하는 **아마추어**입니다.
+   e2: Elle cuisine en tant qu'**amateur**. || 그녀는 **취미로** 요리를 합니다.
+   e3: Nous avons rencontré plusieurs **amateurs** de jardinage. || 우리는 정원을 좋아하는 여러 **아마추어들**을 만났습니다.
+   syn: [débutant, novice, passionné] | ant: [professionnel]
+
+désabonner [ko] ipa=dezabɔne | meanings: 구독 취소하다[동사]
+   e1: Je veux **me désabonner** de cette newsletter. || 나는 이 뉴스레터를 **구독 취소할** 거예요.
+   e2: Elle a décidé de **se désabonner** de son compte. || 그녀는 자신의 계정을 **구독 취소하기로** 결정했어요.
+   e3: Tu peux **te désabonner** facilement du magazine. || 너는 그 잡지를 쉽게 **구독 취소할** 수 있어요.
+   syn: [se désinscrire, annuler l'abonnement] | ant: [s'abonner, s'inscrire]
+
+bloquer [ko] ipa=blɔ.ke | meanings: 막다, 차단하다[동사]
+   e1: Le gardien a **bloqué** le ballon. || 수문수가 **막았다** 공을.
+   e2: La neige a **bloqué** la route ce matin. || 눈이 오늘 아침 도로를 **막았다**.
+   e3: Il ne faut pas **bloquer** le passage aux autres. || 다른 사람들의 통로를 **막으면** 안 돼요.
+   syn: [obstruer, empêcher, entraver] | ant: []
+
+signaler [ko] ipa=siɲale | meanings: 알리다,신고하다[동사]
+   e1: Je **signale** un problème à la réception. || 나는 접수처에 문제를 **알린다**.
+   e2: Elle **signale** l'accident à la police. || 그녀는 경찰에게 사고를 **신고한다**.
+   e3: Nous devons **signaler** les erreurs sur le rapport. || 우리는 보고서에서 오류를 **알려야 한다**.
+   syn: [annoncer, notifier, déclarer] | ant: []
+
+modération [ko] ipa=mɔdeʁasjɔ̃ | meanings: 절제[명사] | 온건[명사]
+   e1: La **modération** est essentielle pour une vie saine. || 건강한 삶을 위해서는 **절제**가 중요합니다.
+   e2: Il prêche la **modération** dans ses discours politiques. || 그는 정치 연설에서 **온건**함을 설파합니다.
+   syn: [tempérance, retenue, équilibre] | ant: []
+
+modérateur [ko] ipa=mɔdɛʁatœʁ | meanings: 중재자[명사] | 사회자[명사]
+   e1: Le **modérateur** a aidé à résoudre le conflit. || **중재자**가 갈등 해결을 도왔어요.
+   e2: Le **modérateur** guide la discussion avec calme. || **사회자**가 차분하게 토론을 이끌어요.
+   e3: Les **modérateurs** assurent un débat respectueux. || **모더레이터들**은 존중받는 토론을 보장해요.
+   syn: [médiateur, arbitre, animateur, présentateur] | ant: []
+
+interaction [ko] ipa=ɛ̃tɛʁaksjɔ̃ | meanings: 상호 작용[명사]
+   e1: L'**interaction** entre les élèves est importante. || 학생들 간의 **상호 작용**은 중요해요.
+   e2: Cette application facilite l'**interaction** sociale. || 이 앱은 사회적 **상호 작용**을 용이하게 해요.
+   e3: L'**interaction** naturelle dans la forêt est fascinante. || 숲 속의 자연스러운 **상호 작용**은 매혹적이에요.
+   syn: [échange, relation, communication] | ant: []
+
+engagement [ko] ipa=ɑ̃ɡaʒmɑ̃ | meanings: 약속[명사] | 참여[명사]
+   e1: Son **engagement** est important pour notre projet. || 그의 **약속**은 우리 프로젝트에 중요해요.
+   e2: L'**engagement** des bénévoles a aidé beaucoup de gens. || 자원봉사자들의 **참여**가 많은 사람을 도왔습니다.
+   syn: [promesse, contrat, obligation, participation] | ant: []
+
+viralité [ko] ipa=viʁalite | meanings: 바이러스성[명사] | 바이럴 현상[명사]
+   e1: La **viralité** de ce virus est très élevée. || 이 바이러스의 **바이러스성**은 매우 높습니다.
+   e2: La vidéo a eu une grande **viralité** sur les réseaux sociaux. || 그 영상은 소셜 네트워크에서 큰 **바이럴** 현상을 일으켰습니다.
+   syn: [contagiosité, propagation virale] | ant: []
+
+viral [ko] ipa=viʁal | meanings: 바이러스의[형용사] | 입소문이 빠르게 퍼지는[형용사]
+   e1: Ce test détecte une infection **virale**. || 이 검사는 **바이러스성** 감염을 감지합니다.
+   e2: Cette vidéo est devenue **virale** sur Internet. || 이 동영상은 인터넷에서 **입소문**으로 빠르게 퍼졌습니다.
+   syn: [] | ant: []
+
+tendance [ko] ipa=tɑ̃dɑ̃s | meanings: 경향[명사] | 유행[명사]
+   e1: La **tendance** est à l'écologie cette année. || 올해는 **경향**이 생태학 쪽이에요.
+   e2: Cette robe suit la **tendance** du moment. || 이 드레스는 현재의 **유행**을 따릅니다.
+   e3: La **tendance** générale va vers plus de solidarité. || 전체적인 **경향**은 더 많은 연대감으로 향합니다.
+   syn: [orientation, courant, mode] | ant: []
+
+hashtag [ko] ipa=ˈhæʃtæɡ | meanings: 해시태그[명사]
+   e1: Elle a ajouté un **hashtag** à sa photo. || 그녀는 사진에 **해시태그**를 추가했다.
+   e2: Le **hashtag** facilite la recherche sur les réseaux. || **해시태그**는 소셜 네트워크에서 검색을 쉽게 한다.
+   e3: Nous utilisons un **hashtag** pour l'événement. || 우리는 행사에 **해시태그**를 사용한다.
+   syn: [] | ant: []
+
+mention [ko] ipa=mɑ̃sjɔ̃ | meanings: 언급[명사] | 언급하다[동사]
+   e1: La **mention** dans le rapport était importante. || 보고서의 **언급**은 중요했어요.
+   e2: Il faut **mentionner** les détails du projet. || 프로젝트의 세부사항을 **언급**해야 해요.
+   e3: Sa **mention** a attiré l'attention de tous. || 그의 **언급**이 모두의 주목을 받았어요.
+   syn: [citation, référence, allusion, citer] | ant: []
+
+notification [ko] ipa=nɔtifikaˈsjɔ̃ | meanings: 통지[명사] | 알림[명사]
+   e1: J'ai reçu une **notification** officielle hier. || 나는 어제 공식 **통지**를 받았어요.
+   e2: La **notification** sur mon téléphone m'a surpris. || 내 휴대전화에 **알림**이 떠서 놀랐어요.
+   e3: Elle attend une **notification** importante ce matin. || 그녀는 오늘 아침 중요한 **통지**를 기다리고 있어요.
+   syn: [avis, alerte, message] | ant: []
+
+filtre [ko] ipa=filtʁ | meanings: 필터[명사] | 여과기[명사]
+   e1: Le **filtre** retient les impuretés dans l'eau. || 물에서 불순물을 잡는 **필터**입니다.
+   e2: J'ai changé le **filtre** de la machine à café hier. || 나는 어제 커피 머신의 **필터**를 교체했다.
+   e3: Le **filtre** améliore la qualité de l'air dans la pièce. || 그 **필터**는 방 안 공기 질을 향상시킵니다.
+   syn: [crible, passoire] | ant: []
+
+algorithme [ko] ipa=al.ɡɔ.ʁitm | meanings: 알고리즘[명사]
+   e1: Cet **algorithme** trie les données rapidement. || 이 **알고리즘**은 데이터를 빠르게 정렬합니다.
+   e2: L'**algorithme** optimise la recherche d'informations. || **알고리즘**은 정보 검색을 최적화합니다.
+   syn: [] | ant: []
+
+personnalisation [ko] ipa=pɛʁsɔnalizasjɔ̃ | meanings: 개인화[명사]
+   e1: La **personnalisation** rend le produit unique. || **개인화**는 제품을 독특하게 만듭니다.
+   e2: La **personnalisation** améliore l'expérience utilisateur. || **개인화**는 사용자 경험을 향상시킵니다.
+   e3: Cette application propose la **personnalisation** des paramètres. || 이 애플리케이션은 설정 **개인화**를 제공합니다.
+   syn: [adaptation, customisation] | ant: []
+
+recommandation [ko] ipa=ʁəkɔmɑ̃dasjɔ̃ | meanings: 권고[명사] | 추천[명사]
+   e1: Le médecin a donné une **recommandation** pour le traitement. || 의사는 치료에 대한 **권고**를 주었다.
+   e2: J'ai suivi sa **recommandation** pour ce restaurant. || 나는 그 사람의 식당 **추천**을 따랐다.
+   syn: [conseil, avis, suggestion] | ant: []
+
+intelligence artificielle [ko] ipa=- | meanings: 인공 지능[명사]
+   e1: L'**intelligence artificielle** aide à diagnostiquer des maladies. || **인공 지능**이 질병 진단을 돕습니다.
+   e2: Les progrès de l'**intelligence artificielle** sont rapides. || **인공 지능**의 발전이 빠릅니다.
+   syn: [] | ant: []
+
+apprentissage automatique [ko] ipa=- | meanings: 기계 학습[표현]
+   e1: L'**apprentissage automatique** améliore la reconnaissance vocale. || **기계 학습**이 음성 인식을 향상시켜요.
+   e2: L'**apprentissage automatique** transforme l'industrie de la santé. || **기계 학습**이 의료 산업을 바꾸고 있어요.
+   syn: [machine learning] | ant: []
+
+robot [ko] ipa=ʁɔ.bo | meanings: 로봇[명사]
+   e1: Le **robot** aide dans les tâches ménagères. || **로봇**이 집안일을 도와줘요.
+   e2: Un **robot** a été programmé pour jouer de la musique. || **로봇**이 음악을 연주하도록 프로그래밍되었어요.
+   e3: Le **robot** nettoie le sol automatiquement. || **로봇**이 자동으로 바닥을 청소해요.
+   syn: [automate, androïde, machine] | ant: []
+
+robotique [ko] ipa=ʁɔbɔtik | meanings: 로봇공학[명사]
+   e1: La **robotique** transforme l'industrie moderne. || **로봇공학**은 현대 산업을 변화시킵니다.
+   e2: Elle étudie la **robotique** à l'université. || 그녀는 대학교에서 **로봇공학**을 공부합니다.
+   e3: La conférence portait sur les avancées en **robotique**. || 그 회의는 **로봇공학**의 발전에 관한 내용이었습니다.
+   syn: [] | ant: []
+
+automatisation [ko] ipa=otomatizasjɔ̃ | meanings: 자동화[명사]
+   e1: L'**automatisation** améliore la production en usine. || **자동화**는 공장의 생산을 향상시킨다.
+   e2: L'**automatisation** réduit les erreurs humaines. || **자동화**는 사람의 실수를 줄인다.
+   e3: La croissance de l'**automatisation** change le marché du travail. || **자동화**의 성장은 노동 시장을 변화시킨다.
+   syn: [robotisation, mécanisation] | ant: []
+
+automatiser [ko] ipa=otomatisɛ | meanings: 자동화하다[동사]
+   e1: L'usine a décidé d'**automatiser** sa production. || 그 공장은 생산을 **자동화하기로** 결정했다.
+   e2: Nous voulons **automatiser** le processus de tri. || 우리는 분류 과정을 **자동화하고자** 한다.
+   syn: [mécaniser, robotiser] | ant: []
+
+informatique [ko] ipa=ɛ̃fɔʁmatik | meanings: 컴퓨터 과학[명사] | 정보 처리 기술[명사]
+   e1: J'**étudie l'informatique** à l'université. || 나는 대학에서 **컴퓨터 과학**을 공부합니다.
+   e2: L'**informatique** facilite la gestion des données. || **정보 처리 기술**은 데이터 관리를 용이하게 합니다.
+   syn: [technologie de l'information, science informatique] | ant: []
+
+informaticien [ko] ipa=ɛ̃fɔʁmatisjɛ̃ | meanings: 컴퓨터 전문가[명사]
+   e1: L'**informaticien** aide à résoudre les problèmes techniques. || **정보기술자**가 기술 문제를 해결하는 데 도움을 준다.
+   e2: Mon frère est **informaticien** dans une grande entreprise. || 내 형은 큰 회사에서 **정보기술자**로 일한다.
+   e3: L'**informaticien** travaille sur un nouveau logiciel. || **정보기술자**가 새 소프트웨어를 작업한다.
+   syn: [programmeur, ingénieur informatique, développeur] | ant: []
+
+programmeur [ko] ipa=pʁɔ.ɡʁa.mœʁ | meanings: 프로그래머[명사]
+   e1: Le **programmeur** travaille sur le code du logiciel. || 그 **프로그래머**는 소프트웨어 코드를 작업합니다.
+   e2: Un **programmeur** expert résout rapidement les bugs. || 숙련된 **프로그래머**가 버그를 빠르게 해결합니다.
+   syn: [développeur, informaticien] | ant: []
+
+développeur [ko] ipa=devlɔpœʁ | meanings: 개발자[명사]
+   e1: Le **développeur** crée une nouvelle application mobile. || **개발자**가 새로운 모바일 앱을 만든다.
+   e2: Un **développeur** travaille sur le site web de l'entreprise. || 한 **개발자**가 회사 웹사이트에서 일한다.
+   e3: Le **développeur** rencontre l'équipe pour discuter du projet. || **개발자**가 프로젝트에 대해 팀과 회의한다.
+   syn: [programmeur, informaticien, codeur] | ant: []
+
+développeuse [ko] ipa=de.vɛ.lɔpøz | meanings: 여성 개발자[명사]
+   e1: La **développeuse** a corrigé le bug rapidement. || **개발자**가 버그를 빠르게 수정했어요.
+   e2: Une **développeuse** travaille souvent en équipe. || 한 **개발자**는 종종 팀에서 일해요.
+   e3: La **développeuse** présente son projet au client. || **개발자**가 고객에게 프로젝트를 발표해요.
+   syn: [programmeuse, codeuse] | ant: []
+
+code [ko] ipa=kɔd | meanings: 암호[명사] | 법전[명사]
+   e1: Le **code** secret protège les données. || **암호**가 데이터를 보호한다.
+   e2: Le **code** civil régit les relations privées. || 민법 **코드**가 사인 간의 관계를 규정한다.
+   syn: [cryptogramme, loi, règlement] | ant: []
+
+coder [ko] ipa=kɔ.de | meanings: 코딩하다, 암호화하다[동사]
+   e1: Il faut **coder** ce site web avant demain. || 내일까지 이 웹사이트를 **코딩해야** 해요.
+   e2: Elle sait très bien **coder** en Python. || 그녀는 파이썬으로 아주 잘 **코딩할** 줄 알아요.
+   e3: Ils vont **coder** les données pour les sécuriser. || 그들은 데이터를 보호하기 위해 **암호화할** 것입니다.
+   syn: [programmer, chiffrer, cryptographier] | ant: []
+
+programmation [ko] ipa=pʁɔɡʁam‿asjɔ̃ | meanings: 프로그래밍[명사] | 방송 편성[명사]
+   e1: La **programmation** informatique demande de la logique. || 컴퓨터 **프로그래밍**은 논리가 필요해요.
+   e2: La **programmation** de la soirée est très variée. || 그날 저녁의 **방송 편성**은 매우 다양해요.
+   e3: Il apprend la **programmation** depuis un an. || 그는 1년 동안 **프로그래밍**을 배우고 있어요.
+   syn: [codage, développement, planification] | ant: []
+
+logiciel libre [ko] ipa=- | meanings: 자유 소프트웨어[명사]
+   e1: Le **logiciel libre** permet la modification du code. || **자유 소프트웨어**는 코드 수정을 허용해요.
+   e2: Nous utilisons un **logiciel libre** pour préserver la liberté. || 우리는 자유를 지키기 위해 **자유 소프트웨어**를 사용해요.
+   e3: Le **logiciel libre** favorise la collaboration mondiale. || **자유 소프트웨어**는 전 세계 협업을 촉진해요.
+   syn: [] | ant: []
+
+logiciel propriétaire [ko] ipa=- | meanings: 독점 소프트웨어[명사]
+   e1: Ce **logiciel propriétaire** coûte cher pour les petites entreprises. || 이 **독점 소프트웨어**는 소규모 기업에 비쌉니다.
+   e2: Le **logiciel propriétaire** limite la modification par l'utilisateur. || **독점 소프트웨어**는 사용자의 수정을 제한합니다.
+   syn: [] | ant: []
+
+open source [ko] ipa=- | meanings: 오픈 소스[표현]
+   e1: Le logiciel est distribué en **open source**. || 그 소프트웨어는 **오픈 소스**로 배포됩니다.
+   e2: Ils préfèrent utiliser des solutions **open source**. || 그들은 **오픈 소스** 솔루션을 사용하는 것을 선호합니다.
+   e3: Le projet est développé grâce à la communauté **open source**. || 그 프로젝트는 **오픈 소스** 커뮤니티 덕분에 개발됩니다.
+   syn: [] | ant: []
+
+données [ko] ipa=dɔne | meanings: 데이터[명사]
+   e1: Les **données** sont stockées dans le cloud. || **데이터**가 클라우드에 저장되어 있습니다.
+   e2: Nous traitons les **données** avec soin. || 우리는 **데이터**를 신중하게 처리합니다.
+   e3: Les **données** collectées sont précises. || 수집된 **데이터**는 정확합니다.
+   syn: [informations, statistiques, résultats] | ant: []
+
+donnée personnelle [ko] ipa=- | meanings: 개인 정보[명사]
+   e1: La **donnée personnelle** doit être protégée. || **개인 정보**는 보호되어야 합니다.
+   e2: Nous collectons la **donnée personnelle** des utilisateurs. || 우리는 사용자들의 **개인 정보**를 수집합니다.
+   e3: La loi encadre l'utilisation de la **donnée personnelle**. || 법은 **개인 정보** 사용을 규제합니다.
+   syn: [information personnelle, identité personnelle] | ant: []
+
+base de données [ko] ipa=- | meanings: 데이터베이스[명사]
+   e1: La **base de données** stocke toutes les informations des clients. || 그 **데이터베이스**는 모든 고객의 정보를 저장합니다.
+   e2: Nous avons amélioré la sécurité de la **base de données**. || 우리는 **데이터베이스**의 보안을 향상시켰습니다.
+   e3: La **base de données** est mise à jour quotidiennement. || **데이터베이스**는 매일 업데이트됩니다.
+   syn: [base de données informatique, système de gestion de données] | ant: []
+
+stockage [ko] ipa=stɔkaʒ | meanings: 저장[명사]
+   e1: Le **stockage** des aliments doit être bien organisé. || 음식의 **저장**은 잘 정리되어야 합니다.
+   e2: Ils améliorent le **stockage** des données numériques. || 그들은 디지털 데이터 **저장**을 개선합니다.
+   e3: Le **stockage** du bois est important avant l’hiver. || 겨울 전에 나무 **저장**이 중요합니다.
+   syn: [entreposage, conservation] | ant: []
+
+stocker [ko] ipa=stɔ.ke | meanings: 저장하다[동사]
+   e1: Je vais **stocker** les légumes au réfrigérateur. || 나는 야채를 냉장고에 **저장할** 거예요.
+   e2: Ils doivent **stocker** les documents importants. || 그들은 중요한 문서들을 **저장해야** 합니다.
+   e3: Elle aime **stocker** du vin pour les occasions spéciales. || 그녀는 특별한 날을 위해 와인을 **저장하는** 것을 좋아합니다.
+   syn: [entreposer, conserver, archiver] | ant: []
+
+cloud [ko] ipa=klaud | meanings: 클라우드, 컴퓨터 서비스[명사]
+   e1: Le stockage sur **cloud** est très pratique. || **클라우드** 저장은 매우 편리해요.
+   e2: Notre entreprise utilise le **cloud** pour ses données. || 우리 회사는 데이터를 위해 **클라우드**를 사용해요.
+   syn: [] | ant: []
+
+centre de données [ko] ipa=- | meanings: 데이터 센터[명사]
+   e1: Le **centre de données** stocke toutes les informations importantes. || **데이터 센터**는 모든 중요한 정보를 저장합니다.
+   e2: Le **centre de données** fonctionne 24 heures sur 24. || **데이터 센터**는 하루 24시간 작동합니다.
+   e3: Nous avons visité un grand **centre de données** hier. || 우리는 어제 큰 **데이터 센터**를 방문했습니다.
+   syn: [] | ant: []
+
+réseau informatique [ko] ipa=- | meanings: 컴퓨터 네트워크[명사]
+   e1: Le **réseau informatique** fonctionne dans toute l'entreprise. || 회사 전체에 **컴퓨터 네트워크**가 작동한다.
+   e2: Nous avons amélioré le **réseau informatique** du bureau. || 우리는 사무실의 **컴퓨터 네트워크**를 개선했다.
+   syn: [réseau numérique, réseau de communication] | ant: []
+
+haut débit [ko] ipa=- | meanings: 고속 통신[명사]
+   e1: Le service **haut débit** est disponible dans notre quartier. || 우리 지역에는 **고속 통신** 서비스가 제공됩니다.
+   e2: J’ai installé une ligne **haut débit** pour mieux travailler. || 더 나은 작업을 위해 **고속 통신** 회선을 설치했습니다.
+   e3: La vidéo en streaming nécessite un **haut débit** stable. || 스트리밍 영상은 안정적인 **고속 통신**이 필요합니다.
+   syn: [connexion rapide, accès internet rapide] | ant: []
+
+fibre optique [ko] ipa=- | meanings: 광섬유[명사]
+   e1: La maison est connectée grâce à la **fibre optique**. || 그 집은 **광섬유** 덕분에 연결되어 있다.
+   e2: La **fibre optique** améliore la vitesse d'Internet. || **광섬유**가 인터넷 속도를 높인다.
+   syn: [] | ant: []
+
+5G [ko] ipa=sɛ̃k ʒe | meanings: 5세대 이동통신[명사]
+   e1: La technologie **5G** améliore la vitesse d'internet. || **5G** 기술은 인터넷 속도를 향상시킵니다.
+   e2: Les smartphones prennent en charge la **5G** maintenant. || 스마트폰은 이제 **5G**를 지원합니다.
+   e3: La couverture **5G** s'étend rapidement dans la ville. || 도시에서 **5G** 서비스가 빠르게 확장되고 있습니다.
+   syn: [] | ant: []
+
+cybersécurité [ko] ipa=sibɛʁsekyʁite | meanings: 사이버 보안[명사]
+   e1: La **cybersécurité** protège les données en ligne. || **사이버보안**은 온라인 데이터를 보호합니다.
+   e2: Les entreprises investissent dans la **cybersécurité**. || 기업들은 **사이버보안**에 투자합니다.
+   e3: La formation en **cybersécurité** est essentielle aujourd'hui. || 오늘날 **사이버보안** 교육은 필수입니다.
+   syn: [sécurité informatique, protection des données, sécurité numérique] | ant: []
+
+piratage [ko] ipa=pi.ʁa.taʒ | meanings: 해적 행위[명사] | 불법 복제[명사]
+   e1: Le **piratage** maritime est interdit par la loi. || 해상 **해적 행위**는 법으로 금지되어 있다.
+   e2: Le **piratage** de logiciels cause de gros problèmes. || 소프트웨어 **불법 복제**는 큰 문제를 일으킨다.
+   syn: [piraterie, hacking, contrefaçon] | ant: []
+
+pirate informatique [ko] ipa=- | meanings: 컴퓨터 해적[명사]
+   e1: Un **pirate informatique** a accès aux données privées. || 한 **컴퓨터 해적**이 개인 데이터를 접속했다.
+   e2: Le **pirate informatique** a piraté le réseau scolaire. || **컴퓨터 해적**이 학교 네트워크를 해킹했다.
+   syn: [] | ant: []
+
+hacker [ko] ipa=akɛʁ | meanings: 해커[명사] | 해킹하다[동사]
+   e1: Le **hacker** a découvert une faille dans le système. || **해커**가 시스템의 결함을 발견했다.
+   e2: Ils vont **hacker** le réseau pour tester sa sécurité. || 그들은 보안 점검을 위해 네트워크를 **해킹할** 것이다.
+   e3: Un **hacker** éthique protège les données des utilisateurs. || 윤리적 **해커**는 사용자 데이터를 보호한다.
+   syn: [pirate informatique, cracker, bidouilleur] | ant: []
+
+virus informatique [ko] ipa=- | meanings: 컴퓨터 바이러스[명사]
+   e1: Un **virus informatique** peut endommager les fichiers. || **컴퓨터 바이러스**는 파일을 손상시킬 수 있다.
+   e2: Le logiciel a détecté un **virus informatique** dangereux. || 소프트웨어가 위험한 **컴퓨터 바이러스**를 감지했다.
+   e3: Il faut protéger l'ordinateur contre le **virus informatique**. || 컴퓨터를 **바이러스**로부터 보호해야 한다.
+   syn: [malware, cheval de Troie] | ant: []
+
+cyberattaque [ko] ipa=sibɛʁatak | meanings: 사이버 공격[명사]
+   e1: Une **cyberattaque** a interrompu le service bancaire. || 한 **사이버공격**으로 은행 서비스가 중단되었다.
+   e2: La sécurité s'est renforcée après une grave **cyberattaque**. || 심각한 **사이버공격** 후 보안이 강화되었다.
+   e3: Ils ont détecté une tentative de **cyberattaque** hier soir. || 그들은 어젯밤 **사이버공격** 시도를 발견했다.
+   syn: [attaque informatique, piratage] | ant: []
+
+rançongiciel [ko] ipa=ʁɑ̃.sɔ̃.ʒi.sjɛl | meanings: 랜섬웨어[명사]
+   e1: Le **rançongiciel** a bloqué l'accès aux fichiers. || **랜섬웨어**가 파일 접근을 막았습니다.
+   e2: Nous avons installé un antivirus contre le **rançongiciel**. || 우리는 **랜섬웨어**를 막기 위해 백신을 설치했습니다.
+   e3: Le **rançongiciel** demande une somme d'argent pour libérer l'ordinateur. || **랜섬웨어**는 컴퓨터를 풀기 위해 돈을 요구합니다.
+   syn: [logiciel rançonneur, maliciel, logiciel malveillant] | ant: []
+
+phishing [ko] ipa=fiʃiŋ | meanings: 피싱[명사]
+   e1: Le **phishing** est un problème de sécurité sérieux. || **피싱**은 심각한 보안 문제입니다.
+   e2: Il a reçu un e-mail de **phishing** hier soir. || 그는 어젯밤 **피싱** 이메일을 받았습니다.
+   e3: Le site web a détecté une tentative de **phishing**. || 웹사이트는 **피싱** 시도를 감지했습니다.
+   syn: [] | ant: []
+
+mot de passe [ko] ipa=- | meanings: 비밀번호[명사]
+   e1: Je change mon **mot de passe** chaque mois. || 나는 매달 **비밀번호**를 바꿔요.
+   e2: N'oublie pas ton **mot de passe** pour te connecter. || 로그인할 때 **비밀번호**를 잊지 마세요.
+   e3: Le **mot de passe** protège tes informations personnelles. || **비밀번호**는 개인정보를 보호해요.
+   syn: [] | ant: []
+
+authentification [ko] ipa=otɑ̃tifikasjɔ̃ | meanings: 인증[명사]
+   e1: L'**authentification** garantit la sécurité des données. || **인증**은 데이터의 보안을 보장합니다.
+   e2: Le système demande une **authentification** par mot de passe. || 시스템은 비밀번호로 **인증**을 요구합니다.
+   e3: L'**authentification** sécurise l'accès aux comptes en ligne. || **인증**은 온라인 계정 접근을 안전하게 합니다.
+   syn: [vérification, confirmation] | ant: []
+
+double authentification [ko] ipa=- | meanings: 이중 인증[명사]
+   e1: La **double authentification** protège mieux vos comptes. || **이중 인증**은 계정을 더 잘 보호합니다.
+   e2: Activez la **double authentification** pour une sécurité renforcée. || 강화된 보안을 위해 **이중 인증**을 활성화하세요.
+   e3: La **double authentification** empêche les accès non autorisés. || **이중 인증**은 무단 접근을 막습니다.
+   syn: [] | ant: []
+
+chiffrement [ko] ipa=ʃifʁəmɑ̃ | meanings: 암호화[명사]
+   e1: Le **chiffrement** protège nos données en ligne. || 온라인에서 우리의 데이터를 **암호화**가 보호합니다.
+   e2: Le **chiffrement** garantit la confidentialité du message. || 메시지의 기밀성은 **암호화**가 보장합니다.
+   syn: [cryptage, codage] | ant: []
+
+chiffrer [ko] ipa=ʃifʁe | meanings: 암호화하다[동사] | 숫자로 나타내다[동사]
+   e1: Nous devons **chiffrer** les données pour la sécurité. || 우리는 보안을 위해 데이터를 **암호화**해야 합니다.
+   e2: Le système permet de **chiffrer** les messages secrets. || 시스템은 비밀 메시지를 **암호화**할 수 있습니다.
+   e3: Il faut **chiffrer** les résultats en nombres précis. || 결과를 정확한 **숫자**로 표시해야 합니다.
+   syn: [coder, encoder, crypter, numériser] | ant: []
+
+vie privée numérique [ko] ipa=- | meanings: 개인정보 보호[표현]
+   e1: La **vie privée numérique** est essentielle pour les utilisateurs. || 사용자에게 **개인정보 보호**는 필수적입니다.
+   e2: Nous devons protéger la **vie privée numérique** en ligne. || 우리는 온라인에서 **개인정보 보호**를 지켜야 합니다.
+   e3: La législation renforce la **vie privée numérique** des citoyens. || 법률은 시민의 **개인정보 보호**를 강화합니다.
+   syn: [confidentialité numérique, protection des données personnelles, sécurité des données privées] | ant: []
+
+RGPD [ko] ipa=ɛʁʒepeˈde | meanings: 유럽 일반 개인정보 보호법[고유명사]
+   e1: Le **RGPD** protège la vie privée des citoyens. || **RGPD**는 시민들의 개인 정보를 보호합니다.
+   e2: Nous respectons les règles du **RGPD** en entreprise. || 우리는 회사에서 **RGPD** 규정을 준수합니다.
+   e3: Le **RGPD** impose des sanctions en cas de non-respect. || **RGPD**는 미준수 시 제재를 가합니다.
+   syn: [] | ant: []
+
+consentement [ko] ipa=kɔ̃sɑ̃təmɑ̃ | meanings: 동의[명사]
+   e1: Le **consentement** est essentiel dans toute relation. || **동의**는 모든 관계에서 필수적입니다.
+   e2: Elle a donné son **consentement** pour le projet. || 그녀는 그 프로젝트에 대해 **동의**했습니다.
+   syn: [accord, approbation, autorisation] | ant: []
+
+cookie [ko] ipa=ku.ki | meanings: 쿠키[명사]
+   e1: J'ai mangé un **cookie** au chocolat. || 나는 초콜릿 **쿠키**를 먹었어요.
+   e2: Elle prépare des **cookies** pour la fête. || 그녀는 파티를 위해 **쿠키**를 준비해요.
+   syn: [biscuit] | ant: []
+
+navigation privée [ko] ipa=- | meanings: 비공개 탐색[표현] | 사생활 보호 기능[명사]
+   e1: J'ouvre une fenêtre en **navigation privée** pour naviguer. || 나는 **비공개** 창을 열었어요.
+   e2: La **navigation privée** protège la confidentialité de tes données. || **비공개** 모드는 너의 데이터 사생활을 보호해 줘요.
+   syn: [mode incognito, navigation incognito] | ant: []
+
+anonymat [ko] ipa=anɔnima | meanings: 익명[명사]
+   e1: Il a choisi l'**anonymat** pour écrire son livre. || 그는 책을 쓰기 위해 **익명**을 선택했다.
+   e2: L'**anonymat** protège la vie privée des utilisateurs. || **익명**은 사용자들의 사생활을 보호한다.
+   e3: Respecter l'**anonymat** est important dans ce sondage. || 이 설문조사에서 **익명**을 존중하는 것이 중요하다.
+   syn: [secret, incognito, confidentialité] | ant: []
+
+pseudonyme [ko] ipa=psødɔnɪm | meanings: 필명[명사]
+   e1: L'écrivain utilise un **pseudonyme** pour écrire ses romans. || 그 작가는 소설을 쓰기 위해 **필명**을 사용해요.
+   e2: Elle a choisi un **pseudonyme** pour préserver son anonymat. || 그녀는 자신의 익명을 지키기 위해 **필명**을 선택했어요.
+   e3: Sous ce **pseudonyme**, il publie ses poèmes les plus secrets. || 그는 이 **필명**으로 가장 비밀스러운 시를 발표해요.
+   syn: [nom de plume, alias, nom d'auteur] | ant: []
+
+identité numérique [ko] ipa=- | meanings: 디지털 신원[명사]
+   e1: L'**identité numérique** protège la vie privée en ligne. || **디지털 신원**은 온라인 사생활을 보호해요.
+   e2: Elle a créé une **identité numérique** pour son site web. || 그녀는 자신의 사이트를 위해 **디지털 신원**을 만들었어요.
+   e3: La gestion de l'**identité numérique** est essentielle aujourd'hui. || 오늘날 **디지털 신원** 관리가 중요해요.
+   syn: [identité en ligne, profil numérique] | ant: []
+
+trace numérique [ko] ipa=- | meanings: 디지털 흔적[명사]
+   e1: La **trace numérique** aide à retrouver l'origine d'un message. || **디지털 흔적**은 메시지의 출처를 찾는 데 도움이 된다.
+   e2: Les réseaux sociaux laissent souvent une **trace numérique**. || 소셜 네트워크는 종종 **디지털 흔적**을 남긴다.
+   e3: Chaque navigation sur Internet crée une **trace numérique**. || 인터넷에서의 모든 탐색은 **디지털 흔적**을 만든다.
+   syn: [empreinte digitale, trace digitale] | ant: []
+
+réalité virtuelle [ko] ipa=- | meanings: 가상 현실[명사]
+   e1: La **réalité virtuelle** offre une expérience immersive incroyable. || **가상 현실**은 놀라운 몰입 경험을 제공합니다.
+   e2: Les jeux en **réalité virtuelle** sont très populaires aujourd'hui. || 오늘날 **가상 현실** 게임이 아주 인기가 많습니다.
+   e3: La formation utilise la **réalité virtuelle** pour simuler des situations réelles. || 훈련은 실제 상황을 시뮬레이션하기 위해 **가상 현실**을 사용합니다.
+   syn: [immersion numérique, simulation virtuelle, monde virtuel] | ant: []
+
+réalité augmentée [ko] ipa=- | meanings: 증강 현실[명사]
+   e1: La **réalité augmentée** améliore notre perception du monde. || **증강 현실**은 우리의 세계 인식을 개선합니다.
+   e2: Les jeux utilisent souvent la **réalité augmentée**. || 게임들은 종종 **증강 현실**을 사용합니다.
+   e3: La **réalité augmentée** facilite l'apprentissage interactif. || **증강 현실**은 상호작용 학습을 용이하게 합니다.
+   syn: [AR] | ant: []
+
+métavers [ko] ipa=me.ta.vɛʁ | meanings: 메타버스[명사]
+   e1: Le **métavers** est un monde virtuel en ligne. || **메타버스**는 온라인 가상 세계입니다.
+   e2: Je visite souvent le **métavers** pour socialiser. || 나는 자주 **메타버스**에서 사교 활동을 합니다.
+   e3: Le commerce se développe rapidement dans le **métavers**. || 상업은 **메타버스**에서 빠르게 발전하고 있습니다.
+   syn: [] | ant: []
+
+blockchain [ko] ipa=blɔkʃɛn | meanings: 블록체인[명사]
+   e1: La **blockchain** garantit la sécurité des transactions. || **블록체인**은 거래의 보안을 보장합니다.
+   e2: Beaucoup d'entreprises utilisent la **blockchain** pour stocker des données. || 많은 기업이 데이터를 저장하기 위해 **블록체인**을 사용합니다.
+   e3: La technologie **blockchain** transforme les services financiers. || **블록체인** 기술이 금융 서비스를 변화시키고 있습니다.
+   syn: [] | ant: []
+
+cryptomonnaie [ko] ipa=kʁip.tɔ.mɔ.nɛ | meanings: 암호화폐[명사]
+   e1: La **cryptomonnaie** gagne en popularité cette année. || 올해 **암호화폐**가 인기를 얻고 있다.
+   e2: Beaucoup investissent dans la **cryptomonnaie** pour diversifier. || 많은 사람이 다양화를 위해 **암호화폐**에 투자한다.
+   syn: [monnaie numérique, crypto] | ant: []
+
+bitcoin [ko] ipa=biktwɛ̃ | meanings: 비트코인[명사]
+   e1: Le **bitcoin** est une monnaie numérique populaire. || **비트코인**은 인기 있는 디지털 화폐입니다.
+   e2: J'ai investi dans le **bitcoin** cette année. || 나는 올해 **비트코인**에 투자했어요.
+   e3: Le prix du **bitcoin** change souvent. || **비트코인** 가격은 자주 변동합니다.
+   syn: [] | ant: []
+
+NFT [ko] ipa=ɛn ɛf te | meanings: 대체 불가능 토큰[명사]
+   e1: L'artiste a vendu un **NFT** célèbre. || 그 예술가는 유명한 **NFT**를 팔았다.
+   e2: J'ai acheté un **NFT** sur une plateforme en ligne. || 나는 온라인 플랫폼에서 **NFT**를 샀다.
+   e3: Le marché des **NFT** grandit rapidement. || **NFT** 시장이 빠르게 성장하고 있다.
+   syn: [] | ant: []
+
+objet connecté [ko] ipa=- | meanings: 인터넷에 연결된 장치[명사]
+   e1: Cet **objet connecté** contrôle ma maison à distance. || 이 **연결된 장치**는 내 집을 원격으로 제어합니다.
+   e2: Chaque **objet connecté** améliore notre quotidien. || 모든 **연결된 장치**는 우리의 일상을 개선합니다.
+   syn: [appareil connecté, dispositif connecté] | ant: []
+
+domotique [ko] ipa=dɔmɔtik | meanings: 주택 자동화[명사]
+   e1: La **domotique** facilite la gestion de la maison. || **도모티크**는 집 관리에 도움을 줘요.
+   e2: Nous avons installé un système de **domotique** moderne. || 우리는 최신 **도모티크** 시스템을 설치했어요.
+   e3: La **domotique** améliore le confort quotidien. || **도모티크**는 일상적인 편안함을 향상시켜요.
+   syn: [automatisation domestique, maison intelligente] | ant: []
+
+drone [ko] ipa=dʁɔn | meanings: 드론, 무인 항공기[명사]
+   e1: Le **drone** survole la forêt calme. || 조용한 숲 위를 **드론**이 날아다닌다.
+   e2: Elle utilise un **drone** pour prendre des photos. || 그녀는 사진을 찍기 위해 **드론**을 사용한다.
+   e3: Le **drone** atterrit doucement sur le toit. || **드론**이 옥상에 부드럽게 착륙한다.
+   syn: [] | ant: []
+
+effet papillon [ko] ipa=- | meanings: 나비 효과[표현]
+   e1: L'**effet papillon** peut changer le futur radicalement. || **나비 효과**는 미래를 급격히 바꿀 수 있다.
+   e2: Un petit geste peut créer un grand **effet papillon**. || 작은 행동이 큰 **나비 효과**를 만들 수 있다.
+   syn: [] | ant: []
+
+point de bascule [ko] ipa=- | meanings: 전환점[명사]
+   e1: La décision fut un **point de bascule** pour la carrière. || 그 결정은 경력의 **전환점**이었다.
+   e2: Ce changement marque un **point de bascule** dans l'histoire. || 이 변화는 역사에서 **전환점**을 나타낸다.
+   syn: [tournant, moment charnière, seuil critique] | ant: []
+
+fonte des glaces [ko] ipa=- | meanings: 빙하 녹음[표현]
+   e1: La **fonte des glaces** menace la vie marine. || **빙하 녹음**이 해양 생물을 위협합니다.
+   e2: Nous devons agir pour ralentir la **fonte des glaces**. || 우리는 **빙하 녹음**을 늦추기 위해 행동해야 합니다.
+   e3: La **fonte des glaces** s'accélère chaque année. || **빙하 녹음**은 매년 가속화됩니다.
+   syn: [dégel des glaces, disparition des glaces] | ant: []
+
+glacier [ko] ipa=ɡlasje | meanings: 빙하[명사] | 아이스크림 가게[명사]
+   e1: Le **glacier** fond lentement dans la vallée. || **빙하**가 계곡에서 천천히 녹고 있다.
+   e2: Nous avons acheté des glaces au **glacier** du centre-ville. || 우리는 시내에 있는 **아이스크림 가게**에서 아이스크림을 샀다.
+   syn: [] | ant: []
+
+permafrost [ko] ipa=pɛʁmafʁɔst | meanings: 영구 동토층[명사]
+   e1: Le **permafrost** fond lentement à cause du réchauffement climatique. || 기후 변화 때문에 **영구 동토층**이 천천히 녹고 있다.
+   e2: Les scientifiques étudient le **permafrost** pour comprendre les gaz emprisonnés. || 과학자들은 갇힌 가스를 이해하기 위해 **영구 동토층**을 연구한다.
+   e3: Le sol gelé du **permafrost** reste dur même en été. || 여름에도 얼어 있는 **영구 동토층**의 땅은 단단하다.
+   syn: [] | ant: []
+
+montée des eaux [ko] ipa=- | meanings: 물의 상승[표현]
+   e1: La **montée des eaux** menace les zones côtières. || 해안 지역을 **물의 상승**이 위협하고 있다.
+   e2: Les habitants s'inquiètent de la **montée des eaux** au printemps. || 봄철에 **물의 상승** 때문에 주민들이 걱정한다.
+   e3: La **montée des eaux** affecte la croissance des plantes sur la rivière. || 강에 있는 식물들의 성장에 **물의 상승**이 영향을 준다.
+   syn: [hausse des eaux, élévation du niveau de l'eau] | ant: []
+
+acidification des océans [ko] ipa=- | meanings: 해양 산성화[표현]
+   e1: L'**acidification des océans** menace les coraux vivants. || **해양 산성화**가 산호초를 위협해요.
+   e2: Les scientifiques étudient l'**acidification des océans** avec attention. || 과학자들은 **해양 산성화**를 주의 깊게 연구하고 있어요.
+   e3: L'**acidification des océans** cause des changements dans la vie marine. || **해양 산성화**는 해양 생태계에 변화를 일으켜요.
+   syn: [] | ant: []
+
+pluies acides [ko] ipa=- | meanings: 산성비[명사]
+   e1: Les **pluies acides** endommagent les forêts. || **산성비**가 숲을 손상시켜요.
+   e2: Les scientifiques étudient les effets des **pluies acides**. || 과학자들이 **산성비**의 영향을 연구하고 있어요.
+   syn: [] | ant: []
+
+particule fine [ko] ipa=- | meanings: 미세한 입자[명사]
+   e1: La **particule fine** est invisible à l'œil nu. || 미세한 **입자**는 육안으로 볼 수 없습니다.
+   e2: Les **particules fines** peuvent affecter la santé. || **미세한 입자**는 건강에 영향을 줄 수 있습니다.
+   syn: [] | ant: []
+
+smog [ko] ipa=smɔɡ | meanings: 스모그[명사]
+   e1: Le **smog** recouvre la ville chaque hiver. || 겨울마다 도시가 **스모그**로 뒤덮인다.
+   e2: Ce matin, le **smog** était particulièrement épais. || 오늘 아침은 특히 **스모그**가 짙었다.
+   e3: Les habitants se plaignent du mauvais **smog**. || 주민들은 **스모그**의 나쁜 질에 불만을 토로한다.
+   syn: [] | ant: []
+
+bilan carbone [ko] ipa=- | meanings: 탄소 배출 평가[명사]
+   e1: Le **bilan carbone** aide à réduire les émissions. || **탄소 배출 평가**는 배출량 줄이는 데 도움이 돼요.
+   e2: Faire un **bilan carbone** est important pour l'environnement. || 환경을 위해 **탄소 배출 평가**를 하는 것은 중요해요.
+   syn: [] | ant: []
+
+compensation carbone [ko] ipa=- | meanings: 탄소 배출 상쇄[표현]
+   e1: La **compensation carbone** aide à réduire l'impact climatique. || **탄소 배출 상쇄**는 기후 영향 감소에 도움이 된다.
+   e2: Cette entreprise investit dans la **compensation carbone**. || 이 회사는 **탄소 배출 상쇄**에 투자한다.
+   e3: La **compensation carbone** est un choix éco-responsable. || **탄소 배출 상쇄**는 친환경적인 선택이다.
+   syn: [] | ant: []
+
+taxe carbone [ko] ipa=- | meanings: 탄소세[명사]
+   e1: La **taxe carbone** encourage les entreprises à réduire leurs émissions. || **탄소세**는 기업들이 배출량을 줄이도록 장려합니다.
+   e2: La **taxe carbone** vise à lutter contre le changement climatique. || **탄소세**는 기후변화에 대응하기 위한 것입니다.
+   e3: Nous avons discuté de la **taxe carbone** lors de la réunion environnementale. || 우리는 환경 회의에서 **탄소세**에 대해 논의했습니다.
+   syn: [] | ant: []
+
+marché du carbone [ko] ipa=- | meanings: 탄소 시장[명사]
+   e1: Le **marché du carbone** aide à réduire les émissions. || **탄소 시장**은 배출량 감축에 도움을 준다.
+   e2: Les entreprises investissent dans le **marché du carbone** vert. || 기업들은 친환경 **탄소 시장**에 투자한다.
+   e3: Le **marché du carbone** régule le prix du CO2. || **탄소 시장**은 이산화탄소 가격을 조정한다.
+   syn: [bourse du carbone, marché des émissions] | ant: []
+
+puits de carbone [ko] ipa=- | meanings: 탄소 흡수원[명사]
+   e1: La forêt agit comme un **puits de carbone** naturel. || 숲은 자연적인 **탄소 흡수원**으로 작용한다.
+   e2: Les océans sont aussi des **puits de carbone** importants. || 바다는 또한 중요한 **탄소 흡수원**이다.
+   e3: Préserver les zones humides renforce les **puits de carbone**. || 습지를 보존하는 것은 **탄소 흡수원**을 강화한다.
+   syn: [réservoir de carbone, puits carbonique] | ant: []
+
+reforestation [ko] ipa=ʁəfɔʁɛstasjɔ̃ | meanings: 삼림 복원[명사]
+   e1: La **reforestation** aide à protéger l'environnement. || **재조림**은 환경을 보호하는 데 도움이 됩니다.
+   e2: Ils ont lancé un projet de **reforestation** locale. || 그들은 지역 **재조림** 프로젝트를 시작했습니다.
+   e3: La **reforestation** est essentielle pour la biodiversité. || **재조림**은 생물 다양성에 필수적입니다.
+   syn: [reboisement, replantation] | ant: []
+
+agroforesterie [ko] ipa=aɡʁɔfʁɔstɛʁi | meanings: 농업과 임업의 결합[명사]
+   e1: L'**agroforesterie** améliore la biodiversité des champs. || **아그로포레스트리**는 농지의 생물 다양성을 향상시킵니다.
+   e2: Les pratiques d'**agroforesterie** combinent arbres et cultures. || **아그로포레스트리** 기술은 나무와 농작물을 결합합니다.
+   e3: De nombreux agriculteurs adoptent l'**agroforesterie** durable. || 많은 농부들이 지속 가능한 **아그로포레스트리**를 채택합니다.
+   syn: [agroforesterie intégrée, silviculture agricole] | ant: []
+
+permaculture [ko] ipa=pɛʁmakyltyʁ | meanings: 영구 농업[명사]
+   e1: La **permaculture** protège la terre durablement. || **퍼머컬처**는 지속가능하게 땅을 보호합니다.
+   e2: Nous étudions la **permaculture** pour cultiver sans dommage. || 우리는 피해 없이 재배하기 위해 **퍼머컬처**를 공부합니다.
+   e3: Le jardin utilise la **permaculture** pour nourrir la famille. || 정원은 가족을 먹여 살리기 위해 **퍼머컬처**를 사용합니다.
+   syn: [agriculture durable, agroécologie] | ant: []
+
+jardin partagé [ko] ipa=- | meanings: 공동 텃밭[명사]
+   e1: Nous avons planté des légumes dans le **jardin partagé**. || 우리는 **공동 텃밭**에 채소를 심었어요.
+   e2: Le **jardin partagé** est un lieu convivial pour les voisins. || **공동 텃밭**은 이웃들이 함께하는 장소입니다.
+   syn: [] | ant: []
+
+culture vivrière [ko] ipa=- | meanings: 자급농업[명사]
+   e1: La **culture vivrière** soutient les villages isolés. || **자급농업**은 외딴 마을을 지탱합니다.
+   e2: Elle pratique la **culture vivrière** pour sa famille. || 그녀는 가족을 위해 **자급농업**을 합니다.
+   syn: [] | ant: []
+
+pêche durable [ko] ipa=- | meanings: 지속 가능한 어업[표현]
+   e1: La **pêche durable** protège les océans. || **지속 가능한 어업**은 바다를 보호합니다.
+   e2: Nous soutenons la **pêche durable** locale. || 우리는 지역 **지속 가능한 어업**을 지원합니다.
+   syn: [] | ant: []
+
+surpêche [ko] ipa=syʁpɛʃ | meanings: 과잉어획[명사] | 남획[명사]
+   e1: La **surpêche** menace l'équilibre des océans. || 해양의 균형을 위협하는 **과잉어획**입니다.
+   e2: La région lutte contre la **surpêche** pour protéger la biodiversité. || 그 지역은 생물다양성 보호를 위해 **남획**에 맞서 싸우고 있습니다.
+   syn: [pêche excessive, exploitation excessive] | ant: []
+
+aquaculture [ko] ipa=akwaˈkyltyʁ | meanings: 양식업[명사]
+   e1: L'**aquaculture** produit du poisson pour le marché. || **양식업**은 시장에 생선을 생산한다.
+   e2: L'**aquaculture** aide à conserver les espèces marines. || **양식업**은 해양 생물종 보존에 도움을 준다.
+   syn: [élevage marine, culture marine] | ant: []
+
+éleveur [ko] ipa=elœvœʁ | meanings: 축산업자[명사]
+   e1: L'**éleveur** nourrit les animaux chaque matin. || **축산업자**가 매일 아침 동물들에게 먹이를 줘요.
+   e2: L'**éleveur** vend du lait frais au marché. || **축산업자**가 시장에서 신선한 우유를 팔아요.
+   e3: Un **éleveur** responsable prend soin de ses bêtes. || 책임감 있는 **축산업자**는 가축을 잘 돌봐요.
+   syn: [fermier, paysan, producteur] | ant: []
+
+élevage extensif [ko] ipa=- | meanings: 광대한 방목 축산[표현]
+   e1: L'**élevage extensif** respecte le rythme naturel des animaux. || **광대한 방목 축산**은 동물의 자연스러운 리듬을 존중합니다.
+   e2: L'**élevage extensif** utilise de grands espaces pour les troupeaux. || **광대한 방목 축산**은 가축들을 위해 넓은 공간을 이용합니다.
+   syn: [] | ant: []
+
+corail [ko] ipa=kɔʁaj | meanings: 산호[명사]
+   e1: Le **corail** est rouge sous l'eau claire. || 투명한 물속에서 **산호**는 빨갛습니다.
+   e2: Nous avons vu beaucoup de poissons près du **corail**. || 우리는 **산호** 근처에서 많은 물고기를 보았습니다.
+   e3: Le fond marin est couvert de **corail** coloré. || 바닷속 바닥은 다채로운 **산호**로 덮여 있습니다.
+   syn: [] | ant: []
+
+récif corallien [ko] ipa=- | meanings: 산호초[명사]
+   e1: Le **récif corallien** abrite de nombreuses espèces marines. || **산호초**는 많은 해양 생물을 서식하게 합니다.
+   e2: Nous avons nagé près du **récif corallien** coloré. || 우리는 화려한 **산호초** 근처에서 수영했습니다.
+   syn: [barrière de corail] | ant: []
+
+mangrove [ko] ipa=mɑ̃ɡʁɔv | meanings: 맹그로브숲[명사]
+   e1: La **mangrove** protège la côte des tempêtes. || **맹그로브**는 폭풍으로부터 해안을 보호합니다.
+   e2: Lors de notre voyage, nous avons exploré une **mangrove** dense. || 우리 여행 중에 우리는 울창한 **맹그로브**를 탐험했어요.
+   e3: La faune de la **mangrove** est très diverse. || **맹그로브**의 동물들은 매우 다양합니다.
+   syn: [] | ant: []
+
+zone protégée [ko] ipa=- | meanings: 보호 구역[명사]
+   e1: La **zone protégée** abrite de nombreuses espèces rares. || 그 **보호 구역**에는 많은 희귀 종들이 서식해요.
+   e2: Nous avons visité une **zone protégée** pendant nos vacances. || 우리는 휴가 동안 **보호 구역**을 방문했어요.
+   e3: La **zone protégée** est essentielle pour la conservation de la nature. || **보호 구역**은 자연 보전에 필수적이에요.
+   syn: [réserve naturelle, aire protégée, parc naturel] | ant: []
+
+réserve naturelle [ko] ipa=- | meanings: 자연 보호구역[명사]
+   e1: La **réserve naturelle** protège les animaux rares. || **자연 보호구역**은 희귀 동물을 보호합니다.
+   e2: Nous avons visité une **réserve naturelle** en été. || 우리는 여름에 **자연 보호구역**을 방문했습니다.
+   e3: La **réserve naturelle** offre un habitat préservé. || **자연 보호구역**은 보호된 서식지를 제공합니다.
+   syn: [parc naturel, site protégé] | ant: []
+
+parc national [ko] ipa=- | meanings: 국립공원[명사]
+   e1: Le **parc national** attire de nombreux visiteurs chaque été. || **국립공원**은 매년 여름 많은 방문객을 끌어들입니다.
+   e2: Nous avons fait une randonnée dans le **parc national** hier. || 우리는 어제 **국립공원**에서 하이킹을 했습니다.
+   e3: Le gouvernement protège les animaux du **parc national**. || 정부는 **국립공원**의 동물을 보호합니다.
+   syn: [réserve naturelle, parc protégé] | ant: []
+
+parc régional [ko] ipa=- | meanings: 지역 공원[명사]
+   e1: Le **parc régional** est parfait pour une promenade en famille. || 그 **지역 공원**은 가족 산책에 완벽해요.
+   e2: Nous avons visité un **parc régional** près de la rivière. || 우리는 강 근처의 **지역 공원**을 방문했어요.
+   syn: [] | ant: []
+
+biodiversité agricole [ko] ipa=- | meanings: 농업 생물 다양성[명사]
+   e1: La **biodiversité agricole** protège la santé des cultures. || **농업 생물 다양성**은 작물의 건강을 보호한다.
+   e2: Il est crucial de préserver la **biodiversité agricole** locale. || 지역 **농업 생물 다양성**을 보존하는 것은 매우 중요하다.
+   e3: La **biodiversité agricole** aide à adapter les fermes au changement climatique. || **농업 생물 다양성**은 농장을 기후변화에 적응시키는 데 도움을 준다.
+   syn: [diversité agricole, diversité biologique agricole] | ant: []
+
+semence paysanne [ko] ipa=- | meanings: 농민 씨앗[명사]
+   e1: La **semence paysanne** est importante pour la biodiversité. || **농민 씨앗**은 생물 다양성에 중요합니다.
+   e2: Ils ont planté la **semence paysanne** dans leur champ. || 그들은 자기 밭에 **농민 씨앗**을 심었습니다.
+   e3: La préservation de la **semence paysanne** protège les traditions agricoles. || **농민 씨앗** 보존은 농업 전통을 보호합니다.
+   syn: [] | ant: []
+
+banque de semences [ko] ipa=- | meanings: 씨앗 저장소[명사]
+   e1: La **banque de semences** conserve des graines rares. || **씨앗 저장소**는 희귀한 씨앗을 보관합니다.
+   e2: Elle travaille dans une **banque de semences** locale. || 그녀는 지역 **씨앗 저장소**에서 일합니다.
+   syn: [] | ant: []
+
+agroécologie [ko] ipa=aɡʁoekɔlɔʒi | meanings: 농업생태학[명사]
+   e1: L'**agroécologie** favorise la biodiversité dans les champs. || **농업생태학**은 밭에서 생물 다양성을 촉진합니다.
+   e2: Ils étudient l'**agroécologie** pour améliorer la qualité des sols. || 그들은 토양의 질을 향상시키기 위해 **농업생태학**을 연구합니다.
+   syn: [agriculture durable, agriculture écologique] | ant: []
+
+transition alimentaire [ko] ipa=- | meanings: 식이 변화[표현]
+   e1: La **transition alimentaire** peut améliorer la santé. || **식이 변화**는 건강을 향상시킬 수 있습니다.
+   e2: La **transition alimentaire** favorise une alimentation durable. || **식이 변화**는 지속 가능한 식사를 촉진합니다.
+   syn: [] | ant: []
+
+flexitarien [ko] ipa=flɛksitaʁjɛ̃ | meanings: 유연채식주의자[명사]
+   e1: Le **flexitarien** mange souvent des légumes mais parfois de la viande. || **유연채식주의자**는 자주 야채를 먹지만 가끔 고기도 먹어요.
+   e2: Ma sœur est **flexitarienne** et adore cuisiner des plats équilibrés. || 내 여동생은 **유연채식주의자**이며 균형 잡힌 요리를 좋아해요.
+   syn: [] | ant: []
+
+crudivore [ko] ipa=kʁydivɔʁ | meanings: 생식 동물[명사]
+   e1: Le **crudivore** mange uniquement des fruits et légumes crus. || **크루디보어**는 오직 생과일과 생야채만 먹어요.
+   e2: Elle est **crudivore** depuis plusieurs années. || 그녀는 몇 년째 **크루디보어**입니다.
+   syn: [] | ant: []
+
+streaming [ko] ipa=stʁi.mɪŋ | meanings: 스트리밍[명사]
+   e1: Le **streaming** permet de regarder des vidéos en direct. || **스트리밍**은 실시간으로 비디오를 볼 수 있게 해요.
+   e2: Elle écoute de la musique en **streaming** tous les jours. || 그녀는 매일 **스트리밍**으로 음악을 들어요.
+   e3: Le service de **streaming** offre une large sélection de films. || **스트리밍** 서비스는 다양한 영화를 제공합니다.
+   syn: [] | ant: []
+
+podcasteur [ko] ipa=pɔd.kastœʁ | meanings: 팟캐스트 진행자[명사]
+   e1: Le **podcasteur** crée un nouvel épisode chaque semaine. || **팟캐스트 진행자**는 매주 새로운 에피소드를 만듭니다.
+   e2: Cette **podcasteuse** parle de voyages et d'aventures. || 이 **팟캐스트 진행자**는 여행과 모험에 대해 이야기합니다.
+   syn: [animateur de podcast, présentateur de podcast] | ant: []

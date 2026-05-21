@@ -1,0 +1,1457 @@
+{
+  "summary": {
+    "schema": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "confidence": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "meaning_count": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "pos_terminology": {
+      "pass": 1327,
+      "total": 1400
+    },
+    "sentence_rejected": {
+      "pass": 1393,
+      "total": 1400
+    },
+    "typo_handled": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "cross_script_purity": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "example_distribution": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "syn_no_paren": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "headword_preserved": {
+      "pass": 1400,
+      "total": 1400
+    },
+    "sensitive_metaling": {
+      "pass": 1400,
+      "total": 1400
+    }
+  },
+  "consistency_violations": [
+    {
+      "source": "en",
+      "word": "hand",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=1, zh-CN=2, fr=2, de=2, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "day",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=2, es=2, it=1"
+    },
+    {
+      "source": "en",
+      "word": "crane",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=1, es=2, it=1"
+    },
+    {
+      "source": "en",
+      "word": "mine",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=2, it=3"
+    },
+    {
+      "source": "en",
+      "word": "right",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "present",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "sole",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "star",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=3, zh-CN=3, fr=3, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "rock",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "table",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=3, ja=3, zh-CN=3, fr=2, de=3, es=3, it=3"
+    },
+    {
+      "source": "en",
+      "word": "1",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=1, de=2, es=2, it=2"
+    },
+    {
+      "source": "en",
+      "word": "7",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=1, zh-CN=1, fr=1, de=1, es=1, it=1"
+    },
+    {
+      "source": "en",
+      "word": "actual",
+      "targets": [
+        "ko",
+        "ja",
+        "zh-CN",
+        "fr",
+        "de",
+        "es",
+        "it"
+      ],
+      "diff": "meaning_count varies: ko=2, ja=2, zh-CN=2, fr=2, de=2, es=1, it=2"
+    }
+  ],
+  "failures_by_check": {
+    "schema": [],
+    "confidence": [],
+    "meaning_count": [],
+    "pos_terminology": [
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "break a leg",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "break a leg",
+        "meanings": [
+          {
+            "definition": "祝你好运",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "piece of cake",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "piece of cake",
+        "meanings": [
+          {
+            "definition": "非常容易的任务",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "spill the beans",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "spill the beans",
+        "meanings": [
+          {
+            "definition": "泄露秘密",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "kick the bucket",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "kick the bucket",
+        "meanings": [
+          {
+            "definition": "死去",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 95
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "hit the road",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "hit the road",
+        "meanings": [
+          {
+            "definition": "出发",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "bite the bullet",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "bite the bullet",
+        "meanings": [
+          {
+            "definition": "忍受困境",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "hit the books",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "hit the books",
+        "meanings": [
+          {
+            "definition": "用功学习",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "once in a blue moon",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "once in a blue moon",
+        "meanings": [
+          {
+            "definition": "极少",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "call it a day",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "call it a day",
+        "meanings": [
+          {
+            "definition": "停止工作",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "beat around the bush",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "beat around the bush",
+        "meanings": [
+          {
+            "definition": "拐弯抹角",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "cut to the chase",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "cut to the chase",
+        "meanings": [
+          {
+            "definition": "切入正题",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "under the weather",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "under the weather",
+        "meanings": [
+          {
+            "definition": "不舒服",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "every cloud has a silver lining",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "every cloud has a silver lining",
+        "meanings": [
+          {
+            "definition": "逆境中的希望",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "get out of hand",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "get out of hand",
+        "meanings": [
+          {
+            "definition": "失控",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "go down in flames",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "go down in flames",
+        "meanings": [
+          {
+            "definition": "惨败",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "1",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "1",
+        "meanings": [
+          {
+            "definition": "一",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          },
+          {
+            "definition": "单个单位",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "keep your chin up",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "keep one's chin up",
+        "meanings": [
+          {
+            "definition": "保持乐观",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "see eye to eye",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "see eye to eye",
+        "meanings": [
+          {
+            "definition": "完全同意",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "100",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "100",
+        "meanings": [
+          {
+            "definition": "一百",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "through thick and thin",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "through thick and thin",
+        "meanings": [
+          {
+            "definition": "无论如何",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "42",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "42",
+        "meanings": [
+          {
+            "definition": "四十二",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "1000000",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "1000000",
+        "meanings": [
+          {
+            "definition": "一百万",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "1/2",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "1/2",
+        "meanings": [
+          {
+            "definition": "二分之一",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"기호\" not in ko set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "번호 기호",
+            "partOfSpeech": "기호",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "3/4",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "3/4",
+        "meanings": [
+          {
+            "definition": "四分之三",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 95
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"기호\" not in ko set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "감탄 부호",
+            "partOfSpeech": "기호",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "5*6",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "5*6",
+        "meanings": [
+          {
+            "definition": "乘法表达式",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "2+2",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "2+2",
+        "meanings": [
+          {
+            "definition": "表达式",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"기호\" not in ko set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "앰퍼샌드",
+            "partOfSpeech": "기호",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "?",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "?",
+        "meanings": [
+          {
+            "definition": "问号",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "3.14",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "3.14",
+        "meanings": [
+          {
+            "definition": "数字，十进制",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "7",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "7",
+        "meanings": [
+          {
+            "definition": "七",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "1000",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "1000",
+        "meanings": [
+          {
+            "definition": "一千",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"기호\" not in ko set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "달러 기호",
+            "partOfSpeech": "기호",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "10-3",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "10-3",
+        "meanings": [
+          {
+            "definition": "十减三",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "time flies",
+        "category": "idiom",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "time flies",
+        "meanings": [
+          {
+            "definition": "时间过得快",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"記号\" not in ja set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "数字記号",
+            "partOfSpeech": "記号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"符号\" not in zh-CN set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "井号",
+            "partOfSpeech": "符号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "dièse",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"Symbol\" not in de set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "Nummernzeichen",
+            "partOfSpeech": "Symbol",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"símbolo\" not in es set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "almohadilla",
+            "partOfSpeech": "símbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "#",
+        "category": "number_expr",
+        "note": "POS \"simbolo\" not in it set",
+        "headword": "#",
+        "meanings": [
+          {
+            "definition": "cancelletto",
+            "partOfSpeech": "simbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"記号\" not in ja set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "感嘆符",
+            "partOfSpeech": "記号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"符号\" not in zh-CN set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "感叹号",
+            "partOfSpeech": "符号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "point d'exclamation",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"Symbol\" not in de set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "Ausrufezeichen",
+            "partOfSpeech": "Symbol",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"símbolo\" not in es set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "signo de exclamación",
+            "partOfSpeech": "símbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "!",
+        "category": "number_expr",
+        "note": "POS \"simbolo\" not in it set",
+        "headword": "!",
+        "meanings": [
+          {
+            "definition": "punto esclamativo",
+            "partOfSpeech": "simbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "...",
+        "category": "number_expr",
+        "note": "POS \"접두사\" not in ko set",
+        "headword": "...",
+        "meanings": [
+          {
+            "definition": "생략 부호",
+            "partOfSpeech": "접두사",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "@",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "@",
+        "meanings": [
+          {
+            "definition": "艾特符号",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "@",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "@",
+        "meanings": [
+          {
+            "definition": "arobase",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "%",
+        "category": "number_expr",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "%",
+        "meanings": [
+          {
+            "definition": "百分号",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"記号\" not in ja set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "ドル記号",
+            "partOfSpeech": "記号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"符号\" not in zh-CN set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "美元符号",
+            "partOfSpeech": "符号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "signe dollar",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"Symbol\" not in de set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "Dollarzeichen",
+            "partOfSpeech": "Symbol",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"símbolo\" not in es set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "símbolo de dólar",
+            "partOfSpeech": "símbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "$",
+        "category": "number_expr",
+        "note": "POS \"simbolo\" not in it set",
+        "headword": "$",
+        "meanings": [
+          {
+            "definition": "simbolo del dollaro",
+            "partOfSpeech": "simbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"記号\" not in ja set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "アンパサンド",
+            "partOfSpeech": "記号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"符号\" not in zh-CN set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "和号",
+            "partOfSpeech": "符号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"symbole\" not in fr set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "esperluette",
+            "partOfSpeech": "symbole",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"Symbol\" not in de set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "Et-Zeichen",
+            "partOfSpeech": "Symbol",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"símbolo\" not in es set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "ampersand",
+            "partOfSpeech": "símbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "&",
+        "category": "number_expr",
+        "note": "POS \"simbolo\" not in it set",
+        "headword": "&",
+        "meanings": [
+          {
+            "definition": "e commerciale",
+            "partOfSpeech": "simbolo",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "...",
+        "category": "number_expr",
+        "note": "POS \"句読点\" not in ja set",
+        "headword": "...",
+        "meanings": [
+          {
+            "definition": "三点リーダー",
+            "partOfSpeech": "句読点",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "...",
+        "category": "number_expr",
+        "note": "POS \"标点符号\" not in zh-CN set",
+        "headword": "...",
+        "meanings": [
+          {
+            "definition": "省略号",
+            "partOfSpeech": "标点符号",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "...",
+        "category": "number_expr",
+        "note": "POS \"signo de puntuación\" not in es set",
+        "headword": "...",
+        "meanings": [
+          {
+            "definition": "puntuación",
+            "partOfSpeech": "signo de puntuación",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "...",
+        "category": "number_expr",
+        "note": "POS \"punteggiatura\" not in it set",
+        "headword": "...",
+        "meanings": [
+          {
+            "definition": "puntini di sospensione",
+            "partOfSpeech": "punteggiatura",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "teh",
+        "category": "typo",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "teh",
+        "meanings": [
+          {
+            "definition": "定冠词，非正式拼写错误",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "询问身份的用语",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "give in",
+        "category": "multi_word",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "give in",
+        "meanings": [
+          {
+            "definition": "屈服，退让，投降",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "get along",
+        "category": "multi_word",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "get along",
+        "meanings": [
+          {
+            "definition": "相处融洽",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "come up",
+        "category": "multi_word",
+        "note": "POS \"表达式\" not in zh-CN set",
+        "headword": "come up",
+        "meanings": [
+          {
+            "definition": "出现,产生",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 90
+          },
+          {
+            "definition": "接近,前进",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 70
+          }
+        ]
+      }
+    ],
+    "sentence_rejected": [
+      {
+        "source": "en",
+        "target": "ko",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "이름을 묻는 질문",
+            "partOfSpeech": "표현",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "ja",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "名前を尋ねる表現",
+            "partOfSpeech": "表現",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "zh-CN",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "询问身份的用语",
+            "partOfSpeech": "表达式",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "fr",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "question pour demander l'identité",
+            "partOfSpeech": "expression",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "de",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "Frage nach der Identität",
+            "partOfSpeech": "Ausdruck",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "es",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "pregunta para pedir la identidad",
+            "partOfSpeech": "expresión",
+            "relevanceScore": 100
+          }
+        ]
+      },
+      {
+        "source": "en",
+        "target": "it",
+        "word": "What is your name",
+        "category": "sentence",
+        "note": "expected note=sentence or input-rejection, got meanings",
+        "headword": "What is your name",
+        "meanings": [
+          {
+            "definition": "espressione per chiedere l'identità",
+            "partOfSpeech": "espressione",
+            "relevanceScore": 100
+          }
+        ]
+      }
+    ],
+    "typo_handled": [],
+    "cross_script_purity": [],
+    "example_distribution": [],
+    "syn_no_paren": [],
+    "headword_preserved": [],
+    "sensitive_metaling": []
+  }
+}

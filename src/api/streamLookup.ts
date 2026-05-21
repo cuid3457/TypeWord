@@ -27,12 +27,30 @@ export interface PartialLookup {
  * defined in the system prompt. Matches 1:1 by index.
  */
 export function extractPartialLookup(accumulated: string): PartialLookup {
+  // v2 COMBINED_QUICK schema emits two arrays — "meanings_translated"
+  // (target-language) first, then "meanings" (canonical, source-language).
+  // For the typewriter display we ONLY want target-language content,
+  // otherwise the user briefly sees source-language definitions appear
+  // before the result event swaps them. Clip accumulated at the "meanings"
+  // key boundary if it appears (and after the meanings_translated array).
+  // v1 schema has no "meanings_translated" key, so the clip is a no-op there.
+  const tgtKeyIdx = accumulated.indexOf('"meanings_translated"');
+  const srcKeyIdx = accumulated.indexOf('"meanings"');
+  let scanRange = accumulated;
+  if (tgtKeyIdx >= 0 && srcKeyIdx > tgtKeyIdx) {
+    // v2 layout: limit definition / partOfSpeech extraction to the slice
+    // between meanings_translated and meanings.
+    scanRange = accumulated.slice(0, srcKeyIdx);
+  }
+
   const defRegex = /"definition"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/g;
   const posRegex = /"partOfSpeech"\s*:\s*"([^"\\]*(?:\\.[^"\\]*)*)"/g;
   const genderRegex = /"gender"\s*:\s*"(mf|[mfn])"/g;
 
-  const defs = [...accumulated.matchAll(defRegex)].map((m) => unescapeJson(m[1]));
-  const poss = [...accumulated.matchAll(posRegex)].map((m) => unescapeJson(m[1]));
+  const defs = [...scanRange.matchAll(defRegex)].map((m) => unescapeJson(m[1]));
+  const poss = [...scanRange.matchAll(posRegex)].map((m) => unescapeJson(m[1]));
+  // Gender is a canonical-only field (lives inside "meanings", not
+  // "meanings_translated"), so scan the FULL accumulated string for it.
   const genders = [...accumulated.matchAll(genderRegex)].map((m) => m[1] as 'm' | 'f' | 'n' | 'mf');
 
   // reading can be a string or an array of strings

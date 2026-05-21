@@ -11,19 +11,19 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
   },
 }));
 
-let mockPremium = false;
+let mockTier: 'free' | 'plus' | 'pro' = 'free';
 jest.mock('../subscriptionService', () => ({
-  isPremium: () => mockPremium,
+  isPremium: () => mockTier !== 'free',
+  getTier: () => mockTier,
 }));
 
 import {
   getDailyLimit,
   getRemaining,
-  getRemainingAll,
   consumeWord,
   canWatchRewardedAd,
   recordRewardedAdWatch,
-  type ReviewMode,
+  REWARDED_AD_BONUS_CARDS,
 } from '../reviewLimitService';
 
 function todayKey(): string {
@@ -31,220 +31,164 @@ function todayKey(): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function seedState(overrides: {
-  date?: string;
-  used?: Partial<Record<ReviewMode, number>>;
-  adsWatched?: number;
-} = {}) {
+function seedState(overrides: { date?: string; used?: number; bonusEarned?: number } = {}) {
   const state = {
     date: overrides.date ?? todayKey(),
-    used: {
-      flashcard: 0,
-      choice: 0,
-      dictation: 0,
-      context: 0,
-      ...overrides.used,
-    },
-    adsWatched: overrides.adsWatched ?? 0,
+    used: overrides.used ?? 0,
+    bonusEarned: overrides.bonusEarned ?? 0,
   };
   store['typeword.reviewLimits'] = JSON.stringify(state);
 }
 
 beforeEach(() => {
   store = {};
-  mockPremium = false;
+  mockTier = 'free';
 });
 
 describe('getDailyLimit', () => {
-  it('returns 50 for flashcard mode', () => {
-    expect(getDailyLimit('flashcard')).toBe(50);
+  it('returns 200 for free tier', () => {
+    expect(getDailyLimit('free')).toBe(200);
   });
 
-  it('returns 50 for choice mode', () => {
-    expect(getDailyLimit('choice')).toBe(50);
+  it('returns 500 for plus tier', () => {
+    expect(getDailyLimit('plus')).toBe(500);
   });
 
-  it('returns 30 for dictation mode', () => {
-    expect(getDailyLimit('dictation')).toBe(30);
+  it('returns Infinity for pro tier', () => {
+    expect(getDailyLimit('pro')).toBe(Infinity);
   });
 
-  it('returns 30 for context mode', () => {
-    expect(getDailyLimit('context')).toBe(30);
-  });
-
-  const modes: ReviewMode[] = ['flashcard', 'choice', 'dictation', 'context'];
-  it('returns a positive number for all modes', () => {
-    for (const mode of modes) {
-      expect(getDailyLimit(mode)).toBeGreaterThan(0);
-    }
+  it('uses current tier when called with no argument', () => {
+    mockTier = 'plus';
+    expect(getDailyLimit()).toBe(500);
   });
 });
 
 describe('getRemaining', () => {
-  it('returns Infinity for premium users', async () => {
-    mockPremium = true;
-    const remaining = await getRemaining('flashcard');
-    expect(remaining).toBe(Infinity);
+  it('returns Infinity for pro users', async () => {
+    mockTier = 'pro';
+    expect(await getRemaining()).toBe(Infinity);
   });
 
-  it('returns full limit when no words consumed', async () => {
-    const remaining = await getRemaining('flashcard');
-    expect(remaining).toBe(50);
+  it('returns full free limit when nothing consumed', async () => {
+    expect(await getRemaining()).toBe(200);
   });
 
-  it('returns correct remaining after some usage', async () => {
-    seedState({ used: { flashcard: 10 } });
-    const remaining = await getRemaining('flashcard');
-    expect(remaining).toBe(40);
+  it('returns full plus limit when nothing consumed', async () => {
+    mockTier = 'plus';
+    expect(await getRemaining()).toBe(500);
+  });
+
+  it('decrements based on used', async () => {
+    seedState({ used: 50 });
+    expect(await getRemaining()).toBe(150);
   });
 
   it('returns 0 when limit exhausted', async () => {
-    seedState({ used: { dictation: 30 } });
-    const remaining = await getRemaining('dictation');
-    expect(remaining).toBe(0);
+    seedState({ used: 200 });
+    expect(await getRemaining()).toBe(0);
   });
 
-  it('returns 0 when usage exceeds limit', async () => {
-    seedState({ used: { dictation: 35 } });
-    const remaining = await getRemaining('dictation');
-    expect(remaining).toBe(0);
-  });
-});
-
-describe('getRemainingAll', () => {
-  it('returns Infinity for all modes when premium', async () => {
-    mockPremium = true;
-    const result = await getRemainingAll();
-    expect(result.flashcard).toBe(Infinity);
-    expect(result.choice).toBe(Infinity);
-    expect(result.dictation).toBe(Infinity);
-    expect(result.context).toBe(Infinity);
+  it('includes ad-earned bonus in remaining', async () => {
+    seedState({ used: 200, bonusEarned: 100 });
+    expect(await getRemaining()).toBe(100);
   });
 
-  it('returns full limits when nothing consumed', async () => {
-    const result = await getRemainingAll();
-    expect(result.flashcard).toBe(50);
-    expect(result.choice).toBe(50);
-    expect(result.dictation).toBe(30);
-    expect(result.context).toBe(30);
-  });
-
-  it('returns correct remaining for partially consumed modes', async () => {
-    seedState({ used: { flashcard: 20, dictation: 5 } });
-    const result = await getRemainingAll();
-    expect(result.flashcard).toBe(30);
-    expect(result.choice).toBe(50);
-    expect(result.dictation).toBe(25);
-    expect(result.context).toBe(30);
+  it('migrates legacy per-mode used record into unified count', async () => {
+    store['typeword.reviewLimits'] = JSON.stringify({
+      date: todayKey(),
+      used: { flashcard: 30, choice: 20, dictation: 10 },
+      adsWatched: 0,
+    });
+    expect(await getRemaining()).toBe(200 - 60);
   });
 });
 
 describe('consumeWord', () => {
   it('allows consumption when within limit', async () => {
-    const result = await consumeWord('flashcard');
+    const result = await consumeWord();
     expect(result.allowed).toBe(true);
-    expect(result.remaining).toBe(49);
+    expect(result.remaining).toBe(199);
   });
 
-  it('decrements remaining properly on successive calls', async () => {
-    await consumeWord('flashcard');
-    const result = await consumeWord('flashcard');
-    expect(result.allowed).toBe(true);
-    expect(result.remaining).toBe(48);
+  it('decrements on successive calls', async () => {
+    await consumeWord();
+    const result = await consumeWord();
+    expect(result.remaining).toBe(198);
   });
 
-  it('returns allowed: false when limit exhausted', async () => {
-    seedState({ used: { flashcard: 50 } });
-    const result = await consumeWord('flashcard');
+  it('blocks consumption when limit exhausted', async () => {
+    seedState({ used: 200 });
+    const result = await consumeWord();
     expect(result.allowed).toBe(false);
     expect(result.remaining).toBe(0);
   });
 
-  it('premium users are always allowed with Infinity remaining', async () => {
-    mockPremium = true;
-    const result = await consumeWord('flashcard');
+  it('pro users are always allowed with Infinity remaining', async () => {
+    mockTier = 'pro';
+    const result = await consumeWord();
     expect(result.allowed).toBe(true);
     expect(result.remaining).toBe(Infinity);
   });
 
-  it('does not modify stored state for premium users', async () => {
-    mockPremium = true;
-    await consumeWord('flashcard');
-    mockPremium = false;
-    const remaining = await getRemaining('flashcard');
-    expect(remaining).toBe(50);
+  it('plus users get 500 limit', async () => {
+    mockTier = 'plus';
+    seedState({ used: 499 });
+    const result = await consumeWord();
+    expect(result.allowed).toBe(true);
+    const blocked = await consumeWord();
+    expect(blocked.allowed).toBe(false);
   });
 
-  it('tracks modes independently', async () => {
-    seedState({ used: { flashcard: 50 } });
-    const flashResult = await consumeWord('flashcard');
-    const choiceResult = await consumeWord('choice');
-    expect(flashResult.allowed).toBe(false);
-    expect(choiceResult.allowed).toBe(true);
-  });
-});
-
-describe('canWatchRewardedAd', () => {
-  it('returns true when no ads watched today', async () => {
-    const result = await canWatchRewardedAd();
-    expect(result).toBe(true);
-  });
-
-  it('returns false after one ad watched', async () => {
-    seedState({ adsWatched: 1 });
-    const result = await canWatchRewardedAd();
-    expect(result).toBe(false);
-  });
-
-  it('returns false for premium users', async () => {
-    mockPremium = true;
-    const result = await canWatchRewardedAd();
-    expect(result).toBe(false);
+  it('mode argument is ignored (unified counter)', async () => {
+    await consumeWord('dictation');
+    await consumeWord('context');
+    const result = await consumeWord('flashcard');
+    expect(result.remaining).toBe(197);
   });
 });
 
-describe('recordRewardedAdWatch', () => {
-  it('resets all usage counts', async () => {
-    seedState({ used: { flashcard: 30, choice: 20, dictation: 15, context: 10 } });
-    await recordRewardedAdWatch();
-    const remaining = await getRemainingAll();
-    expect(remaining.flashcard).toBe(50);
-    expect(remaining.choice).toBe(50);
-    expect(remaining.dictation).toBe(30);
-    expect(remaining.context).toBe(30);
+describe('rewarded ads', () => {
+  it('free user can always watch (unlimited per day)', async () => {
+    expect(await canWatchRewardedAd()).toBe(true);
+    seedState({ bonusEarned: 500 });
+    expect(await canWatchRewardedAd()).toBe(true);
   });
 
-  it('increments adsWatched', async () => {
-    await recordRewardedAdWatch();
-    const canWatch = await canWatchRewardedAd();
-    expect(canWatch).toBe(false);
+  it('paid users cannot watch ads', async () => {
+    mockTier = 'plus';
+    expect(await canWatchRewardedAd()).toBe(false);
+    mockTier = 'pro';
+    expect(await canWatchRewardedAd()).toBe(false);
   });
 
-  it('increments adsWatched from existing count', async () => {
-    seedState({ adsWatched: 0, used: { flashcard: 50 } });
+  it('each watch grants +REWARDED_AD_BONUS_CARDS', async () => {
+    seedState({ used: 200 });
+    expect(await getRemaining()).toBe(0);
     await recordRewardedAdWatch();
-    const canWatch = await canWatchRewardedAd();
-    expect(canWatch).toBe(false);
+    expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS);
+  });
+
+  it('multiple watches stack', async () => {
+    seedState({ used: 200 });
+    await recordRewardedAdWatch();
+    await recordRewardedAdWatch();
+    expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS * 2);
   });
 });
 
 describe('day boundary reset', () => {
   it('returns fresh state when stored date is yesterday', async () => {
-    seedState({ date: '2020-01-01', used: { flashcard: 50, choice: 50, dictation: 30, context: 30 }, adsWatched: 1 });
-    const remaining = await getRemaining('flashcard');
-    expect(remaining).toBe(50);
+    seedState({ date: '2020-01-01', used: 200, bonusEarned: 500 });
+    expect(await getRemaining()).toBe(200);
   });
 
-  it('resets adsWatched on new day', async () => {
-    seedState({ date: '2020-01-01', adsWatched: 1 });
-    const canWatch = await canWatchRewardedAd();
-    expect(canWatch).toBe(true);
-  });
-
-  it('allows consumption after day boundary', async () => {
-    seedState({ date: '2020-01-01', used: { flashcard: 50 } });
-    const result = await consumeWord('flashcard');
+  it('resets bonus on new day', async () => {
+    seedState({ date: '2020-01-01', bonusEarned: 300 });
+    seedState({ date: '2020-01-01', used: 0, bonusEarned: 300 });
+    // After day rollover, bonus should be cleared
+    const result = await consumeWord();
     expect(result.allowed).toBe(true);
-    expect(result.remaining).toBe(49);
+    expect(result.remaining).toBe(199);
   });
 });

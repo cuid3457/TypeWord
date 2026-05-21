@@ -1,0 +1,987 @@
+[
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "de",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "en",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "es",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "fr",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "it",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "아침",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e0:marker_off(\"먹는다\"≠아침)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "en",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "es",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "fr",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "it",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "ja",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "저녁",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e1:marker_off(\"먹었다\"≠저녁)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "년",
+    "lang": "es",
+    "issues": [
+      "G4:m[1]:register(\"mujer (término vulgar)\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "공부",
+    "lang": "zh-CN",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "de",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "en",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "es",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "fr",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "it",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "ja",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "안",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e1:marker_off(\"에\"≠안)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "de",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "en",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "es",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "fr",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "it",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "ja",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "역",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e1:marker_off(\"만났다\"≠역)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "de",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "en",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "es",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "fr",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "it",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "ja",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "팔",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e0:marker_off(\"판다\"≠팔)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "개",
+    "lang": "de",
+    "issues": [
+      "G4:m[1]:register(\"Slang, beleidigend\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "개",
+    "lang": "en",
+    "issues": [
+      "G4:m[1]:register(\"slang, derogatory\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-1",
+    "word": "개",
+    "lang": "it",
+    "issues": [
+      "G4:m[1]:register(\"slang, dispregiativo\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "답",
+    "lang": "de",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "답",
+    "lang": "zh-CN",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "어리다",
+    "lang": "ja",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "만약",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"假使\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "de",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "en",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "es",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "fr",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "it",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "ja",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "코트",
+    "lang": "zh-CN",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-2",
+    "word": "텔레비전",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"TV\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "면접",
+    "lang": "it",
+    "issues": [
+      "G4:m[0]:register(\"colloquio, intervista\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "걱정",
+    "lang": "zh-CN",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "부르다",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"叫다\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "de",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "en",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "es",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "fr",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "it",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "ja",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "김",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e1:marker_off(\"굽다\"≠김)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "de",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "en",
+    "issues": [
+      "G4:m[1]:register(\"penis, slang\")",
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "es",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "fr",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "it",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "ja",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "고추",
+    "lang": "zh-CN",
+    "issues": [
+      "G10:e1:borderline(19)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "출발",
+    "lang": "zh-CN",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "de",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "en",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "es",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "fr",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "it",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "ja",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "터미널",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e0:marker_off(\"기다렸다\"≠터미널)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "방송",
+    "lang": "en",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "방송",
+    "lang": "zh-CN",
+    "issues": [
+      "G14:duplicate_meanings"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "달러",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"USD\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "미터",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"m\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "de",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "en",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "es",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "fr",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "it",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "ja",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "킬로미터",
+    "lang": "zh-CN",
+    "issues": [
+      "G12:non_ko_script(\"km\")"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "de",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "en",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "es",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "fr",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "it",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "ja",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  },
+  {
+    "slug": "topik-1-part-3",
+    "word": "도",
+    "lang": "zh-CN",
+    "issues": [
+      "G8:e2:marker_off(\"이다\"≠도)"
+    ]
+  }
+]

@@ -1,0 +1,355 @@
+[
+  {
+    "word": "감사합니다",
+    "case": "set_expression",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1207,
+        "out": 14
+      }
+    },
+    "new": null,
+    "note": "register: should reject 고맙다"
+  },
+  {
+    "word": "죄송합니다",
+    "case": "set_expression",
+    "old": {
+      "synonyms": [
+        "미안합니다"
+      ],
+      "antonyms": [],
+      "tokens": {
+        "in": 1208,
+        "out": 18
+      }
+    },
+    "new": null,
+    "note": "register: should reject 미안하다"
+  },
+  {
+    "word": "너",
+    "case": "sino_monosyllable",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1211,
+        "out": 14
+      }
+    },
+    "new": null,
+    "note": "register/peer: should reject 당신/자네; antonym=[]"
+  },
+  {
+    "word": "그것",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 14
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 14
+      }
+    },
+    "note": "peer: should reject 이것/저것 as antonym"
+  },
+  {
+    "word": "여기",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [
+        "이곳",
+        "이 자리"
+      ],
+      "antonyms": [
+        "저기"
+      ],
+      "tokens": {
+        "in": 1207,
+        "out": 18
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2451,
+        "out": 14
+      }
+    },
+    "note": "peer: should reject 거기/저기 as antonym"
+  },
+  {
+    "word": "손",
+    "case": "sino_monosyllable",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1207,
+        "out": 14
+      }
+    },
+    "new": null,
+    "note": "part-whole: should reject 팔/주먹/손가락 as syn"
+  },
+  {
+    "word": "다리",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1208,
+        "out": 14
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2452,
+        "out": 9
+      }
+    },
+    "note": "part-whole: should reject 발/무릎 as syn"
+  },
+  {
+    "word": "입",
+    "case": "sino_monosyllable",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1207,
+        "out": 14
+      }
+    },
+    "new": null,
+    "note": "part-whole: should reject 입술/혀 as syn"
+  },
+  {
+    "word": "시계",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1209,
+        "out": 14
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2453,
+        "out": 9
+      }
+    },
+    "note": "hyponym: should reject 손목시계/벽시계"
+  },
+  {
+    "word": "바지",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [
+        "팬츠"
+      ],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 12
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 9
+      }
+    },
+    "note": "hyponym: should reject 청바지/반바지"
+  },
+  {
+    "word": "안녕",
+    "case": "set_expression",
+    "old": {
+      "synonyms": [
+        "안녕하세요"
+      ],
+      "antonyms": [],
+      "tokens": {
+        "in": 1207,
+        "out": 17
+      }
+    },
+    "new": null,
+    "note": "loanword: should reject 하이"
+  },
+  {
+    "word": "양말",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 9
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 9
+      }
+    },
+    "note": "loanword: should reject 삭스"
+  },
+  {
+    "word": "방향",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [
+        "방위",
+        "쪽"
+      ],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 20
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 14
+      }
+    },
+    "note": "fabrication: should reject 이방향"
+  },
+  {
+    "word": "안경",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [
+        "안경테"
+      ],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 13
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 14
+      }
+    },
+    "note": "fabrication: should reject 빛안경"
+  },
+  {
+    "word": "얼굴",
+    "case": "simple_word",
+    "old": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 1210,
+        "out": 9
+      }
+    },
+    "new": {
+      "synonyms": [],
+      "antonyms": [],
+      "tokens": {
+        "in": 2454,
+        "out": 9
+      }
+    },
+    "note": "slang: should reject 얼짱"
+  },
+  {
+    "word": "크다",
+    "case": "verb_adj_da",
+    "old": {
+      "synonyms": [
+        "거대하다",
+        "거창하다"
+      ],
+      "antonyms": [
+        "작다"
+      ],
+      "tokens": {
+        "in": 1210,
+        "out": 20
+      }
+    },
+    "new": {
+      "synonyms": [
+        "거대하다",
+        "거창하다"
+      ],
+      "antonyms": [
+        "작다"
+      ],
+      "tokens": {
+        "in": 2454,
+        "out": 20
+      }
+    },
+    "note": "positive control: 작다 is legitimate ant"
+  },
+  {
+    "word": "행복하다",
+    "case": "verb_adj_da",
+    "old": {
+      "synonyms": [
+        "기쁘다",
+        "즐겁다"
+      ],
+      "antonyms": [
+        "슬프다",
+        "불행하다"
+      ],
+      "tokens": {
+        "in": 1213,
+        "out": 32
+      }
+    },
+    "new": {
+      "synonyms": [
+        "기쁘다",
+        "즐겁다"
+      ],
+      "antonyms": [
+        "슬프다",
+        "불행하다"
+      ],
+      "tokens": {
+        "in": 2457,
+        "out": 32
+      }
+    },
+    "note": "positive control: 슬프다 is legitimate ant"
+  }
+]

@@ -1,4 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
@@ -57,6 +58,51 @@ export function ReviewCardContent({
   const colorScheme = useColorScheme();
   const meanings = current.result.meanings ?? [];
 
+  // Dictation visuals: render the answer as two pieces — typed prefix
+  // (natural letter spacing) and remaining-blanks suffix (extra letterSpacing
+  // so blanks read as discrete cells). Both pieces sit in a centered flex-row,
+  // so the whole composition stays centered as the typed prefix grows. A
+  // synthetic blinking cursor renders between the two pieces. A real TextInput
+  // is overlaid invisibly to capture keyboard input.
+  const dictationInputRef = useRef<TextInput>(null);
+  const [dictationFocused, setDictationFocused] = useState(false);
+  const [dictationCursorOn, setDictationCursorOn] = useState(true);
+  useEffect(() => {
+    if (!dictationFocused) return;
+    setDictationCursorOn(true);
+    const id = setInterval(() => setDictationCursorOn((c) => !c), 530);
+    return () => clearInterval(id);
+  }, [dictationFocused]);
+  const dictationSplit = useMemo(() => {
+    if (!current?.word) return { pre: '', post: '', totalLetters: 0 };
+    const wordChars = Array.from(current.word.normalize('NFC'));
+    const isLetter = (ch: string) => /[\p{L}\p{N}]/u.test(ch);
+    const typedLetters = Array.from(dictationInput.normalize('NFC')).filter(isLetter);
+    const totalLetters = wordChars.filter(isLetter).length;
+    let consumed = 0;
+    let splitIdx = wordChars.length;
+    for (let i = 0; i < wordChars.length; i += 1) {
+      if (isLetter(wordChars[i])) {
+        if (consumed < typedLetters.length) {
+          consumed += 1;
+        } else {
+          splitIdx = i;
+          break;
+        }
+      }
+    }
+    let lp = 0;
+    const pre = wordChars
+      .slice(0, splitIdx)
+      .map((ch) => (isLetter(ch) ? typedLetters[lp++] : ch))
+      .join('');
+    const post = wordChars
+      .slice(splitIdx)
+      .map((ch) => (isLetter(ch) ? '_' : ch))
+      .join('');
+    return { pre, post, totalLetters };
+  }, [current?.word, dictationInput]);
+
   const renderWordHeader = () => (
     <View className="items-center">
       {/* Word stretches to full width so long compounds (Krankenversicherung,
@@ -90,16 +136,19 @@ export function ReviewCardContent({
 
   const renderMeanings = () => (
     <View className="mt-6">
-      {meanings.map((m, i) => (
-        <View key={i} className="mb-2 rounded-xl bg-gray-50 p-3 dark:bg-gray-900">
-          {m.partOfSpeech ? (
-            <Text className="text-xs text-gray-500">{formatPOS(m.partOfSpeech, m.gender, i18n.language)}</Text>
-          ) : null}
-          <Text className="mt-1 text-base text-black dark:text-white">
-            {meanings.length > 1 ? `${i + 1}. ` : ''}{m.definition}
-          </Text>
-        </View>
-      ))}
+      {meanings.map((m, i) => {
+        const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+        return (
+          <View key={i} className="mb-2 rounded-xl bg-gray-50 p-3 dark:bg-gray-900">
+            {marker ? (
+              <Text className="text-xs text-gray-500">{marker}</Text>
+            ) : null}
+            <Text className="mt-1 text-base text-black dark:text-white">
+              {meanings.length > 1 ? `${i + 1}. ` : ''}{m.definition}
+            </Text>
+          </View>
+        );
+      })}
     </View>
   );
 
@@ -132,13 +181,7 @@ export function ReviewCardContent({
             </View>
             {e.translation ? (
               <Text className="mt-1 text-sm text-gray-500">
-                {e.translation.includes('**')
-                  ? e.translation.split('**').map((seg, si) =>
-                      si % 2 === 1
-                        ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                        : <Text key={si}>{seg}</Text>
-                    )
-                  : e.translation}
+                {e.translation.replace(/\*\*/g, '')}
               </Text>
             ) : null}
           </View>
@@ -189,13 +232,7 @@ export function ReviewCardContent({
             return (
               <View className="mb-3 rounded-xl bg-gray-50 p-4 dark:bg-gray-900">
                 <Text className="text-sm text-gray-500">
-                  {ex.translation.includes('**')
-                    ? ex.translation.split('**').map((seg, si) =>
-                        si % 2 === 1
-                          ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                          : <Text key={si}>{seg}</Text>
-                      )
-                    : ex.translation}
+                  {ex.translation.replace(/\*\*/g, '')}
                 </Text>
               </View>
             );
@@ -290,7 +327,8 @@ export function ReviewCardContent({
     case 'choice':
       return <View>{renderWordHeader()}{renderChoices()}</View>;
 
-    case 'dictation':
+    case 'dictation': {
+      const inputDisabled = dictationChecked || dictationListening;
       return (
         <View>
           <View className="items-center">
@@ -303,20 +341,75 @@ export function ReviewCardContent({
           </View>
           <View className="mt-6">
             <View className="flex-row items-center gap-2">
-              <TextInput
-                value={dictationInput}
-                onChangeText={setDictationInput}
-                editable={!dictationChecked && !dictationListening}
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder={dictationListening ? t('review.speaking_listening') : t('review.dictation_placeholder')}
-                placeholderTextColor="#9ca3af"
-                returnKeyType="done"
-                onSubmitEditing={() => {
-                  if (!dictationChecked && dictationInput.trim()) setDictationChecked(true);
-                }}
-                className="flex-1 rounded-xl border border-gray-300 px-4 py-3 text-center text-xl text-black dark:border-gray-700 dark:text-white"
-              />
+              {/* Centered "typed-prefix · cursor · remaining-blanks" row.
+                  Pre uses natural letter spacing so typed letters look normal;
+                  post uses extra letterSpacing so blanks read as discrete cells.
+                  An invisible TextInput overlay captures all keyboard input. */}
+              <Pressable
+                onPress={() => dictationInputRef.current?.focus()}
+                disabled={inputDisabled}
+                className="flex-1 rounded-xl border border-gray-300 dark:border-gray-700"
+                style={{ minHeight: 50, position: 'relative', justifyContent: 'center' }}
+              >
+                {dictationListening ? (
+                  <Text className="text-center text-xl text-gray-400" style={{ paddingVertical: 12 }}>
+                    {t('review.speaking_listening')}
+                  </Text>
+                ) : (
+                  <>
+                    <View
+                      className="flex-row items-center justify-center"
+                      style={{ paddingHorizontal: 16, paddingVertical: 12 }}
+                      pointerEvents="none"
+                    >
+                      <Text className="text-xl text-black dark:text-white">{dictationSplit.pre}</Text>
+                      {dictationFocused && !inputDisabled ? (
+                        <Text
+                          className="text-xl text-black dark:text-white"
+                          style={{ opacity: dictationCursorOn ? 1 : 0, marginHorizontal: 1 }}
+                        >
+                          |
+                        </Text>
+                      ) : null}
+                      <Text
+                        className="text-xl text-gray-300 dark:text-gray-600"
+                        style={{ letterSpacing: 6 }}
+                      >
+                        {dictationSplit.post}
+                      </Text>
+                    </View>
+                    <TextInput
+                      ref={dictationInputRef}
+                      value={dictationInput}
+                      onChangeText={(text) => {
+                        const newLetters = Array.from(text.normalize('NFC')).filter((c) =>
+                          /[\p{L}\p{N}]/u.test(c),
+                        );
+                        if (newLetters.length > dictationSplit.totalLetters) return;
+                        setDictationInput(text);
+                      }}
+                      onFocus={() => setDictationFocused(true)}
+                      onBlur={() => setDictationFocused(false)}
+                      editable={!inputDisabled}
+                      autoCapitalize="none"
+                      autoCorrect={false}
+                      spellCheck={false}
+                      returnKeyType="done"
+                      onSubmitEditing={() => {
+                        if (!dictationChecked && dictationInput.trim()) setDictationChecked(true);
+                      }}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        opacity: 0,
+                      }}
+                    />
+                  </>
+                )}
+              </Pressable>
               <Pressable
                 onPress={onDictationMicPress}
                 disabled={dictationChecked}
@@ -389,6 +482,7 @@ export function ReviewCardContent({
           {dictationChecked ? renderMeanings() : null}
         </View>
       );
+    }
 
     case 'fill_blank': {
       // Show example sentence with the target word replaced by an underline
@@ -411,16 +505,10 @@ export function ReviewCardContent({
       const cleanSentence = ex.sentence.replace(/\*\*/g, '');
       // Translation shown above choices as a hint so the learner can derive
       // the missing word from meaning rather than guess from collocation
-      // alone. Preserve `**…**` markers as a mint highlight so the target
-      // word's translation pops within the surrounding sentence.
-      const renderTranslationHighlighted = (text: string) =>
-        text.includes('**')
-          ? text.split('**').map((seg, si) =>
-              si % 2 === 1
-                ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                : <Text key={si}>{seg}</Text>
-            )
-          : text;
+      // Translation is plain prose (markers were dropped from the prompt
+      // because target morphology often differs enough to break alignment).
+      // Existing data may still contain stray ** chars — strip them.
+      const renderTranslationHighlighted = (text: string) => text.replace(/\*\*/g, '');
       // After answering, fill the blank in-place with the correct word and
       // highlight it. Avoids a redundant "original sentence + translation"
       // panel below the choices.

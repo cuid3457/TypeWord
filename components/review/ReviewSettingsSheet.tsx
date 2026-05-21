@@ -1,6 +1,6 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useMemo, useCallback, useState } from 'react';
-import { Dimensions, Modal, Pressable, ScrollView, Text, View } from 'react-native';
+import { Dimensions, Modal, Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { type SharedValue, runOnJS, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -24,6 +24,8 @@ interface Props {
   setReviewMode: (m: ReviewMode) => void;
   sessionCount: number;
   setSessionCount: (fn: (c: number) => number) => void;
+  autoPlayTts: boolean;
+  setAutoPlayTts: (v: boolean) => void;
   settingsRemaining: Record<string, number>;
   onDismiss: () => void;
   onStart: () => void;
@@ -38,6 +40,8 @@ export function ReviewSettingsSheet({
   setReviewMode,
   sessionCount,
   setSessionCount,
+  autoPlayTts,
+  setAutoPlayTts,
   settingsRemaining,
   onDismiss,
   onStart,
@@ -159,6 +163,25 @@ export function ReviewSettingsSheet({
                     color="#9ca3af"
                   />
                 </Pressable>
+                {/* Auto-play TTS toggle — affects only review cards.
+                    Default-on preserves prior behavior; user can disable
+                    to study silently (e.g. in public). */}
+                <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700">
+                  <View className="flex-row items-center">
+                    <MaterialIcons name="volume-up" size={22} color="#6b7280" />
+                    <Text className="ml-3 text-base text-black dark:text-white">
+                      {t('review.auto_play_tts')}
+                    </Text>
+                  </View>
+                  <Switch
+                    value={autoPlayTts}
+                    onValueChange={setAutoPlayTts}
+                    trackColor={{ false: '#d1d5db', true: '#2EC4A5' }}
+                    thumbColor={autoPlayTts ? '#2EC4A5' : '#f4f4f5'}
+                    ios_backgroundColor="#d1d5db"
+                  />
+                </View>
+
                 {modeListOpen ? (
                   // Self-scrolling list — only the 6 mode rows move when
                   // the user drags inside this box. Order section + mode
@@ -174,7 +197,7 @@ export function ReviewSettingsSheet({
                   >
                     {MODE_ORDER.map((m) => {
                       const rem = settingsRemaining[m] ?? Infinity;
-                      const limit = getDailyLimit(m as LimitReviewMode);
+                      const limit = getDailyLimit();
                       const isSelected = reviewMode === m;
                       return (
                         <Pressable

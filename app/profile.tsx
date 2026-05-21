@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Linking,
+  Modal,
   Platform,
   Pressable,
   ScrollView,
@@ -16,18 +17,27 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppModal } from '@/components/app-modal';
+import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { Toast } from '@/components/toast';
+import { getMyProfile, type MyProfile } from '@src/services/friendsService';
 import {
   getEmail,
   getAuthProvider,
   changePassword,
   signOut,
   deleteAccount,
+  reauthAndDeleteAccount,
+  signInWithApple,
+  signInWithGoogle,
+  REAUTH_REQUIRED,
   ensureSession,
+  isApplePrivateRelay,
   type AuthProvider,
+  type DeletionFeedback,
 } from '@src/services/authService';
 import { syncAll } from '@src/services/syncService';
 import { clearLocalData } from '@src/db';
+import { clearUserSettings } from '@src/storage/userSettings';
 import { usePremium } from '@src/hooks/usePremium';
 
 const SUBSCRIPTION_URL = Platform.select({
@@ -35,6 +45,19 @@ const SUBSCRIPTION_URL = Platform.select({
   android: 'https://play.google.com/store/account/subscriptions',
   default: 'https://play.google.com/store/account/subscriptions',
 }) as string;
+
+// Stable churn-feedback keys. Order is rendering order; localized labels
+// come from `auth.deletion_reason_<key>` in each locale.
+const DELETION_REASONS = [
+  'no_longer_needed',
+  'too_difficult',
+  'too_expensive',
+  'missing_features',
+  'switching',
+  'bugs',
+  'privacy',
+  'other',
+] as const;
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -48,11 +71,46 @@ export default function ProfileScreen() {
   const [logoutModal, setLogoutModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [subscriptionWarningModal, setSubscriptionWarningModal] = useState(false);
+  // Churn-feedback step: shown between the subscription warning (if premium)
+  // and the final delete confirmation. Reasons are stable string keys so
+  // the analytics table stays language-agnostic. Feedback persists across
+  // the delete modal AND the reauth modal — both call deleteAccount() and
+  // both should attach the same feedback payload.
+  const [feedbackModal, setFeedbackModal] = useState(false);
+  const [feedbackReasons, setFeedbackReasons] = useState<Set<string>>(new Set());
+  const [feedbackComment, setFeedbackComment] = useState('');
+  const [reauthModal, setReauthModal] = useState(false);
+  const [reauthPassword, setReauthPassword] = useState('');
+  const [reauthBusy, setReauthBusy] = useState(false);
+  const [reauthError, setReauthError] = useState<string | null>(null);
+  const [myProfile, setMyProfile] = useState<MyProfile | null>(null);
+  const [showProfileSetup, setShowProfileSetup] = useState(false);
   const premium = usePremium();
+
+  const reloadProfile = () => {
+    getMyProfile().then(setMyProfile).catch(() => setMyProfile(null));
+  };
+
+  // Builds the feedback payload from the modal state. Returns undefined
+  // when the user skipped (no reasons, no comment) so the edge function
+  // still inserts a measurable skip row.
+  const buildFeedback = (): DeletionFeedback | undefined => {
+    const reasons = [...feedbackReasons];
+    const comment = feedbackComment.trim();
+    if (reasons.length === 0 && comment.length === 0) {
+      return { was_premium: premium };
+    }
+    return {
+      reasons,
+      comment: comment || undefined,
+      was_premium: premium,
+    };
+  };
 
   useEffect(() => {
     getEmail().then(setUserEmail);
     getAuthProvider().then(setProvider);
+    reloadProfile();
   }, []);
 
   const handleChangePassword = async () => {
@@ -100,22 +158,48 @@ export default function ProfileScreen() {
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
           keyboardShouldPersistTaps="handled"
         >
-          {/* Header */}
-          <Pressable onPress={() => router.back()} className="mb-4 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
-          </Pressable>
+          {/* Header — matches the standard stack-page pattern (h-11 row,
+              arrow + small title on the same line). */}
+          <View className="h-11 flex-row items-center">
+            <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
+              <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            </Pressable>
+            <Text className="text-base font-semibold text-black dark:text-white">
+              {t('auth.profile')}
+            </Text>
+          </View>
 
-          <Text className="text-3xl font-bold text-black dark:text-white">
-            {t('auth.profile')}
-          </Text>
+          {/* Profile (display name + username) — tap to edit */}
+          {myProfile && !myProfile.isAnonymous ? (
+            <Pressable
+              onPress={() => setShowProfileSetup(true)}
+              className="mt-6 flex-row items-center justify-between rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
+            >
+              <View className="flex-1">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  {t('profile_setup.display_name_label')}
+                </Text>
+                <Text className="mt-1 text-base text-black dark:text-white" numberOfLines={1}>
+                  {myProfile.displayName || t('dashboard.unnamed')}
+                </Text>
+                <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  {t('profile_setup.username_label')}
+                </Text>
+                <Text className="mt-1 text-base text-black dark:text-white" numberOfLines={1}>
+                  {myProfile.username ? `@${myProfile.username}` : '—'}
+                </Text>
+              </View>
+              <MaterialIcons name="edit" size={20} color="#9ca3af" />
+            </Pressable>
+          ) : null}
 
           {/* Email display */}
-          <View className="mt-6 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
+          <View className="mt-4 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
             <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
               {t('auth.email')}
             </Text>
             <Text className="mt-1 text-base text-black dark:text-white">
-              {userEmail ?? '—'}
+              {isApplePrivateRelay(userEmail) ? t('auth.apple_private_email') : (userEmail ?? '—')}
             </Text>
           </View>
 
@@ -127,9 +211,11 @@ export default function ProfileScreen() {
             <Text className="mt-1 text-base text-black dark:text-white">
               {provider === 'google'
                 ? t('auth.signed_in_with_google')
-                : provider === 'email'
-                  ? t('auth.signed_in_with_email')
-                  : '—'}
+                : provider === 'apple'
+                  ? t('auth.signed_in_with_apple')
+                  : provider === 'email'
+                    ? t('auth.signed_in_with_email')
+                    : '—'}
             </Text>
           </View>
 
@@ -257,7 +343,7 @@ export default function ProfileScreen() {
           <Pressable
             onPress={() => {
               if (premium) setSubscriptionWarningModal(true);
-              else setDeleteModal(true);
+              else setFeedbackModal(true);
             }}
             className="mt-4 items-center py-3"
           >
@@ -298,11 +384,114 @@ export default function ProfileScreen() {
         confirmText={t('auth.continue_delete')}
         onConfirm={() => {
           setSubscriptionWarningModal(false);
-          setDeleteModal(true);
+          setFeedbackModal(true);
         }}
         onClose={() => setSubscriptionWarningModal(false)}
         destructive
       />
+
+      {/* Churn-feedback step. Skipping advances to the final confirm with
+          undefined feedback — the edge function still inserts a row with
+          empty reasons so we can measure the skip rate.
+
+          KeyboardAvoidingView inside Modal: the outer activity's
+          adjustResize doesn't apply to RN's Modal overlay, so the
+          textarea would otherwise be obscured by the keyboard. Wrapping
+          with padding-behavior centers the dialog above the keyboard. */}
+      <Modal
+        visible={feedbackModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setFeedbackModal(false)}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1 }}
+        >
+        <Pressable
+          onPress={() => setFeedbackModal(false)}
+          className="flex-1 items-center justify-center bg-black/50 px-6"
+        >
+          <Pressable
+            onPress={(e) => e.stopPropagation?.()}
+            className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+          >
+            <Text className="text-lg font-bold text-black dark:text-white">
+              {t('auth.deletion_feedback_title')}
+            </Text>
+            <Text className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+              {t('auth.deletion_feedback_message')}
+            </Text>
+
+            <ScrollView className="mt-4 max-h-72">
+              {DELETION_REASONS.map((key) => {
+                const selected = feedbackReasons.has(key);
+                return (
+                  <Pressable
+                    key={key}
+                    onPress={() => {
+                      setFeedbackReasons((prev) => {
+                        const next = new Set(prev);
+                        if (next.has(key)) next.delete(key);
+                        else next.add(key);
+                        return next;
+                      });
+                    }}
+                    className="flex-row items-center py-2.5"
+                  >
+                    <MaterialIcons
+                      name={selected ? 'check-box' : 'check-box-outline-blank'}
+                      size={20}
+                      color={selected ? '#dc2626' : '#9ca3af'}
+                    />
+                    <Text className="ml-2 flex-1 text-sm text-black dark:text-white">
+                      {t(`auth.deletion_reason_${key}`)}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+              <TextInput
+                value={feedbackComment}
+                onChangeText={setFeedbackComment}
+                placeholder={t('auth.deletion_comment_placeholder')}
+                placeholderTextColor="#9ca3af"
+                multiline
+                maxLength={2000}
+                className="mt-2 min-h-20 rounded-xl border border-gray-300 px-3 py-2 text-sm text-black dark:border-gray-700 dark:text-white"
+                style={{ textAlignVertical: 'top' }}
+              />
+            </ScrollView>
+
+            <View className="mt-4 flex-row gap-3">
+              <Pressable
+                onPress={() => {
+                  setFeedbackReasons(new Set());
+                  setFeedbackComment('');
+                  setFeedbackModal(false);
+                  setDeleteModal(true);
+                }}
+                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+              >
+                <Text className="text-sm font-semibold text-black dark:text-white">
+                  {t('auth.deletion_skip')}
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={() => {
+                  setFeedbackModal(false);
+                  setDeleteModal(true);
+                }}
+                className="flex-1 items-center rounded-xl bg-red-600 py-3"
+              >
+                <Text className="text-sm font-semibold text-white">
+                  {t('auth.deletion_continue')}
+                </Text>
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
+        </KeyboardAvoidingView>
+      </Modal>
 
       <AppModal
         visible={deleteModal}
@@ -312,20 +501,156 @@ export default function ProfileScreen() {
         confirmText={t('auth.delete_account')}
         onConfirm={async () => {
           setDeleteModal(false);
-          const result = await deleteAccount();
+          const result = await deleteAccount(buildFeedback());
           if (!result.error) {
-            await clearLocalData();
-            // Wipe local onboarding flag so the user lands on the welcome flow
-            // with a fresh anonymous session + can optionally re-login.
-            const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
-            await AsyncStorage.removeItem('typeword.userSettings.v1');
-            await ensureSession().catch(() => {});
-            router.replace('/onboarding');
+            await finalizeDeletion();
+            return;
           }
+          if (result.error === REAUTH_REQUIRED) {
+            setReauthError(null);
+            setReauthPassword('');
+            setReauthModal(true);
+            return;
+          }
+          setToast({ message: result.error, type: 'error' });
         }}
         onClose={() => setDeleteModal(false)}
         destructive
       />
+
+      {/* Reauth-and-delete modal: server rejects deletion if the session
+          token is older than 5 minutes. Surface an inline re-prove flow so
+          a long-lived session can't be used to wipe an account. */}
+      <Modal
+        visible={reauthModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setReauthModal(false)}
+      >
+        <Pressable
+          onPress={() => !reauthBusy && setReauthModal(false)}
+          className="flex-1 items-center justify-center bg-black/50"
+        >
+          <Pressable
+            onPress={(e) => e.stopPropagation?.()}
+            className="mx-8 w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+          >
+            <Text className="text-lg font-bold text-black dark:text-white">
+              {t('auth.reauth_required_title')}
+            </Text>
+            <Text className="mt-3 text-sm leading-5 text-gray-600 dark:text-gray-300">
+              {t('auth.reauth_required_message')}
+            </Text>
+
+            {provider === 'email' ? (
+              <View className="mt-4">
+                <TextInput
+                  value={reauthPassword}
+                  onChangeText={setReauthPassword}
+                  placeholder="••••••••"
+                  placeholderTextColor="#9ca3af"
+                  secureTextEntry
+                  autoComplete="current-password"
+                  editable={!reauthBusy}
+                  className="rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                />
+                {reauthError ? (
+                  <Text className="mt-2 text-xs text-red-500">{reauthError}</Text>
+                ) : null}
+              </View>
+            ) : reauthError ? (
+              <Text className="mt-3 text-xs text-red-500">{reauthError}</Text>
+            ) : null}
+
+            <View className="mt-5 flex-row gap-3">
+              <Pressable
+                onPress={() => !reauthBusy && setReauthModal(false)}
+                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+              >
+                <Text className="text-sm font-semibold text-black dark:text-white">
+                  {t('settings.cancel')}
+                </Text>
+              </Pressable>
+              <Pressable
+                onPress={async () => {
+                  if (reauthBusy) return;
+                  setReauthBusy(true);
+                  setReauthError(null);
+                  try {
+                    let result: { error?: string };
+                    const feedback = buildFeedback();
+                    if (provider === 'email') {
+                      if (reauthPassword.trim().length === 0) {
+                        setReauthError(t('auth.error_wrong_password'));
+                        return;
+                      }
+                      result = await reauthAndDeleteAccount(reauthPassword, feedback);
+                    } else if (provider === 'apple') {
+                      const r = await signInWithApple();
+                      if (r.error) { setReauthError(r.error); return; }
+                      result = await deleteAccount(feedback);
+                    } else if (provider === 'google') {
+                      const r = await signInWithGoogle();
+                      if (r.error) { setReauthError(r.error); return; }
+                      result = await deleteAccount(feedback);
+                    } else {
+                      setReauthError('Not supported');
+                      return;
+                    }
+                    if (result.error) {
+                      const lower = result.error.toLowerCase();
+                      const friendly =
+                        lower.includes('invalid') &&
+                        (lower.includes('credentials') || lower.includes('password') || lower.includes('login'))
+                          ? t('auth.error_wrong_password')
+                          : result.error;
+                      setReauthError(friendly);
+                      return;
+                    }
+                    setReauthModal(false);
+                    await finalizeDeletion();
+                  } finally {
+                    setReauthBusy(false);
+                  }
+                }}
+                className="flex-1 items-center rounded-xl bg-red-600 py-3"
+              >
+                {reauthBusy ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text className="text-sm font-semibold text-white">
+                    {t('auth.delete_account')}
+                  </Text>
+                )}
+              </Pressable>
+            </View>
+          </Pressable>
+        </Pressable>
+      </Modal>
+
+      <ProfileSetupModal
+        visible={showProfileSetup}
+        initialDisplayName={myProfile?.displayName ?? ''}
+        initialUsername={myProfile?.username ?? ''}
+        cancellable
+        onSaved={() => {
+          setShowProfileSetup(false);
+          setToast({ message: t('dashboard.profile_saved'), type: 'success' });
+          reloadProfile();
+        }}
+        onCancel={() => setShowProfileSetup(false)}
+      />
     </SafeAreaView>
   );
+
+  async function finalizeDeletion() {
+    await clearLocalData();
+    // Use clearUserSettings (not direct AsyncStorage.removeItem) so the
+    // useUserSettings subscriber in _layout / settings tab is notified —
+    // otherwise stale in-memory `settings` keeps the layout from routing
+    // to /onboarding and the freshly-mounted settings tab renders blank.
+    await clearUserSettings();
+    await ensureSession().catch(() => {});
+    router.replace('/onboarding');
+  }
 }

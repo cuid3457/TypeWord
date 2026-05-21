@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "TypeWord",
+    "name": "MoaVoca",
     "slug": "typeword",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,15 +8,6 @@
     "scheme": "typeword",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "app.typeword.app",
-      "buildNumber": "8",
-      "infoPlist": {
-        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
-        "ITSAppUsesNonExemptEncryption": false
-      }
-    },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#2EC4A5",
@@ -26,7 +17,21 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "app.typeword.app"
+      "package": "app.typeword.app",
+      "allowBackup": false,
+      "googleServicesFile": "./android/app/google-services.json"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.typeword.app",
+      "buildNumber": "9",
+      "appleTeamId": "5UDNYL5YTJ",
+      "usesAppleSignIn": true,
+      "googleServicesFile": "./ios/TypeWord/GoogleService-Info.plist",
+      "infoPlist": {
+        "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "web": {
       "output": "static",
@@ -40,10 +45,17 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#2EC4A5",
           "dark": {
-            "backgroundColor": "#1A1A1A"
+            "backgroundColor": "#2EC4A5"
           }
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notification-icon.png",
+          "color": "#2EC4A5"
         }
       ],
       "expo-localization",
@@ -85,7 +97,8 @@
         }
       ],
       "@react-native-community/datetimepicker",
-      "expo-audio"
+      "expo-audio",
+      "expo-apple-authentication"
     ],
     "experiments": {
       "typedRoutes": true

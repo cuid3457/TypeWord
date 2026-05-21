@@ -9,7 +9,17 @@
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { fetchCloudXp, syncXpToCloud } from './friendsService';
+
 const TOTAL_KEY = 'typeword.xpTotal';
+const CLOUD_SYNC_DEBOUNCE_MS = 5000;
+let cloudSyncTimer: ReturnType<typeof setTimeout> | null = null;
+function scheduleCloudSync(value: number) {
+  if (cloudSyncTimer) clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(() => {
+    syncXpToCloud(value).catch(() => {});
+  }, CLOUD_SYNC_DEBOUNCE_MS);
+}
 
 type Listener = (total: number) => void;
 const listeners = new Set<Listener>();
@@ -37,6 +47,19 @@ export async function initXP(): Promise<void> {
   } catch {
     _total = 0;
   }
+  // Pull cloud XP and reconcile (greater wins). Best-effort — offline launches
+  // simply use the local value, and the next online award triggers a sync.
+  try {
+    const cloud = await fetchCloudXp();
+    if (cloud > _total) {
+      _total = cloud;
+      try { await AsyncStorage.setItem(TOTAL_KEY, String(_total)); } catch {}
+      notify();
+    } else if (cloud < _total) {
+      // Local is ahead (e.g. offline gameplay) — push to cloud.
+      scheduleCloudSync(_total);
+    }
+  } catch { /* offline — skip */ }
 }
 
 export function getTotalXP(): number {
@@ -82,7 +105,14 @@ export function calculateXP(input: XPCalcInput): number {
   const m = MODE_XP_WEIGHT[input.mode] ?? 1.0;
   const s = stageMultiplier(input.intervalDays, input.reviewCount);
   const c = comboMultiplier(input.combo);
-  return Math.round(BASE_XP * m * s * c);
+  // XP 2× boost from the store. Read lazily to avoid circular import and
+  // so a cold-start without inventory data still awards base XP.
+  let boost = 1.0;
+  try {
+    const { getInventory, isBoostActive } = require('./pointsService');
+    if (isBoostActive(getInventory())) boost = 2.0;
+  } catch { /* pointsService unavailable — skip boost */ }
+  return Math.round(BASE_XP * m * s * c * boost);
 }
 
 // ── Persisted total ─────────────────────────────────────────────────
@@ -112,6 +142,7 @@ export async function awardXP(amount: number): Promise<XPGrant> {
   try {
     await AsyncStorage.setItem(TOTAL_KEY, String(_total));
   } catch { /* ignore — value still applied in memory */ }
+  scheduleCloudSync(_total);
   notify();
   return {
     awarded: Math.round(amount),

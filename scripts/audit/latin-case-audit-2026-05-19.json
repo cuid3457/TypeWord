@@ -1,0 +1,3766 @@
+[
+  {
+    "word": "comer",
+    "sourceLang": "es",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "comer",
+          "originalInput": "comer",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "verbo"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ingerir alimentos",
+              "partOfSpeech": "verbo",
+              "relevanceScore": 100
+            }
+          ],
+          "ipa": "koˈmeɾ"
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nos gusta **comer** frutas frescas en verano.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "alimentarse"
+          ],
+          "antonyms": [
+            "ayunar"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8358,
+          "out": 173
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "comer",
+          "ipa": "koˈmeɾ",
+          "originalInput": "comer",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ingerir alimento",
+              "partOfSpeech": "verbo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nos gusta **comer** frutas frescas después de la escuela.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "alimentarse"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4892,
+          "out": 172
+        }
+      }
+    }
+  },
+  {
+    "word": "libro",
+    "sourceLang": "es",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "libro",
+          "ipa": "ˈliβɾo",
+          "originalInput": "libro",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "sustantivo"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "libro",
+              "partOfSpeech": "sustantivo",
+              "relevanceScore": 100,
+              "gender": "m"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ella compró un **libro** interesante en la feria.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8358,
+          "out": 166
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "libro",
+          "ipa": "ˈliβɾo",
+          "originalInput": "libro",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "conjunto de hojas impresas",
+              "partOfSpeech": "sustantivo",
+              "relevanceScore": 100,
+              "gender": "m"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ana compró un **libro** nuevo para la clase de historia.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "tomo",
+            "volumen"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4900,
+          "out": 179
+        }
+      }
+    }
+  },
+  {
+    "word": "feliz",
+    "sourceLang": "es",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "feliz",
+          "ipa": "feˈlis",
+          "originalInput": "feliz",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "adjetivo"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "contento, alegre",
+              "partOfSpeech": "adjetivo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ella está **feliz** con su nuevo trabajo.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "contento",
+            "alegre"
+          ],
+          "antonyms": [
+            "triste"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8362,
+          "out": 170
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "feliz",
+          "ipa": "feˈlis",
+          "originalInput": "feliz",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "contento, alegre",
+              "partOfSpeech": "adjetivo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Los niños están **felices** jugando en el parque.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "contento",
+            "alegre"
+          ],
+          "antonyms": [
+            "triste"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4896,
+          "out": 178
+        }
+      }
+    }
+  },
+  {
+    "word": "por favor",
+    "sourceLang": "es",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "por favor",
+          "originalInput": "por favor",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4177,
+          "out": 48
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "por favor",
+          "originalInput": "por favor",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "제발, 부탁해",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "petición, cortesía",
+              "partOfSpeech": "expresión",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "¿Me pasas la sal, **por favor**?",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "porfa",
+            "porfis"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4513,
+          "out": 157
+        }
+      }
+    }
+  },
+  {
+    "word": "a pesar de",
+    "sourceLang": "es",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "a pesar de",
+          "originalInput": "a pesar de",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4178,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "a pesar de",
+          "originalInput": "a pesar de",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "그럼에도 불구하고",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "aunque, sin importar",
+              "partOfSpeech": "expresión",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Salió a correr **a pesar de** la lluvia intensa.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "aunque",
+            "sin importar"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4516,
+          "out": 159
+        }
+      }
+    }
+  },
+  {
+    "word": "dar de comer",
+    "sourceLang": "es",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "dar de comer",
+          "originalInput": "dar de comer",
+          "confidence": 90,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4178,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "dar de comer",
+          "originalInput": "dar de comer",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹이다, 먹여 주다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "alimentar, dar comida",
+              "partOfSpeech": "verbo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Cada mañana, ella **da de comer** a los gatos del vecindario con mucho cariño.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "alimentar",
+            "nutrir"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4516,
+          "out": 175
+        }
+      }
+    }
+  },
+  {
+    "word": "Madrid",
+    "sourceLang": "es",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Madrid",
+          "originalInput": "Madrid",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "마드리드, 도시",
+              "partOfSpeech": "nombre propio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Madrid, ciudad",
+              "partOfSpeech": "nombre propio",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El museo más famoso está en **Madrid**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 136
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Madrid",
+          "originalInput": "Madrid",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "마드리드, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ciudad",
+              "partOfSpeech": "nombre propio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Visitamos el museo principal de **Madrid**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3427,
+          "out": 115
+        }
+      }
+    }
+  },
+  {
+    "word": "ONU",
+    "sourceLang": "es",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "ONU",
+          "originalInput": "ONU",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "국제연합, 기관",
+              "partOfSpeech": "nombre propio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Organización de Naciones Unidas",
+              "partOfSpeech": "nombre propio",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La **ONU** trabaja para mantener la paz mundial.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8357,
+          "out": 147
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "ONU",
+          "originalInput": "ONU",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "국제 연합, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Organización de las Naciones Unidas, institución",
+              "partOfSpeech": "nombre propio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El informe fue presentado a la **ONU** ayer.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3433,
+          "out": 136
+        }
+      }
+    }
+  },
+  {
+    "word": "RAE",
+    "sourceLang": "es",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "RAE",
+          "originalInput": "RAE",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "스페인 왕립 아카데미, 고유명사",
+              "partOfSpeech": "nombre propio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Real Academia Española, nombre propio",
+              "partOfSpeech": "nombre propio",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La **RAE** actualiza el diccionario cada cierto tiempo.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8364,
+          "out": 161
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "RAE",
+          "originalInput": "RAE",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "스페인 왕립 아카데미, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Real Academia Española, institución",
+              "partOfSpeech": "nombre propio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Consultamos el diccionario de la **RAE** para aclarar dudas.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3433,
+          "out": 145
+        }
+      }
+    }
+  },
+  {
+    "word": "42",
+    "sourceLang": "es",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "numeral"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "cuarenta y dos",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El tren sale a las **42** minutos de la hora.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7218,
+          "out": 124
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "cuarenta y dos",
+              "partOfSpeech": "numeral"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El libro tiene **42** páginas en total.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3905,
+          "out": 127
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "sourceLang": "es",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "numeral"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "tres punto catorce",
+              "partOfSpeech": "numeral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El valor de **3.14** es aproximado para pi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7223,
+          "out": 132
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일 사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "tres punto uno cuatro",
+              "partOfSpeech": "numeral"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "El valor aproximado de **3.14** es pi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3909,
+          "out": 135
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "sourceLang": "es",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "arroba",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Por favor, escribe tu correo con la **@** correcta.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7160,
+          "out": 120
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이, 골뱅이 기호",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "arroba, símbolo arroba",
+              "partOfSpeech": "símbolo"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Por favor, envía el correo a juan**@**gmail.com.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3906,
+          "out": 143
+        }
+      }
+    }
+  },
+  {
+    "word": "manger",
+    "sourceLang": "fr",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "manger",
+          "ipa": "mɑ̃ʒe",
+          "originalInput": "manger",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다",
+              "partOfSpeech": "verbe"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "consommer nourriture",
+              "partOfSpeech": "verbe",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nous **mangeons** ensemble tous les soirs.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "consommer",
+            "dévorer"
+          ],
+          "antonyms": [
+            "jeûner"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8353,
+          "out": 168
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "manger",
+          "ipa": "mɑ̃ʒe",
+          "originalInput": "manger",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "consommer de la nourriture",
+              "partOfSpeech": "verbe",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nous **mangeons** souvent ensemble le dimanche midi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "bouffer"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5009,
+          "out": 172
+        }
+      }
+    }
+  },
+  {
+    "word": "livre",
+    "sourceLang": "fr",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "livre",
+          "ipa": "livʁ",
+          "originalInput": "livre",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "nom"
+            },
+            {
+              "definition": "파운드",
+              "partOfSpeech": "nom"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ouvrage",
+              "partOfSpeech": "nom",
+              "relevanceScore": 100,
+              "gender": "m"
+            },
+            {
+              "definition": "unité de poids",
+              "partOfSpeech": "nom",
+              "relevanceScore": 90,
+              "gender": "f"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Elle a acheté un **livre** intéressant hier.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "Ce sac contient cinq **livres** de farine.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "ouvrage"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8367,
+          "out": 236
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "livre",
+          "ipa": "livʁ",
+          "originalInput": "livre",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "명사"
+            },
+            {
+              "definition": "파운드",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ouvrage, volume",
+              "partOfSpeech": "nom",
+              "relevanceScore": 100,
+              "gender": "m"
+            },
+            {
+              "definition": "unité, poids",
+              "partOfSpeech": "nom",
+              "relevanceScore": 70,
+              "gender": "f"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Marie a acheté un **livre** passionnant hier.",
+              "meaning_index": 0
+            },
+            {
+              "sentence": "Le colis pèse exactement un **livre** selon la balance.",
+              "meaning_index": 1
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "ouvrage",
+            "volume"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5023,
+          "out": 241
+        }
+      }
+    }
+  },
+  {
+    "word": "heureux",
+    "sourceLang": "fr",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "heureux",
+          "ipa": "øʁø",
+          "originalInput": "heureux",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "adjectif"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "heureux, content",
+              "partOfSpeech": "adjectif",
+              "relevanceScore": 100,
+              "gender": "mf"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Elle est **heureuse** de sa réussite.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "content",
+            "joyeux"
+          ],
+          "antonyms": [
+            "malheureux",
+            "triste"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 180
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "heureux",
+          "ipa": "œʁø",
+          "originalInput": "heureux",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "heureux, content, joyeux",
+              "partOfSpeech": "adjectif",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Les enfants sont **heureux** de jouer dehors cet après-midi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "content",
+            "joyeux"
+          ],
+          "antonyms": [
+            "malheureux"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5013,
+          "out": 183
+        }
+      }
+    }
+  },
+  {
+    "word": "s'il vous plaît",
+    "sourceLang": "fr",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "s'il vous plaît",
+          "originalInput": "s'il vous plaît",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4174,
+          "out": 52
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "s'il vous plaît",
+          "originalInput": "s'il vous plaît",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "부탁합니다",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "formule de politesse",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Pouvez-vous m'aider, **s'il vous plaît** ?",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4630,
+          "out": 159
+        }
+      }
+    }
+  },
+  {
+    "word": "à cause de",
+    "sourceLang": "fr",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "à cause de",
+          "originalInput": "à cause de",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4173,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "à cause de",
+          "originalInput": "à cause de",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "때문에, 원인으로",
+              "partOfSpeech": "전치사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "cause, raison, motif",
+              "partOfSpeech": "préposition",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le train est en retard **à cause de** la neige abondante ce matin.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "en raison de",
+            "du fait de"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4631,
+          "out": 175
+        }
+      }
+    }
+  },
+  {
+    "word": "avoir faim",
+    "sourceLang": "fr",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "avoir faim",
+          "originalInput": "avoir faim",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4172,
+          "out": 48
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "avoir faim",
+          "originalInput": "avoir faim",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "배고프다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ressentir la faim",
+              "partOfSpeech": "verbe",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Après la longue randonnée, il **a eu faim** et a mangé rapidement.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4626,
+          "out": 160
+        }
+      }
+    }
+  },
+  {
+    "word": "Paris",
+    "sourceLang": "fr",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Paris",
+          "originalInput": "Paris",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "파리, 도시",
+              "partOfSpeech": "nom propre"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Paris, ville",
+              "partOfSpeech": "nom propre",
+              "relevanceScore": 100,
+              "gender": "mf"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nous visitons **Paris** pendant les vacances d'été.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8350,
+          "out": 144
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Paris",
+          "originalInput": "Paris",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "파리, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "ville",
+              "partOfSpeech": "nom propre"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nous avons lu un article sur **Paris**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3540,
+          "out": 126
+        }
+      }
+    }
+  },
+  {
+    "word": "SNCF",
+    "sourceLang": "fr",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "SNCF",
+          "originalInput": "SNCF",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "프랑스 국영 철도 회사",
+              "partOfSpeech": "nom propre"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "société nationale chemins fer",
+              "partOfSpeech": "nom propre",
+              "relevanceScore": 100,
+              "gender": "f"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La gare est gérée par la **SNCF**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8358,
+          "out": 163
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "SNCF",
+          "originalInput": "SNCF",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "프랑스 국영 철도 회사, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "société nationale des chemins de fer français, institution",
+              "partOfSpeech": "nom propre"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le fonctionnement de la **SNCF** est étudié en cours.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3552,
+          "out": 151
+        }
+      }
+    }
+  },
+  {
+    "word": "Dupont",
+    "sourceLang": "fr",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Dupont",
+          "originalInput": "Dupont",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "듀퐁, 성",
+              "partOfSpeech": "nom propre"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Dupont, nom",
+              "partOfSpeech": "nom propre",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le professeur **Dupont** a corrigé les copies rapidement.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 151
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Dupont",
+          "originalInput": "Dupont",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "듀퐁, 고유명사",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "nom propre",
+              "partOfSpeech": "nom propre"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Nous avons rencontré **Dupont** lors de la réunion.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3543,
+          "out": 137
+        }
+      }
+    }
+  },
+  {
+    "word": "42",
+    "sourceLang": "fr",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "numéral"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "quarante-deux",
+              "partOfSpeech": "numéral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Il y a **42** chaises dans la salle.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7213,
+          "out": 130
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "quarante-deux",
+              "partOfSpeech": "numéral"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le livre commence à la page **42**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4018,
+          "out": 126
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "sourceLang": "fr",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "numéral"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "trois virgule quatorze",
+              "partOfSpeech": "numéral",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le nombre **3.14** est utilisé en mathématiques.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7219,
+          "out": 132
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일 사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "trois, point, un, quatre",
+              "partOfSpeech": "numéral"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Le nombre **3.14** est une approximation de pi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4025,
+          "out": 138
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "sourceLang": "fr",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "arobase",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Mon adresse e-mail contient le symbole **@**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7155,
+          "out": 126
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "arobase",
+              "partOfSpeech": "symbole"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Mon adresse email contient un **@**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4014,
+          "out": 124
+        }
+      }
+    }
+  },
+  {
+    "word": "essen",
+    "sourceLang": "de",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "essen",
+          "ipa": "ˈɛsn̩",
+          "originalInput": "essen",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "essen",
+              "partOfSpeech": "Verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Wir **essen** heute Abend gemeinsam Pizza.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "speisen"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8349,
+          "out": 162
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "essen",
+          "ipa": "ˈɛsn̩",
+          "originalInput": "essen",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "essen, speisen",
+              "partOfSpeech": "Verb",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Wir **essen** heute Abend zusammen im Restaurant.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "speisen"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5030,
+          "out": 166
+        }
+      }
+    }
+  },
+  {
+    "word": "Buch",
+    "sourceLang": "de",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Buch",
+          "ipa": "buːx",
+          "originalInput": "Buch",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "Nomen"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Buch",
+              "partOfSpeech": "Nomen",
+              "relevanceScore": 100,
+              "gender": "n"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Das **Buch** liegt auf dem Tisch.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8354,
+          "out": 157
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Buch",
+          "ipa": "buːx",
+          "originalInput": "Buch",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Schriftwerk, Textsammlung",
+              "partOfSpeech": "Nomen",
+              "relevanceScore": 100,
+              "gender": "n"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Anna liest ein spannendes **Buch** über Geschichte.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "Werk",
+            "Schriftstück"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5039,
+          "out": 172
+        }
+      }
+    }
+  },
+  {
+    "word": "glücklich",
+    "sourceLang": "de",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "glücklich",
+          "ipa": "ˈɡlʏklɪç",
+          "originalInput": "glücklich",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "Adjektiv"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "glücklich, froh",
+              "partOfSpeech": "Adjektiv",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Sie ist **glücklich** über das gute Ergebnis.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "froh",
+            "zufrieden"
+          ],
+          "antonyms": [
+            "unglücklich",
+            "traurig"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8360,
+          "out": 182
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "glücklich",
+          "ipa": "ˈɡlʏklɪç",
+          "originalInput": "glücklich",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "glücklich, froh, zufrieden",
+              "partOfSpeech": "Adjektiv",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Anna ist **glücklich**, weil sie gute Nachrichten erhielt.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "froh",
+            "zufrieden"
+          ],
+          "antonyms": [
+            "unglücklich"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 5039,
+          "out": 188
+        }
+      }
+    }
+  },
+  {
+    "word": "zum Beispiel",
+    "sourceLang": "de",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "zum Beispiel",
+          "originalInput": "zum Beispiel",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4177,
+          "out": 48
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "zum Beispiel",
+          "originalInput": "zum Beispiel",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "예를 들어",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Beispielhaft, als Beispiel",
+              "partOfSpeech": "Ausdruck",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Du kannst viele Früchte essen, **zum Beispiel** Äpfel oder Bananen.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "beispielsweise",
+            "etwa"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4656,
+          "out": 176
+        }
+      }
+    }
+  },
+  {
+    "word": "auf Wiedersehen",
+    "sourceLang": "de",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "auf Wiedersehen",
+          "originalInput": "auf Wiedersehen",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4178,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "auf Wiedersehen",
+          "originalInput": "auf Wiedersehen",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "안녕, 작별 인사",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Abschiedsgruß",
+              "partOfSpeech": "Ausdruck",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Wir sagen jetzt **auf Wiedersehen**, bis zum nächsten Mal!",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "lebwohl",
+            "tschüss"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4657,
+          "out": 162
+        }
+      }
+    }
+  },
+  {
+    "word": "vor allem",
+    "sourceLang": "de",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "vor allem",
+          "originalInput": "vor allem",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "무엇보다도, 특히",
+              "partOfSpeech": "Präposition"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "vor allem, insbesondere",
+              "partOfSpeech": "Präposition",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Wir sollten **vor allem** die Sicherheit beachten.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "insbesondere",
+            "hauptsächlich"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8362,
+          "out": 157
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "vor allem",
+          "originalInput": "vor allem",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "무엇보다도",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "besonders, hauptsächlich",
+              "partOfSpeech": "Ausdruck",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ich mag **vor allem** die Ruhe hier am Wochenende.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "insbesondere",
+            "hauptsächlich"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4652,
+          "out": 167
+        }
+      }
+    }
+  },
+  {
+    "word": "BMW",
+    "sourceLang": "de",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "BMW",
+          "originalInput": "BMW",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "비엠더블유, 자동차 회사",
+              "partOfSpeech": "Eigenname"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Automobilhersteller",
+              "partOfSpeech": "Eigenname",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Der neue **BMW** steht in der Garage.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8357,
+          "out": 148
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "BMW",
+          "originalInput": "BMW",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "바이에른 모터스, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Bayerische Motoren Werke, Eigenname",
+              "partOfSpeech": "proper noun"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Wir lesen einen Artikel über den neuen **BMW**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3575,
+          "out": 139
+        }
+      }
+    }
+  },
+  {
+    "word": "ICE",
+    "sourceLang": "de",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "ICE",
+          "originalInput": "ICE",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "고속열차",
+              "partOfSpeech": "Nomen"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Hochgeschwindigkeitszug",
+              "partOfSpeech": "Nomen",
+              "relevanceScore": 100,
+              "gender": "m"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Der **ICE** fährt pünktlich um acht Uhr ab.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8359,
+          "out": 156
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "ICE",
+          "originalInput": "ICE",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "인터시티익스프레스, 기관"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Intercity-Express, Agentur",
+              "partOfSpeech": "proper noun"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Der **ICE** verbindet viele deutsche Städte schnell.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3574,
+          "out": 125
+        }
+      }
+    }
+  },
+  {
+    "word": "EU",
+    "sourceLang": "de",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "EU",
+          "originalInput": "EU",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "유럽 연합, 고유명사",
+              "partOfSpeech": "Eigenname"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Europäische Union",
+              "partOfSpeech": "Eigenname",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Die **EU** hat neue Umweltgesetze beschlossen.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 149
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "EU",
+          "originalInput": "EU",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "유럽 연합, 기관",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Europäische Union, Institution",
+              "partOfSpeech": "Eigenname"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Viele Länder sind Mitglied der **EU**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3572,
+          "out": 132
+        }
+      }
+    }
+  },
+  {
+    "word": "42",
+    "sourceLang": "de",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "숫자"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "zweiundvierzig",
+              "partOfSpeech": "Numerale",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Das Buch hat genau **42** Seiten.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7218,
+          "out": 129
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "zweiundvierzig",
+              "partOfSpeech": "Numerale"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Das Buch hat genau **42** Seiten.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4046,
+          "out": 126
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "sourceLang": "de",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "Ausdruck"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "drei Komma vierzehn",
+              "partOfSpeech": "Ausdruck",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Die Zahl **3.14** ist eine Annäherung an Pi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7224,
+          "out": 141
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일 사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "drei Komma eins vier",
+              "partOfSpeech": "Numerale"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Die Zahl **3.14** ist eine Näherung für Pi.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4051,
+          "out": 138
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "sourceLang": "de",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "At-Zeichen",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Die E-Mail-Adresse enthält das **@**-Zeichen.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7162,
+          "out": 122
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "At-Zeichen",
+              "partOfSpeech": "Symbol"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Bitte senden Sie die E-Mail an **@**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 4043,
+          "out": 126
+        }
+      }
+    }
+  },
+  {
+    "word": "mangiare",
+    "sourceLang": "it",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "mangiare",
+          "ipa": "manˈdʒaːre",
+          "originalInput": "mangiare",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "mangiare",
+              "partOfSpeech": "verbo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ogni giorno noi **mangiamo** insieme a pranzo.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "consumare"
+          ],
+          "antonyms": [
+            "digiunare"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8359,
+          "out": 167
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "mangiare",
+          "ipa": "manˈdʒaːre",
+          "originalInput": "mangiare",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "먹다, 식사하다",
+              "partOfSpeech": "동사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "consumare cibo",
+              "partOfSpeech": "verbo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "I bambini **mangiano** la frutta fresca ogni giorno.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "consumare"
+          ],
+          "antonyms": [
+            "digiunare"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4910,
+          "out": 181
+        }
+      }
+    }
+  },
+  {
+    "word": "libro",
+    "sourceLang": "it",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "libro",
+          "ipa": "ˈli.bro",
+          "originalInput": "libro",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "nome"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "libro",
+              "partOfSpeech": "nome",
+              "relevanceScore": 100,
+              "gender": "m"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ho comprato un nuovo **libro** interessante ieri.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8352,
+          "out": 157
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "libro",
+          "ipa": "ˈli.bro",
+          "originalInput": "libro",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "책",
+              "partOfSpeech": "명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "testo, volume, pubblicazione",
+              "partOfSpeech": "nome",
+              "relevanceScore": 100,
+              "gender": "m"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Marco ha comprato un nuovo **libro** di cucina italiana.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "volume",
+            "testo"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4909,
+          "out": 173
+        }
+      }
+    }
+  },
+  {
+    "word": "felice",
+    "sourceLang": "it",
+    "expectedCase": "simple_word",
+    "classified": "simple_word",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Felice",
+          "ipa": "feˈli.tʃe",
+          "originalInput": "felice",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜",
+              "partOfSpeech": "aggettivo"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "felice, contento",
+              "partOfSpeech": "aggettivo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Maria è molto **felice** oggi per la buona notizia.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "contento",
+            "allegro"
+          ],
+          "antonyms": [
+            "infelice",
+            "triste"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8364,
+          "out": 176
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "felice",
+          "ipa": "feˈli.tʃe",
+          "originalInput": "felice",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "행복한, 기쁜, 즐거운",
+              "partOfSpeech": "형용사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "felice, contento, lieto",
+              "partOfSpeech": "aggettivo",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Marco è molto **felice** del suo nuovo lavoro.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "contento",
+            "lieto"
+          ],
+          "antonyms": [
+            "infelice"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4917,
+          "out": 191
+        }
+      }
+    }
+  },
+  {
+    "word": "per favore",
+    "sourceLang": "it",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "per favore",
+          "originalInput": "per favore",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4177,
+          "out": 48
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "per favore",
+          "originalInput": "per favore",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "부탁합니다",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "espressione di cortesia",
+              "partOfSpeech": "espressione"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Puoi chiudere la finestra, **per favore**?",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "per piacere",
+            "per cortesia"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4532,
+          "out": 152
+        }
+      }
+    }
+  },
+  {
+    "word": "a causa di",
+    "sourceLang": "it",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "a causa di",
+          "originalInput": "a causa di",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4178,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "a causa di",
+          "originalInput": "a causa di",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "때문에",
+              "partOfSpeech": "전치사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "per via di, a motivo di",
+              "partOfSpeech": "preposizione"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Il volo è stato cancellato **a causa di** una tempesta improvvisa.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "per via di",
+            "a motivo di"
+          ],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4537,
+          "out": 160
+        }
+      }
+    }
+  },
+  {
+    "word": "avere fame",
+    "sourceLang": "it",
+    "expectedCase": "set_expression",
+    "classified": "set_expression",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "avere fame",
+          "originalInput": "avere fame",
+          "confidence": 100,
+          "note": "sentence",
+          "meanings_translated": [],
+          "meanings": []
+        },
+        "examples": null,
+        "synant": null,
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4178,
+          "out": 50
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "avere fame",
+          "originalInput": "avere fame",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "배고프다",
+              "partOfSpeech": "표현"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "provare appetito",
+              "partOfSpeech": "espressione"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Dopo la lunga passeggiata, **avevo fame** e volevo mangiare subito.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [
+            "essere affamato"
+          ],
+          "antonyms": [
+            "essere sazio"
+          ]
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 4531,
+          "out": 162
+        }
+      }
+    }
+  },
+  {
+    "word": "Roma",
+    "sourceLang": "it",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Roma",
+          "originalInput": "Roma",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "로마, 도시",
+              "partOfSpeech": "nome proprio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Roma, città",
+              "partOfSpeech": "nome proprio",
+              "relevanceScore": 100,
+              "gender": "f"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ho visitato **Roma** durante le vacanze estive.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8355,
+          "out": 152
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Roma",
+          "originalInput": "Roma",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "로마, 도시",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "città",
+              "partOfSpeech": "nome proprio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Molti turisti visitano **Roma** ogni anno.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3440,
+          "out": 130
+        }
+      }
+    }
+  },
+  {
+    "word": "FIAT",
+    "sourceLang": "it",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Fiat",
+          "originalInput": "FIAT",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "피아트, 자동차 회사",
+              "partOfSpeech": "nome proprio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Fiat, azienda automobilistica",
+              "partOfSpeech": "nome proprio",
+              "relevanceScore": 100,
+              "gender": "mf"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La **Fiat** ha presentato una nuova auto elettrica.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8364,
+          "out": 160
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "FIAT",
+          "originalInput": "FIAT",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "피아트, 회사",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "Fabbrica Italiana Automobili Torino, nome proprio",
+              "partOfSpeech": "nome proprio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Lo studio si concentra sulla storia della **FIAT**.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3451,
+          "out": 140
+        }
+      }
+    }
+  },
+  {
+    "word": "Rossi",
+    "sourceLang": "it",
+    "expectedCase": "proper_acronym",
+    "classified": "proper_acronym",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "Rossi",
+          "originalInput": "Rossi",
+          "confidence": 95,
+          "meanings_translated": [
+            {
+              "definition": "로시, 성",
+              "partOfSpeech": "nome proprio"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "cognome",
+              "partOfSpeech": "nome proprio",
+              "relevanceScore": 100,
+              "gender": "mf"
+            }
+          ],
+          "ipa": "ˈrɔssi"
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La famiglia **Rossi** abita vicino al parco.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": {
+          "synonyms": [],
+          "antonyms": []
+        },
+        "skippedSynAnt": false,
+        "tokens": {
+          "in": 8356,
+          "out": 172
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "Rossi",
+          "originalInput": "Rossi",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "로시, 고유명사",
+              "partOfSpeech": "고유명사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "nome proprio",
+              "partOfSpeech": "nome proprio"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ho incontrato **Rossi** al mercato ieri mattina.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3443,
+          "out": 135
+        }
+      }
+    }
+  },
+  {
+    "word": "42",
+    "sourceLang": "it",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "numerale"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "quarantadue",
+              "partOfSpeech": "numerale",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ci sono esattamente **42** sedie nella stanza.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7217,
+          "out": 131
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "42",
+          "originalInput": "42",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "사십이",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "quarantadue",
+              "partOfSpeech": "numerale"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Ho letto il capitolo **42** del libro.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3917,
+          "out": 127
+        }
+      }
+    }
+  },
+  {
+    "word": "3.14",
+    "sourceLang": "it",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼점일사",
+              "partOfSpeech": "numerale"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "tre punto quattordici",
+              "partOfSpeech": "numerale",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "La costante matematica è **3.14** approssimata.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7224,
+          "out": 140
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "3.14",
+          "originalInput": "3.14",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "삼 점 일 사",
+              "partOfSpeech": "수사"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "tre, punto, uno, quattro",
+              "partOfSpeech": "numerale"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Il valore di **3.14** approssima pi greco.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3925,
+          "out": 139
+        }
+      }
+    }
+  },
+  {
+    "word": "@",
+    "sourceLang": "it",
+    "expectedCase": "number_symbol",
+    "classified": "number_symbol",
+    "versions": {
+      "old": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "expression"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "chiocciola",
+              "partOfSpeech": "expression",
+              "relevanceScore": 100
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "L'indirizzo email contiene la **@** tra nome e dominio.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 7161,
+          "out": 130
+        }
+      },
+      "new": {
+        "quick": {
+          "headword": "@",
+          "originalInput": "@",
+          "confidence": 100,
+          "meanings_translated": [
+            {
+              "definition": "골뱅이",
+              "partOfSpeech": "기호"
+            }
+          ],
+          "meanings": [
+            {
+              "definition": "chiocciola, at",
+              "partOfSpeech": "simbolo"
+            }
+          ]
+        },
+        "examples": {
+          "examples": [
+            {
+              "sentence": "Inserisci la tua email con **@** per favore.",
+              "meaning_index": 0
+            }
+          ]
+        },
+        "synant": null,
+        "skippedSynAnt": true,
+        "tokens": {
+          "in": 3917,
+          "out": 129
+        }
+      }
+    }
+  }
+]

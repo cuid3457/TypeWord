@@ -2,7 +2,7 @@ import * as SQLite from 'expo-sqlite';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { SCHEMA_V1, SCHEMA_V2, SCHEMA_V3, SCHEMA_V4, SCHEMA_V5, SCHEMA_V6, SCHEMA_V7, SCHEMA_V8, SCHEMA_V9, SCHEMA_V10, SCHEMA_V11, SCHEMA_V12, SCHEMA_V13, SCHEMA_V14, SCHEMA_V15, SCHEMA_VERSION } from './schema';
+import { SCHEMA_V1, SCHEMA_V2, SCHEMA_V3, SCHEMA_V4, SCHEMA_V5, SCHEMA_V6, SCHEMA_V7, SCHEMA_V8, SCHEMA_V9, SCHEMA_V10, SCHEMA_V11, SCHEMA_V12, SCHEMA_V13, SCHEMA_V14, SCHEMA_V15, SCHEMA_V16, SCHEMA_V17, SCHEMA_V18, SCHEMA_V19, SCHEMA_VERSION } from './schema';
 
 const DB_NAME = 'typeword.db';
 
@@ -121,6 +121,56 @@ async function runMigrations(db: SQLite.SQLiteDatabase): Promise<void> {
       console.warn('SCHEMA_V15 failed:', err);
     }
     await db.execAsync('PRAGMA user_version = 15');
+  }
+
+  if (current < 16) {
+    try {
+      await db.execAsync(SCHEMA_V16);
+    } catch (err) {
+      console.warn('SCHEMA_V16 failed:', err);
+    }
+    // Backfill study_dates from any qualifying activity already in user_words.
+    // Streak rule: ≥20 distinct words reviewed OR ≥10 words added in a single
+    // streak-day. Mirrors the live logic in streakService.getQualifiedDates.
+    try {
+      const now = Date.now();
+      await db.execAsync(`
+        INSERT OR IGNORE INTO study_dates (date, qualified_at)
+        SELECT d, ${now} FROM (
+          SELECT date(datetime(updated_at / 1000, 'unixepoch', 'localtime', '-4 hours')) as d
+          FROM user_words WHERE review_count > 0
+          GROUP BY d HAVING COUNT(*) >= 20
+          UNION
+          SELECT date(datetime(created_at / 1000, 'unixepoch', 'localtime', '-4 hours')) as d
+          FROM user_words
+          GROUP BY d HAVING COUNT(*) >= 10
+        );
+      `);
+    } catch (err) {
+      console.warn('study_dates backfill failed:', err);
+    }
+    await db.execAsync('PRAGMA user_version = 16');
+  }
+
+  if (current < 17) {
+    try {
+      await db.execAsync(SCHEMA_V17);
+    } catch { /* column may already exist */ }
+    await db.execAsync('PRAGMA user_version = 17');
+  }
+
+  if (current < 18) {
+    try {
+      await db.execAsync(SCHEMA_V18);
+    } catch { /* columns may already exist */ }
+    await db.execAsync('PRAGMA user_version = 18');
+  }
+
+  if (current < 19) {
+    try {
+      await db.execAsync(SCHEMA_V19);
+    } catch { /* columns may already exist */ }
+    await db.execAsync('PRAGMA user_version = 19');
   }
 }
 

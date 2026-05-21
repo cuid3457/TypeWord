@@ -4,7 +4,22 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-const EFFECTIVE_DATE = '2026-04-27';
+const EFFECTIVE_DATE = '2026-05-11';
+
+// Business registration info has been moved to app/business-info.tsx.
+// Privacy policy text references it via Settings → 사업자 정보. Phone
+// number intentionally not displayed anywhere — email-only contact.
+const PROVIDER_KO = {
+  name: '펀스턴',
+  representative: '박준성',
+  email: 'support@typeword.app',
+};
+
+const PROVIDER_EN = {
+  name: 'Funston',
+  representative: 'Junsung Park',
+  email: 'support@typeword.app',
+};
 
 export default function PrivacyPolicyScreen() {
   const { t, i18n } = useTranslation();
@@ -14,11 +29,11 @@ export default function PrivacyPolicyScreen() {
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 80 }}>
-        <View className="flex-row items-center mb-4">
+        <View className="h-11 flex-row items-center mb-4">
           <Pressable onPress={() => router.back()} className="mr-2 p-1">
             <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
           </Pressable>
-          <Text className="text-3xl font-bold text-black dark:text-white">
+          <Text className="text-base font-semibold text-black dark:text-white">
             {t('settings.privacy')}
           </Text>
         </View>
@@ -60,13 +75,22 @@ function PolicyKo() {
       </Text>
       <Text className="mt-1 text-xs text-gray-500">시행일: {EFFECTIVE_DATE}</Text>
 
+      <SectionTitle>개인정보처리자</SectionTitle>
+      <P>{`본 서비스의 개인정보처리자는 ${PROVIDER_KO.name} (${PROVIDER_KO.representative})이며, 개인정보 보호책임자도 동일합니다. 사업자등록번호·주소 등 상세 사업자 정보는 설정 → 사업자 정보에서 확인하실 수 있습니다.`}</P>
+      <P>{`개인정보 관련 문의: ${PROVIDER_KO.email}`}</P>
+
       <SectionTitle>1. 수집하는 정보</SectionTitle>
-      <P>TypeWord(이하 "앱")는 서비스 제공을 위해 아래 정보를 수집합니다.</P>
+      <P>MoaVoca(이하 "앱")는 서비스 제공을 위해 아래 정보를 수집합니다.</P>
       <Bullet>이메일 주소: 계정 등록 및 로그인 시 수집 (선택 사항)</Bullet>
       <Bullet>비밀번호: 이메일 계정 인증 목적으로 수집되며 암호화되어 저장됩니다</Bullet>
       <Bullet>Google 프로필 정보: Google 로그인 시 이메일 주소와 이름이 수집됩니다 (선택 사항)</Bullet>
+      <Bullet>Apple 계정 정보: Apple 로그인 시 Apple ID에 연결된 이메일 주소와 이름이 수집됩니다 (선택 사항). "Hide My Email" 사용 시 Apple이 생성한 익명 릴레이 주소만 전달받으며, 사용자의 실제 이메일 주소는 알 수 없습니다.</Bullet>
+      <Bullet>표시 이름(닉네임): 친구·공유 기능에서 다른 사용자에게 노출되는 이름. 사용자가 직접 설정합니다.</Bullet>
+      <Bullet>아바타 선택: 운영자가 제공하는 미리 만들어진 아바타 세트 또는 자동 생성된 이니셜 중에서 선택한 정보. 임의 사진 업로드 기능은 제공하지 않습니다.</Bullet>
       <Bullet>언어 설정: 모국어, 원서 언어, 번역 언어</Bullet>
       <Bullet>단어장 정보: 단어장 이름, 저장한 단어 및 AI 생성 정의</Bullet>
+      <Bullet>공유 단어장: 사용자가 다른 이용자가 볼 수 있도록 공유한 단어장 (이름, 설명, 단어 구성)</Bullet>
+      <Bullet>친구 관계: 사용자가 추가/수락/차단한 다른 이용자 목록</Bullet>
       <Bullet>기기 언어: 앱 초기 언어 설정을 위해 1회 확인 (서버 전송 없음)</Bullet>
       <Bullet>카메라/사진: 이미지 단어 추출 기능 사용 시 촬영하거나 선택한 이미지가 AI 처리를 위해 서버로 전송됩니다. 이미지는 처리 후 즉시 삭제되며 서버에 저장되지 않습니다.</Bullet>
       <Bullet>마이크/음성: 음성 검색 기능 사용 시 마이크 입력이 기기 운영체제(Apple/Google)의 음성 인식 서비스로 전달되어 텍스트로 변환됩니다. 변환된 텍스트만 단어 검색에 사용되며, 음성 데이터 자체는 앱 서버로 전송·저장되지 않습니다.</Bullet>
@@ -91,15 +115,18 @@ function PolicyKo() {
       <SectionTitle>4. 제3자 제공</SectionTitle>
       <P>앱은 서비스 제공을 위해 아래 외부 서비스를 이용합니다.</P>
       <Bullet>OpenAI: 검색한 단어와 언어쌍 정보가 전달됩니다. 이미지 단어 추출 기능 사용 시 이미지가 함께 전송됩니다. 사용자 식별 정보는 전송되지 않습니다.</Bullet>
-      <Bullet>Supabase: 인증, 데이터베이스, 클라우드 동기화 및 API 호스팅 서비스 제공</Bullet>
+      <Bullet>Microsoft Azure (Cognitive Services - Speech): 발음 듣기(TTS) 기능 사용 시 단어 또는 예문 텍스트가 Azure Neural TTS 서비스로 전달되어 음성으로 합성됩니다. 사용자 식별 정보는 전송되지 않으며, 생성된 음성은 익명 캐시로 저장됩니다.</Bullet>
+      <Bullet>Supabase: 인증, 데이터베이스, 클라우드 동기화, TTS 음성 캐시 및 API 호스팅 서비스 제공</Bullet>
       <Bullet>RevenueCat: 구독 결제 처리 및 구독 상태 관리. 익명 사용자 ID와 구독 정보만 전달됩니다.</Bullet>
       <Bullet>Free Dictionary API: 영어 단어 검색 실패 시 대체 사전 (단어만 전송)</Bullet>
       <Bullet>Google AdMob: 무료 사용자에게 앱 내 광고를 표시합니다. AdMob은 Google 개인정보처리방침에 따라 기기 식별자 및 광고 상호작용 데이터를 수집할 수 있습니다. 프리미엄 사용자에게는 광고가 표시되지 않습니다.</Bullet>
+      <Bullet>Apple (Sign in with Apple): Apple 로그인 시 Apple이 인증을 처리하고, 사용자가 동의한 정보(이메일, 이름)만 앱으로 전달됩니다. "Hide My Email" 선택 시 Apple이 익명 릴레이 주소를 생성하여 전달합니다.</Bullet>
+      <Bullet>Google (Google Sign-In): Google 로그인 시 Google이 인증을 처리하고, 이메일과 프로필 정보가 전달됩니다.</Bullet>
       <Bullet>Sentry: 앱 오류 모니터링 서비스. 오류 발생 시 기기 정보와 오류 로그가 전송될 수 있으며, 개인 식별 정보는 포함되지 않습니다.</Bullet>
       <P>분석 도구, 소셜 미디어 등에 데이터를 공유하지 않습니다.</P>
 
       <SectionTitle>5. 음성 합성(TTS)</SectionTitle>
-      <P>발음 듣기 기능은 기기 내장 TTS 엔진을 사용하며, 외부 서버로 데이터가 전송되지 않습니다.</P>
+      <P>발음 듣기 기능은 Microsoft Azure Neural TTS 서비스를 사용하여 음성을 합성합니다. 단어 또는 예문 텍스트가 Supabase 서버를 경유하여 Azure로 전달되며, 합성된 음성 파일은 Supabase 저장소에 익명 캐시로 보관되어 동일한 단어를 다시 요청할 때 재사용됩니다. 사용자 식별 정보는 음성 합성 요청에 포함되지 않습니다.</P>
 
       <SectionTitle>6. 음성 인식</SectionTitle>
       <P>단어 검색 화면에서 마이크 버튼으로 음성 입력을 사용할 수 있습니다. 음성은 운영체제가 제공하는 음성 인식 서비스(iOS Speech, Google Speech)에서 처리되며, Apple/Google의 개인정보처리방침이 적용될 수 있습니다. 앱은 인식 결과 텍스트만 받아 검색에 사용하고, 음성 데이터를 별도로 저장하거나 외부로 전송하지 않습니다.</P>
@@ -110,28 +137,44 @@ function PolicyKo() {
       <SectionTitle>8. 단어장 내보내기</SectionTitle>
       <P>프리미엄 사용자는 단어장을 CSV 파일로 내보낼 수 있습니다. 파일은 기기 내에서 생성되어 운영체제의 공유 시트(이메일, 메시지, 클라우드 드라이브 등)를 통해 사용자가 직접 선택한 곳으로 전달됩니다. 내보내기 과정에서 앱 서버로 추가 데이터가 전송되지 않습니다.</P>
 
-      <SectionTitle>9. 광고 식별자 (iOS ATT / Android GAID)</SectionTitle>
+      <SectionTitle>9. 공개 콘텐츠 및 단어장 공유</SectionTitle>
+      <P>이용자가 단어장을 공유 기능을 통해 공개하면, 해당 단어장의 이름·설명·단어 구성과 게시한 사용자의 표시 이름·아바타가 다른 모든 이용자에게 표시됩니다. 공유 단어장은 *공개 정보*로 취급되며, 검색·열람·다운로드의 대상이 됩니다.</P>
+      <P>사용자는 언제든 공유를 해제하거나 콘텐츠를 삭제할 수 있습니다. 다만 다른 이용자가 이미 다운로드하거나 자신의 단어장에 복사한 콘텐츠는 *그 이용자의 사본*에서 자동 삭제되지 않을 수 있습니다.</P>
+      <P>운영자는 부적절한 공개 콘텐츠를 사전 통지 없이 비공개·삭제할 수 있으며, 신고 시스템을 통해 사용자가 부적절한 콘텐츠를 알릴 수 있습니다. 자세한 콘텐츠 정책은 이용약관을 참고하세요.</P>
+
+      <SectionTitle>10. 친구 시스템</SectionTitle>
+      <P>친구로 등록된 다른 이용자에게는 사용자의 표시 이름, 아바타, 학습 통계(학습 일수, 누적 단어 수 등), 공유 단어장이 표시될 수 있습니다. 구체적 공개 범위는 앱 내 설정에서 확인하고 조정할 수 있습니다.</P>
+      <P>친구 추가는 양방향 동의로 성립하며, 친구 관계는 언제든 해제하거나 차단할 수 있습니다. 차단한 사용자에게는 사용자의 콘텐츠가 더 이상 표시되지 않습니다.</P>
+      <P>친구 관계 정보는 서버에 암호화 저장되며, 친구 본인이 아닌 제3자에게는 공개되지 않습니다.</P>
+
+      <SectionTitle>11. 프로필 및 아바타</SectionTitle>
+      <P>이용자의 프로필 아바타는 운영자가 제공하는 미리 만들어진 세트 또는 자동 생성된 이니셜로만 설정할 수 있습니다. 사용자가 임의로 사진·이미지를 업로드하는 기능은 제공하지 않습니다(부적절한 콘텐츠 위험 방지 목적).</P>
+      <P>표시 이름과 아바타는 다른 사용자가 볼 수 있는 *공개 정보*입니다. 친구·공유·게시판 등 사회적 기능 영역에서 노출됩니다.</P>
+
+      <SectionTitle>12. 광고 식별자 (iOS ATT / Android GAID)</SectionTitle>
       <P>iOS에서는 처음 앱 실행 시 광고 식별자(IDFA) 사용 동의를 묻는 시스템 팝업이 표시될 수 있습니다. Android에서는 Google 광고 ID(GAID)가 사용되며, 기기 설정에서 광고 개인화를 제한하거나 광고 ID를 재설정할 수 있습니다. 동의/허용 여부는 광고 개인화 정도에만 영향을 미치며, 거부하더라도 앱의 기본 기능 사용에는 제한이 없습니다. 유럽(GDPR) 및 캘리포니아(CCPA) 지역 사용자에게는 별도의 광고 개인정보 동의 화면이 표시됩니다.</P>
 
-      <SectionTitle>10. 데이터 보관 및 삭제</SectionTitle>
+      <SectionTitle>13. 데이터 보관 및 삭제</SectionTitle>
       <P>기기에 저장된 단어장 데이터는 앱 삭제 시 함께 삭제됩니다. 설정 화면의 "초기화" 기능을 통해 언제든 기기 내 모든 데이터를 삭제할 수 있습니다.</P>
-      <P>계정을 등록한 사용자는 설정 화면에서 계정 삭제를 요청할 수 있으며, 삭제 시 서버에 저장된 이메일, 단어장 데이터 등 모든 정보가 영구적으로 삭제됩니다.</P>
+      <P>계정을 등록한 사용자는 설정 화면에서 계정 삭제를 요청할 수 있으며, 삭제 시 서버에 저장된 이메일, 단어장 데이터, 표시 이름, 친구 관계, 공유 단어장 등 모든 정보가 영구적으로 삭제됩니다.</P>
       <P>구독 해지 후에도 서버 데이터는 계정 삭제를 요청할 때까지 보관됩니다.</P>
+      <P>국세청 부가가치세·종합소득세 신고 의무에 따라, 결제·정산과 관련된 거래 기록은 관계 법령에서 정한 기간(통상 5년) 동안 보관된 후 파기됩니다. 단, 해당 기록에서 개인정보는 가명·비식별화되어 처리됩니다.</P>
 
-      <SectionTitle>11. 계정 및 인증</SectionTitle>
-      <P>앱은 회원가입 없이 사용할 수 있습니다. 클라우드 백업 및 동기화를 이용하려면 이메일 또는 Google 계정으로 로그인할 수 있습니다.</P>
-      <P>이메일 계정 등록 시 이메일 인증을 통해 본인 확인을 진행합니다. 비밀번호는 암호화되어 저장되며, 개발자가 비밀번호 원문을 확인할 수 없습니다.</P>
+      <SectionTitle>14. 계정 및 인증</SectionTitle>
+      <P>앱은 회원가입 없이 사용할 수 있습니다. 클라우드 백업 및 동기화를 이용하려면 이메일, Google 계정 또는 Apple 계정으로 로그인할 수 있습니다.</P>
+      <P>이메일 계정 등록 시 이메일 인증을 통해 본인 확인을 진행합니다. 비밀번호는 암호화되어 저장되며, 운영자가 비밀번호 원문을 확인할 수 없습니다.</P>
       <P>Google 로그인 시 Google 계정의 이메일 주소와 프로필 정보(이름)가 수집됩니다. Google 계정의 비밀번호는 앱에서 처리하지 않습니다.</P>
+      <P>Apple 로그인 시 Apple ID에 연결된 이메일 주소와 이름이 수집됩니다. "Hide My Email"을 선택하면 Apple이 익명 릴레이 주소를 생성하여 전달하며, 운영자는 사용자의 실제 이메일을 알 수 없습니다. Apple 계정의 비밀번호 및 인증 절차는 Apple이 처리하며 앱에서 직접 다루지 않습니다.</P>
 
-      <SectionTitle>12. 아동 개인정보 보호</SectionTitle>
+      <SectionTitle>15. 아동 개인정보 보호</SectionTitle>
       <P>본 앱은 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다. 만 14세 미만 사용자는 보호자의 동의 하에 앱을 사용해야 합니다.</P>
 
-      <SectionTitle>13. 변경 사항 고지</SectionTitle>
+      <SectionTitle>16. 변경 사항 고지</SectionTitle>
       <P>개인정보처리방침이 변경될 경우, 앱 내 공지를 통해 사전에 안내합니다.</P>
 
-      <SectionTitle>14. 문의</SectionTitle>
-      <P>개인정보와 관련한 문의는 아래로 연락해 주세요.</P>
-      <P>이메일: support@typeword.app</P>
+      <SectionTitle>17. 문의</SectionTitle>
+      <P>개인정보와 관련한 문의는 이메일로 보내주시면 답변드리겠습니다.</P>
+      <P>{`이메일: ${PROVIDER_KO.email}`}</P>
     </View>
   );
 }
@@ -144,13 +187,22 @@ function PolicyEn() {
       </Text>
       <Text className="mt-1 text-xs text-gray-500">Effective: {EFFECTIVE_DATE}</Text>
 
+      <SectionTitle>Data Controller</SectionTitle>
+      <P>{`The data controller for this service is ${PROVIDER_EN.name} (${PROVIDER_EN.representative}), who also serves as the Privacy Officer. Full business registration details (registration number, address, mail-order registration) are available under Settings → Business Information.`}</P>
+      <P>{`Privacy inquiries: ${PROVIDER_EN.email}`}</P>
+
       <SectionTitle>1. Information We Collect</SectionTitle>
-      <P>TypeWord ("the App") collects the following information to provide its services.</P>
+      <P>MoaVoca ("the App") collects the following information to provide its services.</P>
       <Bullet>Email address: collected when you register an account (optional)</Bullet>
       <Bullet>Password: collected for email account authentication and stored in encrypted form</Bullet>
       <Bullet>Google profile information: email address and name are collected when signing in with Google (optional)</Bullet>
+      <Bullet>Apple account information: email address and name linked to your Apple ID are collected when signing in with Apple (optional). If you choose "Hide My Email", only an Apple-generated anonymous relay address is passed to us — we cannot see your real email address.</Bullet>
+      <Bullet>Display name (nickname): the name shown to other users in friend and sharing features. Set by you.</Bullet>
+      <Bullet>Avatar selection: an avatar chosen from a Provider-supplied predefined set or auto-generated initials. Custom photo upload is not supported.</Bullet>
       <Bullet>Language settings: native language, source language, target language</Bullet>
       <Bullet>Wordlist data: list names, saved words, and AI-generated definitions</Bullet>
+      <Bullet>Shared wordlists: wordlists you share so other users can view them (name, description, word selection)</Bullet>
+      <Bullet>Friend relationships: list of other users you have added, accepted, or blocked</Bullet>
       <Bullet>Device language: checked once for initial UI language (not sent to servers)</Bullet>
       <Bullet>Camera/Photos: When using the image word extraction feature, captured or selected images are sent to our server for AI processing. Images are deleted immediately after processing and are not stored on our servers.</Bullet>
       <Bullet>Microphone/Voice: When using voice search, microphone input is forwarded to your operating system's speech recognition service (Apple/Google) for conversion to text. Only the transcribed text is used for word lookup; the audio itself is not transmitted to or stored on our servers.</Bullet>
@@ -175,15 +227,18 @@ function PolicyEn() {
       <SectionTitle>4. Third-Party Services</SectionTitle>
       <P>The App uses the following external services to provide its functionality.</P>
       <Bullet>OpenAI: The searched word and language pair are sent. When using image word extraction, images are also transmitted. No user identification is transmitted.</Bullet>
-      <Bullet>Supabase: Provides authentication, database, cloud sync, and API hosting</Bullet>
+      <Bullet>Microsoft Azure (Cognitive Services - Speech): When you use the pronunciation (TTS) feature, the word or example sentence text is sent to Azure Neural TTS for speech synthesis. No user identification is transmitted; the synthesized audio is stored in an anonymous cache.</Bullet>
+      <Bullet>Supabase: Provides authentication, database, cloud sync, TTS audio caching, and API hosting</Bullet>
       <Bullet>RevenueCat: Handles subscription payment processing and subscription state management. Only an anonymous user ID and subscription information are shared.</Bullet>
       <Bullet>Free Dictionary API: Fallback dictionary for English lookups (only the word is sent)</Bullet>
       <Bullet>Google AdMob: Displays advertisements to free-tier users. AdMob may collect device identifiers and ad interaction data in accordance with Google's privacy policy. Premium users do not see ads.</Bullet>
+      <Bullet>Apple (Sign in with Apple): When you sign in with Apple, Apple handles authentication and only the information you consent to share (email, name) is passed to the App. If you select "Hide My Email", Apple generates an anonymous relay address that is shared with us instead of your real email.</Bullet>
+      <Bullet>Google (Google Sign-In): When you sign in with Google, Google handles authentication and your email and profile information are passed to the App.</Bullet>
       <Bullet>Sentry: Error monitoring service. Device information and error logs may be transmitted when errors occur; no personal identifiers are included.</Bullet>
       <P>We do not share data with analytics tools or social media platforms.</P>
 
       <SectionTitle>5. Text-to-Speech (TTS)</SectionTitle>
-      <P>The pronunciation feature uses your device's built-in TTS engine. No data is sent to external servers for this feature.</P>
+      <P>The pronunciation feature uses Microsoft Azure Neural TTS for speech synthesis. The word or example sentence text is routed through our Supabase server to Azure, and the synthesized audio file is stored in an anonymous cache on Supabase storage so that subsequent requests for the same text reuse the cached audio. No user identification is included in TTS synthesis requests.</P>
 
       <SectionTitle>6. Speech Recognition</SectionTitle>
       <P>The microphone button on the word lookup screen lets you dictate a word instead of typing. Audio is processed by your operating system's speech recognition service (iOS Speech, Google Speech) and the corresponding privacy policies of Apple/Google may apply. Our app receives only the transcribed text and uses it for lookup; raw audio is not stored or transmitted by us.</P>
@@ -194,28 +249,44 @@ function PolicyEn() {
       <SectionTitle>8. Wordlist Export</SectionTitle>
       <P>Premium users can export wordlists as CSV files. Files are generated on-device and shared via your operating system's share sheet (email, messaging, cloud drives, etc.) to a destination you choose. No additional data is sent to our servers during export.</P>
 
-      <SectionTitle>9. Advertising Identifiers (iOS ATT / Android GAID)</SectionTitle>
+      <SectionTitle>9. Public Content and Wordlist Sharing</SectionTitle>
+      <P>When you share a wordlist publicly, the wordlist's name, description, word selection, and the posting user's display name and avatar become visible to all other users. Shared wordlists are treated as public information and are subject to discovery, viewing, and download by other users.</P>
+      <P>You may unshare or delete content at any time. However, copies that other users have already downloaded or copied into their own wordlists may not be automatically deleted from those copies.</P>
+      <P>The Provider may, without prior notice, hide or remove inappropriate public content. Users can flag inappropriate content through the in-app reporting system. See the Terms of Service for the full content policy.</P>
+
+      <SectionTitle>10. Friend System</SectionTitle>
+      <P>Users you have added as friends may see your display name, avatar, learning statistics (study days, total words, etc.), and shared wordlists. The exact scope of visibility is shown and adjustable in the in-app settings.</P>
+      <P>Friend relationships are formed by mutual consent and may be removed or blocked at any time. After blocking, the blocked user can no longer see your content.</P>
+      <P>Friend relationship data is stored encrypted on the server and is not disclosed to third parties other than the friends themselves.</P>
+
+      <SectionTitle>11. Profile and Avatar</SectionTitle>
+      <P>Profile avatars may only be set from a Provider-supplied predefined set or as auto-generated initials. Custom photo or image upload is not supported (to prevent the risk of inappropriate content).</P>
+      <P>Display names and avatars are public information visible to other users in friend, sharing, and community feature areas.</P>
+
+      <SectionTitle>12. Advertising Identifiers (iOS ATT / Android GAID)</SectionTitle>
       <P>On iOS, the system may show a tracking permission prompt (IDFA) the first time you launch the App. On Android, the Google Advertising ID (GAID) is used; you can limit ad personalization or reset the GAID in your device settings. Your decision affects only ad personalization — declining does not restrict the app's core functionality. Users in the EU (GDPR) and California (CCPA) will see a separate ad consent screen.</P>
 
-      <SectionTitle>10. Data Retention and Deletion</SectionTitle>
+      <SectionTitle>13. Data Retention and Deletion</SectionTitle>
       <P>Locally stored wordlist data is deleted when you uninstall the app. You can also delete all on-device data at any time using the "Reset" option in Settings.</P>
-      <P>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email and wordlist data will be permanently removed.</P>
+      <P>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email, wordlist data, display name, friend relationships, and shared wordlists will be permanently removed.</P>
       <P>Server data is retained after subscription cancellation until you request account deletion.</P>
+      <P>To comply with Korean tax-reporting obligations (VAT and income tax), payment- and settlement-related transaction records are retained for the period required by applicable law (typically 5 years) before being deleted. Within those records, personal information is pseudonymized or de-identified.</P>
 
-      <SectionTitle>11. Accounts and Authentication</SectionTitle>
-      <P>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email or Google account.</P>
-      <P>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the developer.</P>
+      <SectionTitle>14. Accounts and Authentication</SectionTitle>
+      <P>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email, Google account, or Apple account.</P>
+      <P>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the Provider.</P>
       <P>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google account password is not processed by the App.</P>
+      <P>When signing in with Apple, the email address and name linked to your Apple ID are collected. If you choose "Hide My Email", Apple generates an anonymous relay address that is provided to us instead of your real email — we cannot see your real email address. Apple account password and authentication are handled by Apple and are not processed by the App directly.</P>
 
-      <SectionTitle>12. Children's Privacy</SectionTitle>
-      <P>This App does not knowingly collect personal information from children under the age of 13. Users under 13 should use the App only with parental consent.</P>
+      <SectionTitle>15. Children's Privacy</SectionTitle>
+      <P>This App does not knowingly collect personal information from children under the age of 14 (in line with Korean law) or under the age of 13 (in line with US COPPA). Users below the applicable age should use the App only with parental consent.</P>
 
-      <SectionTitle>13. Changes to This Policy</SectionTitle>
+      <SectionTitle>16. Changes to This Policy</SectionTitle>
       <P>If this Privacy Policy is updated, we will notify you through an in-app notice prior to the changes taking effect.</P>
 
-      <SectionTitle>14. Contact Us</SectionTitle>
-      <P>For privacy-related inquiries, please contact us at:</P>
-      <P>Email: support@typeword.app</P>
+      <SectionTitle>17. Contact Us</SectionTitle>
+      <P>For privacy-related inquiries, please reach out by email.</P>
+      <P>{`Email: ${PROVIDER_EN.email}`}</P>
     </View>
   );
 }

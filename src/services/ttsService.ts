@@ -69,13 +69,22 @@ function phonemeKey(p?: PhonemeOverride): string {
   return p ? `v4:${p.alphabet ?? 'ipa'}:${p.ph}` : '';
 }
 
+/** Public form of `phonemeKey` — used by the prefetch sweeper to mirror
+ * the cache key that `speakCloud` will compute on tap. */
+export function ttsPhonemeKey(p?: PhonemeOverride): string {
+  return phonemeKey(p);
+}
+
 function fallbackToDevice(text: string, language: string, rate: number) {
-  // Disabled: the device TTS uses the OS default voice (often female on
-  // Android), which contradicts the user's gender setting and causes
-  // intermittent female playback when cloud TTS hiccups. Prefer silence —
-  // the user can tap the speaker icon to retry. Keep the function so call
-  // sites need no changes; just no-op for now.
-  void text; void language; void rate;
+  // Last-resort speech via the OS TTS engine. Triggers when cloud TTS
+  // fails (rate-limited, network down, unsupported language) — better
+  // than silence even if the device voice doesn't match the user's
+  // selected gender. Speech.speak fails silently on unsupported langs.
+  try {
+    Speech.speak(text, { language, rate });
+  } catch {
+    // ignore — silence is the only remaining option
+  }
 }
 
 /**
@@ -90,7 +99,12 @@ function fallbackToDevice(text: string, language: string, rate: number) {
 // while iOS gets the full 40% lift.
 const PLATFORM_VOLUME = Platform.OS === 'ios' ? 1.0 : 0.71;
 
-function startPlayback(uri: string, playbackRate: number) {
+function startPlayback(uri: string, playbackRate: number, seqToken: number) {
+  // Final guard — if a newer speakCloud call (or stopAll) bumped speakSeq
+  // between the caller's last check and reaching here, drop this playback.
+  // Without this, an awaiting old session's audio could slip through and
+  // play right before a new session's first card audio.
+  if (seqToken !== speakSeq) return;
   const player = createAudioPlayer({ uri });
   activePlayer = player;
   player.setPlaybackRate(playbackRate, 'high');
@@ -130,7 +144,7 @@ export async function speakCloud(
   if (localUri) {
     if (mySeq !== speakSeq) return;
     try {
-      startPlayback(localUri, userRate * getRateCorrection(language, gender));
+      startPlayback(localUri, userRate * getRateCorrection(language, gender), mySeq);
       return;
     } catch (err) {
       console.warn('local TTS playback failed, refetching:', err);
@@ -163,7 +177,7 @@ export async function speakCloud(
 
   try {
     const correction = resp.rateCorrection ?? getRateCorrection(language, gender);
-    startPlayback(playbackUri, userRate * correction);
+    startPlayback(playbackUri, userRate * correction, mySeq);
   } catch (err) {
     console.warn('audio playback failed, falling back:', err);
     disposeActive();
@@ -204,11 +218,18 @@ export async function prefetchTtsAwaitable(
   text: string,
   language: string,
   phoneme?: PhonemeOverride,
+  /** Optional — restrict prefetch to a single gender. Used by the
+   * launch-time sweeper to avoid doubling bandwidth on words the user
+   * has only listened to in one voice anyway. Default behavior remains
+   * "pre-warm both" for the in-import / search flows where the user
+   * might toggle voices immediately. */
+  genders?: ReadonlyArray<'F' | 'M'>,
 ): Promise<void> {
   if (!text?.trim()) return;
   if (!SUPPORTED_LANGS.has(language)) return;
   const pk = phonemeKey(phoneme);
-  await Promise.all((['F', 'M'] as const).map(async (g) => {
+  const targets = genders ?? (['F', 'M'] as const);
+  await Promise.all(targets.map(async (g) => {
     if (findLocalTtsUri(text, language, g, pk)) return;
     try {
       const resp = await fetchTts(text, language, g, phoneme);

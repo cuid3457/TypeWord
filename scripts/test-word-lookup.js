@@ -8,9 +8,14 @@ const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
 
-const SUPABASE_URL = 'https://dvdufzwdtmiuzkivjpxb.supabase.co';
+const SUPABASE_URL =
+  process.env.EXPO_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
 const SUPABASE_ANON_KEY =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2ZHVmendkdG1pdXpraXZqcHhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyNjI5ODMsImV4cCI6MjA5MTgzODk4M30.7_ji61PtHbe1eTzZijZbVJJ-f9TYyP6L_lwt356BXdM';
+  process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  console.error('Missing env: SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY (or SUPABASE_ANON_KEY) required');
+  process.exit(1);
+}
 const FUNCTION_URL = `${SUPABASE_URL}/functions/v1/word-lookup`;
 
 const DELAY_MS = 3400; // ~17.6 req/min per user, under 20/min limit

@@ -15,6 +15,7 @@ import { genId, lookupWord } from './wordService';
 import { insertBook, saveWord } from '@src/db/queries';
 import { getTtsText, phonemeForChinese } from '@src/utils/ttsLocale';
 import { prefetchTtsAwaitable } from './ttsService';
+import { promoteToPersistent } from './ttsCache';
 import type { WordLookupResult } from '@src/types/word';
 
 // Category is open-ended on purpose: new buckets (foundation, academic,
@@ -42,6 +43,9 @@ export interface CuratedWordlistMeta {
   category: CuratedCategory;
   wordCount: number;
   displayOrder: number;
+  /** Server-side content version. Bumped on any curated_words change in this
+   * list. Used by launch-time sync to decide whether to pull a diff. */
+  contentVersion: number;
 }
 
 export interface CuratedWord {
@@ -65,6 +69,7 @@ interface CuratedWordlistRow {
   category: CuratedCategory;
   word_count: number;
   display_order: number;
+  content_version: number;
 }
 
 interface CuratedWordRow {
@@ -72,6 +77,7 @@ interface CuratedWordRow {
   reading_key: string;
   display_order: number;
   results_by_target_lang: Record<string, WordLookupResult>;
+  updated_at?: string;
 }
 
 function rowToMeta(row: CuratedWordlistRow): CuratedWordlistMeta {
@@ -86,6 +92,7 @@ function rowToMeta(row: CuratedWordlistRow): CuratedWordlistMeta {
     category: row.category,
     wordCount: row.word_count,
     displayOrder: row.display_order,
+    contentVersion: row.content_version ?? 1,
   };
 }
 
@@ -108,6 +115,9 @@ export async function listCuratedWordlists(sourceLang?: string): Promise<Curated
 export async function getCuratedWordlist(id: string): Promise<{
   meta: CuratedWordlistMeta;
   words: CuratedWord[];
+  /** Newest curated_words.updated_at (ms since epoch) — used to seed the
+   * incremental sync watermark when importing this list. 0 if no rows. */
+  newestUpdatedAt: number;
 } | null> {
   const { data: metaData, error: metaErr } = await supabase
     .from('curated_wordlists')
@@ -119,22 +129,30 @@ export async function getCuratedWordlist(id: string): Promise<{
 
   const { data: wordRows, error: wordsErr } = await supabase
     .from('curated_words')
-    .select('word, reading_key, display_order, results_by_target_lang')
+    .select('word, reading_key, display_order, results_by_target_lang, updated_at')
     .eq('curated_wordlist_id', id)
     .order('display_order', { ascending: true });
   if (wordsErr) return null;
 
+  let newestUpdatedAt = 0;
+  const words: CuratedWord[] = (wordRows ?? []).map((r) => {
+    const row = r as CuratedWordRow;
+    if (row.updated_at) {
+      const ms = new Date(row.updated_at).getTime();
+      if (ms > newestUpdatedAt) newestUpdatedAt = ms;
+    }
+    return {
+      word: row.word,
+      readingKey: row.reading_key ?? '',
+      displayOrder: row.display_order,
+      resultsByTargetLang: row.results_by_target_lang ?? {},
+    };
+  });
+
   return {
     meta: rowToMeta(metaData as CuratedWordlistRow),
-    words: (wordRows ?? []).map((r) => {
-      const row = r as CuratedWordRow;
-      return {
-        word: row.word,
-        readingKey: row.reading_key ?? '',
-        displayOrder: row.display_order,
-        resultsByTargetLang: row.results_by_target_lang ?? {},
-      };
-    }),
+    words,
+    newestUpdatedAt,
   };
 }
 
@@ -171,7 +189,7 @@ export async function addCuratedWordlistToUser(
   const data = await getCuratedWordlist(curatedId);
   if (!data) throw new Error('Curated wordlist not found');
 
-  const { meta, words } = data;
+  const { meta, words, newestUpdatedAt } = data;
 
   const bookId = genId();
   await insertBook({
@@ -181,6 +199,12 @@ export async function addCuratedWordlistToUser(
     targetLang,
     bidirectional: true,
     studyLang: meta.sourceLang,
+    curatedWordlistId: meta.id,
+    contentVersion: meta.contentVersion,
+    // Server-time watermark; falls back to local now() only if the server
+    // schema predates the updated_at column (defensive — shouldn't happen
+    // after the curated_sync migration ships).
+    lastSyncedAt: newestUpdatedAt || Date.now(),
   });
 
   let added = 0;
@@ -213,6 +237,7 @@ export async function addCuratedWordlistToUser(
         readingKey: w.readingKey,
         result,
         sourceSentence: null,
+        source: 'curated',
       });
       added++;
 
@@ -236,13 +261,12 @@ export async function addCuratedWordlistToUser(
     }
   }
 
-  // Drain the prefetch queue with bounded concurrency. Without throttling,
-  // a 150-word HSK list fires 300 simultaneous TTS fetches (F + M per
-  // word) which overwhelms expo-audio's downloader on Android — many
-  // requests silently fail and even the user's first speaker tap races
-  // with the mass of pending fetches. 4 in flight is safe and finishes a
-  // 150-word list in ~15-30 seconds in the background.
-  void runPrefetchQueue(prefetchQueue, 4);
+  // Drain the prefetch queue with bounded concurrency. Concurrency=2
+  // keeps the burst rate (~120 calls/min) below the tts-synthesize per-
+  // minute cap so the queue isn't silently 429-rate-limited — earlier
+  // 4-in-flight blew through the 30/min cap and left most examples
+  // uncached and silent on first tap.
+  void runPrefetchQueue(prefetchQueue, 2);
 
   return { bookId, addedCount: added };
 }
@@ -264,6 +288,10 @@ async function runPrefetchQueue(tasks: PrefetchTask[], concurrency: number): Pro
       // prefetchSpeak which made the cap meaningless — all ~600 downloads
       // started in parallel and starved each other.
       await prefetchTtsAwaitable(task.text, task.lang, task.phoneme);
+      // Move from cache/ to document/ so OS storage-pressure eviction
+      // doesn't silently delete the mp3s of a saved wordlist (causing
+      // a 2-second cloud refetch on every speaker tap hours later).
+      promoteToPersistent(task.text, task.lang);
     }
   };
   for (let w = 0; w < concurrency; w++) workers.push(next());

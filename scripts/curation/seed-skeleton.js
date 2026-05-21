@@ -160,15 +160,9 @@ const LISTS = [
     descKo: 'DELE C1 신규 어휘' }),
 
   // ───── 프랑스어 (fr) ─────
-  exam({ slug: 'delf-a1', source: 'fr', examType: 'DELF', level: 'A1', order: 71,
-    names: { ko: 'DELF A1', en: 'DELF A1', fr: 'DELF A1' },
-    descKo: 'France Éducation 공식 DELF A1 어휘' }),
-  exam({ slug: 'delf-a2', source: 'fr', examType: 'DELF', level: 'A2', order: 72,
-    names: { ko: 'DELF A2', en: 'DELF A2', fr: 'DELF A2' },
-    descKo: 'DELF A2 신규 어휘' }),
-  exam({ slug: 'delf-b1', source: 'fr', examType: 'DELF', level: 'B1', order: 73,
-    names: { ko: 'DELF B1', en: 'DELF B1', fr: 'DELF B1' },
-    descKo: 'DELF B1 신규 어휘' }),
+  // delf-a1, delf-a2 placeholders removed: actual content lives in
+  // delf-a1-part-1/2 and delf-a2-part-1/2 (curated via data/*.json).
+  // delf-b1 placeholder removed: actual content in delf-b1-part-1/2/3/4.
   exam({ slug: 'delf-b2', source: 'fr', examType: 'DELF', level: 'B2', order: 74,
     names: { ko: 'DELF B2', en: 'DELF B2', fr: 'DELF B2' },
     descKo: 'DELF B2 신규 어휘' }),

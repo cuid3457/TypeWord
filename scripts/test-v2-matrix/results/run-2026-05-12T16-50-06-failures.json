@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "schema": {
+      "pass": 70,
+      "total": 70
+    },
+    "confidence": {
+      "pass": 70,
+      "total": 70
+    },
+    "meaning_count": {
+      "pass": 70,
+      "total": 70
+    },
+    "pos_terminology": {
+      "pass": 70,
+      "total": 70
+    },
+    "sentence_rejected": {
+      "pass": 70,
+      "total": 70
+    },
+    "typo_handled": {
+      "pass": 70,
+      "total": 70
+    },
+    "cross_script_purity": {
+      "pass": 70,
+      "total": 70
+    },
+    "example_distribution": {
+      "pass": 70,
+      "total": 70
+    },
+    "syn_no_paren": {
+      "pass": 70,
+      "total": 70
+    },
+    "headword_preserved": {
+      "pass": 70,
+      "total": 70
+    },
+    "sensitive_metaling": {
+      "pass": 70,
+      "total": 70
+    }
+  },
+  "consistency_violations": [],
+  "failures_by_check": {
+    "schema": [],
+    "confidence": [],
+    "meaning_count": [],
+    "pos_terminology": [],
+    "sentence_rejected": [],
+    "typo_handled": [],
+    "cross_script_purity": [],
+    "example_distribution": [],
+    "syn_no_paren": [],
+    "headword_preserved": [],
+    "sensitive_metaling": []
+  }
+}

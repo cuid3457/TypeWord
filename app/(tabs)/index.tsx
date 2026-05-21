@@ -12,26 +12,30 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabletContainer } from '@/components/tablet-container';
+import { useTablet } from '@src/hooks/useTablet';
 import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { AppModal } from '@/components/app-modal';
 import { Paywall } from '@/components/paywall';
+import { StreakBanner } from '@/components/streak-banner';
 import { WordlistCreateModal } from '@/components/wordlist-create-modal';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { usePremium } from '@src/hooks/usePremium';
+import { usePremium, useTier } from '@src/hooks/usePremium';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { findLanguage } from '@src/constants/languages';
 import {
   deleteBooks,
   listBooks,
   toggleBookPinned,
-  FREE_BOOK_LIMIT,
+  BOOK_LIMIT_BY_TIER,
   type BookSortMode,
   type BookWithCount,
 } from '@src/db/queries';
 import { consumePaywallPending } from '@src/services/paywallPending';
-import { getStreak, type StreakInfo } from '@src/services/streakService';
+import { getCachedHome, refreshHome, subscribeHome } from '@src/services/homeCache';
+import { type StreakInfo } from '@src/services/streakService';
 import { isNotificationAvailable, rescheduleNotifications, getNotificationTranslations } from '@src/services/notificationService';
 
 export default function HomeScreen() {
@@ -39,11 +43,15 @@ export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const refreshReviewBadge = useRefreshReviewBadge();
   const premium = usePremium();
+  const tier = useTier();
   const { settings } = useUserSettings();
-  const [books, setBooks] = useState<BookWithCount[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [sortMode, setSortMode] = useState<BookSortMode>('recent');
-  const [sortReversed, setSortReversed] = useState(false);
+  const { isTablet } = useTablet();
+  // Seed from boot-prefetch cache so first focus avoids the loading flash.
+  const initialHome = getCachedHome();
+  const [books, setBooks] = useState<BookWithCount[]>(initialHome?.books ?? []);
+  const [loading, setLoading] = useState(!initialHome);
+  const [sortMode, setSortMode] = useState<BookSortMode>(initialHome?.sort ?? 'recent');
+  const [sortReversed, setSortReversed] = useState(initialHome?.reversed ?? false);
   const [editMode, setEditMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -51,33 +59,32 @@ export default function HomeScreen() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
-  const [streak, setStreak] = useState<StreakInfo | null>(null);
+  const [streak, setStreak] = useState<StreakInfo | null>(initialHome?.streak ?? null);
   const longPressedRef = useRef(false);
   const flatListRef = useRef<FlatList<BookWithCount>>(null);
   const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Listen for cache updates (boot prefetch, focus refresh, sort changes).
+  useEffect(() => {
+    return subscribeHome((snap) => {
+      setBooks(snap.books);
+      setStreak(snap.streak);
+      setLoading(false);
+    });
+  }, []);
+
   const loadBooks = useCallback(async (sort: BookSortMode, reversed: boolean) => {
-    try {
-      const rows = await listBooks(sort, reversed);
-      setBooks(rows);
-      setLoading(false);
-    } catch (err) {
-      console.warn('listBooks failed:', err);
-      setLoading(false);
-    }
+    await refreshHome(sort, reversed).finally(() => setLoading(false));
   }, []);
 
   useFocusEffect(
     useCallback(() => {
       if (consumePaywallPending()) setShowPaywall(true);
       loadBooks(sortMode, sortReversed);
-      getStreak().then((s) => {
-        setStreak(s);
-        if (isNotificationAvailable()) {
-          rescheduleNotifications(getNotificationTranslations(t));
-        }
-      }).catch(() => {});
-    }, [loadBooks, sortMode, sortReversed]),
+      if (isNotificationAvailable()) {
+        rescheduleNotifications(getNotificationTranslations(t));
+      }
+    }, [loadBooks, sortMode, sortReversed, t]),
   );
 
   const handleSortChange = (mode: BookSortMode) => {
@@ -167,108 +174,73 @@ export default function HomeScreen() {
     return () => sub.remove();
   }, [editMode]);
 
-  const renderItem = ({ item }: { item: BookWithCount }) => (
-    <BookCard
-      book={item}
-      t={t}
-      dark={colorScheme === 'dark'}
-      editMode={editMode}
-      selected={selectedIds.has(item.id)}
-      highlighted={highlightedBookId === item.id}
-      onPress={() => {
-        if (longPressedRef.current) {
-          longPressedRef.current = false;
-          return;
-        }
-        if (editMode) {
-          toggleSelect(item.id);
-        } else {
-          router.push({ pathname: '/wordlist/[id]', params: { id: item.id } });
-        }
-      }}
-      onLongPress={() => {
-        if (!editMode) {
-          longPressedRef.current = true;
-          setEditMode(true);
-          setSelectedIds(new Set([item.id]));
-        }
-      }}
-      onPin={() => handlePin(item.id)}
-    />
-  );
+  const renderItem = ({ item }: { item: BookWithCount }) => {
+    const card = (
+      <BookCard
+        book={item}
+        t={t}
+        dark={colorScheme === 'dark'}
+        editMode={editMode}
+        selected={selectedIds.has(item.id)}
+        highlighted={highlightedBookId === item.id}
+        onPress={() => {
+          if (longPressedRef.current) {
+            longPressedRef.current = false;
+            return;
+          }
+          if (editMode) {
+            toggleSelect(item.id);
+          } else {
+            router.push({ pathname: '/wordlist/[id]', params: { id: item.id } });
+          }
+        }}
+        onLongPress={() => {
+          if (!editMode) {
+            longPressedRef.current = true;
+            setEditMode(true);
+            setSelectedIds(new Set([item.id]));
+          }
+        }}
+        onPin={() => handlePin(item.id)}
+      />
+    );
+    // Wrap with flex:1 column on tablets so the 2-column grid splits width evenly.
+    return isTablet ? <View style={{ flex: 1 }}>{card}</View> : card;
+  };
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+        <TabletContainer>
         {/* Header */}
-        <View className="flex-row items-end justify-between px-6 pt-6">
+        <View className="flex-row items-center justify-between px-6 pt-6">
           <View className="flex-1">
             <Text className="text-3xl font-bold text-black dark:text-white">
               {t('home.title')}
             </Text>
-            <Text className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              {books.length > 0
-                ? t('home.subtitle_count', { count: books.length })
-                : t('home.subtitle_empty')}
-            </Text>
           </View>
           <Pressable
             onPress={() => {
-              if (!premium && books.length >= FREE_BOOK_LIMIT) {
+              const cap = BOOK_LIMIT_BY_TIER[tier];
+              if (Number.isFinite(cap) && books.length >= cap) {
                 setShowPaywall(true);
               } else {
                 setShowCreateModal(true);
               }
             }}
-            className="rounded-xl bg-black px-4 py-3 dark:bg-white"
+            className="rounded-xl bg-black p-3 dark:bg-white"
+            accessibilityLabel={t('home.new_button')}
+            accessibilityRole="button"
           >
-            <Text className="text-sm font-semibold text-white dark:text-black">
-              {t('home.new_button')}
-            </Text>
+            <MaterialIcons
+              name="add"
+              size={20}
+              color={colorScheme === 'dark' ? '#000' : '#fff'}
+            />
           </Pressable>
         </View>
 
-        {/* Streak banner */}
-        {streak ? (
-          streak.current > 0 ? (
-            <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-amber-50 px-4 py-3 dark:bg-amber-950">
-              <Text className="text-2xl">🔥</Text>
-              <View className="ml-3 flex-1">
-                <Text className="text-sm font-bold text-amber-800 dark:text-amber-200">
-                  {t('streak.days', { count: streak.current })}
-                </Text>
-                <Text className="text-xs text-amber-600 dark:text-amber-400">
-                  {streak.todayDone ? t('streak.done_today') : t('streak.not_yet')}
-                </Text>
-              </View>
-              <View className="flex-row items-center gap-1">
-                {Array.from({ length: 2 }, (_, i) => {
-                  const active = i < streak.hearts;
-                  return (
-                    <MaterialIcons
-                      key={i}
-                      name={active ? 'favorite' : 'favorite-border'}
-                      size={18}
-                      color={active ? '#ef4444' : colorScheme === 'dark' ? '#6b7280' : '#9ca3af'}
-                    />
-                  );
-                })}
-              </View>
-            </View>
-          ) : (
-            <View className="mx-6 mt-4 flex-row items-center rounded-xl bg-gray-100 px-4 py-3 dark:bg-gray-800">
-              <Text className="text-2xl" style={{ opacity: 0.4 }}>🔥</Text>
-              <View className="ml-3 flex-1">
-                <Text className="text-sm font-bold text-gray-500 dark:text-gray-400">
-                  {t('streak.start_title')}
-                </Text>
-                <Text className="text-xs text-gray-400 dark:text-gray-500">
-                  {t('streak.start_hint')}
-                </Text>
-              </View>
-            </View>
-          )
-        ) : null}
+        <StreakBanner streak={streak} />
 
         {/* Sort buttons + edit */}
         <View className="mt-3 flex-row items-center justify-between px-6">
@@ -382,9 +354,12 @@ export default function HomeScreen() {
           <View style={{ flex: 1 }}>
             <FlatList
               ref={flatListRef}
+              key={isTablet ? 'grid' : 'list'}
               data={books}
               keyExtractor={(b) => b.id}
-              contentContainerStyle={{ padding: 24, paddingBottom: editMode ? { small: 86, medium: 104, large: 120 }[settings?.fontSize ?? 'medium'] : 24 }}
+              numColumns={isTablet ? 2 : 1}
+              columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
+              contentContainerStyle={{ padding: 24, paddingBottom: editMode ? { small: 86, medium: 104, large: 120 }[settings?.fontSize ?? 'medium'] : 24, gap: isTablet ? 12 : 0 }}
               renderItem={renderItem}
               onScrollToIndexFailed={(info) => {
                 setTimeout(() => {
@@ -424,14 +399,19 @@ export default function HomeScreen() {
             <Pressable
               onPress={() => setShowDeleteConfirm(true)}
               disabled={selectedIds.size === 0}
-              className={`rounded-xl px-5 py-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+              className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+              accessibilityLabel={t('home.delete_selected')}
+              accessibilityRole="button"
             >
-              <Text className={`text-sm font-semibold ${selectedIds.size > 0 ? 'text-white' : 'text-gray-400'}`}>
-                {t('home.delete_selected')}
-              </Text>
+              <MaterialIcons
+                name="delete-outline"
+                size={22}
+                color={selectedIds.size > 0 ? '#fff' : '#9ca3af'}
+              />
             </Pressable>
           </View>
         ) : null}
+        </TabletContainer>
 
         <AppModal
           visible={showDeleteConfirm}
@@ -444,7 +424,7 @@ export default function HomeScreen() {
           onConfirm={handleDeleteSelected}
         />
 
-        <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} />
+        <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} reason="books" />
 
         <WordlistCreateModal
           visible={showCreateModal}
@@ -510,21 +490,19 @@ function BookCard({
         ) : null}
 
         <View className="flex-1">
-          <View className="flex-row items-center justify-between">
-            <Text className="flex-1 text-base font-medium text-black dark:text-white" numberOfLines={1}>
-              {book.title}
-            </Text>
-            <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-              <Text className="text-sm font-semibold text-black dark:text-white">
-                {t('home.word_count', { count: book.wordCount })}
-              </Text>
-            </View>
-          </View>
+          <Text className="text-base font-medium text-black dark:text-white" numberOfLines={1}>
+            {book.title}
+          </Text>
           {src && tgt ? (
             <Text className="mt-1 text-xs text-gray-500">
               {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
             </Text>
           ) : null}
+        </View>
+        <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+          <Text className="text-sm font-semibold text-black dark:text-white">
+            {t('home.word_count', { count: book.wordCount })}
+          </Text>
         </View>
 
         {/* Edit mode: pin */}

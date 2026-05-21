@@ -15,16 +15,14 @@ export interface Language {
  * so users with old wordlists don't break.
  */
 export const LANGUAGES: Language[] = [
-  { code: 'en', name: 'English (US)', nativeName: 'English (US)', flag: '' },
+  { code: 'en', name: 'English', nativeName: 'English', flag: '' },
   { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '' },
   { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '' },
   { code: 'zh-CN', name: 'Chinese', nativeName: '中文', flag: '' },
-  { code: 'es', name: 'Spanish (Spain)', nativeName: 'Español (España)', flag: '' },
-  { code: 'fr', name: 'French (France)', nativeName: 'Français (France)', flag: '' },
+  { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '' },
+  { code: 'fr', name: 'French', nativeName: 'Français', flag: '' },
   { code: 'de', name: 'German', nativeName: 'Deutsch', flag: '' },
   { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '' },
-  { code: 'pt', name: 'Portuguese (Brazil)', nativeName: 'Português (Brasil)', flag: '' },
-  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '' },
 ];
 
 export const STUDY_LANGUAGES = LANGUAGES;
@@ -62,7 +60,7 @@ export function normalizeLangFamily(code: string): string {
  * Codes removed across migrations. UI fall-back: 'en' (or 'zh-CN' for
  * Traditional Chinese which was removed in the flag/region cleanup).
  */
-const REMOVED_NATIVE_CODES = new Set(['vi', 'id', 'th', 'ar', 'hi', 'tr']);
+const REMOVED_NATIVE_CODES = new Set(['vi', 'id', 'th', 'ar', 'hi', 'tr', 'pt', 'ru']);
 
 /**
  * Migrate a stored native-language code to a supported one.

@@ -9,12 +9,12 @@ function resolveDeviceLang(): string {
   const primary = getLocales()[0];
   if (!primary?.languageCode) return 'en';
   const code = primary.languageCode;
-  if (code !== 'zh') return migrateNativeLang(code);
-  // Chinese: disambiguate Simplified vs Traditional from tag/region.
-  const tag = primary.languageTag ?? '';
-  const region = primary.regionCode ?? '';
-  if (tag.includes('Hant') || ['TW', 'HK', 'MO'].includes(region)) return 'zh-TW';
-  return 'zh-CN';
+  // All Chinese variants (Simplified, Traditional, regional) collapse to
+  // zh-CN for the interface. Traditional was removed from the language
+  // picker, so providing a zh-TW interface would leave Taiwan/HK/Macau
+  // users with an interface they can't manually re-select after switching.
+  if (code === 'zh') return 'zh-CN';
+  return migrateNativeLang(code);
 }
 
 export const deviceLang = resolveDeviceLang();
@@ -24,14 +24,12 @@ function loadLocale(code: string) {
     case 'ko': return require('./locales/ko').default;
     case 'ja': return require('./locales/ja').default;
     case 'zh':
-    case 'zh-CN': return require('./locales/zh-CN').default;
-    case 'zh-TW': return require('./locales/zh-TW').default;
+    case 'zh-CN':
+    case 'zh-TW': return require('./locales/zh-CN').default; // legacy zh-TW → zh-CN
     case 'es': return require('./locales/es').default;
     case 'fr': return require('./locales/fr').default;
     case 'de': return require('./locales/de').default;
     case 'it': return require('./locales/it').default;
-    case 'pt': return require('./locales/pt').default;
-    case 'ru': return require('./locales/ru').default;
     default: return en;
   }
 }
