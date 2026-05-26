@@ -47,6 +47,7 @@ import { markCelebrated, markDailyCelebrated, getDailyEmoji, CELEBRATE_EVENT, ty
 import { getTodayStreakDate } from '@src/services/streakService';
 import { initSubscription, identifyUser, resetUser, refreshBonusPremium } from '@src/services/subscriptionService';
 import { initXP } from '@src/services/xpService';
+import { preloadSfx } from '@src/services/sfxService';
 import { syncAll } from '@src/services/syncService';
 import { syncUserWordsContent } from '@src/services/userWordsSyncService';
 import { sweepTtsPrefetch } from '@src/services/ttsPrefetchSweeper';
@@ -140,6 +141,9 @@ export default function RootLayout() {
     // never competes with sync or first-paint work.
     setTimeout(() => { sweepTtsPrefetch().catch(() => {}); }, 4000);
     initEdgeWarmup();
+    // SFX players are decoded once at boot so first correct/wrong has no
+    // file-decode latency — silent failure is fine, playSfx is a no-op.
+    preloadSfx().catch(() => {});
 
     // Hydrate points + inventory, then reconcile any freezes the user
     // should have consumed for past missed days while offline. Deferred

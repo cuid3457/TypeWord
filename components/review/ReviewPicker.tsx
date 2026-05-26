@@ -244,12 +244,21 @@ export function ReviewPicker({
           const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
           return (
             <Pressable
-              onPress={() => {
-                if (!canStart) {
-                  onMinWordToast();
+              onPress={async () => {
+                if (canStart) {
+                  handleStartRequest(item.bookId);
                   return;
                 }
-                handleStartRequest(item.bookId);
+                // Below MIN_SESSION but the user has finished cards they can
+                // re-queue. The card *is* the reload affordance — the inner
+                // chip is just a visual label (nested Pressable used to
+                // swallow the tap into onMinWordToast).
+                if (canReload) {
+                  await resetReviewSchedule(item.bookId);
+                  await loadPickerData(sortMode, sortReversed);
+                  return;
+                }
+                onMinWordToast();
               }}
               className={`rounded-xl border px-4 py-4 ${isTablet ? '' : 'mx-6 mb-2'} ${
                 highlighted ? '' : 'border-gray-300 dark:border-gray-700'
@@ -288,18 +297,12 @@ export function ReviewPicker({
                 </View>
               </View>
               {canReload ? (
-                <Pressable
-                  onPress={async () => {
-                    await resetReviewSchedule(item.bookId);
-                    await loadPickerData(sortMode, sortReversed);
-                  }}
-                  className="mt-2 flex-row items-center self-start rounded-lg border border-[#2EC4A5] bg-gray-100 px-3 py-1.5 dark:bg-gray-800"
-                >
+                <View className="mt-2 flex-row items-center self-start rounded-lg border border-[#2EC4A5] bg-gray-100 px-3 py-1.5 dark:bg-gray-800">
                   <MaterialIcons name="refresh" size={14} color="#2EC4A5" />
                   <Text className="ml-1 text-xs font-medium text-[#2EC4A5]">
                     {t('review.reload_hint', { count: Math.min(item.reloadableCount, MAX_RELOAD) })}
                   </Text>
-                </Pressable>
+                </View>
               ) : null}
             </Pressable>
           );

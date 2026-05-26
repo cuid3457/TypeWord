@@ -370,6 +370,30 @@ export default function SettingsScreen() {
         </View>
         ) : null}
 
+        {Platform.OS !== 'web' ? (
+        <View className="mt-3 rounded-2xl border border-gray-300 dark:border-gray-700">
+          <View className="flex-row items-center justify-between p-4">
+            <View className="flex-1">
+              <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                {t('settings.sound_effects')}
+              </Text>
+              <Text className="mt-1 text-xs text-gray-400">
+                {t('settings.sound_effects_hint')}
+              </Text>
+            </View>
+            <Switch
+              trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
+              thumbColor={(settings.sfxEnabled ?? true) ? '#2EC4A5' : '#f4f4f5'}
+              value={settings.sfxEnabled ?? true}
+              accessibilityLabel={t('settings.sound_effects')}
+              onValueChange={async (enabled) => {
+                await save({ ...settings, sfxEnabled: enabled });
+              }}
+            />
+          </View>
+        </View>
+        ) : null}
+
         {/* Secondary action buttons. On tablets, lay out as a 2-column
             grid via flex-wrap + 48% basis; phones stay as a vertical
             stack with the original mt-3 spacing. */}

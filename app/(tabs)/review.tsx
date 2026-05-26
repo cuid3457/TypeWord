@@ -44,6 +44,7 @@ import {
   type StoredWord,
 } from '@src/db/queries';
 import { awardXP, calculateXP } from '@src/services/xpService';
+import { isComboMilestone, playSfx } from '@src/services/sfxService';
 import { getStreak, getTodayStreakDate, recordStudyDateIfQualified, type StreakInfo } from '@src/services/streakService';
 import {
   shouldCelebrate,
@@ -437,17 +438,39 @@ export default function ReviewScreen() {
       ? findContextDefinition(cur, contextExIdx)
       : cur?.result.meanings?.[0]?.definition ?? '';
 
-    const candidates = ws
+    const sameTargetCandidates = ws
       .filter((w, i) => i !== idx && w.result.meanings?.length)
       .filter((w) => {
         if (!curTgt) return true;
         const tgt = w.bookId ? map[w.bookId] : '';
         return tgt === curTgt;
       })
-      .map((w) => w.result.meanings[0].definition);
+      .map((w) => (w.result.meanings[0].definition ?? '').trim())
+      .filter((d) => d.length > 0);
 
-    const unique = [...new Set(candidates)].filter((d) => d !== correct);
-    const wrong = shuffleArray(unique).slice(0, 3);
+    const sameTargetUnique = [...new Set(sameTargetCandidates)].filter((d) => d !== correct);
+    let wrong = shuffleArray(sameTargetUnique).slice(0, 3);
+
+    // Cross-target fallback: when the user only has a few words in this
+    // target language, dipping into other books avoids the "blank slot"
+    // bug where setChoices got 1-3 entries and the 4th radio rendered empty.
+    if (wrong.length < 3) {
+      const allCandidates = ws
+        .filter((w, i) => i !== idx && w.result.meanings?.length)
+        .map((w) => (w.result.meanings[0].definition ?? '').trim())
+        .filter((d) => d.length > 0 && d !== correct);
+      const allUnique = [...new Set(allCandidates)];
+      wrong = shuffleArray(allUnique).slice(0, 3);
+    }
+
+    // Final guard — if correct itself is empty or we still don't have 3
+    // wrong options, refuse to set choices (caller still renders the card
+    // but the choice list is short). Better than a phantom empty radio.
+    if (!correct.trim() || wrong.length === 0) {
+      setChoices([]);
+      setChoiceSelected(null);
+      return;
+    }
     setChoices(shuffleArray([correct, ...wrong]));
     setChoiceSelected(null);
   };
@@ -462,17 +485,33 @@ export default function ReviewScreen() {
     const curSrc = cur.bookId ? map[cur.bookId] : '';
     const correct = cur.word;
 
-    const candidates = ws
+    const sameSrcCandidates = ws
       .filter((w, i) => i !== idx && w.word)
       .filter((w) => {
         if (!curSrc) return true;
         const sl = w.bookId ? map[w.bookId] : '';
         return sl === curSrc;
       })
-      .map((w) => w.word);
+      .map((w) => (w.word ?? '').trim())
+      .filter((w) => w.length > 0);
 
-    const unique = [...new Set(candidates)].filter((w) => w !== correct);
-    const wrong = shuffleArray(unique).slice(0, 3);
+    const sameSrcUnique = [...new Set(sameSrcCandidates)].filter((w) => w !== correct);
+    let wrong = shuffleArray(sameSrcUnique).slice(0, 3);
+
+    if (wrong.length < 3) {
+      const allCandidates = ws
+        .filter((w, i) => i !== idx && w.word)
+        .map((w) => (w.word ?? '').trim())
+        .filter((w) => w.length > 0 && w !== correct);
+      const allUnique = [...new Set(allCandidates)];
+      wrong = shuffleArray(allUnique).slice(0, 3);
+    }
+
+    if (!correct.trim() || wrong.length === 0) {
+      setChoices([]);
+      setChoiceSelected(null);
+      return;
+    }
     setChoices(shuffleArray([correct, ...wrong]));
     setChoiceSelected(null);
   };
@@ -683,6 +722,8 @@ export default function ReviewScreen() {
   useEffect(() => {
     if (!isComplete || words.length === 0) return;
 
+    playSfx('session-complete');
+
     (async () => {
       const key = 'review_complete_count';
       const promptKey = 'notif_prompt_shown';
@@ -727,6 +768,9 @@ export default function ReviewScreen() {
         if (milestone) {
           await markCelebrated(s.current);
           setCompleteCelebrate({ type: 'milestone', streak: s.current, variant: 0 });
+          // Streak milestone reuses level-up SFX — same "stepped up" family.
+          // Delayed past session-complete (1.0s) so they never overlap.
+          setTimeout(() => playSfx('level-up'), 1000);
         } else {
           const todayDate = getTodayStreakDate();
           const daily = await shouldCelebrateDaily(todayDate);
@@ -797,14 +841,26 @@ export default function ReviewScreen() {
         reviewCount: current.reviewCount ?? 0,
         combo,
       });
-      awardXP(earned).catch(() => {});
+      // Combo milestone (5/10/20) replaces the Correct ding with the louder
+      // Combo arpeggio — milestone-only firing keeps it from going stale.
+      playSfx(isComboMilestone(combo + 1) ? 'combo' : 'correct');
+      // Level-up SFX rides on the awardXP promise. Delay so it doesn't
+      // collide with the correct/combo ding that just played.
+      awardXP(earned).then((res) => {
+        if (res.leveledUp) setTimeout(() => playSfx('level-up'), 500);
+      }).catch(() => {});
       setXpGain({ amount: earned, key: Date.now() });
       setCombo((c) => c + 1);
     } else if (quality === 'still_learning') {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      playSfx('wrong');
       setCombo(0);
+    } else {
+      // uncertain: selection haptic only. SFX stays silent so the correct/
+      // wrong family meaning isn't blurred — "neither right nor wrong, just
+      // moving on" deserves a different sensory channel.
+      Haptics.selectionAsync();
     }
-    // uncertain: no haptic, no XP, combo unchanged.
   }, [current, activeMode, combo]);
 
   const wrappedSetFlipped = useCallback((v: boolean) => {
@@ -1222,16 +1278,24 @@ export default function ReviewScreen() {
       const playWord = () =>
         speakWord(getTtsText(w.word, lang, w.result.reading), lang, phoneme);
 
+      // First card has no SFX before it — play immediately. Subsequent cards
+      // wait so the correct/wrong/combo ding finishes before TTS grabs the
+      // audio focus (iOS single-channel default kills any in-flight SFX
+      // the moment speakCloud opens a new player).
+      const ttsDelay = index === 0 ? 0 : 600;
+      let ttsTimer: ReturnType<typeof setTimeout> | null = null;
       if (autoPlayTts) {
-        if (m === 'dictation' || m === 'choice' || (m === 'flashcard' && !cardReversed)) {
-          playWord();
-        } else if (m === 'context') {
-          const examples = w.result.examples ?? [];
-          const ex = examples[pickedExIdx] ?? examples[0];
-          if (ex?.sentence) {
-            speakWord(ex.sentence.replace(/\*\*/g, '').trim(), lang);
+        ttsTimer = setTimeout(() => {
+          if (m === 'dictation' || m === 'choice' || (m === 'flashcard' && !cardReversed)) {
+            playWord();
+          } else if (m === 'context') {
+            const examples = w.result.examples ?? [];
+            const ex = examples[pickedExIdx] ?? examples[0];
+            if (ex?.sentence) {
+              speakWord(ex.sentence.replace(/\*\*/g, '').trim(), lang);
+            }
           }
-        }
+        }, ttsDelay);
       }
 
       // Pre-warm the next word's audio so navigation feels instant.

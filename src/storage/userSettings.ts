@@ -27,6 +27,8 @@ export interface UserSettings {
   /** Last review order the user chose. Restored on the next session. */
   reviewOrder?: 'newest' | 'shuffle';
   notificationsEnabled?: boolean;
+  /** Sound effects on/off. Defaults to true. */
+  sfxEnabled?: boolean;
   /** 'F' or 'M' — chosen TTS voice gender, applied across all languages. */
   voiceGender?: 'F' | 'M';
   /** TTS playback rate. 1.0 = natural per-voice speed (with correction); 0.8/1.2 = ±20%. */

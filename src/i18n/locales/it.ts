@@ -92,6 +92,8 @@ export default {
     business_info: 'Informazioni aziendali',
     notifications: 'Notifiche',
     notifications_hint: 'Ricevi un promemoria giornaliero per studiare',
+    sound_effects: 'Effetti sonori',
+    sound_effects_hint: 'Riproduce suoni brevi durante le risposte',
     notifications_unavailable: "Le notifiche non sono disponibili in questo ambiente. Utilizza l'app compilata.",
     notifications_denied: 'Il permesso per le notifiche è stato negato. Abilitalo nelle impostazioni del dispositivo.',
     open_settings: 'Apri Impostazioni',

@@ -215,6 +215,8 @@ export default {
     business_info: 'Business Information',
     notifications: 'Notifications',
     notifications_hint: 'Get reminded to study every day',
+    sound_effects: 'Sound Effects',
+    sound_effects_hint: 'Play short sounds when answering',
     notifications_unavailable: 'Notifications are not available in this environment. Please use the built app.',
     notifications_denied: 'Notification permission was denied. Please enable it in your device settings.',
     open_settings: 'Open Settings',

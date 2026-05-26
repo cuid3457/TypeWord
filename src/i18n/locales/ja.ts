@@ -116,6 +116,8 @@ export default {
     business_info: '事業者情報',
     notifications: '通知',
     notifications_hint: '毎日の学習リマインダーを受け取る',
+    sound_effects: '効果音',
+    sound_effects_hint: '回答時に短い効果音を再生します',
     notifications_unavailable: 'この環境では通知機能を利用できません。ビルドされたアプリでご利用ください。',
     notifications_denied: '通知の許可が拒否されました。端末の設定から通知を許可してください。',
     open_settings: '設定を開く',

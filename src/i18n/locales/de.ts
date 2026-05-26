@@ -96,6 +96,8 @@ export default {
     business_info: 'Unternehmensinformationen',
     notifications: 'Benachrichtigungen',
     notifications_hint: 'Tägliche Lernerinnerung erhalten',
+    sound_effects: 'Soundeffekte',
+    sound_effects_hint: 'Spielt kurze Töne beim Antworten ab',
     notifications_unavailable: 'Benachrichtigungen sind in dieser Umgebung nicht verfügbar. Bitte verwenden Sie die erstellte App.',
     notifications_denied: 'Die Benachrichtigungsberechtigung wurde abgelehnt. Bitte aktivieren Sie sie in den Geräteeinstellungen.',
     open_settings: 'Einstellungen öffnen',

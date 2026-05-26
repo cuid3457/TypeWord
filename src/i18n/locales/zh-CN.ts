@@ -296,6 +296,8 @@ export default {
     business_info: '经营者信息',
     notifications: '通知',
     notifications_hint: '每天收到学习提醒',
+    sound_effects: '音效',
+    sound_effects_hint: '答题时播放短促音效',
     notifications_unavailable: '此环境不支持通知功能，请使用构建后的应用。',
     notifications_denied: '通知权限已被拒绝。请在设备设置中开启通知。',
     open_settings: '打开设置',

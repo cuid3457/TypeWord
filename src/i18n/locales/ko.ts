@@ -401,6 +401,8 @@ export default {
     business_info: '사업자 정보',
     notifications: '알림',
     notifications_hint: '매일 학습 알림을 받아보세요',
+    sound_effects: '효과음',
+    sound_effects_hint: '정답·오답 시 짧은 사운드를 재생합니다',
     notifications_unavailable: '이 환경에서는 알림 기능을 사용할 수 없습니다. 빌드된 앱에서 사용해주세요.',
     notifications_denied: '알림 권한이 거부되었습니다. 기기 설정에서 알림을 허용해 주세요.',
     open_settings: '설정 열기',

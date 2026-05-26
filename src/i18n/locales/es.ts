@@ -97,6 +97,8 @@ export default {
     business_info: 'Información de la empresa',
     notifications: 'Notificaciones',
     notifications_hint: 'Recibe un recordatorio diario para estudiar',
+    sound_effects: 'Efectos de sonido',
+    sound_effects_hint: 'Reproduce sonidos breves al responder',
     notifications_unavailable: 'Las notificaciones no están disponibles en este entorno. Usa la app compilada.',
     notifications_denied: 'El permiso de notificaciones fue denegado. Habilítalo en la configuración del dispositivo.',
     open_settings: 'Abrir Ajustes',
