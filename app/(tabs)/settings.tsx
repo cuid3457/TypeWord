@@ -52,6 +52,17 @@ export default function SettingsScreen() {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [regionSearch, setRegionSearch] = useState('');
   const [pendingRegionCode, setPendingRegionCode] = useState<string | null>(null);
+  // Local toggle states — Switch value reads from these, not from settings.X,
+  // so the animation fires immediately on tap regardless of AsyncStorage
+  // write latency or cascading settings-driven re-renders. settings is still
+  // the source of truth; the useEffect below mirrors it into the locals.
+  const [sfxToggle, setSfxToggle] = useState(true);
+  const [notifToggle, setNotifToggle] = useState(false);
+  useEffect(() => {
+    if (!settings) return;
+    setSfxToggle(settings.sfxEnabled !== false);
+    setNotifToggle(settings.notificationsEnabled ?? false);
+  }, [settings]);
 
   useFocusEffect(
     useCallback(() => {
@@ -344,25 +355,31 @@ export default function SettingsScreen() {
             </View>
             <Switch
               trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-              thumbColor={settings.notificationsEnabled ? '#2EC4A5' : '#f4f4f5'}
-              value={settings.notificationsEnabled ?? false}
+              thumbColor={notifToggle ? '#2EC4A5' : '#f4f4f5'}
+              value={notifToggle}
               accessibilityLabel={t('settings.notifications')}
-              onValueChange={async (enabled) => {
+              onValueChange={(enabled) => {
                 if (!notifAvailable) {
                   setNotifUnavailableModal(true);
                   return;
                 }
                 if (enabled) {
-                  const granted = await requestNotificationPermission();
-                  if (!granted) {
-                    setNotifDeniedModal(true);
-                    return;
-                  }
-                  await save({ ...settings, notificationsEnabled: true });
-                  await rescheduleNotifications(getNotificationTranslations(t));
+                  // Flip immediately so the slider animates, then ask for
+                  // permission. If denied, revert the local toggle.
+                  setNotifToggle(true);
+                  requestNotificationPermission().then((granted) => {
+                    if (!granted) {
+                      setNotifToggle(false);
+                      setNotifDeniedModal(true);
+                      return;
+                    }
+                    save({ ...settings, notificationsEnabled: true }).catch(() => {});
+                    rescheduleNotifications(getNotificationTranslations(t)).catch(() => {});
+                  });
                 } else {
-                  await save({ ...settings, notificationsEnabled: false });
-                  await cancelAllNotifications();
+                  setNotifToggle(false);
+                  save({ ...settings, notificationsEnabled: false }).catch(() => {});
+                  cancelAllNotifications().catch(() => {});
                 }
               }}
             />
@@ -383,11 +400,12 @@ export default function SettingsScreen() {
             </View>
             <Switch
               trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-              thumbColor={(settings.sfxEnabled ?? true) ? '#2EC4A5' : '#f4f4f5'}
-              value={settings.sfxEnabled ?? true}
+              thumbColor={sfxToggle ? '#2EC4A5' : '#f4f4f5'}
+              value={sfxToggle}
               accessibilityLabel={t('settings.sound_effects')}
-              onValueChange={async (enabled) => {
-                await save({ ...settings, sfxEnabled: enabled });
+              onValueChange={(enabled) => {
+                setSfxToggle(enabled);
+                save({ ...settings, sfxEnabled: enabled }).catch(() => {});
               }}
             />
           </View>

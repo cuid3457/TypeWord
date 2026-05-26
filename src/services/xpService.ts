@@ -66,6 +66,23 @@ export function getTotalXP(): number {
   return _total;
 }
 
+/**
+ * Reset the in-memory XP cache so the next session loads from a clean
+ * slate. Called from the SIGNED_OUT handler in app/_layout.tsx — without
+ * this, the dashboard kept showing the previous account's level/XP
+ * (e.g. Apple sign-in after Google logout still rendered Google's 12 Lv
+ * / 7,636 XP because `_total` is a module-level singleton).
+ *
+ * AsyncStorage is already cleared by clearLocalData(); this resets the
+ * cached read and the `_initialized` guard so the next initXP() re-reads
+ * from storage (now empty → 0) and fetches the new user's cloud XP.
+ */
+export function resetXP(): void {
+  _total = 0;
+  _initialized = false;
+  for (const l of listeners) l(0);
+}
+
 // ── XP calculation ──────────────────────────────────────────────────
 
 const BASE_XP = 10;

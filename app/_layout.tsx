@@ -46,7 +46,7 @@ import { getDb } from '@src/db';
 import { markCelebrated, markDailyCelebrated, getDailyEmoji, CELEBRATE_EVENT, type CelebrateInfo } from '@src/services/streakMilestone';
 import { getTodayStreakDate } from '@src/services/streakService';
 import { initSubscription, identifyUser, resetUser, refreshBonusPremium } from '@src/services/subscriptionService';
-import { initXP } from '@src/services/xpService';
+import { initXP, resetXP } from '@src/services/xpService';
 import { preloadSfx } from '@src/services/sfxService';
 import { syncAll } from '@src/services/syncService';
 import { syncUserWordsContent } from '@src/services/userWordsSyncService';
@@ -210,6 +210,10 @@ export default function RootLayout() {
             refreshLibrary(),
             refreshReview(),
           ]));
+        // resetXP() during SIGNED_OUT flipped `_initialized` back to false,
+        // so this call re-loads the new user's XP from AsyncStorage +
+        // cloud. Idempotent on first-login (initXP guards itself).
+        initXP().catch(captureError);
         if (session?.user) {
           setUser(session.user.id);
           if (!session.user.is_anonymous) {
@@ -236,6 +240,12 @@ export default function RootLayout() {
       if (event === 'SIGNED_OUT') {
         setUser(null);
         resetUser().catch(captureError);
+        // Drop in-memory module-level state that survives signOut
+        // because AsyncStorage clears don't touch JS module caches.
+        // xpService's `_total` was the visible bug: after Google
+        // logout, dashboard still showed "12 Lv / 7,636 XP" because
+        // `_total` and `_initialized` were never reset.
+        resetXP();
         // Refresh every tab cache from the now-cleared SQLite so the
         // dashboard/wordlist/library/review screens drop the previous
         // user's data immediately instead of leaking it until the next
