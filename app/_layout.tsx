@@ -236,6 +236,18 @@ export default function RootLayout() {
       if (event === 'SIGNED_OUT') {
         setUser(null);
         resetUser().catch(captureError);
+        // Refresh every tab cache from the now-cleared SQLite so the
+        // dashboard/wordlist/library/review screens drop the previous
+        // user's data immediately instead of leaking it until the next
+        // tab focus. `clearLocalData()` (called by signOut) wipes the
+        // tables first; these refreshes then propagate empty snapshots
+        // to subscribers.
+        Promise.allSettled([
+          refreshHome(),
+          refreshDashboard(),
+          refreshLibrary(),
+          refreshReview(),
+        ]).catch(() => {});
       }
     });
     return () => subscription.unsubscribe();

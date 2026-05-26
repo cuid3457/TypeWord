@@ -2,8 +2,9 @@ import type { Book, UserWord } from '@src/types/book';
 import type { WordLookupResult } from '@src/types/word';
 
 import { getDb } from './index';
-import { scheduleSync } from '@src/services/syncService';
+import { pushDeletes, scheduleSync } from '@src/services/syncService';
 import { removeFromPersistent } from '@src/services/ttsCache';
+import { captureError } from '@src/services/sentry';
 
 // ---------- Books ----------
 
@@ -306,7 +307,17 @@ export async function deleteBooks(ids: string[]): Promise<void> {
     await db.runAsync(`DELETE FROM books WHERE id IN (${placeholders})`, ids);
   });
   purgeTtsForWords(ttsKeys);
-  scheduleSync();
+  // Try to hit the server right now so a wipe-and-reinstall between this
+  // moment and the next scheduleSync tick can't resurrect the deleted books.
+  // If the network is down, pending_deletes still holds the tombstones and
+  // scheduleSync will retry — strictly an improvement over the prior
+  // behavior which was always "best effort, eventually."
+  try {
+    await pushDeletes();
+  } catch (e) {
+    captureError(e, { service: 'queries', fn: 'deleteBooks.pushDeletes' });
+    scheduleSync();
+  }
 }
 
 export async function toggleBookPinned(id: string): Promise<boolean> {

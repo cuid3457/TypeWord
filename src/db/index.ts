@@ -216,8 +216,28 @@ async function runMigrations(db: SQLite.SQLiteDatabase): Promise<void> {
 
 export async function clearLocalData(): Promise<void> {
   const db = await getDb();
-  await db.execAsync('DELETE FROM pending_deletes; DELETE FROM pending_reports; DELETE FROM user_words; DELETE FROM books;');
-  await AsyncStorage.removeItem('typeword.lastSync');
+  // Every table that holds user-specific data must be listed here, or
+  // the data persists into the next user's session — the dashboard and
+  // streak read directly from study_dates, so omitting it leaked the
+  // previous account's calendar dots after signOut.
+  await db.execAsync(
+    'DELETE FROM pending_deletes; ' +
+    'DELETE FROM pending_reports; ' +
+    'DELETE FROM user_words; ' +
+    'DELETE FROM books; ' +
+    'DELETE FROM study_dates;',
+  );
+  // AsyncStorage caches that mirror user state — XP total, sync
+  // checkpoint, streak celebrate markers, etc. — must also be cleared
+  // so the next user starts from zero.
+  await Promise.allSettled([
+    AsyncStorage.removeItem('typeword.lastSync'),
+    AsyncStorage.removeItem('typeword.xpTotal'),
+    AsyncStorage.removeItem('typeword.streakMilestoneSeen'),
+    AsyncStorage.removeItem('typeword.streakDailyCelebrated'),
+    AsyncStorage.removeItem('typeword.authNonce'),
+    AsyncStorage.removeItem('typeword.pendingInviteCode'),
+  ]);
   // Wipe local TTS audio files so a voice swap on the server takes effect
   // immediately. Without this, persistent mp3s recorded with the old voice
   // would still be played for words the user had previously saved.

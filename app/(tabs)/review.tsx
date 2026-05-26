@@ -1173,6 +1173,10 @@ export default function ReviewScreen() {
   // navigating back to an earlier card shows the same example sentence.
   useEffect(() => {
     if (phase !== 'review' || words.length === 0 || index >= words.length) return;
+    // Hoisted so the cleanup at the bottom of the effect can cancel a pending
+    // TTS timer when the user advances to the next card faster than the SFX
+    // gap (otherwise the prior card's playWord fires into the new card).
+    let ttsTimer: ReturnType<typeof setTimeout> | null = null;
     const m: ResolvedMode = reviewMode === 'auto'
       ? (cardModes[index] ?? 'flashcard')
       : reviewMode;
@@ -1283,7 +1287,6 @@ export default function ReviewScreen() {
       // audio focus (iOS single-channel default kills any in-flight SFX
       // the moment speakCloud opens a new player).
       const ttsDelay = index === 0 ? 0 : 600;
-      let ttsTimer: ReturnType<typeof setTimeout> | null = null;
       if (autoPlayTts) {
         ttsTimer = setTimeout(() => {
           if (m === 'dictation' || m === 'choice' || (m === 'flashcard' && !cardReversed)) {
@@ -1311,6 +1314,9 @@ export default function ReviewScreen() {
         );
       }
     }
+    return () => {
+      if (ttsTimer) clearTimeout(ttsTimer);
+    };
   }, [index, phase, targetLangs]);
 
   const isAnswered =
