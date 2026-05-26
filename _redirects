@@ -1,19 +1,19 @@
 # Cloudflare Pages routing for moavoca.com
 #
-# Static assets (HTML pages, _expo bundle, etc.) are served from disk
-# first by CF Pages — only paths with no matching file fall through to
-# these rules. We need a SPA fallback for the Expo Web subpath so
-# Expo Router-driven dynamic routes (e.g. /app/wordlist/<uuid>,
-# /app/invite/<code>) hand control to the client bundle. Static landing
-# at / and the legal docs at /privacy.html etc. are unaffected because
-# they exist on disk and resolve before this rule.
+# CF Pages auto-resolves .html extensions, so most static routes work
+# without a rule (e.g. /app/library → dist/app/library.html). Only
+# DYNAMIC routes need explicit fallback to their [param].html exports.
 #
-# IMPORTANT: asset paths (anything under /app/_expo/ or /app/assets/)
-# MUST return a real 404 when missing instead of falling back to
-# index.html. A stale chunk URL (cached old hash referenced by an
-# updated entry bundle) would otherwise return HTML, which the browser
-# tries to parse as JavaScript and crashes with "Unexpected token '<'".
+# CF Pages _redirects gotchas (learned during deploy):
+#   - 404 is NOT a valid status code. Allowed: 200, 301-303, 307-308.
+#   - A broad rewrite rule like `/app/* /app/index.html 200` is rejected
+#     as an "infinite loop". Narrow patterns to specific subpaths so the
+#     destination never matches the source.
+#
+# Order matters — most specific first.
 
-/app/_expo/*    /app/_expo/:splat    404
-/app/assets/*   /app/assets/:splat   404
-/app/*          /app/index.html      200
+/app/wordlist/library/*  /app/wordlist/library/[id].html  200
+/app/wordlist/add/*      /app/wordlist/add/[id].html      200
+/app/wordlist/*          /app/wordlist/[id].html          200
+/app/invite/*            /app/invite/[code].html          200
+/app/community-detail/*  /app/community-detail/[id].html  200
