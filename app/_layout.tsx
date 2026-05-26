@@ -191,6 +191,41 @@ export default function RootLayout() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        // User-switch guard: if the new session is a different user than
+        // the one whose data is in local SQLite, wipe the local DB before
+        // syncAll. Without this, OAuth popup-driven account switches
+        // never emit SIGNED_OUT — supabase replaces the session in place
+        // — so clearLocalData() is never called between users. The next
+        // syncAll → pushWords then takes the OLD user's local rows,
+        // stamps them with the NEW user_id (line 282-283 of syncService),
+        // and uploads them to the server under the wrong account.
+        //
+        // Async, but kicked off before syncAll so the clear completes
+        // first. We chain syncAll inside the .then to preserve order.
+        const newUserId = session?.user?.id ?? null;
+        const syncAfterGuard = (async () => {
+          let didSwitch = false;
+          try {
+            const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
+            const LAST_USER_KEY = 'typeword.lastSignedInUserId';
+            const prevUserId = await AsyncStorage.getItem(LAST_USER_KEY);
+            if (newUserId && prevUserId && prevUserId !== newUserId) {
+              const { clearLocalData } = await import('@src/db');
+              await clearLocalData();
+              resetXP();
+              didSwitch = true;
+            }
+            if (newUserId) await AsyncStorage.setItem(LAST_USER_KEY, newUserId);
+          } catch (err) {
+            captureError(err, { service: '_layout', fn: 'signedIn:userSwitchGuard' });
+          }
+          // initXP must run AFTER the user-switch wipe so it reads the new
+          // user's empty AsyncStorage and fetches cloud XP fresh. Without
+          // this the in-memory _total carries the prior user's value.
+          if (didSwitch) initXP().catch(captureError);
+          return syncAll();
+        })();
+
         // After pulling fresh data into SQLite, refresh every tab cache
         // so the screens update immediately — without this, a user who
         // was sitting on the wordlist tab during sign-in saw the empty
@@ -202,7 +237,7 @@ export default function RootLayout() {
         // refresh below reads whatever IS in SQLite and updates the
         // screens. Without finally, a sync error left the user staring
         // at the empty state until they switched tabs.
-        syncAll()
+        syncAfterGuard
           .catch((e) => captureError(e, { service: '_layout', fn: 'signedIn:syncAll' }))
           .finally(() => Promise.allSettled([
             refreshHome(),
