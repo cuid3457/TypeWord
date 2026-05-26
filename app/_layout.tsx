@@ -203,8 +203,13 @@ export default function RootLayout() {
         // Async, but kicked off before syncAll so the clear completes
         // first. We chain syncAll inside the .then to preserve order.
         const newUserId = session?.user?.id ?? null;
-        const syncAfterGuard = (async () => {
-          let didSwitch = false;
+        const initAndSync = (async () => {
+          // User-switch wipe: OAuth popup sign-in replaces the session
+          // in place without emitting SIGNED_OUT, so clearLocalData()
+          // never runs between users. The next syncAll → pushWords then
+          // takes the previous user's local rows, stamps them with the
+          // NEW user_id (wordRowToRecord), and pushes them under the
+          // wrong account. Detect via a stored user-id sentinel.
           try {
             const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
             const LAST_USER_KEY = 'typeword.lastSignedInUserId';
@@ -212,43 +217,40 @@ export default function RootLayout() {
             if (newUserId && prevUserId && prevUserId !== newUserId) {
               const { clearLocalData } = await import('@src/db');
               await clearLocalData();
-              resetXP();
-              didSwitch = true;
             }
             if (newUserId) await AsyncStorage.setItem(LAST_USER_KEY, newUserId);
           } catch (err) {
             captureError(err, { service: '_layout', fn: 'signedIn:userSwitchGuard' });
           }
-          // initXP must run AFTER the user-switch wipe so it reads the new
-          // user's empty AsyncStorage and fetches cloud XP fresh. Without
-          // this the in-memory _total carries the prior user's value.
-          if (didSwitch) initXP().catch(captureError);
-          return syncAll();
+
+          // SIGNED_IN: force XP cloud reconcile. xpService's `_initialized`
+          // guard otherwise blocks fetchCloudXp on every call after the
+          // first — and the boot-time initXP at line 129 fires before
+          // session restoration completes (auth.uid()=null → cloud
+          // returns 0), permanently locking _total at 0. resetXP flips
+          // the guard back so the in-handler initXP() refetches.
+          // TOKEN_REFRESHED skips the reset to avoid flickering XP to 0
+          // on every hourly token refresh.
+          if (event === 'SIGNED_IN') {
+            resetXP();
+          }
+
+          // Parallel: syncAll for table data, initXP for cloud XP.
+          await Promise.allSettled([syncAll(), initXP()]);
         })();
 
         // After pulling fresh data into SQLite, refresh every tab cache
         // so the screens update immediately — without this, a user who
         // was sitting on the wordlist tab during sign-in saw the empty
         // state until they manually pulled to refresh.
-        //
-        // `.finally` (not `.then`) — even if syncAll throws partway
-        // through (e.g. a transient wa-sqlite VFS error on web), at
-        // least some rows are usually already written; the cache
-        // refresh below reads whatever IS in SQLite and updates the
-        // screens. Without finally, a sync error left the user staring
-        // at the empty state until they switched tabs.
-        syncAfterGuard
-          .catch((e) => captureError(e, { service: '_layout', fn: 'signedIn:syncAll' }))
+        initAndSync
+          .catch((e) => captureError(e, { service: '_layout', fn: 'signedIn:initAndSync' }))
           .finally(() => Promise.allSettled([
             refreshHome(),
             refreshDashboard(),
             refreshLibrary(),
             refreshReview(),
           ]));
-        // resetXP() during SIGNED_OUT flipped `_initialized` back to false,
-        // so this call re-loads the new user's XP from AsyncStorage +
-        // cloud. Idempotent on first-login (initXP guards itself).
-        initXP().catch(captureError);
         if (session?.user) {
           setUser(session.user.id);
           if (!session.user.is_anonymous) {
