@@ -2,6 +2,7 @@ import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SecureStore from 'expo-secure-store';
 import { createClient } from '@supabase/supabase-js';
+import { Platform } from 'react-native';
 
 const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
@@ -62,6 +63,14 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     storage: tokenStorage,
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: false,
+    // Native deep-link callbacks are intercepted by the manual
+    // Linking.addEventListener handler in app/_layout.tsx and applied
+    // through confirmAndSetSessionFromDeepLink (which gates the swap
+    // behind a confirm modal to defend against link-injection). On
+    // web the redirect lands the user on https://moavoca.com/app/...
+    // with the session in the URL fragment — let the SDK consume it
+    // automatically; there's no equivalent injection vector because
+    // the browser shows the URL bar.
+    detectSessionInUrl: Platform.OS === 'web',
   },
 });

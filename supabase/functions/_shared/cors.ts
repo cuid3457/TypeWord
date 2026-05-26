@@ -8,6 +8,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://typeword.app",         // legacy domain (pre-rebrand) — kept until expiry
   "http://localhost:8081",        // expo dev (web mode)
   "http://localhost:19006",       // expo legacy web port
+  "http://localhost:4173",        // static-export preview (python http.server / vite preview default)
 ]);
 
 export function getCorsHeaders(req: Request): Record<string, string> {
