@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Modal, Pressable, Text, TextInput } from 'react-native';
+import { ActivityIndicator, Pressable, Text, TextInput } from 'react-native';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { setDisplayName } from '@src/services/friendsService';
 
 /**
@@ -46,7 +47,7 @@ export function NicknameModal({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
+    <BottomSheetShell visible={visible} onRequestClose={onCancel} animationType="fade">
       <Pressable onPress={onCancel} className="flex-1 items-center justify-center bg-black/50 px-6">
         <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900">
           <Text className="text-lg font-bold text-black dark:text-white">
@@ -86,6 +87,6 @@ export function NicknameModal({
           </Pressable>
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

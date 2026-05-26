@@ -15,6 +15,7 @@ import {
   type CuratedWord,
   type CuratedWordlistMeta,
 } from '@src/services/curatedWordlistService';
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { ipaSupported } from '@src/services/ipaService';
 
@@ -140,6 +141,7 @@ export default function CuratedWordlistDetail() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="flex-row items-center px-6 pt-2">
         <Pressable onPress={() => router.back()} className="mr-2 p-1">
           <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
@@ -247,6 +249,7 @@ export default function CuratedWordlistDetail() {
         </Pressable>
         </View>
       </View>
+      </TabletContainer>
 
       {showLangPicker ? (
         <Pressable
@@ -289,7 +292,7 @@ export default function CuratedWordlistDetail() {
         </Pressable>
       ) : null}
 
-      <Toast visible={!!toast} message={toast} onHide={() => setToast('')} />
+      <Toast visible={!!toast} message={toast} onHide={() => setToast('')} style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }} />
     </SafeAreaView>
   );
 }

@@ -7,13 +7,15 @@ const TIER_CACHE_KEY = 'typeword.tier';
 const PREMIUM_CACHE_KEY = 'typeword.premium'; // legacy — read for migration only
 const BONUS_UNTIL_CACHE_KEY = 'typeword.bonus_premium_until';
 
-export type Tier = 'free' | 'plus' | 'pro';
+// 2-tier 시스템 (2026-05-25 롤백): free / pro 단일 paid tier.
+// 'pro' = 모든 유료 권한. 'TypeWord premium' (legacy), 'TypeWord pro', 'TypeWord plus' 모두 pro로 통일.
+export type Tier = 'free' | 'pro';
 
 type Listener = (tier: Tier) => void;
 const listeners = new Set<Listener>();
 
 let _rcTier: Tier = 'free';
-let _bonusUntilMs = 0; // epoch ms; treated as plus when now() <= this (referral bonus)
+let _bonusUntilMs = 0; // epoch ms; treated as pro when now() <= this (referral bonus)
 let _initialized = false;
 
 function notify() {
@@ -22,10 +24,8 @@ function notify() {
 }
 
 function _computeTier(): Tier {
-  // Pro entitlement always wins. Bonus referral grants plus, not pro.
   if (_rcTier === 'pro') return 'pro';
-  if (_rcTier === 'plus') return 'plus';
-  if (Date.now() <= _bonusUntilMs) return 'plus';
+  if (Date.now() <= _bonusUntilMs) return 'pro';
   return 'free';
 }
 
@@ -38,24 +38,18 @@ export function getTier(): Tier {
   return _computeTier();
 }
 
-/** Convenience: any paid tier (plus or pro). */
+/** Convenience: any paid tier. */
 export function isPaid(): boolean {
-  return _computeTier() !== 'free';
+  return _computeTier() === 'pro';
 }
 
-/** Convenience: pro tier only. */
+/** Convenience: pro tier (same as isPaid in 2-tier system). */
 export function isPro(): boolean {
   return _computeTier() === 'pro';
 }
 
-/** Convenience: plus tier only (NOT pro). */
-export function isPlus(): boolean {
-  return _computeTier() === 'plus';
-}
-
 /**
- * Backward-compatible alias for callers that just need "is the user paying?".
- * Returns true for plus AND pro. New code should prefer getTier() / isPro().
+ * Backward-compatible alias. In 2-tier system, premium === pro.
  */
 export function isPremium(): boolean {
   return isPaid();
@@ -63,7 +57,7 @@ export function isPremium(): boolean {
 
 /** Backward-compatible subscription wrapper. */
 export function subscribePremium(listener: (premium: boolean) => void): () => void {
-  return subscribeTier((t) => listener(t !== 'free'));
+  return subscribeTier((t) => listener(t === 'pro'));
 }
 
 async function cacheTier(tier: Tier) {
@@ -73,20 +67,20 @@ async function cacheTier(tier: Tier) {
 }
 
 /**
- * Map RevenueCat entitlements to our tier. Pro wins over plus, both win over
- * the legacy "TypeWord premium" entitlement (which existing subscribers have
- * and which now grants plus-equivalent access).
+ * Map RevenueCat entitlements to our tier.
+ * Any of 'TypeWord pro', 'TypeWord plus' (legacy), 'TypeWord premium' (legacy)
+ * → pro. None → free.
  */
 function tierFromEntitlements(active: Record<string, unknown>): Tier {
   if (active['TypeWord pro'] !== undefined) return 'pro';
-  if (active['TypeWord plus'] !== undefined) return 'plus';
-  if (active['TypeWord premium'] !== undefined) return 'plus'; // legacy → plus
+  if (active['TypeWord plus'] !== undefined) return 'pro'; // legacy → pro
+  if (active['TypeWord premium'] !== undefined) return 'pro'; // legacy → pro
   return 'free';
 }
 
 /**
  * Sync the bonus_premium_until window from the user's profile (set by the
- * apply_referral RPC). Independent of RevenueCat — both grant premium and
+ * apply_referral RPC). Independent of RevenueCat — both grant pro and
  * the longer of the two wins.
  */
 export async function refreshBonusPremium(): Promise<void> {
@@ -119,12 +113,14 @@ export async function initSubscription(): Promise<void> {
   _initialized = true;
 
   // Prefer new tier cache; migrate from legacy boolean cache if needed.
-  const cachedTier = (await AsyncStorage.getItem(TIER_CACHE_KEY)) as Tier | null;
-  if (cachedTier === 'pro' || cachedTier === 'plus' || cachedTier === 'free') {
-    _rcTier = cachedTier;
+  const cachedTier = (await AsyncStorage.getItem(TIER_CACHE_KEY)) as Tier | 'plus' | null;
+  if (cachedTier === 'pro' || cachedTier === 'plus') {
+    _rcTier = 'pro'; // legacy 'plus' → 'pro'
+  } else if (cachedTier === 'free') {
+    _rcTier = 'free';
   } else {
     const legacy = await AsyncStorage.getItem(PREMIUM_CACHE_KEY);
-    _rcTier = legacy === '1' ? 'plus' : 'free';
+    _rcTier = legacy === '1' ? 'pro' : 'free';
   }
   const cachedBonus = await AsyncStorage.getItem(BONUS_UNTIL_CACHE_KEY);
   const cachedMs = cachedBonus ? Number(cachedBonus) : 0;
@@ -174,8 +170,7 @@ export async function resetUser(): Promise<void> {
       await Purchases.logOut();
     } catch (e) {
       // RevenueCat throws LOG_OUT_ANONYMOUS_USER_ERROR (code 22) when the
-      // current user was never identified via logIn. Harmless — they have no
-      // entitlements to clear — but it floods Sentry on every data reset.
+      // current user was never identified via logIn. Harmless.
       const err = e as { code?: string | number; message?: string } | null;
       const isAnonErr = String(err?.code) === '22'
         || /anonymous/i.test(err?.message ?? '');
@@ -197,7 +192,7 @@ export async function purchaseMonthly(): Promise<boolean> {
     const { customerInfo } = await Purchases.purchasePackage(monthly);
     const tier = tierFromEntitlements(customerInfo.entitlements.active);
     await cacheTier(tier);
-    return tier !== 'free';
+    return tier === 'pro';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'purchaseMonthly' });
     return false;
@@ -214,38 +209,9 @@ export async function purchaseAnnual(): Promise<boolean> {
     const { customerInfo } = await Purchases.purchasePackage(annual);
     const tier = tierFromEntitlements(customerInfo.entitlements.active);
     await cacheTier(tier);
-    return tier !== 'free';
+    return tier === 'pro';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'purchaseAnnual' });
-    return false;
-  }
-}
-
-/**
- * Tier-aware purchase. Looks up the named offering ('plus' / 'pro') configured
- * in RevenueCat dashboard, then purchases its monthly or annual package.
- * Convention: each tier has its own RC offering with `monthly` and `annual`
- * package types (e.g., "plus" offering → plus_monthly + plus_annual products).
- * Falls back to `current` offering when no tier-named offering exists — useful
- * during pre-launch before Pro products are configured.
- */
-export async function purchaseTier(
-  tier: 'plus' | 'pro',
-  cycle: 'monthly' | 'annual',
-): Promise<boolean> {
-  try {
-    const { default: Purchases } = require('react-native-purchases');
-    const offerings = await Purchases.getOfferings();
-    const named = offerings.all?.[tier] ?? offerings.current;
-    const pkg = cycle === 'annual' ? named?.annual : named?.monthly;
-    if (!pkg) return false;
-
-    const { customerInfo } = await Purchases.purchasePackage(pkg);
-    const newTier = tierFromEntitlements(customerInfo.entitlements.active);
-    await cacheTier(newTier);
-    return newTier !== 'free';
-  } catch (e) {
-    captureError(e, { service: 'subscriptionService', fn: 'purchaseTier', tier, cycle });
     return false;
   }
 }
@@ -256,7 +222,7 @@ export async function restorePurchases(): Promise<boolean> {
     const info = await Purchases.restorePurchases();
     const tier = tierFromEntitlements(info.entitlements.active);
     await cacheTier(tier);
-    return tier !== 'free';
+    return tier === 'pro';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'restorePurchases' });
     return false;
@@ -300,50 +266,6 @@ export async function getOfferings(): Promise<{
     };
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'getOfferings' });
-    return null;
-  }
-}
-
-export type TierOfferings = {
-  plus: { monthly: OfferingInfo | null; annual: OfferingInfo | null };
-  pro: { monthly: OfferingInfo | null; annual: OfferingInfo | null };
-};
-
-/**
- * Pull offerings for both Plus and Pro tiers. Looks up named offerings
- * ('plus' / 'pro') in the RC dashboard, falling back to `current` for plus
- * during the pre-launch window where only legacy offerings may be configured.
- */
-export async function getTierOfferings(): Promise<TierOfferings | null> {
-  try {
-    const { default: Purchases } = require('react-native-purchases');
-    const offerings = await Purchases.getOfferings();
-    if (!offerings) return null;
-
-    const extract = (off: { monthly?: { product: { priceString: string; price: number; currencyCode: string; }; identifier: string; } | null; annual?: { product: { priceString: string; price: number; currencyCode: string; }; identifier: string; } | null; } | null | undefined) => ({
-      monthly: off?.monthly
-        ? {
-            priceString: off.monthly.product.priceString,
-            price: off.monthly.product.price,
-            currencyCode: off.monthly.product.currencyCode,
-            identifier: off.monthly.identifier,
-          }
-        : null,
-      annual: off?.annual
-        ? {
-            priceString: off.annual.product.priceString,
-            price: off.annual.product.price,
-            currencyCode: off.annual.product.currencyCode,
-            identifier: off.annual.identifier,
-          }
-        : null,
-    });
-
-    const plusOffering = offerings.all?.['plus'] ?? offerings.current;
-    const proOffering = offerings.all?.['pro'] ?? null;
-    return { plus: extract(plusOffering), pro: extract(proOffering) };
-  } catch (e) {
-    captureError(e, { service: 'subscriptionService', fn: 'getTierOfferings' });
     return null;
   }
 }

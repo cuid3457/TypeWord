@@ -169,19 +169,22 @@ export function clearAllTtsFiles(): void {
   dirsReady = true;
 }
 
-/** Per-voice playback rate correction, mirroring tts-voices.ts on server. */
+/** Per-voice playback rate correction, mirroring tts-voices.ts on server.
+ * Values are LANGUAGE_BASE_RATE × VOICE_CORRECTION (combined). Used only
+ * as a client-side fallback when the edge function fails to return
+ * `rateCorrection` — normal path uses the server-computed value. */
 const VOICE_CORRECTIONS_BY_LANG_GENDER: Record<string, { F: number; M: number }> = {
-  en: { F: 0.980, M: 1.021 },
-  ko: { F: 1.064, M: 0.943 },
-  ja: { F: 0.990, M: 1.010 },
-  'zh-CN': { F: 1.000, M: 1.011 },
-  'zh-TW': { F: 0.942, M: 1.065 },
-  es: { F: 0.982, M: 1.019 },
-  fr: { F: 0.978, M: 1.023 },
-  de: { F: 0.942, M: 1.065 },
-  it: { F: 0.989, M: 1.011 },
-  pt: { F: 1.062, M: 0.945 },
-  ru: { F: 0.996, M: 1.004 },
+  en:      { F: 0.879 * 1.025, M: 0.879 * 0.975 },
+  ko:      { F: 0.964 * 0.922, M: 0.964 * 1.078 },
+  ja:      { F: 0.815 * 1.034, M: 0.815 * 0.966 },
+  'zh-CN': { F: 0.766 * 1.047, M: 0.766 * 0.953 },
+  'zh-TW': { F: 0.856 * 1.034, M: 0.856 * 0.966 },
+  es:      { F: 0.862 * 1.023, M: 0.862 * 0.977 },
+  fr:      { F: 0.873 * 1.027, M: 0.873 * 0.973 },
+  de:      { F: 1.044 * 1.055, M: 1.044 * 0.945 },
+  it:      { F: 0.828 * 0.993, M: 0.828 * 1.007 },
+  pt:      { F: 0.821 * 0.960, M: 0.821 * 1.040 },
+  ru:      { F: 0.926 * 0.979, M: 0.926 * 1.021 },
 };
 
 export function getRateCorrection(lang: string, gender: 'F' | 'M'): number {

@@ -1,0 +1,53 @@
+─── Step 1: distinct user_words 추출 ───
+  total distinct entries: 2112
+
+─── Step 2: word_entries 정리 ───
+  orphan word_entries deleted: 0
+
+─── Step 3: v4 재처리 (병렬) ───
+  progress 50/2112  ok=50 err=0  rate=1.7/s  eta=1213s
+  progress 100/2112  ok=100 err=0  rate=1.2/s  eta=1634s
+  progress 150/2112  ok=150 err=0  rate=1.2/s  eta=1648s
+  progress 200/2112  ok=200 err=0  rate=1.1/s  eta=1676s
+  progress 250/2112  ok=250 err=0  rate=1.1/s  eta=1641s
+  progress 300/2112  ok=300 err=0  rate=1.0/s  eta=1747s
+  progress 350/2112  ok=350 err=0  rate=1.0/s  eta=1796s
+  progress 400/2112  ok=400 err=0  rate=1.0/s  eta=1773s
+  progress 450/2112  ok=450 err=0  rate=1.0/s  eta=1734s
+  progress 500/2112  ok=500 err=0  rate=0.9/s  eta=1708s
+  progress 550/2112  ok=550 err=0  rate=1.0/s  eta=1639s
+  progress 600/2112  ok=600 err=0  rate=0.9/s  eta=1613s
+  progress 650/2112  ok=650 err=0  rate=0.9/s  eta=1575s
+  progress 700/2112  ok=700 err=0  rate=0.9/s  eta=1496s
+  progress 750/2112  ok=750 err=0  rate=0.9/s  eta=1486s
+  progress 800/2112  ok=800 err=0  rate=0.9/s  eta=1406s
+  progress 850/2112  ok=850 err=0  rate=0.9/s  eta=1349s
+  progress 900/2112  ok=900 err=0  rate=0.9/s  eta=1289s
+  progress 950/2112  ok=950 err=0  rate=1.0/s  eta=1218s
+  progress 1000/2112  ok=1000 err=0  rate=1.0/s  eta=1158s
+  progress 1050/2112  ok=1050 err=0  rate=1.0/s  eta=1092s
+  progress 1100/2112  ok=1100 err=0  rate=1.0/s  eta=1051s
+  [err] 每 (zh-CN→ko): HTTP 503
+  progress 1150/2112  ok=1149 err=1  rate=1.0/s  eta=1003s
+  progress 1200/2112  ok=1199 err=1  rate=1.0/s  eta=945s
+  progress 1250/2112  ok=1249 err=1  rate=1.0/s  eta=890s
+  progress 1300/2112  ok=1299 err=1  rate=1.0/s  eta=838s
+  progress 1350/2112  ok=1349 err=1  rate=1.0/s  eta=792s
+  progress 1400/2112  ok=1399 err=1  rate=1.0/s  eta=743s
+  progress 1450/2112  ok=1449 err=1  rate=1.0/s  eta=692s
+  progress 1500/2112  ok=1499 err=1  rate=1.0/s  eta=642s
+  progress 1550/2112  ok=1549 err=1  rate=0.9/s  eta=595s
+  progress 1600/2112  ok=1599 err=1  rate=0.9/s  eta=548s
+  progress 1650/2112  ok=1649 err=1  rate=0.9/s  eta=506s
+  progress 1700/2112  ok=1699 err=1  rate=0.9/s  eta=458s
+  progress 1750/2112  ok=1749 err=1  rate=0.9/s  eta=404s
+  progress 1800/2112  ok=1799 err=1  rate=0.9/s  eta=345s
+  progress 1850/2112  ok=1849 err=1  rate=0.9/s  eta=288s
+  progress 1900/2112  ok=1899 err=1  rate=0.9/s  eta=231s
+  progress 1950/2112  ok=1949 err=1  rate=0.9/s  eta=177s
+  progress 2000/2112  ok=1999 err=1  rate=0.9/s  eta=122s
+  progress 2050/2112  ok=2049 err=1  rate=0.9/s  eta=68s
+  progress 2100/2112  ok=2099 err=1  rate=0.9/s  eta=13s
+  progress 2112/2112  ok=2111 err=1  rate=0.9/s  eta=0s
+
+완료 — total=2112 ok=2111 err=1 elapsed=2337s

@@ -20,6 +20,8 @@ export interface WordExample {
   sentence: string;
   translation: string;
   meaningIndex?: number;
+  /** Origin of this example. Analytics/debug only; not surfaced in UI. */
+  source?: 'dict' | 'llm';
 }
 
 /**

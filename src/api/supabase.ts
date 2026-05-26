@@ -58,6 +58,16 @@ const tokenStorage = {
   },
 };
 
+// Popup OAuth callbacks (window.opener is set) must NOT auto-consume
+// the URL fragment — the popup page parses the fragment itself and
+// postMessages tokens to the opener. If the SDK strips the fragment
+// first, the popup hands an empty payload to opener → "no_tokens"
+// error. This race manifested intermittently before the gate.
+const isOAuthPopup =
+  Platform.OS === 'web' &&
+  typeof window !== 'undefined' &&
+  !!window.opener;
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     storage: tokenStorage,
@@ -67,10 +77,12 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     // Linking.addEventListener handler in app/_layout.tsx and applied
     // through confirmAndSetSessionFromDeepLink (which gates the swap
     // behind a confirm modal to defend against link-injection). On
-    // web the redirect lands the user on https://moavoca.com/app/...
-    // with the session in the URL fragment — let the SDK consume it
-    // automatically; there's no equivalent injection vector because
-    // the browser shows the URL bar.
-    detectSessionInUrl: Platform.OS === 'web',
+    // the main web page the redirect lands the user on
+    // https://moavoca.com/app/... with the session in the URL fragment
+    // — let the SDK consume it automatically; there's no equivalent
+    // injection vector because the browser shows the URL bar. In
+    // popup OAuth (window.opener present) we hand the fragment to the
+    // opener instead, so the popup's client must leave it alone.
+    detectSessionInUrl: Platform.OS === 'web' && !isOAuthPopup,
   },
 });

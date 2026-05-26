@@ -1,0 +1,288 @@
+loading jmdict-all-3.6.2.json (260.7 MB)...
+JMdict loaded — 217,076 word entries, langs=['all']
+
+=== 生 ===
+  Entry [0] kanji=[生] kana=[き] common=False | senses=6
+             gloss langs: ['eng', 'fre', 'ger', 'hun', 'rus', 'spa']
+      1. [n,pref] pure / undiluted / raw
+      2. [n,pref] 
+      3. [n,pref] 
+      4. [n,pref] 
+      5. [n,pref] 
+      6. [n,pref] 
+  Entry [1] kanji=[生] kana=[なま] common=True | senses=40
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa']
+      1. [adj-no,n] raw / uncooked / fresh
+      2. [adj-no,n] natural / as it is / unedited
+      3. [adj-no,n, col] unprotected (sex) / raw / bareback
+      4. [adj-no,n] live (i.e. not recorded)
+      5. [adj-no,n] inexperienced / unpolished / green
+      6. [n, abbr] impudence / sauciness
+      7. [n, abbr] unpasteurized beer / draft beer / draught beer
+      8. [adj-no] blank (e.g. disk) / unused
+      ... and 32 more senses
+  Entry [2] kanji=[初,初心,産,生] kana=[ウブ,うぶ] common=False | senses=8
+             gloss langs: ['dut', 'eng', 'ger', 'hun', 'rus', 'spa']
+      1. [adj-na,adj-no,n, uk] inexperienced (in life experience) / unsophisticated / green
+      2. [adj-na,adj-no,n, uk] inexperienced (in love) / innocent / naive
+      3. [adj-na,adj-no,n] 
+      4. [adj-na,adj-no,n] 
+      5. [adj-na,adj-no,n] 
+      6. [adj-na,adj-no,n] 
+      7. [adj-na,adj-no,n] 
+      8. [adj-na,adj-no,n] 
+  Entry [3] kanji=[生] kana=[せい,しょう] common=False | senses=12
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'rus', 'slv', 'spa']
+      1. [n] life / living
+      2. [n,n-suf, male,hum] I / me / myself
+      3. [n-suf, abbr] student
+      4. [n-suf] 
+      5. [n-suf] 
+      6. [n-suf] 
+      7. [n-suf] 
+      8. [n-suf] 
+      ... and 4 more senses
+  Entry [4] kanji=[生] kana=[いく] common=False | senses=1
+             gloss langs: ['eng']
+      1. [pref, arch] vital / virile / lively
+  Entry [5] kanji=[生] kana=[ふ] common=False | senses=1
+             gloss langs: ['eng']
+      1. [n,n-suf] area of thick growth (of trees, grass, etc.)
+  Entry [6] kanji=[生り,生] kana=[なまり] common=False | senses=1
+             gloss langs: ['eng']
+      1. [n, uk,abbr] boiled and half-dried bonito
+
+=== 大 ===
+  Entry [0] kanji=[大] kana=[おお] common=True | senses=8
+             gloss langs: ['dut', 'eng', 'fre', 'hun', 'spa']
+      1. [pref] large / big / great
+      2. [pref] older / senior
+      3. [pref] final / ultimate
+      4. [pref] rough / broad / general
+      5. [pref] 
+      6. [pref] 
+      7. [pref] 
+      8. [pref] 
+  Entry [1] kanji=[大] kana=[だい] common=True | senses=22
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'spa']
+      1. [pref,adj-na,n] large / big / great
+      2. [pref] great / prominent / eminent
+      3. [suf] -sized / as big as / the size of
+      4. [n-suf, abbr] university
+      5. [n] large (e.g. serving size) / large option
+      6. [n, abbr] long month (i.e. having 31 days)
+      7. [n] 
+      8. [n] 
+      ... and 14 more senses
+  Entry [2] kanji=[大き,大] kana=[おおき] common=False | senses=6
+             gloss langs: ['eng', 'hun', 'rus', 'swe']
+      1. [pref, arch] great / grand / large
+      2. [pref] greater (of equal court ranks) / upper / senior
+      3. [n,adj-na] a great deal / very much
+      4. [n,adj-na] 
+      5. [n,adj-na] 
+      6. [n,adj-na] 
+  Entry [3] kanji=[大い,大] kana=[おおい] common=False | senses=8
+             gloss langs: ['dut', 'eng', 'ger']
+      1. [adj-nari, arch] big / large / great
+      2. [pref, arch] greater (of equal court ranks) / upper / senior
+      3. [pref] 
+      4. [pref] 
+      5. [pref] 
+      6. [pref] 
+      7. [pref] 
+      8. [pref] 
+  Entry [4] kanji=[大] kana=[たい] common=False | senses=2
+             gloss langs: ['dut', 'eng']
+      1. [pref, abbr] nth year in the Taishō era (1912.7.30-1926.12.25)
+      2. [pref] 
+
+=== 中 ===
+  Entry [0] kanji=[中] kana=[なか] common=True | senses=26
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa']
+      1. [n] inside / interior
+      2. [n,adv] among / within
+      3. [n] middle / center / centre
+      4. [n,adv] during / while / middle
+      5. [n] interval / gap
+      6. [n] mean / average
+      7. [adj-no,n] second (of three, e.g. sons, volumes) / middle
+      8. [n,adj-no] medium grade / medium quality
+      ... and 18 more senses
+  Entry [1] kanji=[内,中,裡,裏,家,內] kana=[うち] common=True | senses=40
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [n,adv] inside / within
+      2. [n,adv, uk] while (e.g. one is young) / during / within (e.g. a day)
+      3. [n,adv, uk] among / amongst / (out) of
+      4. [n, uk] in (secret, chaos, poverty, etc.) / amidst / with (e.g. success)
+      5. [n] within oneself / one's feelings / inner thoughts
+      6. [n, uk] we / our company / our organization
+      7. [n, uk] one's home / one's family
+      8. [n] my spouse / my husband / my wife
+      ... and 32 more senses
+  Entry [2] kanji=[中] kana=[ちゅう] common=True | senses=29
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa']
+      1. [n] medium (size) / average (grade, level, etc.) / middle
+      2. [suf] in / within / out of (e.g. ten people)
+      3. [suf] during / while / in (the course of)
+      4. [suf] currently (doing) / in the process of / in the middle of
+      5. [n] middle way / moderation
+      6. [n] second volume (of three)
+      7. [n, abbr] junior high school / middle school
+      8. [n, abbr] China
+      ... and 21 more senses
+  Entry [3] kanji=[中] kana=[じゅう,ぢゅう] common=True | senses=9
+             gloss langs: ['dut', 'eng', 'rus', 'slv']
+      1. [suf] (all) through (e.g. the night) / throughout (e.g. the year) / all ... long
+      2. [suf] within (e.g. the week) / in the course of (e.g. today) / by the end of
+      3. [suf] all over / throughout (e.g. the world)
+      4. [suf] all (of a group) / the whole (family, school, etc.)
+      5. [suf] 
+      6. [suf] 
+      7. [suf] 
+      8. [suf] 
+      ... and 1 more senses
+  Entry [4] kanji=[中] kana=[チュン] common=False | senses=2
+             gloss langs: ['eng']
+      1. [n, abbr, mahj] red dragon tile
+      2. [n, mahj] winning hand with a pung (or kong) of red dragon tiles
+
+=== 生きる (いきる) ===
+  Entry [0] kanji=[生きる,活きる] kana=[いきる] common=True | senses=26
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [v1,vi] to live / to exist
+      2. [v1,vi] to make a living / to subsist
+      3. [v1,vi] to be in effect / to be in use / to function
+      4. [v1,vi] to come to life / to be enlivened
+      5. [v1,vi] to be safe (in baseball, go, etc.)
+      6. [v1,vi] 
+      7. [v1,vi] 
+      8. [v1,vi] 
+      ... and 18 more senses
+
+=== 行く (いく) ===
+  Entry [0] kanji=[行く,往く] kana=[いく,ゆく,イク] common=True | senses=53
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [v5k-s,vi] to go / to move (towards) / to head (towards)
+      2. [v5k-s,vi] to move through / to travel across / to walk along (e.g. a road)
+      3. [v5k-s,vi] to go (well, badly, etc.) / to proceed / to turn out
+      4. [v5k-s,vi] to do (in a particular way) / to go (with; a choice) / to try
+      5. [v5k-s,vi] to pass (of time, seasons, etc.) / to go by
+      6. [v5k-s,vi] to stream / to flow
+      7. [v5k-s,vi] to die / to pass away
+      8. [v5k-s,vi] to reach (a stage, extent, age, etc.) / to get to / to go (so far as ...)
+      ... and 45 more senses
+
+=== 行 ===
+  Entry [0] kanji=[行] kana=[ぎょう] common=True | senses=28
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [n] line (of text) / row / verse
+      2. [n, Buddh] carya (austerities)
+      3. [n, Buddh] samskara (formations)
+      4. [n, abbr] semi-cursive style (of writing Chinese characters) / running style
+      5. [n] 
+      6. [n] 
+      7. [n] 
+      8. [n] 
+      ... and 20 more senses
+  Entry [1] kanji=[件,条,行] kana=[くだり] common=False | senses=5
+             gloss langs: ['eng', 'ger', 'hun', 'rus', 'spa']
+      1. [n, uk] passage / paragraph
+      2. [n] 
+      3. [n] 
+      4. [n] 
+      5. [n] 
+  Entry [2] kanji=[行] kana=[こう] common=False | senses=13
+             gloss langs: ['dut', 'eng', 'rus']
+      1. [n,n-suf] going / travelling / traveling
+      2. [n] act / action
+      3. [n-suf] bank
+      4. [ctr] counter for banks
+      5. [ctr] counter for groups or parties of people
+      6. [n] type of classical Chinese verse (usu. an epic from the Tang period onwards)
+      7. [n, hist] shopping district (of similar merchants; in the Sui and Tang periods)
+      8. [n, hist] merchants' guild (in the Tang period)
+      ... and 5 more senses
+
+=== 掛ける (かける) ===
+  Entry [0] kanji=[掛ける,懸ける] kana=[かける] common=True | senses=102
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa']
+      1. [v1,vt, uk] to hang up (e.g. a coat, a picture on the wall) / to let hang / to suspend (from)
+      2. [v1,vt, uk] to put on (e.g. a blanket) / to put on top of / to cover
+      3. [v1,vt, uk] to put on (glasses, etc.) / to wear (a necklace, etc.)
+      4. [v1,vt, uk] to make (a call)
+      5. [v1,vt, uk] to spend (time, money) / to expend / to use
+      6. [v1,vt, uk] to pour (liquid) onto / to sprinkle (powder or spices) onto / to splash
+      7. [v1,vt, uk] to turn on (an engine, radio, etc.) / to set (a dial, alarm clock, etc.) / to put on (a DVD, song, etc.)
+      8. [v1,vt, uk] to cause (someone inconvenience, trouble, etc.) / to burden (someone) / to impose
+      ... and 94 more senses
+
+=== 引く (ひく) ===
+  Entry [0] kanji=[引く,曳く,牽く] kana=[ひく] common=True | senses=79
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [v5k,vt] to pull / to tug / to lead (e.g. a horse)
+      2. [v5k,vt] to draw (attention, sympathy, etc.) / to attract (e.g. interest)
+      3. [v5k,vt] to draw back (e.g. one's hand) / to draw in (one's chin, stomach, etc.) / to pull in
+      4. [v5k,vt] to draw (a card, mahjong tile, etc.)
+      5. [v5k,vt] to draw (a line, plan, etc.)
+      6. [v5k,vt] to catch (a cold)
+      7. [v5k,vt] to play (a stringed or keyboard instrument)
+      8. [v5k,vt] to look up (in a dictionary, phone book, etc.) / to consult / to check
+      ... and 71 more senses
+
+=== 見る (みる) ===
+  Entry [0] kanji=[見る,観る,視る,覧る] kana=[みる] common=True | senses=47
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [v1,vt] to see / to look / to watch
+      2. [v1,vt] to examine / to look over / to assess
+      3. [v1,vt] to look after / to attend to / to take care of
+      4. [v1,vt] to experience / to meet with (misfortune, success, etc.)
+      5. [aux-v,v1, uk] to try ... / to have a go at ... / to give ... a try
+      6. [aux-v,v1, uk] to see (that) ... / to find (that) ...
+      7. [aux-v,v1] 
+      8. [aux-v,v1] 
+      ... and 39 more senses
+
+=== 手 ===
+  Entry [0] kanji=[手] kana=[て] common=True | senses=60
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [n] hand / arm
+      2. [n, col] forepaw / foreleg
+      3. [n] handle
+      4. [n] hand / worker / help
+      5. [n] trouble / care / effort
+      6. [n] means / way / trick
+      7. [n] hand / handwriting
+      8. [n] kind / type / sort
+      ... and 52 more senses
+
+=== 時計 (とけい) ===
+  Entry [0] kanji=[時計,土圭,自鳴鐘] kana=[とけい] common=True | senses=10
+             gloss langs: ['dut', 'eng', 'fre', 'ger', 'hun', 'rus', 'slv', 'spa', 'swe']
+      1. [n] clock / watch / timepiece
+      2. [n] 
+      3. [n] 
+      4. [n] 
+      5. [n] 
+      6. [n] 
+      7. [n] 
+      8. [n] 
+      ... and 2 more senses
+
+=== やばい ===
+  Entry [0] kanji=[] kana=[やばい,ヤバい,ヤバイ] common=True | senses=11
+             gloss langs: ['dut', 'eng', 'ger', 'hun', 'spa']
+      1. [adj-i, col] dangerous / risky
+      2. [adj-i, sl] awful / terrible / crap
+      3. [adj-i, sl] terrific / amazing / cool
+      4. [adj-i, sl] crazy / insane / not normal
+      5. [adj-i] 
+      6. [adj-i] 
+      7. [adj-i] 
+      8. [adj-i] 
+      ... and 3 more senses
+  Entry [1] kanji=[野梅] kana=[やばい] common=False | senses=3
+             gloss langs: ['eng', 'ger', 'spa']
+      1. [n] wild Japanese apricot
+      2. [n] 
+      3. [n] 

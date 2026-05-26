@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Keyboard,
-  Modal,
   Platform,
   Pressable,
   Text,
@@ -15,7 +14,9 @@ import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-g
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useTablet } from '@src/hooks/useTablet';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { submitReport } from '@src/services/reportService';
 import { Toast } from '@/components/toast';
 
@@ -34,11 +35,136 @@ interface Props {
 
 const REASONS: Reason[] = ['wrong_meaning', 'wrong_example', 'other'];
 
-export function ReportModal({ visible, onClose, word, wordId, context, sourceLang, targetLang, onSubmitted }: Props) {
+export function ReportModal(props: Props) {
+  const { isTablet } = useTablet();
+  const useCard = Platform.OS === 'web' && isTablet;
+  if (useCard) return <CenteredCardLayout {...props} />;
+  return <BottomSheetLayout {...props} />;
+}
+
+function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLang, targetLang, onSubmitted }: Props) {
+  const { t } = useTranslation();
+  const colorScheme = useColorScheme();
+  const dark = colorScheme === 'dark';
+
+  const [reason, setReason] = useState<Reason | null>(null);
+  const [description, setDescription] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+
+  const hideSheet = useCallback(() => {
+    setReason(null);
+    setDescription('');
+    onClose();
+  }, [onClose]);
+
+  const handleSubmit = async () => {
+    if (!reason) {
+      setToastMessage(t('report.reason_required'));
+      return;
+    }
+    setSubmitting(true);
+    await submitReport({ word, wordId, reason, description: description.trim(), context, sourceLang, targetLang });
+    setSubmitting(false);
+    const idx = Math.floor(Math.random() * 3) + 1;
+    const msg = t(`report.thanks_${idx}`);
+    setReason(null);
+    setDescription('');
+    onClose();
+    onSubmitted?.(msg);
+  };
+
+  return (
+    <BottomSheetShell visible={visible} onRequestClose={hideSheet} animationType="fade">
+      <Pressable
+        onPress={hideSheet}
+        className="flex-1 items-center justify-center bg-black/50 px-6"
+      >
+        <Pressable
+          onPress={() => {}}
+          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+        >
+          {/* Title */}
+          <Text className="text-lg font-bold text-black dark:text-white">
+            {t('report.title')}
+          </Text>
+          <Text className="mt-1 text-sm text-gray-500">
+            "{word}"
+          </Text>
+
+          {/* Reason buttons */}
+          <View className="mt-5 gap-2">
+            {REASONS.map((r) => (
+              <Pressable
+                key={r}
+                onPress={() => setReason(r)}
+                className={`flex-row items-center rounded-xl border-2 px-4 py-3 ${
+                  reason === r
+                    ? 'border-[#2EC4A5]'
+                    : 'border-gray-200 dark:border-gray-700'
+                }`}
+              >
+                <MaterialIcons
+                  name={reason === r ? 'radio-button-checked' : 'radio-button-unchecked'}
+                  size={20}
+                  color={reason === r ? '#2EC4A5' : '#9ca3af'}
+                />
+                <Text className="ml-3 text-base text-black dark:text-white">
+                  {t(`report.${r}`)}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
+
+          {/* Description */}
+          <TextInput
+            value={description}
+            onChangeText={setDescription}
+            placeholder={t('report.description_placeholder')}
+            placeholderTextColor="#9ca3af"
+            multiline
+            className="mt-4 rounded-xl border border-gray-200 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+            style={{ minHeight: 80, textAlignVertical: 'top' }}
+          />
+
+          {/* Submit */}
+          <View className="mt-4">
+            <Pressable
+              onPress={handleSubmit}
+              disabled={submitting}
+              className={`items-center rounded-xl py-4 ${
+                !reason || submitting ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+              }`}
+            >
+              {submitting ? (
+                <ActivityIndicator color={dark ? '#000' : '#fff'} />
+              ) : (
+                <Text className={`text-base font-semibold ${
+                  !reason ? 'text-gray-400' : 'text-white dark:text-black'
+                }`}>
+                  {t('report.submit')}
+                </Text>
+              )}
+            </Pressable>
+            <Toast
+              visible={!!toastMessage}
+              message={toastMessage}
+              onHide={() => setToastMessage('')}
+              style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', pointerEvents: 'none' }}
+            />
+          </View>
+        </Pressable>
+      </Pressable>
+    </BottomSheetShell>
+  );
+}
+
+function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang, targetLang, onSubmitted }: Props) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const dark = colorScheme === 'dark';
   const insets = useSafeAreaInsets();
+  const { isTablet, contentWidth } = useTablet();
 
   const [reason, setReason] = useState<Reason | null>(null);
   const [description, setDescription] = useState('');
@@ -123,7 +249,7 @@ export function ReportModal({ visible, onClose, word, wordId, context, sourceLan
   };
 
   return (
-    <Modal visible={visible} transparent animationType="none" onRequestClose={dismissSheet} statusBarTranslucent>
+    <BottomSheetShell visible={visible} onRequestClose={dismissSheet} statusBarTranslucent>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Pressable
           onPress={dismissSheet}
@@ -140,7 +266,9 @@ export function ReportModal({ visible, onClose, word, wordId, context, sourceLan
                   paddingTop: 20,
                   paddingBottom: Math.max(insets.bottom, 16) + 16,
                   marginBottom: keyboardOffset,
+                  width: '100%',
                 },
+                isTablet ? { maxWidth: contentWidth, alignSelf: 'center' } : null,
                 sheetAnimStyle,
               ]}
             >
@@ -224,6 +352,6 @@ export function ReportModal({ visible, onClose, word, wordId, context, sourceLan
           </GestureDetector>
         </Pressable>
       </GestureHandlerRootView>
-    </Modal>
+    </BottomSheetShell>
   );
 }

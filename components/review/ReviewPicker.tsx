@@ -1,5 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { FlatList, Keyboard, Pressable, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, Keyboard, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { refreshReview } from '@src/services/reviewCache';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
@@ -42,7 +44,7 @@ interface Props {
   settingsModal: React.ReactNode;
 }
 
-const MIN_SESSION = 5;
+const MIN_SESSION = 10;
 
 export function ReviewPicker({
   totalDue,
@@ -67,22 +69,49 @@ export function ReviewPicker({
   highlightTimerRef,
   settingsModal,
 }: Props) {
+  const [refreshing, setRefreshing] = useState(false);
+  const handlePullRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await refreshReview();
+    } finally {
+      setRefreshing(false);
+    }
+  };
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
-  const { isTablet } = useTablet();
+  const { isTablet, contentWidth } = useTablet();
 
-  return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
-      <TabletContainer>
-      <View className="px-6 pt-6">
-        <View className="h-11 justify-center">
+  // Header rendered OUTSIDE the FlatList (as a sibling, not via
+  // ListHeaderComponent) to match the wordlist tab's structure exactly.
+  // We use a Fragment (not a wrapping <View>) so the four chrome rows
+  // become individual flex items of TabletContainer — wordlist tab does
+  // the same. A wrapping <View> would collapse them into ONE flex item,
+  // and the resulting layout pass shifted review's content by ~1px.
+  const headerEl = (
+    <>
+      {/* Header — structure must be byte-for-byte parallel with the
+          wordlist tab (app/(tabs)/index.tsx) for the title baseline
+          to land on the exact same pixel. The wordlist tab pairs the
+          title with a `rounded-xl bg-black p-3` "+" Pressable that
+          measures 44 × 44 (p-3 = 12 + 20 icon + 12). Review has no
+          action button, so we mirror with a same-sized invisible
+          spacer — `h-11 w-11` is exactly 44 × 44. This keeps the
+          flex-row items-center math identical (cross-axis size =
+          max(child heights) = 44), preventing the sub-pixel y-drift
+          we hit when review used h-11 + flex-1 wrapping. */}
+      <View className="flex-row items-center justify-between px-6 pt-6">
+        <View className="flex-1">
           <Text className="text-3xl font-bold text-black dark:text-white">
             {t('review.title')}
           </Text>
         </View>
+        <View className="h-11 w-11" />
       </View>
 
-      <StreakBanner streak={streak} />
+      <View className="px-6">
+        <StreakBanner streak={streak} />
+      </View>
 
       {/* Sort buttons */}
       <View className="mt-3 flex-row gap-2 px-6">
@@ -161,8 +190,16 @@ export function ReviewPicker({
           ) : null}
         </View>
       </View>
+    </>
+  );
 
-      {/* Per-book list */}
+  return (
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
+      {headerEl}
+      {/* Per-book list — header rendered above, outside FlatList, to
+          match the wordlist tab structure pixel-for-pixel. */}
+      <View style={{ flex: 1 }}>
       <FlatList
         ref={pickerListRef}
         key={isTablet ? 'grid' : 'list'}
@@ -170,10 +207,13 @@ export function ReviewPicker({
         keyExtractor={(item) => item.bookId}
         showsVerticalScrollIndicator={false}
         numColumns={isTablet ? 2 : 1}
-        columnWrapperStyle={isTablet ? { gap: 8 } : undefined}
+        columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+        }
         contentContainerStyle={bookCounts.length === 0
-          ? { flexGrow: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24 }
-          : { paddingHorizontal: 24, paddingTop: 24, paddingBottom: 24, gap: isTablet ? 8 : 0 }}
+          ? { flexGrow: 1, paddingHorizontal: 24 }
+          : { paddingTop: 24, paddingBottom: 24, gap: isTablet ? 12 : 0 }}
         ListEmptyComponent={
           <View className="items-center px-6">
             <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color="#9ca3af" />
@@ -201,6 +241,7 @@ export function ReviewPicker({
           const highlighted = highlightedBookId === item.bookId;
           const canStart = item.dueCount >= MIN_SESSION;
           const canReload = item.dueCount < MIN_SESSION && item.reloadableCount > 0;
+          const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
           return (
             <Pressable
               onPress={() => {
@@ -210,10 +251,18 @@ export function ReviewPicker({
                 }
                 handleStartRequest(item.bookId);
               }}
-              className={`rounded-xl border px-4 py-4 ${isTablet ? 'flex-1' : 'mb-2'} ${
+              className={`rounded-xl border px-4 py-4 ${isTablet ? '' : 'mx-6 mb-2'} ${
                 highlighted ? '' : 'border-gray-300 dark:border-gray-700'
               }`}
-              style={highlighted ? { borderColor: '#2EC4A5' } : undefined}
+              style={
+                highlighted
+                  ? isTablet
+                    ? { width: tabletCardWidth, borderColor: '#2EC4A5' }
+                    : { borderColor: '#2EC4A5' }
+                  : isTablet
+                    ? { width: tabletCardWidth }
+                    : undefined
+              }
             >
               {/* Dimmed header/meta only — reload button below stays full opacity.
                   Layout mirrors the wordlist tab BookCard: title + language
@@ -256,6 +305,7 @@ export function ReviewPicker({
           );
         }}
       />
+      </View>
 
       <Toast
         message={toastMsg}

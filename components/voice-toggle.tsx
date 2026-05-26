@@ -9,10 +9,12 @@
  * other voice-using screens see changes on next playback.
  */
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { router } from 'expo-router';
 import { Modal, Pressable, Text, View } from 'react-native';
 import { useState } from 'react';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
+import { usePremium } from '@src/hooks/usePremium';
 
 type Rate = 0.8 | 1.0 | 1.2;
 const RATES: Rate[] = [0.8, 1.0, 1.2];
@@ -27,6 +29,7 @@ interface VoiceToggleProps {
 export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
   const colorScheme = useColorScheme();
   const { settings, save } = useUserSettings();
+  const premium = usePremium();
   const [open, setOpen] = useState(false);
 
   const isDark = colorScheme === 'dark';
@@ -101,21 +104,35 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
             <View style={{ flexDirection: 'row', gap: 8 }}>
               {RATES.map((r) => {
                 const active = rate === r;
+                const locked = !premium && r !== 1.0;
                 return (
                   <Pressable
                     key={r}
-                    onPress={() => update({ voiceRate: r })}
+                    onPress={() => {
+                      if (locked) {
+                        setOpen(false);
+                        router.push('/subscription');
+                        return;
+                      }
+                      update({ voiceRate: r });
+                    }}
                     style={{
                       flex: 1,
                       paddingVertical: 12,
                       borderRadius: 10,
                       backgroundColor: active ? accent : isDark ? '#374151' : '#f3f4f6',
                       alignItems: 'center',
+                      flexDirection: 'row',
+                      justifyContent: 'center',
+                      gap: 4,
                     }}
                   >
                     <Text style={{ fontSize: 15, fontWeight: '600', color: active ? '#fff' : textColor }}>
                       ×{r.toFixed(1)}
                     </Text>
+                    {locked ? (
+                      <MaterialIcons name="lock" size={13} color={subtle} />
+                    ) : null}
                   </Pressable>
                 );
               })}

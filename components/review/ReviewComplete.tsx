@@ -5,8 +5,9 @@ import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSpring } fro
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
+import { router } from 'expo-router';
+
 import { Confetti } from '@/components/confetti';
-import { Paywall } from '@/components/paywall';
 import { usePremium } from '@src/hooks/usePremium';
 import { getDailyEmoji, type CelebrateInfo } from '@src/services/streakMilestone';
 import {
@@ -41,8 +42,6 @@ interface Props {
   setShowNotifPrompt: (v: boolean) => void;
   limitRemaining: number;
   goBackToPicker: () => void;
-  paywallVisible: boolean;
-  setPaywallVisible: (v: boolean) => void;
 }
 
 export function ReviewComplete({
@@ -52,8 +51,6 @@ export function ReviewComplete({
   setShowNotifPrompt,
   limitRemaining,
   goBackToPicker,
-  paywallVisible,
-  setPaywallVisible,
 }: Props) {
   const { t } = useTranslation();
   const premium = usePremium();
@@ -144,7 +141,7 @@ export function ReviewComplete({
 
       {!premium && limitRemaining <= 0 ? (
         <Pressable
-          onPress={() => setPaywallVisible(true)}
+          onPress={() => router.push('/subscription')}
           className="mt-6 w-full flex-row items-center rounded-2xl border border-gray-200 px-5 py-4 dark:border-gray-700"
         >
           <MaterialIcons name="star" size={20} color="#f59e0b" />
@@ -158,8 +155,6 @@ export function ReviewComplete({
       <Pressable onPress={goBackToPicker} className="mt-8 items-center rounded-xl bg-black px-8 py-4 dark:bg-white">
         <Text className="text-base font-semibold text-white dark:text-black">{t('review.back_to_list')}</Text>
       </Pressable>
-
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
     </SafeAreaView>
   );
 }

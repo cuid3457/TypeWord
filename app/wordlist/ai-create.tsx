@@ -4,11 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
+
 export default function WordlistAiCreateScreen() {
   const { t } = useTranslation();
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="flex-row items-center px-6 pt-2">
         <Pressable onPress={() => router.back()} className="mr-2 p-1">
           <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
@@ -23,6 +26,7 @@ export default function WordlistAiCreateScreen() {
           {t('ai_create.coming_soon')}
         </Text>
       </View>
+      </TabletContainer>
     </SafeAreaView>
   );
 }

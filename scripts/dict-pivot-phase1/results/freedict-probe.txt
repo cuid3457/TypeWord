@@ -1,0 +1,272 @@
+
+=== en: 'set' ===
+  entries=5
+  [0] POS=verb | senses=47
+      1. (transitive) (transitive) To put (something) down, to rest.
+      2. (transitive) (transitive) To attach or affix (something) to something else, or in or upon a certain place.
+      3. (transitive) (transitive) To put in a specified condition or state; to cause to be.
+      4. (transitive) (transitive) To start (a fire).
+      5. (dated,transitive) (transitive, dated) To cause to stop or stick; to obstruct; to fasten to a spot.
+      6. (transitive) (transitive) To determine or settle.
+  [1] POS=noun | senses=20
+      1. A punch for setting nails in wood.
+      2. A device for receiving broadcast radio waves (or, more recently, broadcast data); a radio or television.
+      3. (alt of,alternative) Alternative form of sett (“a hole made and lived in by a badger”).
+      4. (alt of,alternative) Alternative form of sett (“pattern of threads and yarns”).
+      5. (alt of,alternative) Alternative form of sett (“piece of quarried stone”).
+      6. (horticulture) A small tuber or bulb used instead of seed, particularly onion sets and potato sets.
+  [2] POS=adjective | senses=7
+      1. Fixed in position.
+      2. Rigid, solidified.
+      3. Ready, prepared.
+      4. Intent, determined (to do something).
+      5. Prearranged.
+      6. Fixed in one’s opinion.
+  [3] POS=noun | senses=21
+      1. A young plant fit for setting out; a slip; shoot.
+      2. A rudimentary fruit.
+      3. The setting of the sun or other luminary; (by extension) the close of the day.
+      4. (figuratively,literally) (literally and figuratively) General movement; direction; drift; tendency.
+      5. A matching collection of similar things. (Note the similar meaning in Etymology 2, Noun.)
+      6. A collection of various objects for a particular purpose.
+  [4] POS=verb | senses=1
+      1. (UK) (UK, education) To divide a class group in a subject according to ability
+
+=== en: 'run' ===
+  entries=4
+  [0] POS=verb | senses=37
+      1. To move swiftly.
+      2. (fluids) To flow.
+      3. (nautical, of a vessel) To sail before the wind, in distinction from reaching or sailing close-hauled.
+      4. (transitive) (transitive) To control or manage; to be in charge of.
+      5. (intransitive) (intransitive) To be a candidate in an election.
+      6. To make participate in certain kinds of competitions.
+  [1] POS=noun | senses=25
+      1. Act or instance of running, of moving rapidly using the feet.
+      2. Act or instance of hurrying (to or from a place) (not necessarily on foot); dash or errand, trip.
+      3. A pleasure trip.
+      4. Flight, instance or period of fleeing.
+      5. Migration of fish.
+      6. A group of fish that migrate, or ascend a river for the purpose of spawning.
+  [2] POS=adjective | senses=5
+      1. (not comparable) In a liquid state; melted or molten.
+      2. (not comparable) Cast in a mould.
+      3. (not comparable) Exhausted; depleted (especially with "down" or "out").
+      4. (not comparable) (of a zoology) Travelled, migrated; having made a migration or a spawning run.
+      5. (not comparable) Smuggled.
+  [3] POS=verb | senses=1
+      1. (form of,participle,past) past participle of rin
+
+=== en: 'bank' ===
+  entries=7
+  [0] POS=noun | senses=9
+      1. (countable) (countable) An institution where one can place and borrow money and take care of financial affairs.
+      2. (countable) (countable) A branch office of such an institution.
+      3. (countable) (countable) An underwriter or controller of a card game.
+      4. (countable) (countable) A fund from deposits or contributions, to be used in transacting business; a joint stock or capital.
+      5. (countable) (gambling, countable) The sum of money etc. which the dealer or banker has as a fund from which to draw stakes and pay losses.
+      6. (slang,uncountable) (slang, uncountable) Money; profit.
+  [1] POS=verb | senses=4
+      1. (intransitive) (intransitive) To deal with a bank or financial institution, or for an institution to provide financial services to a client.
+      2. (transitive) (transitive) To put into a bank.
+      3. (slang,transitive) (transitive, slang) To conceal in the rectum for use in prison.
+      4. (transitive) (transitive, finance) To provide banking services to.
+  [2] POS=noun | senses=9
+      1. (hydrology) An edge of river, lake, or other watercourse.
+      2. (nautical, hydrology) An elevation under the sea; a shallow area of shifting sand, gravel, mud, and so forth
+      3. (geography) A slope of earth, sand, etc.; an embankment.
+      4. (aviation) The incline of an aircraft, especially during a turn.
+      5. (rail transport) An incline, a hill.
+      6. A mass of clouds.
+  [3] POS=verb | senses=8
+      1. (intransitive) (intransitive, aviation) To roll or incline laterally in order to turn.
+      2. (transitive) (transitive) To cause (an aircraft) to bank.
+      3. (transitive) (transitive) To form into a bank or heap, to bank up.
+      4. (intransitive) (intransitive, of clouds) To form a bank; to gather in masses.
+      5. (transitive) (transitive) To cover the embers of a fire with ashes in order to retain heat.
+      6. (transitive) (transitive) To raise a mound or dike about; to enclose, defend, or fortify with a bank; to embank.
+  [4] POS=noun | senses=4
+      1. A row or panel of items stored or grouped together.
+      2. A row of keys on a musical keyboard or the equivalent on a typewriter keyboard.
+      3. (computing) A contiguous block of memory that is of fixed, hardware-dependent size, but often larger than a page and partitioning the memory such that two distinct banks do not overlap.
+      4. (pinball) A set of multiple adjacent drop targets.
+  [5] POS=verb | senses=1
+      1. (transitive) (transitive, order and arrangement) To arrange or order in a row.
+  [6] POS=noun | senses=5
+      1. A bench, as for rowers in a galley; also, a tier of oars.
+      2. A bench or seat for judges in court.
+      3. The regular term of a court of law, or the full court sitting to hear arguments upon questions of law, as distinguished from a sitting at nisi prius, or a court held for jury trials. See banc
+      4. (archaic) (archaic, printing) A kind of table used by printers.
+      5. (music) A bench, or row of keys belonging to a keyboard, as in an organ.
+
+=== en: 'light' ===
+  entries=8
+  [0] POS=noun | senses=17
+      1. (uncountable) (physics, uncountable) Electromagnetic radiation in the wavelength range visible to the human eye (about 400–750 nanometers): visible light.
+      2. (broadly,countable,uncountable) (by extension) Electromagnetic radiation in the wavelength range visible to the human eye or in nearby ranges (infrared or ultraviolet radiation).
+      3. (broadly,countable,uncommon,uncountable) (by extension, less commonly) Electromagnetic radiation of any wavelength.
+      4. (countable) (countable) A source of illumination.
+      5. (countable,figuratively,uncountable) (figurative) Spiritual or mental illumination; enlightenment, useful information.
+      6. (archaic,countable,in plural,uncountable) (in the plural, now rare) Facts; pieces of information; ideas, concepts.
+  [1] POS=verb | senses=6
+      1. (transitive) (transitive) To start (a fire).
+      2. (transitive) (transitive) To set fire to; to set burning.
+      3. (transitive) (transitive) To illuminate; to provide light for when it is dark.
+      4. (intransitive) (intransitive) To become ignited; to take fire.
+      5. To attend or conduct with a light; to show the way to by means of a light.
+      6. (transitive) (transitive, pinball) To make (a bonus) available to be collected by hitting a target, and thus light up the feature light corresponding to that bonus to indicate its availability.
+  [2] POS=adjective | senses=3
+      1. Having light; bright; clear; not dark or obscure.
+      2. Pale or whitish in color; highly luminous and more or less deficient in chroma.
+      3. (of coffee) Served with extra milk or cream.
+  [3] POS=adjective | senses=18
+      1. Having little or relatively little actual weight; not heavy; not cumbrous or unwieldy.
+      2. Having little weight as compared with bulk; of little density or specific gravity.
+      3. Of short or insufficient weight; weighing less than the legal, standard, or proper amount; clipped or diminished.
+      4. Lacking that which burdens or makes heavy.
+      5. (cooking) Not heavy or soggy; spongy; well raised.
+      6. Low in fat, calories, alcohol, salt, etc.
+  [4] POS=adverb | senses=1
+      1. Carrying little.
+  [5] POS=noun | senses=4
+      1. (curling) A stone that is not thrown hard enough.
+      2. See lights (“lungs”).
+      3. (Australia,uncountable) (Australia, uncountable) A low-alcohol lager.
+      4. (historical) (military, historical) A member of the light cavalry.
+  [6] POS=verb | senses=3
+      1. (nautical) To unload a ship, or to jettison material to make it lighter
+      2. To lighten; to ease of a burden; to take off.
+      3. (broadly) (by extension) To leave; to depart.
+  [7] POS=verb | senses=3
+      1. To find by chance.
+      2. To stop upon (of eyes or a glance); to notice
+      3. (archaic) (archaic) To alight; to land or come down.
+
+=== es: 'banco' ===
+  entries=2
+  [0] POS=noun | senses=4
+      1. (masculine) bank (financial institution)
+      2. (masculine) bench
+      3. (masculine) pew
+      4. (masculine) school of fish
+  [1] POS=verb | senses=1
+      1. (first person,form of,indicative,present,singular) first-person singular present indicative of bancar
+
+=== es: 'carta' ===
+  entries=1
+  [0] POS=noun | senses=4
+      1. (feminine) letter (document)
+      2. (feminine) map
+      3. (feminine) menu (list of dishes in a restaurant)
+      4. (feminine) playing card
+
+=== es: 'vela' ===
+  entries=5
+  [0] POS=noun | senses=4
+      1. (feminine) candle
+      2. (feminine) wakefulness, sleeplessness
+      3. (feminine) vigil, watch
+      4. (Latin America,feminine) (Latin America) vigil (any of various indigenous festivals)
+  [1] POS=noun | senses=2
+      1. (feminine) (nautical) sail
+      2. (feminine) (nautical) sailing
+  [2] POS=verb | senses=1
+      1. (form of) inflection of ver:
+  [3] POS=verb | senses=1
+      1. (accusative,form of,imperative,object feminine,object singular,object third person,second person,singular) second-person singular imperative of ir combined with la
+  [4] POS=verb | senses=1
+      1. inflection of velar:
+
+=== fr: 'voler' ===
+  entries=1
+  [0] POS=verb | senses=4
+      1. (intransitive) (intransitive) to fly through the air
+      2. (transitive) (falconry, transitive) to pursue flying
+      3. (intransitive) (intransitive) to scarper, flee
+      4. (transitive) (transitive) to steal, rob
+
+=== fr: 'louer' ===
+  entries=2
+  [0] POS=verb | senses=2
+      1. to rent
+      2. to lease
+  [1] POS=verb | senses=1
+      1. to praise, to recommend
+
+=== fr: 'livre' ===
+  entries=3
+  [0] POS=noun | senses=1
+      1. (masculine) book
+  [1] POS=noun | senses=3
+      1. pound (unit of weight)
+      2. (feminine) pound (unit of currency)
+      3. (Louisiana,feminine) (Louisiana) grade (level)
+  [2] POS=verb | senses=1
+      1. inflection of livrer:
+
+=== de: 'Bank' ===
+  entries=2
+  [0] POS=noun | senses=4
+      1. (feminine) bench (which people sit on); pew
+      2. (feminine) workbench (which things can be set down on)
+      3. (feminine) bank (collection of material in a body of water)
+      4. (feminine) (soccer) substitutes' bench
+  [1] POS=noun | senses=2
+      1. (feminine) bank (financial institution)
+      2. (feminine,in compounds) (in compounds) a storage facility for some specified purpose
+
+=== de: 'Schloss' ===
+  entries=1
+  [0] POS=noun | senses=3
+      1. (neuter,strong) lock, padlock (something used for fastening)
+      2. (neuter,strong) (firearms) lock (firing mechanism)
+      3. (neuter,strong) (architecture) castle (château, palace, not fortified)
+
+=== de: 'Gericht' ===
+  entries=2
+  [0] POS=noun | senses=2
+      1. (neuter,strong) court (of justice)
+      2. (neuter,strong) judgement / judgment
+  [1] POS=noun | senses=1
+      1. (neuter,strong) dish (a type of prepared food)
+
+=== it: 'corso' ===
+  entries=5
+  [0] POS=noun | senses=6
+      1. (masculine) course (of a river, of a university, etc.)
+      2. (masculine) stream, waterway
+      3. (masculine) avenue (especially in the names of streets)
+      4. (masculine) strip (a street with multiple shopping or entertainment possibilities)
+      5. (masculine) circulation (of money)
+      6. (masculine,subjective) subject
+  [1] POS=verb | senses=1
+      1. (form of,participle,past) past participle of correre
+  [2] POS=adjective | senses=1
+      1. Corsican (of, from or relating to Corsica)
+  [3] POS=noun | senses=1
+      1. (masculine) Corsican (native or inhabitant of Corsica) (usually male)
+  [4] POS=noun | senses=2
+      1. (masculine,uncountable) the Corsican language
+      2. (masculine,uncountable) a kind of Corsican wine
+
+=== it: 'lingua' ===
+  entries=1
+  [0] POS=noun | senses=6
+      1. (feminine) tongue
+      2. (countable,feminine) (countable) language (a body of words, and set of methods of combining them (called a grammar), understood by a community and used as a form of communication)
+      3. (feminine) strip, tongue (of land)
+      4. (feminine,in plural) (in the plural) foreign languages
+      5. (feminine) the square horn of an anvil
+      6. (feminine,plural normally) (usually in the plural) a type of Italian flatbread
+
+=== it: 'campo' ===
+  entries=2
+  [0] POS=noun | senses=8
+      1. (masculine) (sports, agriculture) field
+      2. (masculine) battlefield, airfield
+      3. (masculine) range
+      4. (masculine) signal (mobile network)
+      5. (masculine) (film) shot
+      6. (masculine) (art) background (of a painting)
+  [1] POS=verb | senses=1
+      1. (first person,form of,indicative,present,singular) first-person singular present indicative of campare

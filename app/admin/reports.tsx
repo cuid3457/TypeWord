@@ -16,6 +16,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { supabase } from '@src/api/supabase';
 
 const ADMIN_EMAILS = new Set(['junesung07@gmail.com']);
@@ -98,6 +99,7 @@ export default function AdminReportsScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="mb-2 h-11 flex-row items-center px-4">
         <Pressable onPress={() => router.back()} className="mr-2 p-1">
           <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
@@ -158,6 +160,7 @@ export default function AdminReportsScreen() {
           )}
         />
       )}
+      </TabletContainer>
     </SafeAreaView>
   );
 }

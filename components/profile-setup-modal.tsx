@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Modal, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { setDisplayName, setUsername, validateUsername, type UsernameValidation } from '@src/services/friendsService';
 
 /**
@@ -156,7 +157,7 @@ export function ProfileSetupModal({
   })();
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={cancellable && onCancel ? onCancel : () => {}}>
+    <BottomSheetShell visible={visible} onRequestClose={cancellable && onCancel ? onCancel : () => {}} animationType="fade">
       <Pressable
         onPress={cancellable && onCancel ? onCancel : undefined}
         className="flex-1 items-center justify-center bg-black/50 px-6"
@@ -231,6 +232,6 @@ export function ProfileSetupModal({
           ) : null}
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

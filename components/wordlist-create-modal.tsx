@@ -1,18 +1,21 @@
 /**
- * Entry-point sheet for creating a wordlist. Two paths:
+ * Entry-point modal for creating a wordlist. Two paths:
  *   - blank: existing manual creation flow
  *   - browse: curated wordlist library (category + language picked inside)
  *
- * Slide-up bottom sheet with drag-to-dismiss — same pattern as
- * ReviewSettingsSheet and ReportModal for visual consistency.
+ * Layout adapts to platform:
+ *   - Native + mobile web (<600dp):  slide-up bottom sheet, drag-to-dismiss
+ *   - Tablet+ web (>=600dp):         centered card dialog, click-outside / Esc
  */
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useCallback, useEffect, useMemo } from 'react';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Platform, Pressable, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTablet } from '@src/hooks/useTablet';
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 
 interface Props {
   visible: boolean;
@@ -27,8 +30,121 @@ export function WordlistCreateModal({
   onPickBrowse,
   onClose,
 }: Props) {
+  const { isTablet } = useTablet();
+  const useCard = Platform.OS === 'web' && isTablet;
+  if (useCard) {
+    return (
+      <CenteredCardLayout
+        visible={visible}
+        onPickBlank={onPickBlank}
+        onPickBrowse={onPickBrowse}
+        onClose={onClose}
+      />
+    );
+  }
+  return (
+    <BottomSheetLayout
+      visible={visible}
+      onPickBlank={onPickBlank}
+      onPickBrowse={onPickBrowse}
+      onClose={onClose}
+    />
+  );
+}
+
+function OptionRows({
+  onPickBlank,
+  onPickBrowse,
+}: {
+  onPickBlank: () => void;
+  onPickBrowse: () => void;
+}) {
+  const { t } = useTranslation();
+  return (
+    <View className="mt-5 gap-3">
+      <Pressable
+        onPress={onPickBlank}
+        className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
+      >
+        <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+          <MaterialIcons name="edit" size={22} color="#6b7280" />
+        </View>
+        <View className="ml-3 flex-1">
+          <Text className="text-base font-semibold text-black dark:text-white">
+            {t('create_modal.blank_title')}
+          </Text>
+          <Text className="mt-0.5 text-xs text-gray-500">
+            {t('create_modal.blank_description')}
+          </Text>
+        </View>
+      </Pressable>
+
+      <Pressable
+        onPress={onPickBrowse}
+        className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
+      >
+        <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+          <MaterialIcons name="auto-stories" size={22} color="#6b7280" />
+        </View>
+        <View className="ml-3 flex-1">
+          <Text className="text-base font-semibold text-black dark:text-white">
+            {t('create_modal.browse_title')}
+          </Text>
+          <Text className="mt-0.5 text-xs text-gray-500">
+            {t('create_modal.browse_description')}
+          </Text>
+        </View>
+      </Pressable>
+    </View>
+  );
+}
+
+function CenteredCardLayout({ visible, onPickBlank, onPickBrowse, onClose }: Props) {
+  const { t } = useTranslation();
+  return (
+    <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
+      <Pressable
+        onPress={onClose}
+        className="flex-1 items-center justify-center bg-black/50 px-6"
+      >
+        <Pressable
+          onPress={() => {}}
+          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+        >
+          <Text className="text-xl font-bold text-black dark:text-white">
+            {t('create_modal.title')}
+          </Text>
+          <Text className="mt-1 text-sm text-gray-500">
+            {t('create_modal.subtitle')}
+          </Text>
+          <OptionRows
+            onPickBlank={() => {
+              onClose();
+              onPickBlank();
+            }}
+            onPickBrowse={() => {
+              onClose();
+              onPickBrowse();
+            }}
+          />
+          <Pressable
+            onPress={onClose}
+            className="mt-4 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+          >
+            <Text className="text-sm font-medium text-gray-600 dark:text-gray-400">
+              {t('common.cancel')}
+            </Text>
+          </Pressable>
+        </Pressable>
+      </Pressable>
+    </BottomSheetShell>
+  );
+}
+
+function BottomSheetLayout({ visible, onPickBlank, onPickBrowse, onClose }: Props) {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const { isTablet, contentWidth } = useTablet();
   const translateY = useSharedValue(1000);
 
   useEffect(() => {
@@ -75,13 +191,17 @@ export function WordlistCreateModal({
   }));
 
   return (
-    <Modal visible={visible} transparent animationType="none" onRequestClose={dismissSheet} statusBarTranslucent>
+    <BottomSheetShell visible={visible} onRequestClose={dismissSheet} statusBarTranslucent>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Pressable onPress={dismissSheet} className="flex-1 justify-end bg-black/50">
           <GestureDetector gesture={panGesture}>
             <Animated.View
               className="rounded-t-3xl bg-white px-6 pt-5 dark:bg-gray-900"
-              style={[{ paddingBottom: Math.max(insets.bottom, 16) + 16 }, sheetAnimStyle]}
+              style={[
+                { paddingBottom: Math.max(insets.bottom, 16) + 16, width: '100%' },
+                isTablet ? { maxWidth: contentWidth, alignSelf: 'center' } : null,
+                sheetAnimStyle,
+              ]}
             >
               <Pressable onPress={() => {}}>
                 <View className="mb-4 items-center">
@@ -95,46 +215,15 @@ export function WordlistCreateModal({
                   {t('create_modal.subtitle')}
                 </Text>
 
-                <View className="mt-5 gap-3">
-                  <Pressable
-                    onPress={() => pickAndDismiss(onPickBlank)}
-                    className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
-                  >
-                    <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                      <MaterialIcons name="edit" size={22} color="#6b7280" />
-                    </View>
-                    <View className="ml-3 flex-1">
-                      <Text className="text-base font-semibold text-black dark:text-white">
-                        {t('create_modal.blank_title')}
-                      </Text>
-                      <Text className="mt-0.5 text-xs text-gray-500">
-                        {t('create_modal.blank_description')}
-                      </Text>
-                    </View>
-                  </Pressable>
-
-                  <Pressable
-                    onPress={() => pickAndDismiss(onPickBrowse)}
-                    className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
-                  >
-                    <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                      <MaterialIcons name="auto-stories" size={22} color="#6b7280" />
-                    </View>
-                    <View className="ml-3 flex-1">
-                      <Text className="text-base font-semibold text-black dark:text-white">
-                        {t('create_modal.browse_title')}
-                      </Text>
-                      <Text className="mt-0.5 text-xs text-gray-500">
-                        {t('create_modal.browse_description')}
-                      </Text>
-                    </View>
-                  </Pressable>
-                </View>
+                <OptionRows
+                  onPickBlank={() => pickAndDismiss(onPickBlank)}
+                  onPickBrowse={() => pickAndDismiss(onPickBrowse)}
+                />
               </Pressable>
             </Animated.View>
           </GestureDetector>
         </Pressable>
       </GestureHandlerRootView>
-    </Modal>
+    </BottomSheetShell>
   );
 }

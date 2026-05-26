@@ -1,8 +1,9 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Modal, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import {
   FriendsError,
   searchUsers,
@@ -123,7 +124,7 @@ export function AddFriendByUsernameModal({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
       <Pressable onPress={onClose} className="flex-1 items-center justify-center bg-black/50 px-6">
         <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-md rounded-2xl bg-white p-5 dark:bg-gray-900">
           <Text className="text-lg font-bold text-black dark:text-white">
@@ -223,6 +224,6 @@ export function AddFriendByUsernameModal({
           </Pressable>
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

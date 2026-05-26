@@ -13,6 +13,7 @@ import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-nativ
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { supabase } from '@src/api/supabase';
 import {
   addFriendByCode,
@@ -122,6 +123,7 @@ export default function InviteScreen() {
 
   return (
     <SafeAreaView className="flex-1 items-center justify-center bg-white px-8 dark:bg-black">
+      <TabletContainer style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {state.kind === 'loading' ? (
         <ActivityIndicator color="#2EC4A5" size="large" />
       ) : state.kind === 'success' ? (
@@ -195,6 +197,7 @@ export default function InviteScreen() {
           </Pressable>
         </View>
       )}
+      </TabletContainer>
     </SafeAreaView>
   );
 }

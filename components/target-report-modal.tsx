@@ -1,9 +1,10 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Keyboard, Modal, Platform, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Keyboard, Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import {
   reportUser,
   reportWordlist,
@@ -108,7 +109,7 @@ export function TargetReportModal({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} statusBarTranslucent>
+    <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade" statusBarTranslucent>
       <Pressable
         onPress={() => {
           // Progressive dismiss: first backdrop tap closes the keyboard
@@ -209,6 +210,6 @@ export function TargetReportModal({
           </Pressable>
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

@@ -31,6 +31,11 @@ export function ReadingDisplay({
   /** Compact mode for inline use (e.g. word list rows). No tap-to-speak. */
   compact?: boolean;
 }) {
+  // Korean: the headword itself is already in hangul, which IS the phonetic
+  // form. Displaying "reading" alongside the word duplicates the same hangul
+  // and adds visual noise. Skip the reading row entirely for ko.
+  if (sourceLang === 'ko') return null;
+
   const readings = Array.isArray(reading) ? reading : [reading];
   const canSpeak = SPEAKABLE_READINGS.has(sourceLang);
   const formatted = readings.join(' / ');

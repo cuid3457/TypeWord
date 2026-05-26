@@ -1,0 +1,177 @@
+/**
+ * Web variant of the premium paywall. Web checkout is intentionally
+ * absent in v1 — Apple/Google IAP remains the only purchase path. This
+ * screen shows the value proposition and directs users to the mobile
+ * app for actual subscription.
+ *
+ * Anti-steering note: this is the web app linking OUT to the mobile
+ * app's store listing. That's allowed. Apple/Google only restrict the
+ * opposite direction (mobile app linking out to web payments).
+ */
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { router, Stack } from 'expo-router';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import { TabletContainer } from '@/components/tablet-container';
+import { useColorScheme } from '@/hooks/use-color-scheme';
+import { usePremium } from '@src/hooks/usePremium';
+import { refreshBonusPremium } from '@src/services/subscriptionService';
+
+// Until the app ships to the stores with public listings, the search
+// URLs work for both web (returns the search results page) and as
+// universal links on the respective device (opens the store app).
+// Once App Store / Play Console listings are live, swap with the
+// canonical product URLs.
+const STORE_URLS = {
+  ios: 'https://apps.apple.com/search?term=MoaVoca',
+  android: 'https://play.google.com/store/search?q=MoaVoca&c=apps',
+};
+
+export function Paywall() {
+  const { t } = useTranslation();
+  const colorScheme = useColorScheme();
+  const dark = colorScheme === 'dark';
+  const premium = usePremium();
+  const [refreshing, setRefreshing] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const closePage = () => {
+    if (router.canGoBack()) router.back();
+    else router.replace('/');
+  };
+
+  const handleRefreshStatus = async () => {
+    setRefreshing(true);
+    setMessage(null);
+    try {
+      await refreshBonusPremium();
+      // usePremium() updates reactively via its own subscription —
+      // show a generic acknowledgement either way.
+      setMessage(t('premium.status_refreshed') || 'Status refreshed');
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  const features = [
+    { icon: 'all-inclusive' as const, text: t('premium.feature_unlimited') },
+    { icon: 'photo-camera' as const, text: t('premium.feature_image') },
+    { icon: 'folder' as const, text: t('premium.feature_wordlists') },
+    { icon: 'file-download' as const, text: t('premium.feature_export') },
+    { icon: 'block' as const, text: t('premium.feature_no_ads') },
+  ];
+
+  return (
+    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom', 'left', 'right']}>
+      <Stack.Screen options={{ headerShown: false }} />
+
+      <TabletContainer>
+      {/* Header */}
+      <View className="flex-row items-center px-4 py-2">
+        <Pressable
+          onPress={closePage}
+          className="p-2"
+          accessibilityLabel={t('common.back')}
+          accessibilityRole="button"
+        >
+          <MaterialIcons name="arrow-back" size={24} color={dark ? '#fff' : '#000'} />
+        </Pressable>
+      </View>
+
+      <ScrollView
+        contentContainerStyle={{
+          paddingHorizontal: 24,
+          paddingTop: 12,
+          paddingBottom: 32,
+        }}
+      >
+        {/* Title */}
+        <Text className="text-center text-2xl font-bold text-black dark:text-white">
+          MoaVoca {t('premium.title')}
+        </Text>
+
+        {/* Premium-active badge — shown when user already has an entitlement */}
+        {premium ? (
+          <View className="mt-6 items-center rounded-2xl border-2 border-[#2EC4A5] bg-[#2EC4A510] p-5">
+            <MaterialIcons name="verified" size={40} color="#2EC4A5" />
+            <Text className="mt-3 text-center text-base font-semibold text-black dark:text-white">
+              {t('premium.active')}
+            </Text>
+          </View>
+        ) : null}
+
+        {/* Features */}
+        <View className="mt-6 gap-3">
+          {features.map((f) => (
+            <View key={f.icon} className="flex-row items-center">
+              <View className="h-9 w-9 items-center justify-center rounded-full bg-[#2EC4A520]">
+                <MaterialIcons name={f.icon} size={20} color="#2EC4A5" />
+              </View>
+              <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                {f.text}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Web CTA — subscribe in the mobile app */}
+        {!premium ? (
+          <View className="mt-8">
+            <Text className="text-center text-sm leading-5 text-gray-600 dark:text-gray-300">
+              {t('premium.web_subscribe_in_app')}
+            </Text>
+
+            <Pressable
+              onPress={() => Linking.openURL(STORE_URLS.ios)}
+              className="mt-5 flex-row items-center justify-center rounded-xl bg-black py-4"
+              accessibilityRole="link"
+              accessibilityLabel="App Store"
+            >
+              <FontAwesome name="apple" size={22} color="#fff" style={{ marginTop: -2 }} />
+              <Text className="ml-3 text-base font-semibold text-white">
+                {t('premium.open_app_store')}
+              </Text>
+            </Pressable>
+
+            <Pressable
+              onPress={() => Linking.openURL(STORE_URLS.android)}
+              className="mt-3 flex-row items-center justify-center rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+              accessibilityRole="link"
+              accessibilityLabel="Google Play"
+            >
+              <MaterialIcons name="shop" size={22} color={dark ? '#fff' : '#000'} />
+              <Text className="ml-3 text-base font-semibold text-black dark:text-white">
+                {t('premium.open_play_store')}
+              </Text>
+            </Pressable>
+
+            {/* Refresh entitlement — for users who already subscribed on
+                mobile and want their web session to reflect that. */}
+            <Pressable
+              onPress={handleRefreshStatus}
+              disabled={refreshing}
+              className="mt-4 items-center py-3"
+            >
+              {refreshing ? (
+                <ActivityIndicator color="#6b7280" />
+              ) : (
+                <Text className="text-sm font-medium text-[#2EC4A5]">
+                  {t('premium.web_refresh_status')}
+                </Text>
+              )}
+            </Pressable>
+
+            {message ? (
+              <Text className="mt-2 text-center text-xs text-gray-500">{message}</Text>
+            ) : null}
+          </View>
+        ) : null}
+      </ScrollView>
+      </TabletContainer>
+    </SafeAreaView>
+  );
+}

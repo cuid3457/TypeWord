@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
+
 // Business phone (KT M모바일 사업번호, 2026-05-19 issued). Safe to
 // display publicly — dedicated business line, not the founder's
 // personal cell.
@@ -22,7 +24,7 @@ const BUSINESS_INFO = {
   brn: '774-17-02956',
   mailOrderRegistration: '제2026-서울구로-0893호',
   phone: '+82-10-9966-3457',
-  email: 'support@typeword.app',
+  email: 'support@moavoca.com',
   businessType: '정보통신업 / 응용 소프트웨어 개발 및 공급업',
   hostingProvider: 'Supabase Inc.',
   privacyOfficer: '박준성',
@@ -34,6 +36,7 @@ export default function BusinessInfoScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 80 }}>
         <View className="mb-2 h-11 flex-row items-center">
           <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
@@ -68,6 +71,7 @@ export default function BusinessInfoScreen() {
         <Row label={t('business_info.hosting_provider')} value={BUSINESS_INFO.hostingProvider} />
         <Row label={t('business_info.privacy_officer')} value={BUSINESS_INFO.privacyOfficer} />
       </ScrollView>
+      </TabletContainer>
     </SafeAreaView>
   );
 }

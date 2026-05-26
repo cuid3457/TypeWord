@@ -56,6 +56,28 @@ export function initSentry() {
     },
     beforeBreadcrumb(crumb) {
       if (typeof crumb.message === 'string') crumb.message = scrubString(crumb.message);
+      // crumb.data captures fetch URLs, headers, status. supabase-js auto-
+      // emits breadcrumbs whose URL can include access_token query params on
+      // some endpoints. Drop data entirely for network-category crumbs;
+      // otherwise scrub the JSON-stringified form.
+      if (crumb.category === 'xhr' || crumb.category === 'fetch') {
+        delete crumb.data;
+      } else if (crumb.data) {
+        try {
+          const json = JSON.stringify(crumb.data);
+          const scrubbed = scrubString(json);
+          if (scrubbed !== json) {
+            // Replace with scrubbed parsed form, or drop if parse fails.
+            try {
+              crumb.data = JSON.parse(scrubbed);
+            } catch {
+              delete crumb.data;
+            }
+          }
+        } catch {
+          delete crumb.data;
+        }
+      }
       return crumb;
     },
   });

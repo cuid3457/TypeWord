@@ -1,5 +1,6 @@
 import { router, Stack } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
+import * as ImageManipulator from 'expo-image-manipulator';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +17,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { TabletContainer } from '@/components/tablet-container';
 import { AppModal } from '@/components/app-modal';
 import { Toast } from '@/components/toast';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -91,17 +93,32 @@ export default function InquiryScreen() {
 
       const uploadedUrls: string[] = [];
       for (const uri of images) {
-        const ext = uri.split('.').pop()?.toLowerCase() ?? 'jpg';
-        const fileName = `${userId}/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
+        // Re-encode via ImageManipulator with no transforms — strips EXIF
+        // (incl. GPS coordinates) as a side effect of decode + re-encode.
+        // Without this the original device photo's EXIF (home GPS, camera
+        // model, timestamps) would persist on the public CDN URL.
+        let processedUri = uri;
+        try {
+          const out = await ImageManipulator.manipulateAsync(uri, [], {
+            compress: 0.7,
+            format: ImageManipulator.SaveFormat.JPEG,
+          });
+          processedUri = out.uri;
+        } catch (e) {
+          // If re-encode fails, fall back to original URI (rare). Don't
+          // block submission — but log so we know.
+          captureError(e, { service: 'inquiry', fn: 'stripExif' });
+        }
+        const fileName = `${userId}/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.jpg`;
 
-        const response = await fetch(uri);
+        const response = await fetch(processedUri);
         const blob = await response.blob();
         const arrayBuffer = await new Response(blob).arrayBuffer();
 
         const { error: uploadError } = await withTimeout(
           supabase.storage
             .from('inquiries')
-            .upload(fileName, arrayBuffer, { contentType: `image/${ext}`, upsert: false }),
+            .upload(fileName, arrayBuffer, { contentType: 'image/jpeg', upsert: false }),
           UPLOAD_TIMEOUT_MS,
         );
 
@@ -148,6 +165,7 @@ export default function InquiryScreen() {
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
         className="flex-1"
@@ -243,6 +261,7 @@ export default function InquiryScreen() {
           <View className="h-8" />
         </ScrollView>
       </KeyboardAvoidingView>
+      </TabletContainer>
 
       <AppModal
         visible={successModal}

@@ -19,6 +19,19 @@ verify_jwt = false
 # function via admin.auth.getUser(jwt).
 verify_jwt = false
 
+[functions.word-lookup-v2]
+# Same as word-lookup — ES256 incompatibility at gateway. JWT verified inside.
+verify_jwt = false
+
+[functions.word-lookup-v4]
+# Same as word-lookup — ES256 incompatibility at gateway. JWT verified inside.
+verify_jwt = false
+
+[functions.process-report]
+# Internal-only function — authenticated via PROCESS_REPORT_SECRET (Vault-stored
+# shared secret, not a JWT). Gateway JWT verification would block pg_cron entirely.
+verify_jwt = false
+
 [functions.image-extract]
 verify_jwt = false
 

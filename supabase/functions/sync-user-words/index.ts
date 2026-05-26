@@ -29,7 +29,7 @@ import { stitchAndNormalize } from "../_shared/stitch.ts";
 
 const ALLOWED_ORIGINS = new Set([
   "https://moavoca.com", "https://www.moavoca.com",
-  "http://localhost:8081", "http://localhost:19006",
+  "http://localhost:8081", "http://localhost:19006", "http://localhost:4173",
   "https://typeword.app", "https://www.typeword.app",
 ]);
 
@@ -49,15 +49,6 @@ function jsonResponse(body: unknown, status = 200): Response {
     status,
     headers: { "Content-Type": "application/json", ..._corsHeaders },
   });
-}
-
-function decodeJwtPayload(jwt: string): { sub?: string; role?: string } | null {
-  try {
-    const part = jwt.split(".")[1];
-    const padded = part + "=".repeat((4 - (part.length % 4)) % 4);
-    const decoded = atob(padded.replace(/-/g, "+").replace(/_/g, "/"));
-    return JSON.parse(decoded);
-  } catch { return null; }
 }
 
 function getAdmin(): SupabaseClient {
@@ -127,12 +118,11 @@ Deno.serve(async (req: Request) => {
   const jwt = auth.replace(/^Bearer\s+/i, "");
   if (!jwt) return jsonResponse({ error: "Missing Authorization header" }, 401);
 
-  const payload = decodeJwtPayload(jwt);
-  // Detect service-role across legacy JWT (role claim) AND new opaque
-  // sb_secret_xxx format (constant-time compare against env). Service-role
-  // callers (admin scripts, cache-refresh tools) must pass an explicit
-  // user_id in the request body; anonymous/authenticated users derive
-  // their userId from the JWT sub claim.
+  // SECURITY: do NOT trust the JWT's `sub` or `role` payload — those are
+  // base64-decoded without signature verification. A forged JWT with
+  // `role:"service_role"` previously slipped through. Use Supabase's
+  // getUser() (verifies signature) for user tokens; constant-time-compare
+  // against the env secret for service-role.
   const envSecret = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
   function timingSafeEq(a: string, b: string): boolean {
     if (a.length !== b.length || a.length === 0) return false;
@@ -142,20 +132,27 @@ Deno.serve(async (req: Request) => {
     for (let i = 0; i < ae.byteLength; i++) diff |= ae[i] ^ be[i];
     return diff === 0;
   }
-  const isServiceRole = payload?.role === "service_role" || timingSafeEq(jwt, envSecret);
-  let userId = payload?.sub;
-  if (!userId && isServiceRole) {
+  const isServiceRole = envSecret.length > 0 && timingSafeEq(jwt, envSecret);
+
+  const admin = getAdmin();
+
+  let userId: string | undefined;
+  if (isServiceRole) {
+    // Admin scripts / cache-refresh tools must pass explicit user_id.
     try {
       const body = (await req.clone().json()) as Record<string, unknown>;
       if (typeof body.user_id === "string") userId = body.user_id;
     } catch { /* no body */ }
+  } else {
+    const { data, error } = await admin.auth.getUser(jwt);
+    if (error || !data?.user) {
+      return jsonResponse({ error: "Invalid token" }, 401);
+    }
+    userId = data.user.id;
   }
   if (!userId) {
-    console.warn("sync-user-words: no userId from token", { hasSub: !!payload?.sub, role: payload?.role });
-    return jsonResponse({ error: "Invalid token", role: payload?.role ?? null }, 401);
+    return jsonResponse({ error: "Invalid token" }, 401);
   }
-
-  const admin = getAdmin();
   const started = Date.now();
 
   // ── 1. Read all user_words for this user ──
@@ -205,7 +202,9 @@ Deno.serve(async (req: Request) => {
           "id, word, word_lang, headword, ipa, reading, confidence, note, original_input, meanings, synonyms, antonyms, examples, has_enrich, model, prompt_version, updated_at",
         )
         .eq("word_lang", lang)
-        .eq("prompt_version", PROMPT_VERSION_V2)
+        // Accept both legacy v2/v3 (v7-2026-05-17) and current v4 (dict-first-v4) entries.
+        // v4 entries use a different meanings shape and must skip stitch (see stitching block below).
+        .in("prompt_version", [PROMPT_VERSION_V2, "dict-first-v4"])
         .in("word", slice);
       if (error) {
         console.warn(`word_entries batch ${lang}: ${error.message}`);
@@ -236,7 +235,8 @@ Deno.serve(async (req: Request) => {
       )
       .in("word_entry_id", slice)
       .in("target_lang", targetLangs)
-      .eq("prompt_version", PROMPT_VERSION_V2);
+      // Same dual filter as entries — accept both v3 and v4 translations.
+      .in("prompt_version", [PROMPT_VERSION_V2, "dict-first-v4"]);
     if (error) {
       console.warn(`word_translations batch ${i}: ${error.message}`);
       continue;
@@ -272,7 +272,28 @@ Deno.serve(async (req: Request) => {
     const userWordMs = new Date(uw.updated_at).getTime();
     if (userWordMs >= maxServerMs) continue;
 
-    // Stitch with the shared pipeline (same logic as request-time lookup).
+    // v4 (dict-first-v4) bypasses stitch — the translation row is already in
+    // user-facing shape (WordMeaning[] + WordExample[]). Apply the v4 path
+    // whenever EITHER the entry or the translation is v4. Mixed cases (v3
+    // entry + v4 translation patched by process-report) must NOT go through
+    // stitch — stitch would read entry.examples (stale v3 canonical) and
+    // overwrite the fresh v4 translation.
+    const transV4 = (translation?.prompt_version ?? "") === "dict-first-v4";
+    const entryV4 = entry.prompt_version === "dict-first-v4";
+    if (entryV4 || transV4) {
+      const result = {
+        headword: entry.headword ?? entry.word,
+        reading: entry.reading ?? undefined,
+        ipa: entry.ipa ?? undefined,
+        meanings: translation?.meanings_translated ?? [],
+        examples: translation?.examples_translated ?? [],
+        confidence: entry.confidence ?? undefined,
+      };
+      updates.push({ id: uw.id, result_json: result });
+      continue;
+    }
+
+    // v3 legacy — Stitch with the shared pipeline.
     const stitchedResult = stitchAndNormalize(
       entry as unknown as WordEntry,
       (translation as unknown as WordTranslation | null) ?? null,

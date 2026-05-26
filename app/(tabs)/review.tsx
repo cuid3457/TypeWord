@@ -11,7 +11,8 @@ import { ReviewSettingsSheet } from '@/components/review/ReviewSettingsSheet';
 import { ReviewComplete } from '@/components/review/ReviewComplete';
 import { ReviewPicker } from '@/components/review/ReviewPicker';
 import { ReviewActiveCard } from '@/components/review/ReviewActiveCard';
-import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
+import { ReviewLimitModal } from '@/components/review-limit-modal';
+import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 
 import * as Haptics from 'expo-haptics';
 import { useRefreshReviewBadge, useTabBarVisibility } from '@/app/(tabs)/_layout';
@@ -19,7 +20,6 @@ import { useUserSettings } from '@src/hooks/useUserSettings';
 import { saveUserSettings } from '@src/storage/userSettings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCachedReview, refreshReview, subscribeReview } from '@src/services/reviewCache';
-import { showInterstitialIfReady } from '@src/services/interstitialAd';
 import { showRewardedAd } from '@src/services/rewardedAd';
 import {
   consumeWord,
@@ -78,7 +78,7 @@ export default function ReviewScreen() {
     return out;
   };
   const DEFAULT_SESSION = 20;
-  const MIN_SESSION = 5;
+  const MIN_SESSION = 10;
   const MAX_SESSION = 50;
 
   // Phase: 'picker' = choose wordlist, 'review' = flashcard session
@@ -124,7 +124,6 @@ export default function ReviewScreen() {
   const [limitTotal, setLimitTotal] = useState<number>(50);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitAdAvailable, setLimitAdAvailable] = useState(false);
-  const [paywallVisible, setPaywallVisible] = useState(false);
   const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, auto: Infinity });
 
   // Settings modal state
@@ -134,7 +133,22 @@ export default function ReviewScreen() {
     setShowSettings(false);
   }, []);
   const [pendingBookId, setPendingBookId] = useState<string | null>(null);
-  const [reviewOrder, setReviewOrder] = useState<ReviewOrder>('shuffle');
+  const [reviewOrder, setReviewOrder] = useState<ReviewOrder>((settings?.reviewOrder as ReviewOrder) ?? 'shuffle');
+  const reviewOrderHydratedRef = useRef(false);
+  useEffect(() => {
+    if (reviewOrderHydratedRef.current) return;
+    if (!settings) return;
+    reviewOrderHydratedRef.current = true;
+    const stored = settings.reviewOrder as ReviewOrder | undefined;
+    if (stored && stored !== reviewOrder) {
+      setReviewOrder(stored);
+    }
+  }, [settings, reviewOrder]);
+  useEffect(() => {
+    if (!reviewOrderHydratedRef.current || !settings) return;
+    if (settings.reviewOrder === reviewOrder) return;
+    saveUserSettings({ ...settings, reviewOrder }).catch(() => {});
+  }, [reviewOrder, settings]);
   const [reviewMode, setReviewMode] = useState<ReviewMode>((settings?.reviewMode as ReviewMode) ?? 'auto');
   // settings hook loads async — once it arrives, hydrate from the stored
   // last-used mode. Tracked by ref so we only hydrate once (subsequent
@@ -157,7 +171,7 @@ export default function ReviewScreen() {
     if (settings.reviewMode === reviewMode) return;
     saveUserSettings({ ...settings, reviewMode }).catch(() => {});
   }, [reviewMode, settings]);
-  const [sessionCount, setSessionCount] = useState(settings?.sessionCount ?? DEFAULT_SESSION);
+  const [sessionCount, setSessionCount] = useState(Math.max(MIN_SESSION, settings?.sessionCount ?? DEFAULT_SESSION));
 
   // Auto-play TTS at card start — defaults to true (existing behavior).
   // Persisted via userSettings so the toggle survives app restarts.
@@ -265,13 +279,7 @@ export default function ReviewScreen() {
     }, 2000);
   };
 
-  const pendingAdRef = useRef(false);
-
   const goBackToPicker = useCallback(async () => {
-    if (pendingAdRef.current) {
-      pendingAdRef.current = false;
-      showInterstitialIfReady();
-    }
     setPhase('picker');
     // Reset session state so the next startReview doesn't render with the
     // previous session's stale completeCelebrate / words / index.
@@ -320,15 +328,11 @@ export default function ReviewScreen() {
     refreshBadge();
   }, [refreshBadge]);
 
-  // Auto-rate on screen blur (tab switch, navigation away) + show pending ad
+  // Auto-rate on screen blur (tab switch, navigation away)
   useFocusEffect(
     useCallback(() => {
       return () => {
         flushPending();
-        if (pendingAdRef.current) {
-          pendingAdRef.current = false;
-          showInterstitialIfReady();
-        }
       };
     }, [flushPending]),
   );
@@ -678,8 +682,6 @@ export default function ReviewScreen() {
 
   useEffect(() => {
     if (!isComplete || words.length === 0) return;
-
-    pendingAdRef.current = true;
 
     (async () => {
       const key = 'review_complete_count';
@@ -1089,15 +1091,7 @@ export default function ReviewScreen() {
 
   const handleLimitPremium = () => {
     setShowLimitModal(false);
-    setPaywallVisible(true);
-  };
-
-  const handleLimitSwitchMode = () => {
-    setShowLimitModal(false);
-    if (phase === 'review') {
-      goBackToPicker();
-    }
-    handleStartRequest(pendingBookId);
+    router.push('/subscription');
   };
 
   const handleLimitEnd = () => {
@@ -1105,10 +1099,6 @@ export default function ReviewScreen() {
     if (phase === 'review') {
       setIndex(words.length);
     }
-  };
-
-  const modeDisplayName = (mode: ReviewMode): string => {
-    return t(`review.mode_${mode}`);
   };
 
   // Keep pendingRef in sync for blur/exit auto-rate
@@ -1344,29 +1334,38 @@ export default function ReviewScreen() {
     }
 
     return (
-      <ReviewPicker
-        totalDue={totalDue}
-        hasWords={hasWords}
-        bookCounts={bookCounts}
-        sortMode={sortMode}
-        sortReversed={sortReversed}
-        searchQuery={searchQuery}
-        onSearchQueryChange={handleSearchQueryChange}
-        highlightedBookId={highlightedBookId}
-        searchMatches={searchMatches}
-        handleSearchComplete={handleSearchComplete}
-        handleSortChange={handleSortChange}
-        handleStartRequest={handleStartRequest}
-        loadPickerData={loadPickerData}
-        streak={streak}
-        toastMsg={toastMsg}
-        toastVisible={toastVisible}
-        setToastVisible={setToastVisible}
-        onMinWordToast={handleMinWordToast}
-        pickerListRef={pickerListRef}
-        highlightTimerRef={highlightTimerRef}
-        settingsModal={settingsModal}
-      />
+      <>
+        <ReviewPicker
+          totalDue={totalDue}
+          hasWords={hasWords}
+          bookCounts={bookCounts}
+          sortMode={sortMode}
+          sortReversed={sortReversed}
+          searchQuery={searchQuery}
+          onSearchQueryChange={handleSearchQueryChange}
+          highlightedBookId={highlightedBookId}
+          searchMatches={searchMatches}
+          handleSearchComplete={handleSearchComplete}
+          handleSortChange={handleSortChange}
+          handleStartRequest={handleStartRequest}
+          loadPickerData={loadPickerData}
+          streak={streak}
+          toastMsg={toastMsg}
+          toastVisible={toastVisible}
+          setToastVisible={setToastVisible}
+          onMinWordToast={handleMinWordToast}
+          pickerListRef={pickerListRef}
+          highlightTimerRef={highlightTimerRef}
+          settingsModal={settingsModal}
+        />
+        <ReviewLimitModal
+          visible={showLimitModal}
+          canWatchAd={limitAdAvailable}
+          onWatchAd={handleLimitWatchAd}
+          onPremium={handleLimitPremium}
+          onEnd={handleLimitEnd}
+        />
+      </>
     );
   }
 
@@ -1389,8 +1388,6 @@ export default function ReviewScreen() {
         setShowNotifPrompt={setShowNotifPrompt}
         limitRemaining={limitRemaining}
         goBackToPicker={goBackToPicker}
-        paywallVisible={paywallVisible}
-        setPaywallVisible={setPaywallVisible}
       />
     );
   }
@@ -1410,6 +1407,7 @@ export default function ReviewScreen() {
       isAnswered={isAnswered}
       showFinish={showFinish}
       langs={langs}
+      targetLangs={targetLangs}
       cardReversed={cardReversed}
       choices={choices}
       choiceSelected={choiceSelected}
@@ -1441,11 +1439,7 @@ export default function ReviewScreen() {
       limitAdAvailable={limitAdAvailable}
       handleLimitWatchAd={handleLimitWatchAd}
       handleLimitPremium={handleLimitPremium}
-      handleLimitSwitchMode={handleLimitSwitchMode}
       handleLimitEnd={handleLimitEnd}
-      paywallVisible={paywallVisible}
-      setPaywallVisible={setPaywallVisible}
-      modeDisplayName={modeDisplayName(reviewMode)}
     />
   );
 }

@@ -16,6 +16,7 @@ import * as Speech from 'expo-speech';
 import { Platform } from 'react-native';
 import { supabase } from '@src/api/supabase';
 import { getUserSettings } from '@src/storage/userSettings';
+import { isPremium } from '@src/services/subscriptionService';
 import { downloadTtsToCache, findLocalTtsUri, getRateCorrection } from './ttsCache';
 
 const SUPPORTED_LANGS = new Set([
@@ -130,7 +131,11 @@ export async function speakCloud(
   const settings = await getUserSettings();
   if (mySeq !== speakSeq) return;
   const gender = settings?.voiceGender ?? 'F';
-  const userRate = settings?.voiceRate ?? 1.0;
+  // Playback rate (0.8 / 1.2) is a premium feature. Non-premium users always
+  // play at 1.0 regardless of stored setting — keeps prior premium selections
+  // around for re-subscription instead of mutating settings.
+  const storedRate = settings?.voiceRate ?? 1.0;
+  const userRate = !isPremium() && storedRate !== 1.0 ? 1.0 : storedRate;
 
   if (!SUPPORTED_LANGS.has(language)) {
     fallbackToDevice(text, language, userRate);

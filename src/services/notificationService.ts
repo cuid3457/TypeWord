@@ -247,6 +247,7 @@ async function scheduleWeeklySummary(
   tr: NotificationTranslations,
   hour: number,
   weeklyCount: number,
+  claimedDays: Set<number>,
 ): Promise<void> {
   if (!Notifications || weeklyCount <= 0) return;
 
@@ -258,6 +259,7 @@ async function scheduleWeeklySummary(
     sundayTarget.setHours(hour, 0, 0, 0);
     if (sundayTarget <= now) daysUntilSunday = 7;
   }
+  if (claimedDays.has(daysUntilSunday)) return;
 
   const target = new Date(now);
   target.setDate(target.getDate() + daysUntilSunday);
@@ -280,72 +282,100 @@ async function scheduleWeeklySummary(
       ...(Platform.OS === 'android' ? { channelId: 'study-reminders' } : {}),
     },
   });
+  claimedDays.add(daysUntilSunday);
 }
 
-export async function rescheduleNotifications(tr: NotificationTranslations): Promise<void> {
+async function doReschedule(tr: NotificationTranslations): Promise<void> {
   if (!Notifications) return;
+  await Notifications.cancelAllScheduledNotificationsAsync();
 
-  try {
-    await Notifications.cancelAllScheduledNotificationsAsync();
+  const hour = await getPreferredNotificationHour();
+  const dueCount = await getReviewableCount();
+  const { current: streak, todayDone } = await getStreak();
+  const bookName = await getRecentBookName();
+  const weeklyCount = await getWeeklyStudyCount();
+  const notifBooks = await getBooksForNotifications(hour);
 
-    const hour = await getPreferredNotificationHour();
-    const dueCount = await getReviewableCount();
-    const { current: streak, todayDone } = await getStreak();
-    const bookName = await getRecentBookName();
-    const weeklyCount = await getWeeklyStudyCount();
+  // Hard cap: at most one learning ping per day across all sources
+  // (per-list / daily / re-engagement / weekly). Higher-priority source
+  // claims the day first; later sources skip claimed days.
+  const claimedDays = new Set<number>();
 
-    // Per-wordlist daily reminders (for books with notif_enabled = true).
-    // If any per-list reminders are configured, the user has opted into
-    // per-book control — we skip the generic global daily reminder to
-    // avoid duplicate "study today" pings. Re-engagement and weekly
-    // summary still fire (different purpose).
-    const notifBooks = await getBooksForNotifications(hour);
-
-    if (notifBooks.length === 0) {
-      // Today's reminder (fires only if notification hour hasn't passed yet)
-      if (!todayDone) {
-        const content = getDailyContent(tr, dueCount, streak, bookName);
-        await scheduleAtDay(0, hour, content.title, content.body);
-      }
-
-      // Daily reminders for the next 3 days
-      for (const day of [1, 2, 3]) {
-        const content = getDailyContent(tr, dueCount, streak, bookName);
-        await scheduleAtDay(day, hour, content.title, content.body);
-      }
+  // Per-list reminders (highest priority — user explicitly opted into a book).
+  // Bit 0 = Sunday, ..., Bit 6 = Saturday (matches JS Date.getDay()).
+  // If two books fall on the same weekday, only the first book wins that day.
+  for (const book of notifBooks) {
+    if (book.days === 0) continue;
+    const title = tr.perListTitle.replace('{{title}}', book.title);
+    for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
+      if (claimedDays.has(dayOffset)) continue;
+      const target = new Date();
+      target.setDate(target.getDate() + dayOffset);
+      const dayOfWeek = target.getDay();
+      if (!(book.days & (1 << dayOfWeek))) continue;
+      const variantIdx = target.getDate() % 3;
+      const body = pickPerListBody(tr, book.reviewableCount, streak, variantIdx);
+      await scheduleAtDay(dayOffset, book.hour, title, body, book.minute);
+      claimedDays.add(dayOffset);
     }
-
-    // Re-engagement: 7, 10, 21, then every 30 days
-    for (const day of [7, 10, 21, 51, 81]) {
-      const content = getReengagementContent(tr, day, dueCount);
-      await scheduleAtDay(day, hour, content.title, content.body);
-    }
-
-    // Weekly summary (next Sunday)
-    await scheduleWeeklySummary(tr, hour, weeklyCount);
-
-    for (const book of notifBooks) {
-      if (book.days === 0) continue; // user deselected all weekdays — skip
-      const title = tr.perListTitle.replace('{{title}}', book.title);
-      // Schedule for next 7 days, only on days where the bitmask bit is set.
-      // Bit 0 = Sunday, ..., Bit 6 = Saturday (matches JS Date.getDay()).
-      for (let dayOffset = 0; dayOffset < 7; dayOffset++) {
-        const target = new Date();
-        target.setDate(target.getDate() + dayOffset);
-        const dayOfWeek = target.getDay();
-        if (!(book.days & (1 << dayOfWeek))) continue;
-
-        // Rotate body across 3 variants by absolute date so the same day
-        // always uses the same variant (predictable yet varied).
-        const variantIdx = target.getDate() % 3;
-        const body = pickPerListBody(tr, book.reviewableCount, streak, variantIdx);
-
-        await scheduleAtDay(dayOffset, book.hour, title, body, book.minute);
-      }
-    }
-  } catch (e) {
-    captureError(e, { service: 'notificationService', fn: 'rescheduleNotifications' });
   }
+
+  // Generic daily (only when no per-list books are configured).
+  if (notifBooks.length === 0) {
+    if (!todayDone && !claimedDays.has(0)) {
+      const content = getDailyContent(tr, dueCount, streak, bookName);
+      await scheduleAtDay(0, hour, content.title, content.body);
+      claimedDays.add(0);
+    }
+    for (const day of [1, 2, 3]) {
+      if (claimedDays.has(day)) continue;
+      const content = getDailyContent(tr, dueCount, streak, bookName);
+      await scheduleAtDay(day, hour, content.title, content.body);
+      claimedDays.add(day);
+    }
+  }
+
+  // Re-engagement: gradually lengthening cadence so a long-lapsed user
+  // doesn't get bombarded — 7d, 10d, 21d, then ~monthly.
+  for (const day of [7, 10, 21, 51, 81]) {
+    if (claimedDays.has(day)) continue;
+    const content = getReengagementContent(tr, day, dueCount);
+    await scheduleAtDay(day, hour, content.title, content.body);
+    claimedDays.add(day);
+  }
+
+  await scheduleWeeklySummary(tr, hour, weeklyCount, claimedDays);
+}
+
+// Serialize concurrent reschedule calls. Without this, two callers running
+// in parallel (e.g. home-tab focus + ReviewComplete, or a language change
+// mid-flight) interleave their cancelAll + schedule sequences, leaving the
+// queue with mixed-language items or duplicates at the same time slot.
+let inFlightReschedule: Promise<void> | null = null;
+let queuedReschedule: NotificationTranslations | null = null;
+
+export async function rescheduleNotifications(tr: NotificationTranslations): Promise<void> {
+  if (inFlightReschedule) {
+    queuedReschedule = tr;
+    return inFlightReschedule;
+  }
+  inFlightReschedule = (async () => {
+    try {
+      await doReschedule(tr);
+      // Drain any reschedule requests that arrived during this run.
+      // Only the most recent tr matters — older ones would just be overwritten.
+      while (queuedReschedule) {
+        const next = queuedReschedule;
+        queuedReschedule = null;
+        await doReschedule(next);
+      }
+    } catch (e) {
+      captureError(e, { service: 'notificationService', fn: 'rescheduleNotifications' });
+    } finally {
+      inFlightReschedule = null;
+    }
+  })();
+  return inFlightReschedule;
 }
 
 export async function cancelAllNotifications(): Promise<void> {

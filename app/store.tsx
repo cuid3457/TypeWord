@@ -3,8 +3,9 @@ import { router, Stack, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
@@ -75,6 +76,7 @@ export default function StoreScreen() {
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const dark = colorScheme === 'dark';
+  const insets = useSafeAreaInsets();
   const [snap, setSnap] = useState<InventorySnapshot>(getInventory());
   const [toast, setToast] = useState<string | null>(null);
   const [busy, setBusy] = useState<StoreItemId | null>(null);
@@ -122,6 +124,7 @@ export default function StoreScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom']}>
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <ScrollView
         contentContainerStyle={{
           paddingHorizontal: 24,
@@ -255,8 +258,9 @@ export default function StoreScreen() {
           </View>
         </View>
       </ScrollView>
+      </TabletContainer>
 
-      <Toast visible={!!toast} message={toast ?? ''} type="success" onHide={() => setToast(null)} />
+      <Toast visible={!!toast} message={toast ?? ''} type="success" onHide={() => setToast(null)} style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }} />
     </SafeAreaView>
   );
 }

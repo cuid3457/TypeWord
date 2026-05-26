@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import {
   FlatList,
   Linking,
+  Platform,
   Pressable,
   ScrollView,
   Switch,
@@ -17,7 +18,6 @@ import { useTablet } from '@src/hooks/useTablet';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AppModal } from '@/components/app-modal';
-import { Paywall } from '@/components/paywall';
 import { ensureLanguageLoaded } from '@src/i18n';
 import { NATIVE_LANGUAGES, findLanguage } from '@src/constants/languages';
 import { findCountry, getSortedCountries, localizedCountryName } from '@src/constants/countries';
@@ -26,7 +26,6 @@ import { usePremium } from '@src/hooks/usePremium';
 import { showAdsPrivacyOptions } from '@src/services/adsConsent';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { getEmail, isApplePrivateRelay, signOut } from '@src/services/authService';
-import { clearLocalData } from '@src/db';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import {
   isNotificationAvailable,
@@ -46,7 +45,6 @@ export default function SettingsScreen() {
   const [editing, setEditing] = useState<EditingField>(null);
   const [adModal, setAdModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
-  const [paywallVisible, setPaywallVisible] = useState(false);
   const notifAvailable = isNotificationAvailable();
   const [notifUnavailableModal, setNotifUnavailableModal] = useState(false);
   const [notifDeniedModal, setNotifDeniedModal] = useState(false);
@@ -57,7 +55,7 @@ export default function SettingsScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (consumePaywallPending()) setPaywallVisible(true);
+      if (consumePaywallPending()) router.push('/subscription');
       getEmail().then(setUserEmail);
     }, []),
   );
@@ -129,7 +127,7 @@ export default function SettingsScreen() {
 
   const handleReset = async () => {
     setResetModal(false);
-    await clearLocalData();
+    // signOut() clears local SQLite + TTS files internally.
     await clearUserSettings();
     await signOut().catch(() => {});
     const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
@@ -151,7 +149,7 @@ export default function SettingsScreen() {
 
         {/* Premium card */}
         <Pressable
-          onPress={() => !premium && setPaywallVisible(true)}
+          onPress={() => !premium && router.push('/subscription')}
           className="mt-6 rounded-2xl p-4"
           style={{ backgroundColor: premium ? '#2EC4A520' : '#2EC4A510', borderWidth: 1, borderColor: '#2EC4A5' }}
         >
@@ -330,7 +328,10 @@ export default function SettingsScreen() {
           </View>
         </View>
 
-        {/* Notifications */}
+        {/* Notifications — hidden on web. expo-notifications is a no-op
+            in the browser (no service-worker push setup in v1) so the
+            toggle wouldn't actually schedule anything. Native only. */}
+        {Platform.OS !== 'web' ? (
         <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
           <View className="flex-row items-center justify-between p-4">
             <View className="flex-1">
@@ -367,6 +368,7 @@ export default function SettingsScreen() {
             />
           </View>
         </View>
+        ) : null}
 
         {/* Secondary action buttons. On tablets, lay out as a 2-column
             grid via flex-wrap + 48% basis; phones stay as a vertical
@@ -375,8 +377,11 @@ export default function SettingsScreen() {
           className={isTablet ? 'mt-6 flex-row flex-wrap' : 'mt-6'}
           style={isTablet ? { gap: 12 } : undefined}
         >
-          {[
-            {
+          {([
+            // rate_app + ad_privacy hidden on web: expo-store-review +
+            // AdMob consent are both no-ops in the browser, so the
+            // entries would just open "unavailable" placeholders.
+            Platform.OS !== 'web' ? {
               key: 'rate_app',
               onPress: async () => {
                 try {
@@ -391,20 +396,20 @@ export default function SettingsScreen() {
                   setRateModal(true);
                 }
               },
-            },
+            } : null,
             { key: 'contact', onPress: () => router.push('/inquiry') },
             { key: 'terms', onPress: () => router.push('/terms') },
             { key: 'privacy', onPress: () => router.push('/privacy') },
             { key: 'business_info', onPress: () => router.push('/business-info') },
-            {
+            Platform.OS !== 'web' ? {
               key: 'ad_privacy',
               onPress: async () => {
                 const shown = await showAdsPrivacyOptions();
                 if (!shown) setAdModal(true);
               },
-            },
+            } : null,
             { key: 'licenses', onPress: () => router.push('/licenses') },
-          ].map((b, i) => (
+          ].filter(Boolean) as { key: string; onPress: () => void }[]).map((b, i) => (
             <Pressable
               key={b.key}
               onPress={b.onPress}
@@ -483,8 +488,6 @@ export default function SettingsScreen() {
         onConfirm={handleConfirmRegionChange}
         onClose={() => setPendingRegionCode(null)}
       />
-
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
 
       <AppModal
         visible={resetModal}

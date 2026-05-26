@@ -7,15 +7,18 @@ import {
   FlatList,
   Platform,
   Pressable,
+  RefreshControl,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { syncUserWordsContent } from '@src/services/userWordsSyncService';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { AdBanner } from '@/components/ad-banner';
+import { TabletContainer } from '@/components/tablet-container';
 import { AppModal } from '@/components/app-modal';
 import { ExportFormatModal } from '@/components/export-format-modal';
 import { ReportModal } from '@/components/report-modal';
@@ -42,7 +45,6 @@ import { lookupWord } from '@src/services/wordService';
 import { exportWordlistCsv, exportWordlistPdf, PaidFeatureRequiredError } from '@src/services/exportService';
 import { usePremium } from '@src/hooks/usePremium';
 import { useUserSettings } from '@src/hooks/useUserSettings';
-import { Paywall } from '@/components/paywall';
 import { WordlistNotifModal } from '@/components/wordlist-notif-modal';
 import { getNotificationTranslations, isNotificationAvailable, requestNotificationPermission, rescheduleNotifications } from '@src/services/notificationService';
 import { getPreferredNotificationHour } from '@src/services/streakService';
@@ -82,6 +84,29 @@ export default function WordlistDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [book, setBook] = useState<Omit<Book, 'userId'> | null>(null);
   const [words, setWords] = useState<StoredWord[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+  const handlePullRefresh = useCallback(async () => {
+    if (!id) return;
+    setRefreshing(true);
+    try {
+      // 1. Force-sync user_words from server (picks up any AI report fixes).
+      await syncUserWordsContent({ force: true });
+      // 2. Reload local SQLite — pullWords inside syncAll already ran via
+      //    scheduleSync if anything changed server-side; re-read after.
+      const [b, ws, rc] = await Promise.all([
+        getBook(id),
+        listWordsByBook(id),
+        getReviewableCount(id),
+      ]);
+      setBook(b);
+      setWords(ws);
+      setReviewCount(rc);
+    } catch (err) {
+      console.warn('pull-refresh:', err);
+    } finally {
+      setRefreshing(false);
+    }
+  }, [id]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [reviewCount, setReviewCount] = useState(0);
@@ -103,7 +128,6 @@ export default function WordlistDetailScreen() {
   const [notifModalOpen, setNotifModalOpen] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [exportToast, setExportToast] = useState('');
-  const [paywallVisible, setPaywallVisible] = useState(false);
   const [defaultHour, setDefaultHour] = useState(21);
   const premium = usePremium();
   const { settings, save: saveSettings } = useUserSettings();
@@ -160,7 +184,7 @@ export default function WordlistDetailScreen() {
         }
       } catch (err) {
         if (err instanceof PaidFeatureRequiredError) {
-          setPaywallVisible(true);
+          router.push('/subscription');
           return;
         }
         console.error('Export failed:', err);
@@ -231,6 +255,21 @@ export default function WordlistDetailScreen() {
       return true;
     });
     return () => sub.remove();
+  }, [editMode]);
+
+  // Web: Escape key exits edit mode — the ✓ in the corner is easy to
+  // miss with a mouse, and there's no hardware back button on web.
+  useEffect(() => {
+    if (!editMode) return;
+    if (typeof window === 'undefined') return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedIds(new Set());
+        setEditMode(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, [editMode]);
 
   const toggleSelect = (wordId: string) => {
@@ -324,10 +363,11 @@ export default function WordlistDetailScreen() {
     }
   })();
 
-  return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
-      <View className="px-6 pt-6">
-        {editing ? (
+  // Header content — rendered as ListHeaderComponent so pull-to-refresh works
+  // from the header area too (not just the FlatList rows below it).
+  const headerEl = (
+    <View>
+      {editing ? (
           <View className="flex-row items-center gap-2">
             <TextInput
               value={editTitle}
@@ -364,7 +404,23 @@ export default function WordlistDetailScreen() {
         ) : (
           <View className="flex-row items-center">
             <View className="flex-row items-center flex-1">
-              <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
+              <Pressable
+                onPress={() => {
+                  // In edit mode, the back arrow exits selection first
+                  // (otherwise on web the only way out is the small ✓
+                  // top-right, easy to miss with a mouse). Subsequent
+                  // press leaves the page.
+                  if (editMode) {
+                    setSelectedIds(new Set());
+                    setEditMode(false);
+                    return;
+                  }
+                  router.back();
+                }}
+                className="mr-2 p-1"
+                accessibilityLabel={t('common.back')}
+                accessibilityRole="button"
+              >
                 <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
               </Pressable>
               <Pressable
@@ -399,30 +455,32 @@ export default function WordlistDetailScreen() {
             <View className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800">
               <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
             </View>
-            <Pressable
-              onPress={() => setNotifModalOpen(true)}
-              className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
-              accessibilityLabel={t('wordlist.notif_settings')}
-              accessibilityRole="button"
-            >
-              <MaterialIcons
-                name={
-                  !globalNotifEnabled
-                    ? 'notifications-off'
-                    : book.notifEnabled
-                    ? 'notifications-active'
-                    : 'notifications-none'
-                }
-                size={22}
-                color={
-                  !globalNotifEnabled
-                    ? '#9ca3af'
-                    : book.notifEnabled
-                    ? '#2EC4A5'
-                    : '#6b7280'
-                }
-              />
-            </Pressable>
+            {Platform.OS !== 'web' ? (
+              <Pressable
+                onPress={() => setNotifModalOpen(true)}
+                className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
+                accessibilityLabel={t('wordlist.notif_settings')}
+                accessibilityRole="button"
+              >
+                <MaterialIcons
+                  name={
+                    !globalNotifEnabled
+                      ? 'notifications-off'
+                      : book.notifEnabled
+                      ? 'notifications-active'
+                      : 'notifications-none'
+                  }
+                  size={22}
+                  color={
+                    !globalNotifEnabled
+                      ? '#9ca3af'
+                      : book.notifEnabled
+                      ? '#2EC4A5'
+                      : '#6b7280'
+                  }
+                />
+              </Pressable>
+            ) : null}
             <View className="items-center">
               <Pressable
                 onPress={handleExport}
@@ -437,11 +495,6 @@ export default function WordlistDetailScreen() {
                   color={exporting ? '#9ca3af' : '#2EC4A5'}
                 />
               </Pressable>
-              {!premium ? (
-                <Text className="mt-1 text-[10px] font-bold text-amber-600 dark:text-amber-400">
-                  Pro
-                </Text>
-              ) : null}
             </View>
           </View>
         </View>
@@ -520,20 +573,37 @@ export default function WordlistDetailScreen() {
             />
           </Pressable>
         </View>
-      </View>
+    </View>
+  );
 
-      {words.length === 0 ? (
-        <View className="flex-1 items-center justify-center px-10">
-          <MaterialIcons name="translate" size={48} color="#9ca3af" />
-          <Text className="mt-4 text-center text-sm text-gray-500">
-            {t('wordlist.empty')}
-          </Text>
-        </View>
-      ) : (
+  return (
+    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
+      {(
         <FlatList<StoredWord>
           data={sortedWords}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={{ padding: 24, paddingBottom: editMode ? 100 : 80 }}
+          contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: editMode ? 100 : 80, flexGrow: 1 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+          }
+          ListHeaderComponent={headerEl}
+          // Click on empty space below the last word card exits edit
+          // mode (intuitive click-outside-to-deselect for mouse users).
+          ListFooterComponent={editMode ? (
+            <Pressable
+              onPress={() => { setSelectedIds(new Set()); setEditMode(false); }}
+              style={{ flex: 1, minHeight: 200 }}
+            />
+          ) : null}
+          ListEmptyComponent={
+            <View className="items-center justify-center px-10" style={{ minHeight: 240 }}>
+              <MaterialIcons name="translate" size={48} color="#9ca3af" />
+              <Text className="mt-4 text-center text-sm text-gray-500">
+                {t('wordlist.empty')}
+              </Text>
+            </View>
+          }
           renderItem={({ item }) => {
             const w = item;
             return (
@@ -591,7 +661,7 @@ export default function WordlistDetailScreen() {
         />
       )}
 
-      {/* Bottom bar in edit mode */}
+      {/* Bottom bar in edit mode — separate from FlatList */}
       {editMode ? (
         <View className="mx-6 mb-2 flex-row items-center justify-between rounded-2xl bg-gray-800 px-5 py-4 dark:bg-gray-200">
           <Pressable
@@ -629,6 +699,7 @@ export default function WordlistDetailScreen() {
           </Pressable>
         </View>
       ) : null}
+      </TabletContainer>
 
       <AdBanner />
 
@@ -672,8 +743,6 @@ export default function WordlistDetailScreen() {
         />
       ) : null}
 
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} />
-
       <TextActionPopover state={popover} onDismiss={() => setPopover(null)} />
 
       <ExportFormatModal
@@ -696,7 +765,7 @@ export default function WordlistDetailScreen() {
           if (premium) {
             runExport('pdf');
           } else {
-            setPaywallVisible(true);
+            router.push('/subscription');
           }
         }}
         onClose={() => setExportModalOpen(false)}

@@ -155,10 +155,11 @@ export async function awardXP(amount: number): Promise<XPGrant> {
 
 // ── Level curve ─────────────────────────────────────────────────────
 
-/** XP needed to hit `level`. Curve: 100 × level^1.3.
- *  Lv 1 → 100, Lv 5 → ~700, Lv 10 → ~2000, Lv 20 → ~5000, Lv 50 → ~15000. */
+/** XP needed to hit `level`. Curve: 50 × n × (n-1) — Duolingo-style triangular.
+ *  Each level gap grows by exactly +100 XP. All thresholds clean multiples of 100.
+ *  Lv 2 → 100, Lv 5 → 1,000, Lv 10 → 4,500, Lv 20 → 19,000, Lv 50 → 122,500. */
 function xpForLevel(level: number): number {
-  return Math.round(100 * level ** 1.3);
+  return 50 * level * (level - 1);
 }
 
 export interface LevelInfo {

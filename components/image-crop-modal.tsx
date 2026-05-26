@@ -1,10 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dimensions, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
 const { width: SW, height: SH } = Dimensions.get('window');
@@ -190,7 +191,7 @@ export function ImageCropModal({ visible, imageUri, imageWidth, imageHeight, onC
   const hasImage = !!imageUri;
 
   return (
-    <Modal visible={visible} animationType="none" onRequestClose={onCancel} statusBarTranslucent onShow={resetAll}>
+    <BottomSheetShell visible={visible} onRequestClose={onCancel} animationType="none" statusBarTranslucent>
       <GestureHandlerRootView style={[s.root, { backgroundColor: bgColor }]}>
         {hasImage ? (
           <>
@@ -226,7 +227,7 @@ export function ImageCropModal({ visible, imageUri, imageWidth, imageHeight, onC
           </>
         ) : null}
       </GestureHandlerRootView>
-    </Modal>
+    </BottomSheetShell>
   );
 }
 

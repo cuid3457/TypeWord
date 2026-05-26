@@ -33,6 +33,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 const MIN_WORDS_FOR_UPLOAD = 5;
@@ -40,6 +41,10 @@ const MAX_WORDS_FOR_UPLOAD = 1000;
 const MAX_TITLE_LEN = 80;
 const MAX_DESCRIPTION_LEN = 300;
 const MAX_BODY_BYTES = 1024 * 1024; // 1 MB hard cap
+
+// Per-user daily upload cap. Stops feed pollution + bounds OpenAI Moderation
+// cost. Generous enough that legitimate curators don't hit it.
+const MAX_UPLOADS_PER_DAY = 10;
 
 function getCorsHeaders(req: Request) {
   const origin = req.headers.get("origin") ?? "";
@@ -138,7 +143,19 @@ Deno.serve(async (req: Request) => {
     if (!isEdit) {
       sourceLang = typeof payload.source_lang === "string" ? payload.source_lang : "";
       targetLang = typeof payload.target_lang === "string" ? payload.target_lang : "";
-      uploaderName = typeof payload.uploader_name === "string" ? payload.uploader_name.trim() : "";
+      // uploader_name comes from the caller's profile, NOT the payload. This
+      // closes the impersonation vector where a malicious client could set
+      // uploader_name to "MoaVoca Official" / "관리자" / etc. and pass our
+      // moderation pipeline (which only inspects title + description).
+      const { data: prof } = await admin
+        .from("profiles")
+        .select("display_name, username")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      uploaderName = (prof?.display_name as string | undefined)?.trim()
+        || ((prof?.username as string | undefined) ? `@${prof!.username as string}` : "")
+        || "";
+      uploaderName = uploaderName.slice(0, 50);
       const wordsArr = Array.isArray(payload.words) ? payload.words : null;
 
       if (!sourceLang || !targetLang || !wordsArr) {
@@ -151,6 +168,20 @@ Deno.serve(async (req: Request) => {
         return jsonResponse(400, { error: `Max ${MAX_WORDS_FOR_UPLOAD} words per wordlist`, code: "too_many_words" }, cors);
       }
       words = wordsArr;
+
+      // Per-user daily upload cap. Counted on create only (edits don't bump).
+      const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      const { count: dayCount } = await admin
+        .from("community_wordlists")
+        .select("id", { head: true, count: "exact" })
+        .eq("user_id", user.id)
+        .gte("created_at", dayAgo);
+      if ((dayCount ?? 0) >= MAX_UPLOADS_PER_DAY) {
+        return jsonResponse(429, {
+          error: `Daily upload limit reached (${MAX_UPLOADS_PER_DAY}). Try again tomorrow.`,
+          code: "rate_limited",
+        }, cors);
+      }
     }
 
     // ── Keyword blocklist (fast, local) ───────────────────────────────
@@ -228,6 +259,55 @@ Deno.serve(async (req: Request) => {
           field: "description",
           category: "contextual",
         }, cors);
+      }
+    }
+
+    // ── words[] content scan (create mode only) ────────────────────────
+    // The words[] body bypasses the title/description moderation pipeline,
+    // which is the main UGC abuse vector. Two-tier defense:
+    //   1) Blocklist over JSON-stringified words — cheap, catches any
+    //      slur/hate token in any field of any word.
+    //   2) OpenAI Moderation over a random sample of up to 20 word.text
+    //      fields — catches context-sensitive content the blocklist misses.
+    if (!isEdit && words.length > 0) {
+      const wordsBlob = JSON.stringify(words);
+      const wordsBlobBlock = checkBlocklist(wordsBlob);
+      if (!wordsBlobBlock.ok) {
+        console.log("[community-upload] blocklist hit on words[]", {
+          user: user.id,
+          lang: wordsBlobBlock.lang,
+        });
+        return jsonResponse(400, {
+          error: "Wordlist contains inappropriate language",
+          code: "blocklist_match",
+          field: "words",
+        }, cors);
+      }
+
+      // Sample a few word.text fields. Each word is shaped variably — extract
+      // common string fields heuristically.
+      const sample: string[] = [];
+      const step = Math.max(1, Math.floor(words.length / 20));
+      for (let i = 0; i < words.length && sample.length < 20; i += step) {
+        const w = words[i];
+        if (w && typeof w === "object") {
+          const rec = w as Record<string, unknown>;
+          if (typeof rec.word === "string") sample.push(rec.word.slice(0, 200));
+        }
+      }
+      for (const term of sample) {
+        const verdict = await moderateText(term);
+        if (!verdict.ok) {
+          console.log("[community-upload] moderation flagged sample word", {
+            user: user.id, term, topCategory: verdict.topCategory,
+          });
+          return jsonResponse(400, {
+            error: "Wordlist flagged by moderation",
+            code: "moderation_flagged",
+            field: "words",
+            category: verdict.topCategory,
+          }, cors);
+        }
       }
     }
 

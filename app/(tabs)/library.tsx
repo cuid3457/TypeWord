@@ -1,9 +1,9 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Modal, Pressable, Text, TextInput, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { ActivityIndicator, FlatList, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
 
@@ -19,7 +19,8 @@ import { getMyProfile } from '@src/services/friendsService';
 export default function LibraryTabScreen() {
   const { t } = useTranslation();
   const colorScheme = useColorScheme();
-  const { isTablet } = useTablet();
+  const { isTablet, contentWidth } = useTablet();
+  const insets = useSafeAreaInsets();
   // Seed from the boot-prefetch cache so the first focus has data.
   const initial = getCachedLibrary();
   const [sortMode, setSortMode] = useState<CommunitySortMode>(initial?.sort ?? 'likes');
@@ -37,6 +38,7 @@ export default function LibraryTabScreen() {
   const [pendingProfile, setPendingProfile] = useState<{ displayName: string | null; username: string | null } | null>(null);
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
   const [showNickname, setShowNickname] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   // Listen for cache updates (boot prefetch, focus refresh, mutations).
   useEffect(() => {
@@ -96,26 +98,56 @@ export default function LibraryTabScreen() {
   // Realtime: refresh the library feed when a new community wordlist is
   // inserted on the server. Same pattern as the friendships subscription
   // on the dashboard — more reliable than tab-refocus alone.
+  //
+  // We subscribe ONCE on mount and use a ref for `reload` so filter
+  // changes don't tear down + recreate the channel. Without the ref,
+  // re-renders re-ran the async setup before the previous cleanup
+  // resolved → two channels with the same topic existed momentarily,
+  // and Supabase Realtime rejected the second `.on()` with "cannot add
+  // postgres_changes callbacks after subscribe()".
+  const reloadRef = useRef(reload);
+  useEffect(() => { reloadRef.current = reload; }, [reload]);
+
   useEffect(() => {
-    let unsub: (() => void) | null = null;
+    let cancelled = false;
+    let cleanup: (() => void) | null = null;
+    // Per-mount unique channel name so a rapid mount/unmount cycle
+    // (e.g. Expo Router hydration on web) can't hand back a stale
+    // already-subscribed channel from Supabase's by-name registry.
+    // Without this we hit "cannot add postgres_changes callbacks after
+    // subscribe()" whenever the SDK returned the previous mount's
+    // half-torn-down channel.
+    const channelName = `community-wordlists-feed-${Math.random().toString(36).slice(2, 10)}`;
     (async () => {
       const { supabase } = await import('@src/api/supabase');
+      if (cancelled) return;
       const channel = supabase
-        .channel('community-wordlists-feed')
+        .channel(channelName)
         .on(
           'postgres_changes',
           { event: 'INSERT', schema: 'public', table: 'community_wordlists' },
-          () => { reload(); },
+          () => { reloadRef.current(); },
         )
         .subscribe();
-      unsub = () => { supabase.removeChannel(channel); };
+      if (cancelled) {
+        supabase.removeChannel(channel);
+        return;
+      }
+      cleanup = () => { supabase.removeChannel(channel); };
     })();
-    return () => { unsub?.(); };
-  }, [reload]);
+    return () => {
+      cancelled = true;
+      cleanup?.();
+    };
+  }, []);
 
-  return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
-      <TabletContainer>
+  // Header rendered OUTSIDE the FlatList — Fragment (not <View>) so
+  // each chrome row becomes an individual flex item of TabletContainer,
+  // matching wordlist tab byte-for-byte. A wrapping View would collapse
+  // them into one flex item and shift content by ~1px (sub-pixel layout
+  // pass differs).
+  const headerEl = (
+    <>
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 pt-6">
         <View className="flex-1">
@@ -236,34 +268,64 @@ export default function LibraryTabScreen() {
           ) : null}
         </View>
       </View>
+    </>
+  );
 
-      {loading ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
-        </View>
-      ) : items.length === 0 ? (
-        <View className="flex-1 items-center justify-center px-8">
-          <MaterialIcons name="groups" size={64} color="#9ca3af" />
-          <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
-            {t('library_tab.empty_title')}
-          </Text>
-          <Text className="mt-2 text-center text-sm text-gray-400 dark:text-gray-500">
-            {t('library_tab.empty_hint')}
-          </Text>
-        </View>
-      ) : (
+  return (
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
+      {headerEl}
+      <View style={{ flex: 1 }}>
+      {(
         <FlatList
           key={isTablet ? 'grid' : 'list'}
-          data={items}
+          data={loading ? [] : items}
           keyExtractor={(it) => it.id}
           numColumns={isTablet ? 2 : 1}
-          columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
-          contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
+          columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
+          contentContainerStyle={{ paddingTop: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
+          ListEmptyComponent={
+            loading ? (
+              <View className="items-center justify-center py-12">
+                <ActivityIndicator color="#6b7280" />
+              </View>
+            ) : (
+              <View className="items-center justify-center px-8 py-12">
+                <MaterialIcons name="groups" size={64} color="#9ca3af" />
+                <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                  {t('library_tab.empty_title')}
+                </Text>
+                <Text className="mt-2 text-center text-sm text-gray-400 dark:text-gray-500">
+                  {t('library_tab.empty_hint')}
+                </Text>
+              </View>
+            )
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={async () => {
+                setRefreshing(true);
+                try {
+                  await refreshLibrary(sortMode, searchQuery, sourceLangFilter, targetLangFilter, sortReversed);
+                } finally {
+                  setRefreshing(false);
+                }
+              }}
+              tintColor="#10b981"
+              colors={['#10b981']}
+            />
+          }
           renderItem={({ item }) => {
+            // Tablet grid: fixed half-width card. Drops flex:1 entirely so
+            // a lone last-row item doesn't stretch — the empty right slot
+            // just stays empty. Row padding/gap is on columnWrapperStyle.
+            const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
             return (
               <Pressable
                 onPress={() => router.push(`/community-detail/${item.id}`)}
-                className={`rounded-2xl border border-gray-300 p-4 dark:border-gray-700 ${isTablet ? 'flex-1' : 'mb-3'}`}
+                className={`rounded-2xl border border-gray-300 p-4 dark:border-gray-700 ${isTablet ? '' : 'mx-6 mb-3'}`}
+                style={isTablet ? { width: tabletCardWidth } : undefined}
               >
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1">
@@ -299,6 +361,7 @@ export default function LibraryTabScreen() {
           }}
         />
       )}
+      </View>
 
       <NicknameModal
         visible={showNickname}
@@ -364,7 +427,7 @@ export default function LibraryTabScreen() {
           </Pressable>
         </Pressable>
       </Modal>
-      <Toast visible={!!toast} message={toast?.msg ?? ''} type={toast?.type ?? 'success'} onHide={() => setToast(null)} />
+      <Toast visible={!!toast} message={toast?.msg ?? ''} type={toast?.type ?? 'success'} onHide={() => setToast(null)} style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }} />
     </SafeAreaView>
   );
 }

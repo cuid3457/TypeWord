@@ -11,6 +11,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 function getCorsHeaders(req: Request) {
@@ -59,15 +60,26 @@ Deno.serve(async (req: Request) => {
     // Authorization: caller must have a poke row to this recipient created in
     // the last 5 min. send_poke RPC is the only legit creator, so this also
     // proves the cooldown + friendship checks already passed.
-    const { data: pkRow } = await admin
+    //
+    // Push-spam defense: atomically claim the push by stamping last_pushed_at
+    // only when (NULL OR older than 60 seconds). If no row gets updated, we
+    // either have no recent poke, or another invocation already pushed within
+    // the throttle window — return 200 with delivered=false, no push.
+    const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+    const oneMinAgo = new Date(Date.now() - 60 * 1000).toISOString();
+    const { data: claimed } = await admin
       .from("pokes")
-      .select("created_at")
+      .update({ last_pushed_at: new Date().toISOString() })
       .eq("sender_id", user.id)
       .eq("recipient_id", recipientId)
+      .gte("created_at", fiveMinAgo)
+      .or(`last_pushed_at.is.null,last_pushed_at.lt.${oneMinAgo}`)
+      .select("created_at")
       .maybeSingle();
-    const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-    if (!pkRow || (pkRow.created_at as string) < fiveMinAgo) {
-      return jsonResponse(403, { code: "no_recent_poke" }, cors);
+    if (!claimed) {
+      // Either no recent poke row, or we already pushed within the last
+      // minute. Either way, do not push.
+      return jsonResponse(200, { ok: true, delivered: false, reason: "throttled_or_missing" }, cors);
     }
 
     const [{ data: recipient }, { data: sender }] = await Promise.all([
@@ -99,7 +111,7 @@ Deno.serve(async (req: Request) => {
       recipientUserId: recipientId,
       pushToken,
       pushPlatform,
-      title: "TypeWord",
+      title: "MoaVoca",
       body: `${label}님이 학습하자고 쿡 찔렀어요`,
       data: { type: "poke", senderId: user.id },
     });

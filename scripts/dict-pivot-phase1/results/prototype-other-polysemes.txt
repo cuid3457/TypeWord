@@ -1,0 +1,497 @@
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '손'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='손' only)
+  ✅ keep  손^1 (명사, 초급)
+  ✅ keep  손^2 (명사, 고급)
+  ✅ keep  손^3 (명사, 고급)
+  ✅ keep  손^4 (의존 명사, 고급)
+  ✅ keep  손^5 (명사, 고급)
+  ❌ skip (word mismatch (-손))  -손^0 (접사, 고급)
+  ❌ skip (word mismatch (손가락))  손가락^0 (명사, 초급)
+  ❌ skip (word mismatch (손거울))  손거울^0 (명사, 초급)
+  ❌ skip (word mismatch (손녀))  손녀^0 (명사, 초급)
+  ❌ skip (word mismatch (손님))  손님^0 (명사, 초급)
+
+  → 10 → 5 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 10 → 10
+  [Stage 1] AI 자유 generate: 6 meanings
+    - EN=hand (the body part at the end of the arm)  KO=신체 부위
+    - EN=person (as in 'guest' or 'customer', e.g., 손님)  KO=사람/손님
+    - EN=helping hand, assistance (as in '손을 빌리다' - to get help)  KO=도움/지원
+    - EN=skill, touch (as in '손이 좋다' - to be skillful)  KO=솜씨/기술
+    - EN=damage, harm (as in '손해' - loss, or '손을 보다' - to fix or to suffer damage)  KO=손해/피해
+    - EN=action, involvement (as in '손을 대다' - to get involved or to touch)  KO=행동/참여
+  [Stage 2] dict 매칭: 5 matched
+  [Stage 3] borderline 평가: unmatched 5 → rescued 1
+  → senses 10 → 6, entries 5 → 2
+  ✅ 17608:1: 신체 부위로서의 '손'은 generated의 'hand'와 동일하여 keep.
+  ❌ 17608:2: [borderline:drop] 현대 한국어에서 '손'은 전체 hand를 의미하며, 'finger'는 '손가락'이 표준어로 일상적으로 쓰임.
+  ✅ 17608:3: '일하는 사람'은 도움/지원(manpower, helping hand) 의미로 현대 일상에서 쓰이므로 keep. 영어 번역을 generated의 'helping hand, assistance'로 보강.  [EN→ 'helping hand, assistance']
+  ✅ 17608:4: '일을 하는 데 드는 힘, 노력, 기술'은 솜씨/기술(skill, touch) 의미와 일치하므로 keep. 영어 번역을 generated의 'skill, touch'로 보강.  [EN→ 'skill, touch']
+  ✅ 17608:5: [borderline:keep] 현대 한국어에서 '손이 미치다', '손이 닿다'처럼 영향력이나 권한의 의미로 일상적으로 쓰인다.
+  ✅ 63895:1: 손님(guest)은 현대 일상에서 'person (as in guest or customer)'로 쓰이므로 keep. generated의 영어 번역으로 보강.  [EN→ "person (as in 'guest' or 'customer')"]
+  ✅ 63895:2: 가게의 손님(customer, patron)도 generated의 'person (as in guest or customer)'와 동일 의미이므로 keep. 영어 번역 보강.  [EN→ "person (as in 'guest' or 'customer')"]
+  ❌ 63898:1: [borderline:drop] 현대 한국 일상에서 '손'이 귀신이나 악령 의미로 쓰이는 경우는 거의 없으며, 주로 고전이나 민속 신앙 관련 맥락에 한정됨.
+  ❌ 63901:1: [borderline:drop] 생선 세는 단위로서의 '손'은 현대 일상에서 거의 쓰이지 않고, 주로 옛 문헌이나 특정 업계에서만 사용됨.
+  ❌ 63905:1: [borderline:drop] 현대 한국어에서 '손'이 '후손'이나 '자손'의 의미로 일상적으로 쓰이지 않고, 주로 고전이나 족보 등에서만 사용됨.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 2 entries → 2 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 2)
+  - 'hand' ← target_code=17608  example=O
+  - "person (as in 'guest' or 'customer')" ← target_code=63895  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=hand
+       JA cache: て【手】 / てま【手間】。てすう【手数】 / ひとで【人手】
+       ZH cache: 人手 / 手 / 手，工夫 / 权限，影响力所及范围
+       KO 의미 (4):
+         - 팔목 끝에 있으며 무엇을 만지거나 잡을 때 쓰는 몸의 부분.
+             └─ from 손^1 (명사, 초급)
+         - 일하는 사람.
+             └─ from 손^1 (명사, 초급)
+         - 일을 하는 데 드는 사람의 힘이나 노력, 기술.
+             └─ from 손^1 (명사, 초급)
+         - 지배하는 권한이나 영향력.
+             └─ from 손^1 (명사, 초급)
+       예문: 우리 형은 손이 커서 농구공도 한 손으로 잡을 수 있다.
+
+  [2] EN=person (as in 'guest' or 'customer')
+       JA cache: きゃく【客】 / らいきゃく【来客】。こきゃく【顧客】
+       ZH cache: 客人 / 顾客
+       KO 의미 (2):
+         - 다른 곳에서 찾아온 사람.
+             └─ from 손^2 (명사, 고급)
+         - 여관이나 음식점 등의 가게에 찾아온 사람.
+             └─ from 손^2 (명사, 고급)
+       예문: 그 방은 손이 묵고 갈 수 있도록 비워 둔 방이었다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  손
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. hand
+  │     예: 우리 형은 손이 커서 농구공도 한 손으로 잡을 수 있다.
+  │
+  │  2. person (as in 'guest' or 'customer')
+  │     예: 그 방은 손이 묵고 갈 수 있도록 비워 둔 방이었다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '눈'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='눈' only)
+  ✅ keep  눈^1 (명사, 초급)
+  ✅ keep  눈^4 (명사, 초급)
+  ✅ keep  눈^2 (명사, 고급)
+  ✅ keep  눈^3 (명사, 고급)
+  ✅ keep  눈^5 (명사, 고급)
+  ❌ skip (word mismatch (눈물))  눈물^0 (명사, 초급)
+  ❌ skip (word mismatch (눈병))  눈병^0 (명사, 초급)
+  ❌ skip (word mismatch (눈가))  눈가^0 (명사, 중급)
+  ❌ skip (word mismatch (눈감다))  눈감다^0 (동사, 중급)
+  ❌ skip (word mismatch (눈곱))  눈곱^0 (명사, 중급)
+
+  → 10 → 5 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 11 → 11
+  [Stage 1] AI 자유 generate: 5 meanings
+    - EN=eye (the organ for seeing)  KO=눈(신체)
+    - EN=snow (frozen precipitation)  KO=눈(날씨)
+    - EN=sight, vision (the ability to see)  KO=시력
+    - EN=way of looking, perspective, judgment  KO=관점
+    - EN=attention, notice (as in 'draw attention')  KO=관심
+  [Stage 2] dict 매칭: 5 matched
+  [Stage 3] borderline 평가: unmatched 6 → rescued 4
+  → senses 11 → 9, entries 5 → 4
+  ✅ 72704:1: 신체 기관으로서의 '눈'은 generated의 'eye (the organ for seeing)'와 일치하므로 keep.
+  ✅ 72704:2: 'seeing ability'는 generated의 'sight, vision (the ability to see)'와 의미가 동일하므로 keep. 영어 번역을 보강.  [EN→ 'sight, vision']
+  ✅ 72704:3: 'judgment'는 generated의 'way of looking, perspective, judgment'와 의미가 겹치므로 keep. 영어 번역을 보강.  [EN→ 'judgment, perspective']
+  ✅ 72704:4: 'viewpoint'는 generated의 'way of looking, perspective, judgment'와 의미가 겹치므로 keep. 영어 번역을 보강.  [EN→ 'way of looking, perspective']
+  ✅ 20198:1: 'snow'는 generated의 'snow (frozen precipitation)'와 동일하므로 keep.
+  ✅ 72704:5: [borderline:keep] 현대 한국어에서 '눈이 가다', '눈길', '눈이 머무는 곳' 등으로 시선이나 관심의 방향을 표현할 때 자주 쓰인다.
+  ✅ 72704:6: [borderline:keep] ‘태풍의 눈’이라는 표현은 뉴스, 교과서, 일상 대화 등에서 자연스럽게 사용된다.
+  ❌ 24508:1: [borderline:drop] 이 의미의 '눈'은 측정기기의 눈금(gradation)으로, 현대 일상에서는 거의 쓰이지 않고 '눈금'이 표준적으로 쓰임.
+  ✅ 41542:1: [borderline:keep] 현대 한국어에서 '그물의 눈'처럼 그물 구멍을 '눈'이라고 부르는 표현이 여전히 일상적으로 사용됨.
+  ❌ 41542:2: [borderline:drop] 이 의미는 바둑 전문 용어로, 일반적인 일상 회화나 뉴스 등에서는 거의 쓰이지 않는다.
+  ✅ 41543:1: [borderline:keep] 식물 관련 맥락에서 '눈'이 '싹'이나 'bud'의 의미로 현대 한국어 일상, 뉴스, 교과서 등에서 여전히 자연스럽게 쓰인다.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 4 entries → 4 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 4)
+  - 'eye' ← target_code=72704  example=O
+  - 'snow' ← target_code=20198  example=O
+  - 'mesh' ← target_code=41542  example=O
+  - 'bud' ← target_code=41543  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=eye
+       JA cache: め【目】 / め【目】。しりょく【視力】 / め【目】。ちゅうもく【注目】 / め【目】。どうさつりょく【洞察力】 / め【目・眼】 / めつき【目つき】。まなざし【眼差し】
+       ZH cache: 台风眼 / 眼光，眼力，洞察力 / 眼睛 / 眼神，目光 / 视力，眼神 / 视线，眼光，看法
+       KO 의미 (6):
+         - 사람이나 동물의 얼굴에 있으며 빛의 자극을 받아 물체를 볼 수 있는 감각 기관.
+             └─ from 눈^1 (명사, 초급)
+         - 사물의 존재나 형태를 구별하여 알 수 있는 눈의 능력.
+             └─ from 눈^1 (명사, 초급)
+         - 사물을 보고 판단하는 힘.
+             └─ from 눈^1 (명사, 초급)
+         - 무엇을 보는 표정이나 태도.
+             └─ from 눈^1 (명사, 초급)
+         - 사람들의 눈이 가는 길이나 방향.
+             └─ from 눈^1 (명사, 초급)
+         - 태풍에서 중심을 이루는 부분.
+             └─ from 눈^1 (명사, 초급)
+       예문: 아이가 침대에 누워 눈을 감고 잠을 잔다.
+
+  [2] EN=snow
+       JA cache: ゆき【雪】
+       ZH cache: 雪
+       KO 의미 (1):
+         - 공기 중에 있는 물기가 얼어서 땅으로 떨어지는 하얀 솜과 같은 작은 얼음 조각.
+             └─ from 눈^4 (명사, 초급)
+       예문: 하늘에서는 하얀 눈이 펑펑 내리고 있었다.
+
+  [3] EN=mesh
+       JA cache: あみのめ【網の目】
+       ZH cache: 网眼
+       KO 의미 (1):
+         - 그물의 줄 사이에 있는 구멍.
+             └─ from 눈^3 (명사, 고급)
+       예문: 이 그물은 눈이 매우 작아서 구멍이 거의 보이지 않는다.
+
+  [4] EN=bud
+       JA cache: め【芽】
+       ZH cache: 芽
+       KO 의미 (1):
+         - 식물의 가지나 줄기에서 새로 돋아나는 꽃이나 잎 등의 싹.
+             └─ from 눈^5 (명사, 고급)
+       예문: 사월이 되자 사과나무에 초록색 눈이 올라왔다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  눈
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. eye
+  │     예: 아이가 침대에 누워 눈을 감고 잠을 잔다.
+  │
+  │  2. snow
+  │     예: 하늘에서는 하얀 눈이 펑펑 내리고 있었다.
+  │
+  │  3. mesh
+  │     예: 이 그물은 눈이 매우 작아서 구멍이 거의 보이지 않는다.
+  │
+  │  4. bud
+  │     예: 사월이 되자 사과나무에 초록색 눈이 올라왔다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '머리'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='머리' only)
+  ✅ keep  머리^0 (명사, 초급)
+  ❌ skip (word mismatch (-머리))  -머리^0 (접사, 고급)
+  ❌ skip (word mismatch (머리빗))  머리빗^0 (명사, 초급)
+  ❌ skip (word mismatch (머리카락))  머리카락^0 (명사, 초급)
+  ❌ skip (word mismatch (머리핀))  머리핀^0 (명사, 초급)
+  ❌ skip (word mismatch (머리끝))  머리끝^0 (명사, 중급)
+  ❌ skip (word mismatch (머리띠))  머리띠^0 (명사, 중급)
+  ❌ skip (word mismatch (머리숱))  머리숱^0 (명사, 중급)
+  ❌ skip (word mismatch (머리채))  머리채^0 (명사, 중급)
+  ❌ skip (word mismatch (머리칼))  머리칼^0 (명사, 중급)
+
+  → 10 → 1 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 10 → 10
+  [Stage 1] AI 자유 generate: 5 meanings
+    - EN=head (part of the body above the neck)  KO=신체 부위
+    - EN=hair (on the head)  KO=머리카락
+    - EN=brain, intelligence, mind  KO=지능·생각
+    - EN=leader, chief, person in charge  KO=우두머리
+    - EN=beginning, start (of something)  KO=처음·시작
+  [Stage 2] dict 매칭: 7 matched
+  [Stage 3] borderline 평가: unmatched 3 → rescued 1
+  → senses 10 → 8, entries 1 → 1
+  ✅ 66234:1: 신체 부위(목 위의 부분)로서의 '머리'는 generated의 'head (part of the body above the neck)'와 동일하여 유지.
+  ✅ 66234:2: '생각하고 판단하는 능력'은 generated의 'brain, intelligence, mind'와 의미가 같으므로 유지.
+  ✅ 66234:3: '머리에 난 털'은 generated의 'hair (on the head)'와 동일하여 유지.
+  ✅ 66234:4: '단체에서 대표가 되는 사람'은 generated의 'leader, chief, person in charge'와 의미가 같으므로 유지.
+  ✅ 66234:5: '사물의 앞이나 윗부분'은 비유적 의미로, generated의 'beginning, start (of something)'와 연결되므로 유지.
+  ✅ 66234:6: '일의 시작이나 처음'은 generated의 'beginning, start (of something)'와 동일하여 유지.
+  ✅ 66234:7: '어떤 때가 시작될 무렵' 역시 'beginning, start (of something)'와 의미가 같으므로 유지.
+  ❌ 66234:8: [borderline:drop] 현대 한국어에서 '머리'가 '한쪽 옆이나 가장자리' 의미로 일상적으로 쓰이지 않으며, 이 의미는 거의 사라진 고전적 용법임.
+  ✅ 66234:9: [borderline:keep] 현대 한국어에서 '한 머리', '두 머리'처럼 경기나 일의 차례를 세는 데 비유적으로 여전히 쓰이며, 드라마·뉴스 등에서도 간혹 등장함.
+  ❌ 66234:10: [borderline:drop] 음표의 둥근 부분을 '머리'라고 부르는 것은 음악 전문 용어로, 일상 회화나 일반 뉴스 등에서는 거의 쓰이지 않는다.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 1 entries → 1 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 1)
+  - 'head' ← target_code=66234  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=head
+       JA cache: あたま【頭】。ずのう【頭脳】 / あたま【頭】。とうぶ【頭部】 / いちど【一度】 / かしら【頭】。おやかた【親方】 / かみ【髪】。かみのけ【髪の毛】。とうはつ【頭髪】 / さいしょ【最初】。はじまり【始まり】 / てっぺん【天辺】。せんたん【先端】 / はじめごろ【初め頃】
+       ZH cache: 伊始，时分 / 场 / 头 / 头发 / 头脑，脑子 / 头，首，上头，头上 / 开始，开头 / 首脑，头儿，头目
+       KO 의미 (8):
+         - 사람이나 동물의 몸에서 얼굴과 머리털이 있는 부분을 모두 포함한 목 위의 부분.
+             └─ from 머리^0 (명사, 초급)
+         - 생각하고 판단하는 능력.
+             └─ from 머리^0 (명사, 초급)
+         - 머리에 난 털.
+             └─ from 머리^0 (명사, 초급)
+         - 단체에서 대표가 되는 사람.
+             └─ from 머리^0 (명사, 초급)
+         - (비유적으로) 사물의 앞이나 윗부분.
+             └─ from 머리^0 (명사, 초급)
+         - (비유적으로) 일의 시작이나 처음.
+             └─ from 머리^0 (명사, 초급)
+         - (비유적으로) 어떤 때가 시작될 무렵.
+             └─ from 머리^0 (명사, 초급)
+         - (비유적으로) 일의 한 차례나 한 판.
+             └─ from 머리^0 (명사, 초급)
+       예문: 나는 바닥에 머리를 대고 누워 잠시 휴식을 취했다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  머리
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. head
+  │     예: 나는 바닥에 머리를 대고 누워 잠시 휴식을 취했다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '시간'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='시간' only)
+  ✅ keep  시간^1 (명사, 초급)
+  ✅ keep  시간^2 (의존 명사, 초급)
+  ❌ skip (word mismatch (시간표))  시간표^0 (명사, 초급)
+  ❌ skip (word mismatch (시간제))  시간제^0 (명사, 중급)
+  ❌ skip (word mismatch (시간 강사))  시간 강사^0 (, 고급)
+  ❌ skip (word mismatch (시간대))  시간대^0 (명사, 고급)
+  ❌ skip (word mismatch (시간문제))  시간문제^0 (명사, 고급)
+  ❌ skip (word mismatch (시간적))  시간적^1 (명사, 고급)
+  ❌ skip (word mismatch (시간적))  시간적^2 (관형사, 고급)
+  ❌ skip (word mismatch (시간당))  시간당^0 (명사, (no grade))
+
+  → 10 → 2 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 6 → 6
+  [Stage 1] AI 자유 generate: 4 meanings
+    - EN=time (as a general concept or measurable quantity)  KO=시간, 때
+    - EN=hour (unit of time, e.g., 1 hour)  KO=한 시간
+    - EN=period, duration (a certain span of time)  KO=기간, 시기
+    - EN=class period (school lesson time)  KO=수업 시간
+  [Stage 2] dict 매칭: 5 matched
+  [Stage 3] borderline 평가: unmatched 1 → rescued 1
+  → senses 6 → 6, entries 2 → 2
+  ✅ 62841:1: 일상적으로 '시간'의 일반적 개념(어떤 때에서 다른 때까지의 동안)으로 쓰이므로 keep.
+  ✅ 62841:2: '정해진 때', '하루 중의 어느 한 때'는 generated의 '때'와 의미가 같으므로 keep.
+  ✅ 62841:3: [borderline:keep] 일상적으로 '시간이 없다/있다'에서 '어떤 일을 할 여유' 의미로 매우 자주 쓰임.
+  ✅ 62841:4: '어떤 일이 시작되어 끝날 때까지의 동안'은 generated의 'period, duration'과 일치하므로 keep.
+  ✅ 62841:5: '자연히 지나가는 세월'은 generated의 'time (as a general concept)'과 의미가 같으므로 keep.
+  ✅ 62842:1: '하루의 24분의 1이 되는 동안을 나타내는 단위'는 generated의 'hour'와 일치하므로 keep.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 2 entries → 2 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 2)
+  - 'time' ← target_code=62841  example=O
+  - 'hour' ← target_code=62842  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=time
+       JA cache: じかん【時間】 / じかん【時間】。とき【時】 / じかん【時間】。ひま【暇】
+       ZH cache: 光阴，时光 / 时间 / 时间，空儿
+       KO 의미 (5):
+         - 어떤 때에서 다른 때까지의 동안.
+             └─ from 시간^1 (명사, 초급)
+         - 어떤 일을 하도록 정해진 때. 또는 하루 중의 어느 한 때.
+             └─ from 시간^1 (명사, 초급)
+         - 어떤 일을 할 여유.
+             └─ from 시간^1 (명사, 초급)
+         - 어떤 일이 시작되어 끝날 때까지의 동안.
+             └─ from 시간^1 (명사, 초급)
+         - 자연히 지나가는 세월.
+             └─ from 시간^1 (명사, 초급)
+       예문: 외국어를 잘하려면 시간이 많이 걸린다.
+
+  [2] EN=hour
+       JA cache: じかん【時間】
+       ZH cache: 小时
+       KO 의미 (1):
+         - 하루의 24분의 1이 되는 동안을 나타내는 단위.
+             └─ from 시간^2 (의존 명사, 초급)
+       예문: 한 시간은 60분이고, 하루는 스물네 시간이다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  시간
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. time
+  │     예: 외국어를 잘하려면 시간이 많이 걸린다.
+  │
+  │  2. hour
+  │     예: 한 시간은 60분이고, 하루는 스물네 시간이다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '마음'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='마음' only)
+  ✅ keep  마음^0 (명사, 초급)
+  ❌ skip (word mismatch (마음가짐))  마음가짐^0 (명사, 중급)
+  ❌ skip (word mismatch (마음고생))  마음고생^0 (명사, 중급)
+  ❌ skip (word mismatch (마음껏))  마음껏^0 (부사, 중급)
+  ❌ skip (word mismatch (마음대로))  마음대로^0 (부사, 중급)
+  ❌ skip (word mismatch (마음먹다))  마음먹다^0 (동사, 중급)
+  ❌ skip (word mismatch (마음속))  마음속^0 (명사, 중급)
+  ❌ skip (word mismatch (마음씨))  마음씨^0 (명사, 중급)
+  ❌ skip (word mismatch (마음보))  마음보^0 (명사, 고급)
+  ❌ skip (word mismatch (마음잡다))  마음잡다^0 (동사, 고급)
+
+  → 10 → 1 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 5 → 5
+  [Stage 1] AI 자유 generate: 4 meanings
+    - EN=mind; heart (as the seat of emotions and thoughts)  KO=생각·감정
+    - EN=intention; will; desire  KO=의도·의지
+    - EN=feeling; mood  KO=기분·감정
+    - EN=affection; care (for someone)  KO=정성·애정
+  [Stage 2] dict 매칭: 4 matched
+  [Stage 3] borderline 평가: unmatched 1 → rescued 0
+  → senses 5 → 4, entries 1 → 1
+  ❌ 20911:1: [borderline:drop] '성격'이나 '성질'이 표준적으로 쓰이며, '마음'이 'personality' 의미로 현대 일상에서 거의 쓰이지 않음
+  ✅ 20911:2: ‘정신적 활동을 하는 곳’은 generated의 ‘mind; heart (as the seat of emotions and thoughts)’와 일치하므로 유지.
+  ✅ 20911:3: ‘기분이나 느낌’은 generated의 ‘feeling; mood’와 일치하므로 유지.
+  ✅ 20911:4: ‘좋아하는 마음이나 관심’은 generated의 ‘affection; care (for someone)’와 의미가 같으므로 유지. 영어 번역도 generated의 것으로 보강.  [EN→ 'affection; care (for someone)']
+  ✅ 20911:5: ‘의도·의지’는 generated의 ‘intention; will; desire’와 의미가 같으므로 유지.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 1 entries → 1 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 1)
+  - 'mind' ← target_code=20911  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=mind
+       JA cache: き【気】。こころざし【志】 / こうかん【好感】。かんしん【関心】 / こころ【心】。きぶん【気分】。きもち【気持ち】。かんじ【感じ】 / こころ【心】。せいしん【精神】
+       ZH cache: 内心 / 心思，心意，意向 / 心情，心绪 / 心意，心思
+       KO 의미 (4):
+         - 사람의 몸 안에서 느끼거나 생각하는 등의 정신적인 활동을 하는 곳.
+             └─ from 마음^0 (명사, 초급)
+         - 기분이나 느낌.
+             └─ from 마음^0 (명사, 초급)
+         - 좋아하는 마음이나 관심.
+             └─ from 마음^0 (명사, 초급)
+         - 무엇을 하고자 하는 뜻이나 의지.
+             └─ from 마음^0 (명사, 초급)
+       예문: 아이들은 마음이 순수해서 거짓말을 하지 못한다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  마음
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. mind
+  │     예: 아이들은 마음이 순수해서 거짓말을 하지 못한다.
+  │
+  └─────────────────────────────────────────────────────────
+

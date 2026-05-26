@@ -10,6 +10,10 @@ const AD_LOAD_TIMEOUT_MS = 10_000;
 export async function showRewardedAd(): Promise<boolean> {
   if (isExpoGo) return false;
   if (await isAdFree()) return false;
+  // iOS has no real AdMob unit yet — REWARDED_AD_UNIT_ID is null in prod
+  // builds. Skip showing rather than serving a TestIds fallback (AdMob
+  // policy + Apple-reviewer integrity).
+  if (!REWARDED_AD_UNIT_ID) return false;
 
   try {
     const { RewardedAd, RewardedAdEventType, AdEventType } =

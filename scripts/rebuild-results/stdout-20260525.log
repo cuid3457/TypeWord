@@ -1,0 +1,48 @@
+[2026-05-25T13:06:32.296Z] Rebuild starting — workers=20 dry_run=false
+[2026-05-25T13:06:32.297Z] Snapshot SQL written: /Users/junsung/Desktop/MoaVoca/TypeWord/scripts/rebuild-results/snapshot-20260525T13063.sql
+[2026-05-25T13:06:32.297Z]   ↳ run these in Supabase SQL editor BEFORE proceeding if you want a rollback safety net.
+[2026-05-25T13:06:32.297Z] Fetching all (word, source_lang, target_lang) pairs...
+[2026-05-25T13:06:32.731Z] Found 1930 pairs to rebuild.
+[2026-05-25T13:07:03.217Z] Progress 42/1930 (2.2%) failed=0 rate=1.38/s eta=22.8min
+[2026-05-25T13:07:34.016Z] Progress 91/1930 (4.7%) failed=0 rate=1.48/s eta=20.6min
+[2026-05-25T13:08:04.196Z] Progress 135/1930 (7.0%) failed=0 rate=1.48/s eta=20.3min
+[2026-05-25T13:08:34.415Z] Progress 165/1930 (8.5%) failed=0 rate=1.36/s eta=21.7min
+[2026-05-25T13:09:05.364Z] Progress 202/1930 (10.5%) failed=0 rate=1.32/s eta=21.8min
+[2026-05-25T13:09:36.120Z] Progress 241/1930 (12.5%) failed=0 rate=1.31/s eta=21.4min
+[2026-05-25T13:10:06.473Z] Progress 288/1930 (14.9%) failed=0 rate=1.35/s eta=20.3min
+[2026-05-25T13:10:38.029Z] Progress 334/1930 (17.3%) failed=0 rate=1.36/s eta=19.5min
+[2026-05-25T13:11:08.390Z] Progress 372/1930 (19.3%) failed=0 rate=1.35/s eta=19.2min
+[2026-05-25T13:11:38.923Z] Progress 409/1930 (21.2%) failed=0 rate=1.34/s eta=19.0min
+[2026-05-25T13:12:09.506Z] Progress 432/1930 (22.4%) failed=0 rate=1.28/s eta=19.5min
+[2026-05-25T13:12:40.551Z] Progress 458/1930 (23.7%) failed=0 rate=1.25/s eta=19.7min
+[2026-05-25T13:13:10.902Z] Progress 488/1930 (25.3%) failed=0 rate=1.23/s eta=19.6min
+[2026-05-25T13:13:41.278Z] Progress 519/1930 (26.9%) failed=0 rate=1.21/s eta=19.4min
+[2026-05-25T13:14:11.465Z] Progress 558/1930 (28.9%) failed=0 rate=1.22/s eta=18.8min
+[2026-05-25T13:14:42.617Z] Progress 605/1930 (31.3%) failed=0 rate=1.23/s eta=17.9min
+[2026-05-25T13:15:13.288Z] Progress 651/1930 (33.7%) failed=0 rate=1.25/s eta=17.0min
+[2026-05-25T13:15:43.446Z] Progress 682/1930 (35.3%) failed=0 rate=1.24/s eta=16.8min
+[2026-05-25T13:16:13.459Z] Progress 724/1930 (37.5%) failed=0 rate=1.25/s eta=16.1min
+[2026-05-25T13:16:44.371Z] Progress 773/1930 (40.1%) failed=0 rate=1.26/s eta=15.3min
+[2026-05-25T13:17:14.649Z] Progress 833/1930 (43.2%) failed=0 rate=1.30/s eta=14.1min
+[2026-05-25T13:17:44.711Z] Progress 900/1930 (46.6%) failed=0 rate=1.34/s eta=12.8min
+[2026-05-25T13:18:15.195Z] Progress 961/1930 (49.8%) failed=0 rate=1.37/s eta=11.8min
+[2026-05-25T13:18:45.727Z] Progress 1030/1930 (53.4%) failed=0 rate=1.41/s eta=10.7min
+[2026-05-25T13:19:16.137Z] Progress 1090/1930 (56.5%) failed=0 rate=1.43/s eta=9.8min
+[2026-05-25T13:19:47.588Z] Progress 1159/1930 (60.1%) failed=0 rate=1.46/s eta=8.8min
+[2026-05-25T13:20:17.653Z] Progress 1226/1930 (63.5%) failed=0 rate=1.49/s eta=7.9min
+[2026-05-25T13:20:47.776Z] Progress 1289/1930 (66.8%) failed=0 rate=1.51/s eta=7.1min
+[2026-05-25T13:21:18.258Z] Progress 1355/1930 (70.2%) failed=0 rate=1.53/s eta=6.3min
+[2026-05-25T13:21:48.964Z] Progress 1430/1930 (74.1%) failed=0 rate=1.56/s eta=5.3min
+[2026-05-25T13:22:19.015Z] Progress 1516/1930 (78.5%) failed=0 rate=1.60/s eta=4.3min
+[2026-05-25T13:22:50.167Z] Progress 1589/1930 (82.3%) failed=0 rate=1.63/s eta=3.5min
+[2026-05-25T13:23:20.279Z] Progress 1664/1930 (86.2%) failed=0 rate=1.65/s eta=2.7min
+[2026-05-25T13:23:50.393Z] Progress 1736/1930 (89.9%) failed=0 rate=1.67/s eta=1.9min
+[2026-05-25T13:24:20.525Z] Progress 1795/1930 (93.0%) failed=0 rate=1.68/s eta=1.3min
+[2026-05-25T13:24:51.396Z] Progress 1871/1930 (96.9%) failed=1 rate=1.70/s eta=0.6min
+[2026-05-25T13:25:22.690Z] Progress 1929/1930 (99.9%) failed=1 rate=1.71/s eta=0.0min
+[2026-05-25T13:25:23.240Z] Retrying 1 failures...
+[2026-05-25T13:25:41.156Z] Retry done: 1 succeeded, 0 still failed
+[2026-05-25T13:25:41.156Z] 
+=== DONE ===
+[2026-05-25T13:25:41.156Z] Total: 1930 pairs, 1929 succeeded (initial), 1 initial failures, time=19.1min
+[2026-05-25T13:25:41.156Z] Log file: /Users/junsung/Desktop/MoaVoca/TypeWord/scripts/rebuild-results/rebuild-2026-05-25T13-06-32.jsonl

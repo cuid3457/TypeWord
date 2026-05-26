@@ -13,125 +13,162 @@
   h1 { font-size: 36px; font-weight: 700; color: #fff; margin: 24px 0 8px; }
   .date { font-size: 13px; color: #6b7280; margin-bottom: 32px; }
   h2 { font-size: 20px; font-weight: 600; color: #fff; margin: 32px 0 12px; }
+  h3 { font-size: 16px; font-weight: 600; color: #fff; margin: 20px 0 8px; }
   p { margin-bottom: 16px; font-size: 15px; color: #d1d5db; }
   ul { margin: 0 0 16px 24px; }
   li { margin-bottom: 6px; font-size: 15px; color: #d1d5db; }
   a { color: #9ca3af; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border: 1px solid #2a2a2a; vertical-align: top; color: #d1d5db; }
+  th { background: #1a1a1a; color: #fff; font-weight: 600; }
 </style>
 </head>
 <body>
 <div class="container">
   <a href="index.html" class="back">&larr; Back</a>
   <h1>Privacy Policy</h1>
-  <p class="date">Effective: May 5, 2026</p>
+  <p class="date">Effective: May 26, 2026</p>
 
   <h2>Data Controller</h2>
   <ul>
-    <li>Business name: Funston</li>
-    <li>Representative / Privacy Officer: Junsung Park</li>
+    <li>Business name: Funston (펀스턴)</li>
+    <li>Representative / Privacy Officer: Junsung Park (박준성)</li>
     <li>Business registration number: 774-17-02956</li>
+    <li>Mail-order business registration: 제2026-서울구로-0893호</li>
     <li>Address: Opus 1, B36-S77, B1F, 207 Gurojungang-ro, Guro-gu, Seoul, South Korea</li>
     <li>Phone: +82-10-9966-3457</li>
-    <li>Email: support@moavoca.com</li>
+    <li>Email: <a href="mailto:support@moavoca.com">support@moavoca.com</a></li>
   </ul>
+  <p>MoaVoca ("the App") is operated by Funston, a sole proprietorship registered in the Republic of Korea. This Privacy Policy explains what information we collect, how we use it, and the rights you have over it, in line with Korean PIPA, EU/UK GDPR, and the California CCPA.</p>
 
   <h2>1. Information We Collect</h2>
-  <p>MoaVoca ("the App") collects the following information to provide its services.</p>
   <ul>
-    <li>Email address: collected when you register an account (optional)</li>
-    <li>Password: collected for email account authentication and stored in encrypted form</li>
-    <li>Google profile information: email address and name are collected when signing in with Google (optional)</li>
-    <li>Display name (nickname): the name shown to other users in friend and sharing features. Set by you.</li>
-    <li>Avatar selection: an avatar chosen from a Provider-supplied predefined set or auto-generated initials. Custom photo upload is not supported.</li>
-    <li>Language settings: native language, source language, target language</li>
-    <li>Wordlist data: list names, saved words, and AI-generated definitions</li>
-    <li>Shared wordlists: wordlists you share so other users can view them (name, description, word selection)</li>
-    <li>Friend relationships: list of other users you have added, accepted, or blocked</li>
-    <li>Device language: checked once for initial UI language (not sent to servers)</li>
-    <li>Camera/Photos: When using the image word extraction feature, captured or selected images are sent to our server for AI processing. Images are deleted immediately after processing and are not stored on our servers.</li>
-    <li>Microphone/Voice: When using voice search, microphone input is forwarded to your operating system's speech recognition service (Apple/Google) for conversion to text. Only the transcribed text is used for word lookup; the audio itself is not transmitted to or stored on our servers.</li>
-    <li>Notifications: Notification permission is used for learning reminders (daily reminders, weekly recap, and per-wordlist reminders with day-of-week and time selection). All notifications are scheduled locally on your device &mdash; no notification data is sent to external servers. Per-wordlist notification settings are also stored on the server for cloud sync.</li>
-    <li>Country/Timezone: The country and matching timezone you select during onboarding are stored. They are used for monthly usage limit calculations, notification timing, and similar features. You can change your region once per month from Settings.</li>
-    <li>Learning progress: Per-wordlist review counts, next-review dates, and consecutive learning days (streak) are stored on your device and on the server.</li>
-    <li>API usage logs: lookup counts, response times, and costs (for service operations)</li>
-    <li>Subscription status: premium subscription state and related transaction information</li>
+    <li>Email address: collected when you register an account (optional). Used for authentication, security notifications, and account deletion confirmation.</li>
+    <li>Password: collected for email account authentication. Stored only as a one-way salted hash on Supabase Auth. We cannot view it.</li>
+    <li>Apple Sign In / Google Sign In identifier: when you sign in with Apple or Google, we receive a stable per-app user identifier plus, where you authorize it, your name and email. Apple users who opt into "Hide My Email" share an Apple-relayed address; that is treated like any other email.</li>
+    <li>Display name (nickname) and username: the name shown to other users in friend and sharing features. Set by you.</li>
+    <li>Avatar selection: an avatar chosen from a predefined set or auto-generated initials. Custom photo upload is not supported.</li>
+    <li>Language settings: native language, source language, target language.</li>
+    <li>Wordlist data: list names, saved words, AI-generated definitions, your study progress, review counts, next-review dates, and learning streak.</li>
+    <li>Shared wordlists (community): wordlists you publish so other users can view them. Public to all users.</li>
+    <li>Friend graph: friends you have added, accepted, blocked, sent requests to, or "poked".</li>
+    <li>Camera/Photos: images you capture or select for OCR word extraction are sent to OpenAI Vision for processing. The original images are not retained on our servers after processing; only the extracted text is stored as a wordlist.</li>
+    <li>Microphone/Voice: voice input is processed entirely on-device by your operating system's speech engine (iOS Speech / Android SpeechRecognizer). Raw audio is not transmitted to or stored on our servers.</li>
+    <li>Device push token: an Apple APNs or Google FCM token used to deliver friend, poke, and learning-reminder notifications.</li>
+    <li>Country and timezone: collected during onboarding for monthly usage limits and notification timing. Changeable once per month.</li>
+    <li>Device language: read once on first launch to set the initial UI language. Not transmitted to our servers.</li>
+    <li>API usage logs: per-call counts, response times, costs, and error categories, keyed by your user id, used for service operations and abuse prevention.</li>
+    <li>Subscription status: premium subscription state and the RevenueCat transaction identifier for the active entitlement. Card numbers are processed entirely by Apple or Google and never reach us or RevenueCat.</li>
+    <li>Diagnostic data: crash reports and performance traces (via Sentry) with personal identifiers redacted client-side.</li>
+    <li>Advertising identifier (IDFA on iOS / GAID on Android): only when you grant tracking consent. See section 6.</li>
   </ul>
 
-  <h2>2. Information We Do Not Collect</h2>
-  <ul>
-    <li>Additional personal identifiers such as phone number</li>
-    <li>GPS or precise location data</li>
-    <li>Contacts, calendar, or health data</li>
-    <li>Payment card information (payments are processed through Apple/Google)</li>
-    <li>Advertising or tracking identifiers (however, Google AdMob may collect such data per Google's own privacy policy)</li>
-  </ul>
+  <h2>2. Legal Basis for Processing (GDPR Art. 13)</h2>
+  <table>
+    <thead><tr><th>Purpose</th><th>Categories of data</th><th>Legal basis</th><th>Retention</th></tr></thead>
+    <tbody>
+      <tr><td>Provide the App's learning features</td><td>Wordlists, study progress, language settings</td><td>Contract (Art. 6(1)(b))</td><td>Until account deletion</td></tr>
+      <tr><td>Account authentication</td><td>Email, password hash, OAuth identifiers</td><td>Contract (Art. 6(1)(b))</td><td>Until account deletion</td></tr>
+      <tr><td>Friend &amp; community features</td><td>Display name, username, friend graph, public wordlists</td><td>Consent / Contract</td><td>Until you remove or account deletion</td></tr>
+      <tr><td>Abuse prevention, rate limits</td><td>API usage logs, IP-derived rate counters</td><td>Legitimate interest (Art. 6(1)(f))</td><td>90 days</td></tr>
+      <tr><td>Subscription billing</td><td>Subscription state, RevenueCat IDs</td><td>Contract / Legal obligation</td><td>5 years (KR tax law)</td></tr>
+      <tr><td>Personalized advertising</td><td>IDFA / GAID</td><td>Consent (Art. 6(1)(a))</td><td>Per ad-network policy; ≤ 2 years</td></tr>
+      <tr><td>Crash diagnostics</td><td>Stack traces, device model, OS version</td><td>Legitimate interest</td><td>90 days</td></tr>
+    </tbody>
+  </table>
 
   <h2>3. Where Data Is Stored</h2>
-  <p>Wordlists and vocabulary data are stored locally on your device (SQLite). Language settings are kept in on-device storage (AsyncStorage).</p>
-  <p>For registered users, wordlist data is securely transmitted and stored on our server (Supabase) for cloud backup and cross-device sync.</p>
-  <p>When you look up a word, the request is processed through our server (Supabase) for AI processing. Results may be stored in an anonymous cache to improve service quality.</p>
+  <p>Wordlists, vocabulary cache, and learning progress are stored both on your device (SQLite + AsyncStorage / Keychain) and on our server (Supabase, US region) for cross-device sync. AI lookup results may be stored anonymously in a shared cache to reduce duplicate compute. Authentication tokens are stored on your device in iOS Keychain / Android EncryptedSharedPreferences.</p>
 
-  <h2>4. Third-Party Services</h2>
-  <p>The App uses the following external services to provide its functionality.</p>
+  <h2>4. Third-Party Services (Processors / 위탁업체)</h2>
+  <p>We engage the following processors. Each processes personal data only as instructed by us, under a data-processing agreement, and is forbidden from using it for their own purposes.</p>
+  <table>
+    <thead><tr><th>Processor</th><th>Purpose</th><th>Data shared</th><th>Country</th></tr></thead>
+    <tbody>
+      <tr><td>Supabase Inc.</td><td>Authentication, database, edge functions, realtime, storage</td><td>Account data, wordlists, friend graph, push tokens, API logs</td><td>United States</td></tr>
+      <tr><td>OpenAI, L.L.C.</td><td>Word definitions, example generation, image OCR, content moderation</td><td>Looked-up word + language pair; for OCR: the cropped image. No user id transmitted.</td><td>United States</td></tr>
+      <tr><td>Microsoft Azure Cognitive Services</td><td>Neural text-to-speech (pronunciation playback)</td><td>The word or sentence to be spoken, voice and locale parameters. No user id transmitted.</td><td>East US (or nearest Azure region)</td></tr>
+      <tr><td>Apple Push Notification service (APNs)</td><td>Delivers iOS push notifications</td><td>Device push token + payload (notification title/body)</td><td>United States</td></tr>
+      <tr><td>Firebase Cloud Messaging (FCM, Google)</td><td>Delivers Android push notifications</td><td>Device push token + payload</td><td>United States</td></tr>
+      <tr><td>Apple Inc. (Sign in with Apple)</td><td>OAuth authentication</td><td>Authentication tokens; if you opt into Hide My Email, an Apple-relayed email address</td><td>United States</td></tr>
+      <tr><td>Google LLC (Google Sign-In, AdMob)</td><td>OAuth authentication; ad delivery and measurement</td><td>Sign-In: account email + name. AdMob: IDFA/GAID, ad interactions (only with your tracking consent).</td><td>United States</td></tr>
+      <tr><td>RevenueCat, Inc.</td><td>Subscription state management</td><td>Pseudonymous user identifier (our Supabase user id), subscription product id, purchase timestamps. No payment card data.</td><td>United States</td></tr>
+      <tr><td>Sentry, Functional Software Inc.</td><td>Crash and error reporting</td><td>Stack traces, device model, OS version, an opaque session id. Personal identifiers redacted client-side before transmission.</td><td>United States</td></tr>
+      <tr><td>Amazon Web Services (AWS SES)</td><td>Transactional email (deletion confirmation, account notices)</td><td>Recipient email, subject, body</td><td>United States</td></tr>
+      <tr><td>freedictionaryapi.com</td><td>Fallback dictionary for select languages</td><td>The word being looked up</td><td>Various (CDN-delivered)</td></tr>
+    </tbody>
+  </table>
+  <p>We do not share data with analytics tools, social media platforms, or data brokers.</p>
+
+  <h2>5. International Data Transfers (개인정보의 국외이전)</h2>
+  <p>All processors listed in section 4 are located outside the Republic of Korea, primarily in the United States. By using MoaVoca and creating an account, you are informed that:</p>
   <ul>
-    <li>OpenAI: The searched word and language pair are sent. When using image word extraction, images are also transmitted. No user identification is transmitted.</li>
-    <li>Supabase: Provides authentication, database, cloud sync, and API hosting</li>
-    <li>RevenueCat: Handles subscription payment processing and subscription state management. Only an anonymous user ID and subscription information are shared.</li>
-    <li>Free Dictionary API: Fallback dictionary for English lookups (only the word is sent)</li>
-    <li>Google AdMob: Displays advertisements to free-tier users. AdMob may collect device identifiers and ad interaction data in accordance with <a href="https://policies.google.com/privacy">Google's privacy policy</a>. Premium users do not see ads.</li>
-    <li>Sentry: Error monitoring service. Device information and error logs may be transmitted when errors occur; no personal identifiers are included.</li>
+    <li>Receiving parties: the processors listed in section 4.</li>
+    <li>Receiving country: primarily United States.</li>
+    <li>Time and method of transfer: continuously, by encrypted HTTPS/TLS, at the time the relevant feature is used (e.g., a word lookup transfers to OpenAI).</li>
+    <li>Categories: as detailed per processor in section 4.</li>
+    <li>Retention by receivers: per each processor's own retention policy; we instruct them to delete on request.</li>
   </ul>
-  <p>We do not share data with analytics tools or social media platforms.</p>
+  <p>You may decline overseas transfer of your personal data by not creating an account — the App's offline learning features remain usable without sign-up. If you have already created an account and want to withdraw consent, request account deletion as described in section 12.</p>
 
-  <h2>5. Text-to-Speech (TTS)</h2>
-  <p>The pronunciation feature uses your device's built-in TTS engine. No data is sent to external servers for this feature.</p>
+  <h2>6. Advertising Identifiers and Personalized Ads</h2>
+  <p>MoaVoca is free to download and is supported by ads. When you grant tracking permission (Apple ATT prompt on iOS) and ad-personalization consent (Google UMP form for users in the EU / California), Google AdMob receives your advertising identifier (IDFA on iOS, GAID on Android) and ad-interaction data to deliver personalized ads on our behalf. If you decline, AdMob serves non-personalized ads instead and core App functionality is unaffected. You can reset or limit your advertising identifier at any time from your device's system settings. Funston is a joint controller with Google for ad-personalization purposes within the meaning of GDPR Art. 26.</p>
 
-  <h2>6. Speech Recognition</h2>
-  <p>The microphone button on the word lookup screen lets you dictate a word instead of typing. Audio is processed by your operating system's speech recognition service (iOS Speech, Google Speech) and the corresponding privacy policies of Apple/Google may apply. Our app receives only the transcribed text and uses it for lookup; raw audio is not stored or transmitted by us.</p>
+  <h2>7. Text-to-Speech (TTS)</h2>
+  <p>MoaVoca plays pronunciations using Microsoft Azure Neural TTS. When you tap a pronunciation button, the word or sentence is sent through our edge function to Azure, which returns a short MP3. Cached MP3s are stored on Supabase Storage and reused for everyone — no user identifier is associated with cache rows.</p>
 
-  <h2>7. Push Notifications</h2>
-  <p>Daily learning reminders, weekly recaps, and per-wordlist notifications are all scheduled locally on your device. They are not sent from our servers and do not track user behavior. For per-wordlist notifications, you can pick the days of the week and time. Notifications can be disabled at any time from Settings.</p>
+  <h2>8. Speech Recognition</h2>
+  <p>Voice input uses your operating system's on-device speech engine (iOS Speech, Android SpeechRecognizer). Raw audio is not transmitted to or stored on our servers — only the transcribed text is used for the lookup.</p>
 
-  <h2>8. Wordlist Export</h2>
-  <p>Premium users can export wordlists as CSV files. Files are generated on-device and shared via your operating system's share sheet (email, messaging, cloud drives, etc.) to a destination you choose. No additional data is sent to our servers during export.</p>
+  <h2>9. Push Notifications</h2>
+  <p>Daily learning reminders, weekly recaps, and per-wordlist reminders are scheduled locally on your device. Friend events (incoming requests, acceptances) and pokes are delivered from our server through Apple APNs / Google FCM using the device push token you've registered with us. You can disable notifications from your operating system settings at any time.</p>
 
-  <h2>9. Public Content and Wordlist Sharing</h2>
-  <p>When you share a wordlist publicly, the wordlist's name, description, word selection, and the posting user's display name and avatar become visible to all other users. Shared wordlists are treated as public information and are subject to discovery, viewing, and download by other users.</p>
-  <p>You may unshare or delete content at any time. However, copies that other users have already downloaded or copied into their own wordlists may not be automatically deleted from those copies.</p>
-  <p>The Provider may, without prior notice, hide or remove inappropriate public content. Users can flag inappropriate content through the in-app reporting system. See the Terms of Service for the full content policy.</p>
+  <h2>10. Public Content and Wordlist Sharing</h2>
+  <p>When you publish a wordlist publicly, the wordlist's name, description, word selection, and your display name / username and avatar become visible to all other users. Shared wordlists are public information and may be downloaded by others. We may, without prior notice, hide or remove inappropriate content; users can flag content through the in-app reporting system, and we act on credible reports within 24 hours (EU DSA Art. 16). When we take down content you uploaded, we send you a notice with the reason (DSA Art. 17).</p>
 
-  <h2>10. Friend System</h2>
-  <p>Users you have added as friends may see your display name, avatar, learning statistics (study days, total words, etc.), and shared wordlists. The exact scope of visibility is shown and adjustable in the in-app settings.</p>
-  <p>Friend relationships are formed by mutual consent and may be removed or blocked at any time. After blocking, the blocked user can no longer see your content.</p>
-  <p>Friend relationship data is stored encrypted on the server and is not disclosed to third parties other than the friends themselves.</p>
+  <h2>11. Friend System</h2>
+  <p>Users you have added as friends may see your display name, avatar, learning statistics (if you enable "Stats public"), and shared wordlists. Friend relationships are formed by mutual consent and may be removed or blocked at any time. After blocking, the blocked user can no longer interact with you. Friend graph data is stored on Supabase and is not disclosed outside the friendship itself.</p>
 
-  <h2>11. Profile and Avatar</h2>
-  <p>Profile avatars may only be set from a Provider-supplied predefined set or as auto-generated initials. Custom photo or image upload is not supported (to prevent the risk of inappropriate content).</p>
-  <p>Display names and avatars are public information visible to other users in friend, sharing, and community feature areas.</p>
+  <h2>12. Your Rights</h2>
+  <p>Regardless of where you live, you have the following rights over your personal data:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of the personal data we hold about you (열람권, GDPR Art. 15, CCPA right-to-know).</li>
+    <li><strong>Correction</strong> — correct inaccurate data (정정권, GDPR Art. 16, CCPA right-to-correct).</li>
+    <li><strong>Deletion</strong> — request erasure (삭제권, GDPR Art. 17, CCPA right-to-delete). Use the in-app flow described below; alternatively email <a href="mailto:support@moavoca.com">support@moavoca.com</a>.</li>
+    <li><strong>Restriction</strong> of processing (처리정지 요구권, GDPR Art. 18).</li>
+    <li><strong>Portability</strong> — receive your data in a machine-readable format (데이터 이동권, GDPR Art. 20). Premium users can export their wordlists as CSV in-app today; we will provide a full JSON export of all account data on email request within 30 days.</li>
+    <li><strong>Objection</strong> — object to processing based on legitimate interest (GDPR Art. 21).</li>
+    <li><strong>Withdraw consent</strong> at any time without affecting prior processing (동의철회권, GDPR Art. 7(3)).</li>
+    <li><strong>California residents</strong> — we do not "sell" personal information in the traditional sense, and we do not share personal information for cross-context behavioral advertising outside of the AdMob flow described in section 6, which is opt-in. You may also request limitation of use of sensitive personal information by emailing us.</li>
+    <li><strong>Lodge a complaint</strong> with your data-protection authority — for Korea, the Personal Information Protection Commission and the Korea Internet &amp; Security Agency (KISA, <a href="https://privacy.kisa.or.kr">privacy.kisa.or.kr</a>, ☎ 118); for the EU, your national supervisory authority; for the UK, the ICO.</li>
+  </ul>
+  <h3>How to request account deletion</h3>
+  <p><strong>In-app:</strong> Settings → Account → Delete Account → confirm.</p>
+  <p><strong>By email:</strong> send an email to <a href="mailto:support@moavoca.com">support@moavoca.com</a> from the address associated with your account, with the subject line "Account Deletion Request". We will verify your identity and complete the deletion within 30 days.</p>
+  <p><strong>What is deleted:</strong> email, OAuth identifiers, display name, username, avatar selection, wordlists, learning progress, friend graph, shared wordlists, push tokens, per-wordlist notification settings, and any pending content reports you submitted.</p>
+  <p><strong>What is retained:</strong> payment- and tax-related transaction records are retained for the period required by applicable law (typically 5 years for VAT and income tax in Korea). Personal identifiers in those records are pseudonymized.</p>
 
-  <h2>12. Advertising Identifiers (iOS ATT / Android GAID)</h2>
-  <p>On iOS, the system may show a tracking permission prompt (IDFA) the first time you launch the App. On Android, the Google Advertising ID (GAID) is used; you can limit ad personalization or reset the GAID in your device settings. Your decision affects only ad personalization &mdash; declining does not restrict the app's core functionality. Users in the EU (GDPR) and California (CCPA) will see a separate ad consent screen.</p>
+  <h2>13. Accounts and Authentication</h2>
+  <p>The App is usable without an account in a limited anonymous mode. To use cloud sync, friends, community uploads, and premium features, you sign in with email + password, Apple Sign In, or Google Sign-In. Email verification is required after email signup. Passwords are stored only as one-way hashes on Supabase Auth.</p>
 
-  <h2>13. Data Retention and Deletion</h2>
-  <p>Locally stored wordlist data is deleted when you uninstall the app. You can also delete all on-device data at any time using the "Reset" option in Settings.</p>
-  <p>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email, wordlist data, display name, friend relationships, and shared wordlists will be permanently removed.</p>
-  <p>Server data is retained after subscription cancellation until you request account deletion.</p>
-  <p>To comply with Korean tax-reporting obligations (VAT and income tax), payment- and settlement-related transaction records are retained for the period required by applicable law (typically 5 years) before being deleted. Within those records, personal information is pseudonymized or de-identified.</p>
+  <h2>14. Children's Privacy</h2>
+  <p>MoaVoca is rated 12+ on the App Store and Teen on Google Play, and is not directed at children under 14. We do not knowingly collect personal information from children under 14 (Korean PIPA / 정통망법) or under 13 (US COPPA). The onboarding flow asks you to confirm you meet the minimum age before account creation. If you believe a child has provided personal data to us, contact support@moavoca.com and we will delete it.</p>
 
-  <h2>14. Accounts and Authentication</h2>
-  <p>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email or Google account.</p>
-  <p>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the Provider.</p>
-  <p>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google account password is not processed by the App.</p>
+  <h2>15. Data Breach Notification</h2>
+  <p>In the unlikely event of a data breach affecting your personal information, we will notify you and the relevant supervisory authority without undue delay and in any event within 72 hours of becoming aware, where required by applicable law (GDPR Art. 33–34, Korean PIPA Art. 34, CCPA §1798.82).</p>
 
-  <h2>15. Children's Privacy</h2>
-  <p>This App does not knowingly collect personal information from children under the age of 14 (in line with Korean law) or under the age of 13 (in line with US COPPA). Users below the applicable age should use the App only with parental consent.</p>
+  <h2>16. Security</h2>
+  <p>Connections to all our servers use TLS 1.2+. Authentication tokens are stored in iOS Keychain or Android EncryptedSharedPreferences, never plain AsyncStorage. Service-role keys never leave the server. We perform periodic security audits and apply hardening updates promptly (latest audit: 26 May 2026).</p>
 
-  <h2>16. Changes to This Policy</h2>
-  <p>If this Privacy Policy is updated, we will notify you through an in-app notice prior to the changes taking effect.</p>
+  <h2>17. EU / UK Representative</h2>
+  <p>Funston does not currently have an EU or UK GDPR Article 27 representative appointed. EU and UK data subjects may contact us directly at <a href="mailto:support@moavoca.com">support@moavoca.com</a>; if you would like us to designate a representative for direct correspondence in your jurisdiction, send us an email and we will appoint one.</p>
 
-  <h2>17. Contact Us</h2>
+  <h2>18. Changes to This Policy</h2>
+  <p>If this Privacy Policy is updated, we will notify you through an in-app notice prior to material changes taking effect.</p>
+
+  <h2>19. Contact Us</h2>
   <p>For privacy-related inquiries, please contact us at:</p>
-  <p>Email: support@moavoca.com</p>
+  <p>Email: <a href="mailto:support@moavoca.com">support@moavoca.com</a></p>
   <p>Phone: +82-10-9966-3457</p>
 </div>
 </body>

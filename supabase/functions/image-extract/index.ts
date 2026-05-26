@@ -36,6 +36,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 function getCorsHeaders(req: Request) {

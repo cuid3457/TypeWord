@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { NATIVE_LANGUAGES, findLanguage } from '@src/constants/languages';
 import { findCountry, getSortedCountries, localizedCountryName } from '@src/constants/countries';
 import { ensureLanguageLoaded } from '@src/i18n';
@@ -72,6 +73,7 @@ export default function OnboardingSetup() {
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
       <View className="flex-1 justify-between px-6 pb-8 pt-6">
         <View>
           <Pressable
@@ -168,6 +170,7 @@ export default function OnboardingSetup() {
           </Text>
         </View>
       </View>
+      </TabletContainer>
 
       {langModalOpen ? (
         <LanguagePickerModal

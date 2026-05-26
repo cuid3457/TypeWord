@@ -5,7 +5,9 @@
  * jars with the rest of the UI.
  */
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 
 interface ExportFormatModalProps {
   visible: boolean;
@@ -39,7 +41,7 @@ export function ExportFormatModal({
   onClose,
 }: ExportFormatModalProps) {
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
       <Pressable
         onPress={onClose}
         className="flex-1 items-center justify-center bg-black/50 px-6"
@@ -114,6 +116,6 @@ export function ExportFormatModal({
           </Pressable>
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

@@ -10,13 +10,53 @@ let dbPromise: Promise<SQLite.SQLiteDatabase> | null = null;
 
 export function getDb(): Promise<SQLite.SQLiteDatabase> {
   if (!dbPromise) {
-    dbPromise = (async () => {
+    dbPromise = openWithRetry();
+    // If the open/migrate fails (e.g. on web the wa-sqlite OPFS access
+    // handle is briefly contended after a full-page OAuth redirect, which
+    // raises NoModificationAllowedError), clear the memoized promise so
+    // the next caller can retry. Without this every subsequent getDb()
+    // returns the rejected promise and the app is wedged until reload.
+    dbPromise.catch(() => {
+      dbPromise = null;
+    });
+  }
+  return dbPromise;
+}
+
+/**
+ * Open + migrate the database with bounded retry. On web the wa-sqlite
+ * OPFS layer occasionally raises transient errors after a full-page
+ * navigation (OAuth redirect, hard refresh): a worker from the previous
+ * page hasn't released its access handle yet, or the VFS state is mid-
+ * transition. Both errors resolve themselves within a few hundred ms,
+ * so a short exponential backoff turns a fatal boot crash into an
+ * imperceptible delay.
+ */
+async function openWithRetry(): Promise<SQLite.SQLiteDatabase> {
+  const TRANSIENT_PATTERNS = [
+    'NoModificationAllowedError',
+    'Invalid VFS state',
+    'createSyncAccessHandle',
+    'Access Handles cannot be created',
+  ];
+  const MAX_ATTEMPTS = 4;
+  let lastErr: unknown = null;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
       const db = await SQLite.openDatabaseAsync(DB_NAME);
       await runMigrations(db);
       return db;
-    })();
+    } catch (err) {
+      lastErr = err;
+      const msg = err instanceof Error ? err.message : String(err);
+      const transient = TRANSIENT_PATTERNS.some((p) => msg.includes(p));
+      if (!transient || attempt === MAX_ATTEMPTS) throw err;
+      // 150, 300, 600 ms
+      await new Promise((r) => setTimeout(r, 150 * 2 ** (attempt - 1)));
+    }
   }
-  return dbPromise;
+  // Unreachable — the loop either returns or throws — but TS needs it.
+  throw lastErr ?? new Error('openWithRetry: exhausted');
 }
 
 async function runMigrations(db: SQLite.SQLiteDatabase): Promise<void> {

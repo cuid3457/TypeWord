@@ -35,7 +35,7 @@ export function StreakBanner({ streak }: { streak: StreakInfo | null }) {
 
   return (
     <View
-      className="mx-6 mt-4 flex-row items-center rounded-2xl px-4 py-4"
+      className="mt-4 flex-row items-center rounded-2xl px-4 py-4"
       style={{ backgroundColor: tintBg, borderWidth: 1, borderColor: BRAND_GREEN }}
     >
       <View

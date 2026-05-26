@@ -4,11 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
+
 export default function OnboardingWelcome() {
   const { t } = useTranslation();
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
       <View className="flex-1 justify-between px-6 pb-8 pt-12">
         <View>
           <Text className="text-4xl font-bold text-black dark:text-white">
@@ -33,6 +36,7 @@ export default function OnboardingWelcome() {
           </Text>
         </Pressable>
       </View>
+      </TabletContainer>
     </SafeAreaView>
   );
 }

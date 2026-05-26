@@ -16,6 +16,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 function getCorsHeaders(req: Request) {
@@ -63,14 +64,20 @@ Deno.serve(async (req: Request) => {
 
     const admin = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } });
 
-    // Authorization: caller must have a real pending request to this recipient.
+    // Authorization: caller must have a real pending request to this recipient
+    // AND the request must be fresh (created in the last 60 seconds). The
+    // freshness window stops a sender from looping this endpoint with one
+    // persistent pending row to push-blast the recipient. Push is best-effort
+    // anyway; missing the window just means no push, which is acceptable.
+    const sixtySecAgo = new Date(Date.now() - 60 * 1000).toISOString();
     const { data: req_row } = await admin
       .from("friend_requests")
-      .select("sender_id, recipient_id")
+      .select("sender_id, recipient_id, created_at")
       .eq("sender_id", user.id)
       .eq("recipient_id", recipientId)
+      .gte("created_at", sixtySecAgo)
       .maybeSingle();
-    if (!req_row) return jsonResponse(403, { code: "no_pending_request" }, cors);
+    if (!req_row) return jsonResponse(403, { code: "no_fresh_request" }, cors);
 
     // Look up recipient push token + sender display info.
     const [{ data: recipient }, { data: sender }] = await Promise.all([
@@ -102,7 +109,7 @@ Deno.serve(async (req: Request) => {
       recipientUserId: recipientId,
       pushToken,
       pushPlatform,
-      title: "TypeWord",
+      title: "MoaVoca",
       body: `${label}님이 친구 요청을 보냈어요`,
       data: { type: "friend_request", senderId: user.id },
     });

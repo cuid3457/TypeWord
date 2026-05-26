@@ -1,6 +1,7 @@
 import { supabase } from '@src/api/supabase';
 import { getDb } from '@src/db';
 import { withTimeout } from '@src/utils/timeout';
+import { syncUserWordsContent } from '@src/services/userWordsSyncService';
 
 interface ReportParams {
   word: string;
@@ -68,6 +69,14 @@ export async function flushPendingReports(): Promise<void> {
     const ids = rows.map((r) => r.id);
     const placeholders = ids.map(() => '?').join(',');
     await db.runAsync(`DELETE FROM pending_reports WHERE id IN (${placeholders})`, ids);
+
+    // Schedule a follow-up sync so the user sees the AI's fix to their own
+    // report quickly. process-report runs ~5-30s after the INSERT trigger;
+    // we wait ~45s then force-sync user_words so result_json picks up the
+    // patched word_translations even when the throttle would normally skip.
+    setTimeout(() => {
+      syncUserWordsContent({ force: true }).catch(() => { /* silent */ });
+    }, 45_000);
   } catch {
     // offline — will retry on next sync
   }

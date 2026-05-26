@@ -21,7 +21,9 @@ import { markActivity } from '@src/services/edgeWarmup';
 import type { WordLookupRequest, WordLookupResult } from '@src/types/word';
 import type { StreamHandlers } from './streamLookup';
 
-const V2_ENDPOINT = `${SUPABASE_URL}/functions/v1/word-lookup-v2`;
+// dict-first v4로 전환 (Phase 2, 2026-05-24). v2 endpoint는 v3 prompts 사용.
+// v4는 사전 lookup + AI judge (score-based) + 음역 보강 흐름.
+const V2_ENDPOINT = `${SUPABASE_URL}/functions/v1/word-lookup-v4`;
 const DEFAULT_TIMEOUT_MS = 30000;
 
 export interface LookupV2Response {
@@ -144,7 +146,28 @@ function parseSseBlock(block: string): { event: string | null; data: string | nu
   return { event, data };
 }
 
+/**
+ * v4 (dict-first)는 SSE 스트림을 지원하지 않습니다. v4는 사전 호출 + AI judge로
+ * 한 번에 결과 생성 → one-shot JSON 응답. 기존 streaming UI 코드는 그대로 두되,
+ * 내부적으로 lookupV2() one-shot 호출 후 callback으로 dispatch.
+ */
 export async function lookupV2Stream(
+  req: WordLookupRequest,
+  handlers: StreamHandlers,
+): Promise<void> {
+  try {
+    markActivity();
+    const { result, cached } = await lookupV2({ ...req, mode: req.mode ?? 'quick' });
+    handlers.onResult(result, cached);
+  } catch (err) {
+    handlers.onError(err as Error);
+  }
+  return;
+}
+
+// Legacy SSE stream code below — retained for reference but no longer used since
+// v4 returns one-shot JSON. Will be removed in cleanup pass.
+async function _legacyLookupV2Stream(
   req: WordLookupRequest,
   handlers: StreamHandlers,
 ): Promise<void> {

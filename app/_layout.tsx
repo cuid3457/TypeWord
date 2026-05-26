@@ -187,7 +187,25 @@ export default function RootLayout() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        syncAll().catch(captureError);
+        // After pulling fresh data into SQLite, refresh every tab cache
+        // so the screens update immediately — without this, a user who
+        // was sitting on the wordlist tab during sign-in saw the empty
+        // state until they manually pulled to refresh.
+        //
+        // `.finally` (not `.then`) — even if syncAll throws partway
+        // through (e.g. a transient wa-sqlite VFS error on web), at
+        // least some rows are usually already written; the cache
+        // refresh below reads whatever IS in SQLite and updates the
+        // screens. Without finally, a sync error left the user staring
+        // at the empty state until they switched tabs.
+        syncAll()
+          .catch((e) => captureError(e, { service: '_layout', fn: 'signedIn:syncAll' }))
+          .finally(() => Promise.allSettled([
+            refreshHome(),
+            refreshDashboard(),
+            refreshLibrary(),
+            refreshReview(),
+          ]));
         if (session?.user) {
           setUser(session.user.id);
           if (!session.user.is_anonymous) {
@@ -350,6 +368,7 @@ export default function RootLayout() {
             <Stack.Screen name="wordlist/add/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="auth" options={{ headerShown: false }} />
             <Stack.Screen name="profile" options={{ headerShown: false }} />
+            <Stack.Screen name="subscription" options={{ headerShown: false }} />
             <Stack.Screen name="terms" options={{ title: '' }} />
             <Stack.Screen name="privacy" options={{ title: '' }} />
           </Stack>

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { NicknameModal } from '@/components/nickname-modal';
 import { listOriginalBooks, type BookWithCount } from '@src/db/queries';
@@ -117,6 +118,7 @@ export default function CommunityUploadScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="flex-row items-center justify-between px-6 pt-6">
         <View className="flex-row items-center">
           <Pressable
@@ -230,6 +232,7 @@ export default function CommunityUploadScreen() {
           </>
         )}
       </View>
+      </TabletContainer>
 
       <Toast
         message={toastMsg}

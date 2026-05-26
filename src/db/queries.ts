@@ -741,7 +741,7 @@ export async function getReviewableCountsByBook(sort: BookSortMode = 'recent', r
 }
 
 
-export const FREE_BOOK_LIMIT = 5;
+export const FREE_BOOK_LIMIT = 3;
 export const PLUS_BOOK_LIMIT = 30;
 /** Per-tier wordlist count cap. Pro = unlimited. */
 export const BOOK_LIMIT_BY_TIER = {

@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { AppModal } from '@/components/app-modal';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { Toast } from '@/components/toast';
@@ -39,6 +40,7 @@ import { syncAll } from '@src/services/syncService';
 import { clearLocalData } from '@src/db';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { usePremium } from '@src/hooks/usePremium';
+import { useNetworkStatus } from '@src/hooks/useNetworkStatus';
 
 const SUBSCRIPTION_URL = Platform.select({
   ios: 'https://apps.apple.com/account/subscriptions',
@@ -69,6 +71,7 @@ export default function ProfileScreen() {
   const [changing, setChanging] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
   const [logoutModal, setLogoutModal] = useState(false);
+  const isOnline = useNetworkStatus();
   const [deleteModal, setDeleteModal] = useState(false);
   const [subscriptionWarningModal, setSubscriptionWarningModal] = useState(false);
   // Churn-feedback step: shown between the subscription warning (if premium)
@@ -150,6 +153,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -353,17 +357,20 @@ export default function ProfileScreen() {
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>
+      </TabletContainer>
 
       <AppModal
         visible={logoutModal}
         title={t('auth.logout')}
-        message={t('auth.logout_confirm')}
+        message={isOnline ? t('auth.logout_confirm') : t('auth.logout_confirm_offline')}
         buttonText={t('settings.cancel')}
         confirmText={t('auth.logout')}
         onConfirm={async () => {
           setLogoutModal(false);
+          // Push pending changes first so they're durable on the server.
+          // signOut() clears local SQLite + TTS files internally; if
+          // syncAll failed (offline) the user was already warned.
           await syncAll().catch(() => {});
-          await clearLocalData();
           await signOut();
           await ensureSession().catch(() => {});
           router.back();

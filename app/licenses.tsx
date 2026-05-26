@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { TabletContainer } from '@/components/tablet-container';
+
 interface License {
   name: string;
   version: string;
@@ -81,6 +83,7 @@ export default function LicensesScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <FlatList
         data={LICENSES}
         keyExtractor={(item) => item.name}
@@ -113,6 +116,7 @@ export default function LicensesScreen() {
           </Pressable>
         )}
       />
+      </TabletContainer>
     </SafeAreaView>
   );
 }

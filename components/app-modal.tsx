@@ -1,4 +1,6 @@
-import { Modal, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
+
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 
 interface AppModalProps {
   visible: boolean;
@@ -35,19 +37,19 @@ export function AppModal({
   const hasSecondary = !!(secondaryText && onSecondary);
 
   return (
-    <Modal
+    <BottomSheetShell
       visible={visible}
-      transparent
-      animationType="fade"
       onRequestClose={onClose}
+      animationType="fade"
     >
       <Pressable
         onPress={onClose}
         className="flex-1 items-center justify-center bg-black/50"
+        style={{ paddingHorizontal: 23 }}
       >
         <Pressable
           onPress={(e) => e.stopPropagation?.()}
-          className="mx-8 w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
         >
           <Text className="text-lg font-bold text-black dark:text-white">
             {title}
@@ -108,6 +110,6 @@ export function AppModal({
           )}
         </Pressable>
       </Pressable>
-    </Modal>
+    </BottomSheetShell>
   );
 }

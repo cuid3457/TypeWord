@@ -60,7 +60,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium, useTier } from '@src/hooks/usePremium';
 import { ImageCropModal } from '@/components/image-crop-modal';
 import { AdBanner } from '@/components/ad-banner';
-import { Paywall } from '@/components/paywall';
+import { TabletContainer } from '@/components/tablet-container';
 import { ReportModal } from '@/components/report-modal';
 import { ReadingDisplay } from '@/components/reading-display';
 import { fetchIpa, ipaApplicable, ipaSupported } from '@src/services/ipaService';
@@ -187,7 +187,6 @@ export default function AddWordScreen() {
   const isConnected = useNetworkStatus();
   const premium = usePremium();
   const tier = useTier();
-  const [paywallVisible, setPaywallVisible] = useState(false);
   const [book, setBook] = useState<Omit<Book, 'userId'> | null>(null);
   const [word, setWord] = useState('');
   const [loading, setLoading] = useState(false);
@@ -955,6 +954,7 @@ export default function AddWordScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -1140,9 +1140,8 @@ export default function AddWordScreen() {
         </ScrollView>
 
       </KeyboardAvoidingView>
+      </TabletContainer>
       <AdBanner />
-
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} reason="images" />
 
       <ReportModal
         visible={showReport}

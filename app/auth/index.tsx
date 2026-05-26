@@ -1,3 +1,4 @@
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router } from 'expo-router';
 import { useState } from 'react';
@@ -17,16 +18,24 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import * as AppleAuthentication from 'expo-apple-authentication';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { signUpWithEmail, signInWithEmail, signInWithGoogle, signInWithApple, signOut, ensureSession } from '@src/services/authService';
 import { isTimeoutError, withTimeout } from '@src/utils/timeout';
 
 const AUTH_TIMEOUT_MS = 20000;
 
-function mapAuthError(raw: string): string {
+function mapAuthError(raw: string, mode: 'login' | 'signup' = 'login'): string {
   const lower = raw.toLowerCase();
+  // For SIGNUP, never reveal "email already exists" — that's an enumeration
+  // oracle. Treat the email-taken case as a generic success path (the user
+  // gets a confirmation email or, if already registered, nothing — same UX
+  // to an outside observer).
+  if (mode === 'signup' && lower.includes('email') &&
+      (lower.includes('already') || lower.includes('registered') || lower.includes('exists'))) {
+    return 'auth.verify_email';
+  }
   if (lower.includes('invalid') && lower.includes('email')) return 'auth.error_invalid_email';
-  if (lower.includes('email') && (lower.includes('already') || lower.includes('registered') || lower.includes('exists'))) return 'auth.error_email_taken';
   if (lower.includes('password') && (lower.includes('short') || lower.includes('weak') || lower.includes('at least'))) return 'auth.error_weak_password';
   if (lower.includes('invalid') && (lower.includes('credentials') || lower.includes('password') || lower.includes('login'))) return 'auth.error_invalid_credentials';
   if (lower.includes('rate') || lower.includes('too many')) return 'auth.error_too_many_requests';
@@ -76,7 +85,16 @@ export default function AuthScreen() {
       setLoading(false);
       if (result.error) {
         console.log('Auth error:', result.error);
-        showToast(t(mapAuthError(result.error)));
+        const key = mapAuthError(result.error, mode);
+        // If signup got mapped to verify_email (email-taken silenced for
+        // enumeration defense), surface as the same success state as a fresh
+        // signup so an attacker cannot distinguish.
+        if (mode === 'signup' && key === 'auth.verify_email') {
+          setSignedUpEmail(email.trim());
+          showToast(t('auth.verify_email'), 'success');
+        } else {
+          showToast(t(key));
+        }
       } else {
         if (mode === 'signup') {
           setSignedUpEmail(email.trim());
@@ -101,6 +119,7 @@ export default function AuthScreen() {
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
+        <TabletContainer>
         <ScrollView
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
           keyboardShouldPersistTaps="handled"
@@ -116,6 +135,11 @@ export default function AuthScreen() {
             {t('auth.subtitle')}
           </Text>
 
+          {/* Google + Apple OAuth. On web both use Supabase's hosted OAuth
+              flow (full-page redirect → /app/auth/callback → SDK
+              auto-applies session from URL fragment). iOS uses the native
+              Google Sign-In SDK + Apple's OS-level button; Android uses
+              the native Google SDK + Supabase WebBrowser flow for Apple. */}
           <Pressable
             onPress={async () => {
               try {
@@ -151,37 +175,65 @@ export default function AuthScreen() {
             )}
           </Pressable>
 
-          {/* Apple Sign-In — iOS only. App Store Guideline 4.8 requires it
-              when other third-party logins (Google) are present. */}
-          {Platform.OS === 'ios' ? (
-            appleLoading ? (
-              <View style={{ height: 52, marginTop: 12 }} className="items-center justify-center rounded-xl border border-black">
-                <ActivityIndicator color="#000" />
-              </View>
-            ) : (
-              <AppleAuthentication.AppleAuthenticationButton
-                buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-                buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-                cornerRadius={12}
-                style={{ marginTop: 12, height: 52 }}
-                onPress={async () => {
-                  try {
-                    setAppleLoading(true);
-                    const result = await withTimeout(signInWithApple(), AUTH_TIMEOUT_MS);
-                    setAppleLoading(false);
-                    if (result.error) {
-                      if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
-                    } else {
-                      router.back();
-                    }
-                  } catch (err) {
-                    setAppleLoading(false);
-                    if (isTimeoutError(err)) showToast(t('error.slow_network'));
+          {/* Apple Sign-In. iOS uses the OS-level native button (App Store
+              Guideline 4.8 requires it alongside other third-party logins).
+              Android uses Supabase's hosted OAuth flow via an in-app browser
+              — Apple ships no native Android SDK. Web uses Supabase's
+              hosted OAuth flow as a full-page redirect. The handler is the
+              same for all three; only the trigger UI differs. */}
+          {appleLoading ? (
+            <View style={{ height: 52, marginTop: 12 }} className="items-center justify-center rounded-xl bg-black border border-transparent dark:border-gray-700">
+              <ActivityIndicator color="#fff" />
+            </View>
+          ) : Platform.OS === 'ios' ? (
+            <AppleAuthentication.AppleAuthenticationButton
+              buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+              buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+              cornerRadius={12}
+              style={{ marginTop: 12, height: 52 }}
+              onPress={async () => {
+                try {
+                  setAppleLoading(true);
+                  const result = await withTimeout(signInWithApple(), AUTH_TIMEOUT_MS);
+                  setAppleLoading(false);
+                  if (result.error) {
+                    if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
+                  } else {
+                    router.back();
                   }
-                }}
-              />
-            )
-          ) : null}
+                } catch (err) {
+                  setAppleLoading(false);
+                  if (isTimeoutError(err)) showToast(t('error.slow_network'));
+                }
+              }}
+            />
+          ) : (
+            <Pressable
+              onPress={async () => {
+                try {
+                  setAppleLoading(true);
+                  const result = await withTimeout(signInWithApple(), AUTH_TIMEOUT_MS);
+                  setAppleLoading(false);
+                  if (result.error) {
+                    if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
+                  } else {
+                    router.back();
+                  }
+                } catch (err) {
+                  setAppleLoading(false);
+                  if (isTimeoutError(err)) showToast(t('error.slow_network'));
+                }
+              }}
+              disabled={googleLoading || appleLoading || loading}
+              style={{ height: 52, marginTop: 12 }}
+              className="flex-row items-center justify-center rounded-xl bg-black border border-transparent dark:border-gray-700"
+            >
+              <FontAwesome name="apple" size={20} color="#fff" style={{ marginTop: -2 }} />
+              <Text className="ml-3 text-base font-medium text-white">
+                {t('auth.apple_login')}
+              </Text>
+            </Pressable>
+          )}
 
           <View className="my-6 flex-row items-center">
             <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
@@ -308,10 +360,14 @@ export default function AuthScreen() {
             className="mt-4 items-center py-2"
           >
             <Text className="text-sm text-gray-500">
-              {mode === 'signup' ? t('auth.have_account') : t('auth.no_account')}
+              {mode === 'signup' ? t('auth.have_account_prefix') : t('auth.no_account_prefix')}
+              <Text className="font-semibold text-[#2EC4A5]">
+                {mode === 'signup' ? t('auth.have_account_link') : t('auth.no_account_link')}
+              </Text>
             </Text>
           </Pressable>
         </ScrollView>
+        </TabletContainer>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

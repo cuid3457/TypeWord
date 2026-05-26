@@ -1,0 +1,6 @@
+[2026-05-25T13:05:50.692Z] Rebuild starting — workers=20 dry_run=true
+[2026-05-25T13:05:50.692Z] Snapshot SQL written: /Users/junsung/Desktop/MoaVoca/TypeWord/scripts/rebuild-results/snapshot-20260525T13055.sql
+[2026-05-25T13:05:50.692Z]   ↳ run these in Supabase SQL editor BEFORE proceeding if you want a rollback safety net.
+[2026-05-25T13:05:50.692Z] Fetching all (word, source_lang, target_lang) pairs...
+[2026-05-25T13:05:51.462Z] Found 1930 pairs to rebuild.
+[2026-05-25T13:05:51.462Z] DRY RUN — not invalidating or calling LLM. Exiting.

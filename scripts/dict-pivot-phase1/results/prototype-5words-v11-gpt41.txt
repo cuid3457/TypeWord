@@ -1,0 +1,603 @@
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '이'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='이' only)
+  ✅ keep  이^3 (명사, 초급)
+  ✅ keep  이^5 (대명사, 초급)
+  ✅ keep  이^6 (관형사, 초급)
+  ✅ keep  이^8 (수사, 초급)
+  ✅ keep  이^9 (관형사, 초급)
+  ✅ keep  이^1 (명사, 고급)
+  ✅ keep  이^4 (의존 명사, 고급)
+  ✅ keep  이^2 (명사, (no grade))
+  ✅ keep  이^7 (조사, (no grade))
+  ❌ skip (word mismatch (이-))  이-^6 (품사 없음, (no grade))
+
+  → 10 → 9 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 18 → 18
+  [Stage 1] AI 자유 generate: 5 meanings
+    - EN=this (demonstrative, near the speaker)  KO=이것, 이 사람
+    - EN=subject particle (marks the subject of a sentence, after consonant)  KO=주격 조사
+    - EN=tooth  KO=치아, 이빨
+    - EN=surname 'Lee' (common Korean family name)  KO=성씨, 이씨
+    - EN=fly (the insect)  KO=파리(곤충)
+  [Stage 2] dict 매칭: 8 matched
+  [Stage 3] borderline 평가: unmatched 10 → rescued 3
+  → senses 18 → 11, entries 9 → 6
+  ✅ 69529:1: 현대 일상에서 '이'가 치아(이빨) 의미로 널리 쓰임 (generated와 일치)
+  ✅ 27527:1: '이'가 화자 근처의 대상을 가리키는 지시사로 generated의 'this'와 일치
+  ✅ 27527:2: 앞에서 언급한 대상을 가리키는 'this'로 generated와 의미 동일
+  ✅ 27527:3: '이 사람'을 가리키는 용법도 generated의 '이 사람'과 일치
+  ✅ 71687:1: 27527:1과 의미 중복, generated의 'this'와 동일
+  ✅ 71687:2: 27527:2와 의미 중복, generated의 'this'와 동일
+  ✅ 71124:1: '이'가 사람을 가리키는 용법은 generated의 '이 사람'과 의미 동일
+  ✅ 86289:1: 주격 조사로서의 '이'는 generated의 'subject particle'과 일치하여 유지, 영어 번역도 보강  [EN→ 'subject particle (marks the subject of a sentence, after consonant)']
+  ✅ 69529:2: [borderline:keep] 톱이나 톱니바퀴 등 연장의 '이'가 날카로운 부분을 가리키는 의미로 현대 한국어에서도 일상적으로 사용된다.
+  ❌ 69529:3: [borderline:drop] 이 의미의 '이'는 전문적인 기술 용어로, 현대 일상 회화나 뉴스 등에서 거의 사용되지 않는다.
+  ❌ 71125:1: [borderline:drop] ‘이’가 ‘two’의 의미로 쓰이는 경우는 고전 한자어 수사에서나 드물게 나타나며, 현대 일상 한국어에서는 ‘둘’이 표준적으로 쓰임.
+  ❌ 71127:1: [borderline:drop] 현대 한국어에서 '이'가 '둘의'라는 의미(숫자 2)는 거의 사용되지 않으며, 숫자 '2'는 '이'로 읽지만 '둘의'라는 의미로는 일상에서 쓰이지 않는다.
+  ❌ 71127:2: [borderline:drop] ‘이’가 ‘두 번째의’라는 의미로 단독 사용되는 경우는 거의 없고, ‘둘째’나 ‘제2’가 일상적으로 쓰임.
+  ✅ 71561:1: [borderline:keep] 현대 한국어에서 '이'는 머릿니, 몸니 등으로 일상 대화, 뉴스, 학교 보건 등에서 여전히 사용된다.
+  ✅ 71561:2: [borderline:keep] 현대 한국어에서 '이'는 머릿니 등 사람 머리에 기생하는 곤충을 가리키는 일상적 단어로 뉴스, 교과서, 일상 대화 등에서 자연스럽게 쓰인다.
+  ❌ 68819:1: [borderline:drop] 한글 자모 이름(‘ㅣ’)은 문법적 정보로, 일상 회화나 일반 텍스트에서 단어 '이'가 이 의미로 쓰이지 않음.
+  ❌ 86289:2: [borderline:drop] 이는 조사(격조사)로, 문법적 기능어이기 때문에 어휘 학습 앱의 어휘 의미로는 적합하지 않음.
+  ❌ 86289:3: [borderline:drop] 조사는 문법적 기능어로, 어휘 학습 앱의 어휘적 의미 학습 대상이 아니기 때문입니다.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 6 entries → 5 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 5)
+  - 'this' ← target_code=27527  example=O
+  - 'tooth' ← target_code=69529  example=O
+  - 'louse' ← target_code=71561  example=O
+  - 'person; man' ← target_code=71124  example=O
+  - 'subject particle (marks the subject of a sentence, after consonant)' ← target_code=86289  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=this
+       JA cache: この / これ【此れ】
+       ZH cache: 这 / 这个 / 这，这个
+       KO 의미 (5):
+         - 말하는 사람에게 가까이 있거나 말하는 사람이 생각하고 있는 대상을 가리키는 말.
+             └─ from 이^5 (대명사, 초급)
+         - 바로 앞에서 이야기한 대상을 가리키는 말.
+             └─ from 이^5 (대명사, 초급)
+         - ‘이 사람’을 가리키는 말.
+             └─ from 이^5 (대명사, 초급)
+         - 말하는 사람에게 가까이 있거나 말하는 사람이 생각하고 있는 대상을 가리킬 때 쓰는 말.
+             └─ from 이^6 (관형사, 초급)
+         - 바로 앞에서 이야기한 대상을 가리킬 때 쓰는 말.
+             └─ from 이^6 (관형사, 초급)
+       예문: 지금부터 관련 지도를 보여드리겠습니다. 이를 잘 보시기 바랍니다.
+
+  [2] EN=tooth
+       JA cache: は【歯】。しが【歯牙】 / は・やいば【刃】
+       ZH cache: 牙齿 / 齿
+       KO 의미 (2):
+         - 사람이나 동물의 입안에 있으며 무엇을 물거나 음식물을 씹는 일을 하는 기관.
+             └─ from 이^3 (명사, 초급)
+         - 연장의 뾰족뾰족한 날.
+             └─ from 이^3 (명사, 초급)
+       예문: 호랑이가 날카로운 이를 드러내며 운다.
+
+  [3] EN=louse
+       JA cache: しらみ
+       ZH cache: 头虱 / 虱子
+       KO 의미 (2):
+         - 몸의 길이는 1~4mm로 편평한 모양이며, 사람의 몸에 붙어 살면서 피를 빨아 먹는 곤충.
+             └─ from 이^1 (명사, 고급)
+         - 몸의 길이는 약 2~4mm로 연한 회색을 띠며, 사람의 머리에서 피를 빨아 먹는 곤충.
+             └─ from 이^1 (명사, 고급)
+       예문: 온몸이 간지러운 유민이는 몸에 이가 붙어 있는 것은 아닌지 의심했다.
+
+  [4] EN=person; man
+       JA cache: もの【者】
+       KO 의미 (1):
+         - ‘사람’을 나타내는 말.
+             └─ from 이^4 (의존 명사, 고급)
+       예문: 지금 밖에 지나가는 이가 바로 내 사촌 동생이다.
+
+  [5] EN=subject particle (marks the subject of a sentence, after consonant)
+       JA cache: が
+       KO 의미 (1):
+         - 어떤 상태나 상황의 대상이나 동작의 주체를 나타내는 조사.
+             └─ from 이^7 (조사, (no grade))
+       예문: 오늘 밤은 달이 참 밝다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  이
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. this
+  │     예: 지금부터 관련 지도를 보여드리겠습니다. 이를 잘 보시기 바랍니다.
+  │
+  │  2. tooth
+  │     예: 호랑이가 날카로운 이를 드러내며 운다.
+  │
+  │  3. louse
+  │     예: 온몸이 간지러운 유민이는 몸에 이가 붙어 있는 것은 아닌지 의심했다.
+  │
+  │  4. person; man
+  │     예: 지금 밖에 지나가는 이가 바로 내 사촌 동생이다.
+  │
+  │  5. subject particle (marks the subject of a sentence, after consonant)
+  │     예: 오늘 밤은 달이 참 밝다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '부'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='부' only)
+  ✅ keep  부^1 (명사, 중급)
+  ✅ keep  부^2 (명사, 중급)
+  ✅ keep  부^3 (의존 명사, 중급)
+  ❌ skip (word mismatch (부-))  부-^1 (접사, 중급)
+  ❌ skip (word mismatch (부-))  부-^2 (접사, 고급)
+  ❌ skip (word mismatch (부-))  부-^5 (품사 없음, (no grade))
+  ❌ skip (word mismatch (부-))  부-^6 (품사 없음, (no grade))
+  ❌ skip (word mismatch (-부))  -부^3 (접사, 고급)
+  ❌ skip (word mismatch (-부))  -부^4 (접사, 고급)
+  ❌ skip (word mismatch (부부))  부부^0 (명사, 초급)
+
+  → 10 → 3 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 5 → 5
+  [Stage 1] AI 자유 generate: 5 meanings
+    - EN=father (formal, respectful)  KO=아버지
+    - EN=department, section (in an organization)  KO=부서
+    - EN=wealth, riches  KO=재산
+    - EN=prefix meaning 'sub-', 'vice-', or 'assistant' (e.g., 부회장: vice president)  KO=부(접두사)
+    - EN=married couple (as in '부부')  KO=부부의 부
+  [Stage 2] dict 매칭: 2 matched
+  [Stage 3] borderline 평가: unmatched 3 → rescued 3
+  → senses 5 → 5, entries 3 → 3
+  ✅ 25685:1: generated의 'department, section (in an organization)'과 의미가 동일하여 유지
+  ✅ 25694:1: generated의 'wealth, riches'와 의미가 동일하여 유지
+  ✅ 25694:2: [borderline:keep] 뉴스, 경제 기사, 교과서 등에서 '국가의 부', '사회적 부'처럼 자주 쓰이는 일상적 의미임.
+  ✅ 25692:1: [borderline:keep] 현대 한국어에서 시험, 행사, 시리즈 등 여러 차례로 나뉜 일의 순서를 셀 때 '1부', '2부'처럼 널리 사용된다.
+  ✅ 25692:2: [borderline:keep] 신문, 책, 서류를 셀 때 '부'라는 단위는 현대 한국어에서 일상적으로 사용된다.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 3 entries → 3 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 3)
+  - 'wealth; fortune' ← target_code=25694  example=O
+  - 'part' ← target_code=25692  example=O
+  - 'division; department' ← target_code=25685  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=wealth; fortune
+       JA cache: ざいか【財貨】 / とみ【富】。ざいさん【財産】
+       ZH cache: 财富 / 财富，金钱
+       KO 의미 (2):
+         - 많은 재산.
+             └─ from 부^2 (명사, 중급)
+         - 한 국가나 사회가 가지고 있는 자본, 생산물, 자원 등 재산의 전체.
+             └─ from 부^2 (명사, 중급)
+       예문: 그곳의 상인들은 해상 무역을 통해 부를 축적해 왔다.
+
+  [2] EN=part
+       JA cache: ぶ【部】
+       ZH cache: 份，本 / 场，幕
+       KO 의미 (2):
+         - 어떤 일이 몇 차례로 이루어져 있을 때 그중 한 차례를 세는 단위.
+             └─ from 부^3 (의존 명사, 중급)
+         - 신문이나 책, 서류 등을 세는 단위.
+             └─ from 부^3 (의존 명사, 중급)
+       예문: 이번 공연은 일 부와 이 부로 이루어져 있다.
+
+  [3] EN=division; department
+       JA cache: ぶ【部】
+       ZH cache: 部门
+       KO 의미 (1):
+         - 업무 조직 안에서 맡은 일에 따라 나눈 작은 집단.
+             └─ from 부^1 (명사, 중급)
+       예문: 우리 부에서는 영업을 담당하고 있다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  부
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. wealth; fortune
+  │     예: 그곳의 상인들은 해상 무역을 통해 부를 축적해 왔다.
+  │
+  │  2. part
+  │     예: 이번 공연은 일 부와 이 부로 이루어져 있다.
+  │
+  │  3. division; department
+  │     예: 우리 부에서는 영업을 담당하고 있다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '차'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='차' only)
+  ✅ keep  차^1 (명사, 초급)
+  ✅ keep  차^2 (명사, 초급)
+  ✅ keep  차^4 (의존 명사, 중급)
+  ✅ keep  차^3 (명사, 고급)
+  ❌ skip (word mismatch (차-))  차-^1 (접사, 고급)
+  ❌ skip (word mismatch (차-))  차-^2 (품사 없음, (no grade))
+  ❌ skip (word mismatch (차-))  차-^3 (품사 없음, (no grade))
+  ❌ skip (word mismatch (-차))  -차^0 (접사, 고급)
+  ❌ skip (word mismatch (차차))  차차^0 (부사, 중급)
+  ❌ skip (word mismatch (차다))  차다^1 (동사, 초급)
+
+  → 10 → 4 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 9 → 9
+  [Stage 1] AI 자유 generate: 4 meanings
+    - EN=car, automobile  KO=자동차
+    - EN=tea (the drink)  KO=차(음료)
+    - EN=turn, round (in order or sequence)  KO=차례, 순서
+    - EN=kick (in sports, e.g., soccer)  KO=차기, 발로 참
+  [Stage 2] dict 매칭: 5 matched
+  [Stage 3] borderline 평가: unmatched 4 → rescued 3
+  → senses 9 → 8, entries 4 → 4
+  ✅ 61117:1: generated의 'tea (the drink)'와 의미가 동일하여 유지.
+  ✅ 62525:1: generated의 'car, automobile'과 의미가 동일하여 유지.
+  ❌ 62525:2: [borderline:drop] 현대 일상 한국어에서 '차'를 '차 한 차', '차 두 차'처럼 분량 단위로 쓰는 경우는 거의 없으며, 주로 옛 문헌이나 특정 운송업계에서만 사용됨.
+  ✅ 62525:3: [borderline:keep] 장기(한국식 체스)가 여전히 일부에서 즐겨지고 있고, '차'가 장기 말의 이름으로 일상적으로 통용됨.
+  ✅ 71727:1: generated의 'turn, round (in order or sequence)'와 의미가 동일하여 유지. 영어 번역을 보강.  [EN→ 'turn; round (in order or sequence)']
+  ✅ 71727:2: generated의 'turn, round (in order or sequence)'와 의미가 동일하여 유지. 영어 번역을 보강.  [EN→ 'turn; round (in order or sequence)']
+  ✅ 71727:3: generated의 'turn, round (in order or sequence)'와 의미가 동일하여 유지. 영어 번역을 보강.  [EN→ 'turn; round (in order or sequence)']
+  ✅ 91720:1: [borderline:keep] 현대 한국어에서 '온도 차', '의견 차', '세대 차' 등으로 일상적으로 널리 쓰이는 의미임.
+  ✅ 91720:2: [borderline:keep] 수학이나 일상에서 '두 값의 차'처럼 '차'를 'difference' 의미로 자주 사용함.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 4 entries → 4 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 4)
+  - 'turn; round (in order or sequence)' ← target_code=71727  example=O
+  - 'car; automobile; vehicle' ← target_code=62525  example=O
+  - 'difference; gap' ← target_code=91720  example=O
+  - 'tea' ← target_code=61117  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=turn; round (in order or sequence)
+       JA cache: じ【次】 / とき【時】。さい【際】。おり【折】 / め【目】
+       ZH cache: 刚好……的时候 / 次
+       KO 의미 (3):
+         - 어떤 일의 차례나 횟수를 나타내는 말.
+             └─ from 차^4 (의존 명사, 중급)
+         - 어떠한 일을 하던 기회나 순간.
+             └─ from 차^4 (의존 명사, 중급)
+         - 일정한 주기나 기간이 지난 해당 시기를 나타내는 말.
+             └─ from 차^4 (의존 명사, 중급)
+       예문: 나는 지수네 집에 수십 차 전화를 했지만 아무도 전화를 받지 않았다.
+
+  [2] EN=car; automobile; vehicle
+       JA cache: くるま【車】 / しゃ【車】
+       ZH cache: 车 / 车，车辆
+       KO 의미 (2):
+         - 바퀴가 달려 있어 사람이나 짐을 실어 나르는 기관.
+             └─ from 차^2 (명사, 초급)
+         - 장기의 말 중에서 ‘車’ 자를 새긴 말.
+             └─ from 차^2 (명사, 초급)
+       예문: 차 안에는 어른 두 명과 아이 두 명이 타고 있었다.
+
+  [3] EN=difference; gap
+       JA cache: さ【差】 / さ【差】。へだたり【隔たり】
+       ZH cache: 差 / 差别，差异
+       KO 의미 (2):
+         - 둘 이상을 비교했을 때 서로 다르게 나타나는 수준이나 정도.
+             └─ from 차^3 (명사, 고급)
+         - 어떤 수나 식에서 다른 수나 식을 뺀 나머지.
+             └─ from 차^3 (명사, 고급)
+       예문: 우리 부부는 나이 차가 열 살이나 난다.
+
+  [4] EN=tea
+       JA cache: ちゃ【茶】。おちゃ【お茶】
+       ZH cache: 茶，茶水
+       KO 의미 (1):
+         - 좋은 향기나 맛이 있는 식물의 잎이나 뿌리, 열매 등을 달이거나 우려서 만든 마실 것.
+             └─ from 차^1 (명사, 초급)
+       예문: 손님이 올 테니 차를 준비해라.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  차
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. turn; round (in order or sequence)
+  │     예: 나는 지수네 집에 수십 차 전화를 했지만 아무도 전화를 받지 않았다.
+  │
+  │  2. car; automobile; vehicle
+  │     예: 차 안에는 어른 두 명과 아이 두 명이 타고 있었다.
+  │
+  │  3. difference; gap
+  │     예: 우리 부부는 나이 차가 열 살이나 난다.
+  │
+  │  4. tea
+  │     예: 손님이 올 테니 차를 준비해라.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '개'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='개' only)
+  ✅ keep  개^1 (명사, 초급)
+  ✅ keep  개^3 (의존 명사, 초급)
+  ✅ keep  개^2 (명사, (no grade))
+  ❌ skip (word mismatch (개-))  개-^1 (접사, (no grade))
+  ❌ skip (word mismatch (-개))  -개^2 (접사, (no grade))
+  ❌ skip (word mismatch (개개))  개개^1 (명사, 고급)
+  ❌ skip (word mismatch (개개))  개개^2 (부사, 고급)
+  ❌ skip (word mismatch (개월))  개월^0 (의존 명사, 초급)
+  ❌ skip (word mismatch (개다))  개다^1 (동사, 중급)
+  ❌ skip (word mismatch (개다))  개다^3 (동사, 중급)
+
+  → 10 → 3 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 4 → 4
+  [Stage 1] AI 자유 generate: 3 meanings
+    - EN=dog (the animal)  KO=동물, 개
+    - EN=counter for things (used after numbers)  KO=단위, 개수
+    - EN=damn, freaking (slang intensifier, e.g., '개좋다')  KO=강조 비속어
+  [Stage 2] dict 매칭: 2 matched
+  [Stage 3] borderline 평가: unmatched 2 → rescued 2
+  → senses 4 → 4, entries 3 → 3
+  ✅ 64115:1: 현대 일상에서 동물 '개'로 매우 자주 쓰임 (generated의 'dog'와 동일).
+  ✅ 22784:1: 현대 일상에서 수량을 셀 때 단위로 자주 쓰임 (generated의 'counter for things'와 동일).  [EN→ 'counter for things (used after numbers)']
+  ✅ 64115:2: [borderline:keep] 현대 한국어에서 '개'는 욕설로 '나쁜 사람'을 비하할 때 일상적으로 사용되며, 드라마·SNS 등에서 자주 등장한다.
+  ✅ 21836:1: [borderline:keep] 윷놀이는 명절 등에서 여전히 널리 즐기는 놀이이며, '개'는 윷놀이에서 자주 쓰이는 기본 용어로 일상 대화나 설명에서 자연스럽게 등장한다.
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 3 entries → 3 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 3)
+  - 'dog' ← target_code=64115  example=O
+  - 'counter for things (used after numbers)' ← target_code=22784  example=O
+  - 'gae' ← target_code=21836  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=dog
+       JA cache: いぬ【犬】
+       ZH cache: 狗，犬 / 狗，狗崽子
+       KO 의미 (2):
+         - 냄새를 잘 맡고 귀가 매우 밝으며 영리하고 사람을 잘 따라 사냥이나 애완 등의 목적으로 기르는 동물.
+             └─ from 개^1 (명사, 초급)
+         - (욕하는 말로) 사람답지 못한 나쁜 사람.
+             └─ from 개^1 (명사, 초급)
+       예문: 나는 흰 개 한 마리와 검은 고양이 한 마리를 함께 기른다.
+
+  [2] EN=counter for things (used after numbers)
+       JA cache: こ【個】
+       ZH cache: 个
+       KO 의미 (1):
+         - 낱으로 떨어진 물건을 세는 단위.
+             └─ from 개^3 (의존 명사, 초급)
+       예문: 유민이는 여러 개의 모자 중에서 무엇을 쓸까 고민했다.
+
+  [3] EN=gae
+       JA cache: ケ
+       ZH cache: 两分，两步
+       KO 의미 (1):
+         - 윷놀이에서 윷가락 두 개는 엎어지고 두 개는 뒤집어진 경우를 이르는 말.
+             └─ from 개^2 (명사, (no grade))
+       예문: 이번 판에서 개 이상이 나와서 두 칸만 더 가면 내가 이긴다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  개
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. dog
+  │     예: 나는 흰 개 한 마리와 검은 고양이 한 마리를 함께 기른다.
+  │
+  │  2. counter for things (used after numbers)
+  │     예: 유민이는 여러 개의 모자 중에서 무엇을 쓸까 고민했다.
+  │
+  │  3. gae
+  │     예: 이번 판에서 개 이상이 나와서 두 칸만 더 가면 내가 이긴다.
+  │
+  └─────────────────────────────────────────────────────────
+
+
+============================================================
+  End-to-end dict-first pipeline prototype
+  Input: '배'
+============================================================
+
+[Tier 2] krdict 호출 × 3 (en/ja/zh-CN)
+  - trans_lang=1 (en): 10 raw entries
+  - trans_lang=2 (ja): 10 raw entries
+  - trans_lang=11 (zh-CN): 10 raw entries
+
+  → merged 10 unique target_codes
+
+[Tier 1] deterministic 필터 (word=='배' only)
+  ✅ keep  배^1 (명사, 초급)
+  ✅ keep  배^2 (명사, 초급)
+  ✅ keep  배^3 (명사, 초급)
+  ✅ keep  배^5 (의존 명사, 초급)
+  ✅ keep  배^4 (명사, 고급)
+  ❌ skip (word mismatch (배-))  배-^1 (품사 없음, (no grade))
+  ❌ skip (word mismatch (-배))  -배^0 (접사, 고급)
+  ❌ skip (word mismatch (배배))  배배^0 (부사, 고급)
+  ❌ skip (word mismatch (배달))  배달^0 (명사, 초급)
+  ❌ skip (word mismatch (배달되다))  배달되다^0 (동사, 초급)
+
+  → 10 → 5 통과
+
+[Tier 1.5] AI judge (gpt-4.1-mini) — 학습 가치 선별 + 음역 보강
+  [Tier 1.4] deterministic marker 컷: senses 11 → 11
+  [Stage 1] AI 자유 generate: 4 meanings
+    - EN=stomach, belly (part of the body)  KO=몸의 배
+    - EN=pear (the fruit)  KO=과일 배
+    - EN=boat, ship  KO=배(선박)
+    - EN=times, fold (as in 'two times', 'threefold')  KO=몇 배(곱)
+  [Stage 2] dict 매칭: 6 matched
+  [Stage 3] borderline 평가: unmatched 5 → rescued 2
+  → senses 11 → 8, entries 5 → 5
+  ✅ 20211:1: 몸의 배(배, abdomen/belly)로 generated의 'stomach, belly'와 의미 일치하여 keep.
+  ✅ 20211:2: 몸의 배(위장 포함)로 generated의 'stomach, belly'와 의미 일치하여 keep.
+  ✅ 20211:3: [borderline:keep] 현대 한국어에서 '배'가 '자궁'의 의미로 일상적으로 쓰이지는 않지만, 드물게 구어·문학 등에서 '아이를 배다'처럼 '배'가 '자궁'을 의미하는 맥락이 여전히 존재하므로 학습 가치가 있음.
+  ❌ 20211:4: [borderline:drop] 현대 한국어에서 '배'가 '물건의 가운데 부분'을 의미하는 용례는 거의 쓰이지 않으며, 이 의미로는 '중앙', '가운데' 등이 일반적으로 사용됨.
+  ❌ 20211:5: [borderline:drop] 현대 한국어 일상에서는 거의 쓰이지 않는 전문적·고전적 단위어입니다.
+  ✅ 29729:1: 배(선박)로 generated의 'boat, ship'과 의미 일치하여 keep. 영어 번역도 보강.  [EN→ 'boat; ship']
+  ✅ 31454:1: 과일 배로 generated의 'pear (the fruit)'와 의미 일치하여 keep. 영어 번역도 보강.  [EN→ 'pear (the fruit)']
+  ✅ 58079:1: [borderline:keep] 현대 한국어에서 술이나 음료를 주문할 때 '한 배, 두 배'처럼 잔을 세는 단위로 일상적으로 사용된다.
+  ❌ 58079:2: [borderline:drop] 현대 한국어에서 '배'는 '트로피'의 의미로 거의 쓰이지 않고, 실제로는 '트로피' 또는 '우승컵'이 일상적으로 사용됨.
+  ✅ 15901:1: 몇 배(곱)의 의미로 generated의 'times, fold'와 의미 일치하여 keep. 영어 번역도 보강.  [EN→ "times; fold (as in 'two times', 'threefold')"]
+  ✅ 15901:2: 몇 배(곱)의 의미로 generated의 'times, fold'와 의미 일치하여 keep. 영어 번역도 보강.  [EN→ "times; fold (as in 'two times', 'threefold')"]
+
+[Tier 3] 번역 그룹화 (en 번역값 동일한 entries 묶기)
+  → 5 entries → 5 학습 카드
+
+[Tier 4] 그룹별 예문 fetch (view API × 5)
+  - 'abdomen; belly' ← target_code=20211  example=O
+  - "times; fold (as in 'two times', 'threefold')" ← target_code=15901  example=O
+  - 'boat; ship' ← target_code=29729  example=O
+  - 'pear (the fruit)' ← target_code=31454  example=O
+  - 'glass' ← target_code=58079  example=O
+
+────────────────────────────────────────────────────────────────
+  [서버 DB] AI 컨텍스트용 메타 저장 (사용자 미노출)
+────────────────────────────────────────────────────────────────
+
+  [1] EN=abdomen; belly
+       JA cache: はら【腹】。おなか【お腹】。いちょう【胃腸】 / はら【腹】。たい【胎】 / はら【腹】。ふくぶ【腹部】
+       ZH cache: 肚子 / 腹部
+       KO 의미 (3):
+         - 사람이나 동물의 몸에서, 가슴 아래에서 다리 위까지의 부분.
+             └─ from 배^1 (명사, 초급)
+         - 사람이나 동물의 몸에서 음식을 소화시키는 위장, 창자 등의 내장이 있는 곳.
+             └─ from 배^1 (명사, 초급)
+         - 여성의 몸에서 아이가 들어서는 부분.
+             └─ from 배^1 (명사, 초급)
+       예문: 배탈이 나서 따뜻한 방바닥에 배를 대고 엎드려 있었다.
+
+  [2] EN=times; fold (as in 'two times', 'threefold')
+       JA cache: ばい【倍】
+       ZH cache: 倍
+       KO 의미 (2):
+         - 어떤 수나 양을 두 번 합한 만큼.
+             └─ from 배^4 (명사, 고급)
+         - 어떤 수량을 몇 번 합친 수량을 나타내는 단위.
+             └─ from 배^4 (명사, 고급)
+       예문: 일 년 사이에 물가가 배로 올랐다.
+
+  [3] EN=boat; ship
+       JA cache: ふね【船】
+       ZH cache: 船
+       KO 의미 (1):
+         - 사람이나 물건을 싣고 물 위를 다니는 교통수단.
+             └─ from 배^2 (명사, 초급)
+       예문: 태풍 때문에 이틀째 배가 뜨지 못하고 있다.
+
+  [4] EN=pear (the fruit)
+       JA cache: なし【梨】
+       ZH cache: 梨
+       KO 의미 (1):
+         - 껍질은 누렇고 속은 희며 수분이 많고 단맛이 나는, 가을에 나는 둥근 과일.
+             └─ from 배^3 (명사, 초급)
+       예문: 가을에는 사과와 배 같은 과일이 선물로 인기이다.
+
+  [5] EN=glass
+       JA cache: はい【杯】
+       ZH cache: 杯
+       KO 의미 (1):
+         - 술이나 음료를 담은 잔을 세는 단위.
+             └─ from 배^5 (의존 명사, 초급)
+       예문: 나는 술 석 배면 딱 기분 좋게 취했다.
+
+────────────────────────────────────────────────────────────────
+  [사용자 카드] 한국어 → 영어 단어장
+────────────────────────────────────────────────────────────────
+
+  ┌─────────────────────────────────────────────────────────
+  │  배
+  ├─────────────────────────────────────────────────────────
+  │
+  │  1. abdomen; belly
+  │     예: 배탈이 나서 따뜻한 방바닥에 배를 대고 엎드려 있었다.
+  │
+  │  2. times; fold (as in 'two times', 'threefold')
+  │     예: 일 년 사이에 물가가 배로 올랐다.
+  │
+  │  3. boat; ship
+  │     예: 태풍 때문에 이틀째 배가 뜨지 못하고 있다.
+  │
+  │  4. pear (the fruit)
+  │     예: 가을에는 사과와 배 같은 과일이 선물로 인기이다.
+  │
+  │  5. glass
+  │     예: 나는 술 석 배면 딱 기분 좋게 취했다.
+  │
+  └─────────────────────────────────────────────────────────
+

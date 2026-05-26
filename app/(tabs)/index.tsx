@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   BackHandler,
+  FlatList,
   Keyboard,
   Pressable,
   Text,
@@ -14,10 +15,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
-import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import { AppModal } from '@/components/app-modal';
-import { Paywall } from '@/components/paywall';
 import { StreakBanner } from '@/components/streak-banner';
 import { WordlistCreateModal } from '@/components/wordlist-create-modal';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
@@ -45,7 +44,7 @@ export default function HomeScreen() {
   const premium = usePremium();
   const tier = useTier();
   const { settings } = useUserSettings();
-  const { isTablet } = useTablet();
+  const { isTablet, contentWidth } = useTablet();
   // Seed from boot-prefetch cache so first focus avoids the loading flash.
   const initialHome = getCachedHome();
   const [books, setBooks] = useState<BookWithCount[]>(initialHome?.books ?? []);
@@ -55,7 +54,6 @@ export default function HomeScreen() {
   const [editMode, setEditMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [showPaywall, setShowPaywall] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
@@ -79,7 +77,7 @@ export default function HomeScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      if (consumePaywallPending()) setShowPaywall(true);
+      if (consumePaywallPending()) router.push('/subscription');
       loadBooks(sortMode, sortReversed);
       if (isNotificationAvailable()) {
         rescheduleNotifications(getNotificationTranslations(t));
@@ -174,6 +172,21 @@ export default function HomeScreen() {
     return () => sub.remove();
   }, [editMode]);
 
+  // Web: Escape key exits edit mode — the small ✓ in the corner is
+  // easy to miss with a mouse, and there's no hardware back button.
+  useEffect(() => {
+    if (!editMode) return;
+    if (typeof window === 'undefined') return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setEditMode(false);
+        setSelectedIds(new Set());
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [editMode]);
+
   const renderItem = ({ item }: { item: BookWithCount }) => {
     const card = (
       <BookCard
@@ -183,6 +196,7 @@ export default function HomeScreen() {
         editMode={editMode}
         selected={selectedIds.has(item.id)}
         highlighted={highlightedBookId === item.id}
+        noOuterMargin={isTablet}
         onPress={() => {
           if (longPressedRef.current) {
             longPressedRef.current = false;
@@ -204,14 +218,19 @@ export default function HomeScreen() {
         onPin={() => handlePin(item.id)}
       />
     );
-    // Wrap with flex:1 column on tablets so the 2-column grid splits width evenly.
-    return isTablet ? <View style={{ flex: 1 }}>{card}</View> : card;
+    // Tablet grid: fixed half-width cell. Drops flex:1 so a lone last-row
+    // card stays half-width instead of stretching. Row padding/gap is on
+    // columnWrapperStyle.
+    if (isTablet) {
+      const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
+      return <View style={{ width: tabletCardWidth }}>{card}</View>;
+    }
+    return card;
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
-        <TabletContainer>
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+      <TabletContainer>
         {/* Header */}
         <View className="flex-row items-center justify-between px-6 pt-6">
           <View className="flex-1">
@@ -223,7 +242,7 @@ export default function HomeScreen() {
             onPress={() => {
               const cap = BOOK_LIMIT_BY_TIER[tier];
               if (Number.isFinite(cap) && books.length >= cap) {
-                setShowPaywall(true);
+                router.push('/subscription');
               } else {
                 setShowCreateModal(true);
               }
@@ -240,7 +259,9 @@ export default function HomeScreen() {
           </Pressable>
         </View>
 
-        <StreakBanner streak={streak} />
+        <View className="px-6">
+          <StreakBanner streak={streak} />
+        </View>
 
         {/* Sort buttons + edit */}
         <View className="mt-3 flex-row items-center justify-between px-6">
@@ -358,8 +379,17 @@ export default function HomeScreen() {
               data={books}
               keyExtractor={(b) => b.id}
               numColumns={isTablet ? 2 : 1}
-              columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
-              contentContainerStyle={{ padding: 24, paddingBottom: editMode ? { small: 86, medium: 104, large: 120 }[settings?.fontSize ?? 'medium'] : 24, gap: isTablet ? 12 : 0 }}
+              columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
+              contentContainerStyle={{ paddingTop: 24, paddingBottom: editMode ? { small: 86, medium: 104, large: 120 }[settings?.fontSize ?? 'medium'] : 24, gap: isTablet ? 12 : 0, flexGrow: 1 }}
+              // In edit mode, the scroll area below the last card row
+              // becomes a Pressable — tapping empty space exits edit
+              // mode (click-outside-to-deselect, matching desktop UX).
+              ListFooterComponent={editMode ? (
+                <Pressable
+                  onPress={() => { setEditMode(false); setSelectedIds(new Set()); }}
+                  style={{ flex: 1, minHeight: 200 }}
+                />
+              ) : null}
               renderItem={renderItem}
               onScrollToIndexFailed={(info) => {
                 setTimeout(() => {
@@ -424,16 +454,13 @@ export default function HomeScreen() {
           onConfirm={handleDeleteSelected}
         />
 
-        <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} reason="books" />
-
         <WordlistCreateModal
           visible={showCreateModal}
           onClose={() => setShowCreateModal(false)}
           onPickBlank={() => router.push('/wordlist/new')}
           onPickBrowse={() => router.push('/wordlist/library')}
         />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+    </SafeAreaView>
   );
 }
 
@@ -444,6 +471,7 @@ function BookCard({
   editMode,
   selected,
   highlighted,
+  noOuterMargin,
   onPress,
   onLongPress,
   onPin,
@@ -454,6 +482,9 @@ function BookCard({
   editMode: boolean;
   selected: boolean;
   highlighted: boolean;
+  /** When true, drops the default `mx-6 mb-2`. Used on tablet where the
+   *  parent grid wrapper owns horizontal spacing. */
+  noOuterMargin?: boolean;
   onPress: () => void;
   onLongPress: () => void;
   onPin: () => void;
@@ -465,7 +496,7 @@ function BookCard({
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
-      className={`mb-2 rounded-xl border px-4 py-4 ${
+      className={`${noOuterMargin ? '' : 'mx-6 mb-2'} rounded-xl border px-4 py-4 ${
         highlighted
           ? 'bg-white dark:bg-black'
           : 'border-gray-300 bg-white dark:border-gray-700 dark:bg-black'

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   FlatList,
-  Modal,
+  Platform,
   Pressable,
   Switch,
   Text,
@@ -11,7 +11,9 @@ import {
   type NativeSyntheticEvent,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTablet } from '@src/hooks/useTablet';
 
+import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { Toast } from '@/components/toast';
 
 interface Props {
@@ -33,9 +35,15 @@ const CENTER_OFFSET = ITEM_HEIGHT * 2;
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const MINUTES = Array.from({ length: 12 }, (_, i) => i * 5); // 0, 5, 10, ..., 55
 
-export function WordlistNotifModal({
+export function WordlistNotifModal(props: Props) {
+  const { isTablet } = useTablet();
+  const useCard = Platform.OS === 'web' && isTablet;
+  if (useCard) return <CenteredCardLayout {...props} />;
+  return <BottomSheetLayout {...props} />;
+}
+
+function useNotifModalState({
   visible,
-  bookTitle,
   initialEnabled,
   initialHour,
   initialMinute,
@@ -44,8 +52,7 @@ export function WordlistNotifModal({
   onClose,
   onSave,
 }: Props) {
-  const { t, i18n } = useTranslation();
-  const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [enabled, setEnabled] = useState(initialEnabled);
   const [hour, setHour] = useState(initialHour ?? defaultHour);
   const [minute, setMinute] = useState(initialMinute);
@@ -94,8 +101,138 @@ export function WordlistNotifModal({
     setDays((prev) => prev ^ (1 << dayIdx));
   };
 
+  return {
+    enabled, setEnabled,
+    hour, setHour,
+    minute, setMinute,
+    days,
+    saving,
+    toastMsg, setToastMsg,
+    canSave,
+    handleSave,
+    toggleDay,
+  };
+}
+
+function NotifInnerContent({
+  bookTitle,
+  state,
+  onClose,
+  lang,
+}: {
+  bookTitle: string;
+  state: ReturnType<typeof useNotifModalState>;
+  onClose: () => void;
+  lang: string;
+}) {
+  const { t } = useTranslation();
+  const { enabled, setEnabled, hour, setHour, minute, setMinute, days, saving, canSave, handleSave, toggleDay } = state;
   return (
-    <Modal visible={visible} animationType="slide" transparent onRequestClose={onClose}>
+    <>
+      <Text className="text-xl font-bold text-black dark:text-white" numberOfLines={2}>
+        {t('wordlist.notif_title', { title: bookTitle })}
+      </Text>
+
+      <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-700">
+        <Text className="text-base text-black dark:text-white">
+          {t('wordlist.notif_enable')}
+        </Text>
+        <Switch
+          value={enabled}
+          onValueChange={setEnabled}
+          trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
+          thumbColor={enabled ? '#2EC4A5' : '#f4f4f5'}
+        />
+      </View>
+
+      {enabled ? (
+        <>
+          <DaySelector days={days} onToggle={toggleDay} lang={lang} />
+          <View className="mt-3 rounded-xl border border-gray-300 px-4 pt-3 pb-4 dark:border-gray-700">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              {t('wordlist.notif_hour')}
+            </Text>
+            <TimePickerWheels
+              hour={hour}
+              minute={minute}
+              onHourChange={setHour}
+              onMinuteChange={setMinute}
+            />
+          </View>
+        </>
+      ) : null}
+
+      <View className="mt-6 flex-row gap-3">
+        <Pressable
+          onPress={onClose}
+          className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+        >
+          <Text className="text-base font-medium text-black dark:text-white">
+            {t('common.cancel')}
+          </Text>
+        </Pressable>
+        <Pressable
+          onPress={handleSave}
+          disabled={saving}
+          className={`flex-1 items-center rounded-xl py-3 ${
+            saving || !canSave ? 'bg-gray-300' : 'bg-black dark:bg-white'
+          }`}
+        >
+          <Text
+            className={`text-base font-medium ${
+              saving || !canSave ? 'text-gray-500' : 'text-white dark:text-black'
+            }`}
+          >
+            {t('common.done')}
+          </Text>
+        </Pressable>
+      </View>
+    </>
+  );
+}
+
+function CenteredCardLayout(props: Props) {
+  const { i18n } = useTranslation();
+  const state = useNotifModalState(props);
+  const { visible, bookTitle, onClose } = props;
+  return (
+    <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
+      <Pressable
+        onPress={onClose}
+        className="flex-1 items-center justify-center bg-black/50 px-6"
+      >
+        <Pressable
+          onPress={() => {}}
+          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+        >
+          <NotifInnerContent
+            bookTitle={bookTitle}
+            state={state}
+            onClose={onClose}
+            lang={i18n.language}
+          />
+          <Toast
+            visible={!!state.toastMsg}
+            message={state.toastMsg}
+            type="error"
+            onHide={() => state.setToastMsg('')}
+            style={{ position: 'absolute', top: -60, left: 0, right: 0 }}
+          />
+        </Pressable>
+      </Pressable>
+    </BottomSheetShell>
+  );
+}
+
+function BottomSheetLayout(props: Props) {
+  const { i18n } = useTranslation();
+  const insets = useSafeAreaInsets();
+  const { isTablet, contentWidth } = useTablet();
+  const state = useNotifModalState(props);
+  const { visible, bookTitle, onClose } = props;
+
+  return (
+    <BottomSheetShell visible={visible} onRequestClose={onClose}>
       <View className="flex-1 justify-end bg-black/50">
         <Pressable
           onPress={onClose}
@@ -103,79 +240,30 @@ export function WordlistNotifModal({
         />
         <View
           className="rounded-t-3xl bg-white pt-2 dark:bg-gray-900"
-          style={{ paddingBottom: Math.max(insets.bottom, 16) + 16 }}
+          style={[
+            { paddingBottom: Math.max(insets.bottom, 16) + 16, width: '100%' },
+            isTablet ? { maxWidth: contentWidth, alignSelf: 'center' } : null,
+          ]}
         >
           <View className="mx-auto mt-1 mb-3 h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-600" />
           <View className="px-6">
-            <Text className="text-xl font-bold text-black dark:text-white" numberOfLines={2}>
-              {t('wordlist.notif_title', { title: bookTitle })}
-            </Text>
-
-            <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-700">
-              <Text className="text-base text-black dark:text-white">
-                {t('wordlist.notif_enable')}
-              </Text>
-              <Switch
-                value={enabled}
-                onValueChange={setEnabled}
-                trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-                thumbColor={enabled ? '#2EC4A5' : '#f4f4f5'}
-              />
-            </View>
-
-            {enabled ? (
-              <>
-                <DaySelector days={days} onToggle={toggleDay} lang={i18n.language} />
-                <View className="mt-3 rounded-xl border border-gray-300 px-4 pt-3 pb-4 dark:border-gray-700">
-                  <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                    {t('wordlist.notif_hour')}
-                  </Text>
-                  <TimePickerWheels
-                    hour={hour}
-                    minute={minute}
-                    onHourChange={setHour}
-                    onMinuteChange={setMinute}
-                  />
-                </View>
-              </>
-            ) : null}
-
-            <View className="mt-6 flex-row gap-3">
-              <Pressable
-                onPress={onClose}
-                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
-              >
-                <Text className="text-base font-medium text-black dark:text-white">
-                  {t('common.cancel')}
-                </Text>
-              </Pressable>
-              <Pressable
-                onPress={handleSave}
-                disabled={saving}
-                className={`flex-1 items-center rounded-xl py-3 ${
-                  saving || !canSave ? 'bg-gray-300' : 'bg-black dark:bg-white'
-                }`}
-              >
-                <Text
-                  className={`text-base font-medium ${
-                    saving || !canSave ? 'text-gray-500' : 'text-white dark:text-black'
-                  }`}
-                >
-                  {t('common.done')}
-                </Text>
-              </Pressable>
-            </View>
+            <NotifInnerContent
+              bookTitle={bookTitle}
+              state={state}
+              onClose={onClose}
+              lang={i18n.language}
+            />
           </View>
           <Toast
-            visible={!!toastMsg}
-            message={toastMsg}
+            visible={!!state.toastMsg}
+            message={state.toastMsg}
             type="error"
-            onHide={() => setToastMsg('')}
+            onHide={() => state.setToastMsg('')}
             style={{ position: 'absolute', top: -60, left: 0, right: 0 }}
           />
         </View>
       </View>
-    </Modal>
+    </BottomSheetShell>
   );
 }
 

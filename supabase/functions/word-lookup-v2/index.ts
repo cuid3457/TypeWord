@@ -184,6 +184,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 const SUPPORTED_LANGS = new Set([
@@ -1525,8 +1526,12 @@ async function handleRequest(req: Request): Promise<Response> {
     for (let i = 0; i < ae.byteLength; i++) diff |= ae[i] ^ be[i];
     return diff === 0;
   }
-  const isServiceRole = tokenPayload?.role === "service_role" || timingSafeEq(jwt, envSecret);
-  const isAnonRole = tokenPayload?.role === "anon" || timingSafeEq(jwt, envAnon);
+  // SECURITY: do NOT trust tokenPayload.role — the payload is base64-decoded
+  // without signature verification, so an attacker can forge `role:"service_role"`
+  // / `role:"anon"`. Always verify by constant-time-comparing the raw token
+  // against the env-injected secret/anon key.
+  const isServiceRole = envSecret.length > 0 && timingSafeEq(jwt, envSecret);
+  const isAnonRole = envAnon.length > 0 && timingSafeEq(jwt, envAnon);
   let userId: string | null;
   if (isServiceRole) {
     userId = null;

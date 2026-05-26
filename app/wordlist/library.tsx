@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { AdBanner } from '@/components/ad-banner';
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { STUDY_LANGUAGES } from '@src/constants/languages';
 import {
@@ -111,6 +112,7 @@ export default function WordlistLibraryScreen() {
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="px-6 pt-6">
         <View className="h-11 flex-row items-center">
           <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
@@ -341,6 +343,7 @@ export default function WordlistLibraryScreen() {
           />
         </>
       )}
+      </TabletContainer>
       <AdBanner />
       <Toast
         visible={!!toast}

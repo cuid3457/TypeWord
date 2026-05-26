@@ -26,6 +26,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 function getCorsHeaders(req: Request) {
@@ -103,7 +104,19 @@ function validateInput(body: unknown): TtsRequest {
   const gender = b.gender;
   if (gender !== "M" && gender !== "F") throw new ValidationError("gender must be 'M' or 'F'");
 
-  const voice = typeof b.voice === "string" ? b.voice : undefined;
+  // Voice override: allowlist by Azure Neural naming convention to prevent
+  // SSML injection / attacker-controlled cache keys / arbitrary Azure spend.
+  // Pattern: `<lang>-<region>-<NameNeural[Multilingual]>`. Examples that pass:
+  //   en-US-JennyNeural, zh-CN-XiaoxiaoMultilingualNeural, en-GB-RyanNeural.
+  // Anything else is rejected — caller falls back to defaults from TTS_VOICES.
+  const VOICE_RE = /^[A-Za-z]{2,3}-[A-Za-z]{2,4}-[A-Za-z]+(Multilingual)?Neural$/;
+  let voice: string | undefined;
+  if (typeof b.voice === "string" && b.voice.length > 0) {
+    if (b.voice.length > 80 || !VOICE_RE.test(b.voice)) {
+      throw new ValidationError("invalid voice");
+    }
+    voice = b.voice;
+  }
 
   let phoneme: TtsRequest["phoneme"];
   if (b.phoneme && typeof b.phoneme === "object") {
@@ -211,10 +224,13 @@ async function synthesizeWithAzure(args: AzureSynthArgs): Promise<Uint8Array> {
   // absence, but neural voices have rejected unnamespaced phoneme requests
   // with empty 400s in production logs. Declaring it here is harmless for
   // the plain-text path and necessary for the phoneme path.
+  // Both `voice` and `locale` derive from user input (override or
+  // localeFromVoice). Escape before interpolating — even though voice is
+  // already allowlisted by VOICE_RE, defense-in-depth costs nothing.
   const ssml =
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" ` +
-      `xmlns:mstts="http://www.w3.org/2001/mstts" xml:lang="${locale}">` +
-      `<voice name="${voice}">${inner}</voice>` +
+      `xmlns:mstts="http://www.w3.org/2001/mstts" xml:lang="${escapeXml(locale)}">` +
+      `<voice name="${escapeXml(voice)}">${inner}</voice>` +
     `</speak>`;
   const url = `https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`;
   const resp = await fetch(url, {
@@ -243,9 +259,9 @@ async function synthesizeWithAzure(args: AzureSynthArgs): Promise<Uint8Array> {
       ssml: ssml.slice(0, 500),
       headers: headerSummary.join('; '),
     });
-    throw new Error(
-      `Azure TTS ${resp.status}: ${detail.slice(0, 200)} | hdr=${headerSummary.join(';').slice(0, 200)} | ssml=${ssml.slice(0, 200)}`,
-    );
+    // Do not echo SSML body / Azure detail to the thrown Error — caller
+    // surfaces this back to clients. Full detail is in console.error above.
+    throw new Error(`Azure TTS ${resp.status}`);
   }
   return new Uint8Array(await resp.arrayBuffer());
 }
@@ -271,28 +287,30 @@ Deno.serve(async (req: Request) => {
     return jsonResponse({ error: "TTS not configured" }, 500);
   }
 
-  // Lightweight JWT-payload reader for service-role gate on the debug branch.
-  // The token itself is validated by getUser() below; this is a claim peek only.
-  function parseJwtRole(token: string): string | null {
-    try {
-      const parts = token.split(".");
-      if (parts.length !== 3) return null;
-      const payload = parts[1].replace(/-/g, "+").replace(/_/g, "/");
-      const padded = payload + "=".repeat((4 - (payload.length % 4)) % 4);
-      const decoded = JSON.parse(atob(padded)) as Record<string, unknown>;
-      return typeof decoded.role === "string" ? decoded.role : null;
-    } catch {
-      return null;
-    }
+  // Constant-time compare against the env-injected service-role secret.
+  // Replaces the older parseJwtRole() reading — that path trusted the
+  // *unverified* role claim, which a forged JWT could spoof.
+  function timingSafeEq(a: string, b: string): boolean {
+    if (!a || !b || a.length !== b.length) return false;
+    const ae = new TextEncoder().encode(a);
+    const be = new TextEncoder().encode(b);
+    let diff = 0;
+    for (let i = 0; i < ae.byteLength; i++) diff |= ae[i] ^ be[i];
+    return diff === 0;
   }
 
   // Auth
   const authHeader = req.headers.get("Authorization") ?? "";
   const jwt = authHeader.replace(/^Bearer\s+/i, "");
   if (!jwt) return jsonResponse({ error: "Missing Authorization header" }, 401);
-  const { data: userData, error: userErr } = await admin.auth.getUser(jwt);
-  if (userErr || !userData?.user) return jsonResponse({ error: "Invalid token" }, 401);
-  const userId = userData.user.id;
+  const envSecret = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  const isServiceRole = envSecret.length > 0 && timingSafeEq(jwt, envSecret);
+  let userId: string | null = null;
+  if (!isServiceRole) {
+    const { data: userData, error: userErr } = await admin.auth.getUser(jwt);
+    if (userErr || !userData?.user) return jsonResponse({ error: "Invalid token" }, 401);
+    userId = userData.user.id;
+  }
 
   // Parse + validate
   let request: TtsRequest;
@@ -309,8 +327,7 @@ Deno.serve(async (req: Request) => {
   // Detect via the raw JWT payload — supabase-js getUser() already validated
   // the token; here we just read the role claim to gate this branch.
   if (rawBody.action === "list_voices") {
-    const role = parseJwtRole(jwt);
-    if (role !== "service_role") {
+    if (!isServiceRole) {
       return jsonResponse({ error: "Forbidden" }, 403);
     }
     const localeFilter = typeof rawBody.locale === "string" ? rawBody.locale : null;
@@ -383,7 +400,7 @@ Deno.serve(async (req: Request) => {
 
   // ── 2. Rate-limit before paying for Azure call ──────────────────────
   try {
-    await enforceAllLimits(admin, userId, "tts-synthesize");
+    if (!isServiceRole) await enforceAllLimits(admin, userId, "tts-synthesize");
   } catch (err) {
     if (err instanceof RateLimitError || err instanceof BudgetExhaustedError) {
       fireAndForget(

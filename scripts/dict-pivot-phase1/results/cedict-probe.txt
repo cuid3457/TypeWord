@@ -1,0 +1,139 @@
+CC-CEDICT loaded — 124,936 entries
+
+=== 行 ===
+  matched 3 entries
+  [0] 行 [hang2]  (6 senses)
+      1. (bound form) row; line
+      2. (bound form) line of business; trade; profession
+      3. (bound form) commercial firm
+      4. (bound form) to rank (first, second etc) among one's siblings (by age)
+      5. (in data tables) row; (Tw) column
+      6. classifier for rows or lines
+  [1] 行 [heng2]  (1 senses)
+      1. used in 道行[dao4 heng2]
+  [2] 行 [xing2]  (9 senses)
+      1. (bound form) to walk; to go; to travel
+      2. (literary) trip; journey; visit
+      3. (bound form) temporary; makeshift
+      4. (bound form) current; in circulation
+      5. (bound form) to do; to perform
+      6. capable; competent
+      ... and 3 more
+
+=== 长 (trad: 長) ===
+  matched 2 entries
+  [0] 长 [chang2]  (5 senses)
+      1. long
+      2. (bound form) length
+      3. (bound form) strong point; forte
+      4. (bound form) to be good at
+      5. (literary) surplus; spare (Taiwan pr. [zhang4])
+  [1] 长 [zhang3]  (7 senses)
+      1. chief
+      2. head
+      3. elder
+      4. to grow
+      5. to develop
+      6. to increase
+      ... and 1 more
+
+=== 重 ===
+  matched 2 entries
+  [0] 重 [chong2]  (5 senses)
+      1. to repeat
+      2. repetition
+      3. again
+      4. re-
+      5. classifier: layer
+  [1] 重 [zhong4]  (3 senses)
+      1. heavy
+      2. serious
+      3. to attach importance to
+
+=== 好 ===
+  matched 2 entries
+  [0] 好 [hao3]  (9 senses)
+      1. good
+      2. appropriate; proper
+      3. all right!
+      4. (before a verb) easy to
+      5. (before a verb) good to
+      6. (before an adjective for exclamatory effect) so
+      ... and 3 more
+  [1] 好 [hao4]  (1 senses)
+      1. to be fond of; to have a tendency to; to be prone to
+
+=== 会 (trad: 會) ===
+  matched 2 entries
+  [0] 会 [hui4]  (6 senses)
+      1. can; to have the skill; to know how to
+      2. to be likely to; to be sure to
+      3. to meet; to get together
+      4. meeting; gathering
+      5. (suffix) union; group; association
+      6. (bound form) a moment (Taiwan pr. [hui3])
+  [1] 会 [kuai4]  (1 senses)
+      1. (bound form) to reckon accounts
+
+=== 打 ===
+  matched 2 entries
+  [0] 打 [da2]  (2 senses)
+      1. (loanword) dozen
+      2. Taiwan pr. [da3]
+  [1] 打 [da3]  (4 senses)
+      1. a semantically light, transitive verb that is combined with various grammatical objects to form compound verbs and verb-object phrases with a diverse range of meanings (e.g. 打傘|打伞[da3 san3] "to hold an umbrella", 打電話|打电话[da3 dian4 hua4] "to make a phone call", 打針|打针[da3 zhen1] "to get an injection", 打手套[da3 shou3 tao4] "to knit gloves", 打氣|打气[da3 qi4] "to inflate")
+      2. to hit; to strike
+      3. to fight
+      4. (coll.) from; since (as in 打那以後|打那以后[da3 na4 yi3 hou4] "since then")
+
+=== 生 ===
+  matched 1 entries
+  [0] 生 [sheng1]  (13 senses)
+      1. to grow; to give birth; to produce; to be born
+      2. to arise; to occur
+      3. to light (a fire)
+      4. to live; to be alive
+      5. life
+      6. raw; uncooked; unprocessed
+      ... and 7 more
+
+=== 大 ===
+  matched 2 entries
+  [0] 大 [da4]  (6 senses)
+      1. big; large; great
+      2. older (than another person)
+      3. eldest (as in 大姐[da4 jie3])
+      4. greatly; freely; fully
+      5. (dialect) father
+      6. (dialect) uncle (father's brother)
+  [1] 大 [dai4]  (1 senses)
+      1. see 大夫[dai4 fu5]
+
+=== 意思 ===
+  matched 1 entries
+  [0] 意思 [yi4 si5]  (11 senses)
+      1. idea
+      2. opinion
+      3. meaning
+      4. wish
+      5. desire
+      6. interest
+      ... and 5 more
+
+=== 东西 (trad: 東西) ===
+  matched 2 entries
+  [0] 东西 [dong1 xi1]  (1 senses)
+      1. east and west
+  [1] 东西 [dong1 xi5]  (4 senses)
+      1. thing
+      2. stuff
+      3. person
+      4. CL:個|个[ge4],件[jian4]
+
+=== 方便 ===
+  matched 1 entries
+  [0] 方便 [fang1 bian4]  (4 senses)
+      1. convenient; suitable
+      2. to facilitate; to make things easy
+      3. having money to spare
+      4. (euphemism) to relieve oneself

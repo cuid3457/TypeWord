@@ -14,8 +14,8 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
-import { Paywall } from '@/components/paywall';
 import { AdBanner } from '@/components/ad-banner';
 
 import { STUDY_LANGUAGES, findLanguage, isStudyLang } from '@src/constants/languages';
@@ -43,12 +43,11 @@ export default function NewWordlistScreen() {
   });
   const [saving, setSaving] = useState(false);
   const [toast, setToast] = useState('');
-  const [showPaywall, setShowPaywall] = useState(false);
   const [editingLang, setEditingLang] = useState<'study' | 'trans' | null>(null);
 
   useFocusEffect(
     useCallback(() => {
-      if (consumePaywallPending()) setShowPaywall(true);
+      if (consumePaywallPending()) router.push('/subscription');
     }, []),
   );
 
@@ -93,7 +92,7 @@ export default function NewWordlistScreen() {
     if (Number.isFinite(cap)) {
       const count = await getBookCount();
       if (count >= cap) {
-        setShowPaywall(true);
+        router.push('/subscription');
         return;
       }
     }
@@ -119,6 +118,7 @@ export default function NewWordlistScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -337,8 +337,8 @@ export default function NewWordlistScreen() {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      </TabletContainer>
       <AdBanner />
-      <Paywall visible={showPaywall} onClose={() => setShowPaywall(false)} reason="books" />
     </SafeAreaView>
   );
 }

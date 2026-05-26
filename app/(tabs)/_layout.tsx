@@ -10,6 +10,7 @@ import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTablet } from '@src/hooks/useTablet';
 import { getReviewableCount } from '@src/db/queries';
 import { countUnseenPokes, listIncomingRequests } from '@src/services/friendsService';
 import { BottomTabBar } from '@react-navigation/bottom-tabs';
@@ -25,18 +26,36 @@ export const useRefreshNotificationBadge = () => useContext(NotificationBadgeCon
 // setter so the layout-owned tabBarStyle keeps its custom height /
 // padding / background even when the bar is hidden.
 const TabBarVisibleContext = React.createContext<{
+  hidden: boolean;
   setHidden: (hidden: boolean) => void;
-}>({ setHidden: () => {} });
+}>({ hidden: false, setHidden: () => {} });
 export const useTabBarVisibility = () => useContext(TabBarVisibleContext);
 
 function TabBarWithAd(props: BottomTabBarProps) {
   // Outer wrapper needs explicit width:'100%' for iPad landscape — React
   // Navigation's tabBar slot doesn't stretch a content-sized container,
   // which left the ad banner pinned to portrait-width on the left.
+  // When the tab bar is hidden (e.g. active review session), absorb the
+  // system nav-bar inset here so the banner doesn't overlap the nav bar.
+  // On tablet/wide-web the inner column is capped to contentWidth and
+  // centered so the icons don't sprawl across an ultrawide monitor.
+  const insets = useSafeAreaInsets();
+  const colorScheme = useColorScheme();
+  const { hidden } = useContext(TabBarVisibleContext);
+  const { isTablet, contentWidth } = useTablet();
+  const barBackground = colorScheme === 'dark' ? '#000' : '#EEEEEE';
   return (
-    <View style={{ width: '100%' }}>
+    <View
+      style={{
+        width: '100%',
+        paddingBottom: hidden ? insets.bottom : 0,
+        backgroundColor: isTablet ? barBackground : undefined,
+      }}
+    >
       <AdBanner />
-      <BottomTabBar {...props} />
+      <View style={isTablet ? { width: '100%', maxWidth: contentWidth, alignSelf: 'center' } : undefined}>
+        <BottomTabBar {...props} />
+      </View>
     </View>
   );
 }
@@ -85,8 +104,8 @@ export default function TabLayout() {
   const insets = useSafeAreaInsets();
 
   const tabBarVisibility = useMemo(
-    () => ({ setHidden: setTabBarHidden }),
-    [],
+    () => ({ hidden: tabBarHidden, setHidden: setTabBarHidden }),
+    [tabBarHidden],
   );
 
   const refreshReviewBadge = useCallback(() => {

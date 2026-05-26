@@ -24,6 +24,8 @@ export interface UserSettings {
   /** Last review mode the user chose. Restored as the default selection
    *  on the next session so users don't have to re-pick every time. */
   reviewMode?: 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
+  /** Last review order the user chose. Restored on the next session. */
+  reviewOrder?: 'newest' | 'shuffle';
   notificationsEnabled?: boolean;
   /** 'F' or 'M' — chosen TTS voice gender, applied across all languages. */
   voiceGender?: 'F' | 'M';

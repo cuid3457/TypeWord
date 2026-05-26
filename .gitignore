@@ -44,3 +44,8 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Release keystore (do not commit)
+android/app/release.keystore
+android/gradle.properties
+

@@ -28,8 +28,13 @@ import { supabase } from '@src/api/supabase';
 import { scheduleSync } from '@src/services/syncService';
 
 const TAG = '[userWordsSync]';
-const THROTTLE_KEY = 'typeword.userWordsSync.lastRunAt.v8';
-const THROTTLE_MS = 12 * 60 * 60 * 1000; // 12h
+const THROTTLE_KEY = 'typeword.userWordsSync.lastRunAt.v10';
+// 1-second debounce — primarily there to coalesce rapid AppState 'active'
+// bursts (e.g. quick task-switching). The `running` flag already prevents
+// true concurrent execution; this just keeps the foreground sync from
+// firing twice within the same second. Cost of an empty/no-op sync is
+// negligible (~200ms RPC + 0 updates) so there's no reason for a long gate.
+const THROTTLE_MS = 1000;
 
 let running = false;
 
@@ -42,15 +47,17 @@ interface RpcResponse {
   durationMs: number;
 }
 
-// WiFi-only gate. Heavy sync can pull a few hundred KB of stitched
-// result_json on first run; restricting to wifi avoids surprising users
-// on metered cellular plans. Returns true (allow) if netinfo isn't
-// available so we never silently lock out the sync.
-async function isOnWifi(): Promise<boolean> {
+/**
+ * Connectivity gate. Allow sync on any connected network (wifi or cellular)
+ * since the RPC's payload is small (only stale rows return result_json).
+ * Returns true (allow) if netinfo isn't available so we never silently
+ * lock out the sync.
+ */
+async function isConnected(): Promise<boolean> {
   try {
     const NI = require('@react-native-community/netinfo').default;
     const state = await NI.fetch();
-    return state.isConnected === true && state.type === 'wifi';
+    return state.isConnected === true;
   } catch {
     return true;
   }
@@ -61,10 +68,9 @@ export async function syncUserWordsContent(options: { force?: boolean } = {}): P
   running = true;
   try {
     if (!options.force) {
-      // Skip without setting the throttle key when off-wifi, so the next
-      // launch (or AppState 'active') retries as soon as wifi is back.
-      if (!(await isOnWifi())) {
-        console.log(`${TAG} skipped (not on wifi)`);
+      // Skip without setting the throttle key when offline — retry on next 'active'.
+      if (!(await isConnected())) {
+        console.log(`${TAG} skipped (no connection)`);
         return;
       }
       const last = await AsyncStorage.getItem(THROTTLE_KEY);

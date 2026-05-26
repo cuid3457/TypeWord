@@ -2,7 +2,7 @@ import { getDb } from '@src/db';
 
 const HOUR_MS = 3_600_000;
 const DAY_MS = 86_400_000;
-const DAY_BOUNDARY_HOUR = 4; // 새벽 4시 기준
+const DAY_BOUNDARY_HOUR = 0; // 자정 기준
 
 const MAX_HEARTS = 2;
 

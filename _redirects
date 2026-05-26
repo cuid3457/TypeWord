@@ -2,10 +2,18 @@
 #
 # Static assets (HTML pages, _expo bundle, etc.) are served from disk
 # first by CF Pages — only paths with no matching file fall through to
-# these rules. We only need a SPA fallback for the Expo Web subpath so
+# these rules. We need a SPA fallback for the Expo Web subpath so
 # Expo Router-driven dynamic routes (e.g. /app/wordlist/<uuid>,
 # /app/invite/<code>) hand control to the client bundle. Static landing
 # at / and the legal docs at /privacy.html etc. are unaffected because
 # they exist on disk and resolve before this rule.
+#
+# IMPORTANT: asset paths (anything under /app/_expo/ or /app/assets/)
+# MUST return a real 404 when missing instead of falling back to
+# index.html. A stale chunk URL (cached old hash referenced by an
+# updated entry bundle) would otherwise return HTML, which the browser
+# tries to parse as JavaScript and crashes with "Unexpected token '<'".
 
-/app/*    /app/index.html    200
+/app/_expo/*    /app/_expo/:splat    404
+/app/assets/*   /app/assets/:splat   404
+/app/*          /app/index.html      200

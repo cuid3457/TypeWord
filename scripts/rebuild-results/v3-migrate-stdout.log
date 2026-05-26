@@ -1,0 +1,9 @@
+Fetching v3 pairs...
+Found 95 v3 pairs.
+  42/95 (fail=0) rate=2.73/s eta=0.3min
+  77/95 (fail=0) rate=2.50/s eta=0.1min
+  91/95 (fail=0) rate=1.98/s eta=0.0min
+  94/95 (fail=0) rate=1.08/s eta=0.0min
+
+DONE: 95 pairs, 0 initial failures, 1.5min
+Log: /Users/junsung/Desktop/MoaVoca/TypeWord/scripts/rebuild-results/v3-migrate-2026-05-25T15-56-36.jsonl

@@ -13,6 +13,8 @@ export interface WordExample {
   sentence: string;
   translation: string;
   meaningIndex?: number;
+  /** Origin of this example. Used for analytics/debug, not surfaced in UI. */
+  source?: "dict" | "llm";
 }
 
 export type WordLookupMode = "quick" | "enrich";

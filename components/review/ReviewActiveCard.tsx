@@ -9,7 +9,6 @@ import { ReportModal } from '@/components/report-modal';
 import { Toast } from '@/components/toast';
 import { VoiceToggle } from '@/components/voice-toggle';
 import { ReviewLimitModal } from '@/components/review-limit-modal';
-import { Paywall } from '@/components/paywall';
 import type { StoredWord } from '@src/db/queries';
 
 // Reviewer-facing mode (the per-card resolved mode that ReviewCardContent renders).
@@ -28,6 +27,10 @@ interface Props {
 
   // Card content props
   langs: Record<string, string>;
+  /** Target language map keyed by bookId — needed so the report modal can
+   * attach lang context to user reports (process-report aggregator requires
+   * both source_lang and target_lang to be non-null). */
+  targetLangs: Record<string, string>;
   cardReversed: boolean;
   choices: string[];
   choiceSelected: number | null;
@@ -68,11 +71,7 @@ interface Props {
   limitAdAvailable: boolean;
   handleLimitWatchAd: () => void;
   handleLimitPremium: () => void;
-  handleLimitSwitchMode: () => void;
   handleLimitEnd: () => void;
-  paywallVisible: boolean;
-  setPaywallVisible: (v: boolean) => void;
-  modeDisplayName: string;
 }
 
 export function ReviewActiveCard({
@@ -87,6 +86,7 @@ export function ReviewActiveCard({
   showFinish,
 
   langs,
+  targetLangs,
   cardReversed,
   choices,
   choiceSelected,
@@ -122,11 +122,7 @@ export function ReviewActiveCard({
   limitAdAvailable,
   handleLimitWatchAd,
   handleLimitPremium,
-  handleLimitSwitchMode,
   handleLimitEnd,
-  paywallVisible,
-  setPaywallVisible,
-  modeDisplayName,
 }: Props) {
   const { t } = useTranslation();
 
@@ -355,6 +351,8 @@ export function ReviewActiveCard({
           word={current.word}
           wordId={current.id}
           context="review"
+          sourceLang={current.bookId ? langs[current.bookId] : undefined}
+          targetLang={current.bookId ? targetLangs[current.bookId] : undefined}
           onSubmitted={(msg) => setReportToast(msg)}
         />
       ) : null}
@@ -362,14 +360,11 @@ export function ReviewActiveCard({
 
       <ReviewLimitModal
         visible={showLimitModal}
-        modeName={modeDisplayName}
         canWatchAd={limitAdAvailable}
         onWatchAd={handleLimitWatchAd}
         onPremium={handleLimitPremium}
-        onSwitchMode={handleLimitSwitchMode}
         onEnd={handleLimitEnd}
       />
-      <Paywall visible={paywallVisible} onClose={() => setPaywallVisible(false)} reason="cards" />
     </SafeAreaView>
   );
 }

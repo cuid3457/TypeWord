@@ -4,6 +4,8 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { TabletContainer } from '@/components/tablet-container';
+
 const EFFECTIVE_DATE = '2026-05-16';
 
 // Provider business info has been moved to the dedicated business-info
@@ -31,6 +33,7 @@ export default function TermsScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black">
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 80 }}>
         <View className="h-11 flex-row items-center mb-4">
           <Pressable onPress={() => router.back()} className="mr-2 p-1">
@@ -42,6 +45,7 @@ export default function TermsScreen() {
         </View>
         {isKo ? <TermsKo /> : <TermsEn />}
       </ScrollView>
+      </TabletContainer>
     </SafeAreaView>
   );
 }

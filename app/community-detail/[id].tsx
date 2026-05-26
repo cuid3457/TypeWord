@@ -2,11 +2,12 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, Modal, Pressable, RefreshControl, ScrollView, Text, TextInput, View } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { TargetReportModal } from '@/components/target-report-modal';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Toast } from '@/components/toast';
@@ -58,6 +59,21 @@ export default function CommunityDetailScreen() {
 
   const [toastMsg, setToastMsg] = useState('');
   const [toastVisible, setToastVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const handlePullRefresh = async () => {
+    if (!wordlistId) return;
+    setRefreshing(true);
+    try {
+      const [w, l] = await Promise.all([
+        getCommunityWordlist(wordlistId),
+        isCommunityWordlistLiked(wordlistId),
+      ]);
+      if (w) setData(w);
+      setLiked(l);
+    } finally {
+      setRefreshing(false);
+    }
+  };
   const showToast = (msg: string) => {
     setToastMsg(msg);
     setToastVisible(true);
@@ -164,6 +180,7 @@ export default function CommunityDetailScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="px-6 pt-6">
         <View className="h-11 flex-row items-center justify-between">
           <Pressable
@@ -276,6 +293,9 @@ export default function CommunityDetailScreen() {
             data={data.words.slice(0, 20)}
             keyExtractor={(w, i) => `${w.word}-${w.readingKey ?? ''}-${i}`}
             contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 8, paddingBottom: 16 }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+            }
             renderItem={({ item }) => {
               const definition = item.result?.meanings?.[0]?.definition ?? '';
               const reading = item.result?.reading;
@@ -362,6 +382,7 @@ export default function CommunityDetailScreen() {
           </View>
         </View>
       ) : null}
+      </TabletContainer>
 
       <ReportBlockMenu
         visible={showMenu && !!data}

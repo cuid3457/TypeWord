@@ -348,8 +348,14 @@ export function subscribeFriendshipsForUser(
   userId: string,
   onInsert: () => void,
 ): () => void {
+  // Per-call unique name suffix — Supabase's channel-by-name registry
+  // hands back the previous channel if the topic matches, and on a
+  // remount that channel's already-subscribed state rejects new
+  // `.on()` callbacks ("cannot add postgres_changes callbacks after
+  // subscribe()"). Random suffix sidesteps the cache hit entirely.
+  const suffix = Math.random().toString(36).slice(2, 10);
   const channel = supabase
-    .channel(`friendships:${userId}`)
+    .channel(`friendships:${userId}:${suffix}`)
     .on(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'friendships', filter: `user_id=eq.${userId}` },

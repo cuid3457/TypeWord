@@ -2,9 +2,10 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, Stack, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable, RefreshControl, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { AppModal } from '@/components/app-modal';
 import {
   deleteCommunityWordlist,
@@ -22,9 +23,22 @@ export default function MyUploadsScreen() {
   const [items, setItems] = useState<CommunityWordlistMeta[] | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<CommunityWordlistMeta | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const reload = useCallback(() => {
     listMyUploads().then(setItems).catch(() => setItems([]));
+  }, []);
+
+  const handlePullRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      const data = await listMyUploads();
+      setItems(data);
+    } catch {
+      // silent
+    } finally {
+      setRefreshing(false);
+    }
   }, []);
 
   useFocusEffect(useCallback(() => {
@@ -47,6 +61,7 @@ export default function MyUploadsScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="px-6 pt-6">
         <View className="h-11 flex-row items-center">
           <Pressable
@@ -82,6 +97,9 @@ export default function MyUploadsScreen() {
           data={items}
           keyExtractor={(it) => it.id}
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+          }
           renderItem={({ item }) => (
             <View className="mb-2 rounded-xl border border-gray-300 px-4 py-4 dark:border-gray-700">
               <Pressable onPress={() => router.push(`/community-detail/${item.id}`)}>
@@ -132,6 +150,7 @@ export default function MyUploadsScreen() {
           )}
         />
       )}
+      </TabletContainer>
 
       <AppModal
         visible={!!deleteTarget}

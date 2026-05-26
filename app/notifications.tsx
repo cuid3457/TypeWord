@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { TabletContainer } from '@/components/tablet-container';
 import {
   acceptFriendRequest,
   cancelFriendRequest,
@@ -110,6 +111,7 @@ export default function NotificationsScreen() {
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View className="px-6 pt-6">
         <View className="h-11 flex-row items-center">
           <Pressable
@@ -135,9 +137,6 @@ export default function NotificationsScreen() {
           <MaterialIcons name="notifications-none" size={64} color="#9ca3af" />
           <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
             {t('notifications.empty')}
-          </Text>
-          <Text className="mt-2 text-center text-sm text-gray-400 dark:text-gray-500">
-            {t('notifications.empty_hint')}
           </Text>
         </View>
       ) : (
@@ -215,14 +214,14 @@ export default function NotificationsScreen() {
                   <Pressable
                     onPress={() => removePoke(item.userId)}
                     disabled={busyId !== null}
-                    className="rounded-lg bg-gray-300 p-2 dark:bg-gray-700"
+                    className="rounded-lg bg-red-500 p-2"
                     accessibilityLabel={t('common.delete')}
                     accessibilityRole="button"
                   >
                     {busyId === item.userId + '_d' ? (
                       <ActivityIndicator size="small" color="#fff" />
                     ) : (
-                      <MaterialIcons name="close" size={18} color="#fff" />
+                      <MaterialIcons name="delete-outline" size={18} color="#fff" />
                     )}
                   </Pressable>
                 )}
@@ -231,6 +230,7 @@ export default function NotificationsScreen() {
           }}
         />
       )}
+      </TabletContainer>
     </SafeAreaView>
   );
 }

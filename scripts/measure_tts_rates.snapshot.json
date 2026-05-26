@@ -1,0 +1,282 @@
+{
+  "timestamp": "2026-05-26T06:36:37.033Z",
+  "results": [
+    {
+      "lang": "en",
+      "gender": "F",
+      "voice": "en-US-JennyNeural",
+      "label": "prod",
+      "text": "The quick brown fox jumps over the lazy dog and runs to the river.",
+      "syllables": 16,
+      "durationSec": 4.512,
+      "syllablesPerSec": 3.546099290780142
+    },
+    {
+      "lang": "en",
+      "gender": "M",
+      "voice": "en-US-AndrewNeural",
+      "label": "prod",
+      "text": "The quick brown fox jumps over the lazy dog and runs to the river.",
+      "syllables": 16,
+      "durationSec": 4.296,
+      "syllablesPerSec": 3.7243947858472994
+    },
+    {
+      "lang": "ko",
+      "gender": "F",
+      "voice": "ko-KR-JiMinNeural",
+      "label": "prod",
+      "text": "오늘 날씨가 아주 좋아서 공원에서 산책을 하기로 했어요.",
+      "syllables": 22,
+      "durationSec": 4.368,
+      "syllablesPerSec": 5.0366300366300365
+    },
+    {
+      "lang": "ko",
+      "gender": "M",
+      "voice": "ko-KR-HyunsuNeural",
+      "label": "prod",
+      "text": "오늘 날씨가 아주 좋아서 공원에서 산책을 하기로 했어요.",
+      "syllables": 22,
+      "durationSec": 5.112,
+      "syllablesPerSec": 4.303599374021909
+    },
+    {
+      "lang": "ja",
+      "gender": "F",
+      "voice": "ja-JP-MayuNeural",
+      "label": "prod",
+      "text": "今日は天気がとても良いので公園で散歩することにしました。",
+      "syllables": 27,
+      "durationSec": 5.064,
+      "syllablesPerSec": 5.331753554502369
+    },
+    {
+      "lang": "ja",
+      "gender": "M",
+      "voice": "ja-JP-DaichiNeural",
+      "label": "prod",
+      "text": "今日は天気がとても良いので公園で散歩することにしました。",
+      "syllables": 27,
+      "durationSec": 4.728,
+      "syllablesPerSec": 5.710659898477157
+    },
+    {
+      "lang": "zh-CN",
+      "gender": "F",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "label": "prod",
+      "text": "今天天气非常好，所以我决定去公园散步。",
+      "syllables": 17,
+      "durationSec": 4.272,
+      "syllablesPerSec": 3.9794007490636703
+    },
+    {
+      "lang": "zh-CN",
+      "gender": "M",
+      "voice": "zh-CN-YunyangNeural",
+      "label": "prod",
+      "text": "今天天气非常好，所以我决定去公园散步。",
+      "syllables": 17,
+      "durationSec": 3.888,
+      "syllablesPerSec": 4.372427983539095
+    },
+    {
+      "lang": "zh-TW",
+      "gender": "F",
+      "voice": "zh-TW-HsiaoChenNeural",
+      "label": "prod",
+      "text": "今天天氣非常好，所以我決定去公園散步。",
+      "syllables": 17,
+      "durationSec": 4.704,
+      "syllablesPerSec": 3.613945578231293
+    },
+    {
+      "lang": "zh-TW",
+      "gender": "M",
+      "voice": "zh-TW-YunJheNeural",
+      "label": "prod",
+      "text": "今天天氣非常好，所以我決定去公園散步。",
+      "syllables": 17,
+      "durationSec": 4.392,
+      "syllablesPerSec": 3.8706739526411655
+    },
+    {
+      "lang": "es",
+      "gender": "F",
+      "voice": "es-ES-AbrilNeural",
+      "label": "prod",
+      "text": "Hoy hace muy buen tiempo, así que decidí dar un paseo por el parque.",
+      "syllables": 22,
+      "durationSec": 4.848,
+      "syllablesPerSec": 4.537953795379538
+    },
+    {
+      "lang": "es",
+      "gender": "M",
+      "voice": "es-ES-NilNeural",
+      "label": "prod",
+      "text": "Hoy hace muy buen tiempo, así que decidí dar un paseo por el parque.",
+      "syllables": 22,
+      "durationSec": 4.632,
+      "syllablesPerSec": 4.749568221070812
+    },
+    {
+      "lang": "fr",
+      "gender": "F",
+      "voice": "fr-FR-CelesteNeural",
+      "label": "prod",
+      "text": "Il fait très beau aujourd hui, alors je vais me promener dans le parc.",
+      "syllables": 20,
+      "durationSec": 4.488,
+      "syllablesPerSec": 4.45632798573975
+    },
+    {
+      "lang": "fr",
+      "gender": "M",
+      "voice": "fr-FR-YvesNeural",
+      "label": "prod",
+      "text": "Il fait très beau aujourd hui, alors je vais me promener dans le parc.",
+      "syllables": 20,
+      "durationSec": 4.248,
+      "syllablesPerSec": 4.708097928436911
+    },
+    {
+      "lang": "de",
+      "gender": "F",
+      "voice": "de-DE-TanjaNeural",
+      "label": "prod",
+      "text": "Heute ist das Wetter sehr schön, also gehe ich im Park spazieren.",
+      "syllables": 19,
+      "durationSec": 5.256,
+      "syllablesPerSec": 3.6149162861491626
+    },
+    {
+      "lang": "de",
+      "gender": "M",
+      "voice": "de-DE-KlausNeural",
+      "label": "prod",
+      "text": "Heute ist das Wetter sehr schön, also gehe ich im Park spazieren.",
+      "syllables": 19,
+      "durationSec": 4.704,
+      "syllablesPerSec": 4.039115646258503
+    },
+    {
+      "lang": "it",
+      "gender": "F",
+      "voice": "it-IT-PalmiraNeural",
+      "label": "prod",
+      "text": "Oggi il tempo è molto bello, quindi vado a fare una passeggiata nel parco.",
+      "syllables": 25,
+      "durationSec": 5.136,
+      "syllablesPerSec": 4.867601246105919
+    },
+    {
+      "lang": "it",
+      "gender": "M",
+      "voice": "it-IT-GianniNeural",
+      "label": "prod",
+      "text": "Oggi il tempo è molto bello, quindi vado a fare una passeggiata nel parco.",
+      "syllables": 25,
+      "durationSec": 5.208,
+      "syllablesPerSec": 4.800307219662058
+    },
+    {
+      "lang": "pt",
+      "gender": "F",
+      "voice": "pt-BR-LeilaNeural",
+      "label": "prod",
+      "text": "Hoje o tempo está muito bom, então vou dar uma caminhada no parque.",
+      "syllables": 22,
+      "durationSec": 4.344,
+      "syllablesPerSec": 5.064456721915285
+    },
+    {
+      "lang": "pt",
+      "gender": "M",
+      "voice": "pt-BR-JulioNeural",
+      "label": "prod",
+      "text": "Hoje o tempo está muito bom, então vou dar uma caminhada no parque.",
+      "syllables": 22,
+      "durationSec": 4.704,
+      "syllablesPerSec": 4.67687074829932
+    },
+    {
+      "lang": "ru",
+      "gender": "F",
+      "voice": "ru-RU-SvetlanaNeural",
+      "label": "prod",
+      "text": "Сегодня очень хорошая погода, поэтому я решил прогуляться по парку.",
+      "syllables": 22,
+      "durationSec": 4.992,
+      "syllablesPerSec": 4.407051282051282
+    },
+    {
+      "lang": "ru",
+      "gender": "M",
+      "voice": "ru-RU-DmitryNeural",
+      "label": "prod",
+      "text": "Сегодня очень хорошая погода, поэтому я решил прогуляться по парку.",
+      "syllables": 22,
+      "durationSec": 5.208,
+      "syllablesPerSec": 4.224270353302611
+    },
+    {
+      "lang": "zh-CN",
+      "gender": "F",
+      "voice": "zh-CN-XiaoyiNeural",
+      "label": "alt-clearer-F",
+      "text": "今天天气非常好，所以我决定去公园散步。",
+      "syllables": 17,
+      "durationSec": 4.44,
+      "syllablesPerSec": 3.8288288288288284
+    },
+    {
+      "lang": "zh-CN",
+      "gender": "M",
+      "voice": "zh-CN-YunxiNeural",
+      "label": "alt-clearer-M",
+      "text": "今天天气非常好，所以我决定去公园散步。",
+      "syllables": 17,
+      "durationSec": 4.08,
+      "syllablesPerSec": 4.166666666666667
+    }
+  ],
+  "corrections": {
+    "en-US-JennyNeural": 0.9760638297872342,
+    "en-US-AndrewNeural": 1.0251396648044693,
+    "ko-KR-JiMinNeural": 1.085164835164835,
+    "ko-KR-HyunsuNeural": 0.9272300469483569,
+    "ja-JP-MayuNeural": 0.966824644549763,
+    "ja-JP-DaichiNeural": 1.0355329949238579,
+    "zh-CN-XiaoxiaoNeural": 0.9550561797752809,
+    "zh-CN-YunyangNeural": 1.0493827160493827,
+    "zh-TW-HsiaoChenNeural": 0.9668367346938777,
+    "zh-TW-YunJheNeural": 1.03551912568306,
+    "es-ES-AbrilNeural": 0.9777227722772278,
+    "es-ES-NilNeural": 1.0233160621761659,
+    "fr-FR-CelesteNeural": 0.9732620320855615,
+    "fr-FR-YvesNeural": 1.0282485875706215,
+    "de-DE-TanjaNeural": 0.9474885844748859,
+    "de-DE-KlausNeural": 1.0586734693877553,
+    "it-IT-PalmiraNeural": 1.0070093457943927,
+    "it-IT-GianniNeural": 0.9930875576036867,
+    "pt-BR-LeilaNeural": 1.0414364640883977,
+    "pt-BR-JulioNeural": 0.9617346938775511,
+    "ru-RU-SvetlanaNeural": 1.0216346153846154,
+    "ru-RU-DmitryNeural": 0.9792626728110598
+  },
+  "langBase": {
+    "en": 1.3754223433242507,
+    "ko": 1.1777012658227848,
+    "ja": 1.1772788671023964,
+    "zh-CN": 1.0776083044982698,
+    "zh-TW": 1.2024659320192457,
+    "es": 1.1843848101265824,
+    "fr": 1.0911758241758243,
+    "de": 1.2542409131261891,
+    "it": 1.075723879350348,
+    "pt": 1.088147383650832,
+    "ru": 1.1585711229946527
+  }
+}

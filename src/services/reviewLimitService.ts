@@ -11,8 +11,7 @@ export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fil
  * Pro is unlimited.
  */
 const DAILY_LIMIT: Record<Tier, number> = {
-  free: 200,
-  plus: 500,
+  free: 100,
   pro: Number.POSITIVE_INFINITY,
 };
 

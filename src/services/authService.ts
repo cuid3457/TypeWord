@@ -1,5 +1,6 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
 import { Alert, Platform } from 'react-native';
 import i18n from 'i18next';
 
@@ -181,7 +182,137 @@ export async function signInWithEmail(email: string, password: string): Promise<
   return {};
 }
 
+/**
+ * Web OAuth via popup window. Avoids the full-page redirect that broke
+ * wa-sqlite's OPFS access handle on return — the main page keeps its
+ * JavaScript context alive (DB stays open, no hydration), while the
+ * popup handles the provider redirect and posts the resulting session
+ * back to us. Pattern is what Notion/Linear/Slack web do.
+ *
+ * Flow:
+ *   1. Ask Supabase for the OAuth URL (skipBrowserRedirect: true).
+ *   2. Open it in a popup window.
+ *   3. Wait for the popup's callback page to postMessage tokens.
+ *   4. Apply them via setSession on the main client.
+ *
+ * Failure modes handled:
+ *   - Popup blocked → returns { error: 'popup_blocked' }
+ *   - User closes popup → returns { error: 'cancelled' }
+ *   - Provider returns an error → propagates message
+ */
+async function signInWithOAuthPopup(provider: 'google' | 'apple'): Promise<{ error?: string }> {
+  if (typeof window === 'undefined') {
+    return { error: 'no_window' };
+  }
+  try {
+    const redirectTo = `${window.location.origin}/app/auth/callback`;
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo, skipBrowserRedirect: true },
+    });
+    if (error) return { error: error.message };
+    if (!data?.url) return { error: 'no_oauth_url' };
+
+    // Centered popup, reasonable size for Google/Apple consent UI.
+    const w = 480;
+    const h = 640;
+    const left = Math.max(0, (window.outerWidth - w) / 2 + (window.screenX || 0));
+    const top = Math.max(0, (window.outerHeight - h) / 2 + (window.screenY || 0));
+    const popup = window.open(
+      data.url,
+      'moavoca_oauth',
+      `popup=yes,width=${w},height=${h},left=${left},top=${top}`,
+    );
+    if (!popup) return { error: 'popup_blocked' };
+
+    console.log('[oauth-popup] opened popup for', provider);
+    return await new Promise<{ error?: string }>((resolve) => {
+      let settled = false;
+      const settle = (result: { error?: string }) => {
+        if (settled) return;
+        settled = true;
+        console.log('[oauth-popup] settling', provider, result);
+        window.removeEventListener('message', onMessage);
+        clearInterval(closedTimer);
+        clearInterval(urlPoller);
+        try { popup.close(); } catch { /* may already be closed */ }
+        resolve(result);
+      };
+
+      const applyTokens = async (payload: {
+        access_token?: string;
+        refresh_token?: string;
+        code?: string;
+        error?: string;
+      }): Promise<{ error?: string }> => {
+        if (payload.error) return { error: payload.error };
+        if (payload.access_token && payload.refresh_token) {
+          const { error: setErr } = await supabase.auth.setSession({
+            access_token: payload.access_token,
+            refresh_token: payload.refresh_token,
+          });
+          return setErr ? { error: setErr.message } : {};
+        }
+        if (payload.code) {
+          const { error: xErr } = await supabase.auth.exchangeCodeForSession(payload.code);
+          return xErr ? { error: xErr.message } : {};
+        }
+        return { error: 'no_tokens' };
+      };
+
+      const onMessage = async (event: MessageEvent) => {
+        if (event.origin !== window.location.origin) return;
+        const payload = event.data;
+        if (!payload || payload.source !== 'moavoca-oauth') return;
+        console.log('[oauth-popup] received postMessage', payload);
+        settle(await applyTokens(payload));
+      };
+      window.addEventListener('message', onMessage);
+
+      // Secondary recovery: some browsers / network paths defeat the
+      // popup's `postMessage` (third-party cookie chain, COOP isolation,
+      // or the page closing too quickly). Poll the popup's URL — once
+      // it lands on our same-origin callback we can read its
+      // fragment/query directly without needing a message.
+      const urlPoller = setInterval(async () => {
+        if (popup.closed) return; // closed timer will handle
+        try {
+          const href = popup.location.href; // throws while cross-origin
+          if (!href.includes('/app/auth/callback')) return;
+          const u = new URL(href);
+          const hash = u.hash.startsWith('#') ? u.hash.slice(1) : u.hash;
+          const frag = new URLSearchParams(hash);
+          const qry = new URLSearchParams(u.search);
+          console.log('[oauth-popup] popup landed on callback URL');
+          const result = await applyTokens({
+            access_token: frag.get('access_token') ?? undefined,
+            refresh_token: frag.get('refresh_token') ?? undefined,
+            code: qry.get('code') ?? undefined,
+            error: frag.get('error') ?? qry.get('error') ?? undefined,
+          });
+          settle(result);
+        } catch {
+          // Cross-origin — popup still on accounts.google.com or
+          // supabase.co. Try again next tick.
+        }
+      }, 400);
+
+      // Detect user-closed popup (no message arrived).
+      const closedTimer = setInterval(() => {
+        if (popup.closed) settle({ error: 'cancelled' });
+      }, 500);
+    });
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : 'sign_in_failed' };
+  }
+}
+
+async function signInWithGoogleWeb(): Promise<{ error?: string }> {
+  return signInWithOAuthPopup('google');
+}
+
 export async function signInWithGoogle(): Promise<{ error?: string }> {
+  if (Platform.OS === 'web') return signInWithGoogleWeb();
   try {
     ensureGoogleConfigured();
     await GoogleSignin.hasPlayServices();
@@ -196,20 +327,42 @@ export async function signInWithGoogle(): Promise<{ error?: string }> {
     });
     if (error) return { error: error.message };
     return {};
-  } catch {
-    return { error: 'cancelled' };
+  } catch (err: unknown) {
+    // Google's RN SDK throws { code: '<statusCode>', message } where code
+    // is one of: SIGN_IN_CANCELLED ('12501'), DEVELOPER_ERROR ('10', SHA-1
+    // / package mismatch), PLAY_SERVICES_NOT_AVAILABLE, or numeric status codes.
+    // Log non-cancellation errors via console.warn (survives release-build
+    // log stripping) so misconfigurations are visible in logcat without
+    // surfacing cryptic codes to end users.
+    const e = err as { code?: string | number; message?: string };
+    const code = String(e?.code ?? '');
+    const msg = e?.message ?? String(err);
+    if (code === 'SIGN_IN_CANCELLED' || code === '12501') return { error: 'cancelled' };
+    console.warn('[Google Sign-In]', code, msg);
+    return { error: msg || 'sign_in_failed' };
   }
 }
 
 /**
- * Sign in with Apple (iOS only). Apple's first-call-only fullName/email
- * payload is captured here and persisted to user_metadata so re-logins on
- * the same Apple ID don't lose the display name.
+ * Sign in with Apple. iOS uses the OS-level native sheet; Android falls
+ * back to Supabase's hosted OAuth flow via an in-app browser. The two
+ * paths converge on the same Supabase user (matched by Apple `sub`) as
+ * long as the iOS bundle ID and the Android Services ID share the same
+ * Primary App ID in Apple Developer Console.
  */
 export async function signInWithApple(): Promise<{ error?: string }> {
-  if (Platform.OS !== 'ios') {
-    return { error: 'Apple Sign-In is iOS only' };
-  }
+  if (Platform.OS === 'ios') return signInWithAppleNative();
+  if (Platform.OS === 'android') return signInWithAppleWeb();
+  if (Platform.OS === 'web') return signInWithAppleBrowser();
+  return { error: 'Apple Sign-In not supported on this platform' };
+}
+
+// Apple sign-in via the same popup helper as Google.
+async function signInWithAppleBrowser(): Promise<{ error?: string }> {
+  return signInWithOAuthPopup('apple');
+}
+
+async function signInWithAppleNative(): Promise<{ error?: string }> {
   try {
     // Per-attempt nonce defeats identity-token replay (audit M-10).
     // Apple requires the hashed nonce in the auth request and embeds it in
@@ -264,6 +417,80 @@ export async function signInWithApple(): Promise<{ error?: string }> {
   }
 }
 
+/**
+ * Android Apple Sign-In via Supabase-hosted OAuth. Apple does not ship an
+ * Android SDK, so the browser-redirect flow is the only path. We pull the
+ * authorize URL from Supabase (`skipBrowserRedirect: true`), hand it to
+ * expo-web-browser's auth session (ASWebAuthenticationSession-equivalent
+ * on Android via Custom Tabs), then parse the implicit-flow tokens that
+ * Supabase appends to the redirect fragment and call `setSession`
+ * manually because our client is configured with `detectSessionInUrl:
+ * false`. fullName is unavailable on this path — Apple's web flow only
+ * surfaces names on the very first consent and they're returned as POST
+ * form data to the redirect URL, which Supabase consumes server-side and
+ * does not forward to the client. The display name will fall back to the
+ * email local part until the user sets one manually.
+ */
+async function signInWithAppleWeb(): Promise<{ error?: string }> {
+  try {
+    const { data, error: oauthErr } = await supabase.auth.signInWithOAuth({
+      provider: 'apple',
+      options: {
+        redirectTo: REDIRECT_URL,
+        skipBrowserRedirect: true,
+      },
+    });
+    if (oauthErr || !data?.url) {
+      return { error: oauthErr?.message ?? 'Failed to start Apple sign-in' };
+    }
+
+    const result = await WebBrowser.openAuthSessionAsync(data.url, REDIRECT_URL);
+    if (result.type !== 'success' || !result.url) {
+      return { error: 'cancelled' };
+    }
+
+    // Supabase may use either implicit (tokens in fragment) or PKCE (code in
+    // query) depending on the JS client version's default flowType. Handle
+    // both — try fragment first, then fall back to PKCE code exchange.
+    const [pathAndQuery, fragment] = result.url.split('#');
+    const queryStr = pathAndQuery.split('?')[1] ?? '';
+
+    if (fragment) {
+      const params = new URLSearchParams(fragment);
+      const accessToken = params.get('access_token');
+      const refreshToken = params.get('refresh_token');
+      const errCode = params.get('error');
+      if (errCode) return { error: params.get('error_description') ?? errCode };
+      if (accessToken && refreshToken) {
+        const { error: sessionErr } = await supabase.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        if (sessionErr) return { error: sessionErr.message };
+        return {};
+      }
+    }
+
+    if (queryStr) {
+      const qParams = new URLSearchParams(queryStr);
+      const code = qParams.get('code');
+      const errCode = qParams.get('error');
+      if (errCode) return { error: qParams.get('error_description') ?? errCode };
+      if (code) {
+        const { error: exchangeErr } = await supabase.auth.exchangeCodeForSession(code);
+        if (exchangeErr) return { error: exchangeErr.message };
+        return {};
+      }
+    }
+
+    console.log('[Apple Web] callback URL had no tokens or code:', result.url);
+    return { error: 'No tokens received' };
+  } catch (err) {
+    console.log('[Apple Web] exception:', err);
+    return { error: 'cancelled' };
+  }
+}
+
 export type AuthProvider = 'email' | 'google' | 'apple' | 'anonymous' | null;
 
 export async function getAuthProvider(): Promise<AuthProvider> {
@@ -306,7 +533,24 @@ export async function changePassword(
   return {};
 }
 
+/**
+ * Sign the user out and wipe local SQLite + TTS file caches. Local cleanup
+ * runs even if the supabase auth call fails — once a logout is initiated the
+ * session shouldn't outlive its local data. Idempotent; callers don't need
+ * to invoke `clearLocalData` separately.
+ *
+ * Internal authService recovery paths (e.g. failed Google sign-in retry)
+ * call `supabase.auth.signOut()` directly and are intentionally not affected
+ * by this — those paths must not destroy the anonymous user's local data.
+ */
 export async function signOut(): Promise<void> {
+  try {
+    const { clearLocalData } = await import('@src/db');
+    await clearLocalData();
+  } catch (err) {
+    console.warn('signOut: clearLocalData failed:', err);
+    // Continue — the auth signOut still needs to happen.
+  }
   await supabase.auth.signOut();
   setUser(null);
 }
@@ -339,6 +583,7 @@ export async function confirmAndSetSessionFromDeepLink(
 ): Promise<{ applied: boolean; error?: string }> {
   let newEmail: string | null = null;
   let newUserId: string | null = null;
+  let provider: string | null = null;
   try {
     const part = accessToken.split('.')[1];
     if (!part) throw new Error('malformed token');
@@ -350,8 +595,28 @@ export async function confirmAndSetSessionFromDeepLink(
     );
     newEmail = typeof decoded.email === 'string' ? decoded.email : null;
     newUserId = typeof decoded.sub === 'string' ? decoded.sub : null;
+    provider = typeof decoded.app_metadata?.provider === 'string'
+      ? decoded.app_metadata.provider
+      : null;
   } catch {
     return { applied: false, error: 'Invalid token' };
+  }
+
+  // OAuth providers (Apple / Google) authenticate the user at their own
+  // domain before redirecting back. The deep-link confirm modal exists to
+  // defend against attacker-crafted magic-link URLs, but it's unnecessary
+  // friction after an explicit OAuth consent screen. Apply directly.
+  // On Android, supabase OAuth callback fires this code path as a side
+  // effect of the AndroidManifest BROWSABLE intent picking up the
+  // `typeword://` redirect even though signInWithAppleWeb's WebBrowser
+  // also received the same URL — applying twice is idempotent because
+  // setSession with the same tokens is a no-op.
+  if (provider === 'apple' || provider === 'google') {
+    await supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+    return { applied: true };
   }
 
   // State-nonce match: this confirms the deep link came from a flow we

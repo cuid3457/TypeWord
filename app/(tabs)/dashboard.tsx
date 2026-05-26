@@ -8,6 +8,7 @@ import {
   FlatList,
   Modal,
   Pressable,
+  RefreshControl,
   Text,
   View,
 } from 'react-native';
@@ -69,6 +70,7 @@ export default function DashboardScreen() {
   const [showNameModal, setShowNameModal] = useState(false);
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
   const refreshTabBadge = useRefreshNotificationBadge();
   const reloadUnread = useCallback(async () => {
@@ -183,6 +185,21 @@ export default function DashboardScreen() {
         data={isAnon ? [] : friends}
         keyExtractor={(f) => f.friendId}
         contentContainerStyle={{ paddingBottom: 80 + insets.bottom }}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={async () => {
+              setRefreshing(true);
+              try {
+                await Promise.all([refreshDashboard(), reloadUnread()]);
+              } finally {
+                setRefreshing(false);
+              }
+            }}
+            tintColor="#10b981"
+            colors={['#10b981']}
+          />
+        }
         ListHeaderComponent={
           <View className="px-6">
             <View className="flex-row items-center justify-between pt-6">
@@ -290,7 +307,7 @@ export default function DashboardScreen() {
                         {totalXP.toLocaleString()} XP
                       </Text>
                       <Text className="text-xs text-gray-400">
-                        {info.currentLevelXP} / {info.nextLevelXP}
+                        {(totalXP + info.nextLevelXP - info.currentLevelXP).toLocaleString()} XP
                       </Text>
                     </View>
                     <View className="mt-1 h-1.5 rounded-full bg-gray-200 dark:bg-gray-800">
@@ -387,7 +404,7 @@ export default function DashboardScreen() {
             {item.statsPublic ? (
               <View className="mt-3 flex-row items-center gap-2">
                 <StatChip icon="🔥" value={item.streakCurrent ?? 0} label={t('dashboard.stat_streak_short')} />
-                <StatChip icon="⭐" value={(item.xpTotal ?? 0).toLocaleString()} label="XP" />
+                <StatChip icon="⭐" value={getLevel(item.xpTotal ?? 0).level} label="Lv" />
               </View>
             ) : (
               <Text className="mt-2 text-xs text-gray-400">{t('dashboard.stats_hidden')}</Text>
@@ -417,6 +434,7 @@ export default function DashboardScreen() {
         message={toast?.msg ?? ''}
         type={toast?.type ?? 'error'}
         onHide={() => setToast(null)}
+        style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }}
       />
 
       <AddFriendByUsernameModal

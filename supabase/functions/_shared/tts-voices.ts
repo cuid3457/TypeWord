@@ -40,48 +40,76 @@ export const TTS_LOCALE: Record<string, string> = {
 export type Gender = 'M' | 'F';
 
 /**
- * Voice rate correction factors. Each Azure neural voice has a slightly
- * different native speaking rate; without correction, toggling F/M within a
- * language would change perceived speed even at user_rate=1.0.
+ * Per-voice rate correction (within-language F/M normalization).
  *
- * Computed by measuring mp3 duration of the same long sentence per voice,
- * then setting per-language reference = avg(F, M) duration. correction =
- * reference / voice_duration. Apply on the client as:
- *   playback_rate = user_rate × VOICE_CORRECTIONS[voiceId]
+ * Measured 2026-05-26 via scripts/measure_tts_rates.ts:
+ *   correction = voice_duration / language_avg_duration
  *
- * Range observed: ±6.5%. Largest gaps (de/ko/zh-TW/pt) had ~12% F-M speed
- * differences before correction; this map normalizes them within-language.
+ * Direction: faster voice (shorter duration) gets correction < 1 to slow
+ * it back to the language average; slower voice gets > 1. Combined with
+ * LANGUAGE_BASE_RATE this normalizes both within-language F/M and
+ * cross-language pace.
  *
- * Re-run /tmp/lookup-test/measure_rates.mjs when adding/swapping voices.
+ * Final playback rate (client side):
+ *   playback_rate = user_rate × LANGUAGE_BASE_RATE[lang] × VOICE_CORRECTIONS[voice]
+ *
+ * Edge function returns the combined factor as `rateCorrection` so clients
+ * just multiply by their user_rate.
+ *
+ * Re-run scripts/measure_tts_rates.ts when adding/swapping voices.
  */
 export const VOICE_CORRECTIONS: Record<string, number> = {
-  'en-US-JennyNeural':     0.980,
-  'en-US-AndrewNeural':    1.021,
-  'ko-KR-JiMinNeural':     1.064,
-  'ko-KR-HyunsuNeural':    0.943,
-  'ja-JP-MayuNeural':      0.990,
-  'ja-JP-DaichiNeural':    1.010,
-  'zh-CN-XiaoxiaoNeural':  1.000,
-  // YunyangNeural — news-style voice, clearer tones than Yunjian for isolated
-  // CJK chars. Native rate is ~7-9% faster than Xiaoxiao's conversational
-  // pacing (estimated, not yet measured against the reference sentence).
-  // 0.93 brings perceived speed in line with the female voice; re-run
-  // measure_rates.mjs once it's restored to refine.
-  'zh-CN-YunyangNeural':   0.850,
-  'zh-TW-HsiaoChenNeural': 0.942,
-  'zh-TW-YunJheNeural':    1.065,
-  'es-ES-AbrilNeural':     0.982,
-  'es-ES-NilNeural':       1.019,
-  'fr-FR-CelesteNeural':   0.978,
-  'fr-FR-YvesNeural':      1.023,
-  'de-DE-TanjaNeural':     0.942,
-  'de-DE-KlausNeural':     1.065,
-  'it-IT-PalmiraNeural':   0.989,
-  'it-IT-GianniNeural':    1.011,
-  'pt-BR-LeilaNeural':     1.062,
-  'pt-BR-JulioNeural':     0.945,
-  'ru-RU-SvetlanaNeural':  0.996,
-  'ru-RU-DmitryNeural':    1.004,
+  'en-US-JennyNeural':     1.025,
+  'en-US-AndrewNeural':    0.975,
+  'ko-KR-JiMinNeural':     0.922,
+  'ko-KR-HyunsuNeural':    1.078,
+  'ja-JP-MayuNeural':      1.034,
+  'ja-JP-DaichiNeural':    0.966,
+  'zh-CN-XiaoxiaoNeural':  1.047,
+  'zh-CN-YunyangNeural':   0.953,
+  'zh-TW-HsiaoChenNeural': 1.034,
+  'zh-TW-YunJheNeural':    0.966,
+  'es-ES-AbrilNeural':     1.023,
+  'es-ES-NilNeural':       0.977,
+  'fr-FR-CelesteNeural':   1.027,
+  'fr-FR-YvesNeural':      0.973,
+  'de-DE-TanjaNeural':     1.055,
+  'de-DE-KlausNeural':     0.945,
+  'it-IT-PalmiraNeural':   0.993,
+  'it-IT-GianniNeural':    1.007,
+  'pt-BR-LeilaNeural':     0.960,
+  'pt-BR-JulioNeural':     1.040,
+  'ru-RU-SvetlanaNeural':  0.979,
+  'ru-RU-DmitryNeural':    1.021,
+};
+
+/**
+ * Per-language base rate (cross-language pace normalization).
+ *
+ * Azure's native voices have wildly different default syllable rates — at
+ * user_rate=1.0, Japanese plays ~50% faster than English. This map scales
+ * each language toward a comfortable L2-learner pace.
+ *
+ * Tuned 2026-05-26 with these targets (syllables/sec at user_rate=1.0):
+ *   - English/German were too slow (3.6-3.8 → 4.2)
+ *   - Chinese intentionally slower than others (3.8) so tones don't collapse
+ *   - Other languages stay close to their natural conversational pace
+ *
+ * Subjective — re-tune by ear; lower value = slower playback.
+ */
+// 2026-05-26 final targets per user: en/zh = 3.2 syll/s, Latin = 4.0, ko/ja = 4.5
+export const LANGUAGE_BASE_RATE: Record<string, number> = {
+  en:      0.879,  // → 3.2 syll/s
+  ko:      0.964,  // → 4.5 syll/s
+  ja:      0.815,  // → 4.5 syll/s
+  'zh-CN': 0.766,  // → 3.2 syll/s (tones)
+  'zh-TW': 0.856,  // → 3.2 syll/s (tones)
+  es:      0.862,  // → 4.0 syll/s
+  fr:      0.873,  // → 4.0 syll/s
+  de:      1.044,  // → 4.0 syll/s
+  it:      0.828,  // → 4.0 syll/s
+  pt:      0.821,  // → 4.0 syll/s
+  ru:      0.926,  // → 4.0 syll/s
 };
 
 export function pickVoice(language: string, gender: Gender): { voice: string; locale: string } | null {
@@ -91,7 +119,18 @@ export function pickVoice(language: string, gender: Gender): { voice: string; lo
   return { voice: voices[gender], locale };
 }
 
-/** Get correction factor for a voice. Returns 1.0 if voice unknown. */
+/** Derive app-language code from voice ID (`en-US-JennyNeural` → `en`,
+ * `zh-CN-XiaoxiaoNeural` → `zh-CN`). */
+function langFromVoice(voice: string): string {
+  if (voice.startsWith('zh-CN-')) return 'zh-CN';
+  if (voice.startsWith('zh-TW-')) return 'zh-TW';
+  return voice.split('-')[0];
+}
+
+/** Combined correction = LANGUAGE_BASE_RATE × VOICE_CORRECTIONS.
+ * Returns 1.0 if voice unknown. */
 export function rateCorrectionFor(voice: string): number {
-  return VOICE_CORRECTIONS[voice] ?? 1.0;
+  const voiceCorr = VOICE_CORRECTIONS[voice] ?? 1.0;
+  const langBase = LANGUAGE_BASE_RATE[langFromVoice(voice)] ?? 1.0;
+  return voiceCorr * langBase;
 }

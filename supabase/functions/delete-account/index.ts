@@ -8,6 +8,7 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.moavoca.com",
   "https://typeword.app",
   "http://localhost:8081",
+  "http://localhost:4173",
 ]);
 
 // Reauth window: a stale long-lived session shouldn't be enough to wipe an
@@ -149,9 +150,32 @@ Deno.serve(async (req: Request) => {
     }
 
     // Belt-and-suspenders: clean up any rows that don't have ON DELETE
-    // CASCADE wired up. Failures here are logged but not fatal — the auth
-    // user is already gone and the user can't reach this data anyway.
-    const cleanupTables = ["user_words", "books", "content_reports", "inquiries", "profiles", "api_calls"];
+    // CASCADE wired up. Most user-keyed tables CASCADE from auth.users(id),
+    // so deleteUser above already removed them; this list is the explicit
+    // fallback in case any FK was missed in a migration. Failures are logged
+    // but not fatal — the auth user is already gone.
+    //
+    // Tables with multi-column user FKs (sender_id/recipient_id, etc.) are
+    // intentionally omitted from this list because deleting by single
+    // "user_id" wouldn't match. Those rely on the CASCADE wired in their
+    // create migrations (verified in /supabase/migrations/).
+    const cleanupTables = [
+      "user_words",
+      "books",
+      "content_reports",         // ON DELETE SET NULL — still purge by user_id
+      "inquiries",
+      "study_dates",
+      "user_inventory",
+      "deletion_feedback",       // analytics-only, purge to honor GDPR erasure
+      "community_wordlists",     // CASCADE on user_id (defensive only)
+      "community_wordlist_likes",
+      "community_wordlist_downloads",
+      "community_wordlist_reports",
+      "referrals",
+      "report_fixes",            // service-only, but purge any reviewer_id matches via separate handling not needed
+      "profiles",
+      "api_calls",
+    ];
     await Promise.allSettled(
       cleanupTables.map((tbl) =>
         supabase.from(tbl).delete().eq("user_id", userId)
