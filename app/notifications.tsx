@@ -2,7 +2,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, Stack, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Platform, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Platform, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TabletContainer } from '@/components/tablet-container';
@@ -29,11 +29,11 @@ type Notification =
   | { kind: 'friend_request_outgoing'; userId: string; username: string; displayName: string; createdAt: string }
   | { kind: 'poke_received'; pokeId: number; userId: string; username: string; displayName: string; createdAt: string; seenAt: string | null };
 
+type PokeNotification = Extract<Notification, { kind: 'poke_received' }>;
+
 /**
  * Aggregated notifications inbox — friend requests (incoming + outgoing
  * pending) and pokes (kept visible for 7 days, manually deletable).
- * Previously a modal; converted to a stack page so iOS doesn't show the
- * parent peeking out from behind the pageSheet sheet style.
  */
 export default function NotificationsScreen() {
   const { t } = useTranslation();
@@ -70,9 +70,6 @@ export default function NotificationsScreen() {
       // each time, freezing the launcher badge at 1.
       if (markSeen && hasUnseenPokes) {
         markPokesSeen().catch(() => { /* silent */ });
-        // Optimistic local update so the badge useEffect drops immediately —
-        // server seen state is set, but the merged array above still holds
-        // the pre-mark seenAt values.
         const nowIso = new Date().toISOString();
         setItems((prev) => prev?.map((it) =>
           it.kind === 'poke_received' && it.seenAt === null
@@ -108,8 +105,6 @@ export default function NotificationsScreen() {
   }, [items]);
 
   // Realtime: new pokes addressed to me pop in without a manual refresh.
-  // iOS foreground push delivery proved unreliable, so we lean on
-  // postgres_changes (mirrors the friendships subscription pattern).
   useEffect(() => {
     let unsub: (() => void) | null = null;
     let cancelled = false;
@@ -192,150 +187,114 @@ export default function NotificationsScreen() {
     }
   };
 
+  const requests = (items ?? []).filter(
+    (n) => n.kind === 'friend_request_incoming' || n.kind === 'friend_request_outgoing',
+  );
+  const pokes = (items ?? []).filter((n): n is PokeNotification => n.kind === 'poke_received');
+
   return (
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
-      <View className="px-6 pt-6">
-        <View className="h-11 flex-row items-center">
-          <Pressable
-            onPress={() => router.back()}
-            className="mr-2 p-1"
-            accessibilityLabel={t('common.back')}
-            accessibilityRole="button"
-          >
+        {/* App bar */}
+        <View className="h-11 flex-row items-center px-5 pt-6">
+          <Pressable onPress={() => router.back()} className="mr-1 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
             <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
-            {t('notifications.title')}
-          </Text>
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">{t('notifications.title')}</Text>
         </View>
-      </View>
 
-      {items === null ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#7B7366" />
-        </View>
-      ) : items.length === 0 ? (
-        <View className="flex-1 items-center justify-center px-8">
-          <MaterialIcons name="notifications-none" size={64} color="#A79E90" />
-          <Text className="mt-4 text-center text-base font-semibold text-muted">
-            {t('notifications.empty')}
-          </Text>
-        </View>
-      ) : (
-        <FlatList
-          data={items}
-          keyExtractor={(it) => it.kind === 'poke_received' ? `poke_${it.pokeId}` : `${it.kind}_${it.userId}`}
-          contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
-          renderItem={({ item }) => {
-            const isNewPoke = item.kind === 'poke_received' && item.seenAt === null;
-            return (
-              <View
-                className={
-                  isNewPoke
-                    ? 'mb-3 flex-row items-center rounded-2xl p-3'
-                    : 'mb-3 flex-row items-center rounded-2xl border border-line p-3 dark:border-line-dark'
-                }
-                style={isNewPoke ? { borderWidth: 1, borderColor: '#2EC4A5', backgroundColor: '#2EC4A510' } : undefined}
-              >
-                <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
-                  <Text className="text-base font-bold text-muted">
-                    {(item.displayName || item.username).charAt(0).toUpperCase()}
-                  </Text>
+        {items === null ? (
+          <View className="flex-1 items-center justify-center">
+            <ActivityIndicator color="#2EC4A5" />
+          </View>
+        ) : items.length === 0 ? (
+          <View className="flex-1 items-center justify-center px-8" style={{ paddingBottom: 64 }}>
+            <View className="h-36 w-36 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+              <Image source={require('../assets/images/android-icon-foreground.png')} style={{ width: 108, height: 108 }} resizeMode="contain" />
+            </View>
+            <Text className="mt-5 text-lg font-bold text-ink dark:text-ink-dark">{t('notifications.empty')}</Text>
+          </View>
+        ) : (
+          <ScrollView contentContainerStyle={{ paddingHorizontal: 22, paddingTop: 8, paddingBottom: 80 }}>
+            {requests.length > 0 ? (
+              <>
+                <Text className="mb-2 text-[11px] font-bold uppercase tracking-wider text-ink dark:text-ink-dark">
+                  {t('dashboard.incoming_requests')} {requests.length}
+                </Text>
+                <View className="gap-2.5">
+                  {requests.map((item) => (
+                    <View
+                      key={`${item.kind}_${item.userId}`}
+                      className="flex-row items-center gap-3 rounded-[16px] border border-line bg-surface p-3.5 dark:border-line-dark dark:bg-surface-dark"
+                    >
+                      <Avatar name={item.displayName || item.username} />
+                      <View className="flex-1">
+                        {item.displayName ? (
+                          <Text className="text-[15px] font-bold text-ink dark:text-ink-dark" numberOfLines={1}>{item.displayName}</Text>
+                        ) : null}
+                        <Text className="text-xs text-muted" numberOfLines={1}>
+                          @{item.username} · {item.kind === 'friend_request_incoming' ? t('notifications.incoming_label') : t('notifications.outgoing_label')}
+                        </Text>
+                      </View>
+                      {item.kind === 'friend_request_incoming' ? (
+                        <View className="flex-row items-center gap-2">
+                          <Pressable onPress={() => accept(item)} disabled={busyId !== null} className="h-[38px] w-[38px] items-center justify-center rounded-full bg-accent" accessibilityLabel={t('dashboard.accept')} accessibilityRole="button">
+                            {busyId === item.userId + '_a' ? <ActivityIndicator size="small" color="#fff" /> : <MaterialIcons name="check" size={18} color="#fff" />}
+                          </Pressable>
+                          <Pressable onPress={() => reject(item)} disabled={busyId !== null} className="h-[38px] w-[38px] items-center justify-center rounded-full bg-clay dark:bg-clay-dark" accessibilityLabel={t('dashboard.cancel_request')} accessibilityRole="button">
+                            <MaterialIcons name="close" size={18} color="#7B7366" />
+                          </Pressable>
+                        </View>
+                      ) : (
+                        <Pressable onPress={() => cancel(item)} disabled={busyId !== null} className="rounded-[12px] border border-line bg-surface px-3.5 py-2 dark:border-line-dark dark:bg-surface-dark" accessibilityRole="button">
+                          {busyId === item.userId + '_c' ? <ActivityIndicator size="small" color="#7B7366" /> : <Text className="text-xs font-semibold text-ink dark:text-ink-dark">{t('dashboard.cancel_request')}</Text>}
+                        </Pressable>
+                      )}
+                    </View>
+                  ))}
                 </View>
-                <View className="ml-3 flex-1">
-                  {item.displayName ? (
-                    <Text className="text-sm font-semibold text-ink dark:text-ink-dark" numberOfLines={1}>
-                      {item.displayName}
-                    </Text>
-                  ) : null}
-                  <Text className="text-xs text-muted" numberOfLines={1}>
-                    @{item.username}
-                  </Text>
-                  <Text className="mt-0.5 text-xs text-faint" numberOfLines={1}>
-                    {item.kind === 'friend_request_incoming'
-                      ? t('notifications.incoming_label')
-                      : item.kind === 'friend_request_outgoing'
-                        ? t('notifications.outgoing_label')
-                        : t('notifications.poke_label')}
-                  </Text>
+              </>
+            ) : null}
+
+            {pokes.length > 0 ? (
+              <>
+                <Text className={`mb-2 text-[11px] font-bold uppercase tracking-wider text-ink dark:text-ink-dark ${requests.length > 0 ? 'mt-6' : ''}`}>
+                  {t('dashboard.poke')} {pokes.length}
+                </Text>
+                <View className="gap-2.5">
+                  {pokes.map((item) => {
+                    const isNew = item.seenAt === null;
+                    return (
+                      <View
+                        key={`poke_${item.pokeId}`}
+                        className={`flex-row items-center gap-3 rounded-[16px] border p-3.5 ${isNew ? 'border-accent bg-accent-soft dark:border-accent dark:bg-accent-soft-dark' : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'}`}
+                      >
+                        <Avatar name={item.displayName || item.username} />
+                        <View className="flex-1">
+                          {item.displayName ? (
+                            <Text className="text-[15px] font-bold text-ink dark:text-ink-dark" numberOfLines={1}>{item.displayName} 👉</Text>
+                          ) : null}
+                          <Text className={`text-xs ${isNew ? 'text-accent-deep' : 'text-muted'}`} numberOfLines={1}>
+                            @{item.username} · {t('notifications.poke_label')}
+                          </Text>
+                        </View>
+                        <View className="flex-row items-center gap-2">
+                          <Pressable onPress={() => pokeBack(item.pokeId, item.userId, item.displayName || item.username)} disabled={busyId !== null} className="h-[38px] w-[38px] items-center justify-center rounded-full bg-ink dark:bg-ink-dark" accessibilityLabel={t('dashboard.poke')} accessibilityRole="button">
+                            {busyId === `p_${item.pokeId}_p` ? <ActivityIndicator size="small" color="#A79E90" /> : <Text className="text-base leading-[18px]">👉</Text>}
+                          </Pressable>
+                          <Pressable onPress={() => removePoke(item.pokeId)} disabled={busyId !== null} className="h-[38px] w-[38px] items-center justify-center rounded-full bg-clay dark:bg-clay-dark" accessibilityLabel={t('common.delete')} accessibilityRole="button">
+                            {busyId === `p_${item.pokeId}_d` ? <ActivityIndicator size="small" color="#7B7366" /> : <MaterialIcons name="delete-outline" size={18} color="#7B7366" />}
+                          </Pressable>
+                        </View>
+                      </View>
+                    );
+                  })}
                 </View>
-                {item.kind === 'friend_request_incoming' ? (
-                  <View className="flex-row gap-1.5">
-                    <Pressable
-                      onPress={() => accept(item)}
-                      disabled={busyId !== null}
-                      className="rounded-lg p-2"
-                      style={{ backgroundColor: '#2EC4A5' }}
-                      accessibilityLabel={t('dashboard.accept')}
-                      accessibilityRole="button"
-                    >
-                      {busyId === item.userId + '_a' ? (
-                        <ActivityIndicator size="small" color="#fff" />
-                      ) : (
-                        <MaterialIcons name="check" size={18} color="#fff" />
-                      )}
-                    </Pressable>
-                    <Pressable
-                      onPress={() => reject(item)}
-                      disabled={busyId !== null}
-                      className="rounded-lg bg-danger p-2"
-                      accessibilityLabel={t('dashboard.cancel_request')}
-                      accessibilityRole="button"
-                    >
-                      <MaterialIcons name="close" size={18} color="#fff" />
-                    </Pressable>
-                  </View>
-                ) : item.kind === 'friend_request_outgoing' ? (
-                  <Pressable
-                    onPress={() => cancel(item)}
-                    disabled={busyId !== null}
-                    className="rounded-lg bg-danger p-2"
-                    accessibilityLabel={t('dashboard.cancel_request')}
-                    accessibilityRole="button"
-                  >
-                    {busyId === item.userId + '_c' ? (
-                      <ActivityIndicator size="small" color="#fff" />
-                    ) : (
-                      <MaterialIcons name="close" size={18} color="#fff" />
-                    )}
-                  </Pressable>
-                ) : (
-                  <View className="flex-row gap-1.5">
-                    <Pressable
-                      onPress={() => pokeBack(item.pokeId, item.userId, item.displayName || item.username)}
-                      disabled={busyId !== null}
-                      className="rounded-lg bg-ink p-2 dark:bg-ink-dark"
-                      accessibilityLabel={t('dashboard.poke')}
-                      accessibilityRole="button"
-                    >
-                      {busyId === `p_${item.pokeId}_p` ? (
-                        <ActivityIndicator size="small" color="#A79E90" />
-                      ) : (
-                        <Text className="text-base leading-[18px]">👉</Text>
-                      )}
-                    </Pressable>
-                    <Pressable
-                      onPress={() => removePoke(item.pokeId)}
-                      disabled={busyId !== null}
-                      className="rounded-lg bg-danger p-2"
-                      accessibilityLabel={t('common.delete')}
-                      accessibilityRole="button"
-                    >
-                      {busyId === `p_${item.pokeId}_d` ? (
-                        <ActivityIndicator size="small" color="#fff" />
-                      ) : (
-                        <MaterialIcons name="delete-outline" size={18} color="#fff" />
-                      )}
-                    </Pressable>
-                  </View>
-                )}
-              </View>
-            );
-          }}
-        />
-      )}
+              </>
+            ) : null}
+          </ScrollView>
+        )}
       </TabletContainer>
       <Toast
         visible={!!toast}
@@ -345,5 +304,13 @@ export default function NotificationsScreen() {
         style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }}
       />
     </SafeAreaView>
+  );
+}
+
+function Avatar({ name }: { name: string }) {
+  return (
+    <View className="h-[42px] w-[42px] items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+      <Text className="text-base font-bold text-muted">{(name || '?').charAt(0).toUpperCase()}</Text>
+    </View>
   );
 }

@@ -8,6 +8,7 @@ import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { TabletContainer } from '@/components/tablet-container';
+import { Card } from '@/components/ui/card';
 import { TargetReportModal } from '@/components/target-report-modal';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Toast } from '@/components/toast';
@@ -238,52 +239,48 @@ export default function CommunityDetailScreen() {
       ) : (
         <>
           <View className="px-6 pt-2">
-            <View className="flex-row items-center">
-              <View className="h-12 w-12 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
-                <MaterialIcons name="groups" size={22} color="#7B7366" />
-              </View>
-              <View className="ml-3 flex-1">
-                <Text className="text-2xl font-bold text-ink dark:text-ink-dark" numberOfLines={2}>
-                  {data.title}
-                </Text>
-                <Text className="mt-0.5 text-xs text-muted">
-                  {data.uploaderName ? `@${data.uploaderName} · ` : ''}
-                  {data.wordCount}{t('library.words_suffix')}
-                </Text>
-                {sourceLang && targetLang ? (
-                  <Text className="mt-0.5 text-xs text-muted">
-                    {t(`languages.${data.sourceLang}`)} → {t(`languages.${data.targetLang}`)}
+            <Card className="p-5">
+              <View className="flex-row gap-3.5">
+                <View className="h-[52px] w-[52px] items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+                  <Text className="text-xl font-extrabold text-accent-deep">
+                    {(data.uploaderName || data.title || '?').charAt(0).toUpperCase()}
                   </Text>
+                </View>
+                <View className="flex-1">
+                  <Text className="text-xl font-extrabold leading-7 text-ink dark:text-ink-dark" numberOfLines={3}>
+                    {data.title}
+                  </Text>
+                  {data.uploaderName ? (
+                    <Text className="mt-1 text-sm text-muted">@{data.uploaderName}</Text>
+                  ) : null}
+                </View>
+              </View>
+              <View className="mt-3.5 flex-row flex-wrap items-center gap-2">
+                {sourceLang && targetLang ? (
+                  <View className="rounded-full bg-accent-soft px-3 py-1 dark:bg-accent-soft-dark">
+                    <Text className="text-xs font-semibold text-accent-deep">
+                      {t(`languages.${data.sourceLang}`)} → {t(`languages.${data.targetLang}`)}
+                    </Text>
+                  </View>
                 ) : null}
+                <View className="rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+                  <Text className="text-xs font-semibold text-ink dark:text-ink-dark">
+                    {data.wordCount}{t('library.words_suffix')}
+                  </Text>
+                </View>
+                <Pressable onPress={handleLike} disabled={busyLike} className="flex-row items-center rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+                  <MaterialIcons name={liked ? 'favorite' : 'favorite-border'} size={14} color={liked ? '#E0654F' : '#7B7366'} />
+                  <Text className="ml-1 text-xs font-semibold text-ink dark:text-ink-dark">{data.likesCount}</Text>
+                </Pressable>
+                <View className="flex-row items-center rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+                  <MaterialIcons name="download" size={14} color="#7B7366" />
+                  <Text className="ml-1 text-xs font-semibold text-ink dark:text-ink-dark">{data.downloadsCount}</Text>
+                </View>
               </View>
-            </View>
-
-            {data.description ? (
-              <Text className="mt-3 text-sm text-muted">{data.description}</Text>
-            ) : null}
-
-            <View className="mt-3 flex-row items-center gap-2">
-              <Pressable
-                onPress={handleLike}
-                disabled={busyLike}
-                className="flex-row items-center rounded-xl bg-clay px-3 py-1.5 dark:bg-clay-dark"
-              >
-                <MaterialIcons
-                  name={liked ? 'favorite' : 'favorite-border'}
-                  size={16}
-                  color={liked ? '#E0654F' : '#7B7366'}
-                />
-                <Text className="ml-1.5 text-xs font-medium text-ink dark:text-ink-dark">
-                  {data.likesCount}
-                </Text>
-              </Pressable>
-              <View className="flex-row items-center rounded-xl bg-clay px-3 py-1.5 dark:bg-clay-dark">
-                <MaterialIcons name="download" size={16} color="#7B7366" />
-                <Text className="ml-1.5 text-xs font-medium text-ink dark:text-ink-dark">
-                  {data.downloadsCount}
-                </Text>
-              </View>
-            </View>
+              {data.description ? (
+                <Text className="mt-3.5 text-sm leading-[21px] text-muted">{data.description}</Text>
+              ) : null}
+            </Card>
           </View>
 
           <View className="px-6 pt-4">
