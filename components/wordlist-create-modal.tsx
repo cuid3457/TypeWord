@@ -64,10 +64,10 @@ function OptionRows({
     <View className="mt-5 gap-3">
       <Pressable
         onPress={onPickBlank}
-        className="flex-row items-center rounded-xl border-2 border-line p-4 dark:border-line-dark"
+        className="flex-row items-center rounded-2xl border-2 border-line p-4 dark:border-line-dark"
       >
-        <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
-          <MaterialIcons name="edit" size={22} color="#7B7366" />
+        <View className="h-11 w-11 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+          <MaterialIcons name="edit" size={22} color="#1E9E84" />
         </View>
         <View className="ml-3 flex-1">
           <Text className="text-base font-semibold text-ink dark:text-ink-dark">
@@ -81,10 +81,10 @@ function OptionRows({
 
       <Pressable
         onPress={onPickBrowse}
-        className="flex-row items-center rounded-xl border-2 border-line p-4 dark:border-line-dark"
+        className="flex-row items-center rounded-2xl border-2 border-line p-4 dark:border-line-dark"
       >
-        <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
-          <MaterialIcons name="auto-stories" size={22} color="#7B7366" />
+        <View className="h-11 w-11 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+          <MaterialIcons name="auto-stories" size={22} color="#1E9E84" />
         </View>
         <View className="ml-3 flex-1">
           <Text className="text-base font-semibold text-ink dark:text-ink-dark">

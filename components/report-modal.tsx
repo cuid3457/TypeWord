@@ -100,7 +100,7 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
                 onPress={() => setReason(r)}
                 className={`flex-row items-center rounded-xl border-2 px-4 py-3 ${
                   reason === r
-                    ? 'border-[#2EC4A5]'
+                    ? 'border-accent bg-accent-soft dark:bg-accent-soft-dark'
                     : 'border-line dark:border-line-dark'
                 }`}
               >
@@ -294,7 +294,7 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
                       onPress={() => setReason(r)}
                       className={`flex-row items-center rounded-xl border-2 px-4 py-3 ${
                         reason === r
-                          ? 'border-[#2EC4A5]'
+                          ? 'border-accent bg-accent-soft dark:bg-accent-soft-dark'
                           : 'border-line dark:border-line-dark'
                       }`}
                     >
