@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { Card } from '@/components/ui/card';
 import { isAnonymous } from '@src/services/authService';
 import { setPaywallPending } from '@src/services/paywallPending';
 import { haptic } from '@src/services/hapticService';
@@ -30,8 +31,6 @@ export function Paywall() {
 
   const [plan, setPlan] = useState<'monthly' | 'annual'>('annual');
   // Fallback defaults — overwritten by RevenueCat offerings on mount.
-  // Kept in sync with App Store Connect + Play Console + RevenueCat product
-  // configuration: $5.99/mo + $39.99/yr (44% off, ~5.3 months free).
   const [monthlyPrice, setMonthlyPrice] = useState('$5.99');
   const [annualPrice, setAnnualPrice] = useState('$39.99');
   const [annualPerMonth, setAnnualPerMonth] = useState('$3.33');
@@ -43,9 +42,7 @@ export function Paywall() {
   useEffect(() => {
     getOfferings().then((o) => {
       if (!o) return;
-      if (o.monthly) {
-        setMonthlyPrice(o.monthly.priceString);
-      }
+      if (o.monthly) setMonthlyPrice(o.monthly.priceString);
       if (o.annual) {
         setAnnualPrice(o.annual.priceString);
         setAnnualPerMonth(formatLocalPrice(o.annual.price / 12, o.annual.currencyCode));
@@ -98,163 +95,155 @@ export function Paywall() {
     }
   };
 
-  const features = [
-    { icon: 'all-inclusive' as const, text: t('premium.feature_unlimited') },
-    { icon: 'folder' as const, text: t('premium.feature_wordlists') },
-    { icon: 'block' as const, text: t('premium.feature_no_ads') },
-    { icon: 'photo-camera' as const, text: t('premium.feature_image') },
-    { icon: 'file-download' as const, text: t('premium.feature_export') },
+  const features: { icon: React.ComponentProps<typeof MaterialIcons>['name']; text: string }[] = [
+    { icon: 'all-inclusive', text: t('premium.feature_unlimited') },
+    { icon: 'folder', text: t('premium.feature_wordlists') },
+    { icon: 'block', text: t('premium.feature_no_ads') },
+    { icon: 'photo-camera', text: t('premium.feature_image') },
+    { icon: 'file-download', text: t('premium.feature_export') },
   ];
 
   return (
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'bottom', 'left', 'right']}>
       <Stack.Screen options={{ headerShown: false }} />
 
-      <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 32 }}>
-        {/* Header — back button + title (matches other stack pages) */}
-        <View className="mb-4 h-11 flex-row items-center">
-          <Pressable
-            onPress={closePage}
-            className="mr-2 p-1"
-            accessibilityLabel={t('common.back')}
-            accessibilityRole="button"
-          >
-            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
-          </Pressable>
-          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
+      {/* App bar */}
+      <View className="h-11 flex-row items-center px-5">
+        <Pressable onPress={closePage} className="mr-1 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
+          <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+        </Pressable>
+        <Text className="text-lg font-bold text-ink dark:text-ink-dark">
+          MoaVoca {t('premium.title')}
+        </Text>
+      </View>
+
+      <ScrollView className="flex-1" contentContainerStyle={{ paddingHorizontal: 22, paddingBottom: 24 }}>
+        {/* Hero */}
+        <View className="items-center pt-2">
+          <View className="h-[76px] w-[76px] items-center justify-center rounded-[22px] bg-accent-soft dark:bg-accent-soft-dark">
+            <MaterialIcons name="workspace-premium" size={40} color="#1E9E84" />
+          </View>
+          <Text className="mt-4 text-2xl font-extrabold tracking-tight text-ink dark:text-ink-dark" style={{ lineHeight: 32 }}>
             MoaVoca {t('premium.title')}
           </Text>
+          <Text className="mt-1.5 text-sm text-muted">{t('tier.pro_tagline')}</Text>
         </View>
 
-        {/* Features */}
-        <View className="gap-4">
-          {features.map((f) => (
-            <View key={f.icon} className="flex-row items-center">
-              <View
-                className="mr-3 h-10 w-10 items-center justify-center rounded-full"
-                style={{ backgroundColor: '#2EC4A520' }}
-              >
-                <MaterialIcons name={f.icon as any} size={20} color="#2EC4A5" />
+        {/* Feature checklist */}
+        <Card className="mt-6 p-2">
+          {features.map((f, i) => (
+            <View
+              key={f.icon}
+              className={`flex-row items-center gap-3.5 px-3.5 py-3 ${i < features.length - 1 ? 'border-b border-line dark:border-line-dark' : ''}`}
+            >
+              <View className="h-10 w-10 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+                <MaterialIcons name={f.icon} size={20} color="#1E9E84" />
               </View>
-              <Text className="flex-1 text-base text-ink dark:text-ink-dark">{f.text}</Text>
+              <Text className="flex-1 text-[15px] font-semibold text-ink dark:text-ink-dark">{f.text}</Text>
+              <MaterialIcons name="check" size={20} color="#2EC4A5" />
             </View>
           ))}
-        </View>
+        </Card>
 
         {/* Plan selector */}
         <View className="mt-6 flex-row gap-3">
-          <Pressable
-            onPress={() => setPlan('monthly')}
-            className={`flex-1 rounded-xl border-2 p-4 ${
-              plan === 'monthly'
-                ? 'border-[#2EC4A5]'
-                : 'border-line dark:border-line-dark'
-            }`}
-          >
-            <Text className="text-sm text-muted">{t('premium.monthly')}</Text>
-            <Text className="mt-1 text-xl font-bold text-ink dark:text-ink-dark">
-              {monthlyPrice}
-            </Text>
-          </Pressable>
-
-          <Pressable
+          <PlanCard
+            label={t('premium.annual')}
+            price={annualPrice}
+            per={t('premium.per_month', { price: annualPerMonth })}
+            ribbon={t('premium.annual_save', { percent: savingsPercent })}
+            selected={plan === 'annual'}
             onPress={() => setPlan('annual')}
-            className={`flex-1 rounded-xl border-2 p-4 ${
-              plan === 'annual'
-                ? 'border-[#2EC4A5]'
-                : 'border-line dark:border-line-dark'
-            }`}
-          >
-            <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-muted">{t('premium.annual')}</Text>
-              <View className="rounded-full bg-[#2EC4A5] px-2 py-0.5">
-                <Text className="text-xs font-semibold text-white">
-                  {t('premium.annual_save', { percent: savingsPercent })}
-                </Text>
-              </View>
-            </View>
-            <Text className="mt-1 text-xl font-bold text-ink dark:text-ink-dark">
-              {annualPrice}
-            </Text>
-            <Text className="text-xs text-faint">
-              {t('premium.per_month', { price: annualPerMonth })}
-            </Text>
-          </Pressable>
+          />
+          <PlanCard
+            label={t('premium.monthly')}
+            price={monthlyPrice}
+            selected={plan === 'monthly'}
+            onPress={() => setPlan('monthly')}
+          />
         </View>
 
-        {/* Purchase button */}
+        {/* Disclosure (Apple 3.1.2(a) / Play) — must stay on the paywall */}
+        <Text className="mt-4 text-center text-[11px] leading-4 text-faint">
+          {t('premium.disclosure', { monthlyPrice, annualPrice })}
+        </Text>
+
+        {/* Links — restore / manage / legal (compliance: terms+privacy+business reachable) */}
+        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          <Pressable onPress={handleRestore} disabled={restoring}>
+            <Text className="text-[11px] text-faint underline">
+              {restoring ? t('premium.restoring') : t('premium.restore')}
+            </Text>
+          </Pressable>
+          <Text className="text-[11px] text-faint">·</Text>
+          <Pressable onPress={() => {
+            const url = Platform.OS === 'ios'
+              ? 'https://apps.apple.com/account/subscriptions'
+              : 'https://play.google.com/store/account/subscriptions';
+            Linking.openURL(url).catch(() => {});
+          }}>
+            <Text className="text-[11px] text-faint underline">{t('premium.manage_subscription')}</Text>
+          </Pressable>
+          <Text className="text-[11px] text-faint">·</Text>
+          <Pressable onPress={() => router.push('/terms')}><Text className="text-[11px] text-faint underline">{t('settings.terms')}</Text></Pressable>
+          <Text className="text-[11px] text-faint">·</Text>
+          <Pressable onPress={() => router.push('/privacy')}><Text className="text-[11px] text-faint underline">{t('settings.privacy')}</Text></Pressable>
+          <Text className="text-[11px] text-faint">·</Text>
+          <Pressable onPress={() => router.push('/business-info')}><Text className="text-[11px] text-faint underline">{t('settings.business_info')}</Text></Pressable>
+        </View>
+
+        {message ? <Text className="mt-2 text-center text-sm text-muted">{message}</Text> : null}
+      </ScrollView>
+
+      {/* Sticky bottom CTA */}
+      <View className="border-t border-line bg-surface px-5 pb-2 pt-3.5 dark:border-line-dark dark:bg-surface-dark">
         <Pressable
           onPress={handlePurchase}
           disabled={purchasing}
-          className="mt-6 items-center rounded-xl py-4"
-          style={{ backgroundColor: '#2EC4A5' }}
+          className="h-14 items-center justify-center rounded-[14px] bg-accent active:opacity-80"
+          accessibilityRole="button"
         >
           {purchasing ? (
             <ActivityIndicator color="#fff" />
           ) : (
-            <Text className="text-base font-semibold text-white">
-              {t('premium.subscribe')}
+            <Text className="text-base font-bold text-white">
+              {plan === 'annual' ? annualPrice : monthlyPrice} · {t('premium.subscribe')}
             </Text>
           )}
         </Pressable>
-
-        {/* Subscription utility links — restore + manage (한 줄) */}
-        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <Pressable onPress={handleRestore} disabled={restoring}>
-            <Text className="text-xs text-faint underline">
-              {restoring ? t('premium.restoring') : t('premium.restore')}
-            </Text>
-          </Pressable>
-          <Text className="text-xs text-faint">|</Text>
-          <Pressable
-            onPress={() => {
-              const url = Platform.OS === 'ios'
-                ? 'https://apps.apple.com/account/subscriptions'
-                : 'https://play.google.com/store/account/subscriptions';
-              Linking.openURL(url).catch(() => {});
-            }}
-          >
-            <Text className="text-xs text-faint underline">
-              {t('premium.manage_subscription', { defaultValue: 'Manage Subscription' })}
-            </Text>
-          </Pressable>
-        </View>
-
-        {/* Message */}
-        {message ? (
-          <Text className="mt-2 text-center text-sm text-muted">{message}</Text>
-        ) : null}
-
-        {/* Apple Guideline 3.1.2(a) / Google Play subscription disclosure.
-            Must appear ON the paywall (not just in ToS). Spelled out
-            in plain language: subscription title + length + auto-renew
-            + cancellation method. i18n strings render in the user's
-            selected language. */}
-        <Text className="mt-4 text-center text-xs leading-4 text-muted">
-          {t('premium.disclosure', {
-            monthlyPrice,
-            annualPrice,
-            defaultValue:
-              'MoaVoca Premium — Monthly ({{monthlyPrice}}/month) or Annual ({{annualPrice}}/year). Payment is charged to your Apple ID or Google account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage subscriptions and turn off auto-renewal by going to your Account Settings after purchase.',
-          })}
-        </Text>
-
-        {/* Legal links — terms + privacy + business info (전자상거래법 disclosure
-            must be reachable at the point of purchase). */}
-        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <Pressable onPress={() => router.push('/terms')}>
-            <Text className="text-xs text-faint underline">{t('settings.terms')}</Text>
-          </Pressable>
-          <Text className="text-xs text-faint">|</Text>
-          <Pressable onPress={() => router.push('/privacy')}>
-            <Text className="text-xs text-faint underline">{t('settings.privacy')}</Text>
-          </Pressable>
-          <Text className="text-xs text-faint">|</Text>
-          <Pressable onPress={() => router.push('/business-info')}>
-            <Text className="text-xs text-faint underline">{t('settings.business_info')}</Text>
-          </Pressable>
-        </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
+  );
+}
+
+function PlanCard({ label, price, per, ribbon, selected, onPress }: {
+  label: string;
+  price: string;
+  per?: string;
+  ribbon?: string;
+  selected: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      onPress={onPress}
+      className={`flex-1 rounded-[18px] border-2 bg-surface p-4 dark:bg-surface-dark ${selected ? 'border-accent' : 'border-line dark:border-line-dark'}`}
+    >
+      {ribbon ? (
+        <View className="absolute -top-2.5 right-3.5 rounded-full bg-accent px-2.5 py-[3px]">
+          <Text className="text-[11px] font-extrabold text-white">{ribbon}</Text>
+        </View>
+      ) : null}
+      <View className="flex-row items-center justify-between">
+        <Text className="text-sm font-bold text-muted">{label}</Text>
+        <View className={`h-5 w-5 items-center justify-center rounded-full border-2 ${selected ? 'border-accent bg-accent' : 'border-line dark:border-line-dark'}`}>
+          {selected ? <MaterialIcons name="check" size={12} color="#fff" /> : null}
+        </View>
+      </View>
+      <Text className="mt-2 text-2xl font-extrabold tracking-tight text-ink dark:text-ink-dark" style={{ lineHeight: 30 }}>
+        {price}
+      </Text>
+      <Text className="mt-0.5 text-xs text-faint" numberOfLines={1}>{per ?? ' '}</Text>
+    </Pressable>
   );
 }

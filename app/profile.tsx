@@ -17,6 +17,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { TabletContainer } from '@/components/tablet-container';
+import { Card } from '@/components/ui/card';
 import { AppModal } from '@/components/app-modal';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { Toast } from '@/components/toast';
@@ -162,65 +163,54 @@ export default function ProfileScreen() {
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
           keyboardShouldPersistTaps="handled"
         >
-          {/* Header — matches the standard stack-page pattern (h-11 row,
-              arrow + small title on the same line). */}
+          {/* App bar */}
           <View className="h-11 flex-row items-center">
-            <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
+            <Pressable onPress={() => router.back()} className="mr-1 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
               <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-base font-semibold text-ink dark:text-ink-dark">
+            <Text className="text-lg font-bold text-ink dark:text-ink-dark">
               {t('auth.profile')}
             </Text>
           </View>
 
-          {/* Profile (display name + username) — tap to edit */}
+          {/* Identity hero */}
           {myProfile && !myProfile.isAnonymous ? (
-            <Pressable
-              onPress={() => setShowProfileSetup(true)}
-              className="mt-6 flex-row items-center justify-between rounded-2xl border border-line p-4 dark:border-line-dark"
-            >
-              <View className="flex-1">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
-                  {t('profile_setup.display_name_label')}
-                </Text>
-                <Text className="mt-1 text-base text-ink dark:text-ink-dark" numberOfLines={1}>
-                  {myProfile.displayName || t('dashboard.unnamed')}
-                </Text>
-                <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted">
-                  {t('profile_setup.username_label')}
-                </Text>
-                <Text className="mt-1 text-base text-ink dark:text-ink-dark" numberOfLines={1}>
-                  {myProfile.username ? `@${myProfile.username}` : '—'}
+            <Card className="mt-4 items-center p-6">
+              <View className="h-[72px] w-[72px] items-center justify-center rounded-full bg-accent">
+                <Text className="text-3xl font-extrabold text-white">
+                  {(myProfile.displayName || '?').charAt(0).toUpperCase()}
                 </Text>
               </View>
-              <MaterialIcons name="edit" size={20} color="#A79E90" />
-            </Pressable>
+              <Text className="mt-3.5 text-xl font-extrabold text-ink dark:text-ink-dark" numberOfLines={1}>
+                {myProfile.displayName || t('dashboard.unnamed')}
+              </Text>
+              {myProfile.username ? (
+                <Text className="mt-0.5 text-sm text-muted">@{myProfile.username}</Text>
+              ) : null}
+              <Pressable
+                onPress={() => setShowProfileSetup(true)}
+                className="mt-4 flex-row items-center gap-1.5 rounded-[14px] border border-line bg-surface px-4 py-2.5 dark:border-line-dark dark:bg-surface-dark"
+                accessibilityRole="button"
+              >
+                <MaterialIcons name="edit" size={15} color="#7B7366" />
+                <Text className="text-sm font-semibold text-ink dark:text-ink-dark">{t('profile_setup.title')}</Text>
+              </Pressable>
+            </Card>
           ) : null}
 
-          {/* Email display */}
-          <View className="mt-4 rounded-2xl border border-line p-4 dark:border-line-dark">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
-              {t('auth.email')}
-            </Text>
-            <Text className="mt-1 text-base text-ink dark:text-ink-dark">
-              {isApplePrivateRelay(userEmail) ? t('auth.apple_private_email') : (userEmail ?? '—')}
-            </Text>
-          </View>
-
-          {/* Auth provider */}
-          <View className="mt-4 rounded-2xl border border-line p-4 dark:border-line-dark">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
-              {t('auth.signed_in_with')}
-            </Text>
-            <Text className="mt-1 text-base text-ink dark:text-ink-dark">
-              {provider === 'google'
-                ? t('auth.signed_in_with_google')
-                : provider === 'apple'
-                  ? t('auth.signed_in_with_apple')
-                  : provider === 'email'
-                    ? t('auth.signed_in_with_email')
-                    : '—'}
-            </Text>
+          {/* Account — grouped */}
+          <View className="mt-5 overflow-hidden rounded-[20px] border border-line bg-surface dark:border-line-dark dark:bg-surface-dark">
+            <InfoRow
+              icon="mail-outline"
+              label={t('auth.email')}
+              value={isApplePrivateRelay(userEmail) ? t('auth.apple_private_email') : (userEmail ?? '—')}
+            />
+            <InfoRow
+              icon="vpn-key"
+              label={t('auth.signed_in_with')}
+              value={provider === 'google' ? t('auth.signed_in_with_google') : provider === 'apple' ? t('auth.signed_in_with_apple') : provider === 'email' ? t('auth.signed_in_with_email') : '—'}
+              last
+            />
           </View>
 
           {/* Password change - only for email users */}
@@ -318,14 +308,11 @@ export default function ProfileScreen() {
             </View>
           ) : null}
 
-          {/* Cancel subscription (premium only) — neutral styling since the
-              actual cancellation happens in the store, not here. */}
+          {/* Cancel subscription (premium) — neutral; actual cancel is in the store */}
           {premium ? (
             <Pressable
-              onPress={() => {
-                Linking.openURL(SUBSCRIPTION_URL).catch(() => {});
-              }}
-              className="mt-4 items-center rounded-xl border border-line py-4 dark:border-line-dark"
+              onPress={() => { Linking.openURL(SUBSCRIPTION_URL).catch(() => {}); }}
+              className="mt-5 items-center rounded-[14px] border border-line bg-surface py-4 dark:border-line-dark dark:bg-surface-dark"
             >
               <Text className="text-base font-medium text-ink dark:text-ink-dark">
                 {t('auth.cancel_subscription')}
@@ -333,17 +320,15 @@ export default function ProfileScreen() {
             </Pressable>
           ) : null}
 
-          {/* Logout button */}
+          {/* Danger zone */}
           <Pressable
             onPress={() => setLogoutModal(true)}
-            className={`${premium ? 'mt-4' : 'mt-6'} items-center rounded-xl border border-danger py-4`}
+            className={`${premium ? 'mt-3' : 'mt-5'} flex-row items-center justify-center gap-1.5 rounded-[14px] border border-danger bg-surface py-4 dark:bg-surface-dark`}
+            accessibilityRole="button"
           >
-            <Text className="text-base font-semibold text-danger">
-              {t('auth.logout')}
-            </Text>
+            <MaterialIcons name="logout" size={18} color="#E0654F" />
+            <Text className="text-base font-bold text-danger">{t('auth.logout')}</Text>
           </Pressable>
-
-          {/* Delete account button */}
           <Pressable
             onPress={() => {
               if (premium) setSubscriptionWarningModal(true);
@@ -351,9 +336,7 @@ export default function ProfileScreen() {
             }}
             className="mt-4 items-center py-3"
           >
-            <Text className="text-sm text-faint">
-              {t('auth.delete_account')}
-            </Text>
+            <Text className="text-sm text-faint underline">{t('auth.delete_account')}</Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -449,7 +432,7 @@ export default function ProfileScreen() {
                     <MaterialIcons
                       name={selected ? 'check-box' : 'check-box-outline-blank'}
                       size={20}
-                      color={selected ? '#dc2626' : '#A79E90'}
+                      color={selected ? '#E0654F' : '#A79E90'}
                     />
                     <Text className="ml-2 flex-1 text-sm text-ink dark:text-ink-dark">
                       {t(`auth.deletion_reason_${key}`)}
@@ -660,4 +643,21 @@ export default function ProfileScreen() {
     await ensureSession().catch(() => {});
     router.replace('/onboarding');
   }
+}
+
+function InfoRow({ icon, label, value, last }: {
+  icon: React.ComponentProps<typeof MaterialIcons>['name'];
+  label: string;
+  value: string;
+  last?: boolean;
+}) {
+  return (
+    <View className={`flex-row items-center gap-3.5 px-4 py-3.5 ${last ? '' : 'border-b border-line dark:border-line-dark'}`}>
+      <MaterialIcons name={icon} size={19} color="#A79E90" />
+      <View className="flex-1">
+        <Text className="text-[11px] font-bold uppercase tracking-wider text-muted">{label}</Text>
+        <Text className="mt-0.5 text-[15px] text-ink dark:text-ink-dark" numberOfLines={1}>{value}</Text>
+      </View>
+    </View>
+  );
 }
