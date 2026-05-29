@@ -2,9 +2,10 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
+import { cardShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { Toast } from '@/components/toast';
@@ -154,33 +155,33 @@ export default function LibraryTabScreen() {
       {/* Header */}
       <View className="flex-row items-center justify-between px-6 pt-6">
         <View className="flex-1">
-          <Text className="text-3xl font-bold text-black dark:text-white">
+          <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
             {t('tabs.library')}
           </Text>
         </View>
         <View className="flex-row items-center gap-2">
           <Pressable
             onPress={handleMyUploadsPress}
-            className="rounded-xl bg-black p-3 dark:bg-white"
+            className="rounded-full bg-ink p-3 dark:bg-ink-dark"
             accessibilityLabel={t('library_tab.my_uploads')}
             accessibilityRole="button"
           >
             <MaterialIcons
               name="person"
               size={20}
-              color={colorScheme === 'dark' ? '#000' : '#fff'}
+              color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
             />
           </Pressable>
           <Pressable
             onPress={handleUploadPress}
-            className="rounded-xl bg-black p-3 dark:bg-white"
+            className="rounded-full bg-ink p-3 dark:bg-ink-dark"
             accessibilityLabel={t('library_tab.upload_button')}
             accessibilityRole="button"
           >
             <MaterialIcons
               name="add"
               size={20}
-              color={colorScheme === 'dark' ? '#000' : '#fff'}
+              color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
             />
           </Pressable>
         </View>
@@ -192,13 +193,13 @@ export default function LibraryTabScreen() {
           <Pressable
             key={mode}
             onPress={() => handleSortPress(mode)}
-            className={`flex-row items-center rounded-lg px-3 py-1.5 ${
-              sortMode === mode ? 'bg-black dark:bg-white' : 'bg-gray-100 dark:bg-gray-800'
+            className={`flex-row items-center rounded-xl px-3 py-1.5 ${
+              sortMode === mode ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
             }`}
           >
             <Text
-              className={`text-xs font-medium ${
-                sortMode === mode ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-400'
+              className={`text-xs font-semibold ${
+                sortMode === mode ? 'text-canvas dark:text-canvas-dark' : 'text-muted'
               }`}
             >
               {t(`library_tab.sort_${mode}`)}
@@ -207,7 +208,7 @@ export default function LibraryTabScreen() {
               <MaterialIcons
                 name={sortReversed ? 'arrow-upward' : 'arrow-downward'}
                 size={12}
-                color={colorScheme === 'dark' ? '#000' : '#fff'}
+                color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
                 style={{ marginLeft: 2 }}
               />
             ) : null}
@@ -225,13 +226,13 @@ export default function LibraryTabScreen() {
             <Pressable
               key={side}
               onPress={() => setPicker(side)}
-              className={`flex-row items-center rounded-lg px-3 py-1.5 ${
-                active ? 'bg-black dark:bg-white' : 'bg-gray-100 dark:bg-gray-800'
+              className={`flex-row items-center rounded-xl px-3 py-1.5 ${
+                active ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
               }`}
             >
               <Text
-                className={`text-xs font-medium ${
-                  active ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-400'
+                className={`text-xs font-semibold ${
+                  active ? 'text-canvas dark:text-canvas-dark' : 'text-muted'
                 }`}
               >
                 {lang
@@ -241,7 +242,7 @@ export default function LibraryTabScreen() {
               <MaterialIcons
                 name="arrow-drop-down"
                 size={16}
-                color={active ? (colorScheme === 'dark' ? '#000' : '#fff') : '#9ca3af'}
+                color={active ? (colorScheme === 'dark' ? '#15130E' : '#F4F1EA') : '#A79E90'}
                 style={{ marginLeft: 2 }}
               />
             </Pressable>
@@ -251,22 +252,22 @@ export default function LibraryTabScreen() {
 
       {/* Search bar */}
       <View className="mt-2 px-6">
-        <View className="flex-row items-center rounded-xl bg-gray-100 px-3 dark:bg-gray-800">
-          <MaterialIcons name="search" size={18} color="#9ca3af" />
+        <View className="flex-row items-center rounded-xl bg-clay px-3 dark:bg-clay-dark">
+          <MaterialIcons name="search" size={18} color="#A79E90" />
           <TextInput
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholder={t('library_tab.search_placeholder')}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#A79E90"
             returnKeyType="search"
             autoCapitalize="none"
             autoCorrect={false}
             onSubmitEditing={reload}
-            className="ml-2 flex-1 py-2.5 text-sm text-black dark:text-white"
+            className="ml-2 flex-1 py-2.5 text-sm text-ink dark:text-ink-dark"
           />
           {searchQuery ? (
             <Pressable onPress={() => { setSearchQuery(''); setTimeout(reload, 0); }} className="ml-1 p-1">
-              <MaterialIcons name="close" size={16} color="#9ca3af" />
+              <MaterialIcons name="close" size={16} color="#A79E90" />
             </Pressable>
           ) : null}
         </View>
@@ -275,7 +276,7 @@ export default function LibraryTabScreen() {
   );
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       {headerEl}
       <View style={{ flex: 1 }}>
@@ -290,15 +291,21 @@ export default function LibraryTabScreen() {
           ListEmptyComponent={
             loading ? (
               <View className="items-center justify-center py-12">
-                <ActivityIndicator color="#6b7280" />
+                <ActivityIndicator color="#2EC4A5" />
               </View>
             ) : (
               <View className="items-center justify-center px-8 py-12">
-                <MaterialIcons name="groups" size={64} color="#9ca3af" />
-                <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
+                <View className="h-32 w-32 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+                  <Image
+                    source={require('../../assets/images/android-icon-foreground.png')}
+                    style={{ width: 104, height: 104 }}
+                    resizeMode="contain"
+                  />
+                </View>
+                <Text className="mt-5 text-center text-lg font-bold text-ink dark:text-ink-dark">
                   {t('library_tab.empty_title')}
                 </Text>
-                <Text className="mt-2 text-center text-sm text-gray-400 dark:text-gray-500">
+                <Text className="mt-2 text-center text-sm text-muted">
                   {t('library_tab.empty_hint')}
                 </Text>
               </View>
@@ -316,8 +323,8 @@ export default function LibraryTabScreen() {
                   setRefreshing(false);
                 }
               }}
-              tintColor="#10b981"
-              colors={['#10b981']}
+              tintColor="#2EC4A5"
+              colors={['#2EC4A5']}
             />
           }
           renderItem={({ item }) => {
@@ -325,37 +332,41 @@ export default function LibraryTabScreen() {
             // a lone last-row item doesn't stretch — the empty right slot
             // just stays empty. Row padding/gap is on columnWrapperStyle.
             const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
+            const src = findLanguage(item.sourceLang);
             return (
               <Pressable
                 onPress={() => router.push(`/community-detail/${item.id}`)}
-                className={`rounded-2xl border border-gray-300 p-4 dark:border-gray-700 ${isTablet ? '' : 'mx-6 mb-3'}`}
-                style={isTablet ? { width: tabletCardWidth } : undefined}
+                className={`rounded-[20px] border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
+                style={[cardShadow, isTablet ? { width: tabletCardWidth } : null]}
               >
                 <View className="flex-row items-start justify-between">
-                  <View className="flex-1">
-                    <Text className="text-base font-semibold text-black dark:text-white" numberOfLines={1}>
+                  <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
+                    <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
+                  </View>
+                  <View className="ml-3 flex-1">
+                    <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.title}
                     </Text>
                     {item.uploaderName ? (
-                      <Text className="mt-1 text-xs text-gray-400" numberOfLines={1}>
+                      <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
                         @{item.uploaderName}
                       </Text>
                     ) : null}
                   </View>
                   <View className="ml-3 items-end">
-                    <View className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-                      <Text className="text-sm font-semibold text-black dark:text-white">
+                    <View className="rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+                      <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                         {t('home.word_count', { count: item.wordCount })}
                       </Text>
                     </View>
                     <View className="mt-1 flex-row items-center gap-3">
                       <View className="flex-row items-center">
-                        <MaterialIcons name="favorite" size={12} color="#ef4444" />
-                        <Text className="ml-1 text-xs text-gray-500">{item.likesCount}</Text>
+                        <MaterialIcons name="favorite" size={12} color="#E0654F" />
+                        <Text className="ml-1 text-xs text-muted">{item.likesCount}</Text>
                       </View>
                       <View className="flex-row items-center">
-                        <MaterialIcons name="download" size={12} color="#6b7280" />
-                        <Text className="ml-1 text-xs text-gray-500">{item.downloadsCount}</Text>
+                        <MaterialIcons name="download" size={12} color="#7B7366" />
+                        <Text className="ml-1 text-xs text-muted">{item.downloadsCount}</Text>
                       </View>
                     </View>
                   </View>
@@ -397,9 +408,9 @@ export default function LibraryTabScreen() {
       {/* Language filter picker — opened from the source/target buttons */}
       <Modal visible={picker !== null} transparent animationType="fade" onRequestClose={() => setPicker(null)}>
         <Pressable onPress={() => setPicker(null)} className="flex-1 items-center justify-center bg-black/50 px-6">
-          <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm overflow-hidden rounded-2xl bg-white dark:bg-gray-900">
-            <View className="border-b border-gray-100 px-5 py-4 dark:border-gray-800">
-              <Text className="text-base font-bold text-black dark:text-white">
+          <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm overflow-hidden rounded-2xl bg-surface dark:bg-surface-dark">
+            <View className="border-b border-line px-5 py-4 dark:border-line-dark">
+              <Text className="text-base font-bold text-ink dark:text-ink-dark">
                 {picker === 'source' ? t('library_tab.filter_source') : t('library_tab.filter_target')}
               </Text>
             </View>
@@ -420,7 +431,7 @@ export default function LibraryTabScreen() {
                     }}
                     className="flex-row items-center px-5 py-3"
                   >
-                    <Text className="flex-1 text-sm text-black dark:text-white">
+                    <Text className="flex-1 text-sm text-ink dark:text-ink-dark">
                       {lang ? `${lang.flag} ${t(`languages.${lang.code}`)}` : t('library_tab.filter_all')}
                     </Text>
                     {selected ? <MaterialIcons name="check" size={18} color="#2EC4A5" /> : null}

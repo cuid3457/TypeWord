@@ -148,12 +148,12 @@ export default function SettingsScreen() {
   };
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingBottom: 24 }}>
         <View className="pt-6">
           <View className="h-11 justify-center">
-            <Text className="text-3xl font-bold text-black dark:text-white">
+            <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
               {t('settings.title')}
             </Text>
           </View>
@@ -162,15 +162,14 @@ export default function SettingsScreen() {
         {/* Premium card */}
         <Pressable
           onPress={() => { if (!premium) { haptic.tap(); router.push('/subscription'); } }}
-          className="mt-6 rounded-2xl p-4"
-          style={{ backgroundColor: premium ? '#2EC4A520' : '#2EC4A510', borderWidth: 1, borderColor: '#2EC4A5' }}
+          className="mt-6 rounded-2xl border border-accent bg-accent-soft p-4 dark:bg-accent-soft-dark"
         >
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center">
               <MaterialIcons name={premium ? 'verified' : 'workspace-premium'} size={24} color="#2EC4A5" />
               <View className="ml-3">
                 <View className="flex-row items-center">
-                  <Text className="text-base font-semibold text-black dark:text-white">
+                  <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                     {premium ? t('premium.premium_plan') : t('premium.subscribe')}
                   </Text>
                   {premium ? (
@@ -179,13 +178,13 @@ export default function SettingsScreen() {
                     </View>
                   ) : null}
                 </View>
-                <Text className="mt-0.5 text-xs text-gray-500">
+                <Text className="mt-0.5 text-xs text-muted">
                   {premium ? t('premium.active') : t('premium.current_free')}
                 </Text>
               </View>
             </View>
             {!premium ? (
-              <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
+              <MaterialIcons name="chevron-right" size={24} color="#A79E90" />
             ) : null}
           </View>
         </Pressable>
@@ -194,17 +193,17 @@ export default function SettingsScreen() {
         {userEmail ? (
           <Pressable
             onPress={() => { haptic.tap(); router.push('/profile'); }}
-            className="mt-6 flex-row items-center justify-between rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
+            className="mt-6 flex-row items-center justify-between rounded-2xl border border-line p-4 dark:border-line-dark"
           >
-            <Text className="flex-1 text-base text-black dark:text-white">
+            <Text className="flex-1 text-base text-ink dark:text-ink-dark">
               {isApplePrivateRelay(userEmail) ? t('auth.apple_signed_in') : userEmail}
             </Text>
-            <MaterialIcons name="chevron-right" size={24} color="#9ca3af" />
+            <MaterialIcons name="chevron-right" size={24} color="#A79E90" />
           </Pressable>
         ) : (
           <Pressable
             onPress={() => router.push('/auth')}
-            className="mt-6 flex-row items-center justify-center rounded-2xl border border-gray-300 py-4 dark:border-gray-700"
+            className="mt-6 flex-row items-center justify-center rounded-2xl border border-line py-4 dark:border-line-dark"
           >
             <MaterialIcons name="login" size={18} color="#2EC4A5" />
             <Text className="ml-2 text-base font-medium text-[#2EC4A5]">
@@ -213,7 +212,7 @@ export default function SettingsScreen() {
           </Pressable>
         )}
 
-        <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
+        <View className="mt-6 rounded-2xl border border-line dark:border-line-dark">
           {/* Native language */}
           <SettingRow
             label={t('settings.native_language')}
@@ -226,7 +225,7 @@ export default function SettingsScreen() {
               attached to the row that opened it. The other row is hidden
               while editing — same pattern as the new-wordlist screen. */}
           {editing === 'native' ? (
-            <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+            <View className="border-t border-line dark:border-line-dark" style={{ height: 320 }}>
               <LanguageList
                 excludeCode={null}
                 selectedCode={settings.nativeLanguage}
@@ -238,7 +237,7 @@ export default function SettingsScreen() {
 
           {editing !== 'native' ? (
             <>
-              <View className="mx-4 h-px bg-gray-200 dark:bg-gray-800" />
+              <View className="mx-4 h-px bg-line dark:bg-line-dark" />
 
               {/* Region */}
               <SettingRow
@@ -253,7 +252,7 @@ export default function SettingsScreen() {
               />
 
               {editing === 'region' ? (
-                <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 360 }}>
+                <View className="border-t border-line dark:border-line-dark" style={{ height: 360 }}>
                   <CountryList
                     selectedCode={settings.countryCode ?? ''}
                     query={regionSearch}
@@ -269,9 +268,9 @@ export default function SettingsScreen() {
         </View>
 
         {/* Theme selector */}
-        <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
+        <View className="mt-6 rounded-2xl border border-line dark:border-line-dark">
           <View className="p-4">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('settings.theme')}
             </Text>
             <View className="mt-2 flex-row gap-2">
@@ -283,16 +282,16 @@ export default function SettingsScreen() {
                     onPress={() => { haptic.selection(); save({ ...settings, theme: mode }); }}
                     className={`flex-1 items-center justify-center rounded-xl border ${
                       selected
-                        ? 'border-black bg-black dark:border-white dark:bg-white'
-                        : 'border-gray-300 dark:border-gray-700'
+                        ? 'border-ink bg-ink dark:border-ink-dark dark:bg-ink-dark'
+                        : 'border-line dark:border-line-dark'
                     }`}
                     style={{ height: 44 }}
                   >
                     <Text
                       className={`text-sm font-medium ${
                         selected
-                          ? 'text-white dark:text-black'
-                          : 'text-black dark:text-white'
+                          ? 'text-canvas dark:text-canvas-dark'
+                          : 'text-ink dark:text-ink-dark'
                       }`}
                     >
                       {t(`settings.theme_${mode}`)}
@@ -303,11 +302,11 @@ export default function SettingsScreen() {
             </View>
           </View>
 
-          <View className="mx-4 h-px bg-gray-200 dark:bg-gray-800" />
+          <View className="mx-4 h-px bg-line dark:bg-line-dark" />
 
           {/* Font size */}
           <View className="p-4">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('settings.font_size')}
             </Text>
             <View className="mt-2 flex-row gap-2">
@@ -319,16 +318,16 @@ export default function SettingsScreen() {
                     onPress={() => { haptic.selection(); save({ ...settings, fontSize: size }); }}
                     className={`flex-1 items-center justify-center rounded-xl border ${
                       selected
-                        ? 'border-black bg-black dark:border-white dark:bg-white'
-                        : 'border-gray-300 dark:border-gray-700'
+                        ? 'border-ink bg-ink dark:border-ink-dark dark:bg-ink-dark'
+                        : 'border-line dark:border-line-dark'
                     }`}
                     style={{ height: 44 }}
                   >
                     <Text
                       className={`font-medium ${
                         selected
-                          ? 'text-white dark:text-black'
-                          : 'text-black dark:text-white'
+                          ? 'text-canvas dark:text-canvas-dark'
+                          : 'text-ink dark:text-ink-dark'
                       } ${size === 'small' ? 'text-xs' : size === 'large' ? 'text-base' : 'text-sm'}`}
                     >
                       {t(`settings.font_${size}`)}
@@ -344,13 +343,13 @@ export default function SettingsScreen() {
             in the browser (no service-worker push setup in v1) so the
             toggle wouldn't actually schedule anything. Native only. */}
         {Platform.OS !== 'web' ? (
-        <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
+        <View className="mt-6 rounded-2xl border border-line dark:border-line-dark">
           <View className="flex-row items-center justify-between p-4">
             <View className="flex-1">
-              <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                 {t('settings.notifications')}
               </Text>
-              <Text className="mt-1 text-xs text-gray-400">
+              <Text className="mt-1 text-xs text-faint">
                 {t('settings.notifications_hint')}
               </Text>
             </View>
@@ -384,13 +383,13 @@ export default function SettingsScreen() {
         ) : null}
 
         {Platform.OS !== 'web' ? (
-        <View className="mt-3 rounded-2xl border border-gray-300 dark:border-gray-700">
+        <View className="mt-3 rounded-2xl border border-line dark:border-line-dark">
           <View className="flex-row items-center justify-between p-4">
             <View className="flex-1">
-              <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                 {t('settings.sound_effects')}
               </Text>
-              <Text className="mt-1 text-xs text-gray-400">
+              <Text className="mt-1 text-xs text-faint">
                 {t('settings.sound_effects_hint')}
               </Text>
             </View>
@@ -449,12 +448,12 @@ export default function SettingsScreen() {
             <Pressable
               key={b.key}
               onPress={b.onPress}
-              className={`rounded-xl border border-gray-300 py-4 dark:border-gray-700 ${
+              className={`rounded-xl border border-line py-4 dark:border-line-dark ${
                 isTablet ? '' : i === 0 ? '' : 'mt-3'
               }`}
               style={isTablet ? { width: '48.5%' } : undefined}
             >
-              <Text className="text-center text-sm font-medium text-black dark:text-white">
+              <Text className="text-center text-sm font-medium text-ink dark:text-ink-dark">
                 {t(`settings.${b.key}`)}
               </Text>
             </Pressable>
@@ -463,9 +462,9 @@ export default function SettingsScreen() {
 
         <Pressable
           onPress={() => setResetModal(true)}
-          className="mt-6 rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+          className="mt-6 rounded-xl border border-line py-4 dark:border-line-dark"
         >
-          <Text className="text-center text-sm font-medium text-black dark:text-white">
+          <Text className="text-center text-sm font-medium text-ink dark:text-ink-dark">
             {t('settings.reset')}
           </Text>
         </Pressable>
@@ -553,12 +552,12 @@ function SettingRow({
   return (
     <Pressable onPress={onPress} className="flex-row items-center justify-between p-4">
       <View className="flex-1">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
           {label}
         </Text>
-        <Text className="mt-1 text-base text-black dark:text-white">{value}</Text>
+        <Text className="mt-1 text-base text-ink dark:text-ink-dark">{value}</Text>
       </View>
-      <Text className="text-base text-gray-400">{isOpen ? '▲' : '▼'}</Text>
+      <Text className="text-base text-faint">{isOpen ? '▲' : '▼'}</Text>
     </Pressable>
   );
 }
@@ -595,14 +594,14 @@ function CountryList({
 
   return (
     <View className="flex-1">
-      <View className="mx-3 mt-3 flex-row items-center rounded-xl border border-gray-200 px-3 dark:border-gray-700">
-        <MaterialIcons name="search" size={18} color="#9ca3af" />
+      <View className="mx-3 mt-3 flex-row items-center rounded-xl border border-line px-3 dark:border-line-dark">
+        <MaterialIcons name="search" size={18} color="#A79E90" />
         <TextInput
           value={query}
           onChangeText={onQueryChange}
           placeholder={t('settings.region_search_placeholder')}
-          placeholderTextColor="#9ca3af"
-          className="ml-2 flex-1 py-2 text-sm text-black dark:text-white"
+          placeholderTextColor="#A79E90"
+          className="ml-2 flex-1 py-2 text-sm text-ink dark:text-ink-dark"
         />
       </View>
       <FlatList
@@ -620,11 +619,11 @@ function CountryList({
             <Pressable
               onPress={() => { haptic.selection(); onSelect(c.code); }}
               className={`flex-row items-center px-4 py-3 ${
-                selected ? 'bg-black/5 dark:bg-white/10' : ''
+                selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
               }`}
             >
               <Text className="mr-3 text-xl">{c.flag}</Text>
-              <Text className="flex-1 text-base text-black dark:text-white">
+              <Text className="flex-1 text-base text-ink dark:text-ink-dark">
                 {c.displayName}
               </Text>
               {selected ? (
@@ -664,16 +663,16 @@ function LanguageList({
             key={item.code}
             onPress={() => { haptic.selection(); onSelect(item.code); }}
             className={`flex-row items-center px-4 py-3 ${
-              selected ? 'bg-black/5 dark:bg-white/10' : ''
+              selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
             }`}
           >
             <Text className="mr-3 text-xl">{item.flag}</Text>
             <View className="flex-1">
-              <Text className="text-base text-black dark:text-white">
+              <Text className="text-base text-ink dark:text-ink-dark">
                 {translatedName}
               </Text>
               {translatedName !== item.nativeName ? (
-                <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                <Text className="text-xs text-faint">{item.nativeName}</Text>
               ) : null}
             </View>
             {selected ? (

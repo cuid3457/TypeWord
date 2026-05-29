@@ -72,7 +72,7 @@ export default function OnboardingSetup() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       <View className="flex-1 justify-between px-6 pb-8 pt-6">
         <View>
@@ -80,56 +80,56 @@ export default function OnboardingSetup() {
             onPress={() => router.back()}
             className="mb-4 h-10 w-10 items-center justify-center"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-3xl font-bold text-black dark:text-white">
+          <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
             {t('onboarding.setup.title')}
           </Text>
-          <Text className="mt-2 text-base text-gray-600 dark:text-gray-300">
+          <Text className="mt-2 text-base text-muted">
             {t('onboarding.setup.hint')}
           </Text>
 
           <View className="mt-8">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('settings.native_language')}
             </Text>
             <Pressable
               onPress={() => setLangModalOpen(true)}
-              className="mt-2 flex-row items-center justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-700"
+              className="mt-2 flex-row items-center justify-between rounded-xl border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark"
             >
               {lang ? (
                 <View className="flex-row items-center">
                   <Text className="mr-3 text-2xl">{lang.flag}</Text>
-                  <Text className="text-base text-black dark:text-white">
+                  <Text className="text-base text-ink dark:text-ink-dark">
                     {lang.nativeName}
                   </Text>
                 </View>
               ) : (
-                <Text className="text-base text-gray-400">—</Text>
+                <Text className="text-base text-faint">—</Text>
               )}
-              <MaterialIcons name="expand-more" size={24} color="#9ca3af" />
+              <MaterialIcons name="expand-more" size={24} color="#A79E90" />
             </Pressable>
           </View>
 
           <View className="mt-6">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('settings.region')}
             </Text>
             <Pressable
               onPress={() => setCountryModalOpen(true)}
-              className="mt-2 flex-row items-center justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-700"
+              className="mt-2 flex-row items-center justify-between rounded-xl border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark"
             >
               {country ? (
                 <View className="flex-row items-center">
                   <Text className="mr-3 text-2xl">{country.flag}</Text>
-                  <Text className="text-base text-black dark:text-white">
+                  <Text className="text-base text-ink dark:text-ink-dark">
                     {countryDisplayName}
                   </Text>
                 </View>
               ) : (
-                <Text className="text-base text-gray-400">—</Text>
+                <Text className="text-base text-faint">—</Text>
               )}
-              <MaterialIcons name="expand-more" size={24} color="#9ca3af" />
+              <MaterialIcons name="expand-more" size={24} color="#A79E90" />
             </Pressable>
           </View>
         </View>
@@ -139,29 +139,29 @@ export default function OnboardingSetup() {
             onPress={handleFinish}
             disabled={saving}
             className={`items-center rounded-xl py-4 ${
-              saving ? 'bg-gray-300' : 'bg-black dark:bg-white'
+              saving ? 'bg-clay dark:bg-clay-dark' : 'bg-accent'
             }`}
           >
             {saving ? (
-              <ActivityIndicator color="#6b7280" />
+              <ActivityIndicator color="#7B7366" />
             ) : (
-              <Text className="text-base font-semibold text-white dark:text-black">
+              <Text className="text-base font-semibold text-white">
                 {t('onboarding.start')}
               </Text>
             )}
           </Pressable>
 
-          <Text className="mt-4 text-center text-xs leading-5 text-gray-500 dark:text-gray-400">
+          <Text className="mt-4 text-center text-xs leading-5 text-muted">
             {t('onboarding.legal_prefix', { age: minimumAge })}
             <Text
-              className="text-gray-700 dark:text-gray-200 underline"
+              className="text-ink dark:text-ink-dark underline"
               onPress={() => router.push('/terms')}
             >
               {t('onboarding.legal_terms')}
             </Text>
             {t('onboarding.legal_and')}
             <Text
-              className="text-gray-700 dark:text-gray-200 underline"
+              className="text-ink dark:text-ink-dark underline"
               onPress={() => router.push('/privacy')}
             >
               {t('onboarding.legal_privacy')}
@@ -207,13 +207,13 @@ function LanguagePickerModal({
 }) {
   return (
     <Modal visible animationType="slide" onRequestClose={onClose}>
-      <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
         <View className="flex-1 px-6 pb-8 pt-6">
           <View className="flex-row items-center">
             <Pressable onPress={onClose} className="h-10 w-10 items-center justify-center">
-              <MaterialIcons name="close" size={24} color="#6b7280" />
+              <MaterialIcons name="close" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="ml-2 text-xl font-bold text-black dark:text-white">
+            <Text className="ml-2 text-xl font-bold text-ink dark:text-ink-dark">
               {t('settings.native_language')}
             </Text>
           </View>
@@ -228,16 +228,16 @@ function LanguagePickerModal({
                 <Pressable
                   onPress={() => onSelect(item.code)}
                   className={`flex-row items-center rounded-xl px-3 py-3 ${
-                    isSelected ? 'bg-black/5 dark:bg-white/10' : ''
+                    isSelected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
                   }`}
                 >
                   <Text className="mr-3 text-2xl">{item.flag}</Text>
                   <View className="flex-1">
-                    <Text className="text-base text-black dark:text-white">
+                    <Text className="text-base text-ink dark:text-ink-dark">
                       {t(`languages.${item.code}`)}
                     </Text>
                     {t(`languages.${item.code}`) !== item.nativeName ? (
-                      <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                      <Text className="text-xs text-faint">{item.nativeName}</Text>
                     ) : null}
                   </View>
                   {isSelected ? (
@@ -283,25 +283,25 @@ function CountryPickerModal({
 
   return (
     <Modal visible animationType="slide" onRequestClose={onClose}>
-      <SafeAreaView className="flex-1 bg-white dark:bg-black">
+      <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
         <View className="flex-1 px-6 pb-8 pt-6">
           <View className="flex-row items-center">
             <Pressable onPress={onClose} className="h-10 w-10 items-center justify-center">
-              <MaterialIcons name="close" size={24} color="#6b7280" />
+              <MaterialIcons name="close" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="ml-2 text-xl font-bold text-black dark:text-white">
+            <Text className="ml-2 text-xl font-bold text-ink dark:text-ink-dark">
               {t('settings.region')}
             </Text>
           </View>
 
-          <View className="mt-4 flex-row items-center rounded-xl border border-gray-300 px-3 dark:border-gray-700">
-            <MaterialIcons name="search" size={20} color="#9ca3af" />
+          <View className="mt-4 flex-row items-center rounded-xl border border-line px-3 dark:border-line-dark">
+            <MaterialIcons name="search" size={20} color="#A79E90" />
             <TextInput
               value={query}
               onChangeText={setQuery}
               placeholder={t('settings.region_search_placeholder')}
-              placeholderTextColor="#9ca3af"
-              className="ml-2 flex-1 py-3 text-base text-black dark:text-white"
+              placeholderTextColor="#A79E90"
+              className="ml-2 flex-1 py-3 text-base text-ink dark:text-ink-dark"
             />
           </View>
 
@@ -316,11 +316,11 @@ function CountryPickerModal({
                 <Pressable
                   onPress={() => onSelect(item.code)}
                   className={`flex-row items-center px-2 py-3 ${
-                    isSelected ? 'bg-black/5 dark:bg-white/10' : ''
+                    isSelected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
                   }`}
                 >
                   <Text className="mr-3 text-2xl">{item.flag}</Text>
-                  <Text className="flex-1 text-base text-black dark:text-white">
+                  <Text className="flex-1 text-base text-ink dark:text-ink-dark">
                     {item.displayName}
                   </Text>
                   {isSelected ? (
