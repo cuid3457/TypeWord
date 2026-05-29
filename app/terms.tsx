@@ -31,15 +31,15 @@ export default function TermsScreen() {
   const isKo = i18n.language === 'ko';
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 80 }}>
         <View className="h-11 flex-row items-center mb-4">
           <Pressable onPress={() => router.back()} className="mr-2 p-1">
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('settings.terms')}
           </Text>
         </View>
@@ -52,7 +52,7 @@ export default function TermsScreen() {
 
 function SectionTitle({ children }: { children: string }) {
   return (
-    <Text className="mb-2 mt-6 text-lg font-bold text-black dark:text-white">
+    <Text className="mb-2 mt-6 text-lg font-bold text-ink dark:text-ink-dark">
       {children}
     </Text>
   );
@@ -60,7 +60,7 @@ function SectionTitle({ children }: { children: string }) {
 
 function P({ children }: { children: string }) {
   return (
-    <Text className="mb-3 text-sm leading-5 text-gray-700 dark:text-gray-300">
+    <Text className="mb-3 text-sm leading-5 text-ink dark:text-muted-dark">
       {children}
     </Text>
   );
@@ -68,7 +68,7 @@ function P({ children }: { children: string }) {
 
 function Bullet({ children }: { children: string }) {
   return (
-    <Text className="mb-1 ml-4 text-sm leading-5 text-gray-700 dark:text-gray-300">
+    <Text className="mb-1 ml-4 text-sm leading-5 text-ink dark:text-muted-dark">
       {'\u2022'} {children}
     </Text>
   );
@@ -77,10 +77,10 @@ function Bullet({ children }: { children: string }) {
 function TermsKo() {
   return (
     <View>
-      <Text className="text-2xl font-bold text-black dark:text-white">
+      <Text className="text-2xl font-bold text-ink dark:text-ink-dark">
         이용약관
       </Text>
-      <Text className="mt-1 text-xs text-gray-500">시행일: {EFFECTIVE_DATE}</Text>
+      <Text className="mt-1 text-xs text-muted">시행일: {EFFECTIVE_DATE}</Text>
 
       <SectionTitle>서비스 운영자</SectionTitle>
       <P>{`본 서비스는 ${PROVIDER_KO.name}에서 운영합니다. 사업자등록번호, 대표자, 주소, 통신판매업 신고번호 등 상세 사업자 정보는 설정 → 사업자 정보에서 확인하실 수 있습니다.`}</P>
@@ -209,10 +209,10 @@ function TermsKo() {
 function TermsEn() {
   return (
     <View>
-      <Text className="text-2xl font-bold text-black dark:text-white">
+      <Text className="text-2xl font-bold text-ink dark:text-ink-dark">
         Terms of Service
       </Text>
-      <Text className="mt-1 text-xs text-gray-500">Effective: {EFFECTIVE_DATE}</Text>
+      <Text className="mt-1 text-xs text-muted">Effective: {EFFECTIVE_DATE}</Text>
 
       <SectionTitle>Service Provider</SectionTitle>
       <P>{`This Service is operated by ${PROVIDER_EN.name}. Detailed business registration information (registration number, representative, address, mail-order business registration) is available under Settings → Business Information.`}</P>

@@ -81,7 +81,7 @@ export default function LicensesScreen() {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <FlatList
@@ -92,13 +92,13 @@ export default function LicensesScreen() {
           <>
             <View className="h-11 flex-row items-center">
               <Pressable onPress={() => router.back()} className="mr-2 p-1">
-                <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+                <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
               </Pressable>
-              <Text className="text-base font-semibold text-black dark:text-white">
+              <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                 {t('settings.licenses')}
               </Text>
             </View>
-            <Text className="mt-4 mb-4 text-sm text-gray-500">
+            <Text className="mt-4 mb-4 text-sm text-muted">
               {t('settings.licenses_description', { count: LICENSES.length })}
             </Text>
           </>
@@ -106,13 +106,13 @@ export default function LicensesScreen() {
         renderItem={({ item }) => (
           <Pressable
             onPress={() => openNpm(item.name)}
-            className="flex-row items-center border-b border-gray-100 py-3 dark:border-gray-800"
+            className="flex-row items-center border-b border-line py-3 dark:border-line-dark"
           >
             <View className="flex-1">
-              <Text className="text-sm font-medium text-black dark:text-white">{item.name}</Text>
-              <Text className="mt-0.5 text-xs text-gray-400">{item.version} · {item.license}</Text>
+              <Text className="text-sm font-medium text-ink dark:text-ink-dark">{item.name}</Text>
+              <Text className="mt-0.5 text-xs text-faint">{item.version} · {item.license}</Text>
             </View>
-            <MaterialIcons name="open-in-new" size={16} color="#9ca3af" />
+            <MaterialIcons name="open-in-new" size={16} color="#A79E90" />
           </Pressable>
         )}
       />

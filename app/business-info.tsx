@@ -34,19 +34,19 @@ export default function BusinessInfoScreen() {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 80 }}>
         <View className="mb-2 h-11 flex-row items-center">
           <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('business_info.title')}
           </Text>
         </View>
-        <Text className="mb-4 text-xs text-gray-500">
+        <Text className="mb-4 text-xs text-muted">
           {t('business_info.intro')}
         </Text>
 
@@ -78,11 +78,11 @@ export default function BusinessInfoScreen() {
 
 function Row({ label, value, onPress }: { label: string; value: string; onPress?: () => void }) {
   const content = (
-    <View className="border-b border-gray-200 py-3 dark:border-gray-800">
-      <Text className="text-xs uppercase tracking-wider text-gray-500">{label}</Text>
+    <View className="border-b border-line py-3 dark:border-line-dark">
+      <Text className="text-xs uppercase tracking-wider text-muted">{label}</Text>
       <Text
         className={`mt-1 text-base ${
-          onPress ? 'text-emerald-600 underline dark:text-emerald-400' : 'text-black dark:text-white'
+          onPress ? 'text-accent-deep underline dark:text-accent' : 'text-ink dark:text-ink-dark'
         }`}
       >
         {value}

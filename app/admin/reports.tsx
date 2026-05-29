@@ -81,37 +81,37 @@ export default function AdminReportsScreen() {
 
   if (isAdmin === null) {
     return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white dark:bg-black">
+      <SafeAreaView className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
         <Stack.Screen options={{ headerShown: false }} />
-        <ActivityIndicator color="#6b7280" />
+        <ActivityIndicator color="#7B7366" />
       </SafeAreaView>
     );
   }
   if (!isAdmin) {
     return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white dark:bg-black">
+      <SafeAreaView className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
         <Stack.Screen options={{ headerShown: false }} />
-        <Text className="text-base text-gray-500">Access denied.</Text>
+        <Text className="text-base text-muted">Access denied.</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="mb-2 h-11 flex-row items-center px-4">
         <Pressable onPress={() => router.back()} className="mr-2 p-1">
-          <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+          <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
         </Pressable>
-        <Text className="text-base font-semibold text-black dark:text-white">Report Review ({items.length})</Text>
+        <Text className="text-base font-semibold text-ink dark:text-ink-dark">Report Review ({items.length})</Text>
         <Pressable onPress={refresh} className="ml-auto p-1">
-          <MaterialIcons name="refresh" size={22} color="#6b7280" />
+          <MaterialIcons name="refresh" size={22} color="#7B7366" />
         </Pressable>
       </View>
       {loading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
+          <ActivityIndicator color="#7B7366" />
         </View>
       ) : (
         <FlatList
@@ -119,25 +119,25 @@ export default function AdminReportsScreen() {
           keyExtractor={(i) => i.id}
           contentContainerStyle={{ padding: 16, paddingBottom: 80 }}
           renderItem={({ item }) => (
-            <View className="mb-3 rounded-xl border border-gray-200 p-3 dark:border-gray-800">
+            <View className="mb-3 rounded-xl border border-line p-3 dark:border-line-dark">
               <View className="mb-1 flex-row items-center">
-                <Text className="text-base font-semibold text-black dark:text-white">{item.word}</Text>
-                <Text className="ml-2 text-xs text-gray-500">{item.source_lang} → {item.target_lang}</Text>
+                <Text className="text-base font-semibold text-ink dark:text-ink-dark">{item.word}</Text>
+                <Text className="ml-2 text-xs text-muted">{item.source_lang} → {item.target_lang}</Text>
                 <View
                   className={`ml-auto rounded px-2 py-0.5 ${
-                    item.judge_verdict === 'VALID' ? 'bg-emerald-100 dark:bg-emerald-900'
-                      : item.judge_verdict === 'BORDERLINE' ? 'bg-amber-100 dark:bg-amber-900'
-                      : 'bg-gray-100 dark:bg-gray-800'
+                    item.judge_verdict === 'VALID' ? 'bg-accent-soft dark:bg-accent-soft-dark'
+                      : item.judge_verdict === 'BORDERLINE' ? 'bg-warm-amber-soft dark:bg-warm-amber-soft-dark'
+                      : 'bg-clay dark:bg-clay-dark'
                   }`}
                 >
                   <Text className="text-xs">{item.judge_verdict} {item.judge_confidence}</Text>
                 </View>
               </View>
-              <Text className="mb-2 text-xs text-gray-500">{item.report_count} report(s)</Text>
-              <ScrollView className="mb-2 max-h-32 rounded bg-gray-50 p-2 dark:bg-gray-900">
-                <Text className="text-xs text-gray-600 dark:text-gray-400">{item.judge_reasoning}</Text>
+              <Text className="mb-2 text-xs text-muted">{item.report_count} report(s)</Text>
+              <ScrollView className="mb-2 max-h-32 rounded bg-clay p-2 dark:bg-surface-dark">
+                <Text className="text-xs text-muted dark:text-muted-dark">{item.judge_reasoning}</Text>
               </ScrollView>
-              <Text className="mb-2 text-xs text-gray-500" numberOfLines={4}>
+              <Text className="mb-2 text-xs text-muted" numberOfLines={4}>
                 {JSON.stringify(item.original_result, null, 0).slice(0, 240)}
               </Text>
               <View className="flex-row gap-2">
@@ -151,7 +151,7 @@ export default function AdminReportsScreen() {
                 <Pressable
                   onPress={() => reject(item)}
                   disabled={busyId !== null}
-                  className="flex-1 items-center rounded-lg bg-red-500 py-2"
+                  className="flex-1 items-center rounded-lg bg-danger py-2"
                 >
                   <Text className="font-medium text-white">Reject</Text>
                 </Pressable>

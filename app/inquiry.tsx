@@ -163,7 +163,7 @@ export default function InquiryScreen() {
   };
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <KeyboardAvoidingView
@@ -173,9 +173,9 @@ export default function InquiryScreen() {
         <ScrollView className="flex-1" contentContainerStyle={{ padding: 24, paddingBottom: 80 }} keyboardShouldPersistTaps="handled">
           <View className="h-11 flex-row items-center">
             <Pressable onPress={() => router.back()} className="mr-2 p-1">
-              <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-base font-semibold text-black dark:text-white">
+            <Text className="text-base font-semibold text-ink dark:text-ink-dark">
               {t('inquiry.title')}
             </Text>
           </View>
@@ -185,14 +185,14 @@ export default function InquiryScreen() {
             value={body}
             onChangeText={(text) => text.length <= MAX_BODY_LENGTH && setBody(text)}
             placeholder={t('inquiry.placeholder')}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#A79E90"
             multiline
             textAlignVertical="top"
-            className="mt-6 min-h-[200px] rounded-2xl border border-gray-300 p-4 text-base text-black dark:border-gray-700 dark:text-white"
+            className="mt-6 min-h-[200px] rounded-2xl border border-line p-4 text-base text-ink dark:border-line-dark dark:text-ink-dark"
             style={{ backgroundColor: dark ? '#111' : '#fafafa' }}
           />
 
-          <Text className="mt-1 text-right text-xs text-gray-400">
+          <Text className="mt-1 text-right text-xs text-faint">
             {body.length}/{MAX_BODY_LENGTH}
           </Text>
 
@@ -218,10 +218,10 @@ export default function InquiryScreen() {
               {images.length < MAX_IMAGES && (
                 <Pressable
                   onPress={pickImage}
-                  className="h-24 w-24 items-center justify-center rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600"
+                  className="h-24 w-24 items-center justify-center rounded-xl border-2 border-dashed border-line dark:border-line-dark"
                 >
-                  <MaterialIcons name="add-photo-alternate" size={28} color="#9ca3af" />
-                  <Text className="mt-1 text-xs text-gray-400">
+                  <MaterialIcons name="add-photo-alternate" size={28} color="#A79E90" />
+                  <Text className="mt-1 text-xs text-faint">
                     {images.length}/{MAX_IMAGES}
                   </Text>
                 </Pressable>
@@ -235,7 +235,7 @@ export default function InquiryScreen() {
               onPress={handleSubmit}
               disabled={submitting}
               className={`items-center rounded-xl py-4 ${
-                !canSubmit ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+                !canSubmit ? 'bg-clay dark:bg-line-dark' : 'bg-black dark:bg-surface'
               }`}
             >
               {submitting ? (
@@ -243,7 +243,7 @@ export default function InquiryScreen() {
               ) : (
                 <Text
                   className={`text-base font-semibold ${
-                    !canSubmit ? 'text-gray-400' : 'text-white dark:text-black'
+                    !canSubmit ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
                   }`}
                 >
                   {t('inquiry.submit')}
