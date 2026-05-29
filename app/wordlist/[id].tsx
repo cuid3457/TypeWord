@@ -20,6 +20,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { AdBanner } from '@/components/ad-banner';
 import { TabletContainer } from '@/components/tablet-container';
+import { Card } from '@/components/ui/card';
 import { AppModal } from '@/components/app-modal';
 import { ExportFormatModal } from '@/components/export-format-modal';
 import { ReportModal } from '@/components/report-modal';
@@ -370,7 +371,31 @@ export default function WordlistDetailScreen() {
   // from the header area too (not just the FlatList rows below it).
   const headerEl = (
     <View>
-      {editing ? (
+      {/* App bar */}
+      <View className="h-11 flex-row items-center">
+        <Pressable
+          onPress={() => {
+            // In edit mode the back arrow exits selection first.
+            if (editMode) {
+              setSelectedIds(new Set());
+              setEditMode(false);
+              return;
+            }
+            router.back();
+          }}
+          className="mr-1 p-1"
+          accessibilityLabel={t('common.back')}
+          accessibilityRole="button"
+          hitSlop={8}
+        >
+          <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+        </Pressable>
+        <Text className="text-lg font-bold text-ink dark:text-ink-dark">{t('tabs.wordlists')}</Text>
+      </View>
+
+      {/* Header card */}
+      <Card className="mt-2 p-5">
+        {editing ? (
           <View className="flex-row items-center gap-2">
             <TextInput
               value={editTitle}
@@ -401,106 +426,63 @@ export default function WordlistDetailScreen() {
               accessibilityLabel={t('wordlist.rename_save')}
               accessibilityRole="button"
             >
-              <MaterialIcons name="check" size={20} color={colorScheme === 'dark' ? '#000' : '#fff'} />
+              <MaterialIcons name="check" size={20} color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'} />
             </Pressable>
           </View>
         ) : (
-          <View className="flex-row items-center">
-            <View className="flex-row items-center flex-1">
-              <Pressable
-                onPress={() => {
-                  // In edit mode, the back arrow exits selection first
-                  // (otherwise on web the only way out is the small ✓
-                  // top-right, easy to miss with a mouse). Subsequent
-                  // press leaves the page.
-                  if (editMode) {
-                    setSelectedIds(new Set());
-                    setEditMode(false);
-                    return;
-                  }
-                  router.back();
-                }}
-                className="mr-2 p-1"
-                accessibilityLabel={t('common.back')}
-                accessibilityRole="button"
-              >
-                <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
-              </Pressable>
-              <Pressable
-                onPress={() => {
-                  setEditTitle(book.title);
-                  setEditing(true);
-                }}
-                className="flex-row items-center flex-1"
-                accessibilityLabel={t('common.edit')}
-                accessibilityRole="button"
-              >
-                <Text className="flex-1 text-3xl font-bold text-ink dark:text-ink-dark">
-                  {book.title}
-                </Text>
-                <MaterialIcons name="edit" size={20} color="#A79E90" style={{ marginLeft: 8 }} />
-              </Pressable>
-            </View>
-          </View>
-        )}
-        <View className="mt-1 flex-row items-start justify-between">
-          <View className="flex-1">
-            {src && tgt ? (
-              <Text className="text-sm text-muted">
-                {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
-              </Text>
-            ) : null}
-            <Text className="mt-1 text-sm text-muted">
-              {t('wordlist.word_count', { count: words.length })}
+          <Pressable
+            onPress={() => {
+              setEditTitle(book.title);
+              setEditing(true);
+            }}
+            className="flex-row items-center"
+            accessibilityLabel={t('common.edit')}
+            accessibilityRole="button"
+          >
+            <Text className="flex-1 text-[23px] font-extrabold tracking-tight text-ink dark:text-ink-dark">
+              {book.title}
             </Text>
+            <MaterialIcons name="edit" size={16} color="#A79E90" style={{ marginLeft: 8 }} />
+          </Pressable>
+        )}
+        {src && tgt ? (
+          <Text className="mt-1.5 text-sm text-muted">
+            {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)} · {t('wordlist.word_count', { count: words.length })}
+          </Text>
+        ) : (
+          <Text className="mt-1.5 text-sm text-muted">
+            {t('wordlist.word_count', { count: words.length })}
+          </Text>
+        )}
+        <View className="mt-3.5 flex-row gap-2">
+          <View className="rounded-full bg-clay p-2.5 dark:bg-clay-dark">
+            <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
           </View>
-          <View className="ml-3 flex-row items-start gap-2">
-            <View className="rounded-full bg-clay p-2.5 dark:bg-clay-dark">
-              <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
-            </View>
-            {Platform.OS !== 'web' ? (
-              <Pressable
-                onPress={() => setNotifModalOpen(true)}
-                className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
-                accessibilityLabel={t('wordlist.notif_settings')}
-                accessibilityRole="button"
-              >
-                <MaterialIcons
-                  name={
-                    !globalNotifEnabled
-                      ? 'notifications-off'
-                      : book.notifEnabled
-                      ? 'notifications-active'
-                      : 'notifications-none'
-                  }
-                  size={22}
-                  color={
-                    !globalNotifEnabled
-                      ? '#A79E90'
-                      : book.notifEnabled
-                      ? '#2EC4A5'
-                      : '#7B7366'
-                  }
-                />
-              </Pressable>
-            ) : null}
-            <View className="items-center">
-              <Pressable
-                onPress={handleExport}
-                disabled={exporting}
-                className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
-                accessibilityLabel={t('wordlist.export_csv')}
-                accessibilityRole="button"
-              >
-                <MaterialIcons
-                  name="ios-share"
-                  size={22}
-                  color={exporting ? '#A79E90' : '#2EC4A5'}
-                />
-              </Pressable>
-            </View>
-          </View>
+          {Platform.OS !== 'web' ? (
+            <Pressable
+              onPress={() => setNotifModalOpen(true)}
+              className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
+              accessibilityLabel={t('wordlist.notif_settings')}
+              accessibilityRole="button"
+            >
+              <MaterialIcons
+                name={!globalNotifEnabled ? 'notifications-off' : book.notifEnabled ? 'notifications-active' : 'notifications-none'}
+                size={22}
+                color={!globalNotifEnabled ? '#A79E90' : book.notifEnabled ? '#2EC4A5' : '#7B7366'}
+              />
+            </Pressable>
+          ) : null}
+          <Pressable
+            onPress={handleExport}
+            disabled={exporting}
+            className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
+            accessibilityLabel={t('wordlist.export_csv')}
+            accessibilityRole="button"
+          >
+            <MaterialIcons name="ios-share" size={22} color={exporting ? '#A79E90' : '#2EC4A5'} />
+          </Pressable>
         </View>
+      </Card>
 
         {!editMode ? (
           <>
@@ -526,9 +508,9 @@ export default function WordlistDetailScreen() {
                     params: { bookId: book.id },
                   })
                 }
-                className="mt-2 items-center rounded-xl border border-black py-3 dark:border-white"
+                className="mt-2 items-center rounded-xl bg-accent-soft py-3.5 dark:bg-accent-soft-dark"
               >
-                <Text className="text-base font-semibold text-ink dark:text-ink-dark">
+                <Text className="text-base font-bold text-accent-deep dark:text-accent">
                   {t('wordlist.review_button', { count: reviewCount })}
                 </Text>
               </Pressable>

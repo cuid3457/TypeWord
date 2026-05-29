@@ -970,7 +970,7 @@ export default function AddWordScreen() {
             <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
               <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-3xl font-bold text-ink dark:text-ink-dark">
+            <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
               {t('add_word.title')}
             </Text>
           </View>
@@ -1024,20 +1024,22 @@ export default function AddWordScreen() {
                 </Text>
               ) : null}
             </View>
-            <TextInput
-              value={word}
-              onChangeText={setWord}
-              onFocus={handleInputFocus}
-              onSubmitEditing={() => handleLookup()}
-              returnKeyType="search"
-              autoCapitalize="none"
-              autoCorrect={false}
-              maxLength={effectiveMax}
-              placeholder={animatedPlaceholder}
-              placeholderTextColor="#A79E90"
-              className="mt-2 rounded-xl px-4 py-3 text-base text-ink dark:text-ink-dark"
-              style={{ borderWidth: 2, borderColor: listening ? '#E0654F' : '#2EC4A5' }}
-            />
+            <View className="mt-2 flex-row items-center rounded-[14px] px-4" style={{ borderWidth: 2, borderColor: listening ? '#E0654F' : '#2EC4A5' }}>
+              <MaterialIcons name="search" size={20} color={listening ? '#E0654F' : '#2EC4A5'} />
+              <TextInput
+                value={word}
+                onChangeText={setWord}
+                onFocus={handleInputFocus}
+                onSubmitEditing={() => handleLookup()}
+                returnKeyType="search"
+                autoCapitalize="none"
+                autoCorrect={false}
+                maxLength={effectiveMax}
+                placeholder={animatedPlaceholder}
+                placeholderTextColor="#A79E90"
+                className="ml-2 flex-1 py-3 text-base text-ink dark:text-ink-dark"
+              />
+            </View>
             {(() => {
               const wlen = codepointLength(word);
               if (wlen < effectiveMax - (isExpr ? 2 : 8)) return null;
@@ -1128,7 +1130,7 @@ export default function AddWordScreen() {
           ) : null}
 
           {loading && !partial && !response ? (
-            <SkeletonCard word={word.trim()} sourceLang={sourceLang} t={t} />
+            <SkeletonCard word={word.trim()} t={t} />
           ) : null}
 
           {partial && !response ? <PartialCard partial={partial} word={word.trim()} t={t} /> : null}
@@ -1363,7 +1365,7 @@ function formatReading(reading?: string | string[]): string | undefined {
  * delay — so sub-second/cached lookups never flash it — a MoaTip fades in to
  * make the wait less idle. Transitions to PartialCard on the first delta.
  */
-function SkeletonCard({ word, sourceLang, t }: { word: string; sourceLang?: string; t: TFn }) {
+function SkeletonCard({ word, t }: { word: string; t: TFn }) {
   const [showTip, setShowTip] = useState(false);
   useEffect(() => {
     const id = setTimeout(() => setShowTip(true), 700);
@@ -1384,7 +1386,7 @@ function SkeletonCard({ word, sourceLang, t }: { word: string; sourceLang?: stri
         <ActivityIndicator size="small" className="ml-2" />
       </View>
 
-      {showTip ? <MoaTip subjectLang={sourceLang} /> : null}
+      {showTip ? <MoaTip /> : null}
     </View>
   );
 }
