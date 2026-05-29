@@ -35,6 +35,7 @@
 import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@^2.45.0";
 import ESpeakNg from "npm:espeak-ng@1.0.2";
 import { BudgetExhaustedError, RateLimitError, enforceAllLimits } from "../_shared/limits.ts";
+import { logApiCall } from "../_shared/logging.ts";
 
 const ALLOWED_ORIGINS = new Set([
   "https://moavoca.com",
@@ -284,6 +285,18 @@ Deno.serve(async (req: Request) => {
     console.error("espeak generation failed:", err);
     return jsonResponse({ error: "IPA generation failed" }, 500);
   }
+
+  // Log every fresh espeak run (cache miss that reached generation) so the
+  // per-user + system rate-limit counters in check_rate_limits actually
+  // increment. Without this the limiter is a no-op. No tokens/cost (espeak
+  // is local WASM) so warm_state isn't bumped.
+  logApiCall(admin, {
+    userId,
+    endpoint: "ipa-generate",
+    cacheHit: false,
+    status: ipa ? "ok" : "error",
+  }).catch(() => {});
+
   if (!ipa) {
     return jsonResponse({ error: "empty IPA result" }, 500);
   }

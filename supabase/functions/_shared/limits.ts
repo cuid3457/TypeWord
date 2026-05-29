@@ -42,10 +42,15 @@ const ENDPOINT_LIMITS: Record<string, EndpointLimits> = {
     pro:  { perMinute: INF, perHour: INF, perDay: INF, perMonth: INF },
   },
   "ipa-generate": {
-    // Same logic as tts-synthesize: downstream of word-lookup, so
-    // upstream limits + system-wide cap are sufficient guards.
-    free: { perMinute: INF, perHour: INF, perDay: INF, perMonth: INF },
-    pro:  { perMinute: INF, perHour: INF, perDay: INF, perMonth: INF },
+    // Downstream of word-lookup (1 IPA call per headword), so a finite
+    // per-minute cap that tracks word-lookup's 60/min never throttles a
+    // human but blocks a script that POSTs unique throwaway `text` values
+    // to spin up espeak-ng WASM per request + bloat ipa_cache. Counts only
+    // cache misses (cache hits skip the limiter), so legit repeat lookups
+    // are unaffected. NOTE: ipa-generate MUST call logApiCall on each fresh
+    // espeak run for this cap (and the system cap below) to be live.
+    free: { perMinute: 60, perHour: INF, perDay: INF, perMonth: INF },
+    pro:  { perMinute: 60, perHour: INF, perDay: INF, perMonth: INF },
   },
   "image-extract": {
     free: { perMinute: 5, perHour: 30, perDay: INF, perMonth: INF },

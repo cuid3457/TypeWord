@@ -30,7 +30,7 @@ if [ -d "dist/app/assets/node_modules" ]; then
 fi
 
 echo "[build-cf-pages] copying landing + legal pages to dist root"
-cp index.html privacy.html terms.html licenses.html _redirects googlea7e926c78ec67b7e.html dist/
+cp index.html privacy.html terms.html business-info.html licenses.html _redirects _headers googlea7e926c78ec67b7e.html dist/
 
 echo "[build-cf-pages] done. dist/ size:"
 du -sh dist/ dist/app/ dist/app/assets/ 2>/dev/null || true

@@ -608,7 +608,6 @@ export async function confirmAndSetSessionFromDeepLink(
 ): Promise<{ applied: boolean; error?: string }> {
   let newEmail: string | null = null;
   let newUserId: string | null = null;
-  let provider: string | null = null;
   try {
     const part = accessToken.split('.')[1];
     if (!part) throw new Error('malformed token');
@@ -620,29 +619,21 @@ export async function confirmAndSetSessionFromDeepLink(
     );
     newEmail = typeof decoded.email === 'string' ? decoded.email : null;
     newUserId = typeof decoded.sub === 'string' ? decoded.sub : null;
-    provider = typeof decoded.app_metadata?.provider === 'string'
-      ? decoded.app_metadata.provider
-      : null;
   } catch {
     return { applied: false, error: 'Invalid token' };
   }
 
-  // OAuth providers (Apple / Google) authenticate the user at their own
-  // domain before redirecting back. The deep-link confirm modal exists to
-  // defend against attacker-crafted magic-link URLs, but it's unnecessary
-  // friction after an explicit OAuth consent screen. Apply directly.
-  // On Android, supabase OAuth callback fires this code path as a side
-  // effect of the AndroidManifest BROWSABLE intent picking up the
-  // `typeword://` redirect even though signInWithAppleWeb's WebBrowser
-  // also received the same URL — applying twice is idempotent because
-  // setSession with the same tokens is a no-op.
-  if (provider === 'apple' || provider === 'google') {
-    await supabase.auth.setSession({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    });
-    return { applied: true };
-  }
+  // NOTE: we intentionally do NOT special-case OAuth (apple/google) tokens
+  // for a silent apply. The provider claim lives in the UNVERIFIED JWT
+  // payload, and an attacker can craft `typeword://auth/callback#access_token=…`
+  // using their OWN valid Google/Apple tokens (provider='google'); a silent
+  // apply would swap the victim into the attacker's account and exfiltrate
+  // the victim's local words on next sync (login CSRF). The legitimate
+  // Android OAuth flow already establishes the session directly via
+  // signInWithAppleWeb's WebBrowser result, so when the duplicate BROWSABLE
+  // intent reaches here the session is already the right user and the
+  // same-user check below applies it silently with no modal. Any other
+  // session id falls through to the confirm modal, which surfaces the email.
 
   // State-nonce match: this confirms the deep link came from a flow we
   // initiated (signUpWithEmail set the same nonce in AsyncStorage right

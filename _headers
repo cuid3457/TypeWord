@@ -1,0 +1,42 @@
+# Cloudflare Pages security headers for moavoca.com
+#
+# Two tiers:
+#   /*                — non-breaking, site-wide hardening (safe for the Expo
+#                       Web SPA at /app/*, which loads inline bootstrap JS +
+#                       inline RN-web styles and connects cross-origin to
+#                       Supabase/Sentry/RevenueCat — so we deliberately do
+#                       NOT set a restrictive default-src/script-src/connect-src
+#                       here; that would break the app).
+#   static .html      — the marketing/legal pages have ZERO JavaScript and
+#                       load no external resources, so they get a strict
+#                       lock-down CSP that overrides the /* CSP.
+#
+# Before shipping AdSense / a web payment SDK, add an explicit script-src +
+# connect-src + frame-src CSP scoped to /app/* and TEST the SPA against it
+# (see project_web_adsense_plan memory).
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'
+
+/
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+/index.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+/privacy.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+/terms.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+/business-info.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+
+/licenses.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'

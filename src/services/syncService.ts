@@ -46,6 +46,14 @@ export function scheduleSync() {
 
 let _retryAfterSync = false;
 
+// The user id that owns the currently-running sync. Captured once at the
+// start of syncAll and checked by getSessionUserId() before every server
+// write. If the auth session swaps mid-sync (e.g. OAuth-popup account
+// switch, where the SIGNED_OUT event never fires), getSessionUserId throws
+// and the in-flight sync aborts instead of stamping user A's local rows
+// with user B's user_id and uploading them to B's account.
+let _syncOwnerId: string | null = null;
+
 export async function syncAll(): Promise<void> {
   if (_syncing) {
     _retryAfterSync = true;
@@ -58,6 +66,7 @@ export async function syncAll(): Promise<void> {
   if (!session.session?.user || session.session.user.is_anonymous) return;
 
   _syncing = true;
+  _syncOwnerId = session.session.user.id;
   notify();
 
   try {
@@ -93,6 +102,7 @@ export async function syncAll(): Promise<void> {
     await AsyncStorage.setItem(LAST_SYNC_KEY, syncStartTime);
   } finally {
     _syncing = false;
+    _syncOwnerId = null;
     notify();
     if (_retryAfterSync) {
       _retryAfterSync = false;
@@ -107,7 +117,14 @@ export async function syncAll(): Promise<void> {
 
 async function getSessionUserId(): Promise<string> {
   const { data } = await supabase.auth.getSession();
-  return data.session!.user.id;
+  const id = data.session?.user?.id;
+  // Abort if the session is gone or swapped to a different user since the
+  // sync started — prevents writing the owner's local rows under another
+  // account's id (cross-account data leak on account switch).
+  if (!id || (_syncOwnerId !== null && id !== _syncOwnerId)) {
+    throw new Error('sync aborted: auth session changed mid-sync');
+  }
+  return id;
 }
 
 async function pushProfile() {
@@ -168,6 +185,8 @@ async function pushDeletes() {
 
   const bookIds = rows.filter(r => r.table_name === 'books').map(r => r.record_id);
   const wordIds = rows.filter(r => r.table_name === 'user_words').map(r => r.record_id);
+
+  await getSessionUserId(); // abort if session swapped mid-sync
 
   for (const batch of chunks(wordIds, BATCH_SIZE)) {
     const { error } = await supabase.from('user_words').delete().in('id', batch);
@@ -317,6 +336,7 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
   let from = 0;
 
   while (true) {
+    await getSessionUserId(); // abort if session swapped mid-sync
     const { data } = await supabase
       .from('books')
       .select('*')
@@ -382,6 +402,7 @@ async function pullWords(since: string, pendingDeleteIds: Set<string>) {
   let from = 0;
 
   while (true) {
+    await getSessionUserId(); // abort if session swapped mid-sync
     const { data } = await supabase
       .from('user_words')
       .select('*')
