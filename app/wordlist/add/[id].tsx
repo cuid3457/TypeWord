@@ -983,7 +983,7 @@ export default function AddWordScreen() {
                 </Text>
               ) : null}
               <Text className="mt-0.5 text-sm text-muted" numberOfLines={1}>
-                {src?.flag} {t(`languages.${src?.code}`)} → {tgt?.flag} {t(`languages.${tgt?.code}`)}
+                {t(`languages.${src?.code}`)} → {t(`languages.${tgt?.code}`)}
               </Text>
             </View>
             <View className="shrink-0 flex-row items-start gap-3">
@@ -1018,8 +1018,8 @@ export default function AddWordScreen() {
               ) : isBidi && word.trim() ? (
                 <Text className="ml-2 text-xs text-faint">
                   {inputIsStudyLang
-                    ? `${findLanguage(studyLang)?.flag} → ${findLanguage(nativeLang)?.flag}`
-                    : `${findLanguage(nativeLang)?.flag} → ${findLanguage(studyLang)?.flag} (${t('add_word.reverse')})`
+                    ? `${t(`languages.${studyLang}`)} → ${t(`languages.${nativeLang}`)}`
+                    : `${t(`languages.${nativeLang}`)} → ${t(`languages.${studyLang}`)} (${t('add_word.reverse')})`
                   }
                 </Text>
               ) : null}

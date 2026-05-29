@@ -32,6 +32,18 @@ for (const C of targets) {
  * Elements with their own non-Pretendard family (icon glyphs, monospace
  * readings) are left untouched.
  */
+// Emoji (incl. regional-indicator flag pairs 🇰🇷, pictographs 🔥⭐👉, symbols
+// ⭐, variation selectors). Forcing a text fontFamily that lacks these glyphs
+// suppresses them on Android (flags render blank) — so for any text that
+// contains emoji we leave the font untouched and let the OS emoji fallback
+// run. The plain text-arrow "→" (U+2192) is deliberately NOT in these ranges.
+const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u{1F1E6}-\u{1F1FF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/u;
+function containsEmoji(node: unknown): boolean {
+  if (typeof node === 'string') return EMOJI_RE.test(node);
+  if (Array.isArray(node)) return node.some(containsEmoji);
+  return false;
+}
+
 const PRETENDARD_BY_WEIGHT: Record<string, string> = {
   '100': 'Pretendard-Regular',
   '200': 'Pretendard-Regular',
@@ -58,6 +70,11 @@ if (!TextAny.__pretendardPatched && typeof TextAny.render === 'function') {
       fontWeight?: string | number;
     };
     if (flat.fontFamily && !flat.fontFamily.startsWith('Pretendard')) {
+      return baseRender(props, ref);
+    }
+    // Leave emoji-bearing text to the OS so flag/pictograph glyphs render
+    // (a forced fontFamily without those glyphs blanks them on Android).
+    if (containsEmoji((props as { children?: unknown }).children)) {
       return baseRender(props, ref);
     }
     const family = PRETENDARD_BY_WEIGHT[String(flat.fontWeight ?? '400')] ?? 'Pretendard-Regular';

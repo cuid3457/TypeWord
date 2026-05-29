@@ -332,7 +332,6 @@ export default function LibraryTabScreen() {
             // a lone last-row item doesn't stretch — the empty right slot
             // just stays empty. Row padding/gap is on columnWrapperStyle.
             const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
-            const src = findLanguage(item.sourceLang);
             return (
               <Pressable
                 onPress={() => router.push(`/community-detail/${item.id}`)}
@@ -340,10 +339,7 @@ export default function LibraryTabScreen() {
                 style={[cardShadow, isTablet ? { width: tabletCardWidth } : null]}
               >
                 <View className="flex-row items-start justify-between">
-                  <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
-                    <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
-                  </View>
-                  <View className="ml-3 flex-1">
+                  <View className="flex-1">
                     <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.title}
                     </Text>

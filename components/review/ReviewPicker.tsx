@@ -273,16 +273,13 @@ export function ReviewPicker({
                   language in a flex-1 column, due-count chip on the right. */}
               <View style={!canStart ? { opacity: 0.4 } : undefined}>
                 <View className="flex-row items-center">
-                  <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
-                    <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
-                  </View>
-                  <View className="ml-3 flex-1">
+                  <View className="flex-1">
                     <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.title}
                     </Text>
                     {src && tgt ? (
                       <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
-                        {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+                        {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
                       </Text>
                     ) : null}
                   </View>

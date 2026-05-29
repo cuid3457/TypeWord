@@ -447,7 +447,7 @@ export default function WordlistDetailScreen() {
           <View className="flex-1">
             {src && tgt ? (
               <Text className="text-sm text-muted">
-                {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+                {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
               </Text>
             ) : null}
             <Text className="mt-1 text-sm text-muted">

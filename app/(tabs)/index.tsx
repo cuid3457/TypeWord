@@ -537,12 +537,7 @@ function BookCard({
           </View>
         ) : null}
 
-        {/* Source-language flag tile */}
-        <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
-          <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
-        </View>
-
-        <View className="ml-3 flex-1">
+        <View className="flex-1">
           <View className="flex-row items-center">
             {!editMode && book.pinned ? (
               <MaterialIcons name="push-pin" size={13} color="#A79E90" style={{ marginRight: 4 }} />
@@ -553,7 +548,7 @@ function BookCard({
           </View>
           {src && tgt ? (
             <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
-              {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
+              {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
             </Text>
           ) : null}
         </View>
