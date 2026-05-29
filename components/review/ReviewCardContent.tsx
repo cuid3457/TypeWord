@@ -112,7 +112,7 @@ export function ReviewCardContent({
           the word as its own row — always vertically centered, never affected
           by word length. */}
       <Text
-        className="text-3xl font-bold text-center text-black dark:text-white"
+        className="text-4xl font-extrabold text-center text-ink dark:text-ink-dark"
         style={{ alignSelf: 'stretch' }}
       >
         {current.word}
@@ -126,11 +126,11 @@ export function ReviewCardContent({
       ) : null}
       <Pressable
         onPress={onSpeak}
-        className="mt-3 rounded-full bg-gray-100 p-2 dark:bg-gray-800"
+        className="mt-3 rounded-full bg-accent-soft p-2 dark:bg-accent-soft-dark"
         accessibilityLabel={t('common.speak')}
         accessibilityRole="button"
       >
-        <MaterialIcons name="volume-up" size={20} color="#10b981" />
+        <MaterialIcons name="volume-up" size={20} color="#1E9E84" />
       </Pressable>
     </View>
   );
@@ -140,11 +140,11 @@ export function ReviewCardContent({
       {meanings.map((m, i) => {
         const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
         return (
-          <View key={i} className="mb-2 rounded-xl bg-gray-50 p-3 dark:bg-gray-900">
+          <View key={i} className="mb-2 rounded-xl bg-clay p-3 dark:bg-clay-dark">
             {marker ? (
-              <Text className="text-xs text-gray-500">{marker}</Text>
+              <Text className="text-xs text-muted">{marker}</Text>
             ) : null}
-            <Text className="mt-1 text-base text-black dark:text-white">
+            <Text className="mt-1 text-base text-ink dark:text-ink-dark">
               {meanings.length > 1 ? `${i + 1}. ` : ''}{m.definition}
             </Text>
           </View>
@@ -179,9 +179,9 @@ export function ReviewCardContent({
     current.result.examples?.length ? (
       <View className="mt-3">
         {current.result.examples.map((e, i) => (
-          <View key={i} className="mb-2 rounded-lg bg-gray-50 p-3 dark:bg-gray-900">
+          <View key={i} className="mb-2 rounded-lg bg-clay p-3 dark:bg-clay-dark">
             <View className="flex-row items-start">
-              <Text className="flex-1 text-sm italic text-black dark:text-white">
+              <Text className="flex-1 text-sm italic text-ink dark:text-ink-dark">
                 {e.sentence.includes('**')
                   ? renderMarkedSentence(e.sentence, e.meaningIndex)
                   : e.sentence}
@@ -191,15 +191,15 @@ export function ReviewCardContent({
                   const lang = current.bookId ? langs[current.bookId] : 'en';
                   speakWord(e.sentence.replace(/\*\*/g, ''), lang ?? 'en');
                 }}
-                className="ml-2 rounded-full bg-gray-200 p-1 dark:bg-gray-700"
+                className="ml-2 rounded-full bg-accent-soft p-1 dark:bg-accent-soft-dark"
                 accessibilityLabel={t('common.speak')}
                 accessibilityRole="button"
               >
-                <MaterialIcons name="volume-up" size={14} color="#10b981" />
+                <MaterialIcons name="volume-up" size={14} color="#1E9E84" />
               </Pressable>
             </View>
             {e.translation ? (
-              <Text className="mt-1 text-sm text-gray-500">
+              <Text className="mt-1 text-sm text-muted">
                 {e.translation.replace(/\*\*/g, '')}
               </Text>
             ) : null}
@@ -215,14 +215,14 @@ export function ReviewCardContent({
         const isSelected = choiceSelected === i;
         const showResult = choiceSelected !== null;
         if (showResult && !isCorrect && !isSelected) return null;
-        let bg = 'bg-gray-50 dark:bg-gray-900';
+        let bg = 'bg-clay dark:bg-clay-dark';
         let borderStyle = {};
         if (showResult && isCorrect) {
           bg = '';
-          borderStyle = { borderWidth: 2, borderColor: '#2EC4A5', backgroundColor: colorScheme === 'dark' ? '#064e3b' : '#ecfdf5' };
+          borderStyle = { borderWidth: 2, borderColor: '#2EC4A5', backgroundColor: colorScheme === 'dark' ? '#16332C' : '#DBF1EB' };
         } else if (showResult && isSelected && !isCorrect) {
           bg = '';
-          borderStyle = { borderWidth: 2, borderColor: '#ef4444', backgroundColor: colorScheme === 'dark' ? '#450a0a' : '#fef2f2' };
+          borderStyle = { borderWidth: 2, borderColor: '#E0654F', backgroundColor: colorScheme === 'dark' ? '#3A1A14' : '#F6E4DF' };
         }
         return (
           <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)}>
@@ -232,11 +232,11 @@ export function ReviewCardContent({
               style={Object.keys(borderStyle).length ? borderStyle : undefined}
               disabled={choiceSelected !== null}
             >
-              <Text className="flex-1 text-base text-black dark:text-white" numberOfLines={3}>{c}</Text>
+              <Text className="flex-1 text-base text-ink dark:text-ink-dark" numberOfLines={3}>{c}</Text>
               {showResult && isCorrect ? (
                 <MaterialIcons name="check-circle" size={22} color="#2EC4A5" style={{ marginLeft: 8 }} />
               ) : showResult && isSelected && !isCorrect ? (
-                <MaterialIcons name="cancel" size={22} color="#ef4444" style={{ marginLeft: 8 }} />
+                <MaterialIcons name="cancel" size={22} color="#E0654F" style={{ marginLeft: 8 }} />
               ) : null}
             </Pressable>
           </Animated.View>
@@ -249,8 +249,8 @@ export function ReviewCardContent({
             const ex = examples.length > 0 ? examples[contextExampleIdx % examples.length] : null;
             if (!ex?.translation) return null;
             return (
-              <View className="mb-3 rounded-xl bg-gray-50 p-4 dark:bg-gray-900">
-                <Text className="text-sm text-gray-500">
+              <View className="mb-3 rounded-xl bg-clay p-4 dark:bg-clay-dark">
+                <Text className="text-sm text-muted">
                   {ex.translation.replace(/\*\*/g, '')}
                 </Text>
               </View>
@@ -271,7 +271,7 @@ export function ReviewCardContent({
             <View className="mt-6 items-center">{renderWordHeader()}</View>
           ) : (
             <View className="items-center justify-center py-16">
-              <Text className="text-base text-gray-400">{t('review.show_answer')}</Text>
+              <Text className="text-base text-faint">{t('review.show_answer')}</Text>
             </View>
           )}
         </Pressable>
@@ -280,7 +280,7 @@ export function ReviewCardContent({
           {renderWordHeader()}
           {flipped ? renderMeanings() : (
             <View className="items-center justify-center py-16">
-              <Text className="text-base text-gray-400">{t('review.show_answer')}</Text>
+              <Text className="text-base text-faint">{t('review.show_answer')}</Text>
             </View>
           )}
         </Pressable>
@@ -338,17 +338,17 @@ export function ReviewCardContent({
       const cleanSentence = ex.sentence.replace(/\*\*/g, '');
       return (
         <View>
-          <View className="items-center rounded-xl bg-gray-50 p-5 dark:bg-gray-900">
-            <Text className="text-center text-lg leading-7 text-black dark:text-white">
+          <View className="items-center rounded-xl bg-clay p-5 dark:bg-clay-dark">
+            <Text className="text-center text-lg leading-7 text-ink dark:text-ink-dark">
               {renderSentence()}
             </Text>
             <Pressable
               onPress={() => speakWord(cleanSentence, ctxLang)}
-              className="mt-3 rounded-full bg-gray-200 p-2 dark:bg-gray-700"
+              className="mt-3 rounded-full bg-accent-soft p-2 dark:bg-accent-soft-dark"
               accessibilityLabel={t('common.speak')}
               accessibilityRole="button"
             >
-              <MaterialIcons name="volume-up" size={20} color="#10b981" />
+              <MaterialIcons name="volume-up" size={20} color="#1E9E84" />
             </Pressable>
           </View>
           {renderChoices()}
@@ -364,10 +364,10 @@ export function ReviewCardContent({
       return (
         <View>
           <View className="items-center">
-            <Pressable onPress={onSpeak} className="rounded-full bg-gray-100 p-4 dark:bg-gray-800" accessibilityLabel={t('common.speak')} accessibilityRole="button">
-              <MaterialIcons name="volume-up" size={32} color="#10b981" />
+            <Pressable onPress={onSpeak} className="rounded-full bg-accent-soft p-4 dark:bg-accent-soft-dark" accessibilityLabel={t('common.speak')} accessibilityRole="button">
+              <MaterialIcons name="volume-up" size={32} color="#1E9E84" />
             </Pressable>
-            <Text className="mt-3 text-center text-base text-gray-500">
+            <Text className="mt-3 text-center text-base text-muted">
               {meanings[0]?.definition ?? ''}
             </Text>
           </View>
@@ -380,11 +380,11 @@ export function ReviewCardContent({
               <Pressable
                 onPress={() => dictationInputRef.current?.focus()}
                 disabled={inputDisabled}
-                className="flex-1 rounded-xl border border-gray-300 dark:border-gray-700"
+                className="flex-1 rounded-xl border border-line dark:border-line-dark"
                 style={{ minHeight: 50, position: 'relative', justifyContent: 'center' }}
               >
                 {dictationListening ? (
-                  <Text className="text-center text-xl text-gray-400" style={{ paddingVertical: 12 }}>
+                  <Text className="text-center text-xl text-faint" style={{ paddingVertical: 12 }}>
                     {t('review.speaking_listening')}
                   </Text>
                 ) : (
@@ -394,17 +394,17 @@ export function ReviewCardContent({
                       style={{ paddingHorizontal: 16, paddingVertical: 12 }}
                       pointerEvents="none"
                     >
-                      <Text className="text-xl text-black dark:text-white">{dictationSplit.pre}</Text>
+                      <Text className="text-xl text-ink dark:text-ink-dark">{dictationSplit.pre}</Text>
                       {dictationFocused && !inputDisabled ? (
                         <Text
-                          className="text-xl text-black dark:text-white"
+                          className="text-xl text-ink dark:text-ink-dark"
                           style={{ opacity: dictationCursorOn ? 1 : 0, marginHorizontal: 1 }}
                         >
                           |
                         </Text>
                       ) : null}
                       <Text
-                        className="text-xl text-gray-300 dark:text-gray-600"
+                        className="text-xl text-faint"
                         style={{ letterSpacing: 6 }}
                       >
                         {dictationSplit.post}
@@ -446,7 +446,7 @@ export function ReviewCardContent({
                 onPress={onDictationMicPress}
                 disabled={dictationChecked}
                 className={`h-12 w-12 items-center justify-center rounded-full ${
-                  dictationListening ? 'bg-red-500' : dictationChecked ? 'bg-gray-200 dark:bg-gray-800' : 'bg-emerald-500'
+                  dictationListening ? 'bg-danger' : dictationChecked ? 'bg-clay dark:bg-clay-dark' : 'bg-accent'
                 }`}
                 accessibilityLabel={t('review.speaking_prompt')}
                 accessibilityRole="button"
@@ -454,7 +454,7 @@ export function ReviewCardContent({
                 <MaterialIcons
                   name={dictationListening ? 'stop' : 'mic'}
                   size={22}
-                  color={dictationChecked && !dictationListening ? '#9ca3af' : '#ffffff'}
+                  color={dictationChecked && !dictationListening ? '#A79E90' : '#ffffff'}
                 />
               </Pressable>
             </View>
@@ -478,7 +478,7 @@ export function ReviewCardContent({
                           <MaterialIcons name="check-circle" size={24} color="#2EC4A5" />
                           <Text className="text-lg font-bold" style={{ color: '#2EC4A5' }}>{current.word}</Text>
                         </View>
-                        <Text className="text-xs text-gray-500">
+                        <Text className="text-xs text-muted">
                           {t('review.dictation_typo_hint', { input: dictationInput.trim() })}
                         </Text>
                       </View>
@@ -487,10 +487,10 @@ export function ReviewCardContent({
                   return (
                     <View className="items-center gap-1">
                       <View className="flex-row items-center gap-2">
-                        <MaterialIcons name="cancel" size={24} color="#ef4444" />
-                        <Text className="text-lg text-red-500 line-through">{dictationInput.trim()}</Text>
+                        <MaterialIcons name="cancel" size={24} color="#E0654F" />
+                        <Text className="text-lg text-danger line-through">{dictationInput.trim()}</Text>
                       </View>
-                      <Text className="text-lg font-bold text-black dark:text-white">{current.word}</Text>
+                      <Text className="text-lg font-bold text-ink dark:text-ink-dark">{current.word}</Text>
                     </View>
                   );
                 })()}
@@ -499,12 +499,12 @@ export function ReviewCardContent({
               <Pressable
                 onPress={() => dictationInput.trim() && setDictationChecked(true)}
                 className={`mt-3 items-center rounded-xl py-3 ${
-                  dictationInput.trim() ? 'bg-black dark:bg-white' : 'bg-gray-200 dark:bg-gray-800'
+                  dictationInput.trim() ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
                 }`}
                 disabled={!dictationInput.trim()}
               >
                 <Text className={`text-base font-semibold ${
-                  dictationInput.trim() ? 'text-white dark:text-black' : 'text-gray-400'
+                  dictationInput.trim() ? 'text-canvas dark:text-canvas-dark' : 'text-faint'
                 }`}>
                   {t('review.check')}
                 </Text>
@@ -560,24 +560,24 @@ export function ReviewCardContent({
       const showResult = choiceSelected !== null;
       return (
         <View>
-          <View className="rounded-xl bg-gray-50 p-5 dark:bg-gray-900">
+          <View className="rounded-xl bg-clay p-5 dark:bg-clay-dark">
             <View className="flex-row items-start">
-              <Text className="flex-1 text-center text-lg leading-7 text-black dark:text-white">
+              <Text className="flex-1 text-center text-lg leading-7 text-ink dark:text-ink-dark">
                 {showResult ? renderFilledSentence() : blanked}
               </Text>
               {showResult ? (
                 <Pressable
                   onPress={() => speakWord(cleanSentence, ctxLang)}
-                  className="ml-2 rounded-full bg-gray-200 p-1.5 dark:bg-gray-700"
+                  className="ml-2 rounded-full bg-accent-soft p-1.5 dark:bg-accent-soft-dark"
                   accessibilityLabel={t('common.speak')}
                   accessibilityRole="button"
                 >
-                  <MaterialIcons name="volume-up" size={16} color="#10b981" />
+                  <MaterialIcons name="volume-up" size={16} color="#1E9E84" />
                 </Pressable>
               ) : null}
             </View>
             {ex.translation ? (
-              <Text className="mt-2 text-center text-sm text-gray-500">
+              <Text className="mt-2 text-center text-sm text-muted">
                 {renderTranslationHighlighted(ex.translation)}
               </Text>
             ) : null}
@@ -587,13 +587,13 @@ export function ReviewCardContent({
               const isCorrect = c === correctDefinition;
               const isSelected = choiceSelected === i;
               if (showResult && !isCorrect && !isSelected) return null;
-              let bg = 'bg-gray-50 dark:bg-gray-900';
+              let bg = 'bg-clay dark:bg-clay-dark';
               let borderStyle = {};
               if (showResult && isCorrect) {
-                borderStyle = { borderWidth: 2, borderColor: '#2EC4A5', backgroundColor: colorScheme === 'dark' ? '#064e3b' : '#ecfdf5' };
+                borderStyle = { borderWidth: 2, borderColor: '#2EC4A5', backgroundColor: colorScheme === 'dark' ? '#16332C' : '#DBF1EB' };
                 bg = '';
               } else if (showResult && isSelected && !isCorrect) {
-                borderStyle = { borderWidth: 2, borderColor: '#ef4444', backgroundColor: colorScheme === 'dark' ? '#450a0a' : '#fef2f2' };
+                borderStyle = { borderWidth: 2, borderColor: '#E0654F', backgroundColor: colorScheme === 'dark' ? '#3A1A14' : '#F6E4DF' };
                 bg = '';
               }
               return (
@@ -604,11 +604,11 @@ export function ReviewCardContent({
                     style={Object.keys(borderStyle).length ? borderStyle : undefined}
                     disabled={choiceSelected !== null}
                   >
-                    <Text className="flex-1 text-base font-semibold text-black dark:text-white">{c}</Text>
+                    <Text className="flex-1 text-base font-semibold text-ink dark:text-ink-dark">{c}</Text>
                     {showResult && isCorrect ? (
                       <MaterialIcons name="check-circle" size={22} color="#2EC4A5" style={{ marginLeft: 8 }} />
                     ) : showResult && isSelected && !isCorrect ? (
-                      <MaterialIcons name="cancel" size={22} color="#ef4444" style={{ marginLeft: 8 }} />
+                      <MaterialIcons name="cancel" size={22} color="#E0654F" style={{ marginLeft: 8 }} />
                     ) : null}
                   </Pressable>
                 </Animated.View>

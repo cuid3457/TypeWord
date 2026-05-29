@@ -1443,20 +1443,20 @@ export default function ReviewScreen() {
   if (phase === 'picker') {
     if (pickerLoading) {
       return (
-        <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-white dark:bg-black">
-          <Text className="text-sm text-gray-400">{t('review.loading')}</Text>
+        <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
+          <Text className="text-sm text-faint">{t('review.loading')}</Text>
         </SafeAreaView>
       );
     }
 
     if (pickerError) {
       return (
-        <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-white px-10 dark:bg-black">
-          <MaterialIcons name="error-outline" size={48} color="#9ca3af" />
-          <Text className="mt-4 text-xl font-bold text-black dark:text-white">
+        <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-canvas px-10 dark:bg-canvas-dark">
+          <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+          <Text className="mt-4 text-xl font-bold text-ink dark:text-ink-dark">
             {t('error.title')}
           </Text>
-          <Text className="mt-2 text-center text-sm text-gray-500">
+          <Text className="mt-2 text-center text-sm text-muted">
             {t('error.message')}
           </Text>
           <Pressable
@@ -1464,9 +1464,9 @@ export default function ReviewScreen() {
               setPickerLoading(true);
               loadPickerData(sortMode, sortReversed);
             }}
-            className="mt-8 items-center rounded-xl bg-black px-8 py-4 dark:bg-white"
+            className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
           >
-            <Text className="text-base font-semibold text-white dark:text-black">
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
               {t('error.retry')}
             </Text>
           </Pressable>
@@ -1513,8 +1513,8 @@ export default function ReviewScreen() {
   // ── Review Phase: Loading ──
   if (reviewLoading) {
     return (
-      <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-white dark:bg-black">
-        <Text className="text-sm text-gray-400">{t('review.loading')}</Text>
+      <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
+        <Text className="text-sm text-faint">{t('review.loading')}</Text>
       </SafeAreaView>
     );
   }

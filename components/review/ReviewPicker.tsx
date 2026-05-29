@@ -4,6 +4,7 @@ import { FlatList, Keyboard, Pressable, RefreshControl, Text, TextInput, View } 
 import { refreshReview } from '@src/services/reviewCache';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
+import { cardShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 import { useTranslation } from 'react-i18next';
 import type { RefObject } from 'react';
@@ -102,7 +103,7 @@ export function ReviewPicker({
           we hit when review used h-11 + flex-1 wrapping. */}
       <View className="flex-row items-center justify-between px-6 pt-6">
         <View className="flex-1">
-          <Text className="text-3xl font-bold text-black dark:text-white">
+          <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
             {t('review.title')}
           </Text>
         </View>
@@ -119,17 +120,17 @@ export function ReviewPicker({
           <Pressable
             key={mode}
             onPress={() => handleSortChange(mode)}
-            className={`flex-row items-center rounded-lg px-3 py-1.5 ${
+            className={`flex-row items-center rounded-xl px-3 py-1.5 ${
               sortMode === mode
-                ? 'bg-black dark:bg-white'
-                : 'bg-gray-100 dark:bg-gray-800'
+                ? 'bg-ink dark:bg-ink-dark'
+                : 'bg-clay dark:bg-clay-dark'
             }`}
           >
             <Text
-              className={`text-xs font-medium ${
+              className={`text-xs font-semibold ${
                 sortMode === mode
-                  ? 'text-white dark:text-black'
-                  : 'text-gray-600 dark:text-gray-400'
+                  ? 'text-canvas dark:text-canvas-dark'
+                  : 'text-muted'
               }`}
             >
               {t(`home.sort_${mode}`)}
@@ -138,7 +139,7 @@ export function ReviewPicker({
               <MaterialIcons
                 name={sortReversed ? 'arrow-upward' : 'arrow-downward'}
                 size={12}
-                color={colorScheme === 'dark' ? '#000' : '#fff'}
+                color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
                 style={{ marginLeft: 2 }}
               />
             ) : null}
@@ -149,17 +150,17 @@ export function ReviewPicker({
       {/* Search bar */}
       <View className="mt-2 px-6">
         <View>
-          <View className="flex-row items-center rounded-xl bg-gray-100 px-3 dark:bg-gray-800">
-            <MaterialIcons name="search" size={18} color="#9ca3af" />
+          <View className="flex-row items-center rounded-xl bg-clay px-3 dark:bg-clay-dark">
+            <MaterialIcons name="search" size={18} color="#A79E90" />
             <TextInput
               value={searchQuery}
               onChangeText={onSearchQueryChange}
               placeholder={t('home.search_placeholder')}
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               returnKeyType="search"
               autoCapitalize="none"
               autoCorrect={false}
-              className="ml-2 flex-1 py-2.5 text-sm text-black dark:text-white"
+              className="ml-2 flex-1 py-2.5 text-sm text-ink dark:text-ink-dark"
             />
             {searchQuery ? (
               <Pressable
@@ -168,12 +169,12 @@ export function ReviewPicker({
                 accessibilityLabel={t('common.clear')}
                 accessibilityRole="button"
               >
-                <MaterialIcons name="close" size={16} color="#9ca3af" />
+                <MaterialIcons name="close" size={16} color="#A79E90" />
               </Pressable>
             ) : null}
           </View>
           {searchMatches.length > 0 && searchQuery.trim() ? (
-            <View className="mt-1 rounded-xl bg-gray-100 dark:bg-gray-800" style={{ overflow: 'hidden' }}>
+            <View className="mt-1 rounded-xl bg-clay dark:bg-clay-dark" style={{ overflow: 'hidden' }}>
               {searchMatches.map((book) => (
                 <Pressable
                   key={book.bookId}
@@ -181,9 +182,9 @@ export function ReviewPicker({
                   className="flex-row items-center px-4 py-3"
                   style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
                 >
-                  <MaterialIcons name="book" size={16} color="#9ca3af" />
-                  <Text className="ml-2 flex-1 text-sm text-black dark:text-white" numberOfLines={1}>{book.title}</Text>
-                  <Text className="text-xs text-gray-400">{book.dueCount}</Text>
+                  <MaterialIcons name="book" size={16} color="#A79E90" />
+                  <Text className="ml-2 flex-1 text-sm text-ink dark:text-ink-dark" numberOfLines={1}>{book.title}</Text>
+                  <Text className="text-xs text-faint">{book.dueCount}</Text>
                 </Pressable>
               ))}
             </View>
@@ -194,7 +195,7 @@ export function ReviewPicker({
   );
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       {headerEl}
       {/* Per-book list — header rendered above, outside FlatList, to
@@ -209,19 +210,19 @@ export function ReviewPicker({
         numColumns={isTablet ? 2 : 1}
         columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+          <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#2EC4A5" colors={['#2EC4A5']} />
         }
         contentContainerStyle={bookCounts.length === 0
           ? { flexGrow: 1, paddingHorizontal: 24 }
           : { paddingTop: 24, paddingBottom: 24, gap: isTablet ? 12 : 0 }}
         ListEmptyComponent={
           <View className="items-center px-6">
-            <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color="#9ca3af" />
-            <Text className="mt-4 text-center text-base text-gray-500 dark:text-gray-400">
+            <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color={hasWords ? '#2EC4A5' : '#A79E90'} />
+            <Text className="mt-4 text-center text-base text-muted">
               {hasWords ? t('review.empty') : t('review.empty_no_lists')}
             </Text>
             {hasWords ? (
-              <Text className="mt-1 text-center text-sm text-gray-400">
+              <Text className="mt-1 text-center text-sm text-faint">
                 {t('review.empty_hint')}
               </Text>
             ) : null}
@@ -260,46 +261,42 @@ export function ReviewPicker({
                 }
                 onMinWordToast();
               }}
-              className={`rounded-xl border px-4 py-4 ${isTablet ? '' : 'mx-6 mb-2'} ${
-                highlighted ? '' : 'border-gray-300 dark:border-gray-700'
-              }`}
-              style={
-                highlighted
-                  ? isTablet
-                    ? { width: tabletCardWidth, borderColor: '#2EC4A5' }
-                    : { borderColor: '#2EC4A5' }
-                  : isTablet
-                    ? { width: tabletCardWidth }
-                    : undefined
-              }
+              className={`rounded-[20px] border border-line bg-surface px-4 py-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
+              style={[
+                cardShadow,
+                isTablet ? { width: tabletCardWidth } : null,
+                highlighted ? { borderColor: '#2EC4A5' } : null,
+              ]}
             >
               {/* Dimmed header/meta only — reload button below stays full opacity.
-                  Layout mirrors the wordlist tab BookCard: title + language
-                  stacked in a flex-1 column, word-count chip on the right
-                  vertically centered. */}
+                  Layout mirrors the wordlist tab BookCard: flag tile + title +
+                  language in a flex-1 column, due-count chip on the right. */}
               <View style={!canStart ? { opacity: 0.4 } : undefined}>
                 <View className="flex-row items-center">
-                  <View className="flex-1">
-                    <Text className="text-base font-medium text-black dark:text-white" numberOfLines={1}>
+                  <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
+                    <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
+                  </View>
+                  <View className="ml-3 flex-1">
+                    <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.title}
                     </Text>
                     {src && tgt ? (
-                      <Text className="mt-1 text-xs text-gray-500">
+                      <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
                         {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
                       </Text>
                     ) : null}
                   </View>
-                  <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-                    <Text className="text-sm font-semibold text-black dark:text-white">
+                  <View className={`ml-3 rounded-full px-3 py-1 ${canStart ? 'bg-accent-soft dark:bg-accent-soft-dark' : 'bg-clay dark:bg-clay-dark'}`}>
+                    <Text className={`text-sm font-bold ${canStart ? 'text-accent-deep dark:text-accent' : 'text-ink dark:text-ink-dark'}`}>
                       {t('home.word_count', { count: item.dueCount })}
                     </Text>
                   </View>
                 </View>
               </View>
               {canReload ? (
-                <View className="mt-2 flex-row items-center self-start rounded-lg border border-[#2EC4A5] bg-gray-100 px-3 py-1.5 dark:bg-gray-800">
+                <View className="mt-3 flex-row items-center self-start rounded-xl border border-accent bg-clay px-3 py-1.5 dark:bg-clay-dark">
                   <MaterialIcons name="refresh" size={14} color="#2EC4A5" />
-                  <Text className="ml-1 text-xs font-medium text-[#2EC4A5]">
+                  <Text className="ml-1 text-xs font-semibold text-accent-deep dark:text-accent">
                     {t('review.reload_hint', { count: Math.min(item.reloadableCount, MAX_RELOAD) })}
                   </Text>
                 </View>

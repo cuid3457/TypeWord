@@ -76,7 +76,7 @@ function CenteredCardLayout({
       >
         <Pressable
           onPress={() => {}}
-          className="w-full max-w-lg rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-lg rounded-2xl bg-surface p-6 dark:bg-surface-dark"
           style={{ maxHeight: '80vh' as unknown as number }}
         >
           <ScrollView
@@ -84,18 +84,18 @@ function CenteredCardLayout({
             showsVerticalScrollIndicator
             contentContainerStyle={{ paddingBottom: 8 }}
           >
-            <Text className="mb-2 text-sm font-semibold text-gray-500">{t('review.order')}</Text>
+            <Text className="mb-2 text-sm font-semibold text-muted">{t('review.order')}</Text>
             <View className="flex-row gap-2">
               {(['newest', 'shuffle'] as const).map((o) => (
                 <Pressable
                   key={o}
                   onPress={() => setReviewOrder(o)}
                   className={`flex-1 items-center rounded-xl py-3 ${
-                    reviewOrder === o ? 'bg-black dark:bg-white' : 'bg-gray-100 dark:bg-gray-800'
+                    reviewOrder === o ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
                   }`}
                 >
                   <Text className={`text-sm font-semibold ${
-                    reviewOrder === o ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-400'
+                    reviewOrder === o ? 'text-canvas dark:text-canvas-dark' : 'text-muted'
                   }`}>
                     {t(`review.order_${o}`)}
                   </Text>
@@ -104,9 +104,9 @@ function CenteredCardLayout({
             </View>
 
             <View className="mb-2 mt-5 flex-row items-end justify-between">
-              <Text className="text-sm font-semibold text-gray-500">{t('review.mode')}</Text>
+              <Text className="text-sm font-semibold text-muted">{t('review.mode')}</Text>
               {!premium ? (
-                <Text className="text-xs text-gray-400">
+                <Text className="text-xs text-faint">
                   {(settingsRemaining.flashcard ?? Infinity) === Infinity
                     ? null
                     : `${settingsRemaining.flashcard}/${getDailyLimit()}`}
@@ -115,23 +115,23 @@ function CenteredCardLayout({
             </View>
             <Pressable
               onPress={() => setModeListOpen((v) => !v)}
-              className="flex-row items-center rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700"
+              className="flex-row items-center rounded-xl border border-line px-3 py-3 dark:border-line-dark"
             >
-              <MaterialIcons name={modeIcon(reviewMode)} size={22} color="#10b981" />
-              <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+              <MaterialIcons name={modeIcon(reviewMode)} size={22} color="#1E9E84" />
+              <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                 {t(`review.mode_${reviewMode}`)}
               </Text>
               <MaterialIcons
                 name={modeListOpen ? 'expand-less' : 'expand-more'}
                 size={22}
-                color="#9ca3af"
+                color="#A79E90"
               />
             </Pressable>
 
-            <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700">
+            <View className="mt-4 flex-row items-center justify-between rounded-xl border border-line px-3 py-3 dark:border-line-dark">
               <View className="flex-row items-center">
-                <MaterialIcons name="volume-up" size={22} color="#6b7280" />
-                <Text className="ml-3 text-base text-black dark:text-white">
+                <MaterialIcons name="volume-up" size={22} color="#7B7366" />
+                <Text className="ml-3 text-base text-ink dark:text-ink-dark">
                   {t('review.auto_play_tts')}
                 </Text>
               </View>
@@ -146,7 +146,7 @@ function CenteredCardLayout({
                 nestedScrollEnabled
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator
-                className="mt-1 rounded-xl border border-gray-200 dark:border-gray-800"
+                className="mt-1 rounded-xl border border-line dark:border-line-dark"
                 style={{ maxHeight: 350 }}
                 contentContainerStyle={{ padding: 4, gap: 4 }}
               >
@@ -160,15 +160,15 @@ function CenteredCardLayout({
                         setModeListOpen(false);
                       }}
                       className={`flex-row items-center rounded-lg px-3 py-3 ${
-                        isSelected ? 'bg-black/5 dark:bg-white/10' : ''
+                        isSelected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
                       }`}
                     >
                       <MaterialIcons
                         name={modeIcon(m)}
                         size={22}
-                        color={isSelected ? '#10b981' : '#6b7280'}
+                        color={isSelected ? '#1E9E84' : '#7B7366'}
                       />
-                      <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                      <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                         {t(`review.mode_${m}`)}
                       </Text>
                     </Pressable>
@@ -177,7 +177,7 @@ function CenteredCardLayout({
               </ScrollView>
             ) : null}
 
-            <Text className="mb-2 mt-5 text-sm font-semibold text-gray-500">{t('review.session_count')}</Text>
+            <Text className="mb-2 mt-5 text-sm font-semibold text-muted">{t('review.session_count')}</Text>
             <View className="flex-row items-center justify-center gap-4">
               <Pressable
                 onPress={() => {
@@ -185,12 +185,12 @@ function CenteredCardLayout({
                   setSessionCount((c) => Math.max(MIN_SESSION, c - 5));
                 }}
                 className={`h-10 w-10 items-center justify-center rounded-full ${
-                  sessionCount <= MIN_SESSION ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-700'
+                  sessionCount <= MIN_SESSION ? 'bg-clay dark:bg-clay-dark' : 'bg-line dark:bg-line-dark'
                 }`}
               >
-                <Text className={`text-lg font-bold ${sessionCount <= MIN_SESSION ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}>−</Text>
+                <Text className={`text-lg font-bold ${sessionCount <= MIN_SESSION ? 'text-faint' : 'text-ink dark:text-ink-dark'}`}>−</Text>
               </Pressable>
-              <Text className="min-w-[40px] text-center text-2xl font-bold text-black dark:text-white">
+              <Text className="min-w-[40px] text-center text-2xl font-bold text-ink dark:text-ink-dark">
                 {sessionCount}
               </Text>
               <Pressable
@@ -199,15 +199,15 @@ function CenteredCardLayout({
                   setSessionCount((c) => Math.min(MAX_SESSION, c + 5));
                 }}
                 className={`h-10 w-10 items-center justify-center rounded-full ${
-                  sessionCount >= MAX_SESSION ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-700'
+                  sessionCount >= MAX_SESSION ? 'bg-clay dark:bg-clay-dark' : 'bg-line dark:bg-line-dark'
                 }`}
               >
-                <Text className={`text-lg font-bold ${sessionCount >= MAX_SESSION ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}>+</Text>
+                <Text className={`text-lg font-bold ${sessionCount >= MAX_SESSION ? 'text-faint' : 'text-ink dark:text-ink-dark'}`}>+</Text>
               </Pressable>
             </View>
 
-            <Pressable onPress={onStart} className="mt-4 items-center rounded-xl bg-black py-4 dark:bg-white">
-              <Text className="text-base font-semibold text-white dark:text-black">{t('review.start')}</Text>
+            <Pressable onPress={onStart} className="mt-4 items-center rounded-xl bg-accent py-4">
+              <Text className="text-base font-bold text-white">{t('review.start')}</Text>
             </Pressable>
           </ScrollView>
         </Pressable>
@@ -274,7 +274,7 @@ function BottomSheetLayout({
         <Pressable onPress={dismissSheet} className="flex-1 justify-end bg-black/50">
           <Animated.View
             accessibilityLabel={t('review.settings_title')}
-            className="rounded-t-3xl bg-white dark:bg-gray-900"
+            className="rounded-t-3xl bg-surface dark:bg-surface-dark"
             style={[
               {
                 // Cap sheet at 90% of screen so the inner ScrollView gets a
@@ -296,7 +296,7 @@ function BottomSheetLayout({
             <GestureDetector gesture={panGesture}>
               <Pressable onPress={() => {}}>
                 <View className="items-center pt-3 pb-2">
-                  <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
+                  <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
                 </View>
               </Pressable>
             </GestureDetector>
@@ -305,18 +305,18 @@ function BottomSheetLayout({
                   list (when expanded) has its own bounded ScrollView so
                   only the 6 mode rows scroll, never the order section. */}
               <View className="px-6 pt-4 pb-4" style={{ flexShrink: 1 }}>
-                <Text className="mb-2 text-sm font-semibold text-gray-500">{t('review.order')}</Text>
+                <Text className="mb-2 text-sm font-semibold text-muted">{t('review.order')}</Text>
                 <View className="flex-row gap-2">
                   {(['newest', 'shuffle'] as const).map((o) => (
                     <Pressable
                       key={o}
                       onPress={() => setReviewOrder(o)}
                       className={`flex-1 items-center rounded-xl py-3 ${
-                        reviewOrder === o ? 'bg-black dark:bg-white' : 'bg-gray-100 dark:bg-gray-800'
+                        reviewOrder === o ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
                       }`}
                     >
                       <Text className={`text-sm font-semibold ${
-                        reviewOrder === o ? 'text-white dark:text-black' : 'text-gray-600 dark:text-gray-400'
+                        reviewOrder === o ? 'text-canvas dark:text-canvas-dark' : 'text-muted'
                       }`}>
                         {t(`review.order_${o}`)}
                       </Text>
@@ -325,9 +325,9 @@ function BottomSheetLayout({
                 </View>
 
                 <View className="mb-2 mt-5 flex-row items-end justify-between">
-                  <Text className="text-sm font-semibold text-gray-500">{t('review.mode')}</Text>
+                  <Text className="text-sm font-semibold text-muted">{t('review.mode')}</Text>
                   {!premium ? (
-                    <Text className="text-xs text-gray-400">
+                    <Text className="text-xs text-faint">
                       {(settingsRemaining.flashcard ?? Infinity) === Infinity
                         ? null
                         : `${settingsRemaining.flashcard}/${getDailyLimit()}`}
@@ -339,25 +339,25 @@ function BottomSheetLayout({
                     the native-language picker on the settings screen. */}
                 <Pressable
                   onPress={() => setModeListOpen((v) => !v)}
-                  className="flex-row items-center rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700"
+                  className="flex-row items-center rounded-xl border border-line px-3 py-3 dark:border-line-dark"
                 >
-                  <MaterialIcons name={modeIcon(reviewMode)} size={22} color="#10b981" />
-                  <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                  <MaterialIcons name={modeIcon(reviewMode)} size={22} color="#1E9E84" />
+                  <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                     {t(`review.mode_${reviewMode}`)}
                   </Text>
                   <MaterialIcons
                     name={modeListOpen ? 'expand-less' : 'expand-more'}
                     size={22}
-                    color="#9ca3af"
+                    color="#A79E90"
                   />
                 </Pressable>
                 {/* Auto-play TTS toggle — affects only review cards.
                     Default-on preserves prior behavior; user can disable
                     to study silently (e.g. in public). */}
-                <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700">
+                <View className="mt-4 flex-row items-center justify-between rounded-xl border border-line px-3 py-3 dark:border-line-dark">
                   <View className="flex-row items-center">
-                    <MaterialIcons name="volume-up" size={22} color="#6b7280" />
-                    <Text className="ml-3 text-base text-black dark:text-white">
+                    <MaterialIcons name="volume-up" size={22} color="#7B7366" />
+                    <Text className="ml-3 text-base text-ink dark:text-ink-dark">
                       {t('review.auto_play_tts')}
                     </Text>
                   </View>
@@ -376,7 +376,7 @@ function BottomSheetLayout({
                     nestedScrollEnabled
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator
-                    className="mt-1 rounded-xl border border-gray-200 dark:border-gray-800"
+                    className="mt-1 rounded-xl border border-line dark:border-line-dark"
                     style={{ maxHeight: 350 }}
                     contentContainerStyle={{ padding: 4, gap: 4 }}
                   >
@@ -390,15 +390,15 @@ function BottomSheetLayout({
                             setModeListOpen(false);
                           }}
                           className={`flex-row items-center rounded-lg px-3 py-3 ${
-                            isSelected ? 'bg-black/5 dark:bg-white/10' : ''
+                            isSelected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
                           }`}
                         >
                           <MaterialIcons
                             name={modeIcon(m)}
                             size={22}
-                            color={isSelected ? '#10b981' : '#6b7280'}
+                            color={isSelected ? '#1E9E84' : '#7B7366'}
                           />
-                          <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                          <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                             {t(`review.mode_${m}`)}
                           </Text>
                         </Pressable>
@@ -417,7 +417,7 @@ function BottomSheetLayout({
                 className="px-6"
                 style={{ paddingTop: 12, paddingBottom: Math.max(insets.bottom, 16) + 24 }}
               >
-                <Text className="mb-2 text-sm font-semibold text-gray-500">{t('review.session_count')}</Text>
+                <Text className="mb-2 text-sm font-semibold text-muted">{t('review.session_count')}</Text>
                 <View className="flex-row items-center justify-center gap-4">
                   <Pressable
                     onPress={() => {
@@ -425,12 +425,12 @@ function BottomSheetLayout({
                       setSessionCount((c) => Math.max(MIN_SESSION, c - 5));
                     }}
                     className={`h-10 w-10 items-center justify-center rounded-full ${
-                      sessionCount <= MIN_SESSION ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-700'
+                      sessionCount <= MIN_SESSION ? 'bg-clay dark:bg-clay-dark' : 'bg-line dark:bg-line-dark'
                     }`}
                   >
-                    <Text className={`text-lg font-bold ${sessionCount <= MIN_SESSION ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}>−</Text>
+                    <Text className={`text-lg font-bold ${sessionCount <= MIN_SESSION ? 'text-faint' : 'text-ink dark:text-ink-dark'}`}>−</Text>
                   </Pressable>
-                  <Text className="min-w-[40px] text-center text-2xl font-bold text-black dark:text-white">
+                  <Text className="min-w-[40px] text-center text-2xl font-bold text-ink dark:text-ink-dark">
                     {sessionCount}
                   </Text>
                   <Pressable
@@ -439,15 +439,15 @@ function BottomSheetLayout({
                       setSessionCount((c) => Math.min(MAX_SESSION, c + 5));
                     }}
                     className={`h-10 w-10 items-center justify-center rounded-full ${
-                      sessionCount >= MAX_SESSION ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-700'
+                      sessionCount >= MAX_SESSION ? 'bg-clay dark:bg-clay-dark' : 'bg-line dark:bg-line-dark'
                     }`}
                   >
-                    <Text className={`text-lg font-bold ${sessionCount >= MAX_SESSION ? 'text-gray-300 dark:text-gray-600' : 'text-black dark:text-white'}`}>+</Text>
+                    <Text className={`text-lg font-bold ${sessionCount >= MAX_SESSION ? 'text-faint' : 'text-ink dark:text-ink-dark'}`}>+</Text>
                   </Pressable>
                 </View>
 
-                <Pressable onPress={onStart} className="mt-4 items-center rounded-xl bg-black py-4 dark:bg-white">
-                  <Text className="text-base font-semibold text-white dark:text-black">{t('review.start')}</Text>
+                <Pressable onPress={onStart} className="mt-4 items-center rounded-xl bg-accent py-4">
+                  <Text className="text-base font-bold text-white">{t('review.start')}</Text>
                 </Pressable>
               </View>
           </Animated.View>
