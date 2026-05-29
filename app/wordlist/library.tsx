@@ -110,15 +110,15 @@ export default function WordlistLibraryScreen() {
   );
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="px-6 pt-6">
         <View className="h-11 flex-row items-center">
           <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')}>
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('library.title_browse')}
           </Text>
         </View>
@@ -126,15 +126,15 @@ export default function WordlistLibraryScreen() {
 
       {loading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
+          <ActivityIndicator color="#7B7366" />
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
-          <MaterialIcons name="auto-stories" size={64} color="#9ca3af" />
-          <Text className="mt-4 text-center text-base text-gray-500">
+          <MaterialIcons name="auto-stories" size={64} color="#A79E90" />
+          <Text className="mt-4 text-center text-base text-muted">
             {t('library.empty')}
           </Text>
-          <Text className="mt-2 text-center text-sm text-gray-400">
+          <Text className="mt-2 text-center text-sm text-faint">
             {t('library.empty_hint')}
           </Text>
         </View>
@@ -144,21 +144,21 @@ export default function WordlistLibraryScreen() {
               switching contexts is muscle-memory consistent across screens.
               Category sits on top because it scopes which langs are even
               eligible below. */}
-          <View className="mx-6 mt-4 rounded-2xl border border-gray-300 dark:border-gray-700">
+          <View className="mx-6 mt-4 rounded-2xl border border-line dark:border-line-dark">
             <Pressable
               onPress={() => setEditing(editing === 'category' ? null : 'category')}
               className="flex-row items-center p-4"
             >
               <View className="flex-1">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('library.category_label')}
                 </Text>
                 <View className="mt-1 flex-row items-center" style={{ height: 24 }}>
                   {activeCategory ? (
                     <>
-                      <MaterialIcons name={categoryIcon(activeCategory)} size={18} color="#6b7280" />
+                      <MaterialIcons name={categoryIcon(activeCategory)} size={18} color="#7B7366" />
                       <Text
-                        className="ml-2 text-base text-black dark:text-white"
+                        className="ml-2 text-base text-ink dark:text-ink-dark"
                         style={Platform.OS === 'ios'
                           ? undefined
                           : { lineHeight: 24, includeFontPadding: false }}
@@ -168,15 +168,15 @@ export default function WordlistLibraryScreen() {
                       </Text>
                     </>
                   ) : (
-                    <Text className="text-base text-gray-400">—</Text>
+                    <Text className="text-base text-faint">—</Text>
                   )}
                 </View>
               </View>
-              <Text className="text-base text-gray-400">{editing === 'category' ? '▲' : '▼'}</Text>
+              <Text className="text-base text-faint">{editing === 'category' ? '▲' : '▼'}</Text>
             </Pressable>
 
             {editing === 'category' ? (
-              <View className="border-t border-gray-200 dark:border-gray-800" style={{ maxHeight: 320 }}>
+              <View className="border-t border-line dark:border-line-dark" style={{ maxHeight: 320 }}>
                 <ScrollView nestedScrollEnabled>
                   {availableCategories.map((cat) => {
                     const selected = cat === activeCategory;
@@ -187,10 +187,10 @@ export default function WordlistLibraryScreen() {
                           setActiveCategory(cat);
                           setEditing(null);
                         }}
-                        className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
+                        className={`flex-row items-center px-4 py-3 ${selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''}`}
                       >
-                        <MaterialIcons name={categoryIcon(cat)} size={20} color="#6b7280" />
-                        <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+                        <MaterialIcons name={categoryIcon(cat)} size={20} color="#7B7366" />
+                        <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                           {t(`library.category_${cat}`, { defaultValue: cat })}
                         </Text>
                         {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
@@ -203,7 +203,7 @@ export default function WordlistLibraryScreen() {
 
             {editing !== 'category' ? (
               <>
-                <View className="mx-4 h-px bg-gray-200 dark:bg-gray-800" />
+                <View className="mx-4 h-px bg-clay dark:bg-clay-dark" />
 
                 <Pressable
                   onPress={() => setEditing(editing === 'lang' ? null : 'lang')}
@@ -211,11 +211,11 @@ export default function WordlistLibraryScreen() {
                   disabled={availableLangs.length === 0}
                 >
                   <View className="flex-1">
-                    <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                    <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                       {t('library.lang_label')}
                     </Text>
                     <Text
-                      className="mt-1 text-base text-black dark:text-white"
+                      className="mt-1 text-base text-ink dark:text-ink-dark"
                       style={Platform.OS === 'ios'
                         ? undefined
                         : { lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
@@ -227,12 +227,12 @@ export default function WordlistLibraryScreen() {
                     </Text>
                   </View>
                   {availableLangs.length > 1 ? (
-                    <Text className="text-base text-gray-400">{editing === 'lang' ? '▲' : '▼'}</Text>
+                    <Text className="text-base text-faint">{editing === 'lang' ? '▲' : '▼'}</Text>
                   ) : null}
                 </Pressable>
 
                 {editing === 'lang' && availableLangs.length > 1 ? (
-                  <View className="border-t border-gray-200 dark:border-gray-800" style={{ maxHeight: 320 }}>
+                  <View className="border-t border-line dark:border-line-dark" style={{ maxHeight: 320 }}>
                     <ScrollView nestedScrollEnabled>
                       {availableLangs.map((item) => {
                         const selected = item.code === activeLang;
@@ -244,13 +244,13 @@ export default function WordlistLibraryScreen() {
                               setActiveLang(item.code);
                               setEditing(null);
                             }}
-                            className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
+                            className={`flex-row items-center px-4 py-3 ${selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''}`}
                           >
                             <Text className="mr-3 text-xl">{item.flag}</Text>
                             <View className="flex-1">
-                              <Text className="text-base text-black dark:text-white">{translatedName}</Text>
+                              <Text className="text-base text-ink dark:text-ink-dark">{translatedName}</Text>
                               {translatedName !== item.nativeName ? (
-                                <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                                <Text className="text-xs text-faint">{item.nativeName}</Text>
                               ) : null}
                             </View>
                             {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
@@ -273,8 +273,8 @@ export default function WordlistLibraryScreen() {
             contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
             ListEmptyComponent={() => (
               <View className="items-center justify-center pt-16">
-                <MaterialIcons name="auto-stories" size={48} color="#9ca3af" />
-                <Text className="mt-3 text-center text-sm text-gray-500">
+                <MaterialIcons name="auto-stories" size={48} color="#A79E90" />
+                <Text className="mt-3 text-center text-sm text-muted">
                   {t('library.empty')}
                 </Text>
               </View>
@@ -296,48 +296,48 @@ export default function WordlistLibraryScreen() {
                   }
                   router.push({ pathname: '/wordlist/library/[id]', params: { id: item.id } });
                 }}
-                className={`flex-row items-center rounded-2xl border border-gray-300 p-4 dark:border-gray-700 ${isTablet ? 'flex-1' : 'mb-3'}`}
+                className={`flex-row items-center rounded-2xl border border-line p-4 dark:border-line-dark ${isTablet ? 'flex-1' : 'mb-3'}`}
                 style={item.wordCount === 0 ? { opacity: 0.55 } : undefined}
               >
-                <View className="h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
+                <View className="h-12 w-12 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
                   <MaterialIcons
                     name={categoryIcon(item.category)}
                     size={22}
-                    color="#6b7280"
+                    color="#7B7366"
                   />
                 </View>
                 <View className="ml-3 flex-1">
                   <View className="flex-row items-center">
-                    <Text className="flex-1 text-base font-semibold text-black dark:text-white" numberOfLines={1}>
+                    <Text className="flex-1 text-base font-semibold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {localize(item.nameI18n, i18n.language)}
                     </Text>
                     {item.wordCount === 0 ? (
-                      <View className="ml-2 rounded-md bg-gray-200 px-2 py-0.5 dark:bg-gray-700">
-                        <Text className="text-[10px] font-bold text-gray-600 dark:text-gray-400">
+                      <View className="ml-2 rounded-md bg-line px-2 py-0.5 dark:bg-line-dark">
+                        <Text className="text-[10px] font-bold text-muted">
                           {t('library.coming_soon_badge')}
                         </Text>
                       </View>
                     ) : null}
                   </View>
-                  <Text className="mt-0.5 text-xs text-gray-500" numberOfLines={2}>
+                  <Text className="mt-0.5 text-xs text-muted" numberOfLines={2}>
                     {localize(item.descriptionI18n, i18n.language) || `${item.wordCount}${t('library.words_suffix')}`}
                   </Text>
                   <View className="mt-2 flex-row items-center">
                     {item.examType ? (
-                      <View className="mr-2 rounded-md bg-gray-100 px-2 py-0.5 dark:bg-gray-800">
-                        <Text className="text-[10px] font-bold text-gray-600 dark:text-gray-400">
+                      <View className="mr-2 rounded-md bg-clay px-2 py-0.5 dark:bg-clay-dark">
+                        <Text className="text-[10px] font-bold text-muted">
                           {item.examType}
                         </Text>
                       </View>
                     ) : null}
                     {item.wordCount > 0 ? (
-                      <Text className="text-xs text-gray-400">
+                      <Text className="text-xs text-faint">
                         {item.wordCount}{t('library.words_suffix')}
                       </Text>
                     ) : null}
                   </View>
                 </View>
-                <MaterialIcons name="chevron-right" size={20} color="#9ca3af" />
+                <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
               </Pressable>
             )}
           />

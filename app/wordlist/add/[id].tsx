@@ -958,7 +958,7 @@ export default function AddWordScreen() {
   const tgt = findLanguage(targetLang);
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       <KeyboardAvoidingView
         className="flex-1"
@@ -968,9 +968,9 @@ export default function AddWordScreen() {
         <View style={{ paddingHorizontal: 24, paddingTop: 8 }}>
           <View className="flex-row items-center">
             <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
-              <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-3xl font-bold text-black dark:text-white">
+            <Text className="text-3xl font-bold text-ink dark:text-ink-dark">
               {t('add_word.title')}
             </Text>
           </View>
@@ -978,30 +978,30 @@ export default function AddWordScreen() {
           <View className="mt-1 flex-row items-center justify-between">
             <View className="mr-3 flex-1">
               {book ? (
-                <Text className="text-sm text-gray-500 dark:text-gray-400" numberOfLines={1}>
+                <Text className="text-sm text-muted" numberOfLines={1}>
                   {book.title}
                 </Text>
               ) : null}
-              <Text className="mt-0.5 text-sm text-gray-500 dark:text-gray-400" numberOfLines={1}>
+              <Text className="mt-0.5 text-sm text-muted" numberOfLines={1}>
                 {src?.flag} {t(`languages.${src?.code}`)} → {tgt?.flag} {t(`languages.${tgt?.code}`)}
               </Text>
             </View>
             <View className="shrink-0 flex-row items-start gap-3">
               <View className="items-center">
-                <View className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800">
+                <View className="rounded-full bg-clay p-2.5 dark:bg-clay-dark">
                   <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
                 </View>
               </View>
               <View className="items-center">
-                <Pressable onPress={handleMicPress} className={`rounded-full p-2.5 ${listening ? 'bg-red-100 dark:bg-red-900' : 'bg-gray-100 dark:bg-gray-800'}`} accessibilityLabel={t('add_word.voice_search')} accessibilityRole="button">
-                  <MaterialIcons name={listening ? 'stop' : 'mic'} size={22} color={listening ? '#ef4444' : '#2EC4A5'} />
+                <Pressable onPress={handleMicPress} className={`rounded-full p-2.5 ${listening ? 'bg-danger-soft dark:bg-danger-soft-dark' : 'bg-clay dark:bg-clay-dark'}`} accessibilityLabel={t('add_word.voice_search')} accessibilityRole="button">
+                  <MaterialIcons name={listening ? 'stop' : 'mic'} size={22} color={listening ? '#E0654F' : '#2EC4A5'} />
                 </Pressable>
               </View>
               <View className="items-center">
-                <Pressable onPress={handleCameraPress} className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800" accessibilityLabel={t('common.camera')} accessibilityRole="button">
+                <Pressable onPress={handleCameraPress} className="rounded-full bg-clay p-2.5 dark:bg-clay-dark" accessibilityLabel={t('common.camera')} accessibilityRole="button">
                   <MaterialIcons name="photo-camera" size={22} color="#2EC4A5" />
                 </Pressable>
-                <Text className="mt-1 text-center text-xs text-gray-400">
+                <Text className="mt-1 text-center text-xs text-faint">
                   {ocrRemaining}/{ocrLimit}
                 </Text>
               </View>
@@ -1010,13 +1010,13 @@ export default function AddWordScreen() {
 
           <View className="mt-6">
             <View className="flex-row items-center">
-              <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                 {t('add_word.word')}
               </Text>
               {listening ? (
-                <Text className="ml-2 text-xs text-red-500">{t('add_word.listening')}</Text>
+                <Text className="ml-2 text-xs text-danger">{t('add_word.listening')}</Text>
               ) : isBidi && word.trim() ? (
-                <Text className="ml-2 text-xs text-gray-400">
+                <Text className="ml-2 text-xs text-faint">
                   {inputIsStudyLang
                     ? `${findLanguage(studyLang)?.flag} → ${findLanguage(nativeLang)?.flag}`
                     : `${findLanguage(nativeLang)?.flag} → ${findLanguage(studyLang)?.flag} (${t('add_word.reverse')})`
@@ -1034,15 +1034,15 @@ export default function AddWordScreen() {
               autoCorrect={false}
               maxLength={effectiveMax}
               placeholder={animatedPlaceholder}
-              placeholderTextColor="#9ca3af"
-              className="mt-2 rounded-xl px-4 py-3 text-base text-black dark:text-white"
-              style={{ borderWidth: 2, borderColor: listening ? '#ef4444' : '#2EC4A5' }}
+              placeholderTextColor="#A79E90"
+              className="mt-2 rounded-xl px-4 py-3 text-base text-ink dark:text-ink-dark"
+              style={{ borderWidth: 2, borderColor: listening ? '#E0654F' : '#2EC4A5' }}
             />
             {(() => {
               const wlen = codepointLength(word);
               if (wlen < effectiveMax - (isExpr ? 2 : 8)) return null;
               return (
-                <Text className={`mt-1 text-right text-xs ${wlen > effectiveMax ? 'text-red-500' : 'text-gray-400'}`}>
+                <Text className={`mt-1 text-right text-xs ${wlen > effectiveMax ? 'text-danger' : 'text-faint'}`}>
                   {wlen}/{effectiveMax}
                 </Text>
               );
@@ -1055,14 +1055,14 @@ export default function AddWordScreen() {
               disabled={loading || !book || wordOverLimit}
               className={`items-center rounded-xl py-4 ${
                 loading || !word.trim() || !book || wordOverLimit
-                  ? 'bg-gray-300'
-                  : 'bg-black dark:bg-white'
+                  ? 'bg-clay'
+                  : 'bg-ink dark:bg-ink-dark'
               }`}
             >
               {loading && !partial ? (
                 <ActivityIndicator color="#ffffff" />
               ) : (
-                <Text className="text-base font-semibold text-white dark:text-black">
+                <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
                   {t('add_word.search')}
                 </Text>
               )}
@@ -1104,24 +1104,24 @@ export default function AddWordScreen() {
         >
           {candidates.length > 0 ? (
             <View className="mt-4">
-              <Text className="text-sm font-semibold text-black dark:text-white">
+              <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                 {t('add_word.which_meaning')}
               </Text>
               {candidates.map((c, i) => (
                 <Pressable
                   key={i}
                   onPress={() => handleCandidateSelect(c)}
-                  className="mt-2 flex-row items-center rounded-xl border border-gray-300 p-4 dark:border-gray-700"
+                  className="mt-2 flex-row items-center rounded-xl border border-line p-4 dark:border-line-dark"
                 >
                   <View className="flex-1">
-                    <Text className="text-base font-semibold text-black dark:text-white">
+                    <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                       {c.headword}
                     </Text>
                     {c.hint ? (
-                      <Text className="mt-0.5 text-sm text-gray-500">{c.hint}</Text>
+                      <Text className="mt-0.5 text-sm text-muted">{c.hint}</Text>
                     ) : null}
                   </View>
-                  <MaterialIcons name="arrow-forward" size={18} color="#9ca3af" />
+                  <MaterialIcons name="arrow-forward" size={18} color="#A79E90" />
                 </Pressable>
               ))}
             </View>
@@ -1170,20 +1170,20 @@ export default function AddWordScreen() {
 
       <Modal visible={ocrModalVisible} transparent animationType="fade" onRequestClose={() => !ocrLoading && setOcrModalVisible(false)}>
         <View className="flex-1 items-center justify-center bg-black/50 px-6">
-          <View className="max-h-[80%] w-full rounded-2xl bg-white p-5 dark:bg-gray-900">
+          <View className="max-h-[80%] w-full rounded-2xl bg-surface p-5 dark:bg-surface-dark">
             {ocrLoading ? (
               <View className="items-center py-12">
                 <ActivityIndicator size="large" color="#2EC4A5" />
-                <Text className="mt-4 text-sm text-gray-500">
+                <Text className="mt-4 text-sm text-muted">
                   {t('add_word.ocr_extracting')}
                 </Text>
               </View>
             ) : (
               <>
-                <Text className="mb-1 text-lg font-bold text-black dark:text-white">
+                <Text className="mb-1 text-lg font-bold text-ink dark:text-ink-dark">
                   {t('add_word.ocr_select_words')}
                 </Text>
-                <Text className="mb-4 text-xs text-gray-400">
+                <Text className="mb-4 text-xs text-faint">
                   {ocrWords.length} {t('add_word.meanings').toLowerCase()}
                 </Text>
                 <ScrollView style={{ maxHeight: 400 }}>
@@ -1191,26 +1191,26 @@ export default function AddWordScreen() {
                     <Pressable
                       key={i}
                       onPress={() => handleOcrWordTap(w)}
-                      className="mb-2 flex-row items-center rounded-xl border border-gray-200 p-3 dark:border-gray-700"
+                      className="mb-2 flex-row items-center rounded-xl border border-line p-3 dark:border-line-dark"
                     >
                       <View className="flex-1">
                         <View className="flex-row items-center">
-                          <Text className="font-semibold text-black dark:text-white">{w.word}</Text>
+                          <Text className="font-semibold text-ink dark:text-ink-dark">{w.word}</Text>
                           {w.reading ? (
-                            <Text className="ml-2 text-xs text-gray-400">{w.reading}</Text>
+                            <Text className="ml-2 text-xs text-faint">{w.reading}</Text>
                           ) : null}
                         </View>
-                        <Text className="mt-0.5 text-sm text-gray-500">{w.definition}</Text>
+                        <Text className="mt-0.5 text-sm text-muted">{w.definition}</Text>
                       </View>
-                      <MaterialIcons name="arrow-forward" size={18} color="#9ca3af" />
+                      <MaterialIcons name="arrow-forward" size={18} color="#A79E90" />
                     </Pressable>
                   ))}
                 </ScrollView>
                 <Pressable
                   onPress={() => setOcrModalVisible(false)}
-                  className="mt-4 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+                  className="mt-4 items-center rounded-xl border border-line py-3 dark:border-line-dark"
                 >
-                  <Text className="text-sm text-gray-500">{t('common.cancel')}</Text>
+                  <Text className="text-sm text-muted">{t('common.cancel')}</Text>
                 </Pressable>
               </>
             )}
@@ -1228,7 +1228,7 @@ export default function AddWordScreen() {
               <Animated.View
                 style={[
                   {
-                    backgroundColor: dark ? '#1a1a2e' : '#fff',
+                    backgroundColor: dark ? '#1E1B15' : '#fff',
                     borderTopLeftRadius: 24,
                     borderTopRightRadius: 24,
                     paddingHorizontal: 24,
@@ -1240,32 +1240,32 @@ export default function AddWordScreen() {
               >
                 <Pressable onPress={() => {}}>
                   <View className="mb-5 items-center">
-                    <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
+                    <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
                   </View>
 
                   <View className="flex-row justify-center gap-10">
                     <Pressable onPress={() => handlePickSource('camera')} className="items-center">
-                      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 dark:bg-gray-800">
+                      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-clay dark:bg-clay-dark">
                         <MaterialIcons name="photo-camera" size={28} color="#2EC4A5" />
                       </View>
-                      <Text className="mt-2 text-sm text-black dark:text-white">{t('common.camera')}</Text>
+                      <Text className="mt-2 text-sm text-ink dark:text-ink-dark">{t('common.camera')}</Text>
                     </Pressable>
                     <Pressable onPress={() => handlePickSource('gallery')} className="items-center">
-                      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-gray-100 dark:bg-gray-800">
+                      <View className="h-16 w-16 items-center justify-center rounded-2xl bg-clay dark:bg-clay-dark">
                         <MaterialIcons name="photo-library" size={28} color="#2EC4A5" />
                       </View>
-                      <Text className="mt-2 text-sm text-black dark:text-white">{t('common.gallery')}</Text>
+                      <Text className="mt-2 text-sm text-ink dark:text-ink-dark">{t('common.gallery')}</Text>
                     </Pressable>
                   </View>
 
                   <View className="mt-6 items-center">
-                    <Text className="text-xs text-gray-400">
+                    <Text className="text-xs text-faint">
                       {ocrRemaining}/{ocrLimit}
                     </Text>
-                    <Text className="mt-2 text-center text-sm text-gray-500">
+                    <Text className="mt-2 text-center text-sm text-muted">
                       {t('add_word.ocr_hint')}
                     </Text>
-                    <Text className="mt-1 text-center text-xs text-gray-400">
+                    <Text className="mt-1 text-center text-xs text-faint">
                       {t('add_word.ocr_ai_disclaimer')}
                     </Text>
                   </View>
@@ -1304,15 +1304,15 @@ export default function AddWordScreen() {
 
       <Modal visible={showSignupNudge} transparent animationType="fade">
         <View className="flex-1 items-center justify-center bg-black/50 px-8">
-          <View className="w-full rounded-2xl bg-white p-6 dark:bg-gray-900">
+          <View className="w-full rounded-2xl bg-surface p-6 dark:bg-surface-dark">
             <View className="items-center">
               <View className="rounded-full bg-blue-100 p-3 dark:bg-blue-900">
                 <MaterialIcons name="cloud-upload" size={32} color="#3b82f6" />
               </View>
-              <Text className="mt-4 text-center text-lg font-bold text-black dark:text-white">
+              <Text className="mt-4 text-center text-lg font-bold text-ink dark:text-ink-dark">
                 {t('signup_nudge.title')}
               </Text>
-              <Text className="mt-2 text-center text-sm text-gray-500">
+              <Text className="mt-2 text-center text-sm text-muted">
                 {t('signup_nudge.description')}
               </Text>
             </View>
@@ -1333,7 +1333,7 @@ export default function AddWordScreen() {
                 onPress={() => setShowSignupNudge(false)}
                 className="items-center py-3"
               >
-                <Text className="text-sm text-gray-400">
+                <Text className="text-sm text-faint">
                   {t('signup_nudge.later')}
                 </Text>
               </Pressable>
@@ -1374,11 +1374,11 @@ function SkeletonCard({ word, sourceLang, t }: { word: string; sourceLang?: stri
     <View className="mt-6">
       {/* Headword echo — bold, prominent like the real result */}
       {word ? (
-        <Text className="text-2xl font-bold text-black dark:text-white">{word}</Text>
+        <Text className="text-2xl font-bold text-ink dark:text-ink-dark">{word}</Text>
       ) : null}
 
       <View className="mt-3 flex-row items-center">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
           {t('add_word.generating')}
         </Text>
         <ActivityIndicator size="small" className="ml-2" />
@@ -1399,23 +1399,23 @@ function PartialCard({ partial, word, t }: { partial: PartialLookup; word: strin
        * The final ResultCard may replace this with the AI-corrected
        * canonical headword. */}
       {word ? (
-        <Text className="text-2xl font-bold text-black dark:text-white">{word}</Text>
+        <Text className="text-2xl font-bold text-ink dark:text-ink-dark">{word}</Text>
       ) : null}
 
       <View className="mt-3 flex-row items-center">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
           {t('add_word.generating')}
         </Text>
         <ActivityIndicator size="small" className="ml-2" />
       </View>
 
       {readingText ? (
-        <Text className="mt-2 text-sm text-gray-400">{readingText}</Text>
+        <Text className="mt-2 text-sm text-faint">{readingText}</Text>
       ) : null}
 
       {partial.meanings.length > 0 ? (
         <View className="mt-4">
-          <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
             {t('add_word.meanings')}
           </Text>
           {partial.meanings.map((m, i) => {
@@ -1423,12 +1423,12 @@ function PartialCard({ partial, word, t }: { partial: PartialLookup; word: strin
             return (
             <View
               key={i}
-              className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
+              className="mt-2 rounded-xl border border-line p-3 dark:border-line-dark"
             >
               {marker ? (
-                <Text className="text-xs text-gray-500">{marker}</Text>
+                <Text className="text-xs text-muted">{marker}</Text>
               ) : null}
-              <Text className="mt-1 text-base text-black dark:text-white">
+              <Text className="mt-1 text-base text-ink dark:text-ink-dark">
                 {m.definition}
               </Text>
             </View>
@@ -1486,9 +1486,9 @@ function ResultCard({
   return (
     <View className="mt-2">
       {showCorrection ? (
-        <View className="mb-3 flex-row items-center rounded-xl bg-black px-3 py-2 dark:bg-white">
+        <View className="mb-3 flex-row items-center rounded-xl bg-ink px-3 py-2 dark:bg-ink-dark">
           <MaterialIcons name="auto-fix-high" size={16} color={dark ? '#000' : '#fff'} />
-          <Text className="ml-2 flex-1 text-xs text-white dark:text-black">
+          <Text className="ml-2 flex-1 text-xs text-canvas dark:text-canvas-dark">
             {t('add_word.did_you_mean').replace('{{word}}', corrected!)}
           </Text>
         </View>
@@ -1499,19 +1499,19 @@ function ResultCard({
           a single row; when the word wraps to multiple lines, the icon group
           stays as a unit aligned to the top of the headword block. */}
       <View className="flex-row items-start">
-        <Text className="shrink flex-1 text-xl font-bold text-black dark:text-white">
+        <Text className="shrink flex-1 text-xl font-bold text-ink dark:text-ink-dark">
           {displayWord}
         </Text>
         <View className="shrink-0 ml-2 flex-row items-center">
           <Pressable
             onPress={handleSpeak}
-            className="rounded-full bg-gray-100 p-2 dark:bg-gray-800"
+            className="rounded-full bg-clay p-2 dark:bg-clay-dark"
           >
             <MaterialIcons name="volume-up" size={20} color="#2EC4A5" />
           </Pressable>
           {onReport ? (
-            <Pressable onPress={onReport} className="ml-2 rounded-full bg-gray-100 p-2 dark:bg-gray-800">
-              <MaterialIcons name="flag" size={18} color="#9ca3af" />
+            <Pressable onPress={onReport} className="ml-2 rounded-full bg-clay p-2 dark:bg-clay-dark">
+              <MaterialIcons name="flag" size={18} color="#A79E90" />
             </Pressable>
           ) : null}
         </View>
@@ -1520,20 +1520,20 @@ function ResultCard({
         <ReadingDisplay reading={result.reading} sourceLang={sourceLang} word={displayWord} />
       ) : null}
       {result.ipa && ipaSupported(sourceLang) ? (
-        <Text className="mt-1 text-sm text-gray-400">{result.ipa}</Text>
+        <Text className="mt-1 text-sm text-faint">{result.ipa}</Text>
       ) : null}
 
       {lowConfidence ? (
         <View className="mt-2 flex-row items-center">
-          <MaterialIcons name="info-outline" size={14} color="#9ca3af" />
-          <Text className="ml-1 text-xs text-gray-500">
+          <MaterialIcons name="info-outline" size={14} color="#A79E90" />
+          <Text className="ml-1 text-xs text-muted">
             {t('add_word.low_confidence_warning')}
           </Text>
         </View>
       ) : null}
 
       <View className="mt-4">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
           {t('add_word.meanings')}
         </Text>
         {result.meanings?.length ? (
@@ -1542,19 +1542,19 @@ function ResultCard({
             return (
             <View
               key={i}
-              className="mt-2 rounded-xl border border-gray-300 p-3 dark:border-gray-800"
+              className="mt-2 rounded-xl border border-line p-3 dark:border-line-dark"
             >
               {marker ? (
-                <Text className="text-xs text-gray-500">{marker}</Text>
+                <Text className="text-xs text-muted">{marker}</Text>
               ) : null}
-              <Text className="mt-1 text-base text-black dark:text-white">
+              <Text className="mt-1 text-base text-ink dark:text-ink-dark">
                 {m.definition}
               </Text>
             </View>
             );
           })
         ) : (
-          <Text className="mt-2 text-sm text-gray-400">—</Text>
+          <Text className="mt-2 text-sm text-faint">—</Text>
         )}
       </View>
     </View>

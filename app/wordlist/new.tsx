@@ -118,7 +118,7 @@ export default function NewWordlistScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <KeyboardAvoidingView
@@ -131,24 +131,24 @@ export default function NewWordlistScreen() {
         >
           <View className="h-11 flex-row items-center">
             <Pressable onPress={() => { Keyboard.dismiss(); router.back(); }} className="mr-2 p-1">
-              <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-base font-semibold text-black dark:text-white">
+            <Text className="text-base font-semibold text-ink dark:text-ink-dark">
               {t('new_wordlist.title')}
             </Text>
           </View>
 
           <View className="mt-6">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('new_wordlist.name')}
             </Text>
             <TextInput
               value={title}
               onChangeText={setTitle}
               placeholder={animatedPlaceholder}
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               maxLength={MAX_TITLE_LENGTH}
-              className="mt-2 rounded-xl px-4 text-base text-black dark:text-white"
+              className="mt-2 rounded-xl px-4 text-base text-ink dark:text-ink-dark"
               style={[
                 { borderWidth: 2, borderColor: '#2EC4A5' },
                 // iOS line-box rules:
@@ -167,13 +167,13 @@ export default function NewWordlistScreen() {
               ]}
             />
             {title.length >= MAX_TITLE_LENGTH - 10 ? (
-              <Text className="mt-1 text-right text-xs text-gray-400">
+              <Text className="mt-1 text-right text-xs text-faint">
                 {title.length}/{MAX_TITLE_LENGTH}
               </Text>
             ) : null}
           </View>
 
-          <View className="mt-6 rounded-2xl border border-gray-300 dark:border-gray-700">
+          <View className="mt-6 rounded-2xl border border-line dark:border-line-dark">
             <Pressable
               onPress={() => {
                 Keyboard.dismiss();
@@ -182,11 +182,11 @@ export default function NewWordlistScreen() {
               className="flex-row items-center p-4"
             >
               <View className="flex-1">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('new_wordlist.study_lang')}
                 </Text>
                 <Text
-                  className="mt-1 text-base text-black dark:text-white"
+                  className="mt-1 text-base text-ink dark:text-ink-dark"
                   // Android: tight box + remove font padding for crisp
                   // alignment with the label above. iOS: skip the height
                   // clamp — native text metrics handle centering and the
@@ -199,7 +199,7 @@ export default function NewWordlistScreen() {
                   {studyLabel ? `${studyLabel.flag} ${t(`languages.${studyLabel.code}`)}` : '—'}
                 </Text>
               </View>
-              <Text className="text-base text-gray-400">{editingLang === 'study' ? '▲' : '▼'}</Text>
+              <Text className="text-base text-faint">{editingLang === 'study' ? '▲' : '▼'}</Text>
             </Pressable>
 
             {/* Inline list right below the study picker so the option list is
@@ -207,7 +207,7 @@ export default function NewWordlistScreen() {
                 + swap button are hidden during selection to keep focus and
                 avoid the "list appearing below the wrong row" confusion. */}
             {editingLang === 'study' ? (
-              <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+              <View className="border-t border-line dark:border-line-dark" style={{ height: 320 }}>
                 <ScrollView nestedScrollEnabled>
                   {STUDY_LANGUAGES.map((item) => {
                     const selected = item.code === studyLang;
@@ -220,13 +220,13 @@ export default function NewWordlistScreen() {
                           setStudyLang(item.code);
                           setEditingLang(null);
                         }}
-                        className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
+                        className={`flex-row items-center px-4 py-3 ${selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''}`}
                       >
                         <Text className="mr-3 text-xl">{item.flag}</Text>
                         <View className="flex-1">
-                          <Text className="text-base text-black dark:text-white">{translatedName}</Text>
+                          <Text className="text-base text-ink dark:text-ink-dark">{translatedName}</Text>
                           {translatedName !== item.nativeName ? (
-                            <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                            <Text className="text-xs text-faint">{item.nativeName}</Text>
                           ) : null}
                         </View>
                         {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
@@ -240,7 +240,7 @@ export default function NewWordlistScreen() {
             {editingLang !== 'study' ? (
               <>
                 <View className="mx-4 flex-row items-center justify-center py-1">
-                  <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                  <View className="h-px flex-1 bg-clay dark:bg-clay-dark" />
                   <Pressable
                     onPress={() => {
                       Keyboard.dismiss();
@@ -252,11 +252,11 @@ export default function NewWordlistScreen() {
                     hitSlop={10}
                     accessibilityLabel={t('new_wordlist.swap_langs')}
                     accessibilityRole="button"
-                    className="mx-2 h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800"
+                    className="mx-2 h-7 w-7 items-center justify-center rounded-full bg-clay dark:bg-clay-dark"
                   >
-                    <MaterialIcons name="swap-vert" size={18} color="#6b7280" />
+                    <MaterialIcons name="swap-vert" size={18} color="#7B7366" />
                   </Pressable>
-                  <View className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                  <View className="h-px flex-1 bg-clay dark:bg-clay-dark" />
                 </View>
 
                 <Pressable
@@ -267,11 +267,11 @@ export default function NewWordlistScreen() {
                   className="flex-row items-center p-4"
                 >
                   <View className="flex-1">
-                    <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                    <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                       {t('new_wordlist.target_lang')}
                     </Text>
                     <Text
-                      className="mt-1 text-base text-black dark:text-white"
+                      className="mt-1 text-base text-ink dark:text-ink-dark"
                       style={Platform.OS === 'ios'
                         ? undefined
                         : { lineHeight: 24, height: 24, includeFontPadding: false, textAlignVertical: 'center' }}
@@ -280,11 +280,11 @@ export default function NewWordlistScreen() {
                       {transLabel ? `${transLabel.flag} ${t(`languages.${transLabel.code}`)}` : '—'}
                     </Text>
                   </View>
-                  <Text className="text-base text-gray-400">{editingLang === 'trans' ? '▲' : '▼'}</Text>
+                  <Text className="text-base text-faint">{editingLang === 'trans' ? '▲' : '▼'}</Text>
                 </Pressable>
 
                 {editingLang === 'trans' ? (
-                  <View className="border-t border-gray-200 dark:border-gray-800" style={{ height: 320 }}>
+                  <View className="border-t border-line dark:border-line-dark" style={{ height: 320 }}>
                     <ScrollView nestedScrollEnabled>
                       {STUDY_LANGUAGES.map((item) => {
                         const selected = item.code === transLang;
@@ -297,13 +297,13 @@ export default function NewWordlistScreen() {
                               setTransLang(item.code);
                               setEditingLang(null);
                             }}
-                            className={`flex-row items-center px-4 py-3 ${selected ? 'bg-black/5 dark:bg-white/10' : ''}`}
+                            className={`flex-row items-center px-4 py-3 ${selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''}`}
                           >
                             <Text className="mr-3 text-xl">{item.flag}</Text>
                             <View className="flex-1">
-                              <Text className="text-base text-black dark:text-white">{translatedName}</Text>
+                              <Text className="text-base text-ink dark:text-ink-dark">{translatedName}</Text>
                               {translatedName !== item.nativeName ? (
-                                <Text className="text-xs text-gray-400">{item.nativeName}</Text>
+                                <Text className="text-xs text-faint">{item.nativeName}</Text>
                               ) : null}
                             </View>
                             {selected ? <MaterialIcons name="check-circle" size={22} color="#2EC4A5" /> : null}
@@ -324,12 +324,12 @@ export default function NewWordlistScreen() {
                 handleCreate();
               }}
               className={`items-center rounded-xl py-4 ${
-                canSubmit ? 'bg-black dark:bg-white' : 'bg-gray-300'
+                canSubmit ? 'bg-ink dark:bg-ink-dark' : 'bg-clay'
               }`}
             >
               <Text
                 className={`text-base font-semibold ${
-                  canSubmit ? 'text-white dark:text-black' : 'text-gray-500'
+                  canSubmit ? 'text-canvas dark:text-canvas-dark' : 'text-muted'
                 }`}
               >
                 {saving ? t('new_wordlist.creating') : t('new_wordlist.create')}

@@ -66,12 +66,12 @@ const MAX_TITLE_LENGTH = 30;
 const WORD_CARD_STYLE: 'border' | 'shadow' | 'luminance' = 'border';
 
 const WORD_CARD_CLASS_BY_STYLE: Record<typeof WORD_CARD_STYLE, string> = {
-  border: 'mb-2 rounded-xl border border-gray-300 p-4 dark:border-gray-800',
-  shadow: 'mb-2 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950',
+  border: 'mb-2 rounded-xl border border-line p-4 dark:border-line-dark',
+  shadow: 'mb-2 rounded-xl border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark',
   // Luminance: light mode uses subtle white-on-gray-50 lift + soft shadow.
   //            dark mode uses gray-900 card on the (typically gray-950) bg
   //            so the card reads as elevated purely via brightness.
-  luminance: 'mb-2 rounded-2xl border border-gray-200 bg-white p-4 dark:border-transparent dark:bg-[#161616]',
+  luminance: 'mb-2 rounded-2xl border border-line bg-surface p-4 dark:border-transparent dark:bg-[#161616]',
 };
 
 const WORD_CARD_INLINE_STYLE = WORD_CARD_STYLE === 'shadow' || WORD_CARD_STYLE === 'luminance'
@@ -299,12 +299,12 @@ export default function WordlistDetailScreen() {
 
   if (error) {
     return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white px-10 dark:bg-black">
-        <MaterialIcons name="error-outline" size={48} color="#9ca3af" />
-        <Text className="mt-4 text-xl font-bold text-black dark:text-white">
+      <SafeAreaView className="flex-1 items-center justify-center bg-canvas px-10 dark:bg-canvas-dark">
+        <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+        <Text className="mt-4 text-xl font-bold text-ink dark:text-ink-dark">
           {t('error.title')}
         </Text>
-        <Text className="mt-2 text-center text-sm text-gray-500">
+        <Text className="mt-2 text-center text-sm text-muted">
           {t('error.message')}
         </Text>
         <Pressable
@@ -312,9 +312,9 @@ export default function WordlistDetailScreen() {
             setError(false);
             setLoading(true);
           }}
-          className="mt-8 items-center rounded-xl bg-black px-8 py-4 dark:bg-white"
+          className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
         >
-          <Text className="text-base font-semibold text-white dark:text-black">
+          <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
             {t('error.retry')}
           </Text>
         </Pressable>
@@ -324,16 +324,16 @@ export default function WordlistDetailScreen() {
 
   if (loading) {
     return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white dark:bg-black">
-        <Text className="text-sm text-gray-400">{t('wordlist.loading')}</Text>
+      <SafeAreaView className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
+        <Text className="text-sm text-faint">{t('wordlist.loading')}</Text>
       </SafeAreaView>
     );
   }
 
   if (!book) {
     return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white dark:bg-black">
-        <Text className="text-base text-gray-500">{t('wordlist.not_found')}</Text>
+      <SafeAreaView className="flex-1 items-center justify-center bg-canvas dark:bg-canvas-dark">
+        <Text className="text-base text-muted">{t('wordlist.not_found')}</Text>
       </SafeAreaView>
     );
   }
@@ -386,7 +386,7 @@ export default function WordlistDetailScreen() {
                 }
                 setEditing(false);
               }}
-              className="flex-1 rounded-xl border border-gray-300 px-3 py-2 text-2xl font-bold text-black dark:border-gray-700 dark:text-white"
+              className="flex-1 rounded-xl border border-line px-3 py-2 text-2xl font-bold text-ink dark:border-line-dark dark:text-ink-dark"
             />
             <Pressable
               onPress={async () => {
@@ -397,7 +397,7 @@ export default function WordlistDetailScreen() {
                 }
                 setEditing(false);
               }}
-              className="rounded-xl bg-black p-2.5 dark:bg-white"
+              className="rounded-xl bg-ink p-2.5 dark:bg-ink-dark"
               accessibilityLabel={t('wordlist.rename_save')}
               accessibilityRole="button"
             >
@@ -424,7 +424,7 @@ export default function WordlistDetailScreen() {
                 accessibilityLabel={t('common.back')}
                 accessibilityRole="button"
               >
-                <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+                <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
               </Pressable>
               <Pressable
                 onPress={() => {
@@ -435,10 +435,10 @@ export default function WordlistDetailScreen() {
                 accessibilityLabel={t('common.edit')}
                 accessibilityRole="button"
               >
-                <Text className="flex-1 text-3xl font-bold text-black dark:text-white">
+                <Text className="flex-1 text-3xl font-bold text-ink dark:text-ink-dark">
                   {book.title}
                 </Text>
-                <MaterialIcons name="edit" size={20} color="#9ca3af" style={{ marginLeft: 8 }} />
+                <MaterialIcons name="edit" size={20} color="#A79E90" style={{ marginLeft: 8 }} />
               </Pressable>
             </View>
           </View>
@@ -446,22 +446,22 @@ export default function WordlistDetailScreen() {
         <View className="mt-1 flex-row items-start justify-between">
           <View className="flex-1">
             {src && tgt ? (
-              <Text className="text-sm text-gray-500">
+              <Text className="text-sm text-muted">
                 {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
               </Text>
             ) : null}
-            <Text className="mt-1 text-sm text-gray-500">
+            <Text className="mt-1 text-sm text-muted">
               {t('wordlist.word_count', { count: words.length })}
             </Text>
           </View>
           <View className="ml-3 flex-row items-start gap-2">
-            <View className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800">
+            <View className="rounded-full bg-clay p-2.5 dark:bg-clay-dark">
               <VoiceToggle iconSize={22} iconColor="#2EC4A5" />
             </View>
             {Platform.OS !== 'web' ? (
               <Pressable
                 onPress={() => setNotifModalOpen(true)}
-                className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
+                className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
                 accessibilityLabel={t('wordlist.notif_settings')}
                 accessibilityRole="button"
               >
@@ -476,10 +476,10 @@ export default function WordlistDetailScreen() {
                   size={22}
                   color={
                     !globalNotifEnabled
-                      ? '#9ca3af'
+                      ? '#A79E90'
                       : book.notifEnabled
                       ? '#2EC4A5'
-                      : '#6b7280'
+                      : '#7B7366'
                   }
                 />
               </Pressable>
@@ -488,14 +488,14 @@ export default function WordlistDetailScreen() {
               <Pressable
                 onPress={handleExport}
                 disabled={exporting}
-                className="rounded-full bg-gray-100 p-2.5 dark:bg-gray-800"
+                className="rounded-full bg-clay p-2.5 dark:bg-clay-dark"
                 accessibilityLabel={t('wordlist.export_csv')}
                 accessibilityRole="button"
               >
                 <MaterialIcons
                   name="ios-share"
                   size={22}
-                  color={exporting ? '#9ca3af' : '#2EC4A5'}
+                  color={exporting ? '#A79E90' : '#2EC4A5'}
                 />
               </Pressable>
             </View>
@@ -511,9 +511,9 @@ export default function WordlistDetailScreen() {
                   params: { id: book.id },
                 })
               }
-              className="mt-4 items-center rounded-xl bg-black py-4 dark:bg-white"
+              className="mt-4 items-center rounded-xl bg-ink py-4 dark:bg-ink-dark"
             >
-              <Text className="text-base font-semibold text-white dark:text-black">
+              <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
                 {t('wordlist.add_word')}
               </Text>
             </Pressable>
@@ -528,7 +528,7 @@ export default function WordlistDetailScreen() {
                 }
                 className="mt-2 items-center rounded-xl border border-black py-3 dark:border-white"
               >
-                <Text className="text-base font-semibold text-black dark:text-white">
+                <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                   {t('wordlist.review_button', { count: reviewCount })}
                 </Text>
               </Pressable>
@@ -544,15 +544,15 @@ export default function WordlistDetailScreen() {
                 onPress={() => handleSortChange(mode)}
                 className={`flex-row items-center rounded-lg px-3 py-1.5 ${
                   sortMode === mode
-                    ? 'bg-black dark:bg-white'
-                    : 'bg-gray-100 dark:bg-gray-800'
+                    ? 'bg-ink dark:bg-ink-dark'
+                    : 'bg-clay dark:bg-clay-dark'
                 }`}
               >
                 <Text
                   className={`text-xs font-medium ${
                     sortMode === mode
-                      ? 'text-white dark:text-black'
-                      : 'text-gray-600 dark:text-gray-400'
+                      ? 'text-canvas dark:text-canvas-dark'
+                      : 'text-muted'
                   }`}
                 >
                   {t(`wordlist.sort_${mode}`)}
@@ -572,7 +572,7 @@ export default function WordlistDetailScreen() {
             <MaterialIcons
               name={editMode ? 'check' : 'edit'}
               size={20}
-              color={editMode ? '#2EC4A5' : '#6b7280'}
+              color={editMode ? '#2EC4A5' : '#7B7366'}
             />
           </Pressable>
         </View>
@@ -580,7 +580,7 @@ export default function WordlistDetailScreen() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       {(
         <FlatList<StoredWord>
@@ -588,7 +588,7 @@ export default function WordlistDetailScreen() {
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: editMode ? 100 : 80, flexGrow: 1 }}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
           }
           ListHeaderComponent={headerEl}
           // Click on empty space below the last word card exits edit
@@ -601,8 +601,8 @@ export default function WordlistDetailScreen() {
           ) : null}
           ListEmptyComponent={
             <View className="items-center justify-center px-10" style={{ minHeight: 240 }}>
-              <MaterialIcons name="translate" size={48} color="#9ca3af" />
-              <Text className="mt-4 text-center text-sm text-gray-500">
+              <MaterialIcons name="translate" size={48} color="#A79E90" />
+              <Text className="mt-4 text-center text-sm text-muted">
                 {t('wordlist.empty')}
               </Text>
             </View>
@@ -666,7 +666,7 @@ export default function WordlistDetailScreen() {
 
       {/* Bottom bar in edit mode — separate from FlatList */}
       {editMode ? (
-        <View className="mx-6 mb-2 flex-row items-center justify-between rounded-2xl bg-gray-800 px-5 py-4 dark:bg-gray-200">
+        <View className="mx-6 mb-2 flex-row items-center justify-between rounded-2xl bg-ink px-5 py-4 dark:bg-ink-dark">
           <Pressable
             onPress={() => {
               if (selectedIds.size === words.length) {
@@ -681,23 +681,23 @@ export default function WordlistDetailScreen() {
             <MaterialIcons
               name={selectedIds.size === words.length && words.length > 0 ? 'check-box' : 'check-box-outline-blank'}
               size={20}
-              color={selectedIds.size === words.length && words.length > 0 ? '#2EC4A5' : '#9ca3af'}
+              color={selectedIds.size === words.length && words.length > 0 ? '#2EC4A5' : '#A79E90'}
             />
-            <Text className="ml-2 text-sm font-medium text-white dark:text-black">
+            <Text className="ml-2 text-sm font-medium text-canvas dark:text-canvas-dark">
               {selectedIds.size > 0 ? t('wordlist.selected_count', { count: selectedIds.size }) : t('wordlist.select_all')}
             </Text>
           </Pressable>
           <Pressable
             onPress={() => setShowDeleteConfirm(true)}
             disabled={selectedIds.size === 0}
-            className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+            className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-danger' : 'bg-clay dark:bg-clay-dark'}`}
             accessibilityLabel={t('wordlist.delete_selected')}
             accessibilityRole="button"
           >
             <MaterialIcons
               name="delete-outline"
               size={22}
-              color={selectedIds.size > 0 ? '#fff' : '#9ca3af'}
+              color={selectedIds.size > 0 ? '#fff' : '#A79E90'}
             />
           </Pressable>
         </View>
@@ -865,7 +865,7 @@ function WordRow({
             <MaterialIcons
               name={selected ? 'check-box' : 'check-box-outline-blank'}
               size={22}
-              color={selected ? '#ef4444' : '#9ca3af'}
+              color={selected ? '#E0654F' : '#A79E90'}
             />
           </View>
         ) : null}
@@ -873,7 +873,7 @@ function WordRow({
         <View className="flex-1">
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: 6, rowGap: 4 }}>
             <Text
-              className="text-lg font-semibold text-black dark:text-white"
+              className="text-lg font-semibold text-ink dark:text-ink-dark"
               onLongPress={(e) => onShowTextActions(word.word, e)}
             >
               {word.word}
@@ -883,7 +883,7 @@ function WordRow({
             ) : null}
           </View>
           {word.result.ipa && ipaSupported(book.sourceLang) ? (
-            <Text className="mt-1 text-sm text-gray-400">{word.result.ipa}</Text>
+            <Text className="mt-1 text-sm text-faint">{word.result.ipa}</Text>
           ) : null}
         </View>
       </View>
@@ -897,7 +897,7 @@ function WordRow({
             {(expanded ? meanings : meanings.slice(0, 1)).map((m, i) => {
               const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
               return (
-                <Text key={i} className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                <Text key={i} className="mt-1 text-sm text-muted">
                   {meanings.length > 1 ? `${i + 1}. ` : ''}
                   {marker ? `(${marker}) ` : ''}
                   {m.definition}
@@ -905,11 +905,11 @@ function WordRow({
               );
             })}
             {!expanded && meanings.length > 1 ? (
-              <Text className="mt-1 text-xs text-gray-400">+{meanings.length - 1}</Text>
+              <Text className="mt-1 text-xs text-faint">+{meanings.length - 1}</Text>
             ) : null}
           </>
         ) : meanings.length > 0 ? (
-          <Text className="mt-1 text-sm text-gray-500" numberOfLines={1}>
+          <Text className="mt-1 text-sm text-muted" numberOfLines={1}>
             {meanings[0].definition}
           </Text>
         ) : null}
@@ -917,7 +917,7 @@ function WordRow({
 
       {/* Expanded details */}
       {expanded && !editMode ? (
-        <View className="mt-3 border-t border-gray-100 pt-3 dark:border-gray-800">
+        <View className="mt-3 border-t border-line pt-3 dark:border-line-dark">
           {enriching ? (
             <View className="items-center py-4">
               <ActivityIndicator size="small" />
@@ -926,18 +926,18 @@ function WordRow({
             <>
               {examples && examples.length > 0 ? (
                 <View className="mb-3">
-                  <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                  <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                     {t('add_word.examples')}
                   </Text>
                   {examples.map((e, i) => (
-                    <View key={i} className="mt-2 rounded-lg bg-gray-50 p-3 dark:bg-gray-900">
+                    <View key={i} className="mt-2 rounded-lg bg-clay p-3 dark:bg-clay-dark">
                       <View className="flex-row items-start">
                         <Pressable
                           onLongPress={(evt) => onShowTextActions(e.sentence.replace(/\*\*/g, ''), evt)}
                           delayLongPress={350}
                           style={{ flex: 1 }}
                         >
-                          <Text className="text-sm italic text-black dark:text-white">
+                          <Text className="text-sm italic text-ink dark:text-ink-dark">
                             {e.sentence.includes('**')
                               ? e.sentence.split('**').map((seg, si) => {
                                   if (si % 2 === 0) return <Text key={si}>{seg}</Text>;
@@ -956,7 +956,7 @@ function WordRow({
                         </Pressable>
                         <Pressable
                           onPress={() => speakWord(e.sentence.replace(/\*\*/g, ''), book.sourceLang)}
-                          className="ml-2 rounded-full bg-gray-200 p-1 dark:bg-gray-700"
+                          className="ml-2 rounded-full bg-line p-1 dark:bg-line-dark"
                           accessibilityLabel={t('common.speak')}
                           accessibilityRole="button"
                         >
@@ -964,7 +964,7 @@ function WordRow({
                         </Pressable>
                       </View>
                       {e.translation ? (
-                        <Text className="mt-1 text-sm text-gray-500">
+                        <Text className="mt-1 text-sm text-muted">
                           {e.translation.replace(/\*\*/g, '')}
                         </Text>
                       ) : null}
@@ -1005,7 +1005,7 @@ function WordRow({
                     : undefined,
                 );
               }}
-              className="mr-3 rounded-full bg-gray-100 p-1.5 dark:bg-gray-800"
+              className="mr-3 rounded-full bg-clay p-1.5 dark:bg-clay-dark"
               accessibilityLabel={t('common.speak')}
               accessibilityRole="button"
             >
@@ -1021,9 +1021,9 @@ function WordRow({
               accessibilityRole="button"
               hitSlop={8}
             >
-              <MaterialIcons name="flag" size={16} color="#9ca3af" />
+              <MaterialIcons name="flag" size={16} color="#A79E90" />
             </Pressable>
-            <Text className="text-xs text-gray-400">{expanded ? '▲' : '▼'}</Text>
+            <Text className="text-xs text-faint">{expanded ? '▲' : '▼'}</Text>
           </View>
         </View>
       ) : null}
