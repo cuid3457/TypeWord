@@ -150,14 +150,14 @@ Rules:
 - Preserve the JSON shape of the input exactly. Same top-level keys, same per-item keys.
 - Array lengths usually stay constant — fix only the specific issue identified, do NOT "improve" unrelated parts.
 - EXCEPTION — missing example: if the reported issue is that a listed meaning has NO example sentence, you MUST add ONE example targeting that meaning (the examples_translated array grows by exactly 1 for that meaningIndex). Keep all other existing examples byte-identical.
-  - For GRAMMATICAL PARTICLES (Korean 조사 like 은/는/이/가, Japanese 助詞, Chinese 助词) the marker wraps HOST + PARTICLE together (\`**책은**\`, \`**学校に**\`) since the particle alone is unnatural to mark.
+  - Marker scope: the wrap contains ONLY the headword's surface form. Grammatical particles that attach to nouns/pronouns (Korean 조사, Japanese 助詞 attached to nouns, Chinese 助词) stay OUTSIDE the wrap as plain text, including chained particle stacks. For verbs and adjectives, the FULL inflected form (stem + ending) stays inside the wrap.
 - Preserve correct existing content verbatim (good meanings stay, good examples stay).
 - If the issue affects a single meaning or example slot that already exists, regenerate ONLY that slot; keep all other slots byte-identical.
 - Language purity:
     * Each "definition" field is the TARGET_LANG vocabulary-card label — keep it in TARGET_LANG, short (1-3 words preferred), not a paraphrase.
     * Each "sentence" field is the SOURCE_LANG example sentence — keep it in SOURCE_LANG.
     * Each "translation" field is the TARGET_LANG translation of the sentence — keep it in TARGET_LANG.
-- Markers in sentences (sentence field): wrap the headword surface form (or its inflected/conjugated form) in DOUBLE ASTERISKS (\`**W**\`). Exactly one pair per sentence. For grammatical particles wrap host+particle together (\`**책은**\`, \`**学校に**\`).
+- Markers in sentences (sentence field): wrap the headword surface form (or its inflected/conjugated form) in DOUBLE ASTERISKS (\`**W**\`). Exactly one pair per sentence. Marker contains ONLY the headword's surface form. For nouns/pronouns, grammatical particles and chained particle stacks attach OUTSIDE the wrap as plain text. For verbs and adjectives, the full inflected form stays inside the wrap.
 - Translation field is PLAIN PROSE — no markers. Do NOT put \`**...**\` in the translation. The learning card highlights only the source sentence.
 - Do not invent new fields or remove existing fields.
 

@@ -14,11 +14,19 @@
       "channel": "preview",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_RC_IOS_KEY": "appl_DtFMxqEIUbTHrrdoZzmGFopJcUT",
+        "EXPO_PUBLIC_RC_ANDROID_KEY": "goog_SUwjXHdvUvlZPICFCgcDRVHspiI"
       }
     },
     "production": {
       "channel": "production",
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_RC_IOS_KEY": "appl_DtFMxqEIUbTHrrdoZzmGFopJcUT",
+        "EXPO_PUBLIC_RC_ANDROID_KEY": "goog_SUwjXHdvUvlZPICFCgcDRVHspiI"
+      }
     }
   },
   "submit": {

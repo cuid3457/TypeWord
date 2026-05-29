@@ -5,23 +5,75 @@
 //       We configure the same string in both Supabase secrets and in
 //       RevenueCat dashboard → Integrations → Webhook.
 //
-// State source: we trust the webhook payload itself rather than making a
-// follow-up REST API call. RC delivers events with the authoritative list of
-// active entitlement ids at event time, which is sufficient for our single
-// entitlement ("TypeWord premium"). This avoids a round-trip and removes the
-// V1-vs-V2 API endpoint confusion.
+// State source: for every event we read the customer's CURRENT entitlement
+// state from the RC v2 REST API rather than trusting the payload. The payload
+// is event-shaped and unreliable for downgrades — notably TRANSFER carries no
+// app_user_id and silently revokes the old owner's entitlement, and a missed
+// EXPIRATION would leave plan='premium' forever. Reading RC as the source of
+// truth makes plan sync self-correcting regardless of which event fired.
 //
-// Only events for authenticated users (UUID app_user_id) update DB. Anonymous
-// RC user events ($RCAnonymousID:…) are ignored — those users don't have
-// profiles yet; when they sign in, Purchases.logIn() fires a transfer event
-// with the new (UUID) app_user_id, which we then handle.
+// Only authenticated users (UUID app_user_id / transferred_* ids) update DB.
+// Anonymous RC ids ($RCAnonymousID:…) have no profile and are skipped; when
+// they sign in, Purchases.logIn() transfers the purchase to the UUID id and
+// the resulting TRANSFER event re-syncs both ids.
 
-import { createClient } from "npm:@supabase/supabase-js@^2.45.0";
+import { createClient, type SupabaseClient } from "npm:@supabase/supabase-js@^2.45.0";
 import { timingSafeEqual } from "../_shared/timing-safe.ts";
+import { sendEmail } from "../_shared/ses.ts";
+import { getSubscriptionEmailTranslation } from "../_shared/email-translations.ts";
+import { renderEmailHtml } from "../_shared/email-templates.ts";
+import { customerHasActiveEntitlement } from "../_shared/revenuecat.ts";
+import { logEmail } from "../_shared/email-log.ts";
 
-const PREMIUM_ENTITLEMENT_ID = "TypeWord premium"; // legacy entitlement → plus
-const PLUS_ENTITLEMENT_ID = "TypeWord plus";
-const PRO_ENTITLEMENT_ID = "TypeWord pro";
+type SubscriptionEmailType =
+  | "subscription_welcome"
+  | "trial_ending_soon"
+  | "subscription_cancelled"
+  | "subscription_renewal_failed";
+
+/**
+ * Send a subscription lifecycle email to the user. Failures are logged but
+ * don't break webhook acknowledgement — RC retries on non-2xx and we don't
+ * want a transient SES outage to cause webhook event replay.
+ */
+async function sendSubscriptionEmail(
+  admin: SupabaseClient,
+  userId: string,
+  emailType: SubscriptionEmailType,
+): Promise<void> {
+  let recipient = "";
+  try {
+    const { data: userData } = await admin.auth.admin.getUserById(userId);
+    const email = userData?.user?.email;
+    const lang = (userData?.user?.user_metadata?.lang as string | undefined) || "en";
+    if (!email) {
+      console.log("[rc-webhook] no email for user, skipping", { userId, emailType });
+      await logEmail(admin, { userId, emailType, recipient: "", status: "failed", error: "no email on user" });
+      return;
+    }
+    recipient = email;
+    const translations = getSubscriptionEmailTranslation(lang, emailType);
+    const html = renderEmailHtml({
+      heading: translations.heading,
+      body: translations.body,
+      buttonText: translations.buttonText,
+      confirmUrl: "",
+      footer: translations.footer,
+      lang,
+    });
+    await sendEmail({ to: email, subject: translations.subject, html });
+    console.log("[rc-webhook] sent email", { userId, emailType });
+    await logEmail(admin, { userId, emailType, recipient, status: "sent" });
+  } catch (e) {
+    console.error("[rc-webhook] email send failed", {
+      userId,
+      emailType,
+      error: (e as Error).message,
+    });
+    await logEmail(admin, { userId, emailType, recipient, status: "failed", error: (e as Error).message });
+  }
+}
+
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 function jsonResponse(status: number, body: unknown): Response {
@@ -31,32 +83,84 @@ function jsonResponse(status: number, body: unknown): Response {
   });
 }
 
-type Plan = "free" | "plus" | "pro";
+type Plan = "free" | "premium";
 
 /**
- * Determine plan tier from the webhook payload.
- *  • EXPIRATION / SUBSCRIPTION_PAUSED → explicit free
- *  • TEST → skip (dev sandbox ping, no real user state)
- *  • Everything else → derive tier from `entitlement_ids`
- *      - "TypeWord pro"           → pro
- *      - "TypeWord plus"          → plus
- *      - "TypeWord premium" (legacy) → plus
- *      - none                     → free
- *
- * Returns null when the event should be ignored (no DB write).
+ * The user ids whose plan this event can change.
+ *  • TRANSFER carries no app_user_id — only transferred_from (old owner, loses
+ *    access) and transferred_to (new owner, gains it). Both must be re-synced.
+ *  • Every other event acts on its single app_user_id.
  */
-function computePlan(
+function affectedUserIds(
   eventType: string,
-  entitlementIds: string[],
-): Plan | null {
-  if (eventType === "TEST") return null;
-  if (eventType === "EXPIRATION" || eventType === "SUBSCRIPTION_PAUSED") {
-    return "free";
+  event: Record<string, unknown>,
+): string[] {
+  if (eventType === "TRANSFER") {
+    const pick = (v: unknown): string[] =>
+      Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
+    return [...new Set([
+      ...pick(event.transferred_from),
+      ...pick(event.transferred_to),
+    ])];
   }
-  if (entitlementIds.includes(PRO_ENTITLEMENT_ID)) return "pro";
-  if (entitlementIds.includes(PLUS_ENTITLEMENT_ID)) return "plus";
-  if (entitlementIds.includes(PREMIUM_ENTITLEMENT_ID)) return "plus";
-  return "free";
+  const appUserId = event.app_user_id;
+  return typeof appUserId === "string" ? [appUserId] : [];
+}
+
+/**
+ * Re-sync one user's profiles.plan against RC's authoritative entitlement
+ * state. Skips anonymous ids and users without a profile row. On free→premium
+ * upgrade, resets the monthly image-extract quota (industry standard —
+ * Notion/ChatGPT/Cursor/Duolingo reset on upgrade; abuse bounded by store
+ * refund review + trial-eligibility gating). `extraUpdate` carries event-only
+ * fields (e.g. trial_ends_at) that apply solely to the event subject.
+ *
+ * Throws on DB / RC API failure so the webhook returns 500 and RC retries.
+ */
+async function reconcileUserPlan(
+  admin: SupabaseClient,
+  projectId: string,
+  apiKey: string,
+  userId: string,
+  extraUpdate: Record<string, unknown> = {},
+): Promise<Plan | null> {
+  if (!UUID_REGEX.test(userId)) return null;
+
+  const newPlan: Plan =
+    (await customerHasActiveEntitlement(projectId, userId, apiKey))
+      ? "premium"
+      : "free";
+
+  const { data: existing } = await admin
+    .from("profiles")
+    .select("plan")
+    .eq("user_id", userId)
+    .maybeSingle();
+  if (!existing) {
+    console.log("[rc-webhook] no profile row, skipped", { userId });
+    return null;
+  }
+  const oldPlan = (existing as { plan?: string }).plan ?? "free";
+
+  const updateData: Record<string, unknown> = { plan: newPlan, ...extraUpdate };
+  if (oldPlan === "free" && newPlan === "premium") {
+    const now = new Date();
+    const y = now.getUTCFullYear();
+    const m = String(now.getUTCMonth() + 1).padStart(2, "0");
+    updateData.image_extract_count = 0;
+    updateData.image_extract_bucket = `${y}-${m}`;
+  }
+
+  const { error } = await admin
+    .from("profiles")
+    .update(updateData)
+    .eq("user_id", userId);
+  if (error) {
+    throw new Error(`DB update failed for ${userId}: ${error.message}`);
+  }
+
+  console.log("[rc-webhook] reconciled", { userId, oldPlan, newPlan });
+  return newPlan;
 }
 
 Deno.serve(async (req: Request) => {
@@ -85,57 +189,77 @@ Deno.serve(async (req: Request) => {
   if (!event) return jsonResponse(400, { error: "Missing event" });
 
   const eventType = event.type as string;
-  const appUserId = event.app_user_id as string | undefined;
-  const entitlementIds: string[] = Array.isArray(event.entitlement_ids)
-    ? (event.entitlement_ids as string[])
-    : [];
+  const appUserId = typeof event.app_user_id === "string"
+    ? event.app_user_id
+    : null;
 
-  console.log("[rc-webhook] received", {
-    eventType,
-    appUserId,
-    entitlementIds,
-  });
+  console.log("[rc-webhook] received", { eventType, appUserId });
 
-  // 3. Only handle events for authenticated (UUID) users.
-  if (!appUserId || !UUID_REGEX.test(appUserId)) {
-    return jsonResponse(200, { ok: true, skipped: "non-UUID app_user_id" });
+  // 3. Skip the dev sandbox ping — no real user state to sync.
+  if (eventType === "TEST") {
+    return jsonResponse(200, { ok: true, skipped: "TEST event" });
   }
 
-  // 4. Determine new plan tier from event payload.
-  const newPlan = computePlan(eventType, entitlementIds);
-  if (newPlan === null) {
-    return jsonResponse(200, { ok: true, skipped: `event type ${eventType}` });
+  // 4. RC API config — required to read authoritative entitlement state.
+  const projectId = Deno.env.get("REVENUECAT_PROJECT_ID");
+  const rcApiKey = Deno.env.get("REVENUECAT_REST_API_KEY");
+  if (!projectId || !rcApiKey) {
+    console.error("[rc-webhook] missing REVENUECAT_PROJECT_ID / REST API key");
+    return jsonResponse(500, { error: "Server misconfigured" });
   }
 
-  // 5. Update DB (no-op if plan already matches).
+  // 5. Which users does this event touch? (TRANSFER → both old + new owner.)
+  const userIds = affectedUserIds(eventType, event);
+  if (userIds.length === 0) {
+    return jsonResponse(200, { ok: true, skipped: "no app_user_id" });
+  }
+
   const admin = createClient(
     Deno.env.get("SUPABASE_URL")!,
     Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     { auth: { persistSession: false } },
   );
 
-  const { data: updated, error } = await admin
-    .from("profiles")
-    .update({ plan: newPlan })
-    .eq("user_id", appUserId)
-    .select("user_id, plan")
-    .maybeSingle();
-
-  if (error) {
-    console.error("[rc-webhook] DB update failed", { error: error.message });
-    return jsonResponse(500, { error: "DB update failed" });
+  // Capture trial info for the daily trial-reminder cron — only on a fresh
+  // trial start (INITIAL_PURCHASE + period_type='TRIAL'), applied to the event
+  // subject. Reset reminder_sent_at so a re-trial doesn't suppress a reminder.
+  const trialUpdate: Record<string, unknown> = {};
+  const expirationAtMs = event.expiration_at_ms as number | undefined;
+  if (
+    eventType === "INITIAL_PURCHASE" &&
+    event.period_type === "TRIAL" &&
+    typeof expirationAtMs === "number"
+  ) {
+    trialUpdate.trial_ends_at = new Date(expirationAtMs).toISOString();
+    trialUpdate.trial_reminder_sent_at = null;
   }
 
-  if (!updated) {
-    console.log("[rc-webhook] no profile row for user, skipped", { appUserId });
-    return jsonResponse(200, { ok: true, skipped: "no profile row" });
+  // 6. Re-sync each affected user against RC's authoritative entitlement state.
+  const plans: Record<string, Plan | null> = {};
+  for (const userId of userIds) {
+    const extra = userId === appUserId ? trialUpdate : {};
+    plans[userId] = await reconcileUserPlan(
+      admin,
+      projectId,
+      rcApiKey,
+      userId,
+      extra,
+    );
   }
 
-  console.log("[rc-webhook] updated", {
-    userId: appUserId,
-    plan: newPlan,
-    eventType,
-  });
+  // 7. Lifecycle email — keyed off the event subject (app_user_id) and type.
+  //    Awaited so SES errors surface in logs but trapped inside
+  //    sendSubscriptionEmail so the webhook still returns 200 (RC retries
+  //    non-2xx and we don't want email failures to replay plan updates).
+  if (appUserId && UUID_REGEX.test(appUserId)) {
+    if (eventType === "INITIAL_PURCHASE") {
+      await sendSubscriptionEmail(admin, appUserId, "subscription_welcome");
+    } else if (eventType === "CANCELLATION") {
+      await sendSubscriptionEmail(admin, appUserId, "subscription_cancelled");
+    } else if (eventType === "BILLING_ISSUE") {
+      await sendSubscriptionEmail(admin, appUserId, "subscription_renewal_failed");
+    }
+  }
 
-  return jsonResponse(200, { ok: true, plan: newPlan });
+  return jsonResponse(200, { ok: true, plans });
 });

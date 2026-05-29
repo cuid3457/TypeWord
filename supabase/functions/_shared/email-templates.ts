@@ -1,5 +1,3 @@
-const LOGO_URL = "https://dvdufzwdtmiuzkivjpxb.supabase.co/storage/v1/object/public/assets/logo.png";
-
 interface TemplateParams {
   heading: string;
   body: string;
@@ -42,6 +40,9 @@ export function renderEmailHtml(params: TemplateParams): string {
   const ts = new Date().toISOString();
   const safeUrl = params.confirmUrl ? escapeHtml(sanitizeUrl(params.confirmUrl)) : "";
 
+  // No image logo: Gmail mobile aggressively inverts light-dominant images
+  // in dark mode, distorting the brand mascot. Industry standard for
+  // transactional emails is a text-only header — works in every client.
   return `<!DOCTYPE html>
 <html dir="${dir}" lang="${escapeHtml(params.lang)}">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -51,7 +52,6 @@ export function renderEmailHtml(params: TemplateParams): string {
     <tr><td align="center">
       <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:480px;background:#ffffff;border-radius:16px;overflow:hidden;">
         <tr><td style="padding:40px 32px;text-align:${align};">
-          <img src="${LOGO_URL}" alt="TypeWord" width="40" height="40" style="display:block;margin-bottom:24px;border-radius:10px;" />
           <h1 style="margin:0 0 8px;font-size:22px;font-weight:700;color:#000;">${escapeHtml(params.heading)}</h1>
           <p style="margin:0 0 28px;font-size:15px;line-height:1.6;color:#4b5563;">${escapeHtml(params.body)}</p>
           ${safeUrl ? `<table cellpadding="0" cellspacing="0" width="100%" role="presentation"><tr><td align="center">
@@ -60,7 +60,7 @@ export function renderEmailHtml(params: TemplateParams): string {
           <p style="margin:28px 0 0;font-size:12px;line-height:1.5;color:#9ca3af;">${escapeHtml(params.footer)}</p>
         </td></tr>
       </table>
-      <p style="margin:16px 0 0;font-size:11px;color:#d1d5db;text-align:center;">TypeWord · ${ts.slice(0, 16).replace("T", " ")} UTC</p>
+      <p style="margin:16px 0 0;font-size:11px;color:#d1d5db;text-align:center;">MoaVoca · ${ts.slice(0, 16).replace("T", " ")} UTC</p>
     </td></tr>
   </table>
 </body>

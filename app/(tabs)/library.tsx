@@ -15,6 +15,7 @@ import { getCachedLibrary, refreshLibrary, subscribeLibrary } from '@src/service
 import { NicknameModal } from '@/components/nickname-modal';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { getMyProfile } from '@src/services/friendsService';
+import { haptic } from '@src/services/hapticService';
 
 export default function LibraryTabScreen() {
   const { t } = useTranslation();
@@ -62,6 +63,7 @@ export default function LibraryTabScreen() {
   }, [sortMode]);
 
   const handleUploadPress = useCallback(async () => {
+    haptic.tap();
     const profile = await getMyProfile().catch(() => null);
     if (!profile || profile.isAnonymous) {
       setToast({ msg: t('library_tab.upload_signin_required'), type: 'error' });
@@ -77,6 +79,7 @@ export default function LibraryTabScreen() {
   }, [t]);
 
   const handleMyUploadsPress = useCallback(async () => {
+    haptic.tap();
     const profile = await getMyProfile().catch(() => null);
     if (!profile || profile.isAnonymous) {
       setToast({ msg: t('library_tab.upload_signin_required'), type: 'error' });
@@ -305,6 +308,7 @@ export default function LibraryTabScreen() {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={async () => {
+                haptic.tap();
                 setRefreshing(true);
                 try {
                   await refreshLibrary(sortMode, searchQuery, sourceLangFilter, targetLangFilter, sortReversed);

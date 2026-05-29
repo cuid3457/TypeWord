@@ -1,5 +1,5 @@
-import { DeviceEventEmitter } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { awardStreakMilestone } from './pointsService';
 
 export const CELEBRATE_EVENT = 'streak_celebrate';
 
@@ -7,7 +7,9 @@ const MILESTONE_INTERVAL = 10;
 
 const CELEBRATED_KEY = 'streak_last_celebrated';
 const DAILY_CELEBRATED_KEY = 'streak_daily_celebrated';
-const AD_FREE_UNTIL_KEY = 'ad_free_until';
+
+/** Flat point reward granted every 10-day milestone. Mirrors server constant. */
+export const MILESTONE_REWARD_POINTS = 200;
 
 export interface CelebrateInfo {
   type: 'milestone' | 'daily';
@@ -15,10 +17,10 @@ export interface CelebrateInfo {
   variant: number;
 }
 
-const DAILY_EMOJIS = ['\u2728', '\uD83D\uDCAA', '\uD83C\uDFAF'];
+const DAILY_EMOJIS = ['✨', '💪', '🎯'];
 
 export function getDailyEmoji(variant: number): string {
-  return DAILY_EMOJIS[variant] ?? '\u2728';
+  return DAILY_EMOJIS[variant] ?? '✨';
 }
 
 export function isMilestone(streak: number): boolean {
@@ -45,24 +47,11 @@ export function getDailyVariant(todayDate: string): number {
 
 export async function markCelebrated(streak: number): Promise<void> {
   await AsyncStorage.setItem(CELEBRATED_KEY, String(streak));
-  const until = Date.now() + 24 * 60 * 60 * 1000;
-  await AsyncStorage.setItem(AD_FREE_UNTIL_KEY, String(until));
+  // Grant the milestone bonus. Server is idempotent on `streak`, so this is
+  // safe to call even if the local key was cleared/reinstall'd.
+  await awardStreakMilestone(streak);
 }
 
 export async function markDailyCelebrated(todayDate: string): Promise<void> {
   await AsyncStorage.setItem(DAILY_CELEBRATED_KEY, todayDate);
-}
-
-export async function isAdFree(): Promise<boolean> {
-  const { isPremium } = require('./subscriptionService');
-  if (isPremium()) return true;
-  const until = await AsyncStorage.getItem(AD_FREE_UNTIL_KEY);
-  if (!until) return false;
-  return Date.now() < Number(until);
-}
-
-export async function clearAdFree(): Promise<void> {
-  await AsyncStorage.removeItem(AD_FREE_UNTIL_KEY);
-  await AsyncStorage.removeItem(CELEBRATED_KEY);
-  await AsyncStorage.removeItem(DAILY_CELEBRATED_KEY);
 }

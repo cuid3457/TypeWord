@@ -104,6 +104,20 @@ export interface FcmSendArgs {
   data?: Record<string, string>;
   /** Notification channel id for Android 8+ — must match a channel created by the app. */
   channelId?: string;
+  /**
+   * Launcher badge count (Samsung/Pixel etc.). Mirrors APNs aps.badge — the
+   * sender pushes the absolute post-delivery total. Without this the
+   * launcher dot doesn't increment past the first push.
+   */
+  badge?: number;
+  /**
+   * Notification tag — Android replaces any existing notification sharing
+   * the same tag. Samsung One UI stops respecting notification_count once
+   * multiple distinct notifications stack from the same app, so collapsing
+   * repeated pokes from one sender under a single tag is what actually
+   * makes the launcher badge track the latest count.
+   */
+  tag?: string;
 }
 
 export interface FcmSendResult {
@@ -117,6 +131,12 @@ export async function sendFcmPush(args: FcmSendArgs): Promise<FcmSendResult> {
   const token = await getAccessToken();
   const acct = getServiceAccount();
 
+  // OS-displayed notification + data sidecar. We attempted data-only with a
+  // headless TaskManager task to drive Samsung's launcher badge precisely,
+  // but expo-notifications' Android background task did not fire reliably
+  // (tested on Galaxy / One UI). Accepting the limitation: notifications
+  // always appear; the launcher badge syncs the next time the user focuses
+  // the app (setBadgeCountAsync from `refreshNotificationBadge`).
   const message = {
     token: args.fcmToken,
     notification: { title: args.title, body: args.body },
@@ -126,6 +146,8 @@ export async function sendFcmPush(args: FcmSendArgs): Promise<FcmSendResult> {
       notification: {
         sound: 'default',
         ...(args.channelId ? { channel_id: args.channelId } : {}),
+        ...(typeof args.badge === 'number' ? { notification_count: args.badge } : {}),
+        ...(args.tag ? { tag: args.tag } : {}),
       },
     },
   };

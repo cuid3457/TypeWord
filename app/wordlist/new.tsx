@@ -24,6 +24,7 @@ import { insertBook, getBookCount, BOOK_LIMIT_BY_TIER } from '@src/db/queries';
 import { useTier } from '@src/hooks/usePremium';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { genId } from '@src/services/wordService';
+import { haptic } from '@src/services/hapticService';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 
 const MAX_TITLE_LENGTH = 30;
@@ -107,6 +108,7 @@ export default function NewWordlistScreen() {
         bidirectional: true,
         studyLang: studyLang,
       });
+      haptic.success();
       router.replace({ pathname: '/wordlist/[id]', params: { id } });
     } catch {
       setToast(t('error.title'));

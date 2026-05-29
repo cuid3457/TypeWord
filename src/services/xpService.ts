@@ -37,18 +37,26 @@ export function subscribeXP(listener: Listener): () => void {
 }
 
 export async function initXP(): Promise<void> {
-  if (_initialized) return;
-  _initialized = true;
-  try {
-    const raw = await AsyncStorage.getItem(TOTAL_KEY);
-    const n = raw ? Number(raw) : 0;
-    _total = Number.isFinite(n) && n >= 0 ? n : 0;
-    notify();
-  } catch {
-    _total = 0;
+  // AsyncStorage seed: only on the very first call. Subsequent calls
+  // (SIGNED_IN, TOKEN_REFRESHED) keep the in-memory `_total` we already have.
+  if (!_initialized) {
+    _initialized = true;
+    try {
+      const raw = await AsyncStorage.getItem(TOTAL_KEY);
+      const n = raw ? Number(raw) : 0;
+      _total = Number.isFinite(n) && n >= 0 ? n : 0;
+      notify();
+    } catch {
+      _total = 0;
+    }
   }
-  // Pull cloud XP and reconcile (greater wins). Best-effort — offline launches
-  // simply use the local value, and the next online award triggers a sync.
+  // Cloud reconcile must run on EVERY call, not just the first. The boot-time
+  // initXP at _layout.tsx fires before Supabase session restoration completes,
+  // so the first fetchCloudXp sees `auth.uid()` = null and returns 0. The
+  // subsequent SIGNED_IN/TOKEN_REFRESHED also calls initXP — gating the cloud
+  // fetch behind `_initialized` would skip it, leaving `_total` stuck at the
+  // pre-session value (visible bug: dashboard showed 0 XP / Lv 1 after a
+  // sign-out → sign-in even though cloud held the user's real total).
   try {
     const cloud = await fetchCloudXp();
     if (cloud > _total) {

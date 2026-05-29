@@ -14,6 +14,9 @@ export interface WordMeaning {
    * for non-nouns and for languages without grammatical gender. Displayed
    * alongside partOfSpeech. */
   gender?: 'm' | 'f' | 'n' | 'mf';
+  /** Server-only sense pointer used for cross-target canonical example reuse.
+   * Client does not read this — it just travels through JSONB storage. */
+  senseId?: string;
 }
 
 export interface WordExample {

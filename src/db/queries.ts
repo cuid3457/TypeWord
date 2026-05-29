@@ -2,9 +2,8 @@ import type { Book, UserWord } from '@src/types/book';
 import type { WordLookupResult } from '@src/types/word';
 
 import { getDb } from './index';
-import { pushDeletes, scheduleSync } from '@src/services/syncService';
+import { scheduleSync } from '@src/services/syncService';
 import { removeFromPersistent } from '@src/services/ttsCache';
-import { captureError } from '@src/services/sentry';
 
 // ---------- Books ----------
 
@@ -307,17 +306,7 @@ export async function deleteBooks(ids: string[]): Promise<void> {
     await db.runAsync(`DELETE FROM books WHERE id IN (${placeholders})`, ids);
   });
   purgeTtsForWords(ttsKeys);
-  // Try to hit the server right now so a wipe-and-reinstall between this
-  // moment and the next scheduleSync tick can't resurrect the deleted books.
-  // If the network is down, pending_deletes still holds the tombstones and
-  // scheduleSync will retry — strictly an improvement over the prior
-  // behavior which was always "best effort, eventually."
-  try {
-    await pushDeletes();
-  } catch (e) {
-    captureError(e, { service: 'queries', fn: 'deleteBooks.pushDeletes' });
-    scheduleSync();
-  }
+  scheduleSync();
 }
 
 export async function toggleBookPinned(id: string): Promise<boolean> {
@@ -753,12 +742,12 @@ export async function getReviewableCountsByBook(sort: BookSortMode = 'recent', r
 
 
 export const FREE_BOOK_LIMIT = 3;
+/** Legacy 3-tier value; retained for archived code only. */
 export const PLUS_BOOK_LIMIT = 30;
-/** Per-tier wordlist count cap. Pro = unlimited. */
+/** Per-tier wordlist count cap. Premium = unlimited. */
 export const BOOK_LIMIT_BY_TIER = {
   free: FREE_BOOK_LIMIT,
-  plus: PLUS_BOOK_LIMIT,
-  pro: Number.POSITIVE_INFINITY,
+  premium: Number.POSITIVE_INFINITY,
 } as const;
 
 export async function getBookCount(): Promise<number> {

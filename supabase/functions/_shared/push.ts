@@ -23,6 +23,18 @@ export interface DeliverArgs {
   data?: Record<string, string>;
   /** Android channel id; falls back to the app's default 'study-reminders'. */
   channelId?: string;
+  /**
+   * App icon badge count. Both APNs (iOS) and FCM (Android via Samsung/Pixel
+   * launcher) need the absolute post-delivery total — the OS does not auto
+   * increment. Without this, the badge sticks at the first push's count.
+   */
+  badge?: number;
+  /**
+   * FCM notification tag for Android — passing the same tag for repeat
+   * notifications from the same sender collapses them into a single
+   * tray entry (Samsung-friendly badge behavior). Ignored on iOS.
+   */
+  tag?: string;
 }
 
 export interface DeliverResult {
@@ -38,6 +50,8 @@ export async function deliverPush(args: DeliverArgs): Promise<DeliverResult> {
         body: args.body,
         data: args.data,
         channelId: args.channelId ?? 'study-reminders',
+        badge: args.badge,
+        tag: args.tag,
       })
     : await sendApnsPush({
         deviceToken: args.pushToken,
@@ -45,6 +59,7 @@ export async function deliverPush(args: DeliverArgs): Promise<DeliverResult> {
         title: args.title,
         body: args.body,
         data: args.data,
+        badge: args.badge,
       });
 
   if (result.ok) return { delivered: true };

@@ -11,6 +11,7 @@ import { NicknameModal } from '@/components/nickname-modal';
 import { listOriginalBooks, type BookWithCount } from '@src/db/queries';
 import { uploadWordlistToCommunity, CommunityUploadError, UPLOAD_ERROR } from '@src/services/communityWordlistService';
 import { getMyProfile } from '@src/services/friendsService';
+import { haptic } from '@src/services/hapticService';
 
 // Mirrors the review-tab MIN_SESSION threshold so the dimming + toast
 // pattern feels consistent. Public community wordlists with fewer than
@@ -61,6 +62,7 @@ export default function CommunityUploadScreen() {
         description: description.trim() || undefined,
         uploaderName,
       });
+      haptic.success();
       router.back();
     } catch (e) {
       if (e instanceof CommunityUploadError) {

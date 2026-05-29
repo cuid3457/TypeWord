@@ -30,7 +30,7 @@ export interface DictEntry {
   /** 이 entry의 의미들. */
   senses: DictSense[];
   /** 사전 출처 (UI 노출용 attribution). */
-  source: "krdict" | "jmdict" | "cedict" | "freedict";
+  source: "krdict" | "jmdict" | "cedict" | "freedict" | "wiktionary";
 }
 
 export interface DictExample {

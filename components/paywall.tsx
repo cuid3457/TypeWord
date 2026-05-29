@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
 import { isAnonymous } from '@src/services/authService';
 import { setPaywallPending } from '@src/services/paywallPending';
+import { haptic } from '@src/services/hapticService';
 import {
   getOfferings,
   purchaseAnnual,
@@ -27,8 +27,6 @@ import { formatLocalPrice } from '@src/utils/pure';
 
 export function Paywall() {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme();
-  const dark = colorScheme === 'dark';
 
   const [plan, setPlan] = useState<'monthly' | 'annual'>('annual');
   // Fallback defaults — overwritten by RevenueCat offerings on mount.
@@ -73,12 +71,16 @@ export function Paywall() {
   };
 
   const handlePurchase = async () => {
+    haptic.tap();
     if (await requireAuth()) return;
     setPurchasing(true);
     setMessage('');
     const success = plan === 'annual' ? await purchaseAnnual() : await purchaseMonthly();
     setPurchasing(false);
-    if (success) closePage();
+    if (success) {
+      haptic.success();
+      closePage();
+    }
   };
 
   const handleRestore = async () => {
@@ -88,6 +90,7 @@ export function Paywall() {
     const success = await restorePurchases();
     setRestoring(false);
     if (success) {
+      haptic.success();
       setMessage(t('premium.restored'));
       setTimeout(closePage, 1000);
     } else {
@@ -97,42 +100,34 @@ export function Paywall() {
 
   const features = [
     { icon: 'all-inclusive' as const, text: t('premium.feature_unlimited') },
-    { icon: 'photo-camera' as const, text: t('premium.feature_image') },
     { icon: 'folder' as const, text: t('premium.feature_wordlists') },
-    { icon: 'file-download' as const, text: t('premium.feature_export') },
     { icon: 'block' as const, text: t('premium.feature_no_ads') },
+    { icon: 'photo-camera' as const, text: t('premium.feature_image') },
+    { icon: 'file-download' as const, text: t('premium.feature_export') },
   ];
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom', 'left', 'right']}>
       <Stack.Screen options={{ headerShown: false }} />
 
-      {/* Header — back button + title */}
-      <View className="flex-row items-center px-4 py-2">
-        <Pressable
-          onPress={closePage}
-          className="p-2"
-          accessibilityLabel={t('common.back')}
-          accessibilityRole="button"
-        >
-          <MaterialIcons name="arrow-back" size={24} color={dark ? '#fff' : '#000'} />
-        </Pressable>
-      </View>
-
-      <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: 24,
-          paddingTop: 12,
-          paddingBottom: 32,
-        }}
-      >
-        {/* Title */}
-        <Text className="text-center text-2xl font-bold text-black dark:text-white">
-          MoaVoca {t('premium.title')}
-        </Text>
+      <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 32 }}>
+        {/* Header — back button + title (matches other stack pages) */}
+        <View className="mb-4 h-11 flex-row items-center">
+          <Pressable
+            onPress={closePage}
+            className="mr-2 p-1"
+            accessibilityLabel={t('common.back')}
+            accessibilityRole="button"
+          >
+            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+          </Pressable>
+          <Text className="text-base font-semibold text-black dark:text-white">
+            MoaVoca {t('premium.title')}
+          </Text>
+        </View>
 
         {/* Features */}
-        <View className="mt-6 gap-4">
+        <View className="gap-4">
           {features.map((f) => (
             <View key={f.icon} className="flex-row items-center">
               <View
@@ -153,7 +148,7 @@ export function Paywall() {
             className={`flex-1 rounded-xl border-2 p-4 ${
               plan === 'monthly'
                 ? 'border-[#2EC4A5]'
-                : 'border-gray-200 dark:border-gray-700'
+                : 'border-gray-300 dark:border-gray-700'
             }`}
           >
             <Text className="text-sm text-gray-500">{t('premium.monthly')}</Text>
@@ -167,7 +162,7 @@ export function Paywall() {
             className={`flex-1 rounded-xl border-2 p-4 ${
               plan === 'annual'
                 ? 'border-[#2EC4A5]'
-                : 'border-gray-200 dark:border-gray-700'
+                : 'border-gray-300 dark:border-gray-700'
             }`}
           >
             <View className="flex-row items-center justify-between">
@@ -203,12 +198,32 @@ export function Paywall() {
           )}
         </Pressable>
 
-        {/* Restore */}
-        <Pressable onPress={handleRestore} disabled={restoring} className="mt-3 items-center py-2">
-          <Text className="text-sm text-gray-500">
-            {restoring ? t('premium.restoring') : t('premium.restore')}
-          </Text>
-        </Pressable>
+        {/* Subscription utility links — restore + manage (한 줄) */}
+        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          <Pressable onPress={handleRestore} disabled={restoring}>
+            <Text className="text-xs text-gray-400 underline">
+              {restoring ? t('premium.restoring') : t('premium.restore')}
+            </Text>
+          </Pressable>
+          <Text className="text-xs text-gray-300">|</Text>
+          <Pressable
+            onPress={() => {
+              const url = Platform.OS === 'ios'
+                ? 'https://apps.apple.com/account/subscriptions'
+                : 'https://play.google.com/store/account/subscriptions';
+              Linking.openURL(url).catch(() => {});
+            }}
+          >
+            <Text className="text-xs text-gray-400 underline">
+              {t('premium.manage_subscription', { defaultValue: 'Manage Subscription' })}
+            </Text>
+          </Pressable>
+        </View>
+
+        {/* Message */}
+        {message ? (
+          <Text className="mt-2 text-center text-sm text-gray-500">{message}</Text>
+        ) : null}
 
         {/* Apple Guideline 3.1.2(a) / Google Play subscription disclosure.
             Must appear ON the paywall (not just in ToS). Spelled out
@@ -223,26 +238,6 @@ export function Paywall() {
               'MoaVoca Premium — Monthly ({{monthlyPrice}}/month) or Annual ({{annualPrice}}/year). Payment is charged to your Apple ID or Google account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage subscriptions and turn off auto-renewal by going to your Account Settings after purchase.',
           })}
         </Text>
-
-        {/* Manage subscription deep link */}
-        <Pressable
-          onPress={() => {
-            const url = Platform.OS === 'ios'
-              ? 'https://apps.apple.com/account/subscriptions'
-              : 'https://play.google.com/store/account/subscriptions';
-            Linking.openURL(url).catch(() => {});
-          }}
-          className="mt-2 items-center py-1"
-        >
-          <Text className="text-xs text-gray-500 underline">
-            {t('premium.manage_subscription', { defaultValue: 'Manage Subscription' })}
-          </Text>
-        </Pressable>
-
-        {/* Message */}
-        {message ? (
-          <Text className="mt-2 text-center text-sm text-gray-500">{message}</Text>
-        ) : null}
 
         {/* Legal links — terms + privacy + business info (전자상거래법 disclosure
             must be reachable at the point of purchase). */}

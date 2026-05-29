@@ -16,14 +16,13 @@ export interface ImageExtractResult {
 }
 
 export const IMAGE_LIMIT_FREE = 3;
+export const IMAGE_LIMIT_PREMIUM = 300;
+/** Legacy aliases retained for archive code; not used by the active tier table. */
 export const IMAGE_LIMIT_PLUS = 50;
-export const IMAGE_LIMIT_PRO = 150;
-/** Backwards-compat alias retained for callers that still reference this name. */
-export const IMAGE_LIMIT_PREMIUM = IMAGE_LIMIT_PLUS;
+export const IMAGE_LIMIT_PRO = IMAGE_LIMIT_PREMIUM;
 export const IMAGE_LIMIT_BY_TIER = {
   free: IMAGE_LIMIT_FREE,
-  plus: IMAGE_LIMIT_PLUS,
-  pro: IMAGE_LIMIT_PRO,
+  premium: IMAGE_LIMIT_PREMIUM,
 } as const;
 
 function currentMonthBucket(timezone: string): string {

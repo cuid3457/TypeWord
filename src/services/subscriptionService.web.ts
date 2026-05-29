@@ -12,7 +12,7 @@ import { captureError } from './sentry';
 
 const BONUS_UNTIL_CACHE_KEY = 'typeword.bonus_premium_until';
 
-export type Tier = 'free' | 'pro';
+export type Tier = 'free' | 'premium';
 
 type Listener = (tier: Tier) => void;
 const listeners = new Set<Listener>();
@@ -20,7 +20,7 @@ const listeners = new Set<Listener>();
 let _bonusUntilMs = 0;
 
 function _computeTier(): Tier {
-  if (Date.now() <= _bonusUntilMs) return 'pro';
+  if (Date.now() <= _bonusUntilMs) return 'premium';
   return 'free';
 }
 
@@ -39,11 +39,11 @@ export function getTier(): Tier {
 }
 
 export function isPaid(): boolean {
-  return _computeTier() === 'pro';
+  return _computeTier() === 'premium';
 }
 
 export function isPro(): boolean {
-  return _computeTier() === 'pro';
+  return _computeTier() === 'premium';
 }
 
 export function isPremium(): boolean {
@@ -51,7 +51,7 @@ export function isPremium(): boolean {
 }
 
 export function subscribePremium(listener: (premium: boolean) => void): () => void {
-  return subscribeTier((t) => listener(t === 'pro'));
+  return subscribeTier((t) => listener(t === 'premium'));
 }
 
 export async function refreshBonusPremium(): Promise<void> {

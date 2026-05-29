@@ -7,15 +7,16 @@ const TIER_CACHE_KEY = 'typeword.tier';
 const PREMIUM_CACHE_KEY = 'typeword.premium'; // legacy — read for migration only
 const BONUS_UNTIL_CACHE_KEY = 'typeword.bonus_premium_until';
 
-// 2-tier 시스템 (2026-05-25 롤백): free / pro 단일 paid tier.
-// 'pro' = 모든 유료 권한. 'TypeWord premium' (legacy), 'TypeWord pro', 'TypeWord plus' 모두 pro로 통일.
-export type Tier = 'free' | 'pro';
+// 2-tier 시스템: free / premium 단일 paid tier.
+// Internal canonical: 'premium'. Legacy values ('pro', 'plus') still accepted
+// for backward compatibility with cached AsyncStorage + legacy entitlements.
+export type Tier = 'free' | 'premium';
 
 type Listener = (tier: Tier) => void;
 const listeners = new Set<Listener>();
 
 let _rcTier: Tier = 'free';
-let _bonusUntilMs = 0; // epoch ms; treated as pro when now() <= this (referral bonus)
+let _bonusUntilMs = 0; // epoch ms; treated as premium when now() <= this (referral bonus)
 let _initialized = false;
 
 function notify() {
@@ -24,8 +25,8 @@ function notify() {
 }
 
 function _computeTier(): Tier {
-  if (_rcTier === 'pro') return 'pro';
-  if (Date.now() <= _bonusUntilMs) return 'pro';
+  if (_rcTier === 'premium') return 'premium';
+  if (Date.now() <= _bonusUntilMs) return 'premium';
   return 'free';
 }
 
@@ -40,24 +41,22 @@ export function getTier(): Tier {
 
 /** Convenience: any paid tier. */
 export function isPaid(): boolean {
-  return _computeTier() === 'pro';
+  return _computeTier() === 'premium';
 }
 
-/** Convenience: pro tier (same as isPaid in 2-tier system). */
-export function isPro(): boolean {
-  return _computeTier() === 'pro';
-}
-
-/**
- * Backward-compatible alias. In 2-tier system, premium === pro.
- */
+/** Convenience: alias for isPaid (single paid tier in 2-tier system). */
 export function isPremium(): boolean {
+  return isPaid();
+}
+
+/** Legacy alias retained for callers from pre-rename era. Same as isPaid. */
+export function isPro(): boolean {
   return isPaid();
 }
 
 /** Backward-compatible subscription wrapper. */
 export function subscribePremium(listener: (premium: boolean) => void): () => void {
-  return subscribeTier((t) => listener(t === 'pro'));
+  return subscribeTier((t) => listener(t === 'premium'));
 }
 
 async function cacheTier(tier: Tier) {
@@ -66,16 +65,19 @@ async function cacheTier(tier: Tier) {
   notify();
 }
 
-/**
- * Map RevenueCat entitlements to our tier.
- * Any of 'TypeWord pro', 'TypeWord plus' (legacy), 'TypeWord premium' (legacy)
- * → pro. None → free.
- */
+// 'MoaVoca premium' is the canonical entitlement (post-rebrand 2026-05-28).
+// 'TypeWord pro/plus/premium' kept for users who subscribed before the rebrand.
+// Must stay in sync with revenuecat-webhook PRO_ENTITLEMENT_IDS and RevenueCat
+// dashboard.
+const PRO_ENTITLEMENT_IDS = [
+  'MoaVoca premium',  // canonical
+  'TypeWord pro',     // legacy (2-tier post-rollback 2026-05-25)
+  'TypeWord plus',    // legacy
+  'TypeWord premium', // legacy
+];
+
 function tierFromEntitlements(active: Record<string, unknown>): Tier {
-  if (active['TypeWord pro'] !== undefined) return 'pro';
-  if (active['TypeWord plus'] !== undefined) return 'pro'; // legacy → pro
-  if (active['TypeWord premium'] !== undefined) return 'pro'; // legacy → pro
-  return 'free';
+  return PRO_ENTITLEMENT_IDS.some((id) => active[id] !== undefined) ? 'premium' : 'free';
 }
 
 /**
@@ -113,14 +115,16 @@ export async function initSubscription(): Promise<void> {
   _initialized = true;
 
   // Prefer new tier cache; migrate from legacy boolean cache if needed.
-  const cachedTier = (await AsyncStorage.getItem(TIER_CACHE_KEY)) as Tier | 'plus' | null;
-  if (cachedTier === 'pro' || cachedTier === 'plus') {
-    _rcTier = 'pro'; // legacy 'plus' → 'pro'
+  // Legacy 'pro'/'plus' values still map to 'premium' for users upgraded before
+  // the 2026-05-28 canonical rename.
+  const cachedTier = (await AsyncStorage.getItem(TIER_CACHE_KEY)) as Tier | 'pro' | 'plus' | null;
+  if (cachedTier === 'premium' || cachedTier === 'pro' || cachedTier === 'plus') {
+    _rcTier = 'premium';
   } else if (cachedTier === 'free') {
     _rcTier = 'free';
   } else {
     const legacy = await AsyncStorage.getItem(PREMIUM_CACHE_KEY);
-    _rcTier = legacy === '1' ? 'pro' : 'free';
+    _rcTier = legacy === '1' ? 'premium' : 'free';
   }
   const cachedBonus = await AsyncStorage.getItem(BONUS_UNTIL_CACHE_KEY);
   const cachedMs = cachedBonus ? Number(cachedBonus) : 0;
@@ -192,7 +196,7 @@ export async function purchaseMonthly(): Promise<boolean> {
     const { customerInfo } = await Purchases.purchasePackage(monthly);
     const tier = tierFromEntitlements(customerInfo.entitlements.active);
     await cacheTier(tier);
-    return tier === 'pro';
+    return tier === 'premium';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'purchaseMonthly' });
     return false;
@@ -209,7 +213,7 @@ export async function purchaseAnnual(): Promise<boolean> {
     const { customerInfo } = await Purchases.purchasePackage(annual);
     const tier = tierFromEntitlements(customerInfo.entitlements.active);
     await cacheTier(tier);
-    return tier === 'pro';
+    return tier === 'premium';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'purchaseAnnual' });
     return false;
@@ -222,7 +226,7 @@ export async function restorePurchases(): Promise<boolean> {
     const info = await Purchases.restorePurchases();
     const tier = tierFromEntitlements(info.entitlements.active);
     await cacheTier(tier);
-    return tier === 'pro';
+    return tier === 'premium';
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'restorePurchases' });
     return false;

@@ -14,6 +14,7 @@ import { Toast } from '@/components/toast';
 import { findLanguage } from '@src/constants/languages';
 import { supabase } from '@src/api/supabase';
 import { blockUser } from '@src/services/friendsService';
+import { haptic } from '@src/services/hapticService';
 import {
   CommunityUploadError,
   UPLOAD_ERROR,
@@ -62,6 +63,7 @@ export default function CommunityDetailScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const handlePullRefresh = async () => {
     if (!wordlistId) return;
+    haptic.tap();
     setRefreshing(true);
     try {
       const [w, l] = await Promise.all([
@@ -104,6 +106,7 @@ export default function CommunityDetailScreen() {
   const handleLike = async () => {
     if (!wordlistId || busyLike) return;
     setBusyLike(true);
+    haptic.tap();
     try {
       const newLiked = await toggleCommunityWordlistLike(wordlistId);
       setLiked(newLiked);
@@ -125,6 +128,7 @@ export default function CommunityDetailScreen() {
       const { bookId } = await downloadCommunityWordlist(wordlistId, (p) => {
         setDownloadProgress(p);
       });
+      haptic.success();
       // Replace this page with the downloaded wordlist so back returns to
       // the library tab (instead of this detail page).
       router.replace(`/wordlist/${bookId}`);

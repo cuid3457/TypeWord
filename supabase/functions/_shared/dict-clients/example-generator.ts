@@ -95,8 +95,13 @@ Requirements for the SOURCE_LANG sentence:
 3. Surrounding vocabulary at or below the headword's familiarity level. Avoid rare, technical, or formal words around W.
 4. Grammar fully natural and unambiguous to a native speaker of SOURCE_LANG.
 5. Wrap the actual surface form of W as it appears in the sentence (inflected / conjugated / declined as needed) in DOUBLE ASTERISKS: **W**. Exactly one opening **, one closing **. Mark nothing else.
-   - GRAMMATICAL PARTICLES (Korean 조사 like 은/는/이/가/을/를/에/에서/도/만, Japanese 助詞 like は/が/を/に/で/と, Chinese 助词 like 的/了/吗/呢): a particle alone cannot be wrapped standalone in natural prose. Wrap the HOST WORD + PARTICLE together as a single span: \`**책은**\`, \`**学校に**\`, \`**好的**\`. The marker still contains the headword (the particle is inside the wrapped span), which is what the learner card highlights.
-   - SUFFIXES / BOUND MORPHEMES that never appear standalone: same rule — wrap host + suffix together (\`**학생들**\` for 들).
+   - The wrap must contain ONLY the headword's surface form. Grammatical particles that follow the headword and form a separate syntactic unit attach OUTSIDE the wrap as plain text. This applies to:
+     • Korean nominal 조사 (격조사, 보조사, 접속조사) — subject/object markers, postpositions, focus/limit markers, conjunctive markers after nouns, pronouns, numerals.
+     • Japanese 助詞 attached to nouns/pronouns — case, topic, postpositional, focus, conjunctive, terminal interactional particles.
+     • Chinese 助词 (structural / aspectual / modal) — they always attach outside the marker.
+     • Chained particle stacks (multiple particles in sequence after a noun) — the entire chain stays OUTSIDE the wrap.
+   - For VERBS and ADJECTIVES (and other POS whose inflected ending is part of the lexeme, not a separable particle), wrap the FULL inflected form together — stem + ending stays inside the marker as one unit. Do not split a verb stem from its conjugation.
+   - For derivational SUFFIXES that never appear standalone (plural / honorific / nominalizers fused to the host), keep host + suffix together inside the wrap.
 6. Let the SCENE_ANCHOR loosely flavor the situation — never quote it, never list its keywords as nouns.
 
 Requirements for the TARGET_LANG translation:

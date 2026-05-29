@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AppState, DeviceEventEmitter, Modal, Platform, Pressable, Text, View } from 'react-native';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@src/services/hapticService';
 import { rem } from 'react-native-css-interop';
 import 'react-native-reanimated';
 import { enableFreeze, enableScreens } from 'react-native-screens';
@@ -30,6 +30,7 @@ SplashScreen.preventAutoHideAsync();
 
 import { ErrorBoundary } from '@/components/error-boundary';
 import { OfflineBanner } from '@/components/offline-banner';
+import { SplashOverlay } from '@/components/splash-overlay';
 import { useColorScheme, syncTheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { requestAdsConsent } from '@src/services/adsConsent';
@@ -42,7 +43,8 @@ import { refreshReview } from '@src/services/reviewCache';
 import { supabase } from '@src/api/supabase';
 import { captureError, initSentry, setUser } from '@src/services/sentry';
 import { initEdgeWarmup } from '@src/services/edgeWarmup';
-import { getDb } from '@src/db';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { clearLocalData, getDb } from '@src/db';
 import { markCelebrated, markDailyCelebrated, getDailyEmoji, CELEBRATE_EVENT, type CelebrateInfo } from '@src/services/streakMilestone';
 import { getTodayStreakDate } from '@src/services/streakService';
 import { initSubscription, identifyUser, resetUser, refreshBonusPremium } from '@src/services/subscriptionService';
@@ -72,7 +74,7 @@ export default function RootLayout() {
   useEffect(() => {
     const sub = DeviceEventEmitter.addListener(CELEBRATE_EVENT, (info: CelebrateInfo) => {
       setCelebrateInfo(info);
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      haptic.success();
     });
     return () => sub.remove();
   }, []);
@@ -210,12 +212,15 @@ export default function RootLayout() {
           // takes the previous user's local rows, stamps them with the
           // NEW user_id (wordRowToRecord), and pushes them under the
           // wrong account. Detect via a stored user-id sentinel.
+          // Static imports — dynamic await import('@src/db') was failing in
+          // the Hermes/Metro release bundle (the alias never resolved at
+          // runtime), so `clearLocalData` came back undefined and the
+          // following call became `undefined()` → TypeError caught by the
+          // root ErrorBoundary, blanking every screen mounted afterward.
           try {
-            const AsyncStorage = (await import('@react-native-async-storage/async-storage')).default;
             const LAST_USER_KEY = 'typeword.lastSignedInUserId';
             const prevUserId = await AsyncStorage.getItem(LAST_USER_KEY);
             if (newUserId && prevUserId && prevUserId !== newUserId) {
-              const { clearLocalData } = await import('@src/db');
               await clearLocalData();
             }
             if (newUserId) await AsyncStorage.setItem(LAST_USER_KEY, newUserId);
@@ -450,7 +455,7 @@ export default function RootLayout() {
                     {celebrateInfo.streak}{t('streak.milestone_days')}
                   </Text>
                   <Text style={{ marginTop: 16, fontSize: 14, color: '#9ca3af', textAlign: 'center' }}>
-                    {t('streak.milestone_ad_free')}
+                    {t('streak.milestone_reward')}
                   </Text>
                 </>
               ) : celebrateInfo ? (
@@ -469,6 +474,7 @@ export default function RootLayout() {
               ) : null}
               <Pressable
                 onPress={async () => {
+                  haptic.selection();
                   if (celebrateInfo?.type === 'milestone') {
                     await markCelebrated(celebrateInfo.streak);
                   } else {
@@ -485,6 +491,7 @@ export default function RootLayout() {
             </View>
           </View>
         </Modal>
+        <SplashOverlay />
         <StatusBar style="auto" />
       </ThemeProvider>
     </ErrorBoundary>

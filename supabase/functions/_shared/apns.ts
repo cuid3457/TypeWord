@@ -77,6 +77,12 @@ export interface ApnsSendArgs {
   title: string;
   body: string;
   data?: Record<string, string>;
+  /**
+   * App icon badge count. iOS will NOT auto-decrement, so the sender must
+   * push the post-delivery total (e.g. unseen + pending requests) and the
+   * client clears via setBadgeCountAsync when items are viewed.
+   */
+  badge?: number;
 }
 
 export interface ApnsSendResult {
@@ -98,6 +104,7 @@ export async function sendApnsPush(args: ApnsSendArgs): Promise<ApnsSendResult> 
     aps: {
       alert: { title: args.title, body: args.body },
       sound: 'default',
+      ...(typeof args.badge === 'number' ? { badge: args.badge } : {}),
     },
     ...(args.data ?? {}),
   };

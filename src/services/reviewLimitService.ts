@@ -7,20 +7,22 @@ export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fil
 
 /**
  * Per-tier daily card limit (combined across ALL review modes).
- * Free can extend via rewarded ads (+REWARDED_AD_BONUS per ad, no daily cap).
- * Pro is unlimited.
+ * Free can extend via rewarded ads (+REWARDED_AD_BONUS per ad, capped at
+ * REWARDED_AD_DAILY_CAP watches per day). Premium is unlimited.
  */
 const DAILY_LIMIT: Record<Tier, number> = {
   free: 100,
-  pro: Number.POSITIVE_INFINITY,
+  premium: Number.POSITIVE_INFINITY,
 };
 
-const REWARDED_AD_BONUS = 100;
+const REWARDED_AD_BONUS = 50;
+const REWARDED_AD_DAILY_CAP = 3;
 
 interface DailyState {
   date: string;
   used: number;          // total cards consumed today across all modes
   bonusEarned: number;   // total bonus cards earned today via rewarded ads
+  adsWatched: number;    // count of rewarded ads watched today
 }
 
 function todayKey(): string {
@@ -29,7 +31,7 @@ function todayKey(): string {
 }
 
 function emptyState(): DailyState {
-  return { date: todayKey(), used: 0, bonusEarned: 0 };
+  return { date: todayKey(), used: 0, bonusEarned: 0, adsWatched: 0 };
 }
 
 async function loadState(): Promise<DailyState> {
@@ -49,7 +51,12 @@ async function loadState(): Promise<DailyState> {
             if (typeof v === 'number') used += v;
           }
         }
-        return { date: parsed.date, used, bonusEarned: parsed.bonusEarned ?? 0 };
+        return {
+          date: parsed.date,
+          used,
+          bonusEarned: parsed.bonusEarned ?? 0,
+          adsWatched: parsed.adsWatched ?? 0,
+        };
       }
     } catch { /* reset */ }
   }
@@ -79,7 +86,7 @@ export function getDailyLimit(tier: Tier = getTier()): number {
  */
 export async function getRemaining(_mode?: ReviewMode): Promise<number> {
   const tier = getTier();
-  if (tier === 'pro') return Number.POSITIVE_INFINITY;
+  if (tier === 'premium') return Number.POSITIVE_INFINITY;
   const state = await loadState();
   return Math.max(0, effectiveLimit(tier, state.bonusEarned) - state.used);
 }
@@ -107,6 +114,8 @@ export async function getDailyUsage(): Promise<{
   bonusEarned: number;
   used: number;
   remaining: number;
+  adsWatched: number;
+  adsRemaining: number;
 }> {
   const tier = getTier();
   const state = await loadState();
@@ -120,6 +129,8 @@ export async function getDailyUsage(): Promise<{
     bonusEarned: state.bonusEarned,
     used: state.used,
     remaining,
+    adsWatched: state.adsWatched,
+    adsRemaining: Math.max(0, REWARDED_AD_DAILY_CAP - state.adsWatched),
   };
 }
 
@@ -130,7 +141,7 @@ export async function getDailyUsage(): Promise<{
  */
 export async function consumeWord(_mode: ReviewMode = 'auto'): Promise<{ allowed: boolean; remaining: number }> {
   const tier = getTier();
-  if (tier === 'pro') return { allowed: true, remaining: Number.POSITIVE_INFINITY };
+  if (tier === 'premium') return { allowed: true, remaining: Number.POSITIVE_INFINITY };
   const state = await loadState();
   const limit = effectiveLimit(tier, state.bonusEarned);
   if (state.used >= limit) return { allowed: false, remaining: 0 };
@@ -140,22 +151,30 @@ export async function consumeWord(_mode: ReviewMode = 'auto'): Promise<{ allowed
 }
 
 /**
- * Whether the user can watch another rewarded ad. Free users have no daily cap
- * — each ad grants +REWARDED_AD_BONUS cards. Paid tiers don't see the option.
+ * Whether the user can watch another rewarded ad. Free users are capped at
+ * REWARDED_AD_DAILY_CAP watches per day — each grants +REWARDED_AD_BONUS
+ * cards. Paid tiers don't see the option.
  */
 export async function canWatchRewardedAd(): Promise<boolean> {
-  return getTier() === 'free';
+  if (getTier() !== 'free') return false;
+  const state = await loadState();
+  return state.adsWatched < REWARDED_AD_DAILY_CAP;
 }
 
 /**
  * Record that a rewarded ad was watched: grants +REWARDED_AD_BONUS to today's
- * card budget. Stacks with previous ads watched today.
+ * card budget and increments the daily watch counter.
  */
 export async function recordRewardedAdWatch(): Promise<void> {
   const state = await loadState();
+  if (state.adsWatched >= REWARDED_AD_DAILY_CAP) return;
   state.bonusEarned += REWARDED_AD_BONUS;
+  state.adsWatched += 1;
   await saveState(state);
 }
 
 /** Per-watch bonus awarded for one rewarded ad. */
 export const REWARDED_AD_BONUS_CARDS = REWARDED_AD_BONUS;
+
+/** Maximum rewarded ad watches allowed per day. */
+export const REWARDED_AD_DAILY_CAP_COUNT = REWARDED_AD_DAILY_CAP;

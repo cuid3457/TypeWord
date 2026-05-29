@@ -7,14 +7,31 @@ import { captureError } from './sentry';
 let Notifications: typeof import('expo-notifications') | null = null;
 try {
   Notifications = require('expo-notifications');
+
   Notifications!.setNotificationHandler({
-    handleNotification: async () => ({
-      shouldShowAlert: true,
-      shouldPlaySound: true,
-      shouldSetBadge: false,
-      shouldShowBanner: true,
-      shouldShowList: true,
-    }),
+    handleNotification: async (notification) => {
+      // Foreground path: mirror the badge from the FCM data sidecar — iOS
+      // only. Android's launcher badge is disabled by channel showBadge:
+      // false, so calling setBadgeCountAsync here would do nothing useful.
+      if (Platform.OS !== 'android') {
+        try {
+          const raw = notification?.request?.content?.data?.badge_count;
+          if (raw !== undefined && raw !== null) {
+            const n = typeof raw === 'number' ? raw : parseInt(String(raw), 10);
+            if (Number.isFinite(n) && n >= 0) {
+              Notifications!.setBadgeCountAsync(n).catch(() => {});
+            }
+          }
+        } catch { /* silent */ }
+      }
+      return {
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+        shouldShowBanner: true,
+        shouldShowList: true,
+      };
+    },
   });
 
   // Android 8+ requires a notification channel for any notification to display.
@@ -22,6 +39,11 @@ try {
   // them (no banner). Create a default channel at module load.
   if (Platform.OS === 'android' && Notifications) {
     // HIGH importance ensures heads-up banner + sound on lock screen.
+    // showBadge: false — Samsung One UI's launcher badge can't be kept in
+    // sync reliably across sequential pushes (FCM notification_count and
+    // setBadgeCountAsync are both partially ignored). Rather than showing
+    // a stale "1" when the actual count is higher, we disable the launcher
+    // badge entirely on Android. Notifications still appear normally.
     Notifications
       .setNotificationChannelAsync('study-reminders', {
         name: 'Study Reminders',
@@ -30,6 +52,7 @@ try {
         sound: 'default',
         enableVibrate: true,
         lockscreenVisibility: Notifications.AndroidNotificationVisibility.PUBLIC,
+        showBadge: false,
       })
       .catch(() => {
         // Channel creation can fail if permissions denied — non-blocking.

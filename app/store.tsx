@@ -19,6 +19,7 @@ import {
   type InventorySnapshot,
   type StoreItemId,
 } from '@src/services/pointsService';
+import { haptic } from '@src/services/hapticService';
 
 type StoreItem = {
   id: StoreItemId;
@@ -109,6 +110,7 @@ export default function StoreScreen() {
     setBusy(item.id);
     try {
       await purchaseItem(item.id);
+      haptic.success();
       setToast(t('store.purchase_success'));
     } catch (e) {
       if (e instanceof PurchaseError && e.code === 'insufficient_points') {

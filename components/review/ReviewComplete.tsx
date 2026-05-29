@@ -9,6 +9,7 @@ import { router } from 'expo-router';
 
 import { Confetti } from '@/components/confetti';
 import { usePremium } from '@src/hooks/usePremium';
+import { haptic } from '@src/services/hapticService';
 import { getDailyEmoji, type CelebrateInfo } from '@src/services/streakMilestone';
 import {
   requestNotificationPermission,
@@ -58,6 +59,7 @@ export function ReviewComplete({
   const celebrationEmojiRef = useRef('🎉');
   const celebrationScale = useSharedValue(0);
   useEffect(() => {
+    haptic.success();
     const emojis = ['🎉', '🏆', '⭐'];
     celebrationEmojiRef.current = emojis[Math.floor(Math.random() * emojis.length)];
     celebrationScale.value = 0;
@@ -105,7 +107,7 @@ export function ReviewComplete({
           </Text>
           <Text className="mt-2 text-center text-xs text-amber-600 dark:text-amber-400">
             {completeCelebrate.type === 'milestone'
-              ? t('streak.milestone_ad_free')
+              ? t('streak.milestone_reward')
               : t(`streak.daily_message_${completeCelebrate.variant + 1}`)}
           </Text>
         </View>

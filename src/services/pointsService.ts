@@ -91,6 +91,23 @@ export async function awardSessionPoints(amount: number): Promise<number> {
   return _snap.points;
 }
 
+/**
+ * Award the streak-milestone bonus (flat 200 pts every 10 days). Server is
+ * idempotent on the streak value, so re-calls for the same milestone return
+ * the current balance unchanged. Bypasses award_points caps by design.
+ */
+export async function awardStreakMilestone(streak: number): Promise<number> {
+  if (!Number.isFinite(streak) || streak < 10 || streak % 10 !== 0) return _snap.points;
+  try {
+    const { data, error } = await supabase.rpc('award_streak_milestone', { p_streak: streak });
+    if (!error && typeof data === 'number') {
+      _snap = { ..._snap, points: data };
+      notify();
+    }
+  } catch { /* offline — server will not be updated; local snap unchanged */ }
+  return _snap.points;
+}
+
 export class PurchaseError extends Error {
   code: 'insufficient_points' | 'unknown_item' | 'unauthorized' | 'unknown';
   constructor(code: PurchaseError['code'], message: string) {

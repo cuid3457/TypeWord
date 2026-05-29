@@ -183,6 +183,23 @@ export async function signInWithEmail(email: string, password: string): Promise<
 }
 
 /**
+ * Persist the current UI language to user_metadata.lang so backend lifecycle
+ * emails (welcome / trial / cancel) render in the user's language. Email
+ * sign-up captures lang already; OAuth sign-in does not, so every OAuth
+ * success path calls this. Best-effort — failure just leaves the email
+ * fallback at 'en'.
+ */
+async function persistUserLang(): Promise<void> {
+  try {
+    const settings = await getUserSettings();
+    const lang = settings?.nativeLanguage || 'en';
+    await supabase.auth.updateUser({ data: { lang } });
+  } catch {
+    /* non-fatal */
+  }
+}
+
+/**
  * Web OAuth via popup window. Avoids the full-page redirect that broke
  * wa-sqlite's OPFS access handle on return — the main page keeps its
  * JavaScript context alive (DB stays open, no hydration), while the
@@ -251,11 +268,15 @@ async function signInWithOAuthPopup(provider: 'google' | 'apple'): Promise<{ err
             access_token: payload.access_token,
             refresh_token: payload.refresh_token,
           });
-          return setErr ? { error: setErr.message } : {};
+          if (setErr) return { error: setErr.message };
+          await persistUserLang();
+          return {};
         }
         if (payload.code) {
           const { error: xErr } = await supabase.auth.exchangeCodeForSession(payload.code);
-          return xErr ? { error: xErr.message } : {};
+          if (xErr) return { error: xErr.message };
+          await persistUserLang();
+          return {};
         }
         return { error: 'no_tokens' };
       };
@@ -326,6 +347,7 @@ export async function signInWithGoogle(): Promise<{ error?: string }> {
       token: idToken,
     });
     if (error) return { error: error.message };
+    await persistUserLang();
     return {};
   } catch (err: unknown) {
     // Google's RN SDK throws { code: '<statusCode>', message } where code
@@ -409,6 +431,7 @@ async function signInWithAppleNative(): Promise<{ error?: string }> {
         await supabase.auth.updateUser({ data: { display_name: display } }).catch(() => {});
       }
     }
+    await persistUserLang();
     return {};
   } catch (err: unknown) {
     // Apple cancellation is { code: 'ERR_REQUEST_CANCELED' } — surface
@@ -467,6 +490,7 @@ async function signInWithAppleWeb(): Promise<{ error?: string }> {
           refresh_token: refreshToken,
         });
         if (sessionErr) return { error: sessionErr.message };
+        await persistUserLang();
         return {};
       }
     }
@@ -479,6 +503,7 @@ async function signInWithAppleWeb(): Promise<{ error?: string }> {
       if (code) {
         const { error: exchangeErr } = await supabase.auth.exchangeCodeForSession(code);
         if (exchangeErr) return { error: exchangeErr.message };
+        await persistUserLang();
         return {};
       }
     }

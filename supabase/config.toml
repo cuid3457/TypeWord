@@ -50,6 +50,11 @@ verify_jwt = false
 # ES256 key incompatibility; verified inside via admin.auth.getUser(jwt).
 verify_jwt = false
 
+[functions.trial-reminder]
+# pg_cron caller — auth is via Authorization header with CRON_SECRET (vault-
+# stored shared secret, not a JWT). Verified inside the function.
+verify_jwt = false
+
 [api]
 enabled = true
 # Port to use for the API URL.

@@ -7,11 +7,11 @@ import {
   Platform,
   Pressable,
   ScrollView,
-  Switch,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { SmoothSwitch } from '@/components/common/SmoothSwitch';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
@@ -23,6 +23,7 @@ import { NATIVE_LANGUAGES, findLanguage } from '@src/constants/languages';
 import { findCountry, getSortedCountries, localizedCountryName } from '@src/constants/countries';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
+import { haptic } from '@src/services/hapticService';
 import { showAdsPrivacyOptions } from '@src/services/adsConsent';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { getEmail, isApplePrivateRelay, signOut } from '@src/services/authService';
@@ -160,7 +161,7 @@ export default function SettingsScreen() {
 
         {/* Premium card */}
         <Pressable
-          onPress={() => !premium && router.push('/subscription')}
+          onPress={() => { if (!premium) { haptic.tap(); router.push('/subscription'); } }}
           className="mt-6 rounded-2xl p-4"
           style={{ backgroundColor: premium ? '#2EC4A520' : '#2EC4A510', borderWidth: 1, borderColor: '#2EC4A5' }}
         >
@@ -192,7 +193,7 @@ export default function SettingsScreen() {
         {/* Account section */}
         {userEmail ? (
           <Pressable
-            onPress={() => router.push('/profile')}
+            onPress={() => { haptic.tap(); router.push('/profile'); }}
             className="mt-6 flex-row items-center justify-between rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
           >
             <Text className="flex-1 text-base text-black dark:text-white">
@@ -279,7 +280,7 @@ export default function SettingsScreen() {
                 return (
                   <Pressable
                     key={mode}
-                    onPress={() => save({ ...settings, theme: mode })}
+                    onPress={() => { haptic.selection(); save({ ...settings, theme: mode }); }}
                     className={`flex-1 items-center justify-center rounded-xl border ${
                       selected
                         ? 'border-black bg-black dark:border-white dark:bg-white'
@@ -315,7 +316,7 @@ export default function SettingsScreen() {
                 return (
                   <Pressable
                     key={size}
-                    onPress={() => save({ ...settings, fontSize: size })}
+                    onPress={() => { haptic.selection(); save({ ...settings, fontSize: size }); }}
                     className={`flex-1 items-center justify-center rounded-xl border ${
                       selected
                         ? 'border-black bg-black dark:border-white dark:bg-white'
@@ -353,33 +354,28 @@ export default function SettingsScreen() {
                 {t('settings.notifications_hint')}
               </Text>
             </View>
-            <Switch
-              trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-              thumbColor={notifToggle ? '#2EC4A5' : '#f4f4f5'}
+            <SmoothSwitch
               value={notifToggle}
               accessibilityLabel={t('settings.notifications')}
-              onValueChange={(enabled) => {
+              onValueChange={async (enabled) => {
                 if (!notifAvailable) {
                   setNotifUnavailableModal(true);
                   return;
                 }
                 if (enabled) {
-                  // Flip immediately so the slider animates, then ask for
-                  // permission. If denied, revert the local toggle.
                   setNotifToggle(true);
-                  requestNotificationPermission().then((granted) => {
-                    if (!granted) {
-                      setNotifToggle(false);
-                      setNotifDeniedModal(true);
-                      return;
-                    }
-                    save({ ...settings, notificationsEnabled: true }).catch(() => {});
-                    rescheduleNotifications(getNotificationTranslations(t)).catch(() => {});
-                  });
+                  const granted = await requestNotificationPermission();
+                  if (!granted) {
+                    setNotifToggle(false);
+                    setNotifDeniedModal(true);
+                    return;
+                  }
+                  await save({ ...settings, notificationsEnabled: true });
+                  await rescheduleNotifications(getNotificationTranslations(t));
                 } else {
                   setNotifToggle(false);
-                  save({ ...settings, notificationsEnabled: false }).catch(() => {});
-                  cancelAllNotifications().catch(() => {});
+                  await save({ ...settings, notificationsEnabled: false });
+                  await cancelAllNotifications();
                 }
               }}
             />
@@ -398,14 +394,12 @@ export default function SettingsScreen() {
                 {t('settings.sound_effects_hint')}
               </Text>
             </View>
-            <Switch
-              trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-              thumbColor={sfxToggle ? '#2EC4A5' : '#f4f4f5'}
+            <SmoothSwitch
               value={sfxToggle}
               accessibilityLabel={t('settings.sound_effects')}
-              onValueChange={(enabled) => {
+              onValueChange={async (enabled) => {
                 setSfxToggle(enabled);
-                save({ ...settings, sfxEnabled: enabled }).catch(() => {});
+                await save({ ...settings, sfxEnabled: enabled });
               }}
             />
           </View>
@@ -624,7 +618,7 @@ function CountryList({
           const selected = c.code === selectedCode;
           return (
             <Pressable
-              onPress={() => onSelect(c.code)}
+              onPress={() => { haptic.selection(); onSelect(c.code); }}
               className={`flex-row items-center px-4 py-3 ${
                 selected ? 'bg-black/5 dark:bg-white/10' : ''
               }`}
@@ -668,7 +662,7 @@ function LanguageList({
         return (
           <Pressable
             key={item.code}
-            onPress={() => onSelect(item.code)}
+            onPress={() => { haptic.selection(); onSelect(item.code); }}
             className={`flex-row items-center px-4 py-3 ${
               selected ? 'bg-black/5 dark:bg-white/10' : ''
             }`}

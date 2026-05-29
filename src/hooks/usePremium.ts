@@ -8,7 +8,7 @@ import {
 } from '@src/services/subscriptionService';
 
 /**
- * Returns the user's current tier ('free' | 'pro').
+ * Returns the user's current tier ('free' | 'premium').
  * Re-renders when the tier changes (purchase, referral bonus, log out, etc.).
  */
 export function useTier(): Tier {
@@ -23,7 +23,7 @@ export function useTier(): Tier {
 }
 
 /**
- * Returns true for paid tier (pro).
+ * Returns true for paid tier (premium).
  */
 export function usePremium(): boolean {
   const [premium, setPremium] = useState(isPremium);

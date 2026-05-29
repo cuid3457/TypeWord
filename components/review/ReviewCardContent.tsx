@@ -9,6 +9,7 @@ import { ReadingDisplay } from '@/components/reading-display';
 import { getTtsText, speakWord } from '@src/utils/ttsLocale';
 import { formatPOS } from '@src/utils/normalizeResult';
 import { compareDictation } from '@src/utils/dictationCompare';
+import { splitMarkerParticle } from '@src/utils/splitMarkerParticle';
 import type { StoredWord } from '@src/db/queries';
 
 type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank';
@@ -152,6 +153,28 @@ export function ReviewCardContent({
     </View>
   );
 
+  // Highlight the marker span minus its trailing grammatical particle.
+  // The example-generator prompt wraps host + particle together
+  // (`**책은**`, `**学校に**`, `**好的**`) for natural prose, but learner
+  // cards want emphasis on the headword only. Per-example POS picks up
+  // from the meaningIndex slot so verb forms (which look like particles
+  // at the end but aren't) stay intact.
+  const renderMarkedSentence = (sentence: string, meaningIndex: number | undefined) => {
+    const lang = current.bookId ? langs[current.bookId] ?? 'en' : 'en';
+    const headword = current.result.headword ?? current.word;
+    const pos = current.result.meanings?.[meaningIndex ?? 0]?.partOfSpeech;
+    return sentence.split('**').map((seg, si) => {
+      if (si % 2 === 0) return <Text key={si}>{seg}</Text>;
+      const { head, tail } = splitMarkerParticle(seg, headword, lang, pos);
+      return (
+        <Text key={si}>
+          <Text style={{ color: '#2EC4A5', fontWeight: '700' }}>{head}</Text>
+          {tail ? <Text>{tail}</Text> : null}
+        </Text>
+      );
+    });
+  };
+
   const renderExamples = () =>
     current.result.examples?.length ? (
       <View className="mt-3">
@@ -160,11 +183,7 @@ export function ReviewCardContent({
             <View className="flex-row items-start">
               <Text className="flex-1 text-sm italic text-black dark:text-white">
                 {e.sentence.includes('**')
-                  ? e.sentence.split('**').map((seg, si) =>
-                      si % 2 === 1
-                        ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                        : <Text key={si}>{seg}</Text>
-                    )
+                  ? renderMarkedSentence(e.sentence, e.meaningIndex)
                   : e.sentence}
               </Text>
               <Pressable
@@ -281,11 +300,24 @@ export function ReviewCardContent({
         const clean = ex.sentence.replace(/\*\*/g, '');
         const speakAll = () => speakWord(clean, ctxLang);
         if (hasMarkers) {
+          const headword = current.result.headword ?? current.word;
+          const pos = current.result.meanings?.[ex.meaningIndex ?? 0]?.partOfSpeech;
           return ex.sentence.split('**').map((seg, si) => {
             const marked = si % 2 === 1;
+            if (!marked) {
+              return (
+                <Text key={si} onPress={speakAll}>{seg}</Text>
+              );
+            }
+            // Drop trailing particle (조사/助詞/助词) from the highlighted
+            // span so the underline + accent color hit the headword only.
+            // Tail still speaks the original full marked text for TTS
+            // continuity (mirrors how the LLM wrote it).
+            const { head, tail } = splitMarkerParticle(seg, headword, ctxLang, pos);
             return (
-              <Text key={si} onPress={marked ? () => speakWord(seg, ctxLang) : speakAll} style={marked ? highlightStyle : undefined}>
-                {seg}
+              <Text key={si}>
+                <Text onPress={() => speakWord(seg, ctxLang)} style={highlightStyle}>{head}</Text>
+                {tail ? <Text onPress={() => speakWord(seg, ctxLang)}>{tail}</Text> : null}
               </Text>
             );
           });
@@ -514,11 +546,7 @@ export function ReviewCardContent({
       // panel below the choices.
       const renderFilledSentence = () => {
         if (ex.sentence.includes('**')) {
-          return ex.sentence.split('**').map((seg, si) =>
-            si % 2 === 1
-              ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-              : <Text key={si}>{seg}</Text>
-          );
+          return renderMarkedSentence(ex.sentence, ex.meaningIndex);
         }
         const hw = current.result.headword ?? current.word;
         const escaped = hw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');

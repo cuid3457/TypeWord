@@ -4,12 +4,12 @@ import {
   FlatList,
   Platform,
   Pressable,
-  Switch,
   Text,
   View,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
+import { SmoothSwitch } from '@/components/common/SmoothSwitch';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTablet } from '@src/hooks/useTablet';
 
@@ -137,30 +137,29 @@ function NotifInnerContent({
         <Text className="text-base text-black dark:text-white">
           {t('wordlist.notif_enable')}
         </Text>
-        <Switch
+        <SmoothSwitch
           value={enabled}
           onValueChange={setEnabled}
-          trackColor={{ false: '#d1d5db', true: '#A7E8D8' }}
-          thumbColor={enabled ? '#2EC4A5' : '#f4f4f5'}
         />
       </View>
 
-      {enabled ? (
-        <>
-          <DaySelector days={days} onToggle={toggleDay} lang={lang} />
-          <View className="mt-3 rounded-xl border border-gray-300 px-4 pt-3 pb-4 dark:border-gray-700">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-              {t('wordlist.notif_hour')}
-            </Text>
-            <TimePickerWheels
-              hour={hour}
-              minute={minute}
-              onHourChange={setHour}
-              onMinuteChange={setMinute}
-            />
-          </View>
-        </>
-      ) : null}
+      <View
+        pointerEvents={enabled ? 'auto' : 'none'}
+        style={{ opacity: enabled ? 1 : 0.4 }}
+      >
+        <DaySelector days={days} onToggle={toggleDay} lang={lang} />
+        <View className="mt-3 rounded-xl border border-gray-300 px-4 pt-3 pb-4 dark:border-gray-700">
+          <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            {t('wordlist.notif_hour')}
+          </Text>
+          <TimePickerWheels
+            hour={hour}
+            minute={minute}
+            onHourChange={setHour}
+            onMinuteChange={setMinute}
+          />
+        </View>
+      </View>
 
       <View className="mt-6 flex-row gap-3">
         <Pressable

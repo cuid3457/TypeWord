@@ -145,6 +145,8 @@ export async function sendPoke(recipientId: string): Promise<void> {
 }
 
 export interface PokeRecord {
+  /** Surrogate row id — each poke event is its own row, keyed by this. */
+  id: number;
   userId: string;
   username: string;
   displayName: string;
@@ -157,12 +159,14 @@ export async function listRecentPokes(): Promise<PokeRecord[]> {
   const { data, error } = await supabase.rpc('list_recent_pokes');
   if (error) throw mapPgError(error);
   return ((data ?? []) as Array<{
+    id: number;
     sender_id: string;
     username: string;
     display_name: string;
     created_at: string;
     seen_at: string | null;
   }>).map((r) => ({
+    id: r.id,
     userId: r.sender_id,
     username: r.username,
     displayName: r.display_name,
@@ -182,8 +186,8 @@ export async function markPokesSeen(): Promise<void> {
   if (error) throw mapPgError(error);
 }
 
-export async function deletePoke(senderId: string): Promise<void> {
-  const { error } = await supabase.rpc('delete_poke', { p_sender_id: senderId });
+export async function deletePoke(pokeId: number): Promise<void> {
+  const { error } = await supabase.rpc('delete_poke', { p_poke_id: pokeId });
   if (error) throw mapPgError(error);
 }
 
@@ -360,6 +364,28 @@ export function subscribeFriendshipsForUser(
       'postgres_changes',
       { event: 'INSERT', schema: 'public', table: 'friendships', filter: `user_id=eq.${userId}` },
       () => { onInsert(); },
+    )
+    .subscribe();
+  return () => { supabase.removeChannel(channel); };
+}
+
+/**
+ * Subscribe to pokes addressed to `userId`. Each poke is its own row, so
+ * INSERT events alone cover the "new poke arrived" signal — UPDATE only
+ * fires for our own seen_at / last_pushed_at writes and would cause a
+ * reload loop.
+ */
+export function subscribePokesForUser(
+  userId: string,
+  onChange: () => void,
+): () => void {
+  const suffix = Math.random().toString(36).slice(2, 10);
+  const channel = supabase
+    .channel(`pokes:${userId}:${suffix}`)
+    .on(
+      'postgres_changes',
+      { event: 'INSERT', schema: 'public', table: 'pokes', filter: `recipient_id=eq.${userId}` },
+      () => { onChange(); },
     )
     .subscribe();
   return () => { supabase.removeChannel(channel); };

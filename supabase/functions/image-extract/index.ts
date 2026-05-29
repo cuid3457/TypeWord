@@ -16,18 +16,16 @@ const PRICE_OUTPUT_PER_1M = 10.0;
 const ENDPOINT = "image-extract";
 
 const IMAGE_LIMIT_FREE = 3;
-const IMAGE_LIMIT_PLUS = 50;
-const IMAGE_LIMIT_PRO = 150;
-/** Legacy alias retained for any callers still referencing the old name. */
-const IMAGE_LIMIT_PREMIUM = IMAGE_LIMIT_PLUS;
+const IMAGE_LIMIT_PREMIUM = 300;
 
 /** Resolve monthly image-extract limit from the profile's plan string.
- *  Accepts new tier values ('free' / 'plus' / 'pro') and the legacy
- *  'premium' value (mapped to plus, since current Pro entitlement was
- *  renamed to Plus in the 3-tier launch). */
+ *  Canonical 'premium' is the active paid tier (post 2026-05-28 rename).
+ *  Legacy 'pro' and 'plus' values still map to premium for users whose
+ *  profile rows haven't been migrated yet. */
 function imageLimitForPlan(plan: string | null | undefined): number {
-  if (plan === "pro") return IMAGE_LIMIT_PRO;
-  if (plan === "plus" || plan === "premium") return IMAGE_LIMIT_PLUS;
+  if (plan === "premium" || plan === "pro" || plan === "plus") {
+    return IMAGE_LIMIT_PREMIUM;
+  }
   return IMAGE_LIMIT_FREE;
 }
 

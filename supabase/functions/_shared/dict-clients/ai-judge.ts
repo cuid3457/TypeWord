@@ -20,6 +20,27 @@ import type { DictEntry, DictSense } from "./types.ts";
 
 export const FREQ_THRESHOLD = 30;
 
+// Two different caps for the 2-stage judge:
+//
+// SCORE_MAX_SENSES — how many senses get a frequency score. This must be
+// generous because dictionary sense ORDER is NOT frequency order. kaikki
+// lists "power" as ability/authority/people-in-power FIRST and the common
+// "physical force / electricity" senses 7th+. A tight cap here silently
+// drops everyday meanings (the "power→힘 missing" bug). Scoring is cheap
+// (output is just id+score) so we can afford to score the whole list.
+const SCORE_MAX_SENSES = 60;
+//
+// TRANSLATE_MAX_SENSES — how many of the SURVIVORS (score ≥ FREQ_THRESHOLD)
+// we actually translate + show. This bounds the expensive translate output
+// AND the learner card length. Senses are sorted by score desc before this
+// cut, so we keep the most common meanings regardless of dict order.
+const TRANSLATE_MAX_SENSES = 5;
+
+// SOURCE_DEF can be a long encyclopedic gloss. The judge only needs enough
+// to gauge frequency + produce a short translation, so truncate to keep the
+// input prompt (and per-sense token cost) bounded.
+const MAX_SOURCE_DEF_CHARS = 160;
+
 const OPENAI_KEY = Deno.env.get("OPENAI_API_KEY") ?? "";
 const MODEL = "gpt-4.1-mini";
 
@@ -38,6 +59,20 @@ const LANG_NAME: Record<string, string> = {
 };
 function langName(code: string): string {
   return LANG_NAME[code] ?? code;
+}
+
+// Map a dictionary's learner-frequency grade to a baseline frequency score.
+// Currently krdict's word_grade (초급/중급/고급). Returns null when the dict
+// gives no grade (e.g. kaikki) so the caller keeps the LLM score as-is.
+// These are deliberately above FREQ_THRESHOLD(30) for 초급/중급 so genuinely
+// common meanings can't be dropped by an LLM misjudgment; 고급 sits near the
+// threshold so rare/advanced senses still need LLM support to survive.
+function gradeBaseline(grade?: string): number | null {
+  if (!grade) return null;
+  if (grade.includes("초급")) return 70;
+  if (grade.includes("중급")) return 52;
+  if (grade.includes("고급")) return 38;
+  return null; // 무등급 / unknown → trust LLM
 }
 
 const SCORE_SYSTEM = `You are a vocabulary frequency analyst for language learners.
@@ -59,10 +94,15 @@ General profanity / slang / casual derogatory expressions that are NOT discrimin
 
 If a more standard word exists for the same semantic field, lower this sense's score relative to the standard one, but consider whether learners would still encounter it.
 
-Output strict JSON:
+SENSE BRANCHES (group related senses so the learner card shows distinct meanings, not duplicates):
+- Also assign each sense a "branch" integer. Senses that a native speaker considers the SAME underlying meaning used in context share the same branch number — even if their surface translations differ. (A single core concept applied to different domains is ONE branch with several specialized shades.)
+- Senses that are genuinely DISTINCT meanings — or homonyms from unrelated origins that merely share spelling — get DIFFERENT branch numbers. A learner must see every distinct branch.
+- The caller keeps only the highest-frequency sense per branch, so number branches consistently: same meaning → same number, distinct meaning → new number. Start at 0.
+
+Output strict JSON (no reasoning/explanation field — keep it compact so even 20+ senses return fast):
 {
   "scores": [
-    { "id": "<sense_id>", "frequency_score": <0-100>, "reasoning": "<one-line rationale>" }
+    { "id": <int>, "frequency_score": <0-100>, "branch": <int> }
   ]
 }`;
 
@@ -105,7 +145,7 @@ Output strict JSON:
 interface ScoreItem {
   id: string;
   frequency_score: number;
-  reasoning: string;
+  branch?: number;
 }
 
 interface OverrideItem {
@@ -113,7 +153,7 @@ interface OverrideItem {
   translation_override: string;
 }
 
-async function openaiCall(systemPrompt: string, userPrompt: string): Promise<any> {
+async function openaiCall(systemPrompt: string, userPrompt: string, maxTokens?: number): Promise<any> {
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -128,6 +168,7 @@ async function openaiCall(systemPrompt: string, userPrompt: string): Promise<any
       ],
       response_format: { type: "json_object" },
       temperature: 0.0,
+      ...(maxTokens ? { max_tokens: maxTokens } : {}),
     }),
   });
   if (!res.ok) {
@@ -192,13 +233,21 @@ export async function judgeAndTranslate(
   sourceLang: string,
   targetLang: string,
 ): Promise<JudgedSense[]> {
-  const allSenses: DictSense[] = entries.flatMap((e) => e.senses);
-  if (allSenses.length === 0) return [];
+  const allSensesRaw: DictSense[] = entries.flatMap((e) => e.senses);
+  if (allSensesRaw.length === 0) return [];
+  // Score the WHOLE list (up to SCORE_MAX_SENSES) — dict order isn't
+  // frequency order, so we must let the model see every sense to find the
+  // common ones (power's "force/electricity" senses sit 7th+). Scoring
+  // output is tiny (id+score) so this stays fast even at 24 senses.
+  const allSenses = allSensesRaw.slice(0, SCORE_MAX_SENSES);
 
-  // Phase A: SCORE
-  const scoreLines = allSenses.map((s) => {
+  // Phase A: SCORE. Use the array INDEX as the id, not sense_id. The model
+  // mangles structured ids (it strips the ":0" suffix from "0_3:0" → "0_3",
+  // breaking the match and dropping every sense). Plain integers echo back
+  // reliably.
+  const scoreLines = allSenses.map((s, i) => {
     const en = s.en_translation ?? "";
-    return `- id=${s.sense_id}  POS=${s.pos ?? ""}  GRADE=${s.grade ?? ""}  EN=${en}  SOURCE_DEF=${s.source_def}`;
+    return `- id=${i}  POS=${s.pos ?? ""}  GRADE=${s.grade ?? ""}  EN=${(en).slice(0, 80)}  SOURCE_DEF=${(s.source_def ?? "").slice(0, MAX_SOURCE_DEF_CHARS)}`;
   });
   const scoreUserPrompt =
     `SOURCE_LANG=${langName(sourceLang)}\n` +
@@ -206,19 +255,75 @@ export async function judgeAndTranslate(
     `Sense candidates:\n${scoreLines.join("\n")}`;
   const scoreResp = (await openaiCall(SCORE_SYSTEM, scoreUserPrompt)) as { scores: ScoreItem[] };
 
-  const scoreById: Record<string, ScoreItem> = {};
-  for (const sc of scoreResp.scores ?? []) {
-    scoreById[sc.id] = sc;
+  const scoreByIdx: Record<string, { score: number; branch: number }> = {};
+  scoreResp.scores?.forEach((sc, ord) => {
+    // branch falls back to a unique number per sense when the model omits it,
+    // so a missing branch never accidentally merges distinct senses.
+    scoreByIdx[String(sc.id)] = {
+      score: sc.frequency_score,
+      branch: typeof sc.branch === "number" ? sc.branch : 1000 + ord,
+    };
+  });
+
+  // Collect survivors with their branch. Where the dictionary provides an
+  // authoritative learner-frequency grade (krdict 초급/중급/고급), that grade
+  // is the PRIMARY frequency signal and the LLM score only nudges ranking
+  // within a grade. The LLM badly misjudges Korean everyday frequency on its
+  // own (it scored 과일 "배"/pear at 20 and 잔 "glass" at 10 despite both
+  // being 초급), so trusting it alone kept dropping common meanings. Dicts
+  // without a grade (kaikki en/es/…) fall back to the pure LLM score.
+  const survivors: Array<{ sense: DictSense; score: number; branch: number }> = [];
+  allSenses.forEach((s, i) => {
+    const r = scoreByIdx[String(i)];
+    const llmScore = r?.score ?? 0;
+    const base = gradeBaseline(s.grade);
+    const score = base !== null
+      ? Math.round(base + (llmScore - 50) * 0.3)
+      : llmScore;
+    if (score < FREQ_THRESHOLD) return;
+    survivors.push({ sense: s, score, branch: r!.branch });
+  });
+  if (survivors.length === 0) return [];
+
+  // Stage 1: one representative per LLM branch (collapses shades of one
+  // meaning — e.g. power's authority/control/influence → one 권력).
+  const bestPerBranch = new Map<number, { sense: DictSense; score: number }>();
+  for (const sv of survivors) {
+    const cur = bestPerBranch.get(sv.branch);
+    if (!cur || sv.score > cur.score) {
+      bestPerBranch.set(sv.branch, { sense: sv.sense, score: sv.score });
+    }
   }
 
-  const kept: JudgedSense[] = [];
-  for (const s of allSenses) {
-    const sc = scoreById[s.sense_id];
-    const score = sc?.frequency_score ?? 0;
-    if (score < FREQ_THRESHOLD) continue;
-    kept.push({ sense: s, score, reasoning: sc?.reasoning ?? "" });
+  // Stage 2: one representative per dictionary ETYMOLOGY (sense_id prefix).
+  // For krdict the prefix is target_code = a distinct etymology/homonym, and
+  // its several sub-senses (배 belly/middle/time/uterus) are derivations of
+  // ONE word — they must collapse to a single card entry, otherwise belly's
+  // minor senses eat the cap and push out a different homonym (pear). For
+  // dicts whose sense_id prefix is per-sense (kaikki en: "0_3:0"), every
+  // sense has a unique prefix so this stage is a no-op and branch dedup
+  // alone governs (power stays correct).
+  const bestPerEtymology = new Map<string, { sense: DictSense; score: number }>();
+  for (const rep of bestPerBranch.values()) {
+    const prefix = rep.sense.sense_id.split(":")[0];
+    const cur = bestPerEtymology.get(prefix);
+    if (!cur || rep.score > cur.score) bestPerEtymology.set(prefix, rep);
   }
-  if (kept.length === 0) return [];
+
+  // Drop etymologies whose representative meaning is a Korean counter /
+  // bound-unit noun ("~를 세는 단위", "~를 나타내는 단위" — e.g. 배 "잔을
+  // 세는 단위" = a glass-counter). These are measure words, not headword
+  // meanings a learner studies, and krdict often mis-grades them as 초급.
+  // krdict definitions are Korean, so this pattern is inert for other dicts.
+  const isKoCounter = (def?: string) =>
+    /(을|를)\s*(세는|나타내는)\s*단위/.test(def ?? "");
+
+  // Sort etymology reps by score, then cap.
+  let kept: JudgedSense[] = Array.from(bestPerEtymology.values())
+    .filter((r) => !isKoCounter(r.sense.source_def))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, TRANSLATE_MAX_SENSES)
+    .map((r) => ({ sense: r.sense, score: r.score, reasoning: "" }));
 
   // Pre-fill display_translation for senses that don't need a LLM TRANSLATE call.
   // What's left in needsTranslate is the cross-lang work the model must do.
@@ -240,10 +345,11 @@ export async function judgeAndTranslate(
     needsTranslate.push({ k, en_def: enDef });
   }
 
-  // Phase B: OVERRIDE and TRANSLATE in parallel.
+  // Phase B: OVERRIDE and TRANSLATE in parallel. Index into `kept` is the id
+  // (same reliability fix as SCORE).
   const overrideLines = kept.map(
-    ({ sense: s }) =>
-      `- id=${s.sense_id}  EN=${s.en_translation ?? ""}  SOURCE_DEF=${s.source_def.slice(0, 120)}`,
+    ({ sense: s }, i) =>
+      `- id=${i}  EN=${s.en_translation ?? ""}  SOURCE_DEF=${s.source_def.slice(0, 120)}`,
   );
   const overrideUserPrompt =
     `SOURCE_LANG=${langName(sourceLang)}\n` +
@@ -254,12 +360,19 @@ export async function judgeAndTranslate(
     overrides: OverrideItem[];
   }>;
 
+  // needsTranslate entries carry their index within `kept` so the response
+  // maps back correctly.
+  const translateTargets: Array<{ keptIdx: number; en_def: string }> = [];
+  kept.forEach((k, i) => {
+    const nt = needsTranslate.find((n) => n.k === k);
+    if (nt) translateTargets.push({ keptIdx: i, en_def: nt.en_def });
+  });
   const translatePromise: Promise<{ translations: Array<{ id: string; translation: string }> } | null> =
-    needsTranslate.length === 0
+    translateTargets.length === 0
       ? Promise.resolve(null)
       : (() => {
-          const lines = needsTranslate.map(
-            ({ k, en_def }) => `- id=${k.sense.sense_id}  EN_DEF=${en_def}`,
+          const lines = translateTargets.map(
+            ({ keptIdx, en_def }) => `- id=${keptIdx}  EN_DEF=${en_def}`,
           );
           const translateUserPrompt =
             `SOURCE_LANG=${langName(sourceLang)}  TARGET_LANG=${langName(targetLang)}\n` +
@@ -273,26 +386,24 @@ export async function judgeAndTranslate(
 
   const [overrideResp, translateResp] = await Promise.all([overridePromise, translatePromise]);
 
-  const overrideById: Record<string, string> = {};
+  const overrideByIdx: Record<string, string> = {};
   for (const o of overrideResp.overrides ?? []) {
     const ov = (o.translation_override ?? "").trim();
-    if (ov) overrideById[o.id] = ov;
+    if (ov) overrideByIdx[String(o.id)] = ov;
   }
-  for (const k of kept) {
-    if (overrideById[k.sense.sense_id]) {
-      k.en_override = overrideById[k.sense.sense_id];
-    }
-  }
+  kept.forEach((k, i) => {
+    if (overrideByIdx[String(i)]) k.en_override = overrideByIdx[String(i)];
+  });
 
   if (translateResp) {
-    const transById: Record<string, string> = {};
+    const transByIdx: Record<string, string> = {};
     for (const t of translateResp.translations ?? []) {
       const v = (t.translation ?? "").trim();
-      if (v) transById[t.id] = v;
+      if (v) transByIdx[String(t.id)] = v;
     }
-    for (const { k } of needsTranslate) {
-      if (transById[k.sense.sense_id]) k.display_translation = transById[k.sense.sense_id];
-    }
+    kept.forEach((k, i) => {
+      if (transByIdx[String(i)]) k.display_translation = transByIdx[String(i)];
+    });
   }
 
   return kept;
@@ -331,10 +442,10 @@ General profanity / slang / casual derogatory that is NOT discriminatory or hara
 - Otherwise produce a recognizable TARGET_LANG lexical item, not a paraphrase. Different senses of W must take different translations (polysemy).
 - HARD RULE for grammatical particles / function words / bound morphemes (Korean 조사 like 은/는/이/가, Japanese 助詞 like は/が/を, Chinese 助词 like 的/了): never echo the dictionary definition (e.g. "topic particle indicating contrast") — output a SHORT learner-card label like "topic marker", "subject marker", "object marker", "possessive marker", "past tense", etc. 1-3 words MAX. This label will be wrapped in markers on the learning card, so it must read naturally.
 
-Output strict JSON:
+Output strict JSON (no other keys — omit any explanation/reasoning to keep the response compact):
 {
   "results": [
-    { "id": "<sense_id>", "frequency_score": <0-100>, "en_override": "<...>", "target_translation": "<...>", "reasoning": "<one-line>" }
+    { "id": "<sense_id>", "frequency_score": <0-100>, "en_override": "<...>", "target_translation": "<...>" }
   ]
 }`;
 
@@ -343,63 +454,19 @@ interface UnifiedItem {
   frequency_score: number;
   en_override: string;
   target_translation: string;
-  reasoning: string;
 }
 
+// judgeUnified is kept as the public entry point (callers unchanged) but now
+// delegates to the 2-stage judgeAndTranslate. The single-call variant was
+// fast only with a tight sense cap, and that cap silently dropped common
+// meanings whose dict position is late (power's "force/electricity" senses).
+// The 2-stage path scores the FULL list cheaply (id+score output) so no
+// common sense is missed, then translates only the high-frequency survivors.
 export async function judgeUnified(
   word: string,
   entries: DictEntry[],
   sourceLang: string,
   targetLang: string,
 ): Promise<JudgedSense[]> {
-  const allSenses: DictSense[] = entries.flatMap((e) => e.senses);
-  if (allSenses.length === 0) return [];
-
-  // Build sense lines with all info the unified prompt needs.
-  const lines = allSenses.map((s) => {
-    const en = s.en_translation ?? "";
-    const pre = s.translations_by_lang?.[targetLang] ?? "";
-    return (
-      `- id=${s.sense_id}` +
-      `  POS=${s.pos ?? ""}` +
-      `  GRADE=${s.grade ?? ""}` +
-      `  EN=${en}` +
-      `  PRE_TARGET=${pre}` +
-      `  SOURCE_DEF=${s.source_def}`
-    );
-  });
-  const userPrompt =
-    `SOURCE_LANG=${langName(sourceLang)}\n` +
-    `TARGET_LANG=${langName(targetLang)}\n` +
-    `W="${word}"\n` +
-    `Sense candidates:\n${lines.join("\n")}`;
-
-  const resp = (await openaiCall(UNIFIED_SYSTEM, userPrompt)) as { results: UnifiedItem[] };
-  const byId: Record<string, UnifiedItem> = {};
-  for (const r of resp.results ?? []) byId[r.id] = r;
-
-  const kept: JudgedSense[] = [];
-  for (const s of allSenses) {
-    const r = byId[s.sense_id];
-    const score = r?.frequency_score ?? 0;
-    if (score < FREQ_THRESHOLD) continue;
-    const j: JudgedSense = { sense: s, score, reasoning: r?.reasoning ?? "" };
-    const ov = (r?.en_override ?? "").trim();
-    if (ov) j.en_override = ov;
-
-    // Resolve display_translation:
-    //   priority: r.target_translation > sense.translations_by_lang[target] > en_override > sense.en_translation > sense.source_def
-    const tt = (r?.target_translation ?? "").trim();
-    if (tt) {
-      j.display_translation = tt;
-    } else if (s.translations_by_lang?.[targetLang]) {
-      j.display_translation = s.translations_by_lang[targetLang];
-    } else if (targetLang === "en") {
-      j.display_translation = j.en_override ?? s.en_translation ?? s.source_def;
-    } else if (sourceLang === targetLang) {
-      j.display_translation = s.source_def;
-    }
-    kept.push(j);
-  }
-  return kept;
+  return judgeAndTranslate(word, entries, sourceLang, targetLang);
 }

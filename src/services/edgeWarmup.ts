@@ -1,7 +1,11 @@
 import { AppState, type AppStateStatus } from 'react-native';
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from '@src/api/supabase';
 
-const PING_URL = `${SUPABASE_URL}/functions/v1/word-lookup-v2`;
+// User traffic moved to word-lookup-v4 at the dict-first cutover
+// (2026-05-22). Keep this client-side warmup ping pointed at v4 so the
+// 5-min idle ping actually warms the endpoint users hit, not the legacy
+// v2 function (which is now only invoked by curation batch scripts).
+const PING_URL = `${SUPABASE_URL}/functions/v1/word-lookup-v4`;
 const IDLE_THRESHOLD_MS = 3 * 60 * 1000; // 3 minutes
 const PING_INTERVAL_MS = 5 * 60 * 1000; // ping every 5 minutes — matches OpenAI cache TTL
 

@@ -7,6 +7,11 @@ export interface WordMeaning {
   /** Grammatical gender for nouns in gendered languages (de/fr/es/it/pt/ru).
    * `m` masculine, `f` feminine, `n` neuter, `mf` common/epicene. Omitted otherwise. */
   gender?: "m" | "f" | "n" | "mf";
+  /** Stable source-language sense identifier (target-agnostic). Used by the
+   * server's canonical-example reuse path to match each translated meaning
+   * back to its underlying sense across different target_langs, so polysemy
+   * alignment survives cross-target lookups. Client doesn't read this. */
+  senseId?: string;
 }
 
 export interface WordExample {

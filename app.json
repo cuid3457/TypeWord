@@ -19,7 +19,8 @@
       "predictiveBackGestureEnabled": false,
       "package": "app.typeword.app",
       "allowBackup": false,
-      "googleServicesFile": "./android/app/google-services.json"
+      "googleServicesFile": "./android/app/google-services.json",
+      "permissions": ["com.android.vending.BILLING"]
     },
     "ios": {
       "supportsTablet": true,

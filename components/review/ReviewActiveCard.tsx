@@ -1,4 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { haptic } from '@src/services/hapticService';
 import { useEffect, useRef } from 'react';
 import { Animated, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -270,7 +271,7 @@ export function ReviewActiveCard({
               style={{ position: 'absolute', left: -8, top: 0, bottom: 0, justifyContent: 'center' }}
             >
               <Pressable
-                onPress={handleBack}
+                onPress={() => { haptic.selection(); handleBack(); }}
                 accessibilityLabel={t('common.previous')}
                 accessibilityRole="button"
                 hitSlop={8}
@@ -287,7 +288,7 @@ export function ReviewActiveCard({
               style={{ position: 'absolute', right: -8, top: 0, bottom: 0, justifyContent: 'center' }}
             >
               <Pressable
-                onPress={handleSkip}
+                onPress={() => { haptic.selection(); handleSkip(); }}
                 accessibilityLabel={t('common.next')}
                 accessibilityRole="button"
                 hitSlop={8}
@@ -330,7 +331,11 @@ export function ReviewActiveCard({
               </>
             ) : (
               <Pressable
-                onPress={() => { const q = getAnswerQuality(); if (q) handleRate(q); }}
+                onPress={() => {
+                  haptic.selection();
+                  const q = getAnswerQuality();
+                  if (q) handleRate(q);
+                }}
                 className="flex-1 items-center justify-center rounded-xl bg-black dark:bg-white"
               >
                 <Text className="text-base font-semibold text-white dark:text-black">

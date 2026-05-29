@@ -14,7 +14,7 @@ import { ReviewActiveCard } from '@/components/review/ReviewActiveCard';
 import { ReviewLimitModal } from '@/components/review-limit-modal';
 import { router, useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
 
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@src/services/hapticService';
 import { useRefreshReviewBadge, useTabBarVisibility } from '@/app/(tabs)/_layout';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { saveUserSettings } from '@src/storage/userSettings';
@@ -186,9 +186,12 @@ export default function ReviewScreen() {
       setAutoPlayTtsState(settings.autoPlayTts);
     }
   }, [settings, autoPlayTts]);
-  const setAutoPlayTts = useCallback((v: boolean) => {
+  const setAutoPlayTts = useCallback(async (v: boolean) => {
     setAutoPlayTtsState(v);
-    if (settings) saveUserSettings({ ...settings, autoPlayTts: v }).catch(() => {});
+    // Await the persist so the cascading UI updates (settings-dependent
+    // bits) land a beat after the Switch slides — matches the settings
+    // tab toggle feel ("smooth" = animation + follow-through, not instant).
+    if (settings) await saveUserSettings({ ...settings, autoPlayTts: v });
   }, [settings]);
 
   // Choice / context mode state
@@ -389,6 +392,7 @@ export default function ReviewScreen() {
   };
 
   const handleConfirmStart = async () => {
+    haptic.tap();
     if (settings && (settings.sessionCount !== sessionCount || settings.reviewMode !== reviewMode)) {
       await saveUserSettings({ ...settings, sessionCount, reviewMode });
     }
@@ -420,7 +424,16 @@ export default function ReviewScreen() {
     const meanings = cur.result.meanings ?? [];
     if (meanings.length === 0) return '';
     if (meanings.length === 1) return meanings[0].definition;
-    const ex = cur.result.examples?.[exIdx];
+    // Wrap exIdx the same way the renderer does so a stale
+    // contextExampleIdx (carried from a previous card with more examples)
+    // still maps to the example actually on screen. Otherwise an
+    // out-of-range index reads `undefined` and silently falls back to
+    // meanings[0], which would show definition A as the correct answer
+    // while the displayed sentence demonstrates definition B.
+    const examples = cur.result.examples ?? [];
+    if (examples.length === 0) return meanings[0].definition;
+    const safeIdx = ((exIdx % examples.length) + examples.length) % examples.length;
+    const ex = examples[safeIdx];
     if (ex && ex.meaningIndex !== undefined
         && ex.meaningIndex >= 0
         && ex.meaningIndex < meanings.length) {
@@ -475,15 +488,37 @@ export default function ReviewScreen() {
     setChoiceSelected(null);
   };
 
-  // Fill-blank picks WORDS from the same source language as distractors
-  // (instead of definitions). The blank in the example sentence asks "which
-  // word fills this spot?" so the choice list must be word forms.
-  const generateFillBlankChoices = (ws: StoredWord[], idx: number, langMap?: Record<string, string>) => {
+  // Fill-blank picks the form that actually fills the blank — the markered
+  // segment from the example sentence, not the headword. "run" with the
+  // example "He **runs** every day" blanks to "runs", so the correct choice
+  // is "runs". Distractors pull the markered form from each other word's
+  // first markered example so all 4 options are the morphology a learner
+  // would actually have to produce.
+  const extractMarker = (sentence: string | undefined, fallback: string): string => {
+    if (!sentence) return fallback;
+    const m = sentence.match(/\*\*([^*]+)\*\*/);
+    if (!m) return fallback;
+    const inside = m[1].trim();
+    return inside.length > 0 ? inside : fallback;
+  };
+  const generateFillBlankChoices = (
+    ws: StoredWord[],
+    idx: number,
+    langMap?: Record<string, string>,
+    exIdx?: number,
+  ) => {
     const cur = ws[idx];
     if (!cur) return;
     const map = langMap ?? langs;
     const curSrc = cur.bookId ? map[cur.bookId] : '';
-    const correct = cur.word;
+    const curExamples = cur.result.examples ?? [];
+    const curEx = curExamples[exIdx ?? 0] ?? curExamples[0];
+    const correct = extractMarker(curEx?.sentence, cur.word);
+
+    const pickMarkerForm = (w: StoredWord): string => {
+      const ex = (w.result.examples ?? []).find((e) => e.sentence?.includes('**'));
+      return extractMarker(ex?.sentence, w.word ?? '');
+    };
 
     const sameSrcCandidates = ws
       .filter((w, i) => i !== idx && w.word)
@@ -492,8 +527,9 @@ export default function ReviewScreen() {
         const sl = w.bookId ? map[w.bookId] : '';
         return sl === curSrc;
       })
-      .map((w) => (w.word ?? '').trim())
-      .filter((w) => w.length > 0);
+      .map(pickMarkerForm)
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
 
     const sameSrcUnique = [...new Set(sameSrcCandidates)].filter((w) => w !== correct);
     let wrong = shuffleArray(sameSrcUnique).slice(0, 3);
@@ -501,8 +537,9 @@ export default function ReviewScreen() {
     if (wrong.length < 3) {
       const allCandidates = ws
         .filter((w, i) => i !== idx && w.word)
-        .map((w) => (w.word ?? '').trim())
-        .filter((w) => w.length > 0 && w !== correct);
+        .map(pickMarkerForm)
+        .map((s) => s.trim())
+        .filter((s) => s.length > 0 && s !== correct);
       const allUnique = [...new Set(allCandidates)];
       wrong = shuffleArray(allUnique).slice(0, 3);
     }
@@ -677,7 +714,7 @@ export default function ReviewScreen() {
         const pool = markeredExampleIndices(ordered[0]?.result.examples);
         const exIdx = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : 0;
         setContextExampleIdx(exIdx);
-        generateFillBlankChoices(ordered, 0, langMap);
+        generateFillBlankChoices(ordered, 0, langMap, exIdx);
       }
     } catch {
       setPickerError(true);
@@ -834,7 +871,7 @@ export default function ReviewScreen() {
     if (committedCardsRef.current.has(current.id)) return;
     committedCardsRef.current.add(current.id);
     if (quality === 'got_it') {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+      haptic.success();
       const earned = calculateXP({
         mode: activeMode,
         intervalDays: current.intervalDays ?? 0,
@@ -852,14 +889,14 @@ export default function ReviewScreen() {
       setXpGain({ amount: earned, key: Date.now() });
       setCombo((c) => c + 1);
     } else if (quality === 'still_learning') {
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      haptic.medium();
       playSfx('wrong');
       setCombo(0);
     } else {
       // uncertain: selection haptic only. SFX stays silent so the correct/
       // wrong family meaning isn't blurred — "neither right nor wrong, just
       // moving on" deserves a different sensory channel.
-      Haptics.selectionAsync();
+      haptic.selection();
     }
   }, [current, activeMode, combo]);
 
@@ -880,7 +917,15 @@ export default function ReviewScreen() {
         if (activeMode === 'context') {
           correct = findContextDefinition(cur, contextExampleIdx);
         } else if (activeMode === 'fill_blank') {
-          correct = cur.word;
+          // Must match what generateFillBlankChoices put in `choices` —
+          // the markered form from this card's chosen example, not the
+          // headword. Modulo-wrap mirrors the renderer so a stale idx
+          // doesn't drift the correct answer off the displayed example.
+          const examples = cur.result.examples ?? [];
+          const ex = examples.length > 0
+            ? examples[((contextExampleIdx % examples.length) + examples.length) % examples.length]
+            : undefined;
+          correct = extractMarker(ex?.sentence, cur.word);
         } else {
           correct = cur.result.meanings?.[0]?.definition ?? '';
         }
@@ -899,6 +944,21 @@ export default function ReviewScreen() {
     }
     setDictationChecked(v);
   }, [dictationChecked, consumeOnAnswer, current, langs, dictationInput, commitAnswerEffects]);
+
+  // STT path can't use wrappedSetDictationChecked: the listener effect is
+  // pinned to [activeMode], so the captured closure has stale current/
+  // dictationInput. Also, on isFinal we want to grade against the just-arrived
+  // transcript before React flushes setDictationInput. Ref always points at the
+  // latest closure, transcript is passed explicitly.
+  const gradeDictationRef = useRef<(transcript: string) => void>(() => {});
+  gradeDictationRef.current = (transcript: string) => {
+    if (!current || dictationChecked) return;
+    consumeOnAnswer();
+    const lang = current.bookId ? langs[current.bookId] ?? 'en' : 'en';
+    const result = compareDictation(transcript, current.word, lang);
+    commitAnswerEffects(result === 'wrong' ? 'still_learning' : 'got_it');
+    setDictationChecked(true);
+  };
 
   const handleRate = async (quality: 'got_it' | 'uncertain' | 'still_learning') => {
     if (!current) return;
@@ -1107,7 +1167,11 @@ export default function ReviewScreen() {
           setDictationInput(transcript);
           if (event.results[0]?.isFinal) {
             setDictationListening(false);
-            if (transcript.trim()) setDictationChecked(true);
+            const trimmed = transcript.trim();
+            if (trimmed) {
+              setDictationInput(trimmed);
+              gradeDictationRef.current(trimmed);
+            }
           }
         },
       );
@@ -1265,7 +1329,7 @@ export default function ReviewScreen() {
     }
     if (m === 'fill_blank') {
       setContextExampleIdx(pickedExIdx);
-      generateFillBlankChoices(words, index);
+      generateFillBlankChoices(words, index, undefined, pickedExIdx);
     }
     // Auto-play audio for modes that show the prompt up front. For
     // flashcard reverse (definitions shown, word hidden) and fill_blank
@@ -1324,14 +1388,21 @@ export default function ReviewScreen() {
     : activeMode === 'dictation' ? dictationChecked
     : flipped;
 
-  // For fill_blank the "correct choice" is the WORD itself; for context it's
-  // the definition tied to the chosen example; for choice it's the primary
-  // definition. ReviewCardContent compares each candidate to this value.
+  // For fill_blank the "correct choice" is the markered form pulled from
+  // the chosen example (the exact text that filled the blank), not the
+  // headword. For context it's the definition tied to the chosen example;
+  // for choice it's the primary definition.
   const correctDefinition = phase === 'review' && words[index]
     ? activeMode === 'context'
       ? findContextDefinition(words[index], contextExampleIdx)
       : activeMode === 'fill_blank'
-      ? words[index].word
+      ? (() => {
+          const examples = words[index].result.examples ?? [];
+          const ex = examples.length > 0
+            ? examples[((contextExampleIdx % examples.length) + examples.length) % examples.length]
+            : undefined;
+          return extractMarker(ex?.sentence, words[index].word);
+        })()
       : words[index].result.meanings?.[0]?.definition ?? ''
     : '';
 

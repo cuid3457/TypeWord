@@ -2,7 +2,7 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs, useFocusEffect } from 'expo-router';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { AdBanner } from '@/components/ad-banner';
@@ -43,7 +43,7 @@ function TabBarWithAd(props: BottomTabBarProps) {
   const colorScheme = useColorScheme();
   const { hidden } = useContext(TabBarVisibleContext);
   const { isTablet, contentWidth } = useTablet();
-  const barBackground = colorScheme === 'dark' ? '#000' : '#EEEEEE';
+  const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
   return (
     <View
       style={{
@@ -113,11 +113,21 @@ export default function TabLayout() {
   }, []);
 
   const refreshNotificationBadge = useCallback(() => {
-    // Use UNSEEN count (matches the in-page bell badge in dashboard.tsx).
-    // Previously listRecentPokes() returned seen+unseen, which left the
-    // tab badge stuck after the user had already viewed the inbox.
     Promise.all([listIncomingRequests(), countUnseenPokes()])
-      .then(([reqs, unseen]) => setNotificationCount(reqs.length + unseen))
+      .then(([reqs, unseen]) => {
+        const count = reqs.length + unseen;
+        setNotificationCount(count);
+        // Mirror to the OS app icon — iOS only. Samsung One UI cannot keep
+        // the launcher badge in sync reliably across sequential pushes, so
+        // Android disables the launcher badge entirely (channel showBadge:
+        // false in notificationService.ts). The in-app bell + tab dot still
+        // reflect notificationCount above.
+        if (Platform.OS !== 'android') {
+          import('expo-notifications')
+            .then((N) => N.setBadgeCountAsync(count).catch(() => {}))
+            .catch(() => {});
+        }
+      })
       .catch(() => setNotificationCount(0));
   }, []);
 
@@ -136,10 +146,13 @@ export default function TabLayout() {
   const tabBarStyle = useMemo(() => ({
     height: TAB_HEIGHT + insets.bottom,
     paddingBottom: insets.bottom,
-    // Light mode: subtle gray (iOS systemGray6) so the tab bar is visually
-    // distinct from the white content area. Dark mode keeps the platform
-    // default, which already has nice separation from #1A1A1A content bg.
-    ...(colorScheme === 'dark' ? {} : { backgroundColor: '#EEEEEE' }),
+    // Warm raised bar: slightly lighter than the canvas content in light
+    // mode (#F4F1EA) and slightly lighter than the dark canvas (#15130E),
+    // so the bar reads as a floating surface. A faint warm hairline on top
+    // carries the separation.
+    backgroundColor: colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7',
+    borderTopColor: colorScheme === 'dark' ? '#322D24' : '#E5DFD3',
+    borderTopWidth: 1,
     ...(tabBarHidden ? { display: 'none' as const } : null),
   }), [insets.bottom, colorScheme, tabBarHidden]);
 
@@ -151,6 +164,7 @@ export default function TabLayout() {
       tabBar={renderTabBar}
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarInactiveTintColor: colorScheme === 'dark' ? '#6F675A' : '#A79E90',
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarShowLabel: false,

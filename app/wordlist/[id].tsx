@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import { syncUserWordsContent } from '@src/services/userWordsSyncService';
+import { haptic } from '@src/services/hapticService';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -28,6 +29,7 @@ import * as Clipboard from 'expo-clipboard';
 import { TextActionPopover, type PopoverPosition } from '@/components/text-action-popover';
 import { getTtsText, speakWord, phonemeForChinese } from '@src/utils/ttsLocale';
 import { formatPOS } from '@src/utils/normalizeResult';
+import { splitMarkerParticle } from '@src/utils/splitMarkerParticle';
 import { ipaSupported } from '@src/services/ipaService';
 import { ReadingDisplay } from '@/components/reading-display';
 import { findLanguage } from '@src/constants/languages';
@@ -87,6 +89,7 @@ export default function WordlistDetailScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const handlePullRefresh = useCallback(async () => {
     if (!id) return;
+    haptic.tap();
     setRefreshing(true);
     try {
       // 1. Force-sync user_words from server (picks up any AI report fixes).
@@ -936,11 +939,18 @@ function WordRow({
                         >
                           <Text className="text-sm italic text-black dark:text-white">
                             {e.sentence.includes('**')
-                              ? e.sentence.split('**').map((seg, si) =>
-                                  si % 2 === 1
-                                    ? <Text key={si} style={{ color: '#2EC4A5', fontWeight: '700' }}>{seg}</Text>
-                                    : <Text key={si}>{seg}</Text>
-                                )
+                              ? e.sentence.split('**').map((seg, si) => {
+                                  if (si % 2 === 0) return <Text key={si}>{seg}</Text>;
+                                  const headword = word.result.headword ?? word.word;
+                                  const pos = word.result.meanings?.[e.meaningIndex ?? 0]?.partOfSpeech;
+                                  const { head, tail } = splitMarkerParticle(seg, headword, book.sourceLang, pos);
+                                  return (
+                                    <Text key={si}>
+                                      <Text style={{ color: '#2EC4A5', fontWeight: '700' }}>{head}</Text>
+                                      {tail ? <Text>{tail}</Text> : null}
+                                    </Text>
+                                  );
+                                })
                               : e.sentence}
                           </Text>
                         </Pressable>

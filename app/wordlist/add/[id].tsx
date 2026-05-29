@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@src/services/hapticService';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -17,12 +17,13 @@ import {
   View,
 } from 'react-native';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated';
+import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Modal } from 'react-native';
 import { AppModal } from '@/components/app-modal';
+import { MoaTip } from '@/components/moa-tip';
 import { Toast } from '@/components/toast';
 import type { PartialLookup } from '@src/api/streamLookup';
 import { findLanguage } from '@src/constants/languages';
@@ -492,6 +493,7 @@ export default function AddWordScreen() {
           if (existing) {
             setAlreadyExists(true);
           }
+          haptic.selection();
           setResponse(finalRes);
           setPartial(null);
           setLoading(false);
@@ -606,7 +608,7 @@ export default function AddWordScreen() {
       } catch (err) {
         console.warn('promote tts cache failed:', err);
       }
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+      haptic.medium();
       setSaved(true);
       // Keep saving=true through the collapse animation so the button content
       // (spinner) doesn't visually swap mid-animation. Reset happens when the
@@ -628,6 +630,7 @@ export default function AddWordScreen() {
   };
 
   const handleCandidateSelect = async (candidate: HeadwordCandidate) => {
+    haptic.selection();
     setCandidates([]);
     if (!book) return;
     setLoading(true);
@@ -862,6 +865,7 @@ export default function AddWordScreen() {
   };
 
   const handleOcrWordTap = (w: ExtractedWord) => {
+    haptic.selection();
     setOcrModalVisible(false);
     setWord(w.word);
     setResponse(null);
@@ -877,6 +881,7 @@ export default function AddWordScreen() {
   };
 
   const handleMicPress = async () => {
+    haptic.tap();
     if (listening) {
       try {
         const { ExpoSpeechRecognitionModule } = require('expo-speech-recognition');
@@ -1123,7 +1128,7 @@ export default function AddWordScreen() {
           ) : null}
 
           {loading && !partial && !response ? (
-            <SkeletonCard word={word.trim()} t={t} />
+            <SkeletonCard word={word.trim()} sourceLang={sourceLang} t={t} />
           ) : null}
 
           {partial && !response ? <PartialCard partial={partial} word={word.trim()} t={t} /> : null}
@@ -1352,22 +1357,18 @@ function formatReading(reading?: string | string[]): string | undefined {
 }
 
 /**
- * SkeletonCard — sub-second placeholder shown immediately on search submit,
- * before the SSE stream's first delta arrives. Two-purpose:
- *   1. Echo the user's input as the headword so they immediately see "this
- *      is what I searched for"
- *   2. Show grey placeholder bars where meanings will land, so the user
- *      knows the result shape is coming (industry-standard skeleton UX).
- * Transitions seamlessly to PartialCard once the first delta arrives.
+ * SkeletonCard — placeholder shown immediately on search submit, before the
+ * SSE stream's first delta arrives. Echoes the user's input as the headword
+ * ("this is what I searched for") with a "generating" spinner. After a short
+ * delay — so sub-second/cached lookups never flash it — a MoaTip fades in to
+ * make the wait less idle. Transitions to PartialCard on the first delta.
  */
-function SkeletonCard({ word, t }: { word: string; t: TFn }) {
-  // Subtle pulse via opacity. Loops on a worklet thread (reanimated) so
-  // even a slow JS thread during enrich processing doesn't stutter it.
-  const pulse = useSharedValue(0.5);
+function SkeletonCard({ word, sourceLang, t }: { word: string; sourceLang?: string; t: TFn }) {
+  const [showTip, setShowTip] = useState(false);
   useEffect(() => {
-    pulse.value = withRepeat(withTiming(1, { duration: 700 }), -1, true);
-  }, [pulse]);
-  const pulseStyle = useAnimatedStyle(() => ({ opacity: pulse.value }));
+    const id = setTimeout(() => setShowTip(true), 700);
+    return () => clearTimeout(id);
+  }, []);
 
   return (
     <View className="mt-6">
@@ -1383,26 +1384,7 @@ function SkeletonCard({ word, t }: { word: string; t: TFn }) {
         <ActivityIndicator size="small" className="ml-2" />
       </View>
 
-      <View className="mt-4">
-        <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-          {t('add_word.meanings')}
-        </Text>
-        {[0, 1, 2].map((i) => (
-          <View
-            key={i}
-            className="mt-2 rounded-xl border border-gray-200 p-3 dark:border-gray-800"
-          >
-            <Animated.View
-              style={pulseStyle}
-              className="h-3 w-12 rounded bg-gray-200 dark:bg-gray-800"
-            />
-            <Animated.View
-              style={pulseStyle}
-              className="mt-2 h-4 w-4/5 rounded bg-gray-200 dark:bg-gray-800"
-            />
-          </View>
-        ))}
-      </View>
+      {showTip ? <MoaTip subjectLang={sourceLang} /> : null}
     </View>
   );
 }

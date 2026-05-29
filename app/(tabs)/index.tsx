@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import * as Haptics from 'expo-haptics';
+import { haptic } from '@src/services/hapticService';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,7 @@ import {
   BackHandler,
   FlatList,
   Keyboard,
+  Platform,
   Pressable,
   Text,
   TextInput,
@@ -127,7 +128,7 @@ export default function HomeScreen() {
 
   const handleDeleteSelected = async () => {
     try {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+      haptic.warning();
       const ids = Array.from(selectedIds);
       await deleteBooks(ids);
       setBooks((prev) => prev.filter((b) => !selectedIds.has(b.id)));
@@ -174,9 +175,13 @@ export default function HomeScreen() {
 
   // Web: Escape key exits edit mode — the small ✓ in the corner is
   // easy to miss with a mouse, and there's no hardware back button.
+  // Native: skip entirely. RN polyfills `window` as an object without
+  // addEventListener, so the `typeof window === 'undefined'` guard alone
+  // wasn't enough — the call still went through and crashed in production.
   useEffect(() => {
+    if (Platform.OS !== 'web') return;
     if (!editMode) return;
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || typeof window.addEventListener !== 'function') return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setEditMode(false);
@@ -240,6 +245,7 @@ export default function HomeScreen() {
           </View>
           <Pressable
             onPress={() => {
+              haptic.tap();
               const cap = BOOK_LIMIT_BY_TIER[tier];
               if (Number.isFinite(cap) && books.length >= cap) {
                 router.push('/subscription');

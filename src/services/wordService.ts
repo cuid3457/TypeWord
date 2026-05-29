@@ -67,8 +67,10 @@ async function resolveHeadwordOnce(
   sourceLang: string,
   targetLang: string,
 ): Promise<ResolveHeadwordResult> {
-  // Reverse lookup endpoint: v2 (since 2026-05-14) or v1 (legacy).
-  const endpoint = V2_SUPPORTS_TRANSLATE_MODE ? 'word-lookup-v2' : 'word-lookup';
+  // Reverse lookup endpoint: v4 (migrated from v2 on 2026-05-28). v4 hosts
+  // the translate branch using the same reverse_lookups cache + prompts as
+  // v2 so existing cached rows are reused. v1 stays as the dev fallback.
+  const endpoint = V2_SUPPORTS_TRANSLATE_MODE ? 'word-lookup-v4' : 'word-lookup';
   try {
     const { data, error } = await withTimeout(
       supabase.functions.invoke<{

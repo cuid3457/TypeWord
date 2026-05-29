@@ -159,12 +159,7 @@ function chunks<T>(arr: T[], size: number): T[][] {
 // Push — local → server
 // ---------------------------------------------------------------------------
 
-// Exported so queries.ts can run a synchronous push immediately after a
-// local delete. Without this immediate hop, the delete sits in
-// pending_deletes until the next scheduleSync — and a user who wipes the
-// app between those two moments loses the tombstone, so the next install
-// pulls the book back from the server. (See F1 in 2026-05-26 sync audit.)
-export async function pushDeletes() {
+async function pushDeletes() {
   const db = await getDb();
   const rows = await db.getAllAsync<{ record_id: string; table_name: string; deleted_at: number }>(
     'SELECT * FROM pending_deletes',

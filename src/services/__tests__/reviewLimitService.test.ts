@@ -31,11 +31,12 @@ function todayKey(): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function seedState(overrides: { date?: string; used?: number; bonusEarned?: number } = {}) {
+function seedState(overrides: { date?: string; used?: number; bonusEarned?: number; adsWatched?: number } = {}) {
   const state = {
     date: overrides.date ?? todayKey(),
     used: overrides.used ?? 0,
     bonusEarned: overrides.bonusEarned ?? 0,
+    adsWatched: overrides.adsWatched ?? 0,
   };
   store['typeword.reviewLimits'] = JSON.stringify(state);
 }
@@ -145,15 +146,18 @@ describe('consumeWord', () => {
 });
 
 describe('rewarded ads', () => {
-  it('free user can always watch (unlimited per day)', async () => {
+  it('free user can watch when under daily cap', async () => {
     expect(await canWatchRewardedAd()).toBe(true);
-    seedState({ bonusEarned: 500 });
+    seedState({ adsWatched: 2 });
     expect(await canWatchRewardedAd()).toBe(true);
   });
 
-  it('paid users cannot watch ads', async () => {
-    mockTier = 'pro';
+  it('free user cannot watch once daily cap reached', async () => {
+    seedState({ adsWatched: 3 });
     expect(await canWatchRewardedAd()).toBe(false);
+  });
+
+  it('paid users cannot watch ads', async () => {
     mockTier = 'pro';
     expect(await canWatchRewardedAd()).toBe(false);
   });
@@ -165,11 +169,15 @@ describe('rewarded ads', () => {
     expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS);
   });
 
-  it('multiple watches stack', async () => {
+  it('three watches stack up to cap then stop', async () => {
     seedState({ used: 100 });
     await recordRewardedAdWatch();
     await recordRewardedAdWatch();
-    expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS * 2);
+    await recordRewardedAdWatch();
+    expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS * 3);
+    // 4th call past cap is a no-op
+    await recordRewardedAdWatch();
+    expect(await getRemaining()).toBe(REWARDED_AD_BONUS_CARDS * 3);
   });
 });
 

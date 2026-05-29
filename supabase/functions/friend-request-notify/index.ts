@@ -104,6 +104,22 @@ Deno.serve(async (req: Request) => {
     const senderUsername = (sender?.username as string | undefined) ?? "";
     const label = senderDisplay || (senderUsername ? `@${senderUsername}` : "Someone");
 
+    // iOS app icon badge — see poke-notify for rationale.
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const [{ count: unseenPokeCount }, { count: pendingReqCount }] = await Promise.all([
+      admin
+        .from("pokes")
+        .select("sender_id", { count: "exact", head: true })
+        .eq("recipient_id", recipientId)
+        .is("seen_at", null)
+        .gte("created_at", sevenDaysAgo),
+      admin
+        .from("friend_requests")
+        .select("sender_id", { count: "exact", head: true })
+        .eq("recipient_id", recipientId),
+    ]);
+    const badge = (unseenPokeCount ?? 0) + (pendingReqCount ?? 0);
+
     const result = await deliverPush({
       admin,
       recipientUserId: recipientId,
@@ -111,7 +127,8 @@ Deno.serve(async (req: Request) => {
       pushPlatform,
       title: "MoaVoca",
       body: `${label}님이 친구 요청을 보냈어요`,
-      data: { type: "friend_request", senderId: user.id },
+      data: { type: "friend_request", senderId: user.id, badge_count: String(badge) },
+      badge,
     });
 
     return jsonResponse(200, { ok: true, delivered: result.delivered }, cors);

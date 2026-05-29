@@ -101,10 +101,10 @@ export class BudgetExhaustedError extends Error {
 }
 
 interface RateLimitRow {
-  // Tier values written by the RevenueCat webhook. 'premium' is the legacy
-  // pre-3-tier value (treated as plus). 'free' is the default for new
-  // profiles. Anything unrecognised falls back to free.
-  plan: "free" | "plus" | "pro" | "premium";
+  // Tier values written by the RevenueCat webhook. Canonical 'premium' (post
+  // 2026-05-28 rename). Legacy 'pro'/'plus' still accepted for un-migrated
+  // profile rows. Unrecognised falls back to free.
+  plan: "free" | "premium" | "pro" | "plus";
   user_minute: number;
   user_hour: number;
   user_day: number;
@@ -112,6 +112,15 @@ interface RateLimitRow {
   sys_minute: number;
   month_cost: number;
 }
+
+// Isolate-level memo of recent rate-limit checks. Each (user, endpoint) pair
+// caches the last successful result for a short TTL so back-to-back calls
+// from the same user don't re-pay the RPC cost. Cache is invalidated by
+// the TTL alone — we accept a small over-allow window in exchange for not
+// turning every lookup into an extra DB round trip. The Deno isolate gets
+// recycled often (≤5 min idle) so the memo is effectively per-burst.
+const RATE_LIMIT_MEMO_TTL_MS = 30_000;
+const rateLimitMemo = new Map<string, { until: number; row: RateLimitRow }>();
 
 /**
  * Single DB round-trip via RPC that checks all rate limits + monthly budget.
@@ -123,14 +132,20 @@ export async function enforceAllLimits(
   userId: string,
   endpoint: string,
 ): Promise<void> {
-  const { data, error } = await supabase.rpc("check_rate_limits", {
-    p_user_id: userId,
-    p_endpoint: endpoint,
-  });
-
-  if (error) throw error;
-
-  const r = data as RateLimitRow;
+  const memoKey = `${userId}|${endpoint}`;
+  const memoed = rateLimitMemo.get(memoKey);
+  let r: RateLimitRow;
+  if (memoed && memoed.until > Date.now()) {
+    r = memoed.row;
+  } else {
+    const { data, error } = await supabase.rpc("check_rate_limits", {
+      p_user_id: userId,
+      p_endpoint: endpoint,
+    });
+    if (error) throw error;
+    r = data as RateLimitRow;
+    rateLimitMemo.set(memoKey, { until: Date.now() + RATE_LIMIT_MEMO_TTL_MS, row: r });
+  }
   const isPaid = r.plan === "pro" || r.plan === "plus" || r.plan === "premium";
   const endpointLimits = ENDPOINT_LIMITS[endpoint] ?? DEFAULT_LIMITS;
   const limits = isPaid ? endpointLimits.pro : endpointLimits.free;

@@ -12,6 +12,7 @@ import {
   listMyUploads,
   type CommunityWordlistMeta,
 } from '@src/services/communityWordlistService';
+import { haptic } from '@src/services/hapticService';
 
 /**
  * "My uploaded community wordlists" inbox — previously a pageSheet modal,
@@ -30,6 +31,7 @@ export default function MyUploadsScreen() {
   }, []);
 
   const handlePullRefresh = useCallback(async () => {
+    haptic.tap();
     setRefreshing(true);
     try {
       const data = await listMyUploads();

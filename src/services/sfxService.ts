@@ -66,11 +66,11 @@ export async function preloadSfx(): Promise<void> {
   await refreshEnabled();
 }
 
-function computeEnabled(settings: { sfxEnabled?: boolean; autoPlayTts?: boolean } | null): boolean {
-  // SFX off if explicitly disabled OR if the user disabled auto-TTS — the
-  // auto-TTS toggle is the user's "quiet study mode" master switch, so SFX
-  // following it matches the mental model.
-  return settings?.sfxEnabled !== false && settings?.autoPlayTts !== false;
+function computeEnabled(settings: { sfxEnabled?: boolean } | null): boolean {
+  // SFX toggle in Settings tab is independent of the review modal's
+  // "Auto-play sound" (which only controls per-card TTS auto-playback).
+  // Haptic is never gated here — matches iOS silent-switch behavior.
+  return settings?.sfxEnabled !== false;
 }
 
 async function refreshEnabled(): Promise<void> {

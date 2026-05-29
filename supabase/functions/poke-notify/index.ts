@@ -57,29 +57,36 @@ Deno.serve(async (req: Request) => {
 
     const admin = createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false } });
 
-    // Authorization: caller must have a poke row to this recipient created in
-    // the last 5 min. send_poke RPC is the only legit creator, so this also
-    // proves the cooldown + friendship checks already passed.
-    //
-    // Push-spam defense: atomically claim the push by stamping last_pushed_at
-    // only when (NULL OR older than 60 seconds). If no row gets updated, we
-    // either have no recent poke, or another invocation already pushed within
-    // the throttle window — return 200 with delivered=false, no push.
+    // Authorization + atomic claim: select the latest unpushed poke from
+    // this sender within the last 5 minutes, then conditionally update
+    // last_pushed_at IS NULL. Concurrent invocations either lose the
+    // claim or find nothing unpushed and exit. The badge_count carried
+    // in the FCM data field drives setBadgeCountAsync via the client's
+    // background TaskManager task, so each push correctly updates the
+    // launcher badge even when the app is doze-suspended.
     const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
-    const oneMinAgo = new Date(Date.now() - 60 * 1000).toISOString();
-    const { data: claimed } = await admin
+    const { data: latest } = await admin
       .from("pokes")
-      .update({ last_pushed_at: new Date().toISOString() })
+      .select("id")
       .eq("sender_id", user.id)
       .eq("recipient_id", recipientId)
       .gte("created_at", fiveMinAgo)
-      .or(`last_pushed_at.is.null,last_pushed_at.lt.${oneMinAgo}`)
-      .select("created_at")
+      .is("last_pushed_at", null)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    if (!latest) {
+      return jsonResponse(200, { ok: true, delivered: false, reason: "no_unpushed_poke" }, cors);
+    }
+    const { data: claimed } = await admin
+      .from("pokes")
+      .update({ last_pushed_at: new Date().toISOString() })
+      .eq("id", latest.id)
+      .is("last_pushed_at", null)
+      .select("id")
       .maybeSingle();
     if (!claimed) {
-      // Either no recent poke row, or we already pushed within the last
-      // minute. Either way, do not push.
-      return jsonResponse(200, { ok: true, delivered: false, reason: "throttled_or_missing" }, cors);
+      return jsonResponse(200, { ok: true, delivered: false, reason: "concurrent_claim" }, cors);
     }
 
     const [{ data: recipient }, { data: sender }] = await Promise.all([
@@ -106,6 +113,24 @@ Deno.serve(async (req: Request) => {
     const senderUsername = (sender?.username as string | undefined) ?? "";
     const label = senderDisplay || (senderUsername ? `@${senderUsername}` : "Someone");
 
+    // iOS app icon badge — push the absolute post-delivery total so the
+    // home screen reflects unseen pokes + pending friend requests. iOS
+    // does not auto-decrement; the client clears on view.
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    const [{ count: unseenPokeCount }, { count: pendingReqCount }] = await Promise.all([
+      admin
+        .from("pokes")
+        .select("sender_id", { count: "exact", head: true })
+        .eq("recipient_id", recipientId)
+        .is("seen_at", null)
+        .gte("created_at", sevenDaysAgo),
+      admin
+        .from("friend_requests")
+        .select("sender_id", { count: "exact", head: true })
+        .eq("recipient_id", recipientId),
+    ]);
+    const badge = (unseenPokeCount ?? 0) + (pendingReqCount ?? 0);
+
     const result = await deliverPush({
       admin,
       recipientUserId: recipientId,
@@ -113,10 +138,14 @@ Deno.serve(async (req: Request) => {
       pushPlatform,
       title: "MoaVoca",
       body: `${label}님이 학습하자고 쿡 찔렀어요`,
-      data: { type: "poke", senderId: user.id },
+      data: { type: "poke", senderId: user.id, badge_count: String(badge) },
+      badge,
+      // Same sender → same tag → Android replaces the previous notification.
+      // Single tray entry per sender, latest count drives the badge.
+      tag: `poke-${user.id}`,
     });
 
-    return jsonResponse(200, { ok: true, delivered: result.delivered }, cors);
+    return jsonResponse(200, { ok: true, delivered: result.delivered, reason: result.reason, platform: pushPlatform }, cors);
   } catch (e) {
     return jsonResponse(500, { code: "server_error", message: (e as Error).message }, cors);
   }

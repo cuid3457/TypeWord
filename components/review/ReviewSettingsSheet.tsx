@@ -1,6 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useMemo, useCallback, useState } from 'react';
-import { Dimensions, Platform, Pressable, ScrollView, Switch, Text, View } from 'react-native';
+import { Dimensions, Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { SmoothSwitch } from '@/components/common/SmoothSwitch';
 import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
 import Animated, { type SharedValue, runOnJS, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -134,12 +135,9 @@ function CenteredCardLayout({
                   {t('review.auto_play_tts')}
                 </Text>
               </View>
-              <Switch
+              <SmoothSwitch
                 value={autoPlayTts}
                 onValueChange={setAutoPlayTts}
-                trackColor={{ false: '#d1d5db', true: '#2EC4A5' }}
-                thumbColor={autoPlayTts ? '#2EC4A5' : '#f4f4f5'}
-                ios_backgroundColor="#d1d5db"
               />
             </View>
 
@@ -363,12 +361,9 @@ function BottomSheetLayout({
                       {t('review.auto_play_tts')}
                     </Text>
                   </View>
-                  <Switch
+                  <SmoothSwitch
                     value={autoPlayTts}
                     onValueChange={setAutoPlayTts}
-                    trackColor={{ false: '#d1d5db', true: '#2EC4A5' }}
-                    thumbColor={autoPlayTts ? '#2EC4A5' : '#f4f4f5'}
-                    ios_backgroundColor="#d1d5db"
                   />
                 </View>
 

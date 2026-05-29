@@ -46,6 +46,11 @@ For "valid_word" ONLY, list 1 to 4 DISTINCT senses (different meanings, not para
 - pos: part of speech in lowercase English (noun / verb / adjective / adverb / interjection / phrase / abbreviation / proper noun / particle / etc.)
 - frequency_score: 0-100 reflecting how often a typical SOURCE_LANG speaker encounters this sense in everyday contexts (slang/SNS terms can still score high among target demographics).
 
+SENSE DISTINCTNESS RULE — apply judging from SOURCE_LANG, not from English/TARGET_LANG:
+- Two candidate senses count as DISTINCT only when a native SOURCE_LANG speaker would parse them as separate meanings inside the SOURCE_LANG sentence — i.e. they answer different questions, fit different contexts, or rest on different underlying concepts in SOURCE_LANG.
+- Two candidate senses are NOT distinct when they only differ in English nuance / translation choice while expressing the same SOURCE_LANG meaning. The SOURCE_LANG sentence does not change which sense applies; only the English translator's word choice does. Treat as ONE sense and pick the single best en_def that best fits typical usage.
+- Apply this BEFORE listing senses. When unsure, prefer fewer senses. A learner card with one well-chosen meaning beats two near-duplicates whose example sentences would be indistinguishable in SOURCE_LANG.
+
 HARD CUT to score 0-1: racial/ethnic slurs, hate speech, sexual harassment, vulgar sexual content. General profanity / casual slang that is not discriminatory is fine — score by frequency.
 
 For non-valid_word verdicts, "senses" must be an empty array.

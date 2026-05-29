@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
+import { haptic } from '@src/services/hapticService';
 
 type Rate = 0.8 | 1.0 | 1.2;
 const RATES: Rate[] = [0.8, 1.0, 1.2];
@@ -47,6 +48,7 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
   }
 
   const update = (next: Partial<{ voiceGender: 'F' | 'M'; voiceRate: Rate }>) => {
+    haptic.selection();
     save({ ...settings, ...next });
   };
 

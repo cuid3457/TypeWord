@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 import { REWARDED_AD_UNIT_ID } from '@src/constants/ads';
-import { isAdFree } from '@src/services/streakMilestone';
+import { isPremium } from '@src/services/subscriptionService';
 import { captureError } from './sentry';
 
 const isExpoGo = Constants.appOwnership === 'expo';
@@ -9,7 +9,7 @@ const AD_LOAD_TIMEOUT_MS = 10_000;
 
 export async function showRewardedAd(): Promise<boolean> {
   if (isExpoGo) return false;
-  if (await isAdFree()) return false;
+  if (isPremium()) return false;
   // iOS has no real AdMob unit yet — REWARDED_AD_UNIT_ID is null in prod
   // builds. Skip showing rather than serving a TestIds fallback (AdMob
   // policy + Apple-reviewer integrity).
