@@ -6,7 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { ReviewCardContent } from '@/components/review/ReviewCardContent';
-import { cardShadow } from '@/components/ui/card';
 import { ReportModal } from '@/components/report-modal';
 import { Toast } from '@/components/toast';
 import { VoiceToggle } from '@/components/voice-toggle';
@@ -152,8 +151,13 @@ export function ReviewActiveCard({
     ]).start();
   }, [combo, comboAnim]);
 
+  // SafeAreaView omits the 'bottom' edge on purpose: the hidden tab bar's
+  // ad-banner slot below already reserves insets.bottom, so adding it here
+  // double-pads — a dead gap above the ad banner that also shrank the card
+  // (clipping long content / the last MC choice). Dropping it returns that
+  // height to the card.
   return (
-    <SafeAreaView edges={['top', 'left', 'right', 'bottom']} className="flex-1 bg-canvas dark:bg-canvas-dark">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <View className="flex-1 px-6 pt-4">
         {/* Progress bar + back to list */}
         <View className="flex-row items-center justify-between">
@@ -233,7 +237,7 @@ export function ReviewActiveCard({
 
         {/* Card with floating side nav arrows */}
         <View className="mt-4 flex-1 justify-center">
-          <View className="flex-1 rounded-[20px] border border-line bg-surface dark:border-line-dark dark:bg-surface-dark" style={cardShadow}>
+          <View className="flex-1 rounded-[20px] border border-line bg-surface dark:border-line-dark dark:bg-surface-dark">
             <ScrollView contentContainerStyle={{ padding: 24 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
               <ReviewCardContent
                 mode={reviewMode}
