@@ -99,7 +99,6 @@ export default function OnboardingSetup() {
             >
               {lang ? (
                 <View className="flex-row items-center">
-                  <Text className="mr-3 text-2xl">{lang.flag}</Text>
                   <Text className="text-base text-ink dark:text-ink-dark">
                     {lang.nativeName}
                   </Text>
@@ -231,7 +230,6 @@ function LanguagePickerModal({
                     isSelected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
                   }`}
                 >
-                  <Text className="mr-3 text-2xl">{item.flag}</Text>
                   <View className="flex-1">
                     <Text className="text-base text-ink dark:text-ink-dark">
                       {t(`languages.${item.code}`)}

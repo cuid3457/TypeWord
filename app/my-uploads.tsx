@@ -61,7 +61,7 @@ export default function MyUploadsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="px-6 pt-6">
@@ -72,9 +72,9 @@ export default function MyUploadsScreen() {
             accessibilityLabel={t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('library_tab.my_uploads')}
           </Text>
         </View>
@@ -82,15 +82,15 @@ export default function MyUploadsScreen() {
 
       {items === null ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
+          <ActivityIndicator color="#7B7366" />
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
-          <MaterialIcons name="cloud-upload" size={64} color="#9ca3af" />
-          <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
+          <MaterialIcons name="cloud-upload" size={64} color="#A79E90" />
+          <Text className="mt-4 text-center text-base font-semibold text-muted">
             {t('library_tab.my_uploads_empty')}
           </Text>
-          <Text className="mt-2 text-center text-sm text-gray-400 dark:text-gray-500">
+          <Text className="mt-2 text-center text-sm text-faint">
             {t('library_tab.my_uploads_empty_hint')}
           </Text>
         </View>
@@ -100,19 +100,19 @@ export default function MyUploadsScreen() {
           keyExtractor={(it) => it.id}
           contentContainerStyle={{ padding: 24, paddingBottom: 80 }}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+            <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
           }
           renderItem={({ item }) => (
-            <View className="mb-2 rounded-xl border border-gray-300 px-4 py-4 dark:border-gray-700">
+            <View className="mb-2 rounded-xl border border-line px-4 py-4 dark:border-line-dark">
               <Pressable onPress={() => router.push(`/community-detail/${item.id}`)}>
                 <View className="flex-row items-center">
                   <View className="flex-1">
-                    <Text className="text-base font-medium text-black dark:text-white" numberOfLines={1}>
+                    <Text className="text-base font-medium text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.title}
                     </Text>
                   </View>
-                  <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-                    <Text className="text-sm font-semibold text-black dark:text-white">
+                  <View className="ml-3 rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+                    <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                       {t('home.word_count', { count: item.wordCount })}
                     </Text>
                   </View>
@@ -122,15 +122,15 @@ export default function MyUploadsScreen() {
                 <View className="flex-row items-center gap-1.5">
                   <Pressable
                     onPress={() => router.push(`/community-detail/${item.id}?edit=1`)}
-                    className="rounded-lg bg-gray-100 p-2 dark:bg-gray-800"
+                    className="rounded-lg bg-clay p-2 dark:bg-clay-dark"
                     accessibilityLabel={t('library_tab.edit_action')}
                     accessibilityRole="button"
                   >
-                    <MaterialIcons name="edit" size={18} color="#6b7280" />
+                    <MaterialIcons name="edit" size={18} color="#7B7366" />
                   </Pressable>
                   <Pressable
                     onPress={() => setDeleteTarget(item)}
-                    className="rounded-lg bg-red-500 p-2"
+                    className="rounded-lg bg-danger p-2"
                     accessibilityLabel={t('library_tab.delete_action')}
                     accessibilityRole="button"
                   >
@@ -139,12 +139,12 @@ export default function MyUploadsScreen() {
                 </View>
                 <View className="flex-row items-center gap-3">
                   <View className="flex-row items-center">
-                    <MaterialIcons name="favorite" size={12} color="#ef4444" />
-                    <Text className="ml-1 text-xs text-gray-500">{item.likesCount}</Text>
+                    <MaterialIcons name="favorite" size={12} color="#E0654F" />
+                    <Text className="ml-1 text-xs text-muted">{item.likesCount}</Text>
                   </View>
                   <View className="flex-row items-center">
-                    <MaterialIcons name="download" size={12} color="#6b7280" />
-                    <Text className="ml-1 text-xs text-gray-500">{item.downloadsCount}</Text>
+                    <MaterialIcons name="download" size={12} color="#7B7366" />
+                    <Text className="ml-1 text-xs text-muted">{item.downloadsCount}</Text>
                   </View>
                 </View>
               </View>

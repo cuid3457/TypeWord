@@ -182,7 +182,7 @@ export default function CommunityDetailScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="px-6 pt-6">
@@ -193,7 +193,7 @@ export default function CommunityDetailScreen() {
             accessibilityLabel={editing ? t('settings.cancel') : t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name={editing ? 'close' : 'arrow-back'} size={24} color="#6b7280" />
+            <MaterialIcons name={editing ? 'close' : 'arrow-back'} size={24} color="#7B7366" />
           </Pressable>
           {!editing && data && !isOwner ? (
             <Pressable
@@ -202,7 +202,7 @@ export default function CommunityDetailScreen() {
               accessibilityLabel={t('common.more')}
               accessibilityRole="button"
             >
-              <MaterialIcons name="more-vert" size={22} color="#6b7280" />
+              <MaterialIcons name="more-vert" size={22} color="#7B7366" />
             </Pressable>
           ) : null}
         </View>
@@ -210,20 +210,20 @@ export default function CommunityDetailScreen() {
 
       {!data ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
+          <ActivityIndicator color="#7B7366" />
         </View>
       ) : editing ? (
         <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 8, paddingBottom: 120 }} keyboardShouldPersistTaps="handled">
-          <Text className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+          <Text className="text-sm font-semibold text-muted">
             {t('library_tab.title_label')}
           </Text>
           <TextInput
             value={editTitle}
             onChangeText={setEditTitle}
             maxLength={80}
-            className="mt-1 rounded-xl border border-gray-300 px-3 py-2 text-base text-black dark:border-gray-700 dark:text-white"
+            className="mt-1 rounded-xl border border-line px-3 py-2 text-base text-ink dark:border-line-dark dark:text-ink-dark"
           />
-          <Text className="mt-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
+          <Text className="mt-4 text-sm font-semibold text-muted">
             {t('library_tab.description_label')}
           </Text>
           <TextInput
@@ -231,7 +231,7 @@ export default function CommunityDetailScreen() {
             onChangeText={setEditDescription}
             multiline
             maxLength={300}
-            className="mt-1 rounded-xl border border-gray-300 px-3 py-2 text-sm text-black dark:border-gray-700 dark:text-white"
+            className="mt-1 rounded-xl border border-line px-3 py-2 text-sm text-ink dark:border-line-dark dark:text-ink-dark"
             style={{ minHeight: 60 }}
           />
         </ScrollView>
@@ -239,47 +239,47 @@ export default function CommunityDetailScreen() {
         <>
           <View className="px-6 pt-2">
             <View className="flex-row items-center">
-              <View className="h-12 w-12 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-                <MaterialIcons name="groups" size={22} color="#6b7280" />
+              <View className="h-12 w-12 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+                <MaterialIcons name="groups" size={22} color="#7B7366" />
               </View>
               <View className="ml-3 flex-1">
-                <Text className="text-2xl font-bold text-black dark:text-white" numberOfLines={2}>
+                <Text className="text-2xl font-bold text-ink dark:text-ink-dark" numberOfLines={2}>
                   {data.title}
                 </Text>
-                <Text className="mt-0.5 text-xs text-gray-500">
+                <Text className="mt-0.5 text-xs text-muted">
                   {data.uploaderName ? `@${data.uploaderName} · ` : ''}
                   {data.wordCount}{t('library.words_suffix')}
                 </Text>
                 {sourceLang && targetLang ? (
-                  <Text className="mt-0.5 text-xs text-gray-500">
-                    {t(`languages.${data.sourceLang}`)} {sourceLang.flag} → {t(`languages.${data.targetLang}`)} {targetLang.flag}
+                  <Text className="mt-0.5 text-xs text-muted">
+                    {t(`languages.${data.sourceLang}`)} → {t(`languages.${data.targetLang}`)}
                   </Text>
                 ) : null}
               </View>
             </View>
 
             {data.description ? (
-              <Text className="mt-3 text-sm text-gray-500">{data.description}</Text>
+              <Text className="mt-3 text-sm text-muted">{data.description}</Text>
             ) : null}
 
             <View className="mt-3 flex-row items-center gap-2">
               <Pressable
                 onPress={handleLike}
                 disabled={busyLike}
-                className="flex-row items-center rounded-xl bg-gray-100 px-3 py-1.5 dark:bg-gray-800"
+                className="flex-row items-center rounded-xl bg-clay px-3 py-1.5 dark:bg-clay-dark"
               >
                 <MaterialIcons
                   name={liked ? 'favorite' : 'favorite-border'}
                   size={16}
-                  color={liked ? '#ef4444' : '#6b7280'}
+                  color={liked ? '#E0654F' : '#7B7366'}
                 />
-                <Text className="ml-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
+                <Text className="ml-1.5 text-xs font-medium text-ink dark:text-ink-dark">
                   {data.likesCount}
                 </Text>
               </Pressable>
-              <View className="flex-row items-center rounded-xl bg-gray-100 px-3 py-1.5 dark:bg-gray-800">
-                <MaterialIcons name="download" size={16} color="#6b7280" />
-                <Text className="ml-1.5 text-xs font-medium text-gray-700 dark:text-gray-300">
+              <View className="flex-row items-center rounded-xl bg-clay px-3 py-1.5 dark:bg-clay-dark">
+                <MaterialIcons name="download" size={16} color="#7B7366" />
+                <Text className="ml-1.5 text-xs font-medium text-ink dark:text-ink-dark">
                   {data.downloadsCount}
                 </Text>
               </View>
@@ -287,7 +287,7 @@ export default function CommunityDetailScreen() {
           </View>
 
           <View className="px-6 pt-4">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('library.preview')}
             </Text>
           </View>
@@ -298,25 +298,25 @@ export default function CommunityDetailScreen() {
             keyExtractor={(w, i) => `${w.word}-${w.readingKey ?? ''}-${i}`}
             contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 8, paddingBottom: 16 }}
             refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#10b981" colors={['#10b981']} />
+              <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
             }
             renderItem={({ item }) => {
               const definition = item.result?.meanings?.[0]?.definition ?? '';
               const reading = item.result?.reading;
               const readingDisplay = Array.isArray(reading) ? reading.join(', ') : reading;
               return (
-                <View className="border-b border-gray-100 py-3 dark:border-gray-800">
+                <View className="border-b border-line py-3 dark:border-line-dark">
                   <View className="flex-row items-baseline">
-                    <Text className="text-base font-semibold text-black dark:text-white">{item.word}</Text>
+                    <Text className="text-base font-semibold text-ink dark:text-ink-dark">{item.word}</Text>
                     {readingDisplay ? (
-                      <Text className="ml-2 text-xs text-gray-400">{readingDisplay}</Text>
+                      <Text className="ml-2 text-xs text-faint">{readingDisplay}</Text>
                     ) : null}
                     {item.result?.ipa && data && ipaSupported(data.sourceLang) ? (
-                      <Text className="ml-2 text-xs text-gray-400">{item.result.ipa}</Text>
+                      <Text className="ml-2 text-xs text-faint">{item.result.ipa}</Text>
                     ) : null}
                   </View>
                   {definition ? (
-                    <Text className="mt-1 text-sm text-gray-500" numberOfLines={2}>
+                    <Text className="mt-1 text-sm text-muted" numberOfLines={2}>
                       {definition}
                     </Text>
                   ) : null}
@@ -325,7 +325,7 @@ export default function CommunityDetailScreen() {
             }}
             ListFooterComponent={
               data.words.length > 20 ? (
-                <Text className="mt-4 text-center text-sm text-gray-400">
+                <Text className="mt-4 text-center text-sm text-faint">
                   {t('library.preview_more', { count: data.words.length - 20 })}
                 </Text>
               ) : null
@@ -336,26 +336,26 @@ export default function CommunityDetailScreen() {
 
       {data && !editing ? (
         <View
-          className="border-t border-gray-100 bg-white dark:border-gray-800 dark:bg-black"
+          className="border-t border-line bg-surface dark:border-line-dark dark:bg-surface-dark"
           style={{ paddingBottom: Math.max(insets.bottom, 16) + 16 }}
         >
           <View className="px-6 pt-4">
             <Pressable
               onPress={handleDownload}
               disabled={downloading}
-              className="items-center rounded-xl bg-black py-4 dark:bg-white"
+              className="items-center rounded-xl bg-ink py-4 dark:bg-ink-dark"
             >
               {downloading ? (
                 <View className="flex-row items-center">
                   <ActivityIndicator color="#fff" size="small" style={{ marginRight: 8 }} />
-                  <Text className="text-base font-semibold text-white dark:text-black">
+                  <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
                     {downloadProgress
                       ? t('library.adding_progress', { current: downloadProgress.current, total: downloadProgress.total })
                       : t('library.adding')}
                   </Text>
                 </View>
               ) : (
-                <Text className="text-base font-semibold text-white dark:text-black">
+                <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
                   {t('library_tab.download_button')}
                 </Text>
               )}
@@ -366,19 +366,19 @@ export default function CommunityDetailScreen() {
 
       {data && editing ? (
         <View
-          className="border-t border-gray-100 bg-white dark:border-gray-800 dark:bg-black"
+          className="border-t border-line bg-surface dark:border-line-dark dark:bg-surface-dark"
           style={{ paddingBottom: Math.max(insets.bottom, 16) + 16 }}
         >
           <View className="px-6 pt-4">
             <Pressable
               onPress={handleSaveEdit}
               disabled={savingEdit || !editTitle.trim()}
-              className={`items-center rounded-xl py-4 ${savingEdit || !editTitle.trim() ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'}`}
+              className={`items-center rounded-xl py-4 ${savingEdit || !editTitle.trim() ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'}`}
             >
               {savingEdit ? (
-                <ActivityIndicator color="#6b7280" />
+                <ActivityIndicator color="#7B7366" />
               ) : (
-                <Text className="text-base font-semibold text-white dark:text-black">
+                <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
                   {t('library_tab.save_action')}
                 </Text>
               )}
@@ -509,7 +509,7 @@ function ReportBlockMenu({
             <Animated.View
               style={[
                 {
-                  backgroundColor: dark ? '#1a1a2e' : '#fff',
+                  backgroundColor: dark ? '#1E1B15' : '#fff',
                   borderTopLeftRadius: 24,
                   borderTopRightRadius: 24,
                   padding: 24,
@@ -520,27 +520,27 @@ function ReportBlockMenu({
             >
               <Pressable onPress={() => {}}>
                 <View className="mb-3 items-center">
-                  <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
+                  <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
                 </View>
-                <Text className="text-lg font-bold text-black dark:text-white" numberOfLines={1}>
+                <Text className="text-lg font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                   {title}
                 </Text>
                 <Pressable onPress={onReportWordlist} className="mt-4 flex-row items-center py-3">
-                  <MaterialIcons name="flag" size={22} color="#6b7280" />
-                  <Text className="ml-3 text-base text-black dark:text-white">
+                  <MaterialIcons name="flag" size={22} color="#7B7366" />
+                  <Text className="ml-3 text-base text-ink dark:text-ink-dark">
                     {t('report.title_wordlist')}
                   </Text>
                 </Pressable>
                 <Pressable onPress={onReportUser} className="flex-row items-center py-3">
-                  <MaterialIcons name="flag" size={22} color="#ef4444" />
-                  <Text className="ml-3 text-base text-red-500">{t('report.title_user')}</Text>
+                  <MaterialIcons name="flag" size={22} color="#E0654F" />
+                  <Text className="ml-3 text-base text-danger">{t('report.title_user')}</Text>
                 </Pressable>
                 <Pressable onPress={onBlock} className="flex-row items-center py-3">
-                  <MaterialIcons name="block" size={22} color="#ef4444" />
-                  <Text className="ml-3 text-base text-red-500">{t('dashboard.block')}</Text>
+                  <MaterialIcons name="block" size={22} color="#E0654F" />
+                  <Text className="ml-3 text-base text-danger">{t('dashboard.block')}</Text>
                 </Pressable>
                 <Pressable onPress={dismiss} className="mt-3 items-center py-3">
-                  <Text className="text-sm text-gray-500">{t('common.cancel')}</Text>
+                  <Text className="text-sm text-muted">{t('common.cancel')}</Text>
                 </Pressable>
               </Pressable>
             </Animated.View>

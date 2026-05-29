@@ -118,7 +118,7 @@ export default function CommunityUploadScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="flex-row items-center justify-between px-6 pt-6">
@@ -134,9 +134,9 @@ export default function CommunityUploadScreen() {
             accessibilityLabel={t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('library_tab.upload_title')}
           </Text>
         </View>
@@ -145,7 +145,7 @@ export default function CommunityUploadScreen() {
           disabled={!picked || !title.trim() || submitting}
           className="rounded-xl p-3"
           style={{
-            backgroundColor: !picked || !title.trim() || submitting ? '#d1d5db' : '#2EC4A5',
+            backgroundColor: !picked || !title.trim() || submitting ? '#A79E90' : '#2EC4A5',
           }}
           accessibilityLabel={t('library_tab.upload_button')}
           accessibilityRole="button"
@@ -161,11 +161,11 @@ export default function CommunityUploadScreen() {
       <View className="p-4">
         {!picked ? (
           <>
-            <Text className="mb-2 text-sm font-semibold text-gray-600 dark:text-gray-400">
+            <Text className="mb-2 text-sm font-semibold text-muted">
               {t('library_tab.pick_wordlist')}
             </Text>
             {books.length === 0 ? (
-              <Text className="mt-8 text-center text-sm text-gray-500">
+              <Text className="mt-8 text-center text-sm text-muted">
                 {t('library_tab.no_wordlists')}
               </Text>
             ) : (
@@ -182,20 +182,20 @@ export default function CommunityUploadScreen() {
                       }
                       setPicked(b);
                     }}
-                    className="mb-2 flex-row items-center rounded-xl border border-gray-300 p-3 dark:border-gray-700"
+                    className="mb-2 flex-row items-center rounded-xl border border-line p-3 dark:border-line-dark"
                   >
                     <View className="flex-1" style={!canUpload ? { opacity: 0.4 } : undefined}>
-                      <Text className="text-base text-black dark:text-white" numberOfLines={1}>
+                      <Text className="text-base text-ink dark:text-ink-dark" numberOfLines={1}>
                         {b.title}
                       </Text>
-                      <Text className="text-xs text-gray-500">
+                      <Text className="text-xs text-muted">
                         {b.wordCount}{t('library.words_suffix')} · {b.sourceLang}→{b.targetLang}
                       </Text>
                     </View>
                     <MaterialIcons
                       name="chevron-right"
                       size={20}
-                      color="#9ca3af"
+                      color="#A79E90"
                       style={!canUpload ? { opacity: 0.4 } : undefined}
                     />
                   </Pressable>
@@ -205,31 +205,31 @@ export default function CommunityUploadScreen() {
           </>
         ) : (
           <>
-            <Text className="text-sm font-semibold text-gray-600 dark:text-gray-400">
+            <Text className="text-sm font-semibold text-muted">
               {t('library_tab.title_label')}
             </Text>
             <TextInput
               value={title}
               onChangeText={setTitle}
-              className="mt-1 rounded-xl border border-gray-300 px-3 py-2 text-base text-black dark:border-gray-700 dark:text-white"
+              className="mt-1 rounded-xl border border-line px-3 py-2 text-base text-ink dark:border-line-dark dark:text-ink-dark"
               maxLength={80}
             />
-            <Text className="mt-4 text-sm font-semibold text-gray-600 dark:text-gray-400">
+            <Text className="mt-4 text-sm font-semibold text-muted">
               {t('library_tab.description_label')}
             </Text>
             <TextInput
               value={description}
               onChangeText={setDescription}
               multiline
-              className="mt-1 rounded-xl border border-gray-300 px-3 py-2 text-sm text-black dark:border-gray-700 dark:text-white"
+              className="mt-1 rounded-xl border border-line px-3 py-2 text-sm text-ink dark:border-line-dark dark:text-ink-dark"
               style={{ minHeight: 60 }}
               maxLength={300}
             />
-            <Text className="mt-4 text-xs text-gray-500">
+            <Text className="mt-4 text-xs text-muted">
               {picked.wordCount}{t('library.words_suffix')} · {picked.sourceLang}→{picked.targetLang}
             </Text>
             {submitting ? (
-              <ActivityIndicator className="mt-4" color="#6b7280" />
+              <ActivityIndicator className="mt-4" color="#7B7366" />
             ) : null}
           </>
         )}

@@ -236,7 +236,7 @@ export default function LibraryTabScreen() {
                 }`}
               >
                 {lang
-                  ? `${lang.flag} ${t(`languages.${lang.code}`)}`
+                  ? t(`languages.${lang.code}`)
                   : t(`library_tab.filter_${side}`)}
               </Text>
               <MaterialIcons
@@ -428,7 +428,7 @@ export default function LibraryTabScreen() {
                     className="flex-row items-center px-5 py-3"
                   >
                     <Text className="flex-1 text-sm text-ink dark:text-ink-dark">
-                      {lang ? `${lang.flag} ${t(`languages.${lang.code}`)}` : t('library_tab.filter_all')}
+                      {lang ? t(`languages.${lang.code}`) : t('library_tab.filter_all')}
                     </Text>
                     {selected ? <MaterialIcons name="check" size={18} color="#2EC4A5" /> : null}
                   </Pressable>

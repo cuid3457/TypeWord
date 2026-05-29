@@ -216,7 +216,7 @@ export default function SettingsScreen() {
           {/* Native language */}
           <SettingRow
             label={t('settings.native_language')}
-            value={native ? `${native.flag} ${native.nativeName}` : '—'}
+            value={native ? native.nativeName : '—'}
             isOpen={editing === 'native'}
             onPress={() => setEditing(editing === 'native' ? null : 'native')}
           />
@@ -666,7 +666,6 @@ function LanguageList({
               selected ? 'bg-accent-soft dark:bg-accent-soft-dark' : ''
             }`}
           >
-            <Text className="mr-3 text-xl">{item.flag}</Text>
             <View className="flex-1">
               <Text className="text-base text-ink dark:text-ink-dark">
                 {translatedName}

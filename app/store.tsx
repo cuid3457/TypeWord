@@ -55,7 +55,7 @@ const BOOST_ITEMS: StoreItem[] = [
   {
     id: 'boost_15',
     icon: 'flash-on',
-    iconTint: '#f59e0b',
+    iconTint: '#D9A441',
     titleKey: 'store.items.boost_15.title',
     descKey: 'store.items.boost_15.desc',
     price: 20,
@@ -63,7 +63,7 @@ const BOOST_ITEMS: StoreItem[] = [
   {
     id: 'boost_60',
     icon: 'flash-on',
-    iconTint: '#f59e0b',
+    iconTint: '#D9A441',
     titleKey: 'store.items.boost_60.title',
     descKey: 'store.items.boost_60.desc',
     price: 60,
@@ -124,7 +124,7 @@ export default function StoreScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'bottom']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <ScrollView
@@ -144,9 +144,9 @@ export default function StoreScreen() {
             accessibilityLabel={t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('store.title')}
           </Text>
         </View>
@@ -160,9 +160,9 @@ export default function StoreScreen() {
             {t('store.balance')}
           </Text>
           <View className="mt-2 flex-row items-end justify-between">
-            <Text className="text-4xl font-bold text-black dark:text-white">
+            <Text className="text-4xl font-bold text-ink dark:text-ink-dark">
               {points.toLocaleString()}
-              <Text className="text-base font-medium text-gray-500">
+              <Text className="text-base font-medium text-muted">
                 {' '}{t('store.points_unit')}
               </Text>
             </Text>
@@ -172,26 +172,26 @@ export default function StoreScreen() {
 
         {/* Inventory summary */}
         <View className="mt-4 flex-row gap-3">
-          <View className="flex-1 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
+          <View className="flex-1 rounded-2xl border border-line p-4 dark:border-line-dark">
             <View className="flex-row items-center">
               <MaterialIcons name="shield" size={18} color="#3b82f6" />
-              <Text className="ml-1.5 text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <Text className="ml-1.5 text-xs font-semibold uppercase tracking-wider text-muted">
                 {t('store.freeze_count')}
               </Text>
             </View>
-            <Text className="mt-1 text-2xl font-bold text-black dark:text-white">
+            <Text className="mt-1 text-2xl font-bold text-ink dark:text-ink-dark">
               {freezeCount}
             </Text>
           </View>
-          <View className="flex-1 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
+          <View className="flex-1 rounded-2xl border border-line p-4 dark:border-line-dark">
             <View className="flex-row items-center">
-              <MaterialIcons name="flash-on" size={18} color="#f59e0b" />
-              <Text className="ml-1.5 text-xs font-semibold uppercase tracking-wider text-gray-500">
+              <MaterialIcons name="flash-on" size={18} color="#D9A441" />
+              <Text className="ml-1.5 text-xs font-semibold uppercase tracking-wider text-muted">
                 {t('store.active_boost')}
               </Text>
             </View>
             <Text
-              className={`mt-1 text-xl font-bold ${boostActive ? 'text-amber-500' : 'text-gray-400 dark:text-gray-600'}`}
+              className={`mt-1 text-xl font-bold ${boostActive ? 'text-warm-amber' : 'text-faint'}`}
               numberOfLines={1}
             >
               {boostActive
@@ -205,11 +205,11 @@ export default function StoreScreen() {
         <View className="mt-6">
           <View className="flex-row items-center">
             <MaterialIcons name="shield" size={18} color="#3b82f6" />
-            <Text className="ml-1.5 text-sm font-bold text-black dark:text-white">
+            <Text className="ml-1.5 text-sm font-bold text-ink dark:text-ink-dark">
               {t('store.group_streak')}
             </Text>
           </View>
-          <View className="mt-2 overflow-hidden rounded-2xl border border-gray-300 dark:border-gray-700">
+          <View className="mt-2 overflow-hidden rounded-2xl border border-line dark:border-line-dark">
             {FREEZE_ITEMS.map((item, idx) => (
               <ItemRow
                 key={item.id}
@@ -226,12 +226,12 @@ export default function StoreScreen() {
         {/* XP boost group */}
         <View className="mt-6">
           <View className="flex-row items-center">
-            <MaterialIcons name="flash-on" size={18} color="#f59e0b" />
-            <Text className="ml-1.5 text-sm font-bold text-black dark:text-white">
+            <MaterialIcons name="flash-on" size={18} color="#D9A441" />
+            <Text className="ml-1.5 text-sm font-bold text-ink dark:text-ink-dark">
               {t('store.group_boost')}
             </Text>
           </View>
-          <View className="mt-2 overflow-hidden rounded-2xl border border-gray-300 dark:border-gray-700">
+          <View className="mt-2 overflow-hidden rounded-2xl border border-line dark:border-line-dark">
             {BOOST_ITEMS.map((item, idx) => (
               <ItemRow
                 key={item.id}
@@ -246,10 +246,10 @@ export default function StoreScreen() {
         </View>
 
         {/* How to earn */}
-        <View className={`mt-6 rounded-2xl p-4 ${dark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <View className={`mt-6 rounded-2xl p-4 ${dark ? 'bg-clay-dark' : 'bg-clay'}`}>
           <View className="flex-row items-center">
-            <MaterialIcons name="info-outline" size={16} color="#6b7280" />
-            <Text className="ml-1.5 text-xs font-bold uppercase tracking-wider text-gray-500">
+            <MaterialIcons name="info-outline" size={16} color="#7B7366" />
+            <Text className="ml-1.5 text-xs font-bold uppercase tracking-wider text-muted">
               {t('store.how_to_earn_title')}
             </Text>
           </View>
@@ -279,41 +279,41 @@ function ItemRow({ item, affordable, busy, onPress, isLast }: {
     <Pressable
       onPress={onPress}
       disabled={busy}
-      className={`flex-row items-center p-4 ${isLast ? '' : 'border-b border-gray-300 dark:border-gray-700'} active:opacity-70`}
+      className={`flex-row items-center p-4 ${isLast ? '' : 'border-b border-line dark:border-line-dark'} active:opacity-70`}
     >
-      <View className="h-11 w-11 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800" style={{ flexShrink: 0 }}>
+      <View className="h-11 w-11 items-center justify-center rounded-full bg-clay dark:bg-clay-dark" style={{ flexShrink: 0 }}>
         <MaterialIcons name={item.icon} size={22} color={item.iconTint} />
       </View>
       <View className="ml-3 flex-1" style={{ minWidth: 0 }}>
         <View className="flex-row items-center">
           <Text
-            className="text-sm font-semibold text-black dark:text-white"
+            className="text-sm font-semibold text-ink dark:text-ink-dark"
             numberOfLines={1}
             style={{ flexShrink: 1, flexGrow: 0 }}
           >
             {t(item.titleKey)}
           </Text>
           {item.badgeKey ? (
-            <View className="ml-2 rounded-md bg-red-500 px-1.5 py-0.5" style={{ flexShrink: 0 }}>
+            <View className="ml-2 rounded-md bg-danger px-1.5 py-0.5" style={{ flexShrink: 0 }}>
               <Text className="text-[10px] font-bold text-white">{t(item.badgeKey)}</Text>
             </View>
           ) : null}
         </View>
-        <Text className="mt-0.5 text-xs text-gray-500" numberOfLines={2}>
+        <Text className="mt-0.5 text-xs text-muted" numberOfLines={2}>
           {t(item.descKey)}
         </Text>
       </View>
       <View
         className={`ml-3 flex-row items-center rounded-xl px-3 py-2 ${affordable ? '' : 'opacity-50'}`}
-        style={{ backgroundColor: affordable ? BRAND_GREEN : '#d1d5db', flexShrink: 0 }}
+        style={{ backgroundColor: affordable ? BRAND_GREEN : '#A79E90', flexShrink: 0 }}
       >
         {busy ? (
           <ActivityIndicator size="small" color="#fff" />
         ) : (
           <>
-            <MaterialIcons name="monetization-on" size={14} color={affordable ? '#fff' : '#6b7280'} />
+            <MaterialIcons name="monetization-on" size={14} color={affordable ? '#fff' : '#7B7366'} />
             <Text
-              className={`ml-1 text-sm font-bold ${affordable ? 'text-white' : 'text-gray-500'}`}
+              className={`ml-1 text-sm font-bold ${affordable ? 'text-white' : 'text-muted'}`}
             >
               {item.price}
             </Text>
@@ -327,8 +327,8 @@ function ItemRow({ item, affordable, busy, onPress, isLast }: {
 function EarnRow({ icon, text }: { icon: React.ComponentProps<typeof MaterialIcons>['name']; text: string }) {
   return (
     <View className="flex-row items-center">
-      <MaterialIcons name={icon} size={14} color="#6b7280" />
-      <Text className="ml-2 text-xs text-gray-600 dark:text-gray-400" style={{ lineHeight: 18 }}>
+      <MaterialIcons name={icon} size={14} color="#7B7366" />
+      <Text className="ml-2 text-xs text-muted" style={{ lineHeight: 18 }}>
         {text}
       </Text>
     </View>

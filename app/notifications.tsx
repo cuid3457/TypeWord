@@ -193,7 +193,7 @@ export default function NotificationsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top']}>
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
       <View className="px-6 pt-6">
@@ -204,9 +204,9 @@ export default function NotificationsScreen() {
             accessibilityLabel={t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('notifications.title')}
           </Text>
         </View>
@@ -214,12 +214,12 @@ export default function NotificationsScreen() {
 
       {items === null ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator color="#6b7280" />
+          <ActivityIndicator color="#7B7366" />
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">
-          <MaterialIcons name="notifications-none" size={64} color="#9ca3af" />
-          <Text className="mt-4 text-center text-base font-semibold text-gray-500 dark:text-gray-400">
+          <MaterialIcons name="notifications-none" size={64} color="#A79E90" />
+          <Text className="mt-4 text-center text-base font-semibold text-muted">
             {t('notifications.empty')}
           </Text>
         </View>
@@ -235,25 +235,25 @@ export default function NotificationsScreen() {
                 className={
                   isNewPoke
                     ? 'mb-3 flex-row items-center rounded-2xl p-3'
-                    : 'mb-3 flex-row items-center rounded-2xl border border-gray-300 p-3 dark:border-gray-700'
+                    : 'mb-3 flex-row items-center rounded-2xl border border-line p-3 dark:border-line-dark'
                 }
                 style={isNewPoke ? { borderWidth: 1, borderColor: '#2EC4A5', backgroundColor: '#2EC4A510' } : undefined}
               >
-                <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800">
-                  <Text className="text-base font-bold text-gray-600 dark:text-gray-300">
+                <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+                  <Text className="text-base font-bold text-muted">
                     {(item.displayName || item.username).charAt(0).toUpperCase()}
                   </Text>
                 </View>
                 <View className="ml-3 flex-1">
                   {item.displayName ? (
-                    <Text className="text-sm font-semibold text-black dark:text-white" numberOfLines={1}>
+                    <Text className="text-sm font-semibold text-ink dark:text-ink-dark" numberOfLines={1}>
                       {item.displayName}
                     </Text>
                   ) : null}
-                  <Text className="text-xs text-gray-500" numberOfLines={1}>
+                  <Text className="text-xs text-muted" numberOfLines={1}>
                     @{item.username}
                   </Text>
-                  <Text className="mt-0.5 text-xs text-gray-400" numberOfLines={1}>
+                  <Text className="mt-0.5 text-xs text-faint" numberOfLines={1}>
                     {item.kind === 'friend_request_incoming'
                       ? t('notifications.incoming_label')
                       : item.kind === 'friend_request_outgoing'
@@ -280,7 +280,7 @@ export default function NotificationsScreen() {
                     <Pressable
                       onPress={() => reject(item)}
                       disabled={busyId !== null}
-                      className="rounded-lg bg-red-500 p-2"
+                      className="rounded-lg bg-danger p-2"
                       accessibilityLabel={t('dashboard.cancel_request')}
                       accessibilityRole="button"
                     >
@@ -291,7 +291,7 @@ export default function NotificationsScreen() {
                   <Pressable
                     onPress={() => cancel(item)}
                     disabled={busyId !== null}
-                    className="rounded-lg bg-red-500 p-2"
+                    className="rounded-lg bg-danger p-2"
                     accessibilityLabel={t('dashboard.cancel_request')}
                     accessibilityRole="button"
                   >
@@ -306,12 +306,12 @@ export default function NotificationsScreen() {
                     <Pressable
                       onPress={() => pokeBack(item.pokeId, item.userId, item.displayName || item.username)}
                       disabled={busyId !== null}
-                      className="rounded-lg bg-black p-2 dark:bg-white"
+                      className="rounded-lg bg-ink p-2 dark:bg-ink-dark"
                       accessibilityLabel={t('dashboard.poke')}
                       accessibilityRole="button"
                     >
                       {busyId === `p_${item.pokeId}_p` ? (
-                        <ActivityIndicator size="small" color="#9ca3af" />
+                        <ActivityIndicator size="small" color="#A79E90" />
                       ) : (
                         <Text className="text-base leading-[18px]">👉</Text>
                       )}
@@ -319,7 +319,7 @@ export default function NotificationsScreen() {
                     <Pressable
                       onPress={() => removePoke(item.pokeId)}
                       disabled={busyId !== null}
-                      className="rounded-lg bg-red-500 p-2"
+                      className="rounded-lg bg-danger p-2"
                       accessibilityLabel={t('common.delete')}
                       accessibilityRole="button"
                     >

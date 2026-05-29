@@ -122,28 +122,28 @@ export default function InviteScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 items-center justify-center bg-white px-8 dark:bg-black">
+    <SafeAreaView className="flex-1 items-center justify-center bg-canvas px-8 dark:bg-canvas-dark">
       <TabletContainer style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {state.kind === 'loading' ? (
         <ActivityIndicator color="#2EC4A5" size="large" />
       ) : state.kind === 'success' ? (
         <View className="items-center">
-          <View className="rounded-full bg-emerald-100 p-4 dark:bg-emerald-900">
+          <View className="rounded-full bg-accent-soft p-4 dark:bg-accent-soft-dark">
             <MaterialIcons name="check-circle" size={48} color="#2EC4A5" />
           </View>
-          <Text className="mt-4 text-center text-2xl font-bold text-black dark:text-white">
+          <Text className="mt-4 text-center text-2xl font-bold text-ink dark:text-ink-dark">
             {state.alreadyClaimed ? t('invite.added_already_claimed') : t('invite.added_title')}
           </Text>
           {state.alreadyClaimed ? null : (
-            <Text className="mt-2 text-center text-base text-gray-500">
+            <Text className="mt-2 text-center text-base text-muted">
               {t('invite.bonus_message', { days: state.bonusDays })}
             </Text>
           )}
           <Pressable
             onPress={() => router.replace('/(tabs)/dashboard')}
-            className="mt-8 rounded-xl bg-black px-8 py-4 dark:bg-white"
+            className="mt-8 rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
           >
-            <Text className="text-base font-semibold text-white dark:text-black">
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
               {t('invite.go_to_dashboard')}
             </Text>
           </Pressable>
@@ -155,17 +155,17 @@ export default function InviteScreen() {
           <View className="rounded-full bg-blue-100 p-4 dark:bg-blue-900">
             <MaterialIcons name="person-add" size={48} color="#3b82f6" />
           </View>
-          <Text className="mt-4 text-center text-2xl font-bold text-black dark:text-white">
+          <Text className="mt-4 text-center text-2xl font-bold text-ink dark:text-ink-dark">
             {t('invite.signup_title')}
           </Text>
-          <Text className="mt-2 text-center text-base text-gray-500">
+          <Text className="mt-2 text-center text-base text-muted">
             {t('invite.signup_message', { code: state.code })}
           </Text>
           <Pressable
             onPress={() => router.replace('/auth')}
-            className="mt-8 rounded-xl bg-black px-8 py-4 dark:bg-white"
+            className="mt-8 rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
           >
-            <Text className="text-base font-semibold text-white dark:text-black">
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
               {t('invite.signup_cta')}
             </Text>
           </Pressable>
@@ -173,25 +173,25 @@ export default function InviteScreen() {
             onPress={() => router.replace('/(tabs)')}
             className="mt-3 px-4 py-2"
           >
-            <Text className="text-sm text-gray-500">{t('common.skip')}</Text>
+            <Text className="text-sm text-muted">{t('common.skip')}</Text>
           </Pressable>
         </View>
       ) : (
         <View className="items-center">
-          <View className="rounded-full bg-red-100 p-4 dark:bg-red-900">
-            <MaterialIcons name="error-outline" size={48} color="#ef4444" />
+          <View className="rounded-full bg-danger-soft p-4 dark:bg-danger-soft-dark">
+            <MaterialIcons name="error-outline" size={48} color="#E0654F" />
           </View>
-          <Text className="mt-4 text-center text-xl font-bold text-black dark:text-white">
+          <Text className="mt-4 text-center text-xl font-bold text-ink dark:text-ink-dark">
             {t('invite.error_title')}
           </Text>
-          <Text className="mt-2 text-center text-base text-gray-500">
+          <Text className="mt-2 text-center text-base text-muted">
             {state.message}
           </Text>
           <Pressable
             onPress={() => router.replace('/(tabs)')}
-            className="mt-8 rounded-xl bg-black px-8 py-4 dark:bg-white"
+            className="mt-8 rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
           >
-            <Text className="text-base font-semibold text-white dark:text-black">
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
               {t('common.close')}
             </Text>
           </Pressable>
@@ -215,23 +215,23 @@ function NicknameStep({
 
   return (
     <View className="w-full max-w-sm items-center">
-      <View className="rounded-full bg-emerald-100 p-4 dark:bg-emerald-900">
+      <View className="rounded-full bg-accent-soft p-4 dark:bg-accent-soft-dark">
         <MaterialIcons name="badge" size={48} color="#2EC4A5" />
       </View>
-      <Text className="mt-4 text-center text-2xl font-bold text-black dark:text-white">
+      <Text className="mt-4 text-center text-2xl font-bold text-ink dark:text-ink-dark">
         {t('invite.name_title')}
       </Text>
-      <Text className="mt-2 text-center text-base text-gray-500">
+      <Text className="mt-2 text-center text-base text-muted">
         {t('invite.name_hint')}
       </Text>
       <TextInput
         value={name}
         onChangeText={setName}
         placeholder={t('invite.name_placeholder')}
-        placeholderTextColor="#9ca3af"
+        placeholderTextColor="#A79E90"
         autoFocus
         maxLength={20}
-        className="mt-6 w-full rounded-xl border border-gray-300 px-4 py-3 text-center text-base text-black dark:border-gray-700 dark:text-white"
+        className="mt-6 w-full rounded-xl border border-line px-4 py-3 text-center text-base text-ink dark:border-line-dark dark:text-ink-dark"
       />
       <Pressable
         onPress={async () => {
@@ -241,14 +241,14 @@ function NicknameStep({
         }}
         disabled={!trimmed || submitting}
         className={`mt-6 w-full items-center rounded-xl py-4 ${
-          !trimmed || submitting ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+          !trimmed || submitting ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'
         }`}
       >
         {submitting ? (
           <ActivityIndicator color="#fff" />
         ) : (
           <Text className={`text-base font-semibold ${
-            trimmed ? 'text-white dark:text-black' : 'text-gray-400'
+            trimmed ? 'text-canvas dark:text-canvas-dark' : 'text-faint'
           }`}>
             {t('invite.name_continue')}
           </Text>

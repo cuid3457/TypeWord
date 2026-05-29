@@ -114,7 +114,7 @@ export default function AuthScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <KeyboardAvoidingView
         className="flex-1"
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -125,13 +125,13 @@ export default function AuthScreen() {
           keyboardShouldPersistTaps="handled"
         >
           <Pressable onPress={() => router.back()} className="mb-4 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
 
-          <Text className="text-3xl font-bold text-black dark:text-white">
+          <Text className="text-3xl font-bold text-ink dark:text-ink-dark">
             {mode === 'signup' ? t('auth.signup_title') : t('auth.login_title')}
           </Text>
-          <Text className="mt-2 text-sm text-gray-500">
+          <Text className="mt-2 text-sm text-muted">
             {t('auth.subtitle')}
           </Text>
 
@@ -158,17 +158,17 @@ export default function AuthScreen() {
             }}
             disabled={googleLoading || appleLoading || loading}
             style={{ height: 52 }}
-            className="mt-8 flex-row items-center justify-center rounded-xl border border-gray-300 dark:border-gray-700"
+            className="mt-8 flex-row items-center justify-center rounded-xl border border-line dark:border-line-dark"
           >
             {googleLoading ? (
-              <ActivityIndicator color="#6b7280" />
+              <ActivityIndicator color="#7B7366" />
             ) : (
               <>
                 <Image
                   source={{ uri: 'https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png' }}
                   style={{ width: 20, height: 20 }}
                 />
-                <Text className="ml-3 text-base font-medium text-black dark:text-white">
+                <Text className="ml-3 text-base font-medium text-ink dark:text-ink-dark">
                   {t('auth.google_login')}
                 </Text>
               </>
@@ -182,7 +182,7 @@ export default function AuthScreen() {
               hosted OAuth flow as a full-page redirect. The handler is the
               same for all three; only the trigger UI differs. */}
           {appleLoading ? (
-            <View style={{ height: 52, marginTop: 12 }} className="items-center justify-center rounded-xl bg-black border border-transparent dark:border-gray-700">
+            <View style={{ height: 52, marginTop: 12 }} className="items-center justify-center rounded-xl bg-black border border-transparent dark:border-line-dark">
               <ActivityIndicator color="#fff" />
             </View>
           ) : Platform.OS === 'ios' ? (
@@ -226,7 +226,7 @@ export default function AuthScreen() {
               }}
               disabled={googleLoading || appleLoading || loading}
               style={{ height: 52, marginTop: 12 }}
-              className="flex-row items-center justify-center rounded-xl bg-black border border-transparent dark:border-gray-700"
+              className="flex-row items-center justify-center rounded-xl bg-black border border-transparent dark:border-line-dark"
             >
               <FontAwesome name="apple" size={20} color="#fff" style={{ marginTop: -2 }} />
               <Text className="ml-3 text-base font-medium text-white">
@@ -236,39 +236,39 @@ export default function AuthScreen() {
           )}
 
           <View className="my-6 flex-row items-center">
-            <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
-            <Text className="mx-4 text-sm text-gray-400">or</Text>
-            <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
+            <View className="flex-1 h-px bg-clay dark:bg-clay-dark" />
+            <Text className="mx-4 text-sm text-faint">or</Text>
+            <View className="flex-1 h-px bg-clay dark:bg-clay-dark" />
           </View>
 
           <View>
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('auth.email')}
             </Text>
             <TextInput
               value={email}
               onChangeText={setEmail}
               placeholder="email@example.com"
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               keyboardType="email-address"
               autoCapitalize="none"
               autoComplete="email"
-              className="mt-2 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+              className="mt-2 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
             />
           </View>
 
           <View className="mt-4">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('auth.password')}
             </Text>
             <TextInput
               value={password}
               onChangeText={setPassword}
               placeholder="••••••••"
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               secureTextEntry
               autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
-              className="mt-2 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+              className="mt-2 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
             />
           </View>
 
@@ -278,18 +278,18 @@ export default function AuthScreen() {
               disabled={loading || !email.trim() || !password.trim()}
               className={`items-center rounded-xl py-4 ${
                 loading || !email.trim() || !password.trim()
-                  ? 'bg-gray-300'
-                  : 'bg-black dark:bg-white'
+                  ? 'bg-clay'
+                  : 'bg-ink dark:bg-ink-dark'
               }`}
             >
               {loading ? (
-                <ActivityIndicator color="#6b7280" />
+                <ActivityIndicator color="#7B7366" />
               ) : (
                 <Text
                   className={`text-base font-semibold ${
                     !email.trim() || !password.trim()
-                      ? 'text-gray-500'
-                      : 'text-white dark:text-black'
+                      ? 'text-muted'
+                      : 'text-canvas dark:text-canvas-dark'
                   }`}
                 >
                   {mode === 'signup' ? t('auth.signup') : t('auth.login')}
@@ -320,12 +320,12 @@ export default function AuthScreen() {
                 }
               }}
               disabled={resending || !email.trim() || !password.trim()}
-              className="mt-4 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+              className="mt-4 items-center rounded-xl border border-line py-3 dark:border-line-dark"
             >
               {resending ? (
-                <ActivityIndicator color="#6b7280" />
+                <ActivityIndicator color="#7B7366" />
               ) : (
-                <Text className="text-sm font-medium text-gray-600 dark:text-gray-400">
+                <Text className="text-sm font-medium text-muted">
                   {t('auth.resend_email')}
                 </Text>
               )}
@@ -333,17 +333,17 @@ export default function AuthScreen() {
           )}
 
           {mode === 'signup' && (
-            <Text className="mt-4 text-center text-xs leading-5 text-gray-400">
+            <Text className="mt-4 text-center text-xs leading-5 text-faint">
               {t('auth.agree_prefix')}
               <Text
-                className="text-gray-500 underline"
+                className="text-muted underline"
                 onPress={() => router.push('/terms')}
               >
                 {t('settings.terms')}
               </Text>
               {t('auth.agree_and')}
               <Text
-                className="text-gray-500 underline"
+                className="text-muted underline"
                 onPress={() => router.push('/privacy')}
               >
                 {t('settings.privacy')}
@@ -359,7 +359,7 @@ export default function AuthScreen() {
             }}
             className="mt-4 items-center py-2"
           >
-            <Text className="text-sm text-gray-500">
+            <Text className="text-sm text-muted">
               {mode === 'signup' ? t('auth.have_account_prefix') : t('auth.no_account_prefix')}
               <Text className="font-semibold text-[#2EC4A5]">
                 {mode === 'signup' ? t('auth.have_account_link') : t('auth.no_account_link')}

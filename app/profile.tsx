@@ -152,7 +152,7 @@ export default function ProfileScreen() {
     confirmPassword.trim().length > 0;
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       <KeyboardAvoidingView
         className="flex-1"
@@ -166,9 +166,9 @@ export default function ProfileScreen() {
               arrow + small title on the same line). */}
           <View className="h-11 flex-row items-center">
             <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button">
-              <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
             </Pressable>
-            <Text className="text-base font-semibold text-black dark:text-white">
+            <Text className="text-base font-semibold text-ink dark:text-ink-dark">
               {t('auth.profile')}
             </Text>
           </View>
@@ -177,42 +177,42 @@ export default function ProfileScreen() {
           {myProfile && !myProfile.isAnonymous ? (
             <Pressable
               onPress={() => setShowProfileSetup(true)}
-              className="mt-6 flex-row items-center justify-between rounded-2xl border border-gray-300 p-4 dark:border-gray-700"
+              className="mt-6 flex-row items-center justify-between rounded-2xl border border-line p-4 dark:border-line-dark"
             >
               <View className="flex-1">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('profile_setup.display_name_label')}
                 </Text>
-                <Text className="mt-1 text-base text-black dark:text-white" numberOfLines={1}>
+                <Text className="mt-1 text-base text-ink dark:text-ink-dark" numberOfLines={1}>
                   {myProfile.displayName || t('dashboard.unnamed')}
                 </Text>
-                <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('profile_setup.username_label')}
                 </Text>
-                <Text className="mt-1 text-base text-black dark:text-white" numberOfLines={1}>
+                <Text className="mt-1 text-base text-ink dark:text-ink-dark" numberOfLines={1}>
                   {myProfile.username ? `@${myProfile.username}` : '—'}
                 </Text>
               </View>
-              <MaterialIcons name="edit" size={20} color="#9ca3af" />
+              <MaterialIcons name="edit" size={20} color="#A79E90" />
             </Pressable>
           ) : null}
 
           {/* Email display */}
-          <View className="mt-4 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <View className="mt-4 rounded-2xl border border-line p-4 dark:border-line-dark">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('auth.email')}
             </Text>
-            <Text className="mt-1 text-base text-black dark:text-white">
+            <Text className="mt-1 text-base text-ink dark:text-ink-dark">
               {isApplePrivateRelay(userEmail) ? t('auth.apple_private_email') : (userEmail ?? '—')}
             </Text>
           </View>
 
           {/* Auth provider */}
-          <View className="mt-4 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
-            <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <View className="mt-4 rounded-2xl border border-line p-4 dark:border-line-dark">
+            <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
               {t('auth.signed_in_with')}
             </Text>
-            <Text className="mt-1 text-base text-black dark:text-white">
+            <Text className="mt-1 text-base text-ink dark:text-ink-dark">
               {provider === 'google'
                 ? t('auth.signed_in_with_google')
                 : provider === 'apple'
@@ -225,53 +225,53 @@ export default function ProfileScreen() {
 
           {/* Password change - only for email users */}
           {provider === 'email' ? (
-            <View className="mt-6 rounded-2xl border border-gray-300 p-4 dark:border-gray-700">
-              <Text className="text-base font-semibold text-black dark:text-white">
+            <View className="mt-6 rounded-2xl border border-line p-4 dark:border-line-dark">
+              <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                 {t('auth.change_password')}
               </Text>
 
               <View className="mt-4">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('auth.current_password')}
                 </Text>
                 <TextInput
                   value={currentPassword}
                   onChangeText={setCurrentPassword}
                   placeholder="••••••••"
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   secureTextEntry
                   autoComplete="current-password"
-                  className="mt-2 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                  className="mt-2 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
                 />
               </View>
 
               <View className="mt-4">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('auth.new_password')}
                 </Text>
                 <TextInput
                   value={newPassword}
                   onChangeText={setNewPassword}
                   placeholder="••••••••"
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   secureTextEntry
                   autoComplete="new-password"
-                  className="mt-2 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                  className="mt-2 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
                 />
               </View>
 
               <View className="mt-4">
-                <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+                <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
                   {t('auth.confirm_password')}
                 </Text>
                 <TextInput
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   placeholder="••••••••"
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   secureTextEntry
                   autoComplete="new-password"
-                  className="mt-2 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                  className="mt-2 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
                 />
               </View>
 
@@ -281,18 +281,18 @@ export default function ProfileScreen() {
                   disabled={changing || !canSubmit}
                   className={`items-center rounded-xl py-4 ${
                     changing || !canSubmit
-                      ? 'bg-gray-300 dark:bg-gray-700'
-                      : 'bg-black dark:bg-white'
+                      ? 'bg-clay dark:bg-clay-dark'
+                      : 'bg-ink dark:bg-ink-dark'
                   }`}
                 >
                   {changing ? (
-                    <ActivityIndicator color="#6b7280" />
+                    <ActivityIndicator color="#7B7366" />
                   ) : (
                     <Text
                       className={`text-base font-semibold ${
                         !canSubmit
-                          ? 'text-gray-500'
-                          : 'text-white dark:text-black'
+                          ? 'text-muted'
+                          : 'text-canvas dark:text-canvas-dark'
                       }`}
                     >
                       {t('auth.change_password')}
@@ -325,9 +325,9 @@ export default function ProfileScreen() {
               onPress={() => {
                 Linking.openURL(SUBSCRIPTION_URL).catch(() => {});
               }}
-              className="mt-4 items-center rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+              className="mt-4 items-center rounded-xl border border-line py-4 dark:border-line-dark"
             >
-              <Text className="text-base font-medium text-black dark:text-white">
+              <Text className="text-base font-medium text-ink dark:text-ink-dark">
                 {t('auth.cancel_subscription')}
               </Text>
             </Pressable>
@@ -336,9 +336,9 @@ export default function ProfileScreen() {
           {/* Logout button */}
           <Pressable
             onPress={() => setLogoutModal(true)}
-            className={`${premium ? 'mt-4' : 'mt-6'} items-center rounded-xl border border-red-500 py-4`}
+            className={`${premium ? 'mt-4' : 'mt-6'} items-center rounded-xl border border-danger py-4`}
           >
-            <Text className="text-base font-semibold text-red-500">
+            <Text className="text-base font-semibold text-danger">
               {t('auth.logout')}
             </Text>
           </Pressable>
@@ -351,7 +351,7 @@ export default function ProfileScreen() {
             }}
             className="mt-4 items-center py-3"
           >
-            <Text className="text-sm text-gray-400">
+            <Text className="text-sm text-faint">
               {t('auth.delete_account')}
             </Text>
           </Pressable>
@@ -421,12 +421,12 @@ export default function ProfileScreen() {
         >
           <Pressable
             onPress={(e) => e.stopPropagation?.()}
-            className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+            className="w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark"
           >
-            <Text className="text-lg font-bold text-black dark:text-white">
+            <Text className="text-lg font-bold text-ink dark:text-ink-dark">
               {t('auth.deletion_feedback_title')}
             </Text>
-            <Text className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+            <Text className="mt-2 text-sm text-muted">
               {t('auth.deletion_feedback_message')}
             </Text>
 
@@ -449,9 +449,9 @@ export default function ProfileScreen() {
                     <MaterialIcons
                       name={selected ? 'check-box' : 'check-box-outline-blank'}
                       size={20}
-                      color={selected ? '#dc2626' : '#9ca3af'}
+                      color={selected ? '#dc2626' : '#A79E90'}
                     />
-                    <Text className="ml-2 flex-1 text-sm text-black dark:text-white">
+                    <Text className="ml-2 flex-1 text-sm text-ink dark:text-ink-dark">
                       {t(`auth.deletion_reason_${key}`)}
                     </Text>
                   </Pressable>
@@ -461,10 +461,10 @@ export default function ProfileScreen() {
                 value={feedbackComment}
                 onChangeText={setFeedbackComment}
                 placeholder={t('auth.deletion_comment_placeholder')}
-                placeholderTextColor="#9ca3af"
+                placeholderTextColor="#A79E90"
                 multiline
                 maxLength={2000}
-                className="mt-2 min-h-20 rounded-xl border border-gray-300 px-3 py-2 text-sm text-black dark:border-gray-700 dark:text-white"
+                className="mt-2 min-h-20 rounded-xl border border-line px-3 py-2 text-sm text-ink dark:border-line-dark dark:text-ink-dark"
                 style={{ textAlignVertical: 'top' }}
               />
             </ScrollView>
@@ -477,9 +477,9 @@ export default function ProfileScreen() {
                   setFeedbackModal(false);
                   setDeleteModal(true);
                 }}
-                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+                className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
               >
-                <Text className="text-sm font-semibold text-black dark:text-white">
+                <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                   {t('auth.deletion_skip')}
                 </Text>
               </Pressable>
@@ -488,7 +488,7 @@ export default function ProfileScreen() {
                   setFeedbackModal(false);
                   setDeleteModal(true);
                 }}
-                className="flex-1 items-center rounded-xl bg-red-600 py-3"
+                className="flex-1 items-center rounded-xl bg-danger py-3"
               >
                 <Text className="text-sm font-semibold text-white">
                   {t('auth.deletion_continue')}
@@ -540,12 +540,12 @@ export default function ProfileScreen() {
         >
           <Pressable
             onPress={(e) => e.stopPropagation?.()}
-            className="mx-8 w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+            className="mx-8 w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark"
           >
-            <Text className="text-lg font-bold text-black dark:text-white">
+            <Text className="text-lg font-bold text-ink dark:text-ink-dark">
               {t('auth.reauth_required_title')}
             </Text>
-            <Text className="mt-3 text-sm leading-5 text-gray-600 dark:text-gray-300">
+            <Text className="mt-3 text-sm leading-5 text-muted">
               {t('auth.reauth_required_message')}
             </Text>
 
@@ -555,26 +555,26 @@ export default function ProfileScreen() {
                   value={reauthPassword}
                   onChangeText={setReauthPassword}
                   placeholder="••••••••"
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   secureTextEntry
                   autoComplete="current-password"
                   editable={!reauthBusy}
-                  className="rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                  className="rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
                 />
                 {reauthError ? (
-                  <Text className="mt-2 text-xs text-red-500">{reauthError}</Text>
+                  <Text className="mt-2 text-xs text-danger">{reauthError}</Text>
                 ) : null}
               </View>
             ) : reauthError ? (
-              <Text className="mt-3 text-xs text-red-500">{reauthError}</Text>
+              <Text className="mt-3 text-xs text-danger">{reauthError}</Text>
             ) : null}
 
             <View className="mt-5 flex-row gap-3">
               <Pressable
                 onPress={() => !reauthBusy && setReauthModal(false)}
-                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+                className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
               >
-                <Text className="text-sm font-semibold text-black dark:text-white">
+                <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                   {t('settings.cancel')}
                 </Text>
               </Pressable>
@@ -620,7 +620,7 @@ export default function ProfileScreen() {
                     setReauthBusy(false);
                   }
                 }}
-                className="flex-1 items-center rounded-xl bg-red-600 py-3"
+                className="flex-1 items-center rounded-xl bg-danger py-3"
               >
                 {reauthBusy ? (
                   <ActivityIndicator color="#fff" />
