@@ -7,7 +7,7 @@ import { Platform, View, type ViewProps } from 'react-native';
  * `className`; the card owns only surface, border, and radius so caller
  * utilities never conflict with its own.
  */
-const cardShadow = Platform.select({
+export const cardShadow = Platform.select({
   ios: {
     shadowColor: '#1A1206',
     shadowOpacity: 0.06,

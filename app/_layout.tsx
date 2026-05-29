@@ -81,7 +81,14 @@ export default function RootLayout() {
 
   useEffect(() => {
     initSentry();
-    Font.loadAsync({ material: MaterialIconsFont }).catch(captureError);
+    const fontsReady = Font.loadAsync({
+      material: MaterialIconsFont,
+      'Pretendard-Regular': require('../assets/fonts/Pretendard-Regular.otf'),
+      'Pretendard-Medium': require('../assets/fonts/Pretendard-Medium.otf'),
+      'Pretendard-SemiBold': require('../assets/fonts/Pretendard-SemiBold.otf'),
+      'Pretendard-Bold': require('../assets/fonts/Pretendard-Bold.otf'),
+      'Pretendard-ExtraBold': require('../assets/fonts/Pretendard-ExtraBold.otf'),
+    }).catch(captureError);
     setupAudioMode().catch(captureError);
     getDb().catch(captureError);
 
@@ -95,6 +102,7 @@ export default function RootLayout() {
       SplashScreen.hideAsync().catch(() => {});
     }, 2000);
     Promise.allSettled([
+      fontsReady,
       refreshHome().catch(() => {}),
       refreshReview().catch(() => {}),
     ]).finally(() => {

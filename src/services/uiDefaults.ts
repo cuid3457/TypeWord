@@ -10,7 +10,7 @@
  * still applies even on the New Architecture. SectionList shares the
  * same VirtualizedList base so the prop propagates there too.
  */
-import { ScrollView, FlatList, SectionList } from 'react-native';
+import { ScrollView, FlatList, SectionList, StyleSheet, Text } from 'react-native';
 
 const targets = [ScrollView, FlatList, SectionList];
 for (const C of targets) {
@@ -21,4 +21,48 @@ for (const C of targets) {
     showsVerticalScrollIndicator: false,
     showsHorizontalScrollIndicator: false,
   };
+}
+
+/**
+ * Global default font = Pretendard (loaded in _layout via Font.loadAsync).
+ * RN has no font inheritance and React 19 dropped function-component
+ * defaultProps, so we patch Text's forwardRef render to inject the right
+ * Pretendard *weight face* based on the element's resolved fontWeight, then
+ * clear fontWeight so the OS doesn't synth faux-bold on an already-bold face.
+ * Elements with their own non-Pretendard family (icon glyphs, monospace
+ * readings) are left untouched.
+ */
+const PRETENDARD_BY_WEIGHT: Record<string, string> = {
+  '100': 'Pretendard-Regular',
+  '200': 'Pretendard-Regular',
+  '300': 'Pretendard-Regular',
+  '400': 'Pretendard-Regular',
+  normal: 'Pretendard-Regular',
+  '500': 'Pretendard-Medium',
+  '600': 'Pretendard-SemiBold',
+  '700': 'Pretendard-Bold',
+  bold: 'Pretendard-Bold',
+  '800': 'Pretendard-ExtraBold',
+  '900': 'Pretendard-ExtraBold',
+};
+
+const TextAny = Text as unknown as {
+  render?: (props: Record<string, unknown>, ref: unknown) => unknown;
+  __pretendardPatched?: boolean;
+};
+if (!TextAny.__pretendardPatched && typeof TextAny.render === 'function') {
+  const baseRender = TextAny.render.bind(TextAny);
+  TextAny.render = function patchedRender(props: Record<string, unknown>, ref: unknown) {
+    const flat = (StyleSheet.flatten((props as { style?: unknown }).style) ?? {}) as {
+      fontFamily?: string;
+      fontWeight?: string | number;
+    };
+    if (flat.fontFamily && !flat.fontFamily.startsWith('Pretendard')) {
+      return baseRender(props, ref);
+    }
+    const family = PRETENDARD_BY_WEIGHT[String(flat.fontWeight ?? '400')] ?? 'Pretendard-Regular';
+    const style = [{ fontFamily: family }, (props as { style?: unknown }).style, { fontWeight: undefined }];
+    return baseRender({ ...props, style }, ref);
+  };
+  TextAny.__pretendardPatched = true;
 }

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {
   BackHandler,
   FlatList,
+  Image,
   Keyboard,
   Platform,
   Pressable,
@@ -15,6 +16,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
+import { cardShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { AppModal } from '@/components/app-modal';
@@ -234,12 +236,12 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-white dark:bg-black">
+    <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
         {/* Header */}
         <View className="flex-row items-center justify-between px-6 pt-6">
           <View className="flex-1">
-            <Text className="text-3xl font-bold text-black dark:text-white">
+            <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
               {t('home.title')}
             </Text>
           </View>
@@ -253,14 +255,14 @@ export default function HomeScreen() {
                 setShowCreateModal(true);
               }
             }}
-            className="rounded-xl bg-black p-3 dark:bg-white"
+            className="rounded-full bg-ink p-3 dark:bg-ink-dark"
             accessibilityLabel={t('home.new_button')}
             accessibilityRole="button"
           >
             <MaterialIcons
               name="add"
               size={20}
-              color={colorScheme === 'dark' ? '#000' : '#fff'}
+              color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
             />
           </Pressable>
         </View>
@@ -276,17 +278,17 @@ export default function HomeScreen() {
               <Pressable
                 key={mode}
                 onPress={() => handleSortChange(mode)}
-                className={`flex-row items-center rounded-lg px-3 py-1.5 ${
+                className={`flex-row items-center rounded-xl px-3 py-1.5 ${
                   sortMode === mode
-                    ? 'bg-black dark:bg-white'
-                    : 'bg-gray-100 dark:bg-gray-800'
+                    ? 'bg-ink dark:bg-ink-dark'
+                    : 'bg-clay dark:bg-clay-dark'
                 }`}
               >
                 <Text
-                  className={`text-xs font-medium ${
+                  className={`text-xs font-semibold ${
                     sortMode === mode
-                      ? 'text-white dark:text-black'
-                      : 'text-gray-600 dark:text-gray-400'
+                      ? 'text-canvas dark:text-canvas-dark'
+                      : 'text-muted'
                   }`}
                 >
                   {t(`home.sort_${mode}`)}
@@ -295,7 +297,7 @@ export default function HomeScreen() {
                   <MaterialIcons
                     name={sortReversed ? 'arrow-upward' : 'arrow-downward'}
                     size={12}
-                    color={colorScheme === 'dark' ? '#000' : '#fff'}
+                    color={colorScheme === 'dark' ? '#15130E' : '#F4F1EA'}
                     style={{ marginLeft: 2 }}
                   />
                 ) : null}
@@ -306,7 +308,7 @@ export default function HomeScreen() {
             <MaterialIcons
               name={editMode ? 'check' : 'edit'}
               size={20}
-              color={editMode ? '#2EC4A5' : '#6b7280'}
+              color={editMode ? '#2EC4A5' : '#7B7366'}
             />
           </Pressable>
         </View>
@@ -315,8 +317,8 @@ export default function HomeScreen() {
         {!loading ? (
           <View className="mt-2 px-6">
             <View>
-              <View className="flex-row items-center rounded-xl bg-gray-100 px-3 dark:bg-gray-800">
-                <MaterialIcons name="search" size={18} color="#9ca3af" />
+              <View className="flex-row items-center rounded-xl bg-clay px-3 dark:bg-clay-dark">
+                <MaterialIcons name="search" size={18} color="#A79E90" />
                 <TextInput
                   value={searchQuery}
                   onChangeText={(text) => {
@@ -325,12 +327,12 @@ export default function HomeScreen() {
                     if (highlightTimerRef.current) clearTimeout(highlightTimerRef.current);
                   }}
                   placeholder={t('home.search_placeholder')}
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   returnKeyType="search"
                   autoCapitalize="none"
                   autoCorrect={false}
                   accessibilityLabel={t('home.search_placeholder')}
-                  className="ml-2 flex-1 py-2.5 text-sm text-black dark:text-white"
+                  className="ml-2 flex-1 py-2.5 text-sm text-ink dark:text-ink-dark"
                 />
                 {searchQuery ? (
                   <Pressable
@@ -342,12 +344,12 @@ export default function HomeScreen() {
                     accessibilityLabel={t('common.clear')}
                     accessibilityRole="button"
                   >
-                    <MaterialIcons name="close" size={16} color="#9ca3af" />
+                    <MaterialIcons name="close" size={16} color="#A79E90" />
                   </Pressable>
                 ) : null}
               </View>
               {searchMatches.length > 0 && searchQuery.trim() ? (
-                <View className="mt-1 rounded-xl bg-gray-100 dark:bg-gray-800" style={{ overflow: 'hidden' }}>
+                <View className="mt-1 rounded-xl bg-clay dark:bg-clay-dark" style={{ overflow: 'hidden' }}>
                   {searchMatches.map((book) => (
                     <Pressable
                       key={book.id}
@@ -355,9 +357,9 @@ export default function HomeScreen() {
                       className="flex-row items-center px-4 py-3"
                       style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
                     >
-                      <MaterialIcons name="book" size={16} color="#9ca3af" />
-                      <Text className="ml-2 flex-1 text-sm text-black dark:text-white" numberOfLines={1}>{book.title}</Text>
-                      <Text className="text-xs text-gray-400">{t('home.word_count', { count: book.wordCount })}</Text>
+                      <MaterialIcons name="book" size={16} color="#A79E90" />
+                      <Text className="ml-2 flex-1 text-sm text-ink dark:text-ink-dark" numberOfLines={1}>{book.title}</Text>
+                      <Text className="text-xs text-faint">{t('home.word_count', { count: book.wordCount })}</Text>
                     </Pressable>
                   ))}
                 </View>
@@ -368,14 +370,28 @@ export default function HomeScreen() {
 
         {loading ? (
           <View className="flex-1 items-center justify-center">
-            <Text className="text-sm text-gray-400">{t('home.loading')}</Text>
+            <Text className="text-sm text-faint">{t('home.loading')}</Text>
           </View>
         ) : books.length === 0 ? (
           <View className="flex-1 items-center justify-center px-10">
-            <MaterialIcons name="menu-book" size={56} color="#9ca3af" />
-            <Text className="mt-4 text-center text-base text-gray-500 dark:text-gray-400">
+            <View className="h-32 w-32 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+              <Image
+                source={require('../../assets/images/android-icon-foreground.png')}
+                style={{ width: 104, height: 104 }}
+                resizeMode="contain"
+              />
+            </View>
+            <Text className="mt-5 text-center text-lg font-bold text-ink dark:text-ink-dark">
               {t('home.empty')}
             </Text>
+            <Pressable
+              onPress={() => { haptic.tap(); setShowCreateModal(true); }}
+              className="mt-5 rounded-xl bg-accent px-6 py-3"
+              accessibilityRole="button"
+              accessibilityLabel={t('home.new_button')}
+            >
+              <Text className="text-sm font-bold text-white">{t('home.new_button')}</Text>
+            </Pressable>
           </View>
         ) : (
           <View style={{ flex: 1 }}>
@@ -411,7 +427,7 @@ export default function HomeScreen() {
 
         {/* Bottom bar in edit mode */}
         {editMode ? (
-          <View className="absolute bottom-2 left-6 right-6 flex-row items-center justify-between rounded-2xl bg-gray-800 px-5 py-4 dark:bg-gray-200">
+          <View className="absolute bottom-2 left-6 right-6 flex-row items-center justify-between rounded-2xl bg-ink px-5 py-4 dark:bg-ink-dark" style={cardShadow}>
             <Pressable
               onPress={() => {
                 if (selectedIds.size === books.length) {
@@ -426,23 +442,23 @@ export default function HomeScreen() {
               <MaterialIcons
                 name={selectedIds.size === books.length && books.length > 0 ? 'check-box' : 'check-box-outline-blank'}
                 size={20}
-                color={selectedIds.size === books.length && books.length > 0 ? '#2EC4A5' : '#9ca3af'}
+                color={selectedIds.size === books.length && books.length > 0 ? '#2EC4A5' : '#A79E90'}
               />
-              <Text className="ml-2 text-sm font-medium text-white dark:text-black">
+              <Text className="ml-2 text-sm font-semibold text-canvas dark:text-canvas-dark">
                 {selectedIds.size > 0 ? t('home.selected_count', { count: selectedIds.size }) : t('home.select_all')}
               </Text>
             </Pressable>
             <Pressable
               onPress={() => setShowDeleteConfirm(true)}
               disabled={selectedIds.size === 0}
-              className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-red-500' : 'bg-gray-600'}`}
+              className={`rounded-xl p-2.5 ${selectedIds.size > 0 ? 'bg-danger' : 'bg-clay dark:bg-clay-dark'}`}
               accessibilityLabel={t('home.delete_selected')}
               accessibilityRole="button"
             >
               <MaterialIcons
                 name="delete-outline"
                 size={22}
-                color={selectedIds.size > 0 ? '#fff' : '#9ca3af'}
+                color={selectedIds.size > 0 ? '#fff' : '#A79E90'}
               />
             </Pressable>
           </View>
@@ -502,12 +518,12 @@ function BookCard({
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
-      className={`${noOuterMargin ? '' : 'mx-6 mb-2'} rounded-xl border px-4 py-4 ${
+      className={`${noOuterMargin ? '' : 'mx-6 mb-3'} rounded-[20px] border px-4 py-4 ${
         highlighted
-          ? 'bg-white dark:bg-black'
-          : 'border-gray-300 bg-white dark:border-gray-700 dark:bg-black'
+          ? 'border-accent bg-accent-soft dark:bg-accent-soft-dark'
+          : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
       }`}
-      style={highlighted ? { borderColor: '#2EC4A5' } : undefined}
+      style={cardShadow}
     >
       <View className="flex-row items-center">
         {/* Checkbox in edit mode */}
@@ -516,28 +532,33 @@ function BookCard({
             <MaterialIcons
               name={selected ? 'check-box' : 'check-box-outline-blank'}
               size={22}
-              color={selected ? '#ef4444' : '#9ca3af'}
+              color={selected ? '#E0654F' : '#A79E90'}
             />
           </View>
         ) : null}
 
-        {/* Pin indicator in normal mode */}
-        {!editMode && book.pinned ? (
-          <MaterialIcons name="push-pin" size={14} color="#9ca3af" style={{ marginRight: 6 }} />
-        ) : null}
+        {/* Source-language flag tile */}
+        <View className="h-[46px] w-[46px] items-center justify-center rounded-[13px] bg-accent-soft dark:bg-accent-soft-dark">
+          <Text className="text-2xl">{src?.flag ?? '📚'}</Text>
+        </View>
 
-        <View className="flex-1">
-          <Text className="text-base font-medium text-black dark:text-white" numberOfLines={1}>
-            {book.title}
-          </Text>
+        <View className="ml-3 flex-1">
+          <View className="flex-row items-center">
+            {!editMode && book.pinned ? (
+              <MaterialIcons name="push-pin" size={13} color="#A79E90" style={{ marginRight: 4 }} />
+            ) : null}
+            <Text className="flex-1 text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
+              {book.title}
+            </Text>
+          </View>
           {src && tgt ? (
-            <Text className="mt-1 text-xs text-gray-500">
+            <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
               {src.flag} {t(`languages.${src.code}`)} → {tgt.flag} {t(`languages.${tgt.code}`)}
             </Text>
           ) : null}
         </View>
-        <View className="ml-3 rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-          <Text className="text-sm font-semibold text-black dark:text-white">
+        <View className="ml-3 rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+          <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
             {t('home.word_count', { count: book.wordCount })}
           </Text>
         </View>
@@ -548,7 +569,7 @@ function BookCard({
             <MaterialIcons
               name="push-pin"
               size={18}
-              color={book.pinned ? (dark ? '#fff' : '#000') : '#d1d5db'}
+              color={book.pinned ? '#2EC4A5' : '#A79E90'}
             />
           </Pressable>
         ) : null}
