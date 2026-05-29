@@ -609,39 +609,46 @@ function ActivityCalendar({ studiedDates, frozenDates, dark }: { studiedDates: S
         ))}
       </View>
 
-      <View className="flex-row flex-wrap">
-        {cells.map((cell, idx) => {
-          if (!cell.inMonth) {
-            return <View key={idx} style={{ width: `${100 / 7}%`, aspectRatio: 1 }} />;
-          }
-          const filled = cell.studied;
-          // Border precedence: today (mint) > frozen (red) > none. Today
-          // also being a frozen day is impossible by construction (today's
-          // freeze hasn't been consumed yet), so no further tiebreak needed.
-          const hasBorder = cell.isToday || cell.frozen;
-          const borderColor = cell.isToday ? studiedBg : cell.frozen ? frozenBorder : 'transparent';
-          return (
-            <View key={idx} style={{ width: `${100 / 7}%`, aspectRatio: 1, padding: 2 }}>
-              <View
-                className="flex-1 items-center justify-center rounded-full"
-                style={{
-                  backgroundColor: filled ? studiedBg : cell.isFuture ? 'transparent' : cellBg,
-                  borderWidth: hasBorder ? 2 : 0,
-                  borderColor,
-                  opacity: cell.isFuture ? 0.4 : 1,
-                }}
-              >
-                <Text
-                  className="text-xs font-medium"
-                  style={{ color: filled ? '#ffffff' : dark ? '#F1ECE2' : '#2A2620' }}
+      {/* Render as explicit week rows of 7 flex-1 cells. Using flex-1 (like
+          the weekday header above) instead of width:100/7% + flex-wrap avoids
+          sub-pixel rounding pushing the 7th column (Saturday) onto a new row /
+          out of view at certain container widths. cells.length is always a
+          multiple of 7. */}
+      {Array.from({ length: cells.length / 7 }, (_, weekIdx) => (
+        <View key={weekIdx} className="flex-row">
+          {cells.slice(weekIdx * 7, weekIdx * 7 + 7).map((cell, dayIdx) => {
+            if (!cell.inMonth) {
+              return <View key={dayIdx} className="flex-1" style={{ aspectRatio: 1 }} />;
+            }
+            const filled = cell.studied;
+            // Border precedence: today (mint) > frozen (red) > none. Today
+            // also being a frozen day is impossible by construction (today's
+            // freeze hasn't been consumed yet), so no further tiebreak needed.
+            const hasBorder = cell.isToday || cell.frozen;
+            const borderColor = cell.isToday ? studiedBg : cell.frozen ? frozenBorder : 'transparent';
+            return (
+              <View key={dayIdx} className="flex-1" style={{ aspectRatio: 1, padding: 2 }}>
+                <View
+                  className="flex-1 items-center justify-center rounded-full"
+                  style={{
+                    backgroundColor: filled ? studiedBg : cell.isFuture ? 'transparent' : cellBg,
+                    borderWidth: hasBorder ? 2 : 0,
+                    borderColor,
+                    opacity: cell.isFuture ? 0.4 : 1,
+                  }}
                 >
-                  {cell.dayNum}
-                </Text>
+                  <Text
+                    className="text-xs font-medium"
+                    style={{ color: filled ? '#ffffff' : dark ? '#F1ECE2' : '#2A2620' }}
+                  >
+                    {cell.dayNum}
+                  </Text>
+                </View>
               </View>
-            </View>
-          );
-        })}
-      </View>
+            );
+          })}
+        </View>
+      ))}
     </View>
   );
 }
