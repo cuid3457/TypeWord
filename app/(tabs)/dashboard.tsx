@@ -219,21 +219,21 @@ export default function DashboardScreen() {
                 {!isAnon ? (
                   <Pressable
                     onPress={() => { haptic.tap(); router.push('/store'); }}
-                    className="rounded-full border border-line bg-surface p-2.5 dark:border-line-dark dark:bg-surface-dark"
+                    className="rounded-full bg-ink p-3 dark:bg-ink-dark"
                     accessibilityLabel={t('store.title')}
                     accessibilityRole="button"
                   >
                     <MaterialIcons
                       name="storefront"
                       size={20}
-                      color={dark ? '#F1ECE2' : '#2A2620'}
+                      color={dark ? '#15130E' : '#F4F1EA'}
                     />
                   </Pressable>
                 ) : null}
                 {!isAnon ? (
                   <Pressable
                     onPress={() => { haptic.tap(); router.push('/notifications'); }}
-                    className="rounded-full border border-line bg-surface p-2.5 dark:border-line-dark dark:bg-surface-dark"
+                    className="rounded-full bg-ink p-3 dark:bg-ink-dark"
                     accessibilityLabel={t('notifications.title')}
                     accessibilityRole="button"
                   >
@@ -241,7 +241,7 @@ export default function DashboardScreen() {
                       <MaterialIcons
                         name="notifications"
                         size={20}
-                        color={dark ? '#F1ECE2' : '#2A2620'}
+                        color={dark ? '#15130E' : '#F4F1EA'}
                       />
                       {unreadCount > 0 ? (
                         <View
