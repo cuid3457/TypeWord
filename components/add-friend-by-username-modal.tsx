@@ -126,34 +126,34 @@ export function AddFriendByUsernameModal({
   return (
     <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
       <Pressable onPress={onClose} className="flex-1 items-center justify-center bg-black/50 px-6">
-        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-md rounded-2xl bg-white p-5 dark:bg-gray-900">
-          <Text className="text-lg font-bold text-black dark:text-white">
+        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-md rounded-2xl bg-surface p-5 dark:bg-surface-dark">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {t('dashboard.add_friend_title')}
           </Text>
-          <Text className="mt-1 text-sm text-gray-500">
+          <Text className="mt-1 text-sm text-muted">
             {t('dashboard.add_friend_hint_username')}
           </Text>
-          <View className="mt-4 flex-row items-center rounded-xl border border-gray-300 px-3 dark:border-gray-700">
-            <Text className="text-base text-gray-400">@</Text>
+          <View className="mt-4 flex-row items-center rounded-xl border border-line px-3 dark:border-line-dark">
+            <Text className="text-base text-faint">@</Text>
             <TextInput
               value={query}
               onChangeText={setQuery}
               placeholder={t('dashboard.search_username_placeholder')}
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               autoCapitalize="none"
               autoCorrect={false}
               maxLength={20}
               autoFocus
-              className="ml-1 flex-1 py-2.5 text-base text-black dark:text-white"
+              className="ml-1 flex-1 py-2.5 text-base text-ink dark:text-ink-dark"
             />
-            {searching ? <ActivityIndicator size="small" color="#9ca3af" /> : null}
+            {searching ? <ActivityIndicator size="small" color="#A79E90" /> : null}
           </View>
 
           <View className="mt-4" style={{ minHeight: 60, maxHeight: 320 }}>
             {results.length === 0 && !searching && query.length > 0 ? (
               <View className="items-center py-6">
-                <MaterialIcons name="search-off" size={32} color="#9ca3af" />
-                <Text className="mt-2 text-sm text-gray-500">
+                <MaterialIcons name="search-off" size={32} color="#A79E90" />
+                <Text className="mt-2 text-sm text-muted">
                   {t('dashboard.no_search_results')}
                 </Text>
               </View>
@@ -162,18 +162,18 @@ export function AddFriendByUsernameModal({
               const pending = pendingByUserId[item.userId];
               return (
                 <View key={item.userId} className="flex-row items-center py-2">
-                  <View className="h-9 w-9 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800">
-                    <Text className="text-sm font-bold text-gray-600 dark:text-gray-300">
+                  <View className="h-9 w-9 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+                    <Text className="text-sm font-bold text-muted">
                       {(item.displayName || item.username).charAt(0).toUpperCase()}
                     </Text>
                   </View>
                   <View className="ml-3 flex-1">
                     {item.displayName ? (
-                      <Text className="text-sm font-semibold text-black dark:text-white" numberOfLines={1}>
+                      <Text className="text-sm font-semibold text-ink dark:text-ink-dark" numberOfLines={1}>
                         {item.displayName}
                       </Text>
                     ) : null}
-                    <Text className="text-xs text-gray-500" numberOfLines={1}>
+                    <Text className="text-xs text-muted" numberOfLines={1}>
                       @{item.username}
                     </Text>
                   </View>
@@ -181,14 +181,14 @@ export function AddFriendByUsernameModal({
                     onPress={() => !pending && send(item)}
                     disabled={pending || busyUserId === item.userId}
                     className={`rounded-lg px-3 py-1.5 ${
-                      pending ? 'bg-gray-100 dark:bg-gray-800' : 'bg-black dark:bg-white'
+                      pending ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'
                     }`}
                   >
                     {busyUserId === item.userId ? (
-                      <ActivityIndicator size="small" color={pending ? '#9ca3af' : '#fff'} />
+                      <ActivityIndicator size="small" color={pending ? '#A79E90' : '#fff'} />
                     ) : (
                       <Text className={`text-xs font-semibold ${
-                        pending ? 'text-gray-500' : 'text-white dark:text-black'
+                        pending ? 'text-muted' : 'text-canvas dark:text-canvas-dark'
                       }`}>
                         {pending ? t('dashboard.request_sent') : t('dashboard.send_request')}
                       </Text>
@@ -203,15 +203,15 @@ export function AddFriendByUsernameModal({
             <View
               className={`mt-3 rounded-xl px-3 py-2 ${
                 statusMsg.tone === 'ok'
-                  ? 'bg-emerald-50 dark:bg-emerald-950'
-                  : 'bg-red-50 dark:bg-red-950'
+                  ? 'bg-accent-soft dark:bg-accent-soft-dark'
+                  : 'bg-danger-soft dark:bg-danger-soft-dark'
               }`}
             >
               <Text
                 className={`text-xs ${
                   statusMsg.tone === 'ok'
-                    ? 'text-emerald-700 dark:text-emerald-300'
-                    : 'text-red-700 dark:text-red-300'
+                    ? 'text-accent-deep dark:text-accent'
+                    : 'text-danger'
                 }`}
               >
                 {statusMsg.msg}
@@ -220,7 +220,7 @@ export function AddFriendByUsernameModal({
           ) : null}
 
           <Pressable onPress={onClose} className="mt-3 items-center py-2">
-            <Text className="text-sm text-gray-500">{t('common.close')}</Text>
+            <Text className="text-sm text-muted">{t('common.close')}</Text>
           </Pressable>
         </Pressable>
       </Pressable>

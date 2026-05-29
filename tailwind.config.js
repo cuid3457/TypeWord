@@ -32,9 +32,9 @@ module.exports = {
           'soft-dark': '#16332C', // tint background (dark mode)
         },
 
-        // Supporting semantic colors (warm-tuned, single value)
-        danger: { DEFAULT: '#E0654F' }, // destructive / "still learning"
-        'warm-amber': { DEFAULT: '#D9A441' }, // combo / "uncertain"
+        // Supporting semantic colors (warm-tuned). soft = state tint bg.
+        danger: { DEFAULT: '#E0654F', soft: '#F6E4DF', 'soft-dark': '#3A1A14' }, // destructive / "still learning"
+        'warm-amber': { DEFAULT: '#D9A441', soft: '#F6EAD2', 'soft-dark': '#332B16' }, // combo / "uncertain"
         frozen: { DEFAULT: '#6FA8DC' }, // calendar streak-freeze ring
       },
     },

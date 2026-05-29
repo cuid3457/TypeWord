@@ -66,7 +66,7 @@ export function Paywall() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom', 'left', 'right']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'bottom', 'left', 'right']}>
       <Stack.Screen options={{ headerShown: false }} />
 
       <TabletContainer>
@@ -90,7 +90,7 @@ export function Paywall() {
         }}
       >
         {/* Title */}
-        <Text className="text-center text-2xl font-bold text-black dark:text-white">
+        <Text className="text-center text-2xl font-bold text-ink dark:text-ink-dark">
           MoaVoca {t('premium.title')}
         </Text>
 
@@ -98,7 +98,7 @@ export function Paywall() {
         {premium ? (
           <View className="mt-6 items-center rounded-2xl border-2 border-[#2EC4A5] bg-[#2EC4A510] p-5">
             <MaterialIcons name="verified" size={40} color="#2EC4A5" />
-            <Text className="mt-3 text-center text-base font-semibold text-black dark:text-white">
+            <Text className="mt-3 text-center text-base font-semibold text-ink dark:text-ink-dark">
               {t('premium.active')}
             </Text>
           </View>
@@ -111,7 +111,7 @@ export function Paywall() {
               <View className="h-9 w-9 items-center justify-center rounded-full bg-[#2EC4A520]">
                 <MaterialIcons name={f.icon} size={20} color="#2EC4A5" />
               </View>
-              <Text className="ml-3 flex-1 text-base text-black dark:text-white">
+              <Text className="ml-3 flex-1 text-base text-ink dark:text-ink-dark">
                 {f.text}
               </Text>
             </View>
@@ -121,7 +121,7 @@ export function Paywall() {
         {/* Web CTA — subscribe in the mobile app */}
         {!premium ? (
           <View className="mt-8">
-            <Text className="text-center text-sm leading-5 text-gray-600 dark:text-gray-300">
+            <Text className="text-center text-sm leading-5 text-muted">
               {t('premium.web_subscribe_in_app')}
             </Text>
 
@@ -139,12 +139,12 @@ export function Paywall() {
 
             <Pressable
               onPress={() => Linking.openURL(STORE_URLS.android)}
-              className="mt-3 flex-row items-center justify-center rounded-xl border border-gray-300 py-4 dark:border-gray-700"
+              className="mt-3 flex-row items-center justify-center rounded-xl border border-line py-4 dark:border-line-dark"
               accessibilityRole="link"
               accessibilityLabel="Google Play"
             >
               <MaterialIcons name="shop" size={22} color={dark ? '#fff' : '#000'} />
-              <Text className="ml-3 text-base font-semibold text-black dark:text-white">
+              <Text className="ml-3 text-base font-semibold text-ink dark:text-ink-dark">
                 {t('premium.open_play_store')}
               </Text>
             </Pressable>
@@ -157,7 +157,7 @@ export function Paywall() {
               className="mt-4 items-center py-3"
             >
               {refreshing ? (
-                <ActivityIndicator color="#6b7280" />
+                <ActivityIndicator color="#7B7366" />
               ) : (
                 <Text className="text-sm font-medium text-[#2EC4A5]">
                   {t('premium.web_refresh_status')}
@@ -166,7 +166,7 @@ export function Paywall() {
             </Pressable>
 
             {message ? (
-              <Text className="mt-2 text-center text-xs text-gray-500">{message}</Text>
+              <Text className="mt-2 text-center text-xs text-muted">{message}</Text>
             ) : null}
           </View>
         ) : null}

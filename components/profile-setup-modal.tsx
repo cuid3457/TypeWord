@@ -141,8 +141,8 @@ export function ProfileSetupModal({
 
   const validationLabel = (() => {
     if (validation.phase === 'idle') return null;
-    if (validation.phase === 'checking') return { color: 'text-gray-400', text: t('profile_setup.checking') };
-    if (validation.phase === 'ok') return { color: 'text-emerald-600', text: t('profile_setup.available') };
+    if (validation.phase === 'checking') return { color: 'text-faint', text: t('profile_setup.checking') };
+    if (validation.phase === 'ok') return { color: 'text-accent-deep', text: t('profile_setup.available') };
     const errMap: Record<string, string> = {
       too_short: t('profile_setup.error_too_short'),
       too_long: t('profile_setup.error_too_long'),
@@ -153,7 +153,7 @@ export function ProfileSetupModal({
       moderation_flagged: t('profile_setup.error_inappropriate'),
       taken: t('profile_setup.error_taken'),
     };
-    return { color: 'text-red-600', text: errMap[validation.code] ?? t('profile_setup.error_format') };
+    return { color: 'text-danger', text: errMap[validation.code] ?? t('profile_setup.error_format') };
   })();
 
   return (
@@ -162,40 +162,40 @@ export function ProfileSetupModal({
         onPress={cancellable && onCancel ? onCancel : undefined}
         className="flex-1 items-center justify-center bg-black/50 px-6"
       >
-        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900">
-          <Text className="text-lg font-bold text-black dark:text-white">
+        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {t('profile_setup.title')}
           </Text>
-          <Text className="mt-1 text-sm text-gray-500">
+          <Text className="mt-1 text-sm text-muted">
             {t('profile_setup.subtitle')}
           </Text>
 
-          <Text className="mt-5 text-xs font-semibold text-gray-600 dark:text-gray-400">
+          <Text className="mt-5 text-xs font-semibold text-muted">
             {t('profile_setup.display_name_label')}
           </Text>
           <TextInput
             value={displayName}
             onChangeText={setDisplayNameLocal}
             placeholder={t('profile_setup.display_name_placeholder')}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#A79E90"
             maxLength={20}
-            className="mt-1 rounded-xl border border-gray-300 px-3 py-2.5 text-base text-black dark:border-gray-700 dark:text-white"
+            className="mt-1 rounded-xl border border-line px-3 py-2.5 text-base text-ink dark:border-line-dark dark:text-ink-dark"
           />
 
-          <Text className="mt-4 text-xs font-semibold text-gray-600 dark:text-gray-400">
+          <Text className="mt-4 text-xs font-semibold text-muted">
             {t('profile_setup.username_label')}
           </Text>
-          <View className="mt-1 flex-row items-center rounded-xl border border-gray-300 px-3 dark:border-gray-700">
-            <Text className="text-base text-gray-400">@</Text>
+          <View className="mt-1 flex-row items-center rounded-xl border border-line px-3 dark:border-line-dark">
+            <Text className="text-base text-faint">@</Text>
             <TextInput
               value={username}
               onChangeText={(v) => { setUsernameTouched(true); setUsernameLocal(v); }}
               placeholder={t('profile_setup.username_placeholder')}
-              placeholderTextColor="#9ca3af"
+              placeholderTextColor="#A79E90"
               maxLength={20}
               autoCapitalize="none"
               autoCorrect={false}
-              className="ml-1 flex-1 py-2.5 text-base text-black dark:text-white"
+              className="ml-1 flex-1 py-2.5 text-base text-ink dark:text-ink-dark"
             />
           </View>
           {validationLabel ? (
@@ -203,7 +203,7 @@ export function ProfileSetupModal({
               {validationLabel.text}
             </Text>
           ) : (
-            <Text className="mt-1.5 text-xs text-gray-400">
+            <Text className="mt-1.5 text-xs text-faint">
               {t('profile_setup.username_hint')}
             </Text>
           )}
@@ -212,14 +212,14 @@ export function ProfileSetupModal({
             onPress={submit}
             disabled={!canSave}
             className={`mt-5 items-center rounded-xl py-4 ${
-              canSave ? 'bg-black dark:bg-white' : 'bg-gray-300 dark:bg-gray-700'
+              canSave ? 'bg-ink dark:bg-ink-dark' : 'bg-clay dark:bg-clay-dark'
             }`}
           >
             {saving ? (
               <ActivityIndicator color="#fff" />
             ) : (
               <Text className={`text-base font-semibold ${
-                canSave ? 'text-white dark:text-black' : 'text-gray-400'
+                canSave ? 'text-canvas dark:text-canvas-dark' : 'text-faint'
               }`}>
                 {t('common.save')}
               </Text>
@@ -227,7 +227,7 @@ export function ProfileSetupModal({
           </Pressable>
           {cancellable && onCancel ? (
             <Pressable onPress={onCancel} className="mt-2 items-center py-2">
-              <Text className="text-sm text-gray-500">{t('common.cancel')}</Text>
+              <Text className="text-sm text-muted">{t('common.cancel')}</Text>
             </Pressable>
           ) : null}
         </Pressable>

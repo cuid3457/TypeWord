@@ -64,16 +64,16 @@ function OptionRows({
     <View className="mt-5 gap-3">
       <Pressable
         onPress={onPickBlank}
-        className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
+        className="flex-row items-center rounded-xl border-2 border-line p-4 dark:border-line-dark"
       >
-        <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-          <MaterialIcons name="edit" size={22} color="#6b7280" />
+        <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+          <MaterialIcons name="edit" size={22} color="#7B7366" />
         </View>
         <View className="ml-3 flex-1">
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('create_modal.blank_title')}
           </Text>
-          <Text className="mt-0.5 text-xs text-gray-500">
+          <Text className="mt-0.5 text-xs text-muted">
             {t('create_modal.blank_description')}
           </Text>
         </View>
@@ -81,16 +81,16 @@ function OptionRows({
 
       <Pressable
         onPress={onPickBrowse}
-        className="flex-row items-center rounded-xl border-2 border-gray-200 p-4 dark:border-gray-700"
+        className="flex-row items-center rounded-xl border-2 border-line p-4 dark:border-line-dark"
       >
-        <View className="h-10 w-10 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-800">
-          <MaterialIcons name="auto-stories" size={22} color="#6b7280" />
+        <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
+          <MaterialIcons name="auto-stories" size={22} color="#7B7366" />
         </View>
         <View className="ml-3 flex-1">
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             {t('create_modal.browse_title')}
           </Text>
-          <Text className="mt-0.5 text-xs text-gray-500">
+          <Text className="mt-0.5 text-xs text-muted">
             {t('create_modal.browse_description')}
           </Text>
         </View>
@@ -109,12 +109,12 @@ function CenteredCardLayout({ visible, onPickBlank, onPickBrowse, onClose }: Pro
       >
         <Pressable
           onPress={() => {}}
-          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-md rounded-2xl bg-surface p-6 dark:bg-surface-dark"
         >
-          <Text className="text-xl font-bold text-black dark:text-white">
+          <Text className="text-xl font-bold text-ink dark:text-ink-dark">
             {t('create_modal.title')}
           </Text>
-          <Text className="mt-1 text-sm text-gray-500">
+          <Text className="mt-1 text-sm text-muted">
             {t('create_modal.subtitle')}
           </Text>
           <OptionRows
@@ -129,9 +129,9 @@ function CenteredCardLayout({ visible, onPickBlank, onPickBrowse, onClose }: Pro
           />
           <Pressable
             onPress={onClose}
-            className="mt-4 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+            className="mt-4 items-center rounded-xl border border-line py-3 dark:border-line-dark"
           >
-            <Text className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <Text className="text-sm font-medium text-muted">
               {t('common.cancel')}
             </Text>
           </Pressable>
@@ -196,7 +196,7 @@ function BottomSheetLayout({ visible, onPickBlank, onPickBrowse, onClose }: Prop
         <Pressable onPress={dismissSheet} className="flex-1 justify-end bg-black/50">
           <GestureDetector gesture={panGesture}>
             <Animated.View
-              className="rounded-t-3xl bg-white px-6 pt-5 dark:bg-gray-900"
+              className="rounded-t-3xl bg-surface px-6 pt-5 dark:bg-surface-dark"
               style={[
                 { paddingBottom: Math.max(insets.bottom, 16) + 16, width: '100%' },
                 isTablet ? { maxWidth: contentWidth, alignSelf: 'center' } : null,
@@ -205,13 +205,13 @@ function BottomSheetLayout({ visible, onPickBlank, onPickBrowse, onClose }: Prop
             >
               <Pressable onPress={() => {}}>
                 <View className="mb-4 items-center">
-                  <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
+                  <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
                 </View>
 
-                <Text className="text-xl font-bold text-black dark:text-white">
+                <Text className="text-xl font-bold text-ink dark:text-ink-dark">
                   {t('create_modal.title')}
                 </Text>
-                <Text className="mt-1 text-sm text-gray-500">
+                <Text className="mt-1 text-sm text-muted">
                   {t('create_modal.subtitle')}
                 </Text>
 

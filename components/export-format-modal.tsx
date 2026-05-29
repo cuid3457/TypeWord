@@ -48,32 +48,32 @@ export function ExportFormatModal({
       >
         <Pressable
           onPress={(e) => e.stopPropagation?.()}
-          className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark"
         >
-          <Text className="text-lg font-bold text-black dark:text-white">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {title}
           </Text>
-          <Text className="mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300">
+          <Text className="mt-2 text-sm leading-5 text-muted">
             {subtitle}
           </Text>
 
           {/* CSV card */}
           <Pressable
             onPress={onPickCsv}
-            className="mt-5 flex-row items-center rounded-xl border border-gray-300 p-4 dark:border-gray-700"
+            className="mt-5 flex-row items-center rounded-xl border border-line p-4 dark:border-line-dark"
           >
-            <View className="mr-4 h-10 w-10 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800">
-              <MaterialIcons name="grid-on" size={22} color="#6b7280" />
+            <View className="mr-4 h-10 w-10 items-center justify-center rounded-lg bg-clay dark:bg-clay-dark">
+              <MaterialIcons name="grid-on" size={22} color="#7B7366" />
             </View>
             <View className="flex-1">
-              <Text className="text-base font-semibold text-black dark:text-white">
+              <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                 {csvTitle}
               </Text>
-              <Text className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+              <Text className="mt-0.5 text-xs text-muted">
                 {csvDescription}
               </Text>
             </View>
-            <MaterialIcons name="chevron-right" size={20} color="#9ca3af" />
+            <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
           </Pressable>
 
           {/* PDF card */}
@@ -86,7 +86,7 @@ export function ExportFormatModal({
             </View>
             <View className="flex-1">
               <View className="flex-row items-center">
-                <Text className="text-base font-semibold text-black dark:text-white">
+                <Text className="text-base font-semibold text-ink dark:text-ink-dark">
                   {pdfTitle}
                 </Text>
                 {!premium ? (
@@ -98,7 +98,7 @@ export function ExportFormatModal({
                   </View>
                 ) : null}
               </View>
-              <Text className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+              <Text className="mt-0.5 text-xs text-muted">
                 {pdfDescription}
               </Text>
             </View>
@@ -110,7 +110,7 @@ export function ExportFormatModal({
             onPress={onClose}
             className="mt-5 items-center py-2"
           >
-            <Text className="text-sm font-medium text-gray-500 dark:text-gray-400">
+            <Text className="text-sm font-medium text-muted">
               {cancelText}
             </Text>
           </Pressable>

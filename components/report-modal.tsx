@@ -82,13 +82,13 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
       >
         <Pressable
           onPress={() => {}}
-          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-md rounded-2xl bg-surface p-6 dark:bg-surface-dark"
         >
           {/* Title */}
-          <Text className="text-lg font-bold text-black dark:text-white">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {t('report.title')}
           </Text>
-          <Text className="mt-1 text-sm text-gray-500">
+          <Text className="mt-1 text-sm text-muted">
             "{word}"
           </Text>
 
@@ -101,15 +101,15 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
                 className={`flex-row items-center rounded-xl border-2 px-4 py-3 ${
                   reason === r
                     ? 'border-[#2EC4A5]'
-                    : 'border-gray-200 dark:border-gray-700'
+                    : 'border-line dark:border-line-dark'
                 }`}
               >
                 <MaterialIcons
                   name={reason === r ? 'radio-button-checked' : 'radio-button-unchecked'}
                   size={20}
-                  color={reason === r ? '#2EC4A5' : '#9ca3af'}
+                  color={reason === r ? '#2EC4A5' : '#A79E90'}
                 />
-                <Text className="ml-3 text-base text-black dark:text-white">
+                <Text className="ml-3 text-base text-ink dark:text-ink-dark">
                   {t(`report.${r}`)}
                 </Text>
               </Pressable>
@@ -121,9 +121,9 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
             value={description}
             onChangeText={setDescription}
             placeholder={t('report.description_placeholder')}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#A79E90"
             multiline
-            className="mt-4 rounded-xl border border-gray-200 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+            className="mt-4 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
             style={{ minHeight: 80, textAlignVertical: 'top' }}
           />
 
@@ -133,14 +133,14 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
               onPress={handleSubmit}
               disabled={submitting}
               className={`items-center rounded-xl py-4 ${
-                !reason || submitting ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+                !reason || submitting ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'
               }`}
             >
               {submitting ? (
                 <ActivityIndicator color={dark ? '#000' : '#fff'} />
               ) : (
                 <Text className={`text-base font-semibold ${
-                  !reason ? 'text-gray-400' : 'text-white dark:text-black'
+                  !reason ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
                 }`}>
                   {t('report.submit')}
                 </Text>
@@ -259,7 +259,7 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
             <Animated.View
               style={[
                 {
-                  backgroundColor: dark ? '#1a1a2e' : '#fff',
+                  backgroundColor: dark ? '#1E1B15' : '#fff',
                   borderTopLeftRadius: 24,
                   borderTopRightRadius: 24,
                   paddingHorizontal: 24,
@@ -275,14 +275,14 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
               <Pressable onPress={() => {}}>
                 {/* Drag handle */}
                 <View className="mb-4 items-center">
-                  <View className="h-1 w-10 rounded-full bg-gray-300 dark:bg-gray-600" />
+                  <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
                 </View>
 
                 {/* Title */}
-                <Text className="text-lg font-bold text-black dark:text-white">
+                <Text className="text-lg font-bold text-ink dark:text-ink-dark">
                   {t('report.title')}
                 </Text>
-                <Text className="mt-1 text-sm text-gray-500">
+                <Text className="mt-1 text-sm text-muted">
                   "{word}"
                 </Text>
 
@@ -295,15 +295,15 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
                       className={`flex-row items-center rounded-xl border-2 px-4 py-3 ${
                         reason === r
                           ? 'border-[#2EC4A5]'
-                          : 'border-gray-200 dark:border-gray-700'
+                          : 'border-line dark:border-line-dark'
                       }`}
                     >
                       <MaterialIcons
                         name={reason === r ? 'radio-button-checked' : 'radio-button-unchecked'}
                         size={20}
-                        color={reason === r ? '#2EC4A5' : '#9ca3af'}
+                        color={reason === r ? '#2EC4A5' : '#A79E90'}
                       />
-                      <Text className="ml-3 text-base text-black dark:text-white">
+                      <Text className="ml-3 text-base text-ink dark:text-ink-dark">
                         {t(`report.${r}`)}
                       </Text>
                     </Pressable>
@@ -315,9 +315,9 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
                   value={description}
                   onChangeText={setDescription}
                   placeholder={t('report.description_placeholder')}
-                  placeholderTextColor="#9ca3af"
+                  placeholderTextColor="#A79E90"
                   multiline
-                  className="mt-4 rounded-xl border border-gray-200 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+                  className="mt-4 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
                   style={{ minHeight: 80, textAlignVertical: 'top' }}
                 />
 
@@ -327,14 +327,14 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
                     onPress={handleSubmit}
                     disabled={submitting}
                     className={`items-center rounded-xl py-4 ${
-                      !reason || submitting ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+                      !reason || submitting ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'
                     }`}
                   >
                     {submitting ? (
                       <ActivityIndicator color={dark ? '#000' : '#fff'} />
                     ) : (
                       <Text className={`text-base font-semibold ${
-                        !reason ? 'text-gray-400' : 'text-white dark:text-black'
+                        !reason ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
                       }`}>
                         {t('report.submit')}
                       </Text>

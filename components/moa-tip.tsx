@@ -66,7 +66,7 @@ export function MoaTip({ subjectLang, character, size = 92 }: MoaTipProps) {
       </View>
       <Animated.Text
         style={{ opacity: fade }}
-        className="mt-3 text-center text-sm leading-relaxed text-gray-600 dark:text-gray-300"
+        className="mt-3 text-center text-sm leading-relaxed text-muted"
       >
         {tips[idx % tips.length]}
       </Animated.Text>

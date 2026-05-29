@@ -34,10 +34,10 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
   const [open, setOpen] = useState(false);
 
   const isDark = colorScheme === 'dark';
-  const fg = iconColor ?? (isDark ? '#e5e7eb' : '#374151');
-  const cardBg = isDark ? '#1f2937' : '#ffffff';
-  const textColor = isDark ? '#f3f4f6' : '#111827';
-  const subtle = isDark ? '#9ca3af' : '#6b7280';
+  const fg = iconColor ?? (isDark ? '#F1ECE2' : '#2A2620');
+  const cardBg = isDark ? '#2A261E' : '#ffffff';
+  const textColor = isDark ? '#ECE6DA' : '#111827';
+  const subtle = isDark ? '#A79E90' : '#7B7366';
   const accent = '#2EC4A5';
 
   const gender = settings?.voiceGender ?? 'F';
@@ -89,7 +89,7 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
                       flex: 1,
                       paddingVertical: 12,
                       borderRadius: 10,
-                      backgroundColor: active ? accent : isDark ? '#374151' : '#f3f4f6',
+                      backgroundColor: active ? accent : isDark ? '#2A2620' : '#ECE6DA',
                       alignItems: 'center',
                     }}
                   >
@@ -122,7 +122,7 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
                       flex: 1,
                       paddingVertical: 12,
                       borderRadius: 10,
-                      backgroundColor: active ? accent : isDark ? '#374151' : '#f3f4f6',
+                      backgroundColor: active ? accent : isDark ? '#2A2620' : '#ECE6DA',
                       alignItems: 'center',
                       flexDirection: 'row',
                       justifyContent: 'center',

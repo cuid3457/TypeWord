@@ -129,12 +129,12 @@ function NotifInnerContent({
   const { enabled, setEnabled, hour, setHour, minute, setMinute, days, saving, canSave, handleSave, toggleDay } = state;
   return (
     <>
-      <Text className="text-xl font-bold text-black dark:text-white" numberOfLines={2}>
+      <Text className="text-xl font-bold text-ink dark:text-ink-dark" numberOfLines={2}>
         {t('wordlist.notif_title', { title: bookTitle })}
       </Text>
 
-      <View className="mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 p-4 dark:border-gray-700">
-        <Text className="text-base text-black dark:text-white">
+      <View className="mt-4 flex-row items-center justify-between rounded-xl border border-line p-4 dark:border-line-dark">
+        <Text className="text-base text-ink dark:text-ink-dark">
           {t('wordlist.notif_enable')}
         </Text>
         <SmoothSwitch
@@ -148,8 +148,8 @@ function NotifInnerContent({
         style={{ opacity: enabled ? 1 : 0.4 }}
       >
         <DaySelector days={days} onToggle={toggleDay} lang={lang} />
-        <View className="mt-3 rounded-xl border border-gray-300 px-4 pt-3 pb-4 dark:border-gray-700">
-          <Text className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+        <View className="mt-3 rounded-xl border border-line px-4 pt-3 pb-4 dark:border-line-dark">
+          <Text className="text-xs font-semibold uppercase tracking-wider text-muted">
             {t('wordlist.notif_hour')}
           </Text>
           <TimePickerWheels
@@ -164,9 +164,9 @@ function NotifInnerContent({
       <View className="mt-6 flex-row gap-3">
         <Pressable
           onPress={onClose}
-          className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+          className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
         >
-          <Text className="text-base font-medium text-black dark:text-white">
+          <Text className="text-base font-medium text-ink dark:text-ink-dark">
             {t('common.cancel')}
           </Text>
         </Pressable>
@@ -174,12 +174,12 @@ function NotifInnerContent({
           onPress={handleSave}
           disabled={saving}
           className={`flex-1 items-center rounded-xl py-3 ${
-            saving || !canSave ? 'bg-gray-300' : 'bg-black dark:bg-white'
+            saving || !canSave ? 'bg-clay' : 'bg-ink dark:bg-ink-dark'
           }`}
         >
           <Text
             className={`text-base font-medium ${
-              saving || !canSave ? 'text-gray-500' : 'text-white dark:text-black'
+              saving || !canSave ? 'text-muted' : 'text-canvas dark:text-canvas-dark'
             }`}
           >
             {t('common.done')}
@@ -202,7 +202,7 @@ function CenteredCardLayout(props: Props) {
       >
         <Pressable
           onPress={() => {}}
-          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-md rounded-2xl bg-surface p-6 dark:bg-surface-dark"
         >
           <NotifInnerContent
             bookTitle={bookTitle}
@@ -238,13 +238,13 @@ function BottomSheetLayout(props: Props) {
           className="absolute inset-0"
         />
         <View
-          className="rounded-t-3xl bg-white pt-2 dark:bg-gray-900"
+          className="rounded-t-3xl bg-surface pt-2 dark:bg-surface-dark"
           style={[
             { paddingBottom: Math.max(insets.bottom, 16) + 16, width: '100%' },
             isTablet ? { maxWidth: contentWidth, alignSelf: 'center' } : null,
           ]}
         >
-          <View className="mx-auto mt-1 mb-3 h-1 w-12 rounded-full bg-gray-300 dark:bg-gray-600" />
+          <View className="mx-auto mt-1 mb-3 h-1 w-12 rounded-full bg-line dark:bg-line-dark" />
           <View className="px-6">
             <NotifInnerContent
               bookTitle={bookTitle}
@@ -293,7 +293,7 @@ function DaySelector({
 }) {
   const labels = getWeekdayLabels(lang);
   return (
-    <View className="mt-3 flex-row items-center justify-between rounded-xl border border-gray-300 px-3 py-3 dark:border-gray-700">
+    <View className="mt-3 flex-row items-center justify-between rounded-xl border border-line px-3 py-3 dark:border-line-dark">
       {labels.map((label, idx) => {
         const selected = (days & (1 << idx)) !== 0;
         return (
@@ -301,13 +301,13 @@ function DaySelector({
             key={idx}
             onPress={() => onToggle(idx)}
             className={`h-9 w-9 items-center justify-center rounded-full ${
-              selected ? '' : 'bg-gray-100 dark:bg-gray-800'
+              selected ? '' : 'bg-clay dark:bg-clay-dark'
             }`}
             style={selected ? { backgroundColor: '#2EC4A5' } : undefined}
           >
             <Text
               className={`text-sm font-semibold ${
-                selected ? 'text-white' : 'text-gray-500 dark:text-gray-400'
+                selected ? 'text-white' : 'text-muted'
               }`}
             >
               {label}
@@ -340,7 +340,7 @@ function TimePickerWheels({
         format={(h) => h.toString().padStart(2, '0')}
         label={t('wordlist.notif_hour_label')}
       />
-      <Text className="mx-2 text-3xl font-bold text-black dark:text-white" style={{ marginTop: -16 }}>
+      <Text className="mx-2 text-3xl font-bold text-ink dark:text-ink-dark" style={{ marginTop: -16 }}>
         :
       </Text>
       <Wheel
@@ -395,7 +395,7 @@ function Wheel({
         {/* Center selection band */}
         <View
           pointerEvents="none"
-          className="bg-gray-100 dark:bg-gray-800"
+          className="bg-clay dark:bg-clay-dark"
           style={{
             position: 'absolute',
             top: CENTER_OFFSET,
@@ -418,8 +418,8 @@ function Wheel({
               <Text
                 className={`text-2xl ${
                   item === value
-                    ? 'font-bold text-black dark:text-white'
-                    : 'text-gray-400 dark:text-gray-500'
+                    ? 'font-bold text-ink dark:text-ink-dark'
+                    : 'text-faint'
                 }`}
               >
                 {format(item)}
@@ -440,7 +440,7 @@ function Wheel({
           nestedScrollEnabled
         />
       </View>
-      <Text className="mt-1 text-xs text-gray-500">{label}</Text>
+      <Text className="mt-1 text-xs text-muted">{label}</Text>
     </View>
   );
 }

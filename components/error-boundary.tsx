@@ -44,20 +44,20 @@ function ErrorFallback({ canRetry, onRetry }: { canRetry: boolean; onRetry: () =
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="flex-1 items-center justify-center bg-white px-10 dark:bg-black">
-      <MaterialIcons name="error-outline" size={48} color="#9ca3af" />
-      <Text className="mt-4 text-xl font-bold text-black dark:text-white">
+    <SafeAreaView className="flex-1 items-center justify-center bg-canvas px-10 dark:bg-canvas-dark">
+      <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+      <Text className="mt-4 text-xl font-bold text-ink dark:text-ink-dark">
         {t('error.title')}
       </Text>
-      <Text className="mt-2 text-center text-sm text-gray-500">
+      <Text className="mt-2 text-center text-sm text-muted">
         {canRetry ? t('error.message') : t('error.init_failed')}
       </Text>
       {canRetry ? (
         <Pressable
           onPress={onRetry}
-          className="mt-8 items-center rounded-xl bg-black px-8 py-4 dark:bg-white"
+          className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
         >
-          <Text className="text-base font-semibold text-white dark:text-black">
+          <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
             {t('error.retry')}
           </Text>
         </Pressable>

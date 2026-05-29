@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-const COLORS = ['#2EC4A5', '#ef4444', '#f59e0b', '#3b82f6', '#8b5cf6', '#ec4899'];
+const COLORS = ['#2EC4A5', '#E0654F', '#D9A441', '#3b82f6', '#8b5cf6', '#ec4899'];
 const { width: SW, height: SH } = Dimensions.get('window');
 
 function Piece({

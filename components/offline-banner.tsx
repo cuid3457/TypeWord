@@ -41,7 +41,7 @@ export function OfflineBanner() {
 
   if (!mode) return null;
 
-  const bg = mode === 'offline' ? '#ef4444' : '#2EC4A5';
+  const bg = mode === 'offline' ? '#E0654F' : '#2EC4A5';
   const icon = mode === 'offline' ? 'wifi-off' : 'wifi';
   const text = mode === 'offline' ? t('error.offline_title') : t('error.online_title');
 

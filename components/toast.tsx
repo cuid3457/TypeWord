@@ -38,7 +38,7 @@ export function Toast({ message, visible, onHide, type = 'error', duration = 200
 
   if (!visible) return null;
 
-  const bg = type === 'error' ? '#ef4444' : '#2EC4A5';
+  const bg = type === 'error' ? '#E0654F' : '#2EC4A5';
 
   return (
     <Animated.View style={[

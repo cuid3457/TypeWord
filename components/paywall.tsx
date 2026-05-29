@@ -107,7 +107,7 @@ export function Paywall() {
   ];
 
   return (
-    <SafeAreaView className="flex-1 bg-white dark:bg-black" edges={['top', 'bottom', 'left', 'right']}>
+    <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'bottom', 'left', 'right']}>
       <Stack.Screen options={{ headerShown: false }} />
 
       <ScrollView contentContainerStyle={{ padding: 24, paddingBottom: 32 }}>
@@ -119,9 +119,9 @@ export function Paywall() {
             accessibilityLabel={t('common.back')}
             accessibilityRole="button"
           >
-            <MaterialIcons name="arrow-back" size={24} color="#6b7280" />
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
           </Pressable>
-          <Text className="text-base font-semibold text-black dark:text-white">
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
             MoaVoca {t('premium.title')}
           </Text>
         </View>
@@ -136,7 +136,7 @@ export function Paywall() {
               >
                 <MaterialIcons name={f.icon as any} size={20} color="#2EC4A5" />
               </View>
-              <Text className="flex-1 text-base text-black dark:text-white">{f.text}</Text>
+              <Text className="flex-1 text-base text-ink dark:text-ink-dark">{f.text}</Text>
             </View>
           ))}
         </View>
@@ -148,11 +148,11 @@ export function Paywall() {
             className={`flex-1 rounded-xl border-2 p-4 ${
               plan === 'monthly'
                 ? 'border-[#2EC4A5]'
-                : 'border-gray-300 dark:border-gray-700'
+                : 'border-line dark:border-line-dark'
             }`}
           >
-            <Text className="text-sm text-gray-500">{t('premium.monthly')}</Text>
-            <Text className="mt-1 text-xl font-bold text-black dark:text-white">
+            <Text className="text-sm text-muted">{t('premium.monthly')}</Text>
+            <Text className="mt-1 text-xl font-bold text-ink dark:text-ink-dark">
               {monthlyPrice}
             </Text>
           </Pressable>
@@ -162,21 +162,21 @@ export function Paywall() {
             className={`flex-1 rounded-xl border-2 p-4 ${
               plan === 'annual'
                 ? 'border-[#2EC4A5]'
-                : 'border-gray-300 dark:border-gray-700'
+                : 'border-line dark:border-line-dark'
             }`}
           >
             <View className="flex-row items-center justify-between">
-              <Text className="text-sm text-gray-500">{t('premium.annual')}</Text>
+              <Text className="text-sm text-muted">{t('premium.annual')}</Text>
               <View className="rounded-full bg-[#2EC4A5] px-2 py-0.5">
                 <Text className="text-xs font-semibold text-white">
                   {t('premium.annual_save', { percent: savingsPercent })}
                 </Text>
               </View>
             </View>
-            <Text className="mt-1 text-xl font-bold text-black dark:text-white">
+            <Text className="mt-1 text-xl font-bold text-ink dark:text-ink-dark">
               {annualPrice}
             </Text>
-            <Text className="text-xs text-gray-400">
+            <Text className="text-xs text-faint">
               {t('premium.per_month', { price: annualPerMonth })}
             </Text>
           </Pressable>
@@ -201,11 +201,11 @@ export function Paywall() {
         {/* Subscription utility links — restore + manage (한 줄) */}
         <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <Pressable onPress={handleRestore} disabled={restoring}>
-            <Text className="text-xs text-gray-400 underline">
+            <Text className="text-xs text-faint underline">
               {restoring ? t('premium.restoring') : t('premium.restore')}
             </Text>
           </Pressable>
-          <Text className="text-xs text-gray-300">|</Text>
+          <Text className="text-xs text-faint">|</Text>
           <Pressable
             onPress={() => {
               const url = Platform.OS === 'ios'
@@ -214,7 +214,7 @@ export function Paywall() {
               Linking.openURL(url).catch(() => {});
             }}
           >
-            <Text className="text-xs text-gray-400 underline">
+            <Text className="text-xs text-faint underline">
               {t('premium.manage_subscription', { defaultValue: 'Manage Subscription' })}
             </Text>
           </Pressable>
@@ -222,7 +222,7 @@ export function Paywall() {
 
         {/* Message */}
         {message ? (
-          <Text className="mt-2 text-center text-sm text-gray-500">{message}</Text>
+          <Text className="mt-2 text-center text-sm text-muted">{message}</Text>
         ) : null}
 
         {/* Apple Guideline 3.1.2(a) / Google Play subscription disclosure.
@@ -230,7 +230,7 @@ export function Paywall() {
             in plain language: subscription title + length + auto-renew
             + cancellation method. i18n strings render in the user's
             selected language. */}
-        <Text className="mt-4 text-center text-xs leading-4 text-gray-500 dark:text-gray-400">
+        <Text className="mt-4 text-center text-xs leading-4 text-muted">
           {t('premium.disclosure', {
             monthlyPrice,
             annualPrice,
@@ -243,15 +243,15 @@ export function Paywall() {
             must be reachable at the point of purchase). */}
         <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
           <Pressable onPress={() => router.push('/terms')}>
-            <Text className="text-xs text-gray-400 underline">{t('settings.terms')}</Text>
+            <Text className="text-xs text-faint underline">{t('settings.terms')}</Text>
           </Pressable>
-          <Text className="text-xs text-gray-300">|</Text>
+          <Text className="text-xs text-faint">|</Text>
           <Pressable onPress={() => router.push('/privacy')}>
-            <Text className="text-xs text-gray-400 underline">{t('settings.privacy')}</Text>
+            <Text className="text-xs text-faint underline">{t('settings.privacy')}</Text>
           </Pressable>
-          <Text className="text-xs text-gray-300">|</Text>
+          <Text className="text-xs text-faint">|</Text>
           <Pressable onPress={() => router.push('/business-info')}>
-            <Text className="text-xs text-gray-400 underline">{t('settings.business_info')}</Text>
+            <Text className="text-xs text-faint underline">{t('settings.business_info')}</Text>
           </Pressable>
         </View>
       </ScrollView>

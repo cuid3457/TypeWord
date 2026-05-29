@@ -130,20 +130,20 @@ export function TargetReportModal({
           // Pressables (radio rows, submit, cancel) intercept their own
           // taps so this only fires for "blank" card space.
           onPress={() => Keyboard.dismiss()}
-          className="w-full max-w-sm rounded-2xl bg-white p-5 dark:bg-gray-900"
+          className="w-full max-w-sm rounded-2xl bg-surface p-5 dark:bg-surface-dark"
         >
           <View className="flex-row items-center">
-            <MaterialIcons name="flag" size={20} color="#ef4444" />
-            <Text className="ml-2 text-lg font-bold text-black dark:text-white">
+            <MaterialIcons name="flag" size={20} color="#E0654F" />
+            <Text className="ml-2 text-lg font-bold text-ink dark:text-ink-dark">
               {target.kind === 'wordlist' ? t('report.title_wordlist') : t('report.title_user')}
             </Text>
           </View>
           {targetLabel ? (
-            <Text className="mt-1 text-sm text-gray-500" numberOfLines={1}>
+            <Text className="mt-1 text-sm text-muted" numberOfLines={1}>
               {targetLabel}
             </Text>
           ) : null}
-          <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <Text className="mt-3 text-xs font-semibold uppercase tracking-wider text-muted">
             {t('report.reason_label')}
           </Text>
           <View className="mt-2">
@@ -155,17 +155,17 @@ export function TargetReportModal({
                   onPress={() => setReason(r)}
                   className={`mt-1.5 flex-row items-center rounded-xl border px-3 py-2.5 ${
                     selected
-                      ? 'border-red-500 bg-red-50 dark:bg-red-950'
-                      : 'border-gray-300 dark:border-gray-700'
+                      ? 'border-danger bg-danger-soft dark:bg-danger-soft-dark'
+                      : 'border-line dark:border-line-dark'
                   }`}
                 >
                   <MaterialIcons
                     name={selected ? 'radio-button-checked' : 'radio-button-unchecked'}
                     size={18}
-                    color={selected ? '#ef4444' : '#9ca3af'}
+                    color={selected ? '#E0654F' : '#A79E90'}
                   />
                   <Text className={`ml-2 text-sm ${
-                    selected ? 'font-semibold text-red-700 dark:text-red-300' : 'text-black dark:text-white'
+                    selected ? 'font-semibold text-danger' : 'text-ink dark:text-ink-dark'
                   }`}>
                     {t(`report.reasons.${target.kind}.${r}`)}
                   </Text>
@@ -173,7 +173,7 @@ export function TargetReportModal({
               );
             })}
           </View>
-          <Text className="mt-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
+          <Text className="mt-4 text-xs font-semibold uppercase tracking-wider text-muted">
             {t('report.description_label')}
           </Text>
           <TextInput
@@ -182,31 +182,31 @@ export function TargetReportModal({
             placeholder=""
             multiline
             maxLength={200}
-            className="mt-1 rounded-xl border border-gray-300 px-3 py-2 text-sm text-black dark:border-gray-700 dark:text-white"
+            className="mt-1 rounded-xl border border-line px-3 py-2 text-sm text-ink dark:border-line-dark dark:text-ink-dark"
             style={{ minHeight: 60, textAlignVertical: 'top' }}
           />
-          <Text className="mt-1 text-right text-xs text-gray-400">
+          <Text className="mt-1 text-right text-xs text-faint">
             ({description.length}/200)
           </Text>
           <Pressable
             onPress={submit}
             disabled={!reason || submitting}
             className={`mt-4 items-center rounded-xl py-4 ${
-              !reason || submitting ? 'bg-gray-300 dark:bg-gray-700' : 'bg-red-600'
+              !reason || submitting ? 'bg-clay dark:bg-clay-dark' : 'bg-danger'
             }`}
           >
             {submitting ? (
               <ActivityIndicator color="#fff" />
             ) : (
               <Text className={`text-base font-semibold ${
-                !reason ? 'text-gray-400' : 'text-white'
+                !reason ? 'text-faint' : 'text-white'
               }`}>
                 {t('report.submit')}
               </Text>
             )}
           </Pressable>
           <Pressable onPress={onClose} className="mt-2 items-center py-2">
-            <Text className="text-sm text-gray-500">{t('common.cancel')}</Text>
+            <Text className="text-sm text-muted">{t('common.cancel')}</Text>
           </Pressable>
         </Pressable>
       </Pressable>

@@ -25,15 +25,15 @@ export function ReviewLimitModal({
   return (
     <BottomSheetShell visible={visible} onRequestClose={() => {}} animationType="fade">
       <View className="flex-1 items-center justify-center bg-black/50 px-8">
-        <View className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900">
+        <View className="w-full max-w-md rounded-2xl bg-surface p-6 dark:bg-surface-dark">
           <View className="items-center">
-            <View className="rounded-full bg-amber-100 p-3 dark:bg-amber-900">
-              <MaterialIcons name="lock-clock" size={32} color="#f59e0b" />
+            <View className="rounded-full bg-warm-amber-soft p-3 dark:bg-warm-amber-soft-dark">
+              <MaterialIcons name="lock-clock" size={32} color="#D9A441" />
             </View>
-            <Text className="mt-4 text-center text-lg font-bold text-black dark:text-white">
+            <Text className="mt-4 text-center text-lg font-bold text-ink dark:text-ink-dark">
               {t('review_limit.title')}
             </Text>
-            <Text className="mt-2 text-center text-sm text-gray-500">
+            <Text className="mt-2 text-center text-sm text-muted">
               {t('review_limit.description')}
             </Text>
           </View>
@@ -55,14 +55,14 @@ export function ReviewLimitModal({
               <View>
                 <Pressable
                   onPress={onWatchAd}
-                  className="flex-row items-center rounded-xl border border-gray-300 py-4 px-4 dark:border-gray-700"
+                  className="flex-row items-center rounded-xl border border-line py-4 px-4 dark:border-line-dark"
                 >
-                  <MaterialIcons name="play-circle-outline" size={20} color="#6b7280" />
-                  <Text className="ml-3 flex-1 text-base font-medium text-black dark:text-white">
+                  <MaterialIcons name="play-circle-outline" size={20} color="#7B7366" />
+                  <Text className="ml-3 flex-1 text-base font-medium text-ink dark:text-ink-dark">
                     {t('review_limit.watch_ad')}
                   </Text>
                 </Pressable>
-                <Text className="mt-1.5 text-center text-xs text-gray-400">
+                <Text className="mt-1.5 text-center text-xs text-faint">
                   {t('review_limit.watch_ad_hint')}
                 </Text>
               </View>
@@ -72,7 +72,7 @@ export function ReviewLimitModal({
               onPress={onEnd}
               className="items-center py-3"
             >
-              <Text className="text-sm text-gray-400">
+              <Text className="text-sm text-faint">
                 {t('review_limit.end_session')}
               </Text>
             </Pressable>

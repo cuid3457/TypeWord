@@ -217,7 +217,7 @@ export function ImageCropModal({ visible, imageUri, imageWidth, imageHeight, onC
 
             {/* Buttons */}
             <View style={[s.btnRow, { paddingBottom: Math.max(insets.bottom, 16) + 16 }]}>
-              <Pressable onPress={onCancel} style={[s.btnOutline, { borderColor: dark ? '#374151' : '#d1d5db', backgroundColor: dark ? '#1f2937' : '#f9fafb' }]}>
+              <Pressable onPress={onCancel} style={[s.btnOutline, { borderColor: dark ? '#2A2620' : '#A79E90', backgroundColor: dark ? '#2A261E' : '#f9fafb' }]}>
                 <Text style={s.cancelTxt}>{t('common.cancel')}</Text>
               </Pressable>
               <Pressable onPress={handleConfirm} style={s.btnFilled}>
@@ -273,6 +273,6 @@ const s = StyleSheet.create({
     paddingVertical: 14, borderRadius: 12,
     backgroundColor: ACCENT,
   },
-  cancelTxt: { color: '#9ca3af', fontSize: 15, fontWeight: '600' },
+  cancelTxt: { color: '#A79E90', fontSize: 15, fontWeight: '600' },
   okTxt: { color: '#fff', fontSize: 15, fontWeight: '600' },
 });

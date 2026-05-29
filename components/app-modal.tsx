@@ -49,12 +49,12 @@ export function AppModal({
       >
         <Pressable
           onPress={(e) => e.stopPropagation?.()}
-          className="w-full max-w-md rounded-2xl bg-white p-6 dark:bg-gray-900"
+          className="w-full max-w-md rounded-2xl bg-surface p-6 dark:bg-surface-dark"
         >
-          <Text className="text-lg font-bold text-black dark:text-white">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {title}
           </Text>
-          <Text className="mt-3 text-sm leading-5 text-gray-600 dark:text-gray-300">
+          <Text className="mt-3 text-sm leading-5 text-muted">
             {message}
           </Text>
 
@@ -73,9 +73,9 @@ export function AppModal({
             <View className="mt-5 flex-row gap-3">
               <Pressable
                 onPress={onClose}
-                className="flex-1 items-center rounded-xl border border-gray-300 py-3 dark:border-gray-700"
+                className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
               >
-                <Text className="text-sm font-semibold text-black dark:text-white">
+                <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
                   {buttonText}
                 </Text>
               </Pressable>
@@ -83,15 +83,15 @@ export function AppModal({
                 onPress={onConfirm}
                 className={`flex-1 items-center rounded-xl py-3 ${
                   destructive
-                    ? 'bg-red-600'
-                    : 'bg-black dark:bg-white'
+                    ? 'bg-danger'
+                    : 'bg-ink dark:bg-ink-dark'
                 }`}
               >
                 <Text
                   className={`text-sm font-semibold ${
                     destructive
                       ? 'text-white'
-                      : 'text-white dark:text-black'
+                      : 'text-canvas dark:text-canvas-dark'
                   }`}
                 >
                   {confirmText}
@@ -101,9 +101,9 @@ export function AppModal({
           ) : (
             <Pressable
               onPress={onClose}
-              className="mt-5 items-center rounded-xl bg-black py-3 dark:bg-white"
+              className="mt-5 items-center rounded-xl bg-ink py-3 dark:bg-ink-dark"
             >
-              <Text className="text-sm font-semibold text-white dark:text-black">
+              <Text className="text-sm font-semibold text-canvas dark:text-canvas-dark">
                 {buttonText}
               </Text>
             </Pressable>

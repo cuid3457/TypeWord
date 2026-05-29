@@ -49,41 +49,41 @@ export function NicknameModal({
   return (
     <BottomSheetShell visible={visible} onRequestClose={onCancel} animationType="fade">
       <Pressable onPress={onCancel} className="flex-1 items-center justify-center bg-black/50 px-6">
-        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-white p-6 dark:bg-gray-900">
-          <Text className="text-lg font-bold text-black dark:text-white">
+        <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark">
+          <Text className="text-lg font-bold text-ink dark:text-ink-dark">
             {t('nickname_modal.title')}
           </Text>
-          <Text className="mt-1 text-sm text-gray-500">
+          <Text className="mt-1 text-sm text-muted">
             {t('nickname_modal.hint')}
           </Text>
           <TextInput
             value={name}
             onChangeText={setName}
             placeholder={t('nickname_modal.placeholder')}
-            placeholderTextColor="#9ca3af"
+            placeholderTextColor="#A79E90"
             maxLength={20}
             autoFocus
-            className="mt-4 rounded-xl border border-gray-300 px-4 py-3 text-base text-black dark:border-gray-700 dark:text-white"
+            className="mt-4 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
           />
           <Pressable
             onPress={submit}
             disabled={!name.trim() || saving}
             className={`mt-4 items-center rounded-xl py-4 ${
-              !name.trim() || saving ? 'bg-gray-300 dark:bg-gray-700' : 'bg-black dark:bg-white'
+              !name.trim() || saving ? 'bg-clay dark:bg-clay-dark' : 'bg-ink dark:bg-ink-dark'
             }`}
           >
             {saving ? (
               <ActivityIndicator color="#fff" />
             ) : (
               <Text className={`text-base font-semibold ${
-                !name.trim() ? 'text-gray-400' : 'text-white dark:text-black'
+                !name.trim() ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
               }`}>
                 {t('common.save')}
               </Text>
             )}
           </Pressable>
           <Pressable onPress={onCancel} className="mt-2 items-center py-2">
-            <Text className="text-sm text-gray-500">{t('common.cancel')}</Text>
+            <Text className="text-sm text-muted">{t('common.cancel')}</Text>
           </Pressable>
         </Pressable>
       </Pressable>

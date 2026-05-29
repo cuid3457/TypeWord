@@ -452,30 +452,30 @@ export default function RootLayout() {
         </View>
         <Modal visible={celebrateInfo !== null} animationType="fade" transparent statusBarTranslucent>
           <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 24 }}>
-            <View style={{ width: '100%', alignItems: 'center', backgroundColor: colorScheme === 'dark' ? '#1a1a2e' : '#fff', borderRadius: 24, padding: 32 }}>
+            <View style={{ width: '100%', alignItems: 'center', backgroundColor: colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7', borderRadius: 24, padding: 32 }}>
               {celebrateInfo?.type === 'milestone' ? (
                 <>
                   <Text style={{ fontSize: 64 }}>🔥</Text>
-                  <Text style={{ marginTop: 16, fontSize: 22, fontWeight: 'bold', color: colorScheme === 'dark' ? '#fff' : '#000', textAlign: 'center' }}>
+                  <Text style={{ marginTop: 16, fontSize: 22, fontWeight: 'bold', color: colorScheme === 'dark' ? '#F1ECE2' : '#2A2620', textAlign: 'center' }}>
                     {t('streak.milestone_title')}
                   </Text>
-                  <Text style={{ marginTop: 8, fontSize: 40, fontWeight: '900', color: '#f59e0b', textAlign: 'center' }}>
+                  <Text style={{ marginTop: 8, fontSize: 40, fontWeight: '900', color: '#D9A441', textAlign: 'center' }}>
                     {celebrateInfo.streak}{t('streak.milestone_days')}
                   </Text>
-                  <Text style={{ marginTop: 16, fontSize: 14, color: '#9ca3af', textAlign: 'center' }}>
+                  <Text style={{ marginTop: 16, fontSize: 14, color: '#A79E90', textAlign: 'center' }}>
                     {t('streak.milestone_reward')}
                   </Text>
                 </>
               ) : celebrateInfo ? (
                 <>
                   <Text style={{ fontSize: 64 }}>{getDailyEmoji(celebrateInfo.variant)}</Text>
-                  <Text style={{ marginTop: 16, fontSize: 22, fontWeight: 'bold', color: colorScheme === 'dark' ? '#fff' : '#000', textAlign: 'center' }}>
+                  <Text style={{ marginTop: 16, fontSize: 22, fontWeight: 'bold', color: colorScheme === 'dark' ? '#F1ECE2' : '#2A2620', textAlign: 'center' }}>
                     {t(`streak.daily_title_${celebrateInfo.variant + 1}`)}
                   </Text>
                   <Text style={{ marginTop: 8, fontSize: 32, fontWeight: '800', color: '#2EC4A5', textAlign: 'center' }}>
                     {celebrateInfo.streak}{t('streak.milestone_days')}
                   </Text>
-                  <Text style={{ marginTop: 16, fontSize: 14, color: '#9ca3af', textAlign: 'center' }}>
+                  <Text style={{ marginTop: 16, fontSize: 14, color: '#A79E90', textAlign: 'center' }}>
                     {t(`streak.daily_message_${celebrateInfo.variant + 1}`)}
                   </Text>
                 </>
@@ -490,9 +490,9 @@ export default function RootLayout() {
                   }
                   setCelebrateInfo(null);
                 }}
-                style={{ marginTop: 24, width: '100%', alignItems: 'center', backgroundColor: colorScheme === 'dark' ? '#fff' : '#000', borderRadius: 12, paddingVertical: 16 }}
+                style={{ marginTop: 24, width: '100%', alignItems: 'center', backgroundColor: colorScheme === 'dark' ? '#F1ECE2' : '#2A2620', borderRadius: 12, paddingVertical: 16 }}
               >
-                <Text style={{ fontSize: 16, fontWeight: '600', color: colorScheme === 'dark' ? '#000' : '#fff' }}>
+                <Text style={{ fontSize: 16, fontWeight: '600', color: colorScheme === 'dark' ? '#15130E' : '#F4F1EA' }}>
                   {t('streak.milestone_continue')}
                 </Text>
               </Pressable>

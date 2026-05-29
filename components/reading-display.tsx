@@ -46,7 +46,7 @@ export function ReadingDisplay({
   // columnGap and wrapped items land flush at the line's left edge.
   if (compact || readings.length <= 1 || !canSpeak) {
     return (
-      <Text className={compact ? 'text-sm text-gray-400' : 'mt-1 text-sm text-gray-400'}>
+      <Text className={compact ? 'text-sm text-faint' : 'mt-1 text-sm text-faint'}>
         {formatted}
       </Text>
     );
@@ -68,10 +68,10 @@ export function ReadingDisplay({
           <Pressable
             key={i}
             onPress={handlePress}
-            className="flex-row items-center rounded-full bg-gray-100 px-2.5 py-1 dark:bg-gray-800"
+            className="flex-row items-center rounded-full bg-clay px-2.5 py-1 dark:bg-clay-dark"
           >
-            <MaterialIcons name="volume-up" size={11} color="#10b981" />
-            <Text className="ml-1 text-sm text-gray-500 dark:text-gray-400">{r}</Text>
+            <MaterialIcons name="volume-up" size={11} color="#1E9E84" />
+            <Text className="ml-1 text-sm text-muted">{r}</Text>
           </Pressable>
         );
       })}
