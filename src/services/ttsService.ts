@@ -17,6 +17,7 @@ import { Platform } from 'react-native';
 import { supabase } from '@src/api/supabase';
 import { getUserSettings } from '@src/storage/userSettings';
 import { isPremium } from '@src/services/subscriptionService';
+import { setupAudioMode } from './audio';
 import { downloadTtsToCache, findLocalTtsUri, getRateCorrection } from './ttsCache';
 
 const SUPPORTED_LANGS = new Set([
@@ -110,7 +111,15 @@ function startPlayback(uri: string, playbackRate: number, seqToken: number) {
   activePlayer = player;
   player.setPlaybackRate(playbackRate, 'high');
   player.volume = PLATFORM_VOLUME;
-  player.play();
+  // On web, expo-audio's underlying HTMLAudioElement.play() returns a
+  // Promise that rejects with AbortError when a rapid pause() preempts it
+  // (typical when the user taps a new word before the previous TTS started).
+  // The interruption is the desired behavior; swallow the rejection so it
+  // doesn't surface as an unhandled rejection in Sentry.
+  const ret = player.play() as unknown;
+  if (ret && typeof (ret as PromiseLike<unknown>).then === 'function') {
+    (ret as Promise<unknown>).catch(() => { /* silent — AbortError on interrupt */ });
+  }
 }
 
 export async function speakCloud(
@@ -127,8 +136,18 @@ export async function speakCloud(
   try { Speech.stop(); } catch { /* ignore */ }
   const mySeq = ++speakSeq;
 
-  // Step 2: read user settings (AsyncStorage round-trip).
-  const settings = await getUserSettings();
+  // Step 2: read user settings (AsyncStorage round-trip). Re-assert the iOS
+  // audio session in parallel — iOS silently reconfigures the AVAudioSession
+  // on interruptions (ad video, calls, Siri, route changes), leaving TTS
+  // routed to the quiet earpiece/ambient category. setAudioModeAsync is
+  // idempotent and cheap, so re-asserting per utterance keeps playback
+  // reliably loud regardless of what touched the session since boot. Runs
+  // concurrently with the settings read to add no serial latency, and covers
+  // every downstream path (device fallback, local cache, cloud fetch).
+  const [settings] = await Promise.all([
+    getUserSettings(),
+    setupAudioMode().catch(() => {}),
+  ]);
   if (mySeq !== speakSeq) return;
   const gender = settings?.voiceGender ?? 'F';
   // Playback rate (0.8 / 1.2) is a premium feature. Non-premium users always

@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import { ReviewCardContent } from '@/components/review/ReviewCardContent';
+import { TabletContainer } from '@/components/tablet-container';
 import { ReportModal } from '@/components/report-modal';
 import { Toast } from '@/components/toast';
 import { VoiceToggle } from '@/components/voice-toggle';
@@ -158,6 +159,7 @@ export function ReviewActiveCard({
   // height to the card.
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
+      <TabletContainer>
       <View className="flex-1 px-6 pt-4">
         {/* Progress bar + back to list */}
         <View className="flex-row items-center justify-between">
@@ -238,7 +240,7 @@ export function ReviewActiveCard({
         {/* Card with floating side nav arrows */}
         <View className="mt-4 flex-1 justify-center">
           <View className="flex-1 rounded-[20px] border border-line bg-surface dark:border-line-dark dark:bg-surface-dark">
-            <ScrollView contentContainerStyle={{ padding: 24 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+            <ScrollView contentContainerStyle={{ padding: 24, flexGrow: 1 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
               <ReviewCardContent
                 mode={reviewMode}
                 current={current}
@@ -352,6 +354,7 @@ export function ReviewActiveCard({
           )}
         </View>
       </View>
+      </TabletContainer>
 
       {current ? (
         <ReportModal

@@ -91,7 +91,11 @@ export function playSfx(name: SfxName): void {
   if (!player) return;
   try {
     player.seekTo(0);
-    player.play();
+    // Web: catch the async AbortError too (see ttsService for the rationale).
+    const ret = player.play() as unknown;
+    if (ret && typeof (ret as PromiseLike<unknown>).then === 'function') {
+      (ret as Promise<unknown>).catch(() => { /* silent */ });
+    }
   } catch {
     // expo-audio occasionally rejects seekTo on a player mid-transition.
     // SFX miss is acceptable — never let it crash the review flow.

@@ -382,7 +382,6 @@ export default function SettingsScreen() {
         </View>
         ) : null}
 
-        {Platform.OS !== 'web' ? (
         <View className="mt-3 rounded-2xl border border-line dark:border-line-dark">
           <View className="flex-row items-center justify-between p-4">
             <View className="flex-1">
@@ -403,7 +402,6 @@ export default function SettingsScreen() {
             />
           </View>
         </View>
-        ) : null}
 
         {/* Secondary action buttons. On tablets, lay out as a 2-column
             grid via flex-wrap + 48% basis; phones stay as a vertical

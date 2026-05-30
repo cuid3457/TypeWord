@@ -209,7 +209,7 @@ export function ReviewCardContent({
     ) : null;
 
   const renderChoices = () => (
-    <Animated.View layout={LinearTransition.duration(300)} className="mt-6 gap-2">
+    <Animated.View layout={LinearTransition.duration(300)} className="mt-6" style={{ gap: 10 }}>
       {choices.map((c, i) => {
         const isCorrect = c === correctDefinition;
         const isSelected = choiceSelected === i;
@@ -265,7 +265,7 @@ export function ReviewCardContent({
   switch (mode) {
     case 'flashcard':
       return cardReversed ? (
-        <Pressable onPress={() => !flipped && setFlipped(true)}>
+        <Pressable onPress={() => !flipped && setFlipped(true)} style={{ flex: 1 }} accessibilityRole="button">
           {renderMeanings()}
           {flipped ? (
             <View className="mt-6 items-center">{renderWordHeader()}</View>
@@ -276,7 +276,7 @@ export function ReviewCardContent({
           )}
         </Pressable>
       ) : (
-        <Pressable onPress={() => !flipped && setFlipped(true)}>
+        <Pressable onPress={() => !flipped && setFlipped(true)} style={{ flex: 1 }} accessibilityRole="button">
           {renderWordHeader()}
           {flipped ? renderMeanings() : (
             <View className="items-center justify-center py-16">
@@ -582,7 +582,7 @@ export function ReviewCardContent({
               </Text>
             ) : null}
           </View>
-          <Animated.View layout={LinearTransition.duration(300)} className="mt-6 gap-2">
+          <Animated.View layout={LinearTransition.duration(300)} className="mt-6" style={{ gap: 10 }}>
             {choices.map((c, i) => {
               const isCorrect = c === correctDefinition;
               const isSelected = choiceSelected === i;
