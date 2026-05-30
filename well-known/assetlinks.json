@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "app.typeword.app",
       "sha256_cert_fingerprints": [
-        "47:3A:7A:99:D2:2C:5E:3C:9A:67:69:6D:E7:76:62:02:7A:2A:CB:6E:71:D5:0A:BD:51:4C:33:3A:DE:45:2F:BB"
+        "47:3A:7A:99:D2:2C:5E:3C:9A:67:69:6D:E7:76:62:02:7A:2A:CB:6E:71:D5:0A:BD:51:4C:33:3A:DE:45:2F:BB",
+        "3D:73:B3:CE:84:6E:5A:4C:6A:99:6F:68:CC:FD:A2:88:4C:06:55:6F:B2:2B:26:44:29:A4:EE:F0:C7:99:D9:04"
       ]
     }
   }
