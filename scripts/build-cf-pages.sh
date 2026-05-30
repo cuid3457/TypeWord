@@ -29,6 +29,16 @@ if [ -d "dist/app/assets/node_modules" ]; then
     | xargs -0 sed -i 's|assets/node_modules/|assets/_packages/|g'
 fi
 
+# Expo Web emits `<title data-rh="true"></title>` (react-helmet anchor)
+# and fills it at runtime via per-route JS. Before JS hydrates the browser
+# falls back to the hostname (e.g. "moavoca") as the tab title, which
+# looks lowercase + unbranded. Inject "MoaVoca" as the default so the
+# tab reads correctly on first paint; per-route titles still override
+# once the app boots.
+echo "[build-cf-pages] injecting default <title>MoaVoca</title>"
+find dist/app -name '*.html' -type f -print0 \
+  | xargs -0 sed -i 's|<title data-rh="true"></title>|<title data-rh="true">MoaVoca</title>|g'
+
 echo "[build-cf-pages] copying landing + legal pages to dist root"
 cp index.html privacy.html terms.html business-info.html licenses.html _redirects _headers googlea7e926c78ec67b7e.html robots.txt sitemap.xml og-image.png dist/
 
