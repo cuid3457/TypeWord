@@ -82,6 +82,12 @@ function WebTopTabBar(props: BottomTabBarProps) {
       style={{
         width: '100%',
         backgroundColor: barBackground,
+        // Nuke any inherited border/shadow on this container so no
+        // hairline appears under the top nav.
+        borderBottomWidth: 0,
+        borderTopWidth: 0,
+        elevation: 0,
+        shadowOpacity: 0,
       }}
     >
       <View
@@ -97,7 +103,14 @@ function WebTopTabBar(props: BottomTabBarProps) {
       >
         <WebWordmark />
         <View style={{ flex: 1 }} />
-        <View style={{ width: clusterWidth }}>
+        <View
+          style={{
+            width: clusterWidth,
+            // Same defensive nuking — the wrapper around BottomTabBar.
+            borderBottomWidth: 0,
+            borderTopWidth: 0,
+          }}
+        >
           <BottomTabBar {...props} />
         </View>
       </View>
@@ -242,10 +255,20 @@ export default function TabLayout() {
       // Desktop/tablet web ignores the `tabBarHidden` immersive flag —
       // big screens have room to keep persistent navigation visible, and
       // it matches browser-app convention. Phone-web + native still hide.
+      // Zero all border + shadow sides — RN's BottomTabBar applies a
+      // default hairline border (one side depending on position) and a
+      // platform-shadow on web that draws a thin line under the cluster.
       return {
         height: TAB_HEIGHT,
         backgroundColor: barBg,
         borderTopWidth: 0,
+        borderBottomWidth: 0,
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        elevation: 0,
+        shadowOpacity: 0,
+        shadowOffset: { width: 0, height: 0 },
+        shadowRadius: 0,
       };
     }
     if (isWeb) {
