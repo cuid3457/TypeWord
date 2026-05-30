@@ -209,7 +209,10 @@ export function ReviewCardContent({
     ) : null;
 
   const renderChoices = () => (
-    <Animated.View layout={LinearTransition.duration(300)} className="mt-6">
+    // Inline marginTop: NativeWind's `mt-6` silently drops off the
+    // reanimated Animated.View on react-native-web in some builds,
+    // making the first option visually flush with the prompt card.
+    <Animated.View layout={LinearTransition.duration(300)} style={{ marginTop: 10 }}>
       {choices.map((c, i) => {
         const isCorrect = c === correctDefinition;
         const isSelected = choiceSelected === i;
@@ -584,7 +587,7 @@ export function ReviewCardContent({
               </Text>
             ) : null}
           </View>
-          <Animated.View layout={LinearTransition.duration(300)} className="mt-6">
+          <Animated.View layout={LinearTransition.duration(300)} style={{ marginTop: 10 }}>
             {choices.map((c, i) => {
               const isCorrect = c === correctDefinition;
               const isSelected = choiceSelected === i;
