@@ -16,21 +16,30 @@ const MIN_HOLD_MS = 250;
 const FADE_MS = 300;
 const PROMO_DEFAULT_MS = 3000;
 
+// Module-level flag: splash should fire AT MOST once per app session.
+// Web stack pops can briefly unmount-remount the root layout's children,
+// which would reset useState(done=false) and replay the mint flash every
+// time the user navigates back from a stack screen to a tab. Guard with
+// a non-reactive flag so a remount returns null on first paint.
+let _splashShownThisSession = false;
+
 export function SplashOverlay() {
   const insets = useSafeAreaInsets();
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(_splashShownThisSession);
   const [promo, setPromo] = useState<PromoSplash | null>(null);
   const opacity = useRef(new Animated.Value(1)).current;
-  const dismissedRef = useRef(false);
+  const dismissedRef = useRef(_splashShownThisSession);
 
   const dismiss = () => {
     if (dismissedRef.current) return;
     dismissedRef.current = true;
+    _splashShownThisSession = true;
     Animated.timing(opacity, { toValue: 0, duration: FADE_MS, useNativeDriver: true })
       .start(() => setDone(true));
   };
 
   useEffect(() => {
+    if (_splashShownThisSession) return;
     let cancelled = false;
     let timer: ReturnType<typeof setTimeout>;
     (async () => {
