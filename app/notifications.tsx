@@ -41,6 +41,7 @@ export default function NotificationsScreen() {
   const [items, setItems] = useState<Notification[] | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const reload = useCallback(async (markSeen: boolean) => {
     try {
@@ -64,6 +65,7 @@ export default function NotificationsScreen() {
         })),
       ].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
       setItems(merged);
+      setError(null);
       // Mark seen only when the user actually opens the inbox (focus). The
       // Realtime path must NOT mark seen — otherwise concurrent pokes get
       // marked seen between sends and poke-notify's unseen-count drops to 1
@@ -77,8 +79,9 @@ export default function NotificationsScreen() {
             : it
         ) ?? null);
       }
-    } catch {
+    } catch (e) {
       setItems([]);
+      setError(e instanceof Error && e.message ? e.message : 'unknown');
     }
   }, []);
 
@@ -209,6 +212,29 @@ export default function NotificationsScreen() {
         {items === null ? (
           <View className="flex-1 items-center justify-center">
             <ActivityIndicator color="#2EC4A5" />
+          </View>
+        ) : error && items.length === 0 ? (
+          <View className="flex-1 items-center justify-center px-10" style={{ paddingBottom: 64 }}>
+            <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+            <Text className="mt-4 text-center text-xl font-bold text-ink dark:text-ink-dark">
+              {t('error.title')}
+            </Text>
+            <Text className="mt-2 text-center text-sm text-muted">
+              {t('error.message')}
+            </Text>
+            {error !== 'unknown' ? (
+              <Text className="mt-2 text-center text-xs text-faint" numberOfLines={3}>
+                {error}
+              </Text>
+            ) : null}
+            <Pressable
+              onPress={() => { setItems(null); reload(true); }}
+              className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
+            >
+              <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
+                {t('error.retry')}
+              </Text>
+            </Pressable>
           </View>
         ) : items.length === 0 ? (
           <View className="flex-1 items-center justify-center px-8" style={{ paddingBottom: 64 }}>

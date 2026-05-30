@@ -1,6 +1,6 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, useFocusEffect } from 'expo-router';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Image, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,6 +8,7 @@ import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { Toast } from '@/components/toast';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { findLanguage, STUDY_LANGUAGES } from '@src/constants/languages';
 import { type CommunitySortMode, type CommunityWordlistMeta } from '@src/services/communityWordlistService';
@@ -40,6 +41,7 @@ export default function LibraryTabScreen() {
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
   const [showNickname, setShowNickname] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Listen for cache updates (boot prefetch, focus refresh, mutations).
   useEffect(() => {
@@ -50,7 +52,12 @@ export default function LibraryTabScreen() {
   }, []);
 
   const reload = useCallback(() => {
-    refreshLibrary(sortMode, searchQuery, sourceLangFilter, targetLangFilter, sortReversed).finally(() => setLoading(false));
+    refreshLibrary(sortMode, searchQuery, sourceLangFilter, targetLangFilter, sortReversed)
+      .then(() => setError(null))
+      .catch((e: unknown) => {
+        setError(e instanceof Error && e.message ? e.message : 'unknown');
+      })
+      .finally(() => setLoading(false));
   }, [sortMode, searchQuery, sourceLangFilter, targetLangFilter, sortReversed]);
 
   const handleSortPress = useCallback((mode: CommunitySortMode) => {
@@ -143,6 +150,22 @@ export default function LibraryTabScreen() {
       cleanup?.();
     };
   }, []);
+
+  // Inject native ad markers: one at the top + one every N items thereafter.
+  // Top placement guarantees cold-start users still see an ad without scrolling.
+  type AdItem = { __ad: true; key: string };
+  const itemsWithAds = useMemo<Array<CommunityWordlistMeta | AdItem>>(() => {
+    if (items.length === 0) return items;
+    const adsEvery = 7;
+    const out: Array<CommunityWordlistMeta | AdItem> = [{ __ad: true, key: 'ad-top' }];
+    items.forEach((it, idx) => {
+      out.push(it);
+      if ((idx + 1) % adsEvery === 0 && idx < items.length - 1) {
+        out.push({ __ad: true, key: `ad-${idx}` });
+      }
+    });
+    return out;
+  }, [items, isTablet]);
 
   // Header rendered OUTSIDE the FlatList — Fragment (not <View>) so
   // each chrome row becomes an individual flex item of TabletContainer,
@@ -282,8 +305,8 @@ export default function LibraryTabScreen() {
       {(
         <FlatList
           key={isTablet ? 'grid' : 'list'}
-          data={loading ? [] : items}
-          keyExtractor={(it) => it.id}
+          data={loading ? [] : itemsWithAds}
+          keyExtractor={(it) => ('__ad' in it ? it.key : it.id)}
           numColumns={isTablet ? 2 : 1}
           columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
           contentContainerStyle={{ paddingTop: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
@@ -291,6 +314,29 @@ export default function LibraryTabScreen() {
             loading ? (
               <View className="items-center justify-center py-12">
                 <ActivityIndicator color="#2EC4A5" />
+              </View>
+            ) : error ? (
+              <View className="items-center justify-center px-10 py-12">
+                <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+                <Text className="mt-4 text-center text-xl font-bold text-ink dark:text-ink-dark">
+                  {t('error.title')}
+                </Text>
+                <Text className="mt-2 text-center text-sm text-muted">
+                  {t('error.message')}
+                </Text>
+                {error !== 'unknown' ? (
+                  <Text className="mt-2 text-center text-xs text-faint" numberOfLines={3}>
+                    {error}
+                  </Text>
+                ) : null}
+                <Pressable
+                  onPress={() => { setLoading(true); reload(); }}
+                  className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
+                >
+                  <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
+                    {t('error.retry')}
+                  </Text>
+                </Pressable>
               </View>
             ) : (
               <View className="items-center justify-center px-8 py-12">
@@ -331,6 +377,16 @@ export default function LibraryTabScreen() {
             // a lone last-row item doesn't stretch — the empty right slot
             // just stays empty. Row padding/gap is on columnWrapperStyle.
             const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
+            if ('__ad' in item) {
+              return (
+                <View
+                  className={isTablet ? '' : 'mx-6 mb-3'}
+                  style={isTablet ? { width: tabletCardWidth } : null}
+                >
+                  <NativeAdCard />
+                </View>
+              );
+            }
             return (
               <Pressable
                 onPress={() => router.push(`/community-detail/${item.id}`)}

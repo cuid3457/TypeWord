@@ -380,9 +380,14 @@ export default function WordlistDetailScreen() {
   // AdMob invalid traffic), and skip when the list is too small (<5 words)
   // since an ad would dominate the screen.
   type AdItem = { __ad: true; key: string };
-  const sortedWordsWithAds: Array<StoredWord | AdItem> = (() => {
-    if (editMode || sortedWords.length < 5) return sortedWords;
-    const out: Array<StoredWord | AdItem> = [{ __ad: true, key: 'ad-top' }];
+  type SortMarker = { __sort: true };
+  type ListItem = StoredWord | AdItem | SortMarker;
+  // Sort row sits at data index 0 so FlatList can pin it via
+  // stickyHeaderIndices once the user scrolls past the header card.
+  const sortedWordsWithAds: ListItem[] = (() => {
+    const sortItem: SortMarker = { __sort: true };
+    if (editMode || sortedWords.length < 5) return [sortItem, ...sortedWords];
+    const out: ListItem[] = [sortItem, { __ad: true, key: 'ad-top' }];
     sortedWords.forEach((w, idx) => {
       out.push(w);
       if ((idx + 1) % 15 === 0 && idx < sortedWords.length - 1) {
@@ -543,46 +548,54 @@ export default function WordlistDetailScreen() {
           </>
         ) : null}
 
-        <View className="mt-4 mb-2 flex-row items-center justify-between">
-          <View className="flex-row gap-2">
-            {(['recent', 'alpha', 'review'] as const).map((mode) => (
-              <Pressable
-                key={mode}
-                onPress={() => handleSortChange(mode)}
-                className={`flex-row items-center rounded-lg px-3 py-1.5 ${
-                  sortMode === mode
-                    ? 'bg-ink dark:bg-ink-dark'
-                    : 'bg-clay dark:bg-clay-dark'
-                }`}
-              >
-                <Text
-                  className={`text-xs font-medium ${
-                    sortMode === mode
-                      ? 'text-canvas dark:text-canvas-dark'
-                      : 'text-muted'
-                  }`}
-                >
-                  {t(`wordlist.sort_${mode}`)}
-                </Text>
-                {sortMode === mode ? (
-                  <MaterialIcons
-                    name={sortReversed ? 'arrow-upward' : 'arrow-downward'}
-                    size={12}
-                    color={colorScheme === 'dark' ? '#000' : '#fff'}
-                    style={{ marginLeft: 2 }}
-                  />
-                ) : null}
-              </Pressable>
-            ))}
-          </View>
-          <Pressable onPress={toggleEditMode} className="p-1" accessibilityLabel={editMode ? t('common.done') : t('common.edit')} accessibilityRole="button">
-            <MaterialIcons
-              name={editMode ? 'check' : 'edit'}
-              size={20}
-              color={editMode ? '#2EC4A5' : '#7B7366'}
-            />
+    </View>
+  );
+
+  // Sort row extracted from the static header so it can be pinned by
+  // FlatList's stickyHeaderIndices. Solid bg so list items don't bleed
+  // through when it sticks. Negative-horizontal margin cancels the
+  // FlatList contentContainer 24px padding, then re-pads inside — gives
+  // the sticky surface full edge-to-edge coverage.
+  const sortRowEl = (
+    <View className="mb-2 -mx-6 flex-row items-center justify-between bg-canvas px-6 pt-4 pb-2 dark:bg-canvas-dark">
+      <View className="flex-row gap-2">
+        {(['recent', 'alpha', 'review'] as const).map((mode) => (
+          <Pressable
+            key={mode}
+            onPress={() => handleSortChange(mode)}
+            className={`flex-row items-center rounded-lg px-3 py-1.5 ${
+              sortMode === mode
+                ? 'bg-ink dark:bg-ink-dark'
+                : 'bg-clay dark:bg-clay-dark'
+            }`}
+          >
+            <Text
+              className={`text-xs font-medium ${
+                sortMode === mode
+                  ? 'text-canvas dark:text-canvas-dark'
+                  : 'text-muted'
+              }`}
+            >
+              {t(`wordlist.sort_${mode}`)}
+            </Text>
+            {sortMode === mode ? (
+              <MaterialIcons
+                name={sortReversed ? 'arrow-upward' : 'arrow-downward'}
+                size={12}
+                color={colorScheme === 'dark' ? '#000' : '#fff'}
+                style={{ marginLeft: 2 }}
+              />
+            ) : null}
           </Pressable>
-        </View>
+        ))}
+      </View>
+      <Pressable onPress={toggleEditMode} className="p-1" accessibilityLabel={editMode ? t('common.done') : t('common.edit')} accessibilityRole="button">
+        <MaterialIcons
+          name={editMode ? 'check' : 'edit'}
+          size={20}
+          color={editMode ? '#2EC4A5' : '#7B7366'}
+        />
+      </Pressable>
     </View>
   );
 
@@ -590,14 +603,19 @@ export default function WordlistDetailScreen() {
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       {(
-        <FlatList<StoredWord | AdItem>
+        <FlatList<ListItem>
           data={sortedWordsWithAds}
-          keyExtractor={(item) => ('__ad' in item ? item.key : item.id)}
+          keyExtractor={(item) => ('__sort' in item ? '__sort__' : '__ad' in item ? item.key : item.id)}
           contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: editMode ? 100 : 80, flexGrow: 1 }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
           }
           ListHeaderComponent={headerEl}
+          // FlatList children layout: [ListHeader, data[0], data[1], …,
+          // ListFooter]. Sort row lives at data[0] → child index 1, so the
+          // app bar + book card scroll normally and the sort row pins as
+          // soon as the user scrolls past the header.
+          stickyHeaderIndices={[1]}
           // Click on empty space below the last word card exits edit
           // mode (intuitive click-outside-to-deselect for mouse users).
           ListFooterComponent={editMode ? (
@@ -615,6 +633,9 @@ export default function WordlistDetailScreen() {
             </View>
           }
           renderItem={({ item }) => {
+            if ('__sort' in item) {
+              return sortRowEl;
+            }
             if ('__ad' in item) {
               return (
                 <View className="my-3">

@@ -9,6 +9,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  useWindowDimensions,
   View,
 } from 'react-native';
 import { SmoothSwitch } from '@/components/common/SmoothSwitch';
@@ -43,6 +44,7 @@ export default function SettingsScreen() {
   const { settings, save } = useUserSettings();
   const premium = usePremium();
   const { isTablet } = useTablet();
+  const { height: windowHeight } = useWindowDimensions();
   const [editing, setEditing] = useState<EditingField>(null);
   const [adModal, setAdModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
@@ -252,7 +254,13 @@ export default function SettingsScreen() {
               />
 
               {editing === 'region' ? (
-                <View className="border-t border-line dark:border-line-dark" style={{ height: 360 }}>
+                <View
+                  className="border-t border-line dark:border-line-dark"
+                  // Cap at half the viewport so the picker stays bounded with
+                  // the keyboard open or on short screens; never shrinks below
+                  // 240 so a single result is still scannable.
+                  style={{ height: Math.max(240, Math.min(360, windowHeight * 0.5)) }}
+                >
                   <CountryList
                     selectedCode={settings.countryCode ?? ''}
                     query={regionSearch}
