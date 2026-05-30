@@ -235,7 +235,7 @@ export default function ReviewScreen() {
   // Refs for auto-rate on blur/exit
   const pendingRef = useRef<{ wordId: string; mode: string; quality: 'got_it' | 'uncertain' | 'still_learning' } | null>(null);
 
-  const [pickerError, setPickerError] = useState(false);
+  const [pickerError, setPickerError] = useState<string | null>(null);
 
   // Listen for cache updates (boot prefetch, focus refresh).
   useEffect(() => {
@@ -245,16 +245,19 @@ export default function ReviewScreen() {
       setHasWords(snap.hasWords);
       if (snap.streak) setStreak(snap.streak);
       setPickerLoading(false);
-      setPickerError(false);
+      setPickerError(null);
     });
   }, []);
 
   const loadPickerData = useCallback(async (sort: BookSortMode, reversed: boolean) => {
     try {
       await refreshReview(sort, reversed);
-      setPickerError(false);
-    } catch {
-      setPickerError(true);
+      setPickerError(null);
+    } catch (e) {
+      // Surface the actual failure reason as a debug subtitle under the
+      // generic error UI — Supabase / network errors are descriptive
+      // enough to differentiate auth vs quota vs offline at a glance.
+      setPickerError(e instanceof Error && e.message ? e.message : 'unknown');
     } finally {
       setPickerLoading(false);
       refreshBadge();
@@ -1502,6 +1505,11 @@ export default function ReviewScreen() {
           <Text className="mt-2 text-center text-sm text-muted">
             {t('error.message')}
           </Text>
+          {pickerError !== 'unknown' ? (
+            <Text className="mt-2 text-center text-xs text-faint" numberOfLines={3}>
+              {pickerError}
+            </Text>
+          ) : null}
           <Pressable
             onPress={() => {
               setPickerLoading(true);

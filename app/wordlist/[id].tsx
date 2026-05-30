@@ -118,7 +118,7 @@ export default function WordlistDetailScreen() {
   const [sortReversed, setSortReversed] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Edit mode for bulk word delete
   const [editMode, setEditMode] = useState(false);
@@ -157,7 +157,9 @@ export default function WordlistDetailScreen() {
           }
         } catch (err) {
           console.error('Failed to load wordlist:', err);
-          if (!cancelled) setError(true);
+          if (!cancelled) {
+            setError(err instanceof Error && err.message ? err.message : 'unknown');
+          }
         } finally {
           if (!cancelled) setLoading(false);
         }
@@ -308,9 +310,14 @@ export default function WordlistDetailScreen() {
         <Text className="mt-2 text-center text-sm text-muted">
           {t('error.message')}
         </Text>
+        {error !== 'unknown' ? (
+          <Text className="mt-2 text-center text-xs text-faint" numberOfLines={3}>
+            {error}
+          </Text>
+        ) : null}
         <Pressable
           onPress={() => {
-            setError(false);
+            setError(null);
             setLoading(true);
           }}
           className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
@@ -367,17 +374,18 @@ export default function WordlistDetailScreen() {
     }
   })();
 
-  // Inject native ad markers every 30 words. Skip in edit mode (ads next to
-  // selection checkboxes invite accidental clicks → AdMob invalid traffic),
-  // and skip when the list is too small (<5 words) since an ad would
-  // dominate the screen.
+  // Inject native ad markers: one at the top + one every 15 words thereafter.
+  // Top placement ensures users with small lists still see an ad. Skip in
+  // edit mode (ads next to selection checkboxes invite accidental clicks →
+  // AdMob invalid traffic), and skip when the list is too small (<5 words)
+  // since an ad would dominate the screen.
   type AdItem = { __ad: true; key: string };
   const sortedWordsWithAds: Array<StoredWord | AdItem> = (() => {
     if (editMode || sortedWords.length < 5) return sortedWords;
-    const out: Array<StoredWord | AdItem> = [];
+    const out: Array<StoredWord | AdItem> = [{ __ad: true, key: 'ad-top' }];
     sortedWords.forEach((w, idx) => {
       out.push(w);
-      if ((idx + 1) % 30 === 0 && idx < sortedWords.length - 1) {
+      if ((idx + 1) % 15 === 0 && idx < sortedWords.length - 1) {
         out.push({ __ad: true, key: `ad-${idx}` });
       }
     });

@@ -4,6 +4,7 @@ import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  ActivityIndicator,
   BackHandler,
   FlatList,
   Image,
@@ -17,11 +18,13 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { floatingShadow } from '@/components/ui/card';
+import { webCursor } from '@/components/ui/pressable-card';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { AppModal } from '@/components/app-modal';
 import { StreakBanner } from '@/components/streak-banner';
 import { WordlistCreateModal } from '@/components/wordlist-create-modal';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium, useTier } from '@src/hooks/usePremium';
@@ -62,7 +65,7 @@ export default function HomeScreen() {
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
   const [streak, setStreak] = useState<StreakInfo | null>(initialHome?.streak ?? null);
   const longPressedRef = useRef(false);
-  const flatListRef = useRef<FlatList<BookWithCount>>(null);
+  const flatListRef = useRef<FlatList<BookWithCount | { __ad: true; key: string }>>(null);
   const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Listen for cache updates (boot prefetch, focus refresh, sort changes).
@@ -194,7 +197,36 @@ export default function HomeScreen() {
     return () => window.removeEventListener('keydown', onKey);
   }, [editMode]);
 
-  const renderItem = ({ item }: { item: BookWithCount }) => {
+  // Inject native ad markers: one at the top + one every N items thereafter.
+  // Top placement guarantees cold-start users (few wordlists) still see an
+  // ad without scrolling. Skip in editMode (selection UI inline with ad
+  // invites accidental clicks).
+  type AdItem = { __ad: true; key: string };
+  const booksWithAds = useMemo<Array<BookWithCount | AdItem>>(() => {
+    if (editMode || books.length === 0) return books;
+    const adsEvery = isTablet ? 14 : 7;
+    const out: Array<BookWithCount | AdItem> = [{ __ad: true, key: 'ad-top' }];
+    books.forEach((b, idx) => {
+      out.push(b);
+      if ((idx + 1) % adsEvery === 0 && idx < books.length - 1) {
+        out.push({ __ad: true, key: `ad-${idx}` });
+      }
+    });
+    return out;
+  }, [books, editMode, isTablet]);
+
+  const renderItem = ({ item }: { item: BookWithCount | AdItem }) => {
+    if ('__ad' in item) {
+      const tabletCardWidth = isTablet ? (contentWidth - 24 * 2 - 12) / 2 : undefined;
+      return (
+        <View
+          className={isTablet ? '' : 'mx-6 mb-3'}
+          style={isTablet ? { width: tabletCardWidth } : undefined}
+        >
+          <NativeAdCard />
+        </View>
+      );
+    }
     const card = (
       <BookCard
         book={item}
@@ -255,6 +287,7 @@ export default function HomeScreen() {
                 setShowCreateModal(true);
               }
             }}
+            style={webCursor}
             className="rounded-full bg-ink p-3 dark:bg-ink-dark"
             accessibilityLabel={t('home.new_button')}
             accessibilityRole="button"
@@ -278,6 +311,7 @@ export default function HomeScreen() {
               <Pressable
                 key={mode}
                 onPress={() => handleSortChange(mode)}
+                style={webCursor}
                 className={`flex-row items-center rounded-xl px-3 py-1.5 ${
                   sortMode === mode
                     ? 'bg-ink dark:bg-ink-dark'
@@ -304,7 +338,7 @@ export default function HomeScreen() {
               </Pressable>
             ))}
           </View>
-          <Pressable onPress={toggleEdit} className="p-1" accessibilityLabel={editMode ? t('common.done') : t('common.edit')} accessibilityRole="button">
+          <Pressable onPress={toggleEdit} style={webCursor} className="p-1" accessibilityLabel={editMode ? t('common.done') : t('common.edit')} accessibilityRole="button">
             <MaterialIcons
               name={editMode ? 'check' : 'edit'}
               size={20}
@@ -340,6 +374,7 @@ export default function HomeScreen() {
                       setSearchQuery('');
                       setHighlightedBookId(null);
                     }}
+                    style={webCursor}
                     className="ml-1 p-1"
                     accessibilityLabel={t('common.clear')}
                     accessibilityRole="button"
@@ -355,7 +390,7 @@ export default function HomeScreen() {
                       key={book.id}
                       onPress={() => handleSearchComplete(book)}
                       className="flex-row items-center px-4 py-3"
-                      style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
+                      style={({ pressed }) => [webCursor, { opacity: pressed ? 0.6 : 1 }]}
                     >
                       <MaterialIcons name="book" size={16} color="#A79E90" />
                       <Text className="ml-2 flex-1 text-sm text-ink dark:text-ink-dark" numberOfLines={1}>{book.title}</Text>
@@ -370,7 +405,7 @@ export default function HomeScreen() {
 
         {loading ? (
           <View className="flex-1 items-center justify-center">
-            <Text className="text-sm text-faint">{t('home.loading')}</Text>
+            <ActivityIndicator size="large" color="#2EC4A5" />
           </View>
         ) : books.length === 0 ? (
           <View className="flex-1 items-center justify-center px-10">
@@ -398,8 +433,8 @@ export default function HomeScreen() {
             <FlatList
               ref={flatListRef}
               key={isTablet ? 'grid' : 'list'}
-              data={books}
-              keyExtractor={(b) => b.id}
+              data={booksWithAds}
+              keyExtractor={(b) => ('__ad' in b ? b.key : b.id)}
               numColumns={isTablet ? 2 : 1}
               columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
               contentContainerStyle={{ paddingTop: 24, paddingBottom: editMode ? { small: 86, medium: 104, large: 120 }[settings?.fontSize ?? 'medium'] : 24, gap: isTablet ? 12 : 0, flexGrow: 1 }}
@@ -513,15 +548,22 @@ function BookCard({
 }) {
   const src = findLanguage(book.sourceLang);
   const tgt = book.targetLang ? findLanguage(book.targetLang) : null;
+  const [hovered, setHovered] = useState(false);
+  const isWeb = Platform.OS === 'web';
 
   return (
     <Pressable
       onPress={onPress}
       onLongPress={onLongPress}
+      onHoverIn={isWeb ? () => setHovered(true) : undefined}
+      onHoverOut={isWeb ? () => setHovered(false) : undefined}
+      style={webCursor}
       className={`${noOuterMargin ? '' : 'mx-6 mb-3'} rounded-[20px] border px-4 py-4 ${
         highlighted
           ? 'border-accent bg-accent-soft dark:bg-accent-soft-dark'
-          : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
+          : hovered
+            ? 'border-faint bg-clay dark:border-line-dark dark:bg-clay-dark'
+            : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
       }`}
     >
       <View className="flex-row items-center">

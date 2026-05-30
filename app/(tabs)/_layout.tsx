@@ -35,7 +35,7 @@ const TAB_HEIGHT = 60;
 // Web puts the tab bar at the top of the viewport (desktop convention).
 // Layout: wordmark on the left + nav icons clustered on the right inside
 // a centered contentWidth column. The full-width gutters carry the warm
-// background and the bottom hairline. Mobile ad-banner slot is skipped.
+// background and the bottom hairline.
 const WEB_NAV_CLUSTER_WIDTH = 380;
 
 function WebWordmark() {
@@ -70,10 +70,14 @@ function WebWordmark() {
 }
 
 function WebTopTabBar(props: BottomTabBarProps) {
-  const { contentWidth } = useTablet();
+  const { contentWidth, width } = useTablet();
   const colorScheme = useColorScheme();
   const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
   const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
+  // At the just-tablet breakpoint (600-700px) the wordmark + 380px cluster
+  // would crowd the 600px contentWidth cap. Shrink the cluster to 300px
+  // (still 60px per icon) so there's comfortable space between brand and nav.
+  const clusterWidth = width < 760 ? 300 : WEB_NAV_CLUSTER_WIDTH;
   return (
     <View
       style={{
@@ -96,7 +100,7 @@ function WebTopTabBar(props: BottomTabBarProps) {
       >
         <WebWordmark />
         <View style={{ flex: 1 }} />
-        <View style={{ width: WEB_NAV_CLUSTER_WIDTH }}>
+        <View style={{ width: clusterWidth }}>
           <BottomTabBar {...props} />
         </View>
       </View>
@@ -104,14 +108,11 @@ function WebTopTabBar(props: BottomTabBarProps) {
   );
 }
 
-function TabBarWithAd(props: BottomTabBarProps) {
-  // Outer wrapper needs explicit width:'100%' for iPad landscape — React
-  // Navigation's tabBar slot doesn't stretch a content-sized container,
-  // which left the ad banner pinned to portrait-width on the left.
-  // When the tab bar is hidden (e.g. active review session), absorb the
-  // system nav-bar inset here so the banner doesn't overlap the nav bar.
-  // On tablet/wide-web the inner column is capped to contentWidth and
-  // centered so the icons don't sprawl across an ultrawide monitor.
+// Native + phone-web bottom tab bar. Width-caps to contentWidth on
+// tablet so icons don't sprawl. When the bar is hidden (active review
+// session), this wrapper absorbs the bottom safe-area inset so the
+// surface underneath stays clear of the system nav bar.
+function TabBarMobile(props: BottomTabBarProps) {
   const insets = useSafeAreaInsets();
   const colorScheme = useColorScheme();
   const { hidden } = useContext(TabBarVisibleContext);
@@ -232,7 +233,7 @@ export default function TabLayout() {
     (props: BottomTabBarProps) => {
       if (isWebTop) return <WebTopTabBar {...props} />;
       if (isWeb) return <BottomTabBar {...props} />;
-      return <TabBarWithAd {...props} />;
+      return <TabBarMobile {...props} />;
     },
     [isWeb, isWebTop],
   );

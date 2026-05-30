@@ -152,11 +152,9 @@ export function ReviewActiveCard({
     ]).start();
   }, [combo, comboAnim]);
 
-  // SafeAreaView omits the 'bottom' edge on purpose: the hidden tab bar's
-  // ad-banner slot below already reserves insets.bottom, so adding it here
-  // double-pads — a dead gap above the ad banner that also shrank the card
-  // (clipping long content / the last MC choice). Dropping it returns that
-  // height to the card.
+  // SafeAreaView omits 'bottom' on purpose: the hidden tab bar wrapper
+  // (TabBarMobile) already absorbs the bottom safe-area inset while hidden,
+  // so adding it here double-pads and shrinks the card area.
   return (
     <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
