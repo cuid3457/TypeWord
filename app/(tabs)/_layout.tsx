@@ -241,7 +241,10 @@ export default function TabLayout() {
 
   const renderTabBar = useCallback(
     (props: BottomTabBarProps) => {
-      if (isWebTop) return <WebTopTabBar {...props} />;
+      // Wide web: root layout's <WebTopNav> renders the nav and persists
+      // across stack screens. Returning null here avoids stacking two
+      // nav bars when the tabs layout is the active route.
+      if (isWebTop) return null;
       if (isWeb) return <BottomTabBar {...props} />;
       return <TabBarMobile {...props} />;
     },
@@ -252,24 +255,11 @@ export default function TabLayout() {
     const barBg = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
     const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
     if (isWebTop) {
-      // Desktop/tablet web ignores the `tabBarHidden` immersive flag —
-      // big screens have room to keep persistent navigation visible, and
-      // it matches browser-app convention. Phone-web + native still hide.
-      // Zero all border + shadow sides — RN's BottomTabBar applies a
-      // default hairline border (one side depending on position) and a
-      // platform-shadow on web that draws a thin line under the cluster.
-      return {
-        height: TAB_HEIGHT,
-        backgroundColor: barBg,
-        borderTopWidth: 0,
-        borderBottomWidth: 0,
-        borderLeftWidth: 0,
-        borderRightWidth: 0,
-        elevation: 0,
-        shadowOpacity: 0,
-        shadowOffset: { width: 0, height: 0 },
-        shadowRadius: 0,
-      };
+      // Wide-web nav is rendered by the root layout's <WebTopNav> so it
+      // can persist across stack screens (terms, subscription, etc).
+      // Hide the in-tabs bar entirely — display:none also drops the
+      // reserved space so screens start from the very top.
+      return { display: 'none' as const };
     }
     if (isWeb) {
       // Phone-browser bottom bar: respect iOS Safari home-indicator inset.
@@ -316,7 +306,10 @@ export default function TabLayout() {
         },
         tabBarIconStyle: { marginTop: 0, marginBottom: 0, flex: 1, justifyContent: 'center' },
         tabBarStyle,
-        tabBarPosition: isWebTop ? 'top' : 'bottom',
+        // tabBarPosition defaults to 'bottom'; root <WebTopNav> handles
+        // the wide-web top layout so we no longer flip the navigator's
+        // internal position.
+        tabBarPosition: 'bottom',
         lazy: false,
       }}>
       <Tabs.Screen

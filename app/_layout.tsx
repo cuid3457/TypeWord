@@ -32,6 +32,7 @@ import { ComebackBoostModal } from '@/components/comeback-boost-modal';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { OfflineBanner } from '@/components/offline-banner';
 import { SplashOverlay } from '@/components/splash-overlay';
+import { WebTopNav } from '@/components/web-top-nav';
 import { useColorScheme, syncTheme } from '@/hooks/use-color-scheme';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { requestAdsConsent } from '@src/services/adsConsent';
@@ -457,6 +458,7 @@ export default function RootLayout() {
     <ErrorBoundary>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <View style={{ flex: 1 }}>
+          <WebTopNav />
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="onboarding" options={{ headerShown: false }} />
