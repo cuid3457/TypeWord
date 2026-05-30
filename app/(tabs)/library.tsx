@@ -2,7 +2,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, FlatList, Image, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Modal, Platform, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
@@ -156,6 +156,9 @@ export default function LibraryTabScreen() {
   type AdItem = { __ad: true; key: string };
   const itemsWithAds = useMemo<Array<CommunityWordlistMeta | AdItem>>(() => {
     if (items.length === 0) return items;
+    // Web NativeAdCard renders null, so injecting ad markers leaves
+    // empty grid cells that misalign columns. Skip on web.
+    if (Platform.OS === 'web') return items;
     const adsEvery = 7;
     const out: Array<CommunityWordlistMeta | AdItem> = [{ __ad: true, key: 'ad-top' }];
     items.forEach((it, idx) => {

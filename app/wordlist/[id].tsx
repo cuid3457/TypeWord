@@ -387,6 +387,9 @@ export default function WordlistDetailScreen() {
   const sortedWordsWithAds: ListItem[] = (() => {
     const sortItem: SortMarker = { __sort: true };
     if (editMode || sortedWords.length < 5) return [sortItem, ...sortedWords];
+    // Web NativeAdCard renders null → injecting ad markers leaves blank
+    // gaps between word cards. Skip ad injection on web entirely.
+    if (Platform.OS === 'web') return [sortItem, ...sortedWords];
     const out: ListItem[] = [sortItem, { __ad: true, key: 'ad-top' }];
     sortedWords.forEach((w, idx) => {
       out.push(w);

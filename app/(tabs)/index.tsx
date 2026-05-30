@@ -243,6 +243,10 @@ export default function HomeScreen() {
   type AdItem = { __ad: true; key: string };
   const booksWithAds = useMemo<Array<BookWithCount | AdItem>>(() => {
     if (editMode || books.length === 0) return books;
+    // Web has no AdMob native ad SDK (NativeAdCard.web renders null), so
+    // injecting ad markers would leave empty grid cells that shove the
+    // first wordlist into the wrong column. Skip injection on web.
+    if (Platform.OS === 'web') return books;
     const adsEvery = 7;
     const out: Array<BookWithCount | AdItem> = [{ __ad: true, key: 'ad-top' }];
     books.forEach((b, idx) => {
