@@ -14,13 +14,13 @@ const EFFECTIVE_DATE = '2026-05-11';
 const PROVIDER_KO = {
   name: '펀스턴',
   representative: '박준성',
-  email: 'support@typeword.app',
+  email: 'support@moavoca.com',
 };
 
 const PROVIDER_EN = {
   name: 'Funston',
   representative: 'Junsung Park',
-  email: 'support@typeword.app',
+  email: 'support@moavoca.com',
 };
 
 export default function PrivacyPolicyScreen() {

@@ -18,12 +18,12 @@ const EFFECTIVE_DATE = '2026-05-16';
 // Phone number intentionally removed everywhere — email-only contact.
 const PROVIDER_KO = {
   name: '펀스턴',
-  email: 'support@typeword.app',
+  email: 'support@moavoca.com',
 };
 
 const PROVIDER_EN = {
   name: 'Funston',
-  email: 'support@typeword.app',
+  email: 'support@moavoca.com',
 };
 
 export default function TermsScreen() {

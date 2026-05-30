@@ -8,7 +8,7 @@ interface SendEmailParams {
 
 export async function sendEmail(params: SendEmailParams): Promise<void> {
   const region = Deno.env.get("AWS_REGION")!;
-  const fromEmail = Deno.env.get("SES_FROM_EMAIL") || "TypeWord <noreply@typeword.app>";
+  const fromEmail = Deno.env.get("SES_FROM_EMAIL") || "MoaVoca <noreply@moavoca.com>";
 
   const aws = new AwsClient({
     accessKeyId: Deno.env.get("AWS_ACCESS_KEY_ID")!,
