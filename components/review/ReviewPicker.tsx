@@ -1,12 +1,14 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useState } from 'react';
-import { FlatList, Keyboard, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { FlatList, Keyboard, Platform, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { refreshReview } from '@src/services/reviewCache';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useTablet } from '@src/hooks/useTablet';
 import { useTranslation } from 'react-i18next';
 import type { RefObject } from 'react';
+
+import { webCursor } from '@/components/ui/pressable-card';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { StreakBanner } from '@/components/streak-banner';
@@ -242,67 +244,21 @@ export function ReviewPicker({
           }, 200);
         }}
         renderItem={({ item }) => {
-          const src = findLanguage(item.sourceLang);
-          const tgt = item.targetLang ? findLanguage(item.targetLang) : null;
-          const highlighted = highlightedBookId === item.bookId;
-          const canStart = item.dueCount >= MIN_SESSION;
-          const canReload = item.dueCount < MIN_SESSION && item.reloadableCount > 0;
           const tabletCardWidth = (contentWidth - 24 * 2 - 12) / 2;
           return (
-            <Pressable
-              onPress={async () => {
-                if (canStart) {
-                  handleStartRequest(item.bookId);
-                  return;
-                }
-                // Below MIN_SESSION but the user has finished cards they can
-                // re-queue. The card *is* the reload affordance — the inner
-                // chip is just a visual label (nested Pressable used to
-                // swallow the tap into onMinWordToast).
-                if (canReload) {
-                  await resetReviewSchedule(item.bookId);
-                  await loadPickerData(sortMode, sortReversed);
-                  return;
-                }
-                onMinWordToast();
+            <PickerBookCard
+              item={item}
+              highlighted={highlightedBookId === item.bookId}
+              isTablet={isTablet}
+              tabletCardWidth={tabletCardWidth}
+              onStart={handleStartRequest}
+              onReload={async (bookId) => {
+                await resetReviewSchedule(bookId);
+                await loadPickerData(sortMode, sortReversed);
               }}
-              className={`rounded-[20px] border border-line bg-surface px-4 py-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
-              style={[
-                isTablet ? { width: tabletCardWidth } : null,
-                highlighted ? { borderColor: '#2EC4A5' } : null,
-              ]}
-            >
-              {/* Dimmed header/meta only — reload button below stays full opacity.
-                  Layout mirrors the wordlist tab BookCard: flag tile + title +
-                  language in a flex-1 column, due-count chip on the right. */}
-              <View style={!canStart ? { opacity: 0.4 } : undefined}>
-                <View className="flex-row items-center">
-                  <View className="flex-1">
-                    <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
-                      {item.title}
-                    </Text>
-                    {src && tgt ? (
-                      <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
-                        {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
-                      </Text>
-                    ) : null}
-                  </View>
-                  <View className={`ml-3 rounded-full px-3 py-1 ${canStart ? 'bg-accent-soft dark:bg-accent-soft-dark' : 'bg-clay dark:bg-clay-dark'}`}>
-                    <Text className={`text-sm font-bold ${canStart ? 'text-accent-deep dark:text-accent' : 'text-ink dark:text-ink-dark'}`}>
-                      {t('home.word_count', { count: item.dueCount })}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-              {canReload ? (
-                <View className="mt-3 flex-row items-center self-start rounded-xl border border-accent bg-clay px-3 py-1.5 dark:bg-clay-dark">
-                  <MaterialIcons name="refresh" size={14} color="#2EC4A5" />
-                  <Text className="ml-1 text-xs font-semibold text-accent-deep dark:text-accent">
-                    {t('review.reload_hint', { count: Math.min(item.reloadableCount, MAX_RELOAD) })}
-                  </Text>
-                </View>
-              ) : null}
-            </Pressable>
+              onMinWordToast={onMinWordToast}
+              t={t}
+            />
           );
         }}
       />
@@ -318,5 +274,99 @@ export function ReviewPicker({
 
       {settingsModal}
     </SafeAreaView>
+  );
+}
+
+// Picker row card. Pulled out so each row gets its own `hovered` state
+// for the web hover surface swap — mirrors the wordlist-tab BookCard
+// pattern. Highlighted (just-completed) wordlist keeps its accent border
+// via inline style, which wins over the hover className.
+function PickerBookCard({
+  item,
+  highlighted,
+  isTablet,
+  tabletCardWidth,
+  onStart,
+  onReload,
+  onMinWordToast,
+  t,
+}: {
+  item: BookReviewCount;
+  highlighted: boolean;
+  isTablet: boolean;
+  tabletCardWidth: number;
+  onStart: (bookId: string) => void;
+  onReload: (bookId: string) => Promise<void>;
+  onMinWordToast: () => void;
+  t: (key: string, opts?: Record<string, unknown>) => string;
+}) {
+  const src = findLanguage(item.sourceLang);
+  const tgt = item.targetLang ? findLanguage(item.targetLang) : null;
+  const canStart = item.dueCount >= MIN_SESSION;
+  const canReload = item.dueCount < MIN_SESSION && item.reloadableCount > 0;
+  const [hovered, setHovered] = useState(false);
+  const isWeb = Platform.OS === 'web';
+
+  return (
+    <Pressable
+      onPress={async () => {
+        if (canStart) {
+          onStart(item.bookId);
+          return;
+        }
+        // Below MIN_SESSION but the user has finished cards they can
+        // re-queue. The card *is* the reload affordance — the inner
+        // chip is just a visual label (nested Pressable used to
+        // swallow the tap into onMinWordToast).
+        if (canReload) {
+          await onReload(item.bookId);
+          return;
+        }
+        onMinWordToast();
+      }}
+      onHoverIn={isWeb ? () => setHovered(true) : undefined}
+      onHoverOut={isWeb ? () => setHovered(false) : undefined}
+      style={[
+        webCursor,
+        isTablet ? { width: tabletCardWidth } : null,
+        highlighted ? { borderColor: '#2EC4A5' } : null,
+      ]}
+      className={`rounded-[20px] border px-4 py-4 ${
+        hovered
+          ? 'border-faint bg-clay dark:border-line-dark dark:bg-clay-dark'
+          : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
+      } ${isTablet ? '' : 'mx-6 mb-3'}`}
+    >
+      {/* Dimmed header/meta only — reload button below stays full opacity.
+          Layout mirrors the wordlist tab BookCard: flag tile + title +
+          language in a flex-1 column, due-count chip on the right. */}
+      <View style={!canStart ? { opacity: 0.4 } : undefined}>
+        <View className="flex-row items-center">
+          <View className="flex-1">
+            <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
+              {item.title}
+            </Text>
+            {src && tgt ? (
+              <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
+                {t(`languages.${src.code}`)} → {t(`languages.${tgt.code}`)}
+              </Text>
+            ) : null}
+          </View>
+          <View className={`ml-3 rounded-full px-3 py-1 ${canStart ? 'bg-accent-soft dark:bg-accent-soft-dark' : 'bg-clay dark:bg-clay-dark'}`}>
+            <Text className={`text-sm font-bold ${canStart ? 'text-accent-deep dark:text-accent' : 'text-ink dark:text-ink-dark'}`}>
+              {t('home.word_count', { count: item.dueCount })}
+            </Text>
+          </View>
+        </View>
+      </View>
+      {canReload ? (
+        <View className="mt-3 flex-row items-center self-start rounded-xl border border-accent bg-clay px-3 py-1.5 dark:bg-clay-dark">
+          <MaterialIcons name="refresh" size={14} color="#2EC4A5" />
+          <Text className="ml-1 text-xs font-semibold text-accent-deep dark:text-accent">
+            {t('review.reload_hint', { count: Math.min(item.reloadableCount, MAX_RELOAD) })}
+          </Text>
+        </View>
+      ) : null}
+    </Pressable>
   );
 }

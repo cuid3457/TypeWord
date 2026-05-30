@@ -9,6 +9,7 @@ import { useTablet } from '@src/hooks/useTablet';
 
 import { Toast } from '@/components/toast';
 import { NativeAdCard } from '@/components/native-ad-card';
+import { webCursor } from '@/components/ui/pressable-card';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { findLanguage, STUDY_LANGUAGES } from '@src/constants/languages';
 import { type CommunitySortMode, type CommunityWordlistMeta } from '@src/services/communityWordlistService';
@@ -391,41 +392,12 @@ export default function LibraryTabScreen() {
               );
             }
             return (
-              <Pressable
-                onPress={() => router.push(`/community-detail/${item.id}`)}
-                className={`rounded-[20px] border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
-                style={isTablet ? { width: tabletCardWidth } : null}
-              >
-                <View className="flex-row items-start justify-between">
-                  <View className="flex-1">
-                    <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
-                      {item.title}
-                    </Text>
-                    {item.uploaderName ? (
-                      <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
-                        @{item.uploaderName}
-                      </Text>
-                    ) : null}
-                  </View>
-                  <View className="ml-3 items-end">
-                    <View className="rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
-                      <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
-                        {t('home.word_count', { count: item.wordCount })}
-                      </Text>
-                    </View>
-                    <View className="mt-1 flex-row items-center gap-3">
-                      <View className="flex-row items-center">
-                        <MaterialIcons name="favorite" size={12} color="#E0654F" />
-                        <Text className="ml-1 text-xs text-muted">{item.likesCount}</Text>
-                      </View>
-                      <View className="flex-row items-center">
-                        <MaterialIcons name="download" size={12} color="#7B7366" />
-                        <Text className="ml-1 text-xs text-muted">{item.downloadsCount}</Text>
-                      </View>
-                    </View>
-                  </View>
-                </View>
-              </Pressable>
+              <CommunityCard
+                item={item}
+                isTablet={isTablet}
+                tabletCardWidth={tabletCardWidth}
+                t={t}
+              />
             );
           }}
         />
@@ -498,5 +470,65 @@ export default function LibraryTabScreen() {
       </Modal>
       <Toast visible={!!toast} message={toast?.msg ?? ''} type={toast?.type ?? 'success'} onHide={() => setToast(null)} style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }} />
     </SafeAreaView>
+  );
+}
+
+// Community wordlist row. Extracted so each row owns its own hover state
+// for the web surface swap, matching the wordlist-tab BookCard pattern.
+function CommunityCard({
+  item,
+  isTablet,
+  tabletCardWidth,
+  t,
+}: {
+  item: CommunityWordlistMeta;
+  isTablet: boolean;
+  tabletCardWidth: number;
+  t: (key: string, opts?: Record<string, unknown>) => string;
+}) {
+  const [hovered, setHovered] = useState(false);
+  const isWeb = Platform.OS === 'web';
+  return (
+    <Pressable
+      onPress={() => router.push(`/community-detail/${item.id}`)}
+      onHoverIn={isWeb ? () => setHovered(true) : undefined}
+      onHoverOut={isWeb ? () => setHovered(false) : undefined}
+      style={[webCursor, isTablet ? { width: tabletCardWidth } : null]}
+      className={`rounded-[20px] border p-4 ${
+        hovered
+          ? 'border-faint bg-clay dark:border-line-dark dark:bg-clay-dark'
+          : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
+      } ${isTablet ? '' : 'mx-6 mb-3'}`}
+    >
+      <View className="flex-row items-start justify-between">
+        <View className="flex-1">
+          <Text className="text-base font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
+            {item.title}
+          </Text>
+          {item.uploaderName ? (
+            <Text className="mt-1 text-xs text-muted" numberOfLines={1}>
+              @{item.uploaderName}
+            </Text>
+          ) : null}
+        </View>
+        <View className="ml-3 items-end">
+          <View className="rounded-full bg-clay px-3 py-1 dark:bg-clay-dark">
+            <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+              {t('home.word_count', { count: item.wordCount })}
+            </Text>
+          </View>
+          <View className="mt-1 flex-row items-center gap-3">
+            <View className="flex-row items-center">
+              <MaterialIcons name="favorite" size={12} color="#E0654F" />
+              <Text className="ml-1 text-xs text-muted">{item.likesCount}</Text>
+            </View>
+            <View className="flex-row items-center">
+              <MaterialIcons name="download" size={12} color="#7B7366" />
+              <Text className="ml-1 text-xs text-muted">{item.downloadsCount}</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </Pressable>
   );
 }
