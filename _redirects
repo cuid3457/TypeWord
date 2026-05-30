@@ -12,6 +12,13 @@
 #
 # Order matters — most specific first.
 
+# Universal Link / App Link well-known files. CF Pages drops dotfile
+# directories during deploy; we host the JSON under /well-known/ and
+# proxy the canonical Apple/Google paths with a 200 rewrite so the
+# response body + headers come from the real file.
+/.well-known/apple-app-site-association  /well-known/apple-app-site-association  200
+/.well-known/assetlinks.json             /well-known/assetlinks.json             200
+
 # Store download redirects. Stable URLs the invite page links to —
 # easier to keep up to date than hardcoded store URLs scattered in code.
 # After the iOS App Store listing goes live, update /get/ios below with

@@ -42,14 +42,15 @@ find dist/app -name '*.html' -type f -print0 \
 echo "[build-cf-pages] copying landing + legal pages to dist root"
 cp index.html privacy.html terms.html business-info.html licenses.html data.html probability.html _redirects _headers googlea7e926c78ec67b7e.html robots.txt sitemap.xml og-image.png dist/
 
-# Universal Link / App Link verification files. Apple looks for
-# https://moavoca.com/.well-known/apple-app-site-association (no extension,
-# served as application/json — Content-Type pinned in _headers). Android
-# looks for /.well-known/assetlinks.json. Both must be at the apex domain
-# root, NOT under /app/.
-echo "[build-cf-pages] copying .well-known association files"
-mkdir -p dist/.well-known
-cp well-known/apple-app-site-association well-known/assetlinks.json dist/.well-known/
+# Universal Link / App Link verification files. CF Pages drops dotfile
+# directories (incl. .well-known) during deploy, so we ship them under a
+# regular dist/well-known/ directory and rewrite the canonical
+# /.well-known/* paths to it via _redirects. Apple swcd and Android's
+# Digital Asset Links verifier see normal 200 JSON responses at the
+# canonical URL — the rewrite is transparent.
+echo "[build-cf-pages] copying well-known association files (dotless dir for CF Pages)"
+mkdir -p dist/well-known
+cp well-known/apple-app-site-association well-known/assetlinks.json dist/well-known/
 
 echo "[build-cf-pages] done. dist/ size:"
 du -sh dist/ dist/app/ dist/app/assets/ 2>/dev/null || true
