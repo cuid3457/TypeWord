@@ -12,8 +12,9 @@
 #
 # Order matters — most specific first.
 
-/app/wordlist/library/*  /app/wordlist/library/[id].html  200
-/app/wordlist/add/*      /app/wordlist/add/[id].html      200
-/app/wordlist/*          /app/wordlist/[id].html          200
-/app/invite/*            /app/invite/[code].html          200
-/app/community-detail/*  /app/community-detail/[id].html  200
+# SPA mode (app.json web.output = "single"): expo emits a single
+# /app/index.html shell and the router does all path matching client-side.
+# CF Pages serves real static files first (e.g. /app/_expo/static/js/...),
+# falling back to this rewrite only for paths that have no file on disk —
+# which is exactly the SPA routes we want to land in the shell.
+/app/*  /app/index.html  200
