@@ -31,14 +31,66 @@ const TabBarVisibleContext = React.createContext<{
 }>({ hidden: false, setHidden: () => {} });
 export const useTabBarVisibility = () => useContext(TabBarVisibleContext);
 
-// Web puts the tab bar at the top of the viewport (desktop convention)
-// and caps its inner width so icons don't sprawl across an ultrawide
-// monitor. The mobile ad-banner slot is skipped on web entirely.
+const TAB_HEIGHT = 60;
+
+// Web puts the tab bar at the top of the viewport (desktop convention).
+// Layout: wordmark on the left + nav icons clustered on the right inside
+// a centered contentWidth column. The full-width gutters carry the warm
+// background and the bottom hairline. Mobile ad-banner slot is skipped.
+const WEB_NAV_CLUSTER_WIDTH = 380;
+
+function WebWordmark() {
+  const colorScheme = useColorScheme();
+  const ink = colorScheme === 'dark' ? '#F0EBDF' : '#2A2620';
+  return (
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: '800',
+          letterSpacing: -0.5,
+          color: ink,
+          // @ts-expect-error — web-only font fallback chain
+          fontFamily: Platform.OS === 'web' ? 'Pretendard Variable, Pretendard, system-ui, sans-serif' : undefined,
+        }}
+      >
+        Moa<Text style={{ color: '#2EC4A5' }}>Voca</Text>
+      </Text>
+      <View
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: 3,
+          backgroundColor: '#2EC4A5',
+          marginLeft: 4,
+          marginTop: 10,
+        }}
+      />
+    </View>
+  );
+}
+
 function WebTopTabBar(props: BottomTabBarProps) {
-  const { contentWidth } = useTablet();
+  const { isTablet, contentWidth } = useTablet();
   const colorScheme = useColorScheme();
   const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
   const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
+  // < 600px web (phone browser): no wordmark, BottomTabBar spreads icons
+  // across the row as before. Saves horizontal space on narrow viewports.
+  if (!isTablet) {
+    return (
+      <View
+        style={{
+          width: '100%',
+          backgroundColor: barBackground,
+          borderBottomColor: lineColor,
+          borderBottomWidth: 1,
+        }}
+      >
+        <BottomTabBar {...props} />
+      </View>
+    );
+  }
   return (
     <View
       style={{
@@ -48,8 +100,22 @@ function WebTopTabBar(props: BottomTabBarProps) {
         borderBottomWidth: 1,
       }}
     >
-      <View style={{ width: '100%', maxWidth: contentWidth, alignSelf: 'center' }}>
-        <BottomTabBar {...props} />
+      <View
+        style={{
+          width: '100%',
+          maxWidth: contentWidth,
+          alignSelf: 'center',
+          flexDirection: 'row',
+          alignItems: 'center',
+          paddingHorizontal: 20,
+          height: TAB_HEIGHT,
+        }}
+      >
+        <WebWordmark />
+        <View style={{ flex: 1 }} />
+        <View style={{ width: WEB_NAV_CLUSTER_WIDTH }}>
+          <BottomTabBar {...props} />
+        </View>
       </View>
     </View>
   );
@@ -116,8 +182,6 @@ function TabIconWithBadge({
     </View>
   );
 }
-
-const TAB_HEIGHT = 60;
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
