@@ -285,9 +285,9 @@ export default function WordlistLibraryScreen() {
             keyExtractor={(it) => ('__ad' in it ? it.key : it.id)}
             numColumns={isTablet ? 2 : 1}
             columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
-            contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
+            contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0, flexGrow: 1 }}
             ListEmptyComponent={() => (
-              <View className="items-center justify-center pt-16">
+              <View className="flex-1 items-center justify-center">
                 <MaterialIcons name="auto-stories" size={48} color="#A79E90" />
                 <Text className="mt-3 text-center text-sm text-muted">
                   {t('library.empty')}

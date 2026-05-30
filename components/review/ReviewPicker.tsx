@@ -216,7 +216,7 @@ export function ReviewPicker({
           ? { flexGrow: 1, paddingHorizontal: 24 }
           : { paddingTop: 24, paddingBottom: 24, gap: isTablet ? 12 : 0 }}
         ListEmptyComponent={
-          <View className="items-center px-6">
+          <View className="flex-1 items-center justify-center px-6">
             <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color={hasWords ? '#2EC4A5' : '#A79E90'} />
             <Text className="mt-4 text-center text-base text-muted">
               {hasWords ? t('review.empty') : t('review.empty_no_lists')}

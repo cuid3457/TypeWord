@@ -385,6 +385,9 @@ export default function WordlistDetailScreen() {
   // Sort row sits at data index 0 so FlatList can pin it via
   // stickyHeaderIndices once the user scrolls past the header card.
   const sortedWordsWithAds: ListItem[] = (() => {
+    // Empty wordlist → drop the sort marker so ListEmptyComponent fires.
+    // With no words to sort, the sort row is meaningless anyway.
+    if (sortedWords.length === 0) return [];
     const sortItem: SortMarker = { __sort: true };
     if (editMode || sortedWords.length < 5) return [sortItem, ...sortedWords];
     // Web NativeAdCard renders null → injecting ad markers leaves blank
@@ -628,7 +631,7 @@ export default function WordlistDetailScreen() {
             />
           ) : null}
           ListEmptyComponent={
-            <View className="items-center justify-center px-10" style={{ minHeight: 240 }}>
+            <View className="flex-1 items-center justify-center px-10" style={{ minHeight: 240 }}>
               <MaterialIcons name="translate" size={48} color="#A79E90" />
               <Text className="mt-4 text-center text-sm text-muted">
                 {t('wordlist.empty')}

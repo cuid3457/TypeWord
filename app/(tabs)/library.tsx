@@ -312,14 +312,14 @@ export default function LibraryTabScreen() {
           keyExtractor={(it) => ('__ad' in it ? it.key : it.id)}
           numColumns={isTablet ? 2 : 1}
           columnWrapperStyle={isTablet ? { gap: 12, paddingHorizontal: 24 } : undefined}
-          contentContainerStyle={{ paddingTop: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
+          contentContainerStyle={{ paddingTop: 24, paddingBottom: 80, gap: isTablet ? 12 : 0, flexGrow: 1 }}
           ListEmptyComponent={
             loading ? (
-              <View className="items-center justify-center py-12">
+              <View className="flex-1 items-center justify-center py-12">
                 <ActivityIndicator color="#2EC4A5" />
               </View>
             ) : error ? (
-              <View className="items-center justify-center px-10 py-12">
+              <View className="flex-1 items-center justify-center px-10 py-12">
                 <MaterialIcons name="error-outline" size={48} color="#A79E90" />
                 <Text className="mt-4 text-center text-xl font-bold text-ink dark:text-ink-dark">
                   {t('error.title')}
@@ -342,7 +342,7 @@ export default function LibraryTabScreen() {
                 </Pressable>
               </View>
             ) : (
-              <View className="items-center justify-center px-8 py-12">
+              <View className="flex-1 items-center justify-center px-8 py-12">
                 <View className="h-32 w-32 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
                   <Image
                     source={require('../../assets/images/android-icon-foreground.png')}

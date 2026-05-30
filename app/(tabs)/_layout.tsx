@@ -73,7 +73,6 @@ function WebTopTabBar(props: BottomTabBarProps) {
   const { contentWidth, width } = useTablet();
   const colorScheme = useColorScheme();
   const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
-  const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
   // At the just-tablet breakpoint (600-700px) the wordmark + 380px cluster
   // would crowd the 600px contentWidth cap. Shrink the cluster to 300px
   // (still 60px per icon) so there's comfortable space between brand and nav.
@@ -83,8 +82,6 @@ function WebTopTabBar(props: BottomTabBarProps) {
       style={{
         width: '100%',
         backgroundColor: barBackground,
-        borderBottomColor: lineColor,
-        borderBottomWidth: 1,
       }}
     >
       <View
@@ -242,8 +239,6 @@ export default function TabLayout() {
     const barBg = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
     const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
     if (isWebTop) {
-      // The WebTopTabBar wrapper owns the full-viewport-width bottom hairline
-      // so the line spans the gutters; keep the inner bar borderless.
       // Desktop/tablet web ignores the `tabBarHidden` immersive flag —
       // big screens have room to keep persistent navigation visible, and
       // it matches browser-app convention. Phone-web + native still hide.
