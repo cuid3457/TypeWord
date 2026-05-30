@@ -133,14 +133,16 @@ export function BackgroundPicker({ visible, onClose }: Props) {
           accessibilityRole="button"
         />
 
-        {/* Sheet — absolute sibling pinned to the bottom */}
+        {/* Centering wrapper: keeps the sheet a phone-width column on
+            wide web viewports while remaining full-bleed on native. */}
+        <View
+          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center', maxHeight: '80%' }}
+          pointerEvents="box-none"
+        >
         <Animated.View
           style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            maxHeight: '80%',
+            width: '100%',
+            maxWidth: 480,
             transform: [{ translateY }],
           }}
           className="rounded-t-3xl bg-surface dark:bg-surface-dark"
@@ -187,6 +189,7 @@ export function BackgroundPicker({ visible, onClose }: Props) {
             ) : null}
           </ScrollView>
         </Animated.View>
+        </View>
 
         {/* Non-transforming floor: covers the area under the translucent
             system nav bar so dragged sheet content cannot leak through.
