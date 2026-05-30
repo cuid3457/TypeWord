@@ -71,26 +71,10 @@ function WebWordmark() {
 }
 
 function WebTopTabBar(props: BottomTabBarProps) {
-  const { isTablet, contentWidth } = useTablet();
+  const { contentWidth } = useTablet();
   const colorScheme = useColorScheme();
   const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
   const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
-  // < 600px web (phone browser): no wordmark, BottomTabBar spreads icons
-  // across the row as before. Saves horizontal space on narrow viewports.
-  if (!isTablet) {
-    return (
-      <View
-        style={{
-          width: '100%',
-          backgroundColor: barBackground,
-          borderBottomColor: lineColor,
-          borderBottomWidth: 1,
-        }}
-      >
-        <BottomTabBar {...props} />
-      </View>
-    );
-  }
   return (
     <View
       style={{
@@ -226,26 +210,46 @@ export default function TabLayout() {
     }, [refreshReviewBadge, refreshNotificationBadge]),
   );
 
-  // Web puts the tab bar at the top (desktop-web convention) and skips the
-  // mobile ad-banner wrapper. Native keeps the bottom bar with the ad slot.
+  // Web has two layouts:
+  //  - Tablet/desktop (>= 600px viewport): tab bar at top with wordmark
+  //    on the left and clustered icons on the right (desktop convention).
+  //  - Phone (< 600px viewport): keep the bar at the bottom for thumb
+  //    reach — the native mobile pattern. Ad slot is still skipped.
+  // Native always uses the bottom bar with the ad slot.
   const isWeb = Platform.OS === 'web';
+  const { isTablet: isWideViewport } = useTablet();
+  const isWebTop = isWeb && isWideViewport;
 
   const renderTabBar = useCallback(
-    (props: BottomTabBarProps) =>
-      isWeb ? <WebTopTabBar {...props} /> : <TabBarWithAd {...props} />,
-    [isWeb],
+    (props: BottomTabBarProps) => {
+      if (isWebTop) return <WebTopTabBar {...props} />;
+      if (isWeb) return <BottomTabBar {...props} />;
+      return <TabBarWithAd {...props} />;
+    },
+    [isWeb, isWebTop],
   );
 
   const tabBarStyle = useMemo(() => {
     const barBg = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
     const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
-    if (isWeb) {
+    if (isWebTop) {
       // The WebTopTabBar wrapper owns the full-viewport-width bottom hairline
       // so the line spans the gutters; keep the inner bar borderless.
       return {
         height: TAB_HEIGHT,
         backgroundColor: barBg,
         borderTopWidth: 0,
+        ...(tabBarHidden ? { display: 'none' as const } : null),
+      };
+    }
+    if (isWeb) {
+      // Phone-browser bottom bar: respect iOS Safari home-indicator inset.
+      return {
+        height: TAB_HEIGHT + insets.bottom,
+        paddingBottom: insets.bottom,
+        backgroundColor: barBg,
+        borderTopColor: lineColor,
+        borderTopWidth: 1,
         ...(tabBarHidden ? { display: 'none' as const } : null),
       };
     }
@@ -257,7 +261,7 @@ export default function TabLayout() {
       borderTopWidth: 1,
       ...(tabBarHidden ? { display: 'none' as const } : null),
     };
-  }, [insets.bottom, colorScheme, tabBarHidden, isWeb]);
+  }, [insets.bottom, colorScheme, tabBarHidden, isWeb, isWebTop]);
 
   return (
     <ReviewBadgeContext.Provider value={refreshReviewBadge}>
@@ -283,7 +287,7 @@ export default function TabLayout() {
         },
         tabBarIconStyle: { marginTop: 0, marginBottom: 0, flex: 1, justifyContent: 'center' },
         tabBarStyle,
-        tabBarPosition: isWeb ? 'top' : 'bottom',
+        tabBarPosition: isWebTop ? 'top' : 'bottom',
         lazy: false,
       }}>
       <Tabs.Screen
