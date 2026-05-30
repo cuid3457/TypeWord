@@ -569,10 +569,17 @@ export async function getReviewableWords(
     newCardBudget !== undefined ? Math.max(0, newCardBudget) : limit,
   );
 
+  // `next_review IS NULL` for a reviewed card (review_count > 0) is an
+  // inconsistent state — recordReview always writes a next_review, but a
+  // reviewed row pulled from the server with a missing next_review lands
+  // here. The picker counts (getReviewableCount / getReviewableCountsByBook)
+  // already treat NULL as due, so the due query must too — otherwise those
+  // rows inflate the card's due count yet can never enter a session, leaving
+  // a wordlist that shows N due but only surfaces a handful of cards.
   const dueRows = await db.getAllAsync<UserWordRow>(
     `SELECT w.* FROM user_words w
      INNER JOIN books b ON w.book_id = b.id
-     WHERE w.review_count > 0 AND w.next_review <= ? ${bookFilter}
+     WHERE w.review_count > 0 AND (w.next_review IS NULL OR w.next_review <= ?) ${bookFilter}
      ORDER BY w.next_review ASC
      LIMIT ?`,
     [now, ...bookParams, CANDIDATE_LIMIT],

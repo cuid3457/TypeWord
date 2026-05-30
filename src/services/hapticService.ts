@@ -36,10 +36,10 @@ function notify(type: Haptics.NotificationFeedbackType): void {
 
 export const haptic = {
   selection(): void {
-    // selectionAsync is crisp on iOS but maps to an inconsistent micro-tick on
-    // Android — use a uniform Light impact there so both platforms feel alike.
-    if (Platform.OS === 'android') impact(Haptics.ImpactFeedbackStyle.Light);
-    else safe(() => Haptics.selectionAsync());
+    // iOS selectionAsync is a near-imperceptible pick-tick — far weaker than
+    // Android's Light impact, which left iOS feeling like haptics were missing.
+    // Use Light impact on both so the two platforms feel the same.
+    impact(Haptics.ImpactFeedbackStyle.Light);
   },
   tap(): void {
     impact(Haptics.ImpactFeedbackStyle.Light);

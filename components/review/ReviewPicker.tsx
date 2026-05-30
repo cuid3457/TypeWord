@@ -4,7 +4,6 @@ import { FlatList, Keyboard, Pressable, RefreshControl, Text, TextInput, View } 
 import { refreshReview } from '@src/services/reviewCache';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
-import { cardShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 import { useTranslation } from 'react-i18next';
 import type { RefObject } from 'react';
@@ -263,7 +262,6 @@ export function ReviewPicker({
               }}
               className={`rounded-[20px] border border-line bg-surface px-4 py-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
               style={[
-                cardShadow,
                 isTablet ? { width: tabletCardWidth } : null,
                 highlighted ? { borderColor: '#2EC4A5' } : null,
               ]}

@@ -23,6 +23,22 @@ const JMDICT_LANG_MAP: Record<string, string> = {
   // dut/hun/rus/slv/swe 등은 우리 target_lang 외 — 무시
 };
 
+// JMdict misc 태그 중 일반 학습자에게 노출 가치가 없는 register/staleness 신호.
+// 정책 ([[feedback_filter_by_learning_value_not_pos]]): "사전 archaic/obsolete
+// 태그만 자동 컷, 나머지는 LLM judge". JMdict는 영어 wiktionary와 달리 register
+// 태그가 명확해서 결정적 필터 효과가 큼. 사전에서 떨궈 LLM 입력·출력을 줄임.
+//   obs    obsolete · 폐어
+//   arch   archaic  · 고어
+//   rare   rare term · 희소어
+//   dated  dated term · 오래된 표현
+//   obsc   obscure term · 모호어
+//   hist   historical term · 역사 용어
+// lit(literary)/joc(jocular)/vulg/sl는 학습 가치 있을 수 있어 보존 (LLM이 판단).
+const ARCHAIC_MISC = new Set(["obs", "arch", "rare", "dated", "obsc", "hist"]);
+function isArchaicSense(misc: string[] = []): boolean {
+  return misc.some((m) => ARCHAIC_MISC.has(m));
+}
+
 /**
  * JMdict에서 한자(kanji) 또는 가나(kana)로 단어 검색.
  * 정확 일치 (GIN array contains).
@@ -63,6 +79,8 @@ export async function jmdictSearch(
     const senses: DictSense[] = [];
     const allSenses = row.data?.sense ?? [];
     allSenses.forEach((s, idx) => {
+      // Register filter: 폐어/고어/희소어 등은 일반 학습자에게 노출 가치 없음.
+      if (isArchaicSense(s.misc)) return;
       const glosses = s.gloss ?? [];
       const en_translation = glosses.find((g) => g.lang === "eng")?.text;
       const translations_by_lang: Record<string, string> = {};
@@ -80,6 +98,9 @@ export async function jmdictSearch(
         homograph_index: String(row.jmdict_seq),
       });
     });
+
+    // 전 의미가 archaic으로 잘려 빈 entry는 학습 가치 없음 — 통째 제외.
+    if (senses.length === 0) continue;
 
     // 표제어는 입력된 word로 (kanji 또는 kana 중 하나)
     const headword = row.kanji_forms.includes(word) ? word : (row.kana_forms[0] ?? word);

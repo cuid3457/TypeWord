@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Image, Modal, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
-import { cardShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { Toast } from '@/components/toast';
@@ -336,7 +335,7 @@ export default function LibraryTabScreen() {
               <Pressable
                 onPress={() => router.push(`/community-detail/${item.id}`)}
                 className={`rounded-[20px] border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark ${isTablet ? '' : 'mx-6 mb-3'}`}
-                style={[cardShadow, isTablet ? { width: tabletCardWidth } : null]}
+                style={isTablet ? { width: tabletCardWidth } : null}
               >
                 <View className="flex-row items-start justify-between">
                   <View className="flex-1">

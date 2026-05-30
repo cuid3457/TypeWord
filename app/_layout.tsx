@@ -343,6 +343,12 @@ export default function RootLayout() {
     const FG_SYNCALL_THROTTLE_MS = 60_000;
     const sub = AppState.addEventListener('change', (state) => {
       if (state === 'active') {
+        // Re-assert the iOS audio session on every foreground. Interruptions
+        // (calls, Siri, other audio apps, route changes) can leave the
+        // AVAudioSession in a quiet category; the boot-time setupAudioMode no
+        // longer holds. Idempotent and unthrottled — cheap insurance that TTS
+        // stays loud after the app regains focus.
+        setupAudioMode().catch(() => {});
         const now = Date.now();
         if (now - lastFgSyncAllAt >= FG_SYNCALL_THROTTLE_MS) {
           lastFgSyncAllAt = now;

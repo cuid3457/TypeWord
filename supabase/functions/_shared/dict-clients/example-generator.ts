@@ -354,7 +354,7 @@ For each item, produce:
 Output strict JSON:
 {
   "translations": [
-    { "idx": <number>, "translation": "<TARGET_LANG sentence with **...** marker>" }
+    { "idx": <number>, "translation": "<TARGET_LANG sentence, plain prose, NO markers>" }
   ]
 }`;
 

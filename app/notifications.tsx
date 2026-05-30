@@ -197,11 +197,13 @@ export default function NotificationsScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <TabletContainer>
         {/* App bar */}
-        <View className="h-11 flex-row items-center px-5 pt-6">
-          <Pressable onPress={() => router.back()} className="mr-1 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
-            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
-          </Pressable>
-          <Text className="text-lg font-bold text-ink dark:text-ink-dark">{t('notifications.title')}</Text>
+        <View style={{ paddingTop: 24, paddingHorizontal: 24 }}>
+          <View className="mb-4 h-11 flex-row items-center">
+            <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+            </Pressable>
+            <Text className="text-base font-semibold text-ink dark:text-ink-dark">{t('notifications.title')}</Text>
+          </View>
         </View>
 
         {items === null ? (

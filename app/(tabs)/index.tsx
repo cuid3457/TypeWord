@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
-import { cardShadow } from '@/components/ui/card';
+import { floatingShadow } from '@/components/ui/card';
 import { useTablet } from '@src/hooks/useTablet';
 
 import { AppModal } from '@/components/app-modal';
@@ -427,7 +427,7 @@ export default function HomeScreen() {
 
         {/* Bottom bar in edit mode */}
         {editMode ? (
-          <View className="absolute bottom-2 left-6 right-6 flex-row items-center justify-between rounded-2xl bg-ink px-5 py-4 dark:bg-ink-dark" style={cardShadow}>
+          <View className="absolute bottom-2 left-6 right-6 flex-row items-center justify-between rounded-2xl bg-ink px-5 py-4 dark:bg-ink-dark" style={floatingShadow}>
             <Pressable
               onPress={() => {
                 if (selectedIds.size === books.length) {
@@ -523,7 +523,6 @@ function BookCard({
           ? 'border-accent bg-accent-soft dark:bg-accent-soft-dark'
           : 'border-line bg-surface dark:border-line-dark dark:bg-surface-dark'
       }`}
-      style={cardShadow}
     >
       <View className="flex-row items-center">
         {/* Checkbox in edit mode */}

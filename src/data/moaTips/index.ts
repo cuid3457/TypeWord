@@ -54,3 +54,28 @@ export function getRandomTip(displayLang?: string | null, subjectLang?: string |
   if (tips.length === 0) return null;
   return tips[Math.floor(Math.random() * tips.length)];
 }
+
+const TIP_LANGS: readonly TipLang[] = ['en', 'ko', 'ja', 'zh-CN', 'es', 'fr', 'de', 'it'];
+
+/**
+ * All tips for `displayLang` across every studied language, shuffled so the
+ * rotation surfaces a mix of languages rather than running through one block
+ * at a time. Written in the user's display language. Used by the loading
+ * companion, which is language-agnostic (it doesn't know or care which
+ * wordlist the user is in).
+ */
+export function getAllTips(displayLang?: string | null): string[] {
+  const d = normLang(displayLang);
+  const block = MOA_TIPS[d] ?? MOA_TIPS.en;
+  const all: string[] = [];
+  for (const code of TIP_LANGS) {
+    const arr = block[code];
+    if (arr) all.push(...arr);
+  }
+  // Fisher–Yates shuffle on a copy.
+  for (let i = all.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [all[i], all[j]] = [all[j], all[i]];
+  }
+  return all;
+}

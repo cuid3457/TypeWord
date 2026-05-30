@@ -26,7 +26,7 @@ import { jmdictSearch } from "../_shared/dict-clients/jmdict.ts";
 import { cedictSearch } from "../_shared/dict-clients/cedict.ts";
 import { freedictSearch } from "../_shared/dict-clients/freedict.ts";
 import { wiktionarySearch } from "../_shared/dict-clients/wiktionary.ts";
-import { judgeAndTranslate, judgeUnified, type JudgedSense } from "../_shared/dict-clients/ai-judge.ts";
+import { judgeUnified, type JudgedSense } from "../_shared/dict-clients/ai-judge.ts";
 import {
   generateExamples,
   translateCanonicalSentences,

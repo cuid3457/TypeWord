@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Animated, Image, View, type ImageSourcePropType } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { getTips } from '@src/data/moaTips';
+import { getAllTips } from '@src/data/moaTips';
 
 // Placeholder character: the splash artwork (mint bg baked in) shown inside a
 // rounded badge for now. Swap in dedicated transparent Moa art later via the
@@ -12,8 +12,6 @@ const MINT = '#2EC4A5';
 const ROTATE_MS = 4500;
 
 interface MoaTipProps {
-  /** Language being studied — selects which language's tips to show. */
-  subjectLang?: string;
   /** Override the character art (e.g., a seasonal Moa). Defaults to splash art. */
   character?: ImageSourcePropType;
   /** Badge size in px. */
@@ -21,16 +19,16 @@ interface MoaTipProps {
 }
 
 /**
- * A reusable "loading companion": Moa character + a short fact/TMI about the
- * studied language, in the user's display language. Picks a random tip per
- * mount and gently rotates so longer waits stay fresh. Renders nothing when
- * no tips resolve. Drop into any loading/empty state.
+ * A reusable "loading companion": Moa character + a short fact/TMI about any
+ * of the supported languages, in the user's display language. Picks a random
+ * tip per mount and gently rotates so longer waits stay fresh. Renders nothing
+ * when no tips resolve. Drop into any loading/empty state.
  */
-export function MoaTip({ subjectLang, character, size = 92 }: MoaTipProps) {
+export function MoaTip({ character, size = 92 }: MoaTipProps) {
   const { i18n } = useTranslation();
   const tips = useMemo(
-    () => getTips(i18n.language, subjectLang),
-    [i18n.language, subjectLang],
+    () => getAllTips(i18n.language),
+    [i18n.language],
   );
   const [idx, setIdx] = useState(() =>
     tips.length ? Math.floor(Math.random() * tips.length) : 0,
