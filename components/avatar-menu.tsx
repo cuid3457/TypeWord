@@ -99,6 +99,51 @@ export function AvatarMenu({ visible, onClose, onPickBackground, onPickCharacter
     onPickCharacter();
   };
 
+  const characterRow = (
+    <MenuRow
+      icon="card-giftcard"
+      iconColor="#D9A441"
+      title={t('avatar_menu.character_title')}
+      subtitle={
+        hasCharacters
+          ? t('avatar_menu.character_subtitle')
+          : t('avatar_menu.character_coming_soon')
+      }
+      onPress={handlePickCharacter}
+      badge={!hasCharacters ? t('avatar_menu.coming_soon_badge') : undefined}
+    />
+  );
+  const backgroundRow = (
+    <MenuRow
+      icon="palette"
+      iconColor="#2EC4A5"
+      title={t('avatar_menu.background_title')}
+      subtitle={t('avatar_menu.background_subtitle')}
+      onPress={handlePickBackground}
+    />
+  );
+
+  // Web uses a centered popup (matches every other modal in the app).
+  // Native keeps the drag-dismiss bottom sheet for thumb ergonomics.
+  if (Platform.OS === 'web') {
+    return (
+      <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
+        <Pressable onPress={onClose} className="flex-1 items-center justify-center bg-black/50 px-6">
+          <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-sm rounded-2xl bg-surface p-6 dark:bg-surface-dark">
+            <Text className="text-lg font-bold text-ink dark:text-ink-dark">
+              {t('avatar_menu.title')}
+            </Text>
+            <View className="mt-4">
+              {backgroundRow}
+              <View className="h-2" />
+              {characterRow}
+            </View>
+          </Pressable>
+        </Pressable>
+      </BottomSheetShell>
+    );
+  }
+
   return (
     <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
       <View style={StyleSheet.absoluteFillObject}>
@@ -108,57 +153,35 @@ export function AvatarMenu({ visible, onClose, onPickBackground, onPickCharacter
           accessibilityRole="button"
         />
 
-        {/* Centering wrapper: keeps the sheet a phone-width column on
-            wide web viewports while remaining full-bleed on native. */}
-        <View
-          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center' }}
-          pointerEvents="box-none"
+        <Animated.View
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            transform: [{ translateY }],
+          }}
+          className="rounded-t-3xl bg-surface dark:bg-surface-dark"
         >
-          <Animated.View
-            style={{
-              width: '100%',
-              maxWidth: 480,
-              transform: [{ translateY }],
-            }}
-            className="rounded-t-3xl bg-surface dark:bg-surface-dark"
-          >
-            <View {...panResponder.panHandlers} className="px-6 pt-3 pb-2">
-              <View className="mb-3 self-center h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
-              <Text className="text-lg font-bold text-ink dark:text-ink-dark">
-                {t('avatar_menu.title')}
-              </Text>
-            </View>
+          <View {...panResponder.panHandlers} className="px-6 pt-3 pb-2">
+            <View className="mb-3 self-center h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
+            <Text className="text-lg font-bold text-ink dark:text-ink-dark">
+              {t('avatar_menu.title')}
+            </Text>
+          </View>
 
-            <View
-              style={{
-                paddingHorizontal: 16,
-                paddingTop: 8,
-                paddingBottom: Math.max(20, insets.bottom + 12),
-              }}
-            >
-              <MenuRow
-                icon="palette"
-                iconColor="#2EC4A5"
-                title={t('avatar_menu.background_title')}
-                subtitle={t('avatar_menu.background_subtitle')}
-                onPress={handlePickBackground}
-              />
-              <View className="h-2" />
-              <MenuRow
-                icon="card-giftcard"
-                iconColor="#D9A441"
-                title={t('avatar_menu.character_title')}
-                subtitle={
-                  hasCharacters
-                    ? t('avatar_menu.character_subtitle')
-                    : t('avatar_menu.character_coming_soon')
-                }
-                onPress={handlePickCharacter}
-                badge={!hasCharacters ? t('avatar_menu.coming_soon_badge') : undefined}
-              />
-            </View>
-          </Animated.View>
-        </View>
+          <View
+            style={{
+              paddingHorizontal: 16,
+              paddingTop: 8,
+              paddingBottom: Math.max(20, insets.bottom + 12),
+            }}
+          >
+            {backgroundRow}
+            <View className="h-2" />
+            {characterRow}
+          </View>
+        </Animated.View>
 
         {insets.bottom > 0 ? (
           <View

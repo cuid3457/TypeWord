@@ -123,6 +123,55 @@ export function BackgroundPicker({ visible, onClose }: Props) {
     }
   };
 
+  const swatchGrid = (
+    <>
+      <View className="flex-row flex-wrap gap-3">
+        {backgrounds.map((item) => (
+          <SwatchTile
+            key={item.id}
+            label={t(`mystery_box.items.${item.id}`, { defaultValue: item.id })}
+            isEquipped={equippedId === item.id}
+            busy={busy === item.id}
+            onPress={() => apply(item)}
+          >
+            <ProfileBackground item={item} className="flex-1" />
+          </SwatchTile>
+        ))}
+      </View>
+      {backgrounds.length === 0 ? (
+        <View className="mt-2 items-center rounded-xl border border-dashed border-line px-4 py-5 dark:border-line-dark">
+          <Text className="text-xs text-muted text-center">
+            {t('background_picker.empty_catalog')}
+          </Text>
+        </View>
+      ) : null}
+    </>
+  );
+
+  // Web uses a centered popup (matches every other modal in the app).
+  // Native keeps the drag-dismiss bottom sheet for thumb ergonomics.
+  if (Platform.OS === 'web') {
+    return (
+      <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
+        <Pressable onPress={onClose} className="flex-1 items-center justify-center bg-black/50 px-6">
+          <Pressable onPress={(e) => e.stopPropagation?.()} className="w-full max-w-md rounded-2xl bg-surface dark:bg-surface-dark" style={{ maxHeight: '85%' }}>
+            <View className="px-6 pt-5 pb-2">
+              <Text className="text-lg font-bold text-ink dark:text-ink-dark">
+                {t('background_picker.title')}
+              </Text>
+              <Text className="mt-1 text-xs text-muted">
+                {t('background_picker.subtitle')}
+              </Text>
+            </View>
+            <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 12, paddingBottom: 20 }}>
+              {swatchGrid}
+            </ScrollView>
+          </Pressable>
+        </Pressable>
+      </BottomSheetShell>
+    );
+  }
+
   return (
     <BottomSheetShell visible={visible} onRequestClose={onClose} animationType="fade">
       <View style={StyleSheet.absoluteFillObject}>
@@ -133,16 +182,14 @@ export function BackgroundPicker({ visible, onClose }: Props) {
           accessibilityRole="button"
         />
 
-        {/* Centering wrapper: keeps the sheet a phone-width column on
-            wide web viewports while remaining full-bleed on native. */}
-        <View
-          style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center', maxHeight: '80%' }}
-          pointerEvents="box-none"
-        >
+        {/* Sheet — absolute sibling pinned to the bottom */}
         <Animated.View
           style={{
-            width: '100%',
-            maxWidth: 480,
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            maxHeight: '80%',
             transform: [{ translateY }],
           }}
           className="rounded-t-3xl bg-surface dark:bg-surface-dark"
@@ -166,30 +213,9 @@ export function BackgroundPicker({ visible, onClose }: Props) {
               paddingBottom: Math.max(28, insets.bottom + 16),
             }}
           >
-            <View className="flex-row flex-wrap gap-3">
-              {backgrounds.map((item) => (
-                <SwatchTile
-                  key={item.id}
-                  label={t(`mystery_box.items.${item.id}`, { defaultValue: item.id })}
-                  isEquipped={equippedId === item.id}
-                  busy={busy === item.id}
-                  onPress={() => apply(item)}
-                >
-                  <ProfileBackground item={item} className="flex-1" />
-                </SwatchTile>
-              ))}
-            </View>
-
-            {backgrounds.length === 0 ? (
-              <View className="mt-2 items-center rounded-xl border border-dashed border-line px-4 py-5 dark:border-line-dark">
-                <Text className="text-xs text-muted text-center">
-                  {t('background_picker.empty_catalog')}
-                </Text>
-              </View>
-            ) : null}
+            {swatchGrid}
           </ScrollView>
         </Animated.View>
-        </View>
 
         {/* Non-transforming floor: covers the area under the translucent
             system nav bar so dragged sheet content cannot leak through.
