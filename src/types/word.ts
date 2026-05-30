@@ -14,6 +14,11 @@ export interface WordMeaning {
    * for non-nouns and for languages without grammatical gender. Displayed
    * alongside partOfSpeech. */
   gender?: 'm' | 'f' | 'n' | 'mf';
+  /** Register/style chip for this sense: 'colloquial' | 'informal' | 'slang'
+   * | 'vulgar' | 'humorous' | 'derogatory' | 'literary' | 'poetic'
+   * | 'honorific' | 'humble' | 'polite' | 'euphemistic' | 'childish'
+   * | 'feminine-speech' | 'masculine-speech'. Omitted for neutral senses. */
+  register?: string;
   /** Server-only sense pointer used for cross-target canonical example reuse.
    * Client does not read this — it just travels through JSONB storage. */
   senseId?: string;

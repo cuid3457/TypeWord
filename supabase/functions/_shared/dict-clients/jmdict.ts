@@ -39,6 +39,31 @@ function isArchaicSense(misc: string[] = []): boolean {
   return misc.some((m) => ARCHAIC_MISC.has(m));
 }
 
+// JMdict misc abbreviations → register signals shown on the learner card.
+// (Reference: jmdict-simplified misc list.)
+const REGISTER_BY_MISC: Record<string, string> = {
+  col: "colloquial",
+  fam: "colloquial",
+  sl: "slang",
+  "net-sl": "slang",
+  vulg: "vulgar",
+  X: "vulgar", // X-rated / explicit
+  hon: "honorific",
+  hum: "humble",
+  pol: "polite",
+  derog: "derogatory",
+  joc: "humorous",
+  litf: "literary",
+  poet: "poetic",
+  chn: "childish",
+  fem: "feminine-speech",
+  male: "masculine-speech",
+};
+function extractRegister(misc: string[] = []): string | undefined {
+  for (const m of misc) if (REGISTER_BY_MISC[m]) return REGISTER_BY_MISC[m];
+  return undefined;
+}
+
 /**
  * JMdict에서 한자(kanji) 또는 가나(kana)로 단어 검색.
  * 정확 일치 (GIN array contains).
@@ -73,6 +98,7 @@ export async function jmdictSearch(
         gloss?: Array<{ lang: string; text: string }>;
         misc?: string[];
         field?: string[];
+        dialect?: string[];
       }>;
     };
   }>) {
@@ -81,6 +107,8 @@ export async function jmdictSearch(
     allSenses.forEach((s, idx) => {
       // Register filter: 폐어/고어/희소어 등은 일반 학습자에게 노출 가치 없음.
       if (isArchaicSense(s.misc)) return;
+      // 방언 sense 제외 (관서/관동/사투리 등 — 표준 일본어 학습 범위 밖).
+      if ((s.dialect ?? []).length > 0) return;
       const glosses = s.gloss ?? [];
       const en_translation = glosses.find((g) => g.lang === "eng")?.text;
       const translations_by_lang: Record<string, string> = {};
@@ -96,6 +124,7 @@ export async function jmdictSearch(
         pos: (s.partOfSpeech ?? []).join(","),
         misc_tags: [...(s.misc ?? []), ...(s.field ?? [])],
         homograph_index: String(row.jmdict_seq),
+        register: extractRegister(s.misc),
       });
     });
 

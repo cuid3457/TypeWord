@@ -21,8 +21,10 @@ import { saveUserSettings } from '@src/storage/userSettings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCachedReview, refreshReview, subscribeReview } from '@src/services/reviewCache';
 import { showRewardedAd } from '@src/services/rewardedAd';
+import { preloadInterstitial, showInterstitial } from '@src/services/interstitialAd';
 import {
   consumeWord,
+  consumeSessionEndAd,
   canWatchRewardedAd,
   recordRewardedAdWatch,
   getRemaining,
@@ -80,7 +82,8 @@ export default function ReviewScreen() {
   };
   const DEFAULT_SESSION = 20;
   const MIN_SESSION = 10;
-  const MAX_SESSION = 50;
+  const MAX_SESSION_FREE = 30;
+  const MAX_SESSION_PREMIUM = 50;
 
   // Phase: 'picker' = choose wordlist, 'review' = flashcard session
   const [phase, setPhase] = useState<'picker' | 'review'>('picker');
@@ -121,6 +124,7 @@ export default function ReviewScreen() {
 
   // Review limit state
   const premium = usePremium();
+  const MAX_SESSION = premium ? MAX_SESSION_PREMIUM : MAX_SESSION_FREE;
   const [limitRemaining, setLimitRemaining] = useState<number>(Infinity);
   const [limitTotal, setLimitTotal] = useState<number>(50);
   const [showLimitModal, setShowLimitModal] = useState(false);
@@ -173,6 +177,14 @@ export default function ReviewScreen() {
     saveUserSettings({ ...settings, reviewMode }).catch(() => {});
   }, [reviewMode, settings]);
   const [sessionCount, setSessionCount] = useState(Math.max(MIN_SESSION, settings?.sessionCount ?? DEFAULT_SESSION));
+
+  // Clamp to the tier-effective max — free users who previously stored a
+  // higher value (was 50 pre-2026-05-30) get pulled back to 30 on hydrate.
+  useEffect(() => {
+    if (sessionCount > MAX_SESSION) {
+      setSessionCount(MAX_SESSION);
+    }
+  }, [MAX_SESSION, sessionCount]);
 
   // Auto-play TTS at card start — defaults to true (existing behavior).
   // Persisted via userSettings so the toggle survives app restarts.
@@ -291,6 +303,7 @@ export default function ReviewScreen() {
     setCardModes([]);
     setIndex(0);
     setCompleteCelebrate(null);
+    setResultGateOpen(false);
     await loadPickerData(sortMode, sortReversed);
   }, [loadPickerData, sortMode, sortReversed]);
 
@@ -559,6 +572,9 @@ export default function ReviewScreen() {
     // one. stopSpeaking bumps the speakSeq token in ttsService, invalidating
     // any awaiting speakCloud calls before they reach startPlayback.
     stopSpeaking();
+    // Warm the interstitial so it's ready by session end. No-op for premium /
+    // when no ad unit ID is configured / web.
+    preloadInterstitial();
     setReviewLoading(true);
     setSelectedBookId(bookId ?? null);
     try {
@@ -755,12 +771,20 @@ export default function ReviewScreen() {
 
   const [showNotifPrompt, setShowNotifPrompt] = useState(false);
   const [completeCelebrate, setCompleteCelebrate] = useState<CelebrateInfo | null>(null);
+  // Gate for the ReviewComplete page: opens after the session-end
+  // interstitial (if any) is dismissed so the celebration appears after the
+  // ad rather than under it.
+  const [resultGateOpen, setResultGateOpen] = useState(false);
 
   useEffect(() => {
-    if (!isComplete || words.length === 0) return;
+    if (!isComplete || words.length === 0) {
+      setResultGateOpen(false);
+      return;
+    }
 
     playSfx('session-complete');
 
+    let cancelled = false;
     (async () => {
       const key = 'review_complete_count';
       const promptKey = 'notif_prompt_shown';
@@ -768,7 +792,7 @@ export default function ReviewScreen() {
       await AsyncStorage.setItem(key, String(count));
 
       const alreadyShown = await AsyncStorage.getItem(promptKey);
-      if (count === 3 && !alreadyShown && isNotificationAvailable()) {
+      if (count === 3 && !alreadyShown && isNotificationAvailable() && !cancelled) {
         setShowNotifPrompt(true);
         await AsyncStorage.setItem(promptKey, '1');
       }
@@ -798,30 +822,49 @@ export default function ReviewScreen() {
         }
       } catch { /* silent */ }
 
+      // Compute streak / celebration info locally first — only commit to
+      // state after the interstitial dismisses, so the level-up SFX delay
+      // (1s) doesn't fire under the ad.
       const s = await getStreak();
-      setStreak(s);
+      if (!cancelled) setStreak(s);
+      let pendingCelebrate: CelebrateInfo | null = null;
+      let pendingMilestoneSfx = false;
       if (s.todayDone && s.current > 0) {
         const milestone = await shouldCelebrate(s.current);
         if (milestone) {
           await markCelebrated(s.current);
-          setCompleteCelebrate({ type: 'milestone', streak: s.current, variant: 0 });
-          // Streak milestone reuses level-up SFX — same "stepped up" family.
-          // Delayed past session-complete (1.0s) so they never overlap.
-          setTimeout(() => playSfx('level-up'), 1000);
+          pendingCelebrate = { type: 'milestone', streak: s.current, variant: 0 };
+          pendingMilestoneSfx = true;
         } else {
           const todayDate = getTodayStreakDate();
           const daily = await shouldCelebrateDaily(todayDate);
           if (daily) {
             await markDailyCelebrated(todayDate);
-            setCompleteCelebrate({ type: 'daily', streak: s.current, variant: getDailyVariant(todayDate) });
-          } else {
-            setCompleteCelebrate(null);
+            pendingCelebrate = { type: 'daily', streak: s.current, variant: getDailyVariant(todayDate) };
           }
         }
-      } else {
-        setCompleteCelebrate(null);
       }
+
+      // Session-end interstitial gate. consumeSessionEndAd also bumps the
+      // sessionsCompleted counter for premium users so a downgrade doesn't
+      // backfill ads.
+      const shouldShowAd = await consumeSessionEndAd();
+      if (shouldShowAd && !cancelled) {
+        await showInterstitial();
+      }
+
+      if (cancelled) return;
+
+      setCompleteCelebrate(pendingCelebrate);
+      if (pendingMilestoneSfx) {
+        // Streak milestone reuses level-up SFX — same "stepped up" family.
+        // Delayed so it doesn't collide with the celebration animation.
+        setTimeout(() => playSfx('level-up'), 1000);
+      }
+      setResultGateOpen(true);
     })();
+
+    return () => { cancelled = true; };
   }, [isComplete]);
 
   const formatNextReview = (nextMs: number): string => {
@@ -1521,6 +1564,14 @@ export default function ReviewScreen() {
 
   // ── Review Phase: Complete ──
   if (isComplete) {
+    // While the session-end interstitial is loading/showing, render a blank
+    // shell underneath. The ad sits on top; once dismissed, resultGateOpen
+    // flips and the celebration page renders.
+    if (!resultGateOpen) {
+      return (
+        <SafeAreaView edges={['top', 'left', 'right']} className="flex-1 bg-canvas dark:bg-canvas-dark" />
+      );
+    }
     return (
       <ReviewComplete
         stats={stats}

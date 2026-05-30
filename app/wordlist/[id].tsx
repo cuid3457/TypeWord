@@ -18,7 +18,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { AdBanner } from '@/components/ad-banner';
 import { TabletContainer } from '@/components/tablet-container';
 import { Card } from '@/components/ui/card';
 import { AppModal } from '@/components/app-modal';
@@ -28,8 +27,9 @@ import { Toast } from '@/components/toast';
 import { VoiceToggle } from '@/components/voice-toggle';
 import * as Clipboard from 'expo-clipboard';
 import { TextActionPopover, type PopoverPosition } from '@/components/text-action-popover';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { getTtsText, speakWord, phonemeForChinese } from '@src/utils/ttsLocale';
-import { formatPOS } from '@src/utils/normalizeResult';
+import { formatPOS, formatRegister } from '@src/utils/normalizeResult';
 import { splitMarkerParticle } from '@src/utils/splitMarkerParticle';
 import { ipaSupported } from '@src/services/ipaService';
 import { ReadingDisplay } from '@/components/reading-display';
@@ -367,6 +367,23 @@ export default function WordlistDetailScreen() {
     }
   })();
 
+  // Inject native ad markers every 30 words. Skip in edit mode (ads next to
+  // selection checkboxes invite accidental clicks → AdMob invalid traffic),
+  // and skip when the list is too small (<5 words) since an ad would
+  // dominate the screen.
+  type AdItem = { __ad: true; key: string };
+  const sortedWordsWithAds: Array<StoredWord | AdItem> = (() => {
+    if (editMode || sortedWords.length < 5) return sortedWords;
+    const out: Array<StoredWord | AdItem> = [];
+    sortedWords.forEach((w, idx) => {
+      out.push(w);
+      if ((idx + 1) % 30 === 0 && idx < sortedWords.length - 1) {
+        out.push({ __ad: true, key: `ad-${idx}` });
+      }
+    });
+    return out;
+  })();
+
   // Header content — rendered as ListHeaderComponent so pull-to-refresh works
   // from the header area too (not just the FlatList rows below it).
   const headerEl = (
@@ -565,9 +582,9 @@ export default function WordlistDetailScreen() {
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <TabletContainer>
       {(
-        <FlatList<StoredWord>
-          data={sortedWords}
-          keyExtractor={(item) => item.id}
+        <FlatList<StoredWord | AdItem>
+          data={sortedWordsWithAds}
+          keyExtractor={(item) => ('__ad' in item ? item.key : item.id)}
           contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: editMode ? 100 : 80, flexGrow: 1 }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
@@ -590,6 +607,13 @@ export default function WordlistDetailScreen() {
             </View>
           }
           renderItem={({ item }) => {
+            if ('__ad' in item) {
+              return (
+                <View className="my-3">
+                  <NativeAdCard />
+                </View>
+              );
+            }
             const w = item;
             return (
               <WordRow
@@ -685,8 +709,6 @@ export default function WordlistDetailScreen() {
         </View>
       ) : null}
       </TabletContainer>
-
-      <AdBanner />
 
       <AppModal
         visible={showDeleteConfirm}
@@ -817,6 +839,8 @@ function WordRow({
           meanings: word.result.meanings?.map((m) => ({
             definition: m.definition,
             partOfSpeech: m.partOfSpeech,
+            gender: m.gender,
+            register: m.register,
           })),
         });
         await updateWordResult(word.id, res.result);
@@ -878,11 +902,13 @@ function WordRow({
           <>
             {(expanded ? meanings : meanings.slice(0, 1)).map((m, i) => {
               const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+              const register = formatRegister(m.register, i18n.language);
               return (
                 <Text key={i} className="mt-1 text-sm text-muted">
                   {meanings.length > 1 ? `${i + 1}. ` : ''}
                   {marker ? `(${marker}) ` : ''}
                   {m.definition}
+                  {register ? <Text className="text-xs text-faint"> · {register}</Text> : null}
                 </Text>
               );
             })}

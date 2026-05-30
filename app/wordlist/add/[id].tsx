@@ -60,7 +60,6 @@ import { useNetworkStatus } from '@src/hooks/useNetworkStatus';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium, useTier } from '@src/hooks/usePremium';
 import { ImageCropModal } from '@/components/image-crop-modal';
-import { AdBanner } from '@/components/ad-banner';
 import { TabletContainer } from '@/components/tablet-container';
 import { ReportModal } from '@/components/report-modal';
 import { ReadingDisplay } from '@/components/reading-display';
@@ -68,7 +67,7 @@ import { fetchIpa, ipaApplicable, ipaSupported } from '@src/services/ipaService'
 import { promoteToPersistent } from '@src/services/ttsCache';
 import { getTtsText, prefetchSpeak, speakWord } from '@src/utils/ttsLocale';
 import { VoiceToggle } from '@/components/voice-toggle';
-import { formatPOS } from '@src/utils/normalizeResult';
+import { formatPOS, formatRegister } from '@src/utils/normalizeResult';
 
 // Per-language max input length (in code points). Mirrors server validator.
 // Sized to admit most idioms/proverbs while still rejecting full sentences.
@@ -116,6 +115,8 @@ function backgroundPrefetchCandidate(
         meanings: quick.result.meanings.map((m) => ({
           definition: m.definition,
           partOfSpeech: m.partOfSpeech,
+          gender: m.gender,
+          register: m.register,
         })),
       });
       for (const ex of enriched?.examples ?? []) {
@@ -238,6 +239,8 @@ export default function AddWordScreen() {
         meanings: res.result.meanings?.map((m) => ({
           definition: m.definition,
           partOfSpeech: m.partOfSpeech,
+          gender: m.gender,
+          register: m.register,
         })),
       })
         .then((enriched) => {
@@ -1148,7 +1151,6 @@ export default function AddWordScreen() {
 
       </KeyboardAvoidingView>
       </TabletContainer>
-      <AdBanner />
 
       <ReportModal
         visible={showReport}
@@ -1422,13 +1424,18 @@ function PartialCard({ partial, word, t }: { partial: PartialLookup; word: strin
           </Text>
           {partial.meanings.map((m, i) => {
             const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+            const register = formatRegister(m.register, i18n.language);
             return (
             <View
               key={i}
               className="mt-2 rounded-xl border border-line p-3 dark:border-line-dark"
             >
-              {marker ? (
-                <Text className="text-xs text-muted">{marker}</Text>
+              {marker || register ? (
+                <Text className="text-xs text-muted">
+                  {marker}
+                  {marker && register ? <Text className="text-faint"> · </Text> : null}
+                  {register ? <Text className="text-faint">{register}</Text> : null}
+                </Text>
               ) : null}
               <Text className="mt-1 text-base text-ink dark:text-ink-dark">
                 {m.definition}
@@ -1541,13 +1548,18 @@ function ResultCard({
         {result.meanings?.length ? (
           result.meanings.map((m, i) => {
             const marker = formatPOS(m.partOfSpeech, m.gender, i18n.language);
+            const register = formatRegister(m.register, i18n.language);
             return (
             <View
               key={i}
               className="mt-2 rounded-xl border border-line p-3 dark:border-line-dark"
             >
-              {marker ? (
-                <Text className="text-xs text-muted">{marker}</Text>
+              {marker || register ? (
+                <Text className="text-xs text-muted">
+                  {marker}
+                  {marker && register ? <Text className="text-faint"> · </Text> : null}
+                  {register ? <Text className="text-faint">{register}</Text> : null}
+                </Text>
               ) : null}
               <Text className="mt-1 text-base text-ink dark:text-ink-dark">
                 {m.definition}

@@ -27,6 +27,7 @@ import { cedictSearch } from "../_shared/dict-clients/cedict.ts";
 import { freedictSearch } from "../_shared/dict-clients/freedict.ts";
 import { wiktionarySearch } from "../_shared/dict-clients/wiktionary.ts";
 import { judgeUnified, type JudgedSense } from "../_shared/dict-clients/ai-judge.ts";
+import { posCanonical } from "../_shared/dict-clients/pos-normalize.ts";
 import {
   generateExamples,
   translateCanonicalSentences,
@@ -98,8 +99,17 @@ function validateLookupInput(body: unknown): WordLookupRequest {
   return { word, sourceLang, targetLang, mode } as WordLookupRequest;
 }
 
+// Run a promise after the response has been sent. Uses Deno's EdgeRuntime.waitUntil
+// so the isolate stays alive until the task completes (without it, Supabase may
+// tear down the isolate as soon as Response is dispatched, dropping the work).
+// Falls back to a bare .catch() in environments without the waitUntil API.
 function fireAndForget<T>(p: Promise<T>): void {
-  p.catch(() => {});
+  const guarded = p.catch((err) => {
+    console.warn("[v4 background]", (err as Error)?.message ?? err);
+  });
+  // deno-lint-ignore no-explicit-any
+  const rt = (globalThis as any).EdgeRuntime;
+  if (rt && typeof rt.waitUntil === "function") rt.waitUntil(guarded);
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -481,15 +491,23 @@ async function realignExamplesByLlmJudge(
 // ────────────────────────────────────────────────────────────────────────
 // SenseGroup → WordMeaning 변환 (v2 응답 형식 호환)
 // ────────────────────────────────────────────────────────────────────────
-function toWordMeanings(groups: SenseGroup[]): WordMeaning[] {
+function toWordMeanings(
+  groups: SenseGroup[],
+  source: string | undefined,
+): WordMeaning[] {
   return groups.map((g) => {
-    const firstSense = g.senses[0];
-    const pos = firstSense?.sense.pos ?? "";
+    const firstSense = g.senses[0]?.sense;
+    // Store POS in CANONICAL ENGLISH ("noun"/"verb"/...). The client localizes
+    // to the user's UI language at render time so a Korean user sees "명사"
+    // regardless of whether the lookup target is ko or en.
+    const pos = posCanonical(firstSense?.pos, source ?? "");
     return {
-      definition: g.display_en,     // 사용자 카드에 표시될 번역
+      definition: g.display_en,
       partOfSpeech: pos,
-      relevanceScore: g.max_score,   // frequency_score (0-100)
-      senseId: firstSense?.sense.sense_id,  // for cross-target canonical reuse
+      relevanceScore: g.max_score,
+      gender: firstSense?.gender,         // m/f/n/mf for Latin nouns
+      register: firstSense?.register,     // colloquial/slang/literary/honorific...
+      senseId: firstSense?.sense_id,      // for cross-target canonical reuse
     } as WordMeaning;
   });
 }
@@ -526,22 +544,26 @@ async function getCached(
   sourceLang: string,
   targetLang: string,
 ): Promise<CachedHit | null> {
-  // Source filter intentionally absent — both 'dictionary' and 'llm' (신조어 fallback)
-  // entries are valid cache hits. The source field is tracked for analytics, not gating.
+  // Single round-trip: fetch the word_entries row AND its word_translations row
+  // for this target_lang via PostgREST's embedded select. (Previous version
+  // did two sequential queries — ~100ms wasted on every lookup.) Source filter
+  // intentionally absent: both 'dictionary' and 'llm' (신조어 fallback) cache
+  // hits are valid.
   const { data: entry } = await supabase
     .from("word_entries")
-    .select("id, headword, reading, ipa, meanings, source")
+    .select(
+      "id, headword, reading, ipa, meanings, source, " +
+      "word_translations!inner(meanings_translated, examples_translated, target_lang)",
+    )
     .eq("word", word)
     .eq("word_lang", sourceLang)
+    .eq("word_translations.target_lang", targetLang)
     .maybeSingle();
   if (!entry) return null;
-
-  const { data: trans } = await supabase
-    .from("word_translations")
-    .select("meanings_translated, examples_translated")
-    .eq("word_entry_id", entry.id)
-    .eq("target_lang", targetLang)
-    .maybeSingle();
+  const trans = (entry.word_translations as Array<{
+    meanings_translated: WordMeaning[];
+    examples_translated: WordExample[];
+  }> | undefined)?.[0];
   if (!trans) return null;
 
   const examples = (trans.examples_translated ?? []) as WordExample[];
@@ -741,7 +763,8 @@ async function handleDictMiss(
   // documented in [[project_v4_quick_enrich_canonical]] and keeps quick
   // mode at the 2.5-3s target instead of stacking N parallel LLM example
   // calls + an LLM judge call on top of validateNeologism.
-  const meanings = toWordMeanings(groups);
+  // dict-miss path has no real dict source — pass undefined so POS just empties.
+  const meanings = toWordMeanings(groups, undefined);
   let examples: WordExample[] = [];
   if (mode === "enrich") {
     const exampleMap = await fetchExamples(word, sourceLang, targetLang, groups, []);
@@ -759,13 +782,11 @@ async function handleDictMiss(
     confidence: groups[0]?.max_score ?? 0,
   };
 
-  // Cache as source='llm'
-  try {
+  // Cache as source='llm' in the background — doesn't block the response.
+  fireAndForget((async () => {
     const entryId = await saveCacheCanonicalLlm(word, sourceLang, verdict.senses);
     await saveCacheTranslation(entryId, targetLang, meanings, examples);
-  } catch (err) {
-    console.warn(`[v4] llm cache save failed: ${(err as Error).message}`);
-  }
+  })());
 
   return { result, cached: false };
 }
@@ -838,6 +859,7 @@ async function enrichExistingCache(
     }
   }
 
+  const newRows: CanonicalExampleRow[] = [];
   if (misses.length > 0) {
     const reqs: ExampleRequest[] = misses.map(({ m, idx }) => ({
       key: `m:${idx}`,
@@ -847,7 +869,6 @@ async function enrichExistingCache(
       targetGloss: m.definition,
     }));
     const gen = await generateExamples(reqs, sourceLang, targetLang);
-    const newRows: CanonicalExampleRow[] = [];
     for (const { idx, sid } of misses) {
       const ex = gen.get(`m:${idx}`);
       if (!ex) continue;
@@ -859,11 +880,8 @@ async function enrichExistingCache(
       });
       newRows.push({ sentence: ex.sentence, meaningIndex: idx, senseId: sid });
     }
-    if (newRows.length > 0) {
-      const merged = [...canonical, ...newRows];
-      await supabase.from("word_entries").update({ examples: merged }).eq("id", cached.entryId);
-    }
   }
+  const canonicalMerged = newRows.length > 0 ? [...canonical, ...newRows] : null;
 
   examples.sort((a, b) => (a.meaningIndex ?? 0) - (b.meaningIndex ?? 0));
 
@@ -876,10 +894,16 @@ async function enrichExistingCache(
     ? await realignExamplesByLlmJudge(word, sourceLang, meanings, tokenRealigned)
     : tokenRealigned;
 
-  // Persist target-specific translation row.
-  await supabase.from("word_translations").update({
-    examples_translated: realigned,
-  }).eq("word_entry_id", cached.entryId).eq("target_lang", targetLang);
+  // Persist canonical + target translation in the background — the response
+  // below doesn't depend on these writes. Saves ~200-400ms of DB latency.
+  fireAndForget((async () => {
+    if (canonicalMerged) {
+      await supabase.from("word_entries").update({ examples: canonicalMerged }).eq("id", cached.entryId);
+    }
+    await supabase.from("word_translations").update({
+      examples_translated: realigned,
+    }).eq("word_entry_id", cached.entryId).eq("target_lang", targetLang);
+  })());
 
   return {
     result: { ...cached.result, examples: realigned },
@@ -935,52 +959,47 @@ async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResul
   // 4. 그룹화 + 정렬 (entry × 번역 동일성, 학습자 부담 ↓)
   const groups = groupByEntryThenTranslation(judged);
 
-  // 5. canonical entry 먼저 upsert — fetchExamplesViaCanonical이 examples 업데이트할
-  //    대상이 존재해야 하므로 순서 중요. quick mode도 동일 (examples는 빈 채로 둠).
-  const meanings = toWordMeanings(groups);
-  try {
-    const entryId = await saveCacheCanonical(word, sourceLang, entries, judged);
-
-    // 6. 예문 — quick은 생략 (검색 화면이 표시 안 함). enrich은 canonical 재사용 path.
-    const headwordForGen = entries[0]?.headword ?? word;
-    const readingVariants: string[] = [];
-    if (entries[0]?.reading) readingVariants.push(entries[0].reading);
-    const exampleMap = mode === "quick"
-      ? new Map<string, ExampleResult>()
-      : await fetchExamplesViaCanonical(word, headwordForGen, sourceLang, targetLang, groups, readingVariants);
-    const rawExamples = toWordExamples(groups, exampleMap);
-    // Dict-sourced data: senseDef came from an authoritative dictionary
-    // entry, so the per-meaning generator rarely produces a sentence in
-    // the wrong sense. Translation-token realign alone handles the
-    // occasional sentence-only drift. The expensive LLM-judge step is
-    // reserved for the neologism / dict-miss path (handleDictMiss), where
-    // BOTH sentence and translation can drift (e.g. 야속하다) — there the
-    // judge is the only thing that catches it.
-    const examples = realignExamplesByTranslation(meanings, rawExamples, targetLang);
-
-    // 7. translation 저장 (best effort)
-    await saveCacheTranslation(entryId, targetLang, meanings, examples);
-
-    const result: WordLookupResult = {
-      headword: entries[0]?.headword ?? word,
-      reading: entries[0]?.reading,
-      meanings,
-      examples,
-      confidence: groups[0]?.max_score ?? 0,
-    };
-    return { result, cached: false };
-  } catch (err) {
-    console.warn(`[v4] save/example pipeline failed: ${(err as Error).message}`);
-    // Degrade gracefully — return meanings only, no examples.
-    const result: WordLookupResult = {
-      headword: entries[0]?.headword ?? word,
-      reading: entries[0]?.reading,
-      meanings,
-      examples: [],
-      confidence: groups[0]?.max_score ?? 0,
-    };
-    return { result, cached: false };
+  // 5. Build the response. For quick mode examples are empty (search screen
+  //    skips them); enrich computes examples synchronously via canonical reuse.
+  const meanings = toWordMeanings(groups, entries[0]?.source);
+  let examples: WordExample[] = [];
+  if (mode === "enrich") {
+    try {
+      const headwordForGen = entries[0]?.headword ?? word;
+      const readingVariants = entries[0]?.reading ? [entries[0].reading] : [];
+      const exampleMap = await fetchExamplesViaCanonical(
+        word, headwordForGen, sourceLang, targetLang, groups, readingVariants,
+      );
+      const rawExamples = toWordExamples(groups, exampleMap);
+      // Dict-sourced: senseDef came from an authoritative dictionary entry,
+      // so the per-meaning generator rarely picks the wrong sense. Token
+      // realign handles the occasional sentence-only drift; the heavier LLM
+      // judge is reserved for handleDictMiss where both sentence + translation
+      // can drift (e.g. 야속하다).
+      examples = realignExamplesByTranslation(meanings, rawExamples, targetLang);
+    } catch (err) {
+      console.warn(`[v4] enrich example pipeline failed: ${(err as Error).message}`);
+    }
   }
+
+  const result: WordLookupResult = {
+    headword: entries[0]?.headword ?? word,
+    reading: entries[0]?.reading,
+    meanings,
+    examples,
+    confidence: groups[0]?.max_score ?? 0,
+  };
+
+  // 6. Persist to cache in the background — the response above doesn't depend
+  //    on these writes completing. Frees the user from ~200-400ms of DB latency
+  //    on every miss. EdgeRuntime.waitUntil (inside fireAndForget) keeps the
+  //    isolate alive until the chain finishes.
+  fireAndForget((async () => {
+    const entryId = await saveCacheCanonical(word, sourceLang, entries, judged);
+    await saveCacheTranslation(entryId, targetLang, meanings, examples);
+  })());
+
+  return { result, cached: false };
 }
 
 // ────────────────────────────────────────────────────────────────────────

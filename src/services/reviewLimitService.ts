@@ -18,11 +18,21 @@ const DAILY_LIMIT: Record<Tier, number> = {
 const REWARDED_AD_BONUS = 50;
 const REWARDED_AD_DAILY_CAP = 3;
 
+/**
+ * Cumulative cards-per-interstitial. Session-end ad fires when today's used
+ * count crosses a new multiple of this. Picking 30 ties to the free MAX_SESSION
+ * so a 30-card sessioner sees one ad per session, while smaller-session users
+ * still hit ~3-4 ads per 100-card daily limit.
+ */
+const INTERSTITIAL_BUCKET_SIZE = 30;
+
 interface DailyState {
   date: string;
-  used: number;          // total cards consumed today across all modes
-  bonusEarned: number;   // total bonus cards earned today via rewarded ads
-  adsWatched: number;    // count of rewarded ads watched today
+  used: number;             // total cards consumed today across all modes
+  bonusEarned: number;      // total bonus cards earned today via rewarded ads
+  adsWatched: number;       // count of rewarded ads watched today
+  sessionsCompleted: number;// completed review sessions today (for first-session immunity)
+  lastAdBucket: number;     // highest 30-card bucket already shown a session-end ad
 }
 
 function todayKey(): string {
@@ -31,7 +41,14 @@ function todayKey(): string {
 }
 
 function emptyState(): DailyState {
-  return { date: todayKey(), used: 0, bonusEarned: 0, adsWatched: 0 };
+  return {
+    date: todayKey(),
+    used: 0,
+    bonusEarned: 0,
+    adsWatched: 0,
+    sessionsCompleted: 0,
+    lastAdBucket: 0,
+  };
 }
 
 async function loadState(): Promise<DailyState> {
@@ -56,6 +73,8 @@ async function loadState(): Promise<DailyState> {
           used,
           bonusEarned: parsed.bonusEarned ?? 0,
           adsWatched: parsed.adsWatched ?? 0,
+          sessionsCompleted: (parsed as { sessionsCompleted?: number }).sessionsCompleted ?? 0,
+          lastAdBucket: (parsed as { lastAdBucket?: number }).lastAdBucket ?? 0,
         };
       }
     } catch { /* reset */ }
@@ -178,3 +197,39 @@ export const REWARDED_AD_BONUS_CARDS = REWARDED_AD_BONUS;
 
 /** Maximum rewarded ad watches allowed per day. */
 export const REWARDED_AD_DAILY_CAP_COUNT = REWARDED_AD_DAILY_CAP;
+
+/**
+ * Record that a review session just ended. Returns true if a session-end
+ * interstitial should be shown now (free tier, second-session+, and `used`
+ * just crossed a new 30-card bucket). The bucket pointer is advanced
+ * regardless so first-session immunity doesn't let the user accumulate
+ * pending ads.
+ */
+export async function consumeSessionEndAd(): Promise<boolean> {
+  if (getTier() !== 'free') {
+    // Still record the session so a downgrade doesn't backfill ads.
+    const state = await loadState();
+    state.sessionsCompleted += 1;
+    await saveState(state);
+    return false;
+  }
+  const state = await loadState();
+  state.sessionsCompleted += 1;
+  const currentBucket = Math.floor(state.used / INTERSTITIAL_BUCKET_SIZE);
+  const crossed = currentBucket > state.lastAdBucket;
+  // First session of the day: always immune, but advance the pointer so the
+  // user doesn't see an immediate ad on session 2 if they already crossed.
+  const immune = state.sessionsCompleted === 1;
+  let show = false;
+  if (crossed && !immune) {
+    show = true;
+  }
+  if (crossed) {
+    state.lastAdBucket = currentBucket;
+  }
+  await saveState(state);
+  return show;
+}
+
+/** Size of the cumulative-card bucket between session-end interstitials. */
+export const INTERSTITIAL_BUCKET_CARDS = INTERSTITIAL_BUCKET_SIZE;

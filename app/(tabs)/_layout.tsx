@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { AdBanner } from '@/components/ad-banner';
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
@@ -126,7 +125,6 @@ function TabBarWithAd(props: BottomTabBarProps) {
         backgroundColor: isTablet ? barBackground : undefined,
       }}
     >
-      <AdBanner />
       <View style={isTablet ? { width: '100%', maxWidth: contentWidth, alignSelf: 'center' } : undefined}>
         <BottomTabBar {...props} />
       </View>

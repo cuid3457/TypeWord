@@ -41,6 +41,7 @@ export interface CanonicalMeaning {
   partOfSpeech: string;
   relevanceScore?: number;
   gender?: "m" | "f" | "n" | "mf";
+  register?: string;
 }
 
 export interface CanonicalExample {
@@ -73,6 +74,8 @@ export interface WordEntry {
 export interface TranslatedMeaning {
   definition: string;
   partOfSpeech: string;
+  gender?: "m" | "f" | "n" | "mf";
+  register?: string;
 }
 
 export interface TranslatedExample {

@@ -17,14 +17,23 @@ const STOP_WORDS = new Set([
   'do', 'did', 'does', 'have', 'has', 'had',
 ]);
 
+// Korean particles attached to nouns/verbs we strip so token matching works.
+// Keep in sync with the server copy in _shared/realign-examples.ts.
+const KO_PARTICLE_RE =
+  /(?:으로서|에게서|에서는|에서도|에서|에게|한테|께서|이라도|까지|부터|조차|마저|처럼|보다|으로|와|과|이며|이고|이라|이다|입니다|이요|이|가|을|를|은|는|의|도|만|와|로|랑|이랑|뿐|이나|나|네|니|냐|군요|네요|군|구나|지요|지)$/;
+function stripKoreanParticle(t: string): string {
+  if (!/[가-힯]/.test(t)) return t;
+  const stripped = t.replace(KO_PARTICLE_RE, '');
+  return stripped.length >= 1 ? stripped : t;
+}
+
 function tokenize(s: string): Set<string> {
-  return new Set(
-    (s || '')
-      .toLowerCase()
-      .replace(/[(),.;:!?'"`“”]/g, ' ')
-      .split(/\s+/)
-      .filter((t) => t.length > 1),
-  );
+  const raw = (s || '')
+    .toLowerCase()
+    .replace(/[(),.;:!?'"`“”、。!?]/g, ' ')
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+  return new Set(raw.map(stripKoreanParticle).filter((t) => t.length >= 1));
 }
 
 export function realignExamplesByTranslation(
@@ -78,6 +87,14 @@ export function realignExamplesByTranslation(
     if (orig >= 0 && orig < meanings.length && !usedSlots.has(orig)) {
       out.push(ex);
       usedSlots.add(orig);
+      continue;
+    }
+    for (let i = 0; i < meanings.length; i++) {
+      if (!usedSlots.has(i)) {
+        out.push({ ...ex, meaningIndex: i });
+        usedSlots.add(i);
+        break;
+      }
     }
   }
 

@@ -2,7 +2,6 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Text, TextInput, View } from 'react-native';
-import Animated, { FadeIn, FadeOut, LinearTransition } from 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { ReadingDisplay } from '@/components/reading-display';
@@ -209,10 +208,7 @@ export function ReviewCardContent({
     ) : null;
 
   const renderChoices = () => (
-    // Inline marginTop: NativeWind's `mt-6` silently drops off the
-    // reanimated Animated.View on react-native-web in some builds,
-    // making the first option visually flush with the prompt card.
-    <Animated.View layout={LinearTransition.duration(300)} style={{ marginTop: 10 }}>
+    <View style={{ marginTop: 10 }}>
       {choices.map((c, i) => {
         const isCorrect = c === correctDefinition;
         const isSelected = choiceSelected === i;
@@ -228,9 +224,7 @@ export function ReviewCardContent({
           borderStyle = { borderWidth: 2, borderColor: '#E0654F', backgroundColor: colorScheme === 'dark' ? '#3A1A14' : '#F6E4DF' };
         }
         return (
-          // marginBottom per-item: reanimated Animated.View drops the `gap`
-          // style on react-native-web, so we space siblings explicitly.
-          <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)} style={{ marginBottom: 10 }}>
+          <View key={i} style={{ marginBottom: 10 }}>
             <Pressable
               onPress={() => choiceSelected === null && setChoiceSelected(i)}
               className={`flex-row items-center rounded-xl p-4 ${bg}`}
@@ -244,11 +238,11 @@ export function ReviewCardContent({
                 <MaterialIcons name="cancel" size={22} color="#E0654F" style={{ marginLeft: 8 }} />
               ) : null}
             </Pressable>
-          </Animated.View>
+          </View>
         );
       })}
       {choiceSelected !== null ? (
-        <Animated.View entering={FadeIn.duration(300).delay(250)}>
+        <View>
           {mode === 'context' && (() => {
             const examples = current.result.examples ?? [];
             const ex = examples.length > 0 ? examples[contextExampleIdx % examples.length] : null;
@@ -262,9 +256,9 @@ export function ReviewCardContent({
             );
           })()}
           {renderMeanings()}
-        </Animated.View>
+        </View>
       ) : null}
-    </Animated.View>
+    </View>
   );
 
   switch (mode) {
@@ -587,7 +581,7 @@ export function ReviewCardContent({
               </Text>
             ) : null}
           </View>
-          <Animated.View layout={LinearTransition.duration(300)} style={{ marginTop: 10 }}>
+          <View style={{ marginTop: 10 }}>
             {choices.map((c, i) => {
               const isCorrect = c === correctDefinition;
               const isSelected = choiceSelected === i;
@@ -602,7 +596,7 @@ export function ReviewCardContent({
                 bg = '';
               }
               return (
-                <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)} style={{ marginBottom: 10 }}>
+                <View key={i} style={{ marginBottom: 10 }}>
                   <Pressable
                     onPress={() => choiceSelected === null && setChoiceSelected(i)}
                     className={`flex-row items-center rounded-xl p-4 ${bg}`}
@@ -616,15 +610,15 @@ export function ReviewCardContent({
                       <MaterialIcons name="cancel" size={22} color="#E0654F" style={{ marginLeft: 8 }} />
                     ) : null}
                   </Pressable>
-                </Animated.View>
+                </View>
               );
             })}
             {showResult ? (
-              <Animated.View entering={FadeIn.duration(300).delay(250)}>
+              <View>
                 {renderMeanings()}
-              </Animated.View>
+              </View>
             ) : null}
-          </Animated.View>
+          </View>
         </View>
       );
     }

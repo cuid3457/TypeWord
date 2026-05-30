@@ -11,6 +11,7 @@ import type { RefObject } from 'react';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { StreakBanner } from '@/components/streak-banner';
 import { Toast } from '@/components/toast';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { findLanguage } from '@src/constants/languages';
 import {
   MAX_RELOAD,
@@ -227,6 +228,11 @@ export function ReviewPicker({
             ) : null}
           </View>
         }
+        ListFooterComponent={bookCounts.length > 0 ? (
+          <View className="mt-3 px-6">
+            <NativeAdCard />
+          </View>
+        ) : null}
         onScrollToIndexFailed={(info) => {
           setTimeout(() => {
             pickerListRef.current?.scrollToOffset({

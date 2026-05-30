@@ -20,6 +20,15 @@ export interface DictSense {
   homograph_index?: string;
   /** Dictionary-provided example sentences (when the source dict ships them). */
   examples?: Array<{ text: string; translation?: string }>;
+  /** Grammatical gender for Latin-language nouns (m/f/n, or mf=common gender).
+   *  Extracted from wiktionary sense tags ("masculine"/"feminine"/"neuter").
+   *  Omitted for non-nouns and genderless languages. */
+  gender?: "m" | "f" | "n" | "mf";
+  /** Register/style marker that contextualizes the sense for learners:
+   *  colloquial, informal, slang, vulgar, humorous, derogatory, literary,
+   *  poetic, honorific, humble, polite, childish. Omitted for neutral senses.
+   *  Extracted from wiktionary sense tags / jmdict misc. */
+  register?: string;
 }
 
 export interface DictEntry {

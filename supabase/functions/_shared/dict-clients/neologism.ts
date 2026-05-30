@@ -35,9 +35,9 @@ function langName(code: string): string {
 const VALIDATE_SYSTEM = `You are a vocabulary validator for a language-learning app. The headword W was NOT found in the authoritative dictionary for SOURCE_LANG. Decide what W is.
 
 Verdicts:
-- "valid_word": A real word or short phrase used by real SOURCE_LANG speakers. Includes: slang, internet/SNS neologisms, regional/dialect terms, technical/jargon terms, recent loanwords, proper-noun-derived common usage. "Not in the standard dictionary" alone does NOT make it invalid.
-- "typo": Likely a misspelling or close-miss of a real SOURCE_LANG word. Provide the most likely intended form.
-- "non_word": Gibberish, random characters, mojibake, or otherwise not a recognizable word in any language.
+- "valid_word": A real word or short phrase used by real SOURCE_LANG speakers. Includes: slang, internet/SNS neologisms, regional/dialect terms, technical/jargon terms, recent loanwords, proper-noun-derived common usage, and PROPER NOUNS of real public figures / places / works that a learner would plausibly encounter (politicians, world leaders, celebrities, historical figures, well-known place names, famous titles). "Not in the standard dictionary" alone does NOT make it invalid.
+- "typo": Likely a misspelling or close-miss of a real SOURCE_LANG word. Prefer this verdict over "non_word" whenever W is within a small edit-distance (1-2 char insertions/deletions/substitutions) of a common SOURCE_LANG word. Examples of patterns to catch: missing letters (powr→power, gud→good), doubled/missing doubles (recieve→receive, accomodate→accommodate), letter swaps (thier→their, teh→the), common phonetic mis-spellings. When unsure between "typo" and "non_word", choose "typo" and propose the closest real word.
+- "non_word": Gibberish, random characters, keyboard mashing (asdfgh, qwerty patterns), mojibake, or otherwise not a recognizable word in any language AND not within plausible edit distance of one.
 - "wrong_language": A real word, but clearly in a language other than SOURCE_LANG.
 
 For "valid_word" ONLY, list 1 to 4 DISTINCT senses (different meanings, not paraphrases of the same meaning). For each sense:
@@ -52,6 +52,12 @@ SENSE DISTINCTNESS RULE — apply judging from SOURCE_LANG, not from English/TAR
 - Apply this BEFORE listing senses. When unsure, prefer fewer senses. A learner card with one well-chosen meaning beats two near-duplicates whose example sentences would be indistinguishable in SOURCE_LANG.
 
 HARD CUT to score 0-1: racial/ethnic slurs, hate speech, sexual harassment, vulgar sexual content. General profanity / casual slang that is not discriminatory is fine — score by frequency.
+
+PUBLIC FIGURES / DISPUTED TOPICS — NEUTRAL CARD RULE:
+- For real politicians, world leaders, monarchs, or other public officials: en_def must be a BRIEF, NEUTRAL, FACTUAL descriptor — full name + role + country/affiliation only. No opinions, no controversies, no current-events commentary, no party-aligned framing. Example pattern: "Joe Biden, American politician (46th U.S. President)." Limit to ONE sense.
+- For celebrities / artists / athletes / authors: same pattern — "<full name>, <profession> from <country>".
+- For places involved in geopolitical disputes (contested islands, contested historical events, contested place names): use a neutral textbook tone. Acknowledge the term without taking sides; if a Korean / Japanese / Chinese learner is the audience, present the term as they would encounter it in their country's standard textbook. Do not insert advocacy or political framing.
+- target_gloss for public figures: just the name in TARGET_LANG (e.g. target_gloss="조 바이든"). Do NOT cram biography into the gloss.
 
 For non-valid_word verdicts, "senses" must be an empty array.
 

@@ -32,14 +32,31 @@ const STOP_WORDS = new Set([
   "do", "did", "does", "have", "has", "had",
 ]);
 
+// Korean particles attached to nouns/verbs that we need to strip so token
+// matching works. ko/ja agglutination glues these to content words ("능력이",
+// "능력을", "능력에서는") and exact-match scoring would miss them. We strip
+// trailing particle clusters from each whitespace-split token.
+//   ko 격조사: 이/가/을/를/은/는/의/에/에서/에게/한테/께/으로/로/와/과/도/만
+//             보다/처럼/까지/부터/조차/마저/이라도/이며/이고
+//   ko 종결어미: 다/요/네/구나/까/지/세요/습니다/ㅂ니다  (붙어있을 때 컷)
+const KO_PARTICLE_RE =
+  /(?:으로서|에게서|에서는|에서도|에서|에게|한테|께서|이라도|까지|부터|조차|마저|처럼|보다|으로|와|과|이며|이고|이라|이다|입니다|이요|이|가|을|를|은|는|의|도|만|와|로|랑|이랑|뿐|이나|나|네|니|냐|군요|네요|군|구나|지요|지)$/;
+function stripKoreanParticle(t: string): string {
+  // Only fire on tokens with Hangul; latin tokens pass through.
+  if (!/[가-힯]/.test(t)) return t;
+  // Single stripping pass — particles can chain but one strip captures the
+  // most common 1- or 2-syllable suffix and gets us to the lemma.
+  const stripped = t.replace(KO_PARTICLE_RE, "");
+  return stripped.length >= 1 ? stripped : t;
+}
+
 function tokenize(s: string): Set<string> {
-  return new Set(
-    (s || "")
-      .toLowerCase()
-      .replace(/[(),.;:!?'"`“”]/g, " ")
-      .split(/\s+/)
-      .filter((t) => t.length > 1),  // drop 1-char noise
-  );
+  const raw = (s || "")
+    .toLowerCase()
+    .replace(/[(),.;:!?'"`“”、。!?]/g, " ")
+    .split(/\s+/)
+    .filter((t) => t.length > 1);
+  return new Set(raw.map(stripKoreanParticle).filter((t) => t.length >= 1));
 }
 
 export function realignExamplesByTranslation(
@@ -89,12 +106,22 @@ export function realignExamplesByTranslation(
       continue;
     }
 
-    // No discriminating-token match. Keep original index if free; drop if
-    // already taken — a confidently-wrong example is worse than no example.
+    // No discriminating-token match. Trust the LLM's original meaningIndex
+    // first; if that slot is taken, fall to the next free slot so we don't
+    // leave a meaning with zero examples. Dropping is worse for the learner
+    // than a tentatively-assigned example.
     const orig = ex.meaningIndex ?? 0;
     if (orig >= 0 && orig < meanings.length && !usedSlots.has(orig)) {
       out.push(ex);
       usedSlots.add(orig);
+      continue;
+    }
+    for (let i = 0; i < meanings.length; i++) {
+      if (!usedSlots.has(i)) {
+        out.push({ ...ex, meaningIndex: i });
+        usedSlots.add(i);
+        break;
+      }
     }
   }
 

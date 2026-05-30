@@ -16,37 +16,43 @@ const POS_MAP: Record<string, Record<string, string>> = {
     preposition: '전치사', conjunction: '접속사', interjection: '감탄사',
     pronoun: '대명사', determiner: '관형사', particle: '조사',
     'proper noun': '고유명사', abbreviation: '약어', prefix: '접두사', suffix: '접미사',
-    expression: '표현',
+    expression: '표현', numeral: '수사', symbol: '기호',
   },
   ja: {
     noun: '名詞', verb: '動詞', adjective: '形容詞', adverb: '副詞',
     preposition: '前置詞', conjunction: '接続詞', interjection: '感嘆詞',
     pronoun: '代名詞', 'proper noun': '固有名詞', expression: '表現',
+    numeral: '数詞', symbol: '記号',
   },
   zh: {
     noun: '名词', verb: '动词', adjective: '形容词', adverb: '副词',
     preposition: '介词', conjunction: '连词', interjection: '叹词',
     pronoun: '代词', 'proper noun': '专有名词', expression: '表达',
+    numeral: '数词', symbol: '符号',
   },
   es: {
     noun: 'sustantivo', verb: 'verbo', adjective: 'adjetivo', adverb: 'adverbio',
     preposition: 'preposición', conjunction: 'conjunción', interjection: 'interjección',
     pronoun: 'pronombre', 'proper noun': 'nombre propio', expression: 'expresión',
+    numeral: 'numeral', symbol: 'símbolo',
   },
   fr: {
     noun: 'nom', verb: 'verbe', adjective: 'adjectif', adverb: 'adverbe',
     preposition: 'préposition', conjunction: 'conjonction', interjection: 'interjection',
     pronoun: 'pronom', 'proper noun': 'nom propre', expression: 'expression',
+    numeral: 'numéral', symbol: 'symbole',
   },
   de: {
     noun: 'Nomen', verb: 'Verb', adjective: 'Adjektiv', adverb: 'Adverb',
     preposition: 'Präposition', conjunction: 'Konjunktion', interjection: 'Interjektion',
     pronoun: 'Pronomen', 'proper noun': 'Eigenname', expression: 'Ausdruck',
+    numeral: 'Numerale', symbol: 'Symbol',
   },
   it: {
     noun: 'nome', verb: 'verbo', adjective: 'aggettivo', adverb: 'avverbio',
     preposition: 'preposizione', conjunction: 'congiunzione', interjection: 'interiezione',
     pronoun: 'pronome', 'proper noun': 'nome proprio', expression: 'espressione',
+    numeral: 'numerale', symbol: 'simbolo',
   },
   pt: {
     noun: 'substantivo', verb: 'verbo', adjective: 'adjetivo', adverb: 'advérbio',
@@ -100,22 +106,90 @@ const GENDER_LABEL: Record<string, { m: string; f: string; n: string; mf: string
 };
 
 /**
- * Build the marker text shown before each meaning's definition. As a learning
- * tool (not a dictionary), we no longer surface part-of-speech to users.
- * Grammatical gender, however, is grammatically essential for gendered
- * languages (de/fr/es/it/pt/ru) so we keep it. Returns the inner text
- * (no parens) so call sites control wrapping — empty string means "skip".
+ * Build the marker text shown before each meaning's definition. POS is
+ * localized to the user's UI language (their native language) — NOT the
+ * wordlist's target language. A Korean user always sees "명사" whether the
+ * wordlist is en→ko, ko→en, or ko→fr. Gender for Latin-language nouns is
+ * appended. Returns the inner text (no parens) so call sites control wrapping.
+ * (Earlier we hid POS to keep the learning UI minimal; reverted 2026-05-30 to
+ * make cards feel like a real wordlist.)
  */
 export function formatPOS(
-  _pos: string,
+  pos: string,
   gender: 'm' | 'f' | 'n' | 'mf' | undefined,
   uiLang: string,
 ): string {
-  if (!gender) return '';
-  const labels = GENDER_LABEL[uiLang]
-    ?? GENDER_LABEL[uiLang.split('-')[0]]
-    ?? GENDER_LABEL.en;
-  return labels[gender];
+  const parts: string[] = [];
+  if (pos) parts.push(translatePOS(pos, uiLang));
+  if (gender) {
+    const labels = GENDER_LABEL[uiLang]
+      ?? GENDER_LABEL[uiLang.split('-')[0]]
+      ?? GENDER_LABEL.en;
+    parts.push(labels[gender]);
+  }
+  return parts.join(' · ');
+}
+
+/**
+ * Short localized register chip shown beside a meaning ("informal", "slang",
+ * "honorific", etc.). Returns empty for neutral senses or unmapped registers.
+ */
+const REGISTER_LABEL: Record<string, Record<string, string>> = {
+  ko: {
+    colloquial: '구어', informal: '비격식', slang: '속어', vulgar: '비속어',
+    humorous: '유머', derogatory: '비하', literary: '문어', poetic: '시적',
+    honorific: '존칭', humble: '겸손', polite: '정중', euphemistic: '완곡',
+    childish: '아이말', 'feminine-speech': '여성어', 'masculine-speech': '남성어',
+  },
+  en: {
+    colloquial: 'colloq.', informal: 'informal', slang: 'slang', vulgar: 'vulgar',
+    humorous: 'humorous', derogatory: 'derog.', literary: 'literary', poetic: 'poetic',
+    honorific: 'honorific', humble: 'humble', polite: 'polite', euphemistic: 'euph.',
+    childish: 'childish', 'feminine-speech': 'fem. speech', 'masculine-speech': 'masc. speech',
+  },
+  ja: {
+    colloquial: '口語', informal: 'くだけた', slang: '俗語', vulgar: '卑語',
+    humorous: 'おどけ', derogatory: '蔑称', literary: '文語', poetic: '詩的',
+    honorific: '敬語', humble: '謙譲', polite: '丁寧', euphemistic: '婉曲',
+    childish: '幼児語', 'feminine-speech': '女性語', 'masculine-speech': '男性語',
+  },
+  'zh-CN': {
+    colloquial: '口语', informal: '非正式', slang: '俚语', vulgar: '粗俗',
+    humorous: '幽默', derogatory: '贬义', literary: '书面', poetic: '诗意',
+    honorific: '敬语', humble: '谦语', polite: '客气', euphemistic: '委婉',
+    childish: '童语', 'feminine-speech': '女性用语', 'masculine-speech': '男性用语',
+  },
+  es: {
+    colloquial: 'coloquial', informal: 'informal', slang: 'jerga', vulgar: 'vulgar',
+    humorous: 'humorístico', derogatory: 'despectivo', literary: 'literario', poetic: 'poético',
+    honorific: 'honorífico', humble: 'humilde', polite: 'cortés', euphemistic: 'eufemístico',
+    childish: 'infantil', 'feminine-speech': 'lenguaje fem.', 'masculine-speech': 'lenguaje masc.',
+  },
+  fr: {
+    colloquial: 'familier', informal: 'informel', slang: 'argot', vulgar: 'vulgaire',
+    humorous: 'humoristique', derogatory: 'péjoratif', literary: 'littéraire', poetic: 'poétique',
+    honorific: 'honorifique', humble: 'humble', polite: 'poli', euphemistic: 'euphémistique',
+    childish: 'enfantin', 'feminine-speech': 'langage fém.', 'masculine-speech': 'langage masc.',
+  },
+  de: {
+    colloquial: 'umgangsspr.', informal: 'informell', slang: 'Slang', vulgar: 'vulgär',
+    humorous: 'humorvoll', derogatory: 'abwertend', literary: 'literarisch', poetic: 'poetisch',
+    honorific: 'höflich', humble: 'bescheiden', polite: 'höflich', euphemistic: 'verhüllend',
+    childish: 'kindlich', 'feminine-speech': 'weibl. Sprache', 'masculine-speech': 'männl. Sprache',
+  },
+  it: {
+    colloquial: 'colloquiale', informal: 'informale', slang: 'gergo', vulgar: 'volgare',
+    humorous: 'umoristico', derogatory: 'spregiativo', literary: 'letterario', poetic: 'poetico',
+    honorific: 'onorifico', humble: 'umile', polite: 'cortese', euphemistic: 'eufemistico',
+    childish: 'infantile', 'feminine-speech': 'parlato femm.', 'masculine-speech': 'parlato masch.',
+  },
+};
+export function formatRegister(register: string | undefined, uiLang: string): string {
+  if (!register) return '';
+  const labels = REGISTER_LABEL[uiLang]
+    ?? REGISTER_LABEL[uiLang.split('-')[0]]
+    ?? REGISTER_LABEL.en;
+  return labels[register] ?? register;
 }
 
 function fixPOS(result: WordLookupResult, targetLang: string): WordLookupResult {

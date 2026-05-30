@@ -16,7 +16,8 @@ type ReviewOrder = 'newest' | 'shuffle';
 type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
 
 const MIN_SESSION = 10;
-const MAX_SESSION = 50;
+const MAX_SESSION_FREE = 30;
+const MAX_SESSION_PREMIUM = 50;
 
 interface Props {
   visible: boolean;
@@ -66,6 +67,7 @@ function CenteredCardLayout({
 }: Props) {
   const { t } = useTranslation();
   const premium = usePremium();
+  const MAX_SESSION = premium ? MAX_SESSION_PREMIUM : MAX_SESSION_FREE;
   const [modeListOpen, setModeListOpen] = useState(false);
 
   return (
@@ -234,6 +236,7 @@ function BottomSheetLayout({
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const premium = usePremium();
+  const MAX_SESSION = premium ? MAX_SESSION_PREMIUM : MAX_SESSION_FREE;
   const { isTablet, contentWidth } = useTablet();
   const [modeListOpen, setModeListOpen] = useState(false);
 

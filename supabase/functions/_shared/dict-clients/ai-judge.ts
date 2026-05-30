@@ -343,6 +343,7 @@ General profanity / slang / casual derogatory that is NOT discriminatory or hara
 - Return "" when SOURCE_LANG equals TARGET_LANG, or when PRE_TARGET is already provided, or when TARGET_LANG is English and EN already conveys meaning.
 - Otherwise a recognizable TARGET_LANG lexical item, not a paraphrase. Different senses must take different translations.
 - For grammatical particles / function words / bound morphemes (Korean 조사, Japanese 助詞, Chinese 助词): never echo the dictionary definition — output a SHORT learner-card label ("topic marker", "object marker", "past tense", …), 1-3 words MAX.
+- For real public figures (politicians/world leaders/celebrities/historical figures): output just the full name in TARGET_LANG (e.g. "조 바이든", "Donald Trump") — no biographical commentary. Keep neutral and factual; let the learner card itself stay minimal.
 
 Output strict JSON (id is the integer from the input, no other keys):
 {
@@ -497,8 +498,12 @@ const SELECT_SYSTEM = `You curate vocabulary cards for GENERAL language learners
 
 Return ONLY the everyday CORE meanings a general learner needs:
 - MERGE AGGRESSIVELY by core concept, not by nuance. Senses that express one underlying idea — even applied to different domains, registers, or connotations — collapse into a SINGLE card. Split into separate cards only when the meanings are genuinely unrelated: a different core concept, or a homonym from another origin.
-- DROP archaic, obsolete, historical, highly technical/jargon, proper-name, and rare or regional senses.
+- DROP archaic, obsolete, historical, highly technical/jargon, and rare or regional senses. Proper-name senses are KEPT only when W is itself a real public figure / place / work a learner would plausibly meet (see PUBLIC FIGURE RULE below); otherwise drop proper-name uses.
 - Order by everyday frequency, most common first. Return 2-4 cards in almost all cases; allow a 5th only for a genuinely rich word. Prefer FEWER, broader cards over many narrow ones.
+
+PUBLIC FIGURE / DISPUTED TOPIC RULE — NEUTRAL CARDS:
+- When a sense identifies a real politician, world leader, monarch, public official, celebrity, athlete, author, or other public figure, render target_translation as just the full name in TARGET_LANG (e.g. "조 바이든", "Donald Trump", "Xi Jinping") with NO biographical commentary. The "en" label is a brief neutral descriptor: full name + role + country/affiliation only, no controversies, no party framing, no current-events opinion. Limit to ONE merged card for the figure.
+- For contested place names / historical events / geopolitical disputes: present the term in neutral textbook tone, as a learner of SOURCE_LANG would encounter it in standard textbooks. Do not insert advocacy.
 
 For each kept meaning, choose ONE representative sense and output:
 - id: the integer id of that representative sense
@@ -540,6 +545,12 @@ async function judgeSelect(
     `All senses:\n${lines}`;
   const resp = (await openaiCall(SELECT_SYSTEM, userPrompt, opts.model)) as { meanings: SelectItem[] };
 
+  // Strip the meta-category prefix some models prepend to translations of
+  // idioms / set phrases ("idiom, substitute", "expression: …", "phrase - …").
+  // The learner card needs the lexical item only.
+  const stripMetaPrefix = (s: string) =>
+    s.replace(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)\s*[,:.\-]\s*/i, "").trim();
+
   const out: JudgedSense[] = [];
   const seen = new Set<number>();
   const seenPrefix = new Set<string>(); // for dedupByEntry (jmdict_seq)
@@ -557,8 +568,8 @@ async function judgeSelect(
       seenPrefix.add(prefix);
     }
     seen.add(idx);
-    const enLabel = (m.en ?? "").trim();
-    const tr = (m.target_translation ?? "").trim();
+    const enLabel = stripMetaPrefix((m.en ?? "").trim());
+    const tr = stripMetaPrefix((m.target_translation ?? "").trim());
     const prefill = prefillTranslation(sense, targetLang);
     out.push({
       sense,

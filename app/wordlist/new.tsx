@@ -16,7 +16,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
-import { AdBanner } from '@/components/ad-banner';
 
 import { STUDY_LANGUAGES, findLanguage, isStudyLang } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
@@ -340,7 +339,6 @@ export default function NewWordlistScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
       </TabletContainer>
-      <AdBanner />
     </SafeAreaView>
   );
 }

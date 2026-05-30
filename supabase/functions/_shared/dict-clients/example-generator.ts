@@ -90,7 +90,7 @@ You receive:
 - SCENE_ANCHOR: a broad situational context to vary the scene (NOT a vocabulary instruction — do not name it literally)
 
 Requirements for the SOURCE_LANG sentence:
-1. Length: 6 to 14 words for Latin-script languages; 8 to 16 characters for CJK languages. ONE sentence.
+1. Length: 6 to 14 words for Latin-script languages; 8 to 16 characters for CJK languages. EXACTLY ONE sentence — no compound sentences joined by periods/exclamation/question marks. The sentence ends with a single sentence-final punctuation mark and contains zero mid-sentence sentence-final punctuation. The translation must likewise be ONE sentence.
 2. Must illustrate THIS specific sense unambiguously — not a different sense of the same word, not a meta usage.
 3. Surrounding vocabulary at or below the headword's familiarity level. Avoid rare, technical, or formal words around W.
 4. Grammar fully natural and unambiguous to a native speaker of SOURCE_LANG.
@@ -103,6 +103,10 @@ Requirements for the SOURCE_LANG sentence:
    - For VERBS and ADJECTIVES (and other POS whose inflected ending is part of the lexeme, not a separable particle), wrap the FULL inflected form together — stem + ending stays inside the marker as one unit. Do not split a verb stem from its conjugation.
    - For derivational SUFFIXES that never appear standalone (plural / honorific / nominalizers fused to the host), keep host + suffix together inside the wrap.
 6. Let the SCENE_ANCHOR loosely flavor the situation — never quote it, never list its keywords as nouns.
+7. PUBLIC FIGURE / DISPUTED TOPIC NEUTRALITY — when W is a real politician, world leader, monarch, public official, celebrity, athlete, author, or refers to a contested geopolitical/historical topic, the example must be NEUTRAL and FACTUAL:
+   - Allowed: textbook-style "We learned about W in history class.", "W appears in today's news article.", neutral biographical statements ("W was born in 1942.", "W is the current president of <country>."), or generic scene-setting that mentions the name without political commentary.
+   - Forbidden: any expression of approval / disapproval, controversy, scandal, conflict, policy stance, party labeling, election outcome opinion, comparison to other figures, advocacy for or against the figure's actions, references to ongoing political disputes. No charged adjectives ("corrupt", "great", "controversial", etc.) attached to W.
+   - For disputed places / historical events: present as a learner would see in a standard school textbook of the SOURCE_LANG country. No taking sides.
 
 Requirements for the TARGET_LANG translation:
 - Natural, idiomatic translation of the entire sentence (not word-for-word).
@@ -175,6 +179,16 @@ function countMarkers(s: string): number {
 
 function stripMarkers(s: string): string {
   return s.replace(/\*\*/g, "");
+}
+
+// Count sentences for the single-sentence guard. Splits on sentence-ending
+// punctuation (Latin .!? + CJK 。！？) followed by whitespace OR end of string.
+// "3.14" stays as one sentence because the period inside a number isn't
+// followed by whitespace.
+function sentenceCount(s: string): number {
+  const plain = stripMarkers(s).trim();
+  if (!plain) return 0;
+  return plain.split(/[.!?。！？]+(?=\s|$)/).map((t) => t.trim()).filter(Boolean).length;
 }
 
 function lengthOk(s: string, sourceLang: string): boolean {
@@ -258,6 +272,13 @@ function validate(
     return { ok: false, reason: "headword_missing" };
   }
   if (resp.translation.trim().length < 2) return { ok: false, reason: "translation_too_short" };
+  // Single-sentence guard: review/quiz UIs expect one cohesive example. Reject
+  // 2+ sentences in either source or translation so the retry can produce a
+  // single-sentence variant.
+  const srcN = sentenceCount(resp.sentence);
+  if (srcN > 1) return { ok: false, reason: `source_multi_sentence=${srcN}` };
+  const trN = sentenceCount(resp.translation);
+  if (trN > 1) return { ok: false, reason: `translation_multi_sentence=${trN}` };
   // Translation is plain prose — no markers required (or allowed). The
   // learning card highlights only the source sentence.
   return { ok: true };

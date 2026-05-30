@@ -3,10 +3,10 @@ import { router, Stack, useFocusEffect, useLocalSearchParams } from 'expo-router
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, FlatList, Platform, Pressable, ScrollView, Text, View } from 'react-native';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTablet } from '@src/hooks/useTablet';
 
-import { AdBanner } from '@/components/ad-banner';
 import { TabletContainer } from '@/components/tablet-container';
 import { Toast } from '@/components/toast';
 import { STUDY_LANGUAGES } from '@src/constants/languages';
@@ -103,6 +103,21 @@ export default function WordlistLibraryScreen() {
     if (!activeLang) return [];
     return itemsInCategory.filter((i) => i.sourceLang === activeLang);
   }, [itemsInCategory, activeLang]);
+
+  // Inject native ad markers every N items. Phone (single column) = 10,
+  // tablet (2-col grid) = 20 so the visual cadence matches across layouts.
+  const dataWithAds = useMemo<Array<(typeof filtered)[number] | { __ad: true; key: string }>>(() => {
+    if (filtered.length === 0) return [];
+    const adsEvery = isTablet ? 20 : 10;
+    const out: Array<(typeof filtered)[number] | { __ad: true; key: string }> = [];
+    filtered.forEach((item, idx) => {
+      out.push(item);
+      if ((idx + 1) % adsEvery === 0 && idx < filtered.length - 1) {
+        out.push({ __ad: true, key: `ad-${idx}` });
+      }
+    });
+    return out;
+  }, [filtered, isTablet]);
 
   const activeLangMeta = useMemo(
     () => STUDY_LANGUAGES.find((l) => l.code === activeLang),
@@ -266,8 +281,8 @@ export default function WordlistLibraryScreen() {
 
           <FlatList
             key={isTablet ? 'grid' : 'list'}
-            data={filtered}
-            keyExtractor={(it) => it.id}
+            data={dataWithAds}
+            keyExtractor={(it) => ('__ad' in it ? it.key : it.id)}
             numColumns={isTablet ? 2 : 1}
             columnWrapperStyle={isTablet ? { gap: 12 } : undefined}
             contentContainerStyle={{ padding: 24, paddingBottom: 80, gap: isTablet ? 12 : 0 }}
@@ -279,7 +294,15 @@ export default function WordlistLibraryScreen() {
                 </Text>
               </View>
             )}
-            renderItem={({ item }) => (
+            renderItem={({ item }) => {
+              if ('__ad' in item) {
+                return (
+                  <View className={isTablet ? 'flex-1' : 'mb-3'}>
+                    <NativeAdCard />
+                  </View>
+                );
+              }
+              return (
               <Pressable
                 ref={(r) => {
                   if (r) cardRefs.current.set(item.id, r as unknown as View);
@@ -339,12 +362,12 @@ export default function WordlistLibraryScreen() {
                 </View>
                 <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
               </Pressable>
-            )}
+              );
+            }}
           />
         </>
       )}
       </TabletContainer>
-      <AdBanner />
       <Toast
         visible={!!toast}
         message={toast}

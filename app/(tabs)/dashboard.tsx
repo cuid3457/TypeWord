@@ -23,6 +23,7 @@ import { NicknameModal } from '@/components/nickname-modal';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { AddFriendByUsernameModal } from '@/components/add-friend-by-username-modal';
 import { TargetReportModal } from '@/components/target-report-modal';
+import { NativeAdCard } from '@/components/native-ad-card';
 import { useRefreshNotificationBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { getCachedDashboard, refreshDashboard, subscribeDashboard } from '@src/services/dashboardCache';
@@ -375,6 +376,9 @@ export default function DashboardScreen() {
                 </View>
               </>
             )}
+            <View className="mt-4">
+              <NativeAdCard />
+            </View>
           </View>
         }
         renderItem={({ item }) => (
