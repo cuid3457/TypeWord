@@ -19,7 +19,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium } from '@src/hooks/usePremium';
-import { refreshBonusPremium } from '@src/services/subscriptionService';
+import {
+  purchaseAnnual,
+  purchaseMonthly,
+  refreshBonusPremium,
+} from '@src/services/subscriptionService';
+
+// Phase 2 web checkout. When EXPO_PUBLIC_WEB_CHECKOUT_PROVIDER is unset or
+// 'none', we hide the web-buy buttons and keep the mobile-store CTAs. When
+// set to 'paddle' / 'toss' / etc, subscriptionService.web.ts routes through
+// the corresponding hosted checkout.
+const WEB_CHECKOUT_PROVIDER = (process.env.EXPO_PUBLIC_WEB_CHECKOUT_PROVIDER ?? 'none') as
+  | 'none'
+  | 'paddle'
+  | 'toss'
+  | 'stripe';
+const WEB_CHECKOUT_ENABLED = WEB_CHECKOUT_PROVIDER !== 'none';
 
 // Until the app ships to the stores with public listings, the search
 // URLs work for both web (returns the search results page) and as
@@ -52,6 +67,19 @@ export function Paywall() {
       // usePremium() updates reactively via its own subscription —
       // show a generic acknowledgement either way.
       setMessage(t('premium.status_refreshed') || 'Status refreshed');
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
+  const handleWebPurchase = async (plan: 'monthly' | 'annual') => {
+    setRefreshing(true);
+    setMessage(null);
+    try {
+      const ok = plan === 'annual' ? await purchaseAnnual() : await purchaseMonthly();
+      if (!ok) {
+        setMessage(t('premium.web_checkout_unavailable') || 'Checkout temporarily unavailable');
+      }
     } finally {
       setRefreshing(false);
     }
@@ -118,12 +146,42 @@ export function Paywall() {
           ))}
         </View>
 
-        {/* Web CTA — subscribe in the mobile app */}
+        {/* Web CTA — subscribe in the mobile app (or directly on web when enabled) */}
         {!premium ? (
           <View className="mt-8">
-            <Text className="text-center text-sm leading-5 text-muted">
-              {t('premium.web_subscribe_in_app')}
-            </Text>
+            {WEB_CHECKOUT_ENABLED ? (
+              <>
+                <Pressable
+                  onPress={() => handleWebPurchase('annual')}
+                  disabled={refreshing}
+                  className="flex-row items-center justify-center rounded-xl bg-[#2EC4A5] py-4"
+                  accessibilityRole="button"
+                  accessibilityLabel={t('premium.subscribe_annual') || 'Subscribe annual'}
+                >
+                  <Text className="text-base font-semibold text-white">
+                    {t('premium.subscribe_annual') || 'Subscribe annual'}
+                  </Text>
+                </Pressable>
+                <Pressable
+                  onPress={() => handleWebPurchase('monthly')}
+                  disabled={refreshing}
+                  className="mt-3 flex-row items-center justify-center rounded-xl border border-[#2EC4A5] py-4"
+                  accessibilityRole="button"
+                  accessibilityLabel={t('premium.subscribe_monthly') || 'Subscribe monthly'}
+                >
+                  <Text className="text-base font-semibold text-[#2EC4A5]">
+                    {t('premium.subscribe_monthly') || 'Subscribe monthly'}
+                  </Text>
+                </Pressable>
+                <Text className="mt-4 text-center text-xs text-muted">
+                  {t('premium.web_or_mobile') || 'Or use the mobile app:'}
+                </Text>
+              </>
+            ) : (
+              <Text className="text-center text-sm leading-5 text-muted">
+                {t('premium.web_subscribe_in_app')}
+              </Text>
+            )}
 
             <Pressable
               onPress={() => Linking.openURL(STORE_URLS.ios)}

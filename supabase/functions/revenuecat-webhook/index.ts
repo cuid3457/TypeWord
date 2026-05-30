@@ -108,12 +108,16 @@ function affectedUserIds(
 }
 
 /**
- * Re-sync one user's profiles.plan against RC's authoritative entitlement
- * state. Skips anonymous ids and users without a profile row. On free→premium
- * upgrade, resets the monthly image-extract quota (industry standard —
- * Notion/ChatGPT/Cursor/Duolingo reset on upgrade; abuse bounded by store
- * refund review + trial-eligibility gating). `extraUpdate` carries event-only
- * fields (e.g. trial_ends_at) that apply solely to the event subject.
+ * Re-sync one user's profiles.plan against the union of entitlement sources
+ * (RC live state, web payment, referral bonus). Delegates to the
+ * reconcile_plan_from_sources RPC so RC and web webhooks converge on the
+ * same plan without trampling each other. Skips anonymous ids and users
+ * without a profile row.
+ *
+ * On free→premium transition, the RPC resets the monthly image-extract
+ * quota (industry standard — Notion/ChatGPT/Cursor/Duolingo reset on
+ * upgrade). `extraUpdate` carries event-only fields (e.g. trial_ends_at)
+ * forwarded as JSONB to the RPC.
  *
  * Throws on DB / RC API failure so the webhook returns 500 and RC retries.
  */
@@ -126,40 +130,29 @@ async function reconcileUserPlan(
 ): Promise<Plan | null> {
   if (!UUID_REGEX.test(userId)) return null;
 
-  const newPlan: Plan =
-    (await customerHasActiveEntitlement(projectId, userId, apiKey))
-      ? "premium"
-      : "free";
+  const rcActive = await customerHasActiveEntitlement(projectId, userId, apiKey);
 
-  const { data: existing } = await admin
-    .from("profiles")
-    .select("plan")
-    .eq("user_id", userId)
-    .maybeSingle();
-  if (!existing) {
+  const { data, error } = await admin.rpc("reconcile_plan_from_sources", {
+    p_user_id: userId,
+    p_rc_active: rcActive,
+    p_extra: extraUpdate,
+  });
+  if (error) {
+    throw new Error(`reconcile_plan_from_sources failed for ${userId}: ${error.message}`);
+  }
+  // RPC returns SETOF; empty when there's no profile row.
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row) {
     console.log("[rc-webhook] no profile row, skipped", { userId });
     return null;
   }
-  const oldPlan = (existing as { plan?: string }).plan ?? "free";
-
-  const updateData: Record<string, unknown> = { plan: newPlan, ...extraUpdate };
-  if (oldPlan === "free" && newPlan === "premium") {
-    const now = new Date();
-    const y = now.getUTCFullYear();
-    const m = String(now.getUTCMonth() + 1).padStart(2, "0");
-    updateData.image_extract_count = 0;
-    updateData.image_extract_bucket = `${y}-${m}`;
-  }
-
-  const { error } = await admin
-    .from("profiles")
-    .update(updateData)
-    .eq("user_id", userId);
-  if (error) {
-    throw new Error(`DB update failed for ${userId}: ${error.message}`);
-  }
-
-  console.log("[rc-webhook] reconciled", { userId, oldPlan, newPlan });
+  const newPlan = (row as { new_plan?: string }).new_plan as Plan | undefined ?? null;
+  console.log("[rc-webhook] reconciled", {
+    userId,
+    rcActive,
+    newPlan,
+    source: (row as { new_source?: string }).new_source ?? null,
+  });
   return newPlan;
 }
 
