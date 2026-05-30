@@ -209,7 +209,7 @@ export function ReviewCardContent({
     ) : null;
 
   const renderChoices = () => (
-    <Animated.View layout={LinearTransition.duration(300)} className="mt-6" style={{ gap: 10 }}>
+    <Animated.View layout={LinearTransition.duration(300)} className="mt-6">
       {choices.map((c, i) => {
         const isCorrect = c === correctDefinition;
         const isSelected = choiceSelected === i;
@@ -225,7 +225,9 @@ export function ReviewCardContent({
           borderStyle = { borderWidth: 2, borderColor: '#E0654F', backgroundColor: colorScheme === 'dark' ? '#3A1A14' : '#F6E4DF' };
         }
         return (
-          <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)}>
+          // marginBottom per-item: reanimated Animated.View drops the `gap`
+          // style on react-native-web, so we space siblings explicitly.
+          <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)} style={{ marginBottom: 10 }}>
             <Pressable
               onPress={() => choiceSelected === null && setChoiceSelected(i)}
               className={`flex-row items-center rounded-xl p-4 ${bg}`}
@@ -582,7 +584,7 @@ export function ReviewCardContent({
               </Text>
             ) : null}
           </View>
-          <Animated.View layout={LinearTransition.duration(300)} className="mt-6" style={{ gap: 10 }}>
+          <Animated.View layout={LinearTransition.duration(300)} className="mt-6">
             {choices.map((c, i) => {
               const isCorrect = c === correctDefinition;
               const isSelected = choiceSelected === i;
@@ -597,7 +599,7 @@ export function ReviewCardContent({
                 bg = '';
               }
               return (
-                <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)}>
+                <Animated.View key={i} exiting={FadeOut.duration(200)} layout={LinearTransition.duration(300)} style={{ marginBottom: 10 }}>
                   <Pressable
                     onPress={() => choiceSelected === null && setChoiceSelected(i)}
                     className={`flex-row items-center rounded-xl p-4 ${bg}`}
