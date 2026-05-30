@@ -28,8 +28,9 @@ import { Toast } from '@/components/toast';
 import type { PartialLookup } from '@src/api/streamLookup';
 import { findLanguage } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
-import { findWord, getBook, getTotalWordCount, saveWord } from '@src/db/queries';
-import { isAnonymous } from '@src/services/authService';
+import { findWord, getBook, getTotalWordCount, saveWord, ANON_WORD_LIMIT } from '@src/db/queries';
+import { useIsAnonymous } from '@src/hooks/useIsAnonymous';
+import { SignupCTAModal } from '@/components/signup-cta';
 import { getStreak, getTodayStreakDate, recordStudyDateIfQualified } from '@src/services/streakService';
 import {
   CELEBRATE_EVENT,
@@ -203,7 +204,8 @@ export default function AddWordScreen() {
   const [toast, setToast] = useState('');
   const [showReport, setShowReport] = useState(false);
   const [reportToast, setReportToast] = useState('');
-  const [showSignupNudge, setShowSignupNudge] = useState(false);
+  const [showAnonWordLimitModal, setShowAnonWordLimitModal] = useState(false);
+  const isAnon = useIsAnonymous();
 
   const [ocrWords, setOcrWords] = useState<ExtractedWord[]>([]);
   const [ocrSelected, setOcrSelected] = useState<Set<number>>(new Set());
@@ -587,6 +589,17 @@ export default function AddWordScreen() {
     const trimmed = word.trim();
     if (!trimmed || saving || !response || !book) return;
 
+    // Anon demo cap (10 words): hard-stop before saving the 11th word.
+    // Show signup CTA modal — _layout.tsx's anon→signup migration keeps
+    // the existing local SQLite words intact through signup.
+    if (isAnon) {
+      const current = await getTotalWordCount();
+      if (current >= ANON_WORD_LIMIT) {
+        setShowAnonWordLimitModal(true);
+        return;
+      }
+    }
+
     setSaving(true);
     try {
       const wordId = genId();
@@ -617,15 +630,9 @@ export default function AddWordScreen() {
       // (spinner) doesn't visually swap mid-animation. Reset happens when the
       // next search clears state.
       maybeCelebrateStreak();
-      const NUDGE_KEY = 'typeword.signupNudgeShown';
-      const alreadyNudged = await AsyncStorage.getItem(NUDGE_KEY);
-      if (!alreadyNudged) {
-        const [count, anon] = await Promise.all([getTotalWordCount(), isAnonymous()]);
-        if (count >= 20 && anon) {
-          await AsyncStorage.setItem(NUDGE_KEY, '1');
-          setShowSignupNudge(true);
-        }
-      }
+      // First-save banner is rendered on the home tab (wordlist list view)
+      // — see (tabs)/index.tsx — so it's visible to the user the moment
+      // they navigate back. No trigger needed here.
     } catch {
       setError(t('error.title'));
       setSaving(false);
@@ -1306,45 +1313,14 @@ export default function AddWordScreen() {
         onClose={() => setMicDeniedModal(false)}
       />
 
-      <Modal visible={showSignupNudge} transparent animationType="fade">
-        <View className="flex-1 items-center justify-center bg-black/50 px-8">
-          <View className="w-full rounded-2xl bg-surface p-6 dark:bg-surface-dark">
-            <View className="items-center">
-              <View className="rounded-full bg-blue-100 p-3 dark:bg-blue-900">
-                <MaterialIcons name="cloud-upload" size={32} color="#3b82f6" />
-              </View>
-              <Text className="mt-4 text-center text-lg font-bold text-ink dark:text-ink-dark">
-                {t('signup_nudge.title')}
-              </Text>
-              <Text className="mt-2 text-center text-sm text-muted">
-                {t('signup_nudge.description')}
-              </Text>
-            </View>
-            <View className="mt-6 gap-3">
-              <Pressable
-                onPress={() => {
-                  setShowSignupNudge(false);
-                  router.push('/auth');
-                }}
-                className="items-center rounded-xl py-4"
-                style={{ backgroundColor: '#2EC4A5' }}
-              >
-                <Text className="text-base font-semibold text-white">
-                  {t('signup_nudge.signup')}
-                </Text>
-              </Pressable>
-              <Pressable
-                onPress={() => setShowSignupNudge(false)}
-                className="items-center py-3"
-              >
-                <Text className="text-sm text-faint">
-                  {t('signup_nudge.later')}
-                </Text>
-              </Pressable>
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <SignupCTAModal
+        visible={showAnonWordLimitModal}
+        title={t('anon.limit_words_title')}
+        message={t('anon.limit_words_message')}
+        ctaLabel={t('anon.signup_cta')}
+        nextPath={`/wordlist/add/${book?.id ?? ''}`}
+        onClose={() => setShowAnonWordLimitModal(false)}
+      />
     </SafeAreaView>
   );
 }

@@ -28,16 +28,20 @@ import { NativeAdCard } from '@/components/native-ad-card';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium, useTier } from '@src/hooks/usePremium';
+import { useIsAnonymous } from '@src/hooks/useIsAnonymous';
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { findLanguage } from '@src/constants/languages';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   deleteBooks,
+  getTotalWordCount,
   listBooks,
   toggleBookPinned,
   BOOK_LIMIT_BY_TIER,
   type BookSortMode,
   type BookWithCount,
 } from '@src/db/queries';
+import { SignupCTABanner } from '@/components/signup-cta';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { getCachedHome, refreshHome, subscribeHome } from '@src/services/homeCache';
 import { type StreakInfo } from '@src/services/streakService';
@@ -51,6 +55,16 @@ export default function HomeScreen() {
   const tier = useTier();
   const { settings } = useUserSettings();
   const { isTablet, contentWidth } = useTablet();
+  const isAnon = useIsAnonymous();
+  // Anon web visitors see active CTA copy in the empty state instead of
+  // the generic "create a wordlist" message. Native anon users still see
+  // the original copy (they're post-install commitment, different funnel).
+  const showAnonEmptyCta = isAnon && Platform.OS === 'web';
+  // First-save banner: shown to anon users with at least one saved word,
+  // until dismissed. Re-checked on focus so it appears the moment the
+  // user navigates back from the add-word screen.
+  const [firstSaveBannerVisible, setFirstSaveBannerVisible] = useState(false);
+  const FIRST_SAVE_BANNER_KEY = 'moavoca.firstSaveBannerDismissed';
   // Seed from boot-prefetch cache so first focus avoids the loading flash.
   const initialHome = getCachedHome();
   const [books, setBooks] = useState<BookWithCount[]>(initialHome?.books ?? []);
@@ -89,6 +103,31 @@ export default function HomeScreen() {
         rescheduleNotifications(getNotificationTranslations(t));
       }
     }, [loadBooks, sortMode, sortReversed, t]),
+  );
+
+  // First-save banner visibility check (anon + has ≥1 saved word + not
+  // previously dismissed). Re-runs on focus so the banner appears the
+  // moment the user navigates back from add-word.
+  useFocusEffect(
+    useCallback(() => {
+      if (!isAnon) {
+        setFirstSaveBannerVisible(false);
+        return;
+      }
+      (async () => {
+        try {
+          const dismissed = await AsyncStorage.getItem(FIRST_SAVE_BANNER_KEY);
+          if (dismissed === '1') {
+            setFirstSaveBannerVisible(false);
+            return;
+          }
+          const wc = await getTotalWordCount();
+          setFirstSaveBannerVisible(wc > 0);
+        } catch {
+          /* AsyncStorage hiccup — leave banner hidden */
+        }
+      })();
+    }, [isAnon]),
   );
 
   const handleSortChange = (mode: BookSortMode) => {
@@ -204,7 +243,7 @@ export default function HomeScreen() {
   type AdItem = { __ad: true; key: string };
   const booksWithAds = useMemo<Array<BookWithCount | AdItem>>(() => {
     if (editMode || books.length === 0) return books;
-    const adsEvery = isTablet ? 14 : 7;
+    const adsEvery = 7;
     const out: Array<BookWithCount | AdItem> = [{ __ad: true, key: 'ad-top' }];
     books.forEach((b, idx) => {
       out.push(b);
@@ -417,19 +456,33 @@ export default function HomeScreen() {
               />
             </View>
             <Text className="mt-5 text-center text-lg font-bold text-ink dark:text-ink-dark">
-              {t('home.empty')}
+              {showAnonEmptyCta ? t('anon.try_now_title') : t('home.empty')}
             </Text>
             <Pressable
               onPress={() => { haptic.tap(); setShowCreateModal(true); }}
               className="mt-5 rounded-xl bg-accent px-6 py-3"
               accessibilityRole="button"
-              accessibilityLabel={t('home.new_button')}
+              accessibilityLabel={showAnonEmptyCta ? t('anon.try_now_cta') : t('home.new_button')}
             >
-              <Text className="text-sm font-bold text-white">{t('home.new_button')}</Text>
+              <Text className="text-sm font-bold text-white">
+                {showAnonEmptyCta ? t('anon.try_now_cta') : t('home.new_button')}
+              </Text>
             </Pressable>
           </View>
         ) : (
           <View style={{ flex: 1 }}>
+            {firstSaveBannerVisible ? (
+              <SignupCTABanner
+                message={t('anon.first_save_banner')}
+                nextPath="/(tabs)"
+                onDismiss={async () => {
+                  setFirstSaveBannerVisible(false);
+                  try {
+                    await AsyncStorage.setItem(FIRST_SAVE_BANNER_KEY, '1');
+                  } catch { /* AsyncStorage hiccup — banner stays hidden in-session */ }
+                }}
+              />
+            ) : null}
             <FlatList
               ref={flatListRef}
               key={isTablet ? 'grid' : 'list'}

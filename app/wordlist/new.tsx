@@ -19,19 +19,23 @@ import { Toast } from '@/components/toast';
 
 import { STUDY_LANGUAGES, findLanguage, isStudyLang } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
-import { insertBook, getBookCount, BOOK_LIMIT_BY_TIER } from '@src/db/queries';
+import { insertBook, getBookCount, BOOK_LIMIT_BY_TIER, ANON_BOOK_LIMIT } from '@src/db/queries';
 import { useTier } from '@src/hooks/usePremium';
+import { useIsAnonymous } from '@src/hooks/useIsAnonymous';
 import { consumePaywallPending } from '@src/services/paywallPending';
 import { genId } from '@src/services/wordService';
 import { haptic } from '@src/services/hapticService';
 import { useUserSettings } from '@src/hooks/useUserSettings';
+import { SignupCTAModal } from '@/components/signup-cta';
 
 const MAX_TITLE_LENGTH = 30;
 
 export default function NewWordlistScreen() {
   const { t, i18n } = useTranslation();
   const tier = useTier();
+  const isAnon = useIsAnonymous();
   const { settings } = useUserSettings();
+  const [showAnonLimitModal, setShowAnonLimitModal] = useState(false);
   const [title, setTitle] = useState('');
   const [studyLang, setStudyLang] = useState<string>(() => {
     const saved = settings?.primarySourceLang;
@@ -88,12 +92,22 @@ export default function NewWordlistScreen() {
       return;
     }
     if (!canSubmit) return;
-    const cap = BOOK_LIMIT_BY_TIER[tier];
-    if (Number.isFinite(cap)) {
+    // Anon demo cap (1 wordlist): show signup CTA modal instead of the
+    // subscription paywall. Authenticated users fall through to tier cap.
+    if (isAnon) {
       const count = await getBookCount();
-      if (count >= cap) {
-        router.push('/subscription');
+      if (count >= ANON_BOOK_LIMIT) {
+        setShowAnonLimitModal(true);
         return;
+      }
+    } else {
+      const cap = BOOK_LIMIT_BY_TIER[tier];
+      if (Number.isFinite(cap)) {
+        const count = await getBookCount();
+        if (count >= cap) {
+          router.push('/subscription');
+          return;
+        }
       }
     }
     setSaving(true);
@@ -339,6 +353,15 @@ export default function NewWordlistScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
       </TabletContainer>
+
+      <SignupCTAModal
+        visible={showAnonLimitModal}
+        title={t('anon.limit_books_title')}
+        message={t('anon.limit_books_message')}
+        ctaLabel={t('anon.signup_cta')}
+        nextPath="/wordlist/new"
+        onClose={() => setShowAnonLimitModal(false)}
+      />
     </SafeAreaView>
   );
 }

@@ -757,6 +757,13 @@ export const BOOK_LIMIT_BY_TIER = {
   premium: Number.POSITIVE_INFINITY,
 } as const;
 
+/** Anonymous (pre-signup) demo caps — see web companion-thesis design.
+ * Enforced at the call sites (wordlist/new + wordlist/add) so the limit-hit
+ * UX routes through the SignupCTA modal instead of throwing. Authenticated
+ * users use BOOK_LIMIT_BY_TIER above. */
+export const ANON_BOOK_LIMIT = 1;
+export const ANON_WORD_LIMIT = 10;
+
 export async function getBookCount(): Promise<number> {
   const db = await getDb();
   const row = await db.getFirstAsync<{ cnt: number }>(
