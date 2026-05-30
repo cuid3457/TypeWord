@@ -40,6 +40,27 @@
   Content-Type: application/json
   Cache-Control: public, max-age=3600
 
+# SPA cache policy
+#
+# Expo Web emits hash-named static assets (entry-<sha>.js, foo-<sha>.js)
+# that are content-addressed and safe to long-cache. But the SPA shell
+# at /app/<route> is served via the _redirects rewrite to /app/index.html,
+# and CF Pages' default for rewritten HTML is `public, s-maxage=604800`
+# (7d edge). When a fresh deploy replaces chunk hashes, any user landing
+# on an edge-cached old shell gets HTML referencing dead chunks. The
+# `/app/*` SPA fallback then serves index.html with text/html for the
+# missing chunk URL, and the browser fails to parse HTML as a JS module
+# ("Loading module … failed").
+#
+# Order matters: CF Pages merges all matching rules and later ones win
+# on the same header name. Static chunks rule must come AFTER the SPA
+# shell rule so it overrides for `/app/_expo/*`.
+/app/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/app/_expo/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /
   Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://*.adtrafficquality.google; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google; font-src https://cdn.jsdelivr.net; connect-src 'self' https://cloudflareinsights.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com https://*.adtrafficquality.google https://*.google.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 

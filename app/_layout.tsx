@@ -13,6 +13,13 @@ import 'react-native-reanimated';
 import { enableFreeze, enableScreens } from 'react-native-screens';
 import '../global.css';
 import '@src/services/uiDefaults';
+import { installChunkLoadReloadGuard } from '@src/services/webChunkReloadGuard';
+
+// Install BEFORE any dynamic import() runs (boot-path itself uses several
+// await import(...) calls below) so a stale-deploy chunk rejection in
+// _layout's first effects is caught by unhandledrejection and triggers a
+// one-shot window.location.reload() instead of stranding the user.
+installChunkLoadReloadGuard();
 
 // Disable react-native-screens optimizations. Default behavior
 // detaches inactive screens from the native view hierarchy and

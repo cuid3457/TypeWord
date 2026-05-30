@@ -22,6 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getCachedReview, refreshReview, subscribeReview } from '@src/services/reviewCache';
 import { showRewardedAd } from '@src/services/rewardedAd';
 import { preloadInterstitial, showInterstitial } from '@src/services/interstitialAd';
+import { reloadForStaleChunk } from '@src/services/webChunkReloadGuard';
 import {
   consumeWord,
   consumeSessionEndAd,
@@ -740,6 +741,12 @@ export default function ReviewScreen() {
         generateFillBlankChoices(ordered, 0, langMap, exIdx);
       }
     } catch (e) {
+      // Stale-deploy chunk failure: an old entry bundle in memory points
+      // at a chunk hash that no longer exists post-redeploy. The catch
+      // here would otherwise render the picker error UI with no path to
+      // recover (state reset retries the same broken import). Reload to
+      // fetch a fresh entry bundle; sessionStorage guards against loops.
+      if (reloadForStaleChunk()) return;
       setPickerError(e instanceof Error && e.message ? e.message : 'unknown');
       setPhase('picker');
     } finally {
