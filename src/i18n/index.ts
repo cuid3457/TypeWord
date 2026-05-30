@@ -1,6 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
+import { Platform } from 'react-native';
 
 import en from './locales/en';
 import { migrateNativeLang } from '@src/constants/languages';
@@ -34,17 +35,32 @@ function loadLocale(code: string) {
   }
 }
 
+// Web SSG concern: expo-localization's getLocales() returns the build
+// machine's locale at static-export time (CF Pages = 'en') but the
+// browser's locale at runtime ('ko' for KR users, etc.). If i18n boots
+// in the browser's locale on first client render, every translated
+// <Text> renders different content than the English SSG HTML → React
+// #418 hydration mismatch on every page load.
+//
+// Fix: on web, boot i18n in English to match the SSG HTML. The root
+// layout's existing useEffect (settings load) then swaps to the user's
+// actual locale via i18n.changeLanguage *after* hydration completes.
+// Brief English flash on first paint is the trade-off for clean
+// hydration. Native (iOS/Android) has no SSG so it keeps booting in
+// the device's locale directly.
+const initLng = Platform.OS === 'web' ? 'en' : deviceLang;
+
 const resources: Record<string, { translation: any }> = {
   en: { translation: en },
 };
 
-if (deviceLang !== 'en') {
-  resources[deviceLang] = { translation: loadLocale(deviceLang) };
+if (initLng !== 'en') {
+  resources[initLng] = { translation: loadLocale(initLng) };
 }
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: deviceLang,
+  lng: initLng,
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
 });
