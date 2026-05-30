@@ -235,11 +235,13 @@ export default function TabLayout() {
     if (isWebTop) {
       // The WebTopTabBar wrapper owns the full-viewport-width bottom hairline
       // so the line spans the gutters; keep the inner bar borderless.
+      // Desktop/tablet web ignores the `tabBarHidden` immersive flag —
+      // big screens have room to keep persistent navigation visible, and
+      // it matches browser-app convention. Phone-web + native still hide.
       return {
         height: TAB_HEIGHT,
         backgroundColor: barBg,
         borderTopWidth: 0,
-        ...(tabBarHidden ? { display: 'none' as const } : null),
       };
     }
     if (isWeb) {
