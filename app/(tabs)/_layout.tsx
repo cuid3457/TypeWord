@@ -31,6 +31,30 @@ const TabBarVisibleContext = React.createContext<{
 }>({ hidden: false, setHidden: () => {} });
 export const useTabBarVisibility = () => useContext(TabBarVisibleContext);
 
+// Web puts the tab bar at the top of the viewport (desktop convention)
+// and caps its inner width so icons don't sprawl across an ultrawide
+// monitor. The mobile ad-banner slot is skipped on web entirely.
+function WebTopTabBar(props: BottomTabBarProps) {
+  const { contentWidth } = useTablet();
+  const colorScheme = useColorScheme();
+  const barBackground = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
+  const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
+  return (
+    <View
+      style={{
+        width: '100%',
+        backgroundColor: barBackground,
+        borderBottomColor: lineColor,
+        borderBottomWidth: 1,
+      }}
+    >
+      <View style={{ width: '100%', maxWidth: contentWidth, alignSelf: 'center' }}>
+        <BottomTabBar {...props} />
+      </View>
+    </View>
+  );
+}
+
 function TabBarWithAd(props: BottomTabBarProps) {
   // Outer wrapper needs explicit width:'100%' for iPad landscape — React
   // Navigation's tabBar slot doesn't stretch a content-sized container,
@@ -138,23 +162,38 @@ export default function TabLayout() {
     }, [refreshReviewBadge, refreshNotificationBadge]),
   );
 
+  // Web puts the tab bar at the top (desktop-web convention) and skips the
+  // mobile ad-banner wrapper. Native keeps the bottom bar with the ad slot.
+  const isWeb = Platform.OS === 'web';
+
   const renderTabBar = useCallback(
-    (props: BottomTabBarProps) => <TabBarWithAd {...props} />,
-    [],
+    (props: BottomTabBarProps) =>
+      isWeb ? <WebTopTabBar {...props} /> : <TabBarWithAd {...props} />,
+    [isWeb],
   );
 
-  const tabBarStyle = useMemo(() => ({
-    height: TAB_HEIGHT + insets.bottom,
-    paddingBottom: insets.bottom,
-    // Warm raised bar: slightly lighter than the canvas content in light
-    // mode (#F4F1EA) and slightly lighter than the dark canvas (#15130E),
-    // so the bar reads as a floating surface. A faint warm hairline on top
-    // carries the separation.
-    backgroundColor: colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7',
-    borderTopColor: colorScheme === 'dark' ? '#322D24' : '#E5DFD3',
-    borderTopWidth: 1,
-    ...(tabBarHidden ? { display: 'none' as const } : null),
-  }), [insets.bottom, colorScheme, tabBarHidden]);
+  const tabBarStyle = useMemo(() => {
+    const barBg = colorScheme === 'dark' ? '#1E1B15' : '#FCFBF7';
+    const lineColor = colorScheme === 'dark' ? '#322D24' : '#E5DFD3';
+    if (isWeb) {
+      // The WebTopTabBar wrapper owns the full-viewport-width bottom hairline
+      // so the line spans the gutters; keep the inner bar borderless.
+      return {
+        height: TAB_HEIGHT,
+        backgroundColor: barBg,
+        borderTopWidth: 0,
+        ...(tabBarHidden ? { display: 'none' as const } : null),
+      };
+    }
+    return {
+      height: TAB_HEIGHT + insets.bottom,
+      paddingBottom: insets.bottom,
+      backgroundColor: barBg,
+      borderTopColor: lineColor,
+      borderTopWidth: 1,
+      ...(tabBarHidden ? { display: 'none' as const } : null),
+    };
+  }, [insets.bottom, colorScheme, tabBarHidden, isWeb]);
 
   return (
     <ReviewBadgeContext.Provider value={refreshReviewBadge}>
@@ -180,6 +219,7 @@ export default function TabLayout() {
         },
         tabBarIconStyle: { marginTop: 0, marginBottom: 0, flex: 1, justifyContent: 'center' },
         tabBarStyle,
+        tabBarPosition: isWeb ? 'top' : 'bottom',
         lazy: false,
       }}>
       <Tabs.Screen
