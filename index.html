@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>MoaVoca — AI Vocabulary Learning for 8 Languages</title>
-<meta name="description" content="Save vocabulary from any source — drama, books, lessons — and actually remember it. Spaced repetition flashcards across 8 languages: English, Korean, Japanese, Chinese, Spanish, French, German, Italian.">
+<title>MoaVoca — 8개 언어 AI 단어 학습</title>
+<meta name="description" content="드라마·책·수업에서 발견한 단어를 저장하고, 간격 반복으로 평생 기억하세요. 영어·한국어·일본어·중국어·스페인어·프랑스어·독일어·이탈리아어 8개 언어 AI 단어 학습 앱.">
+<meta name="keywords" content="단어 암기 앱, 영어 단어장, 일본어 단어, 중국어 HSK, TOEIC 단어, JLPT 단어, TOPIK 단어, 간격 반복, AI 단어 학습, 8개 언어 학습">
 <link rel="canonical" href="https://moavoca.com/">
 
-<!-- Open Graph (social link previews) -->
 <meta property="og:type" content="website">
+<meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="MoaVoca">
-<meta property="og:title" content="MoaVoca — AI Vocabulary Learning">
-<meta property="og:description" content="Save vocabulary from any source and actually remember it. Spaced repetition across 8 languages.">
+<meta property="og:title" content="MoaVoca — 8개 언어 AI 단어 학습">
+<meta property="og:description" content="드라마·책·수업에서 만난 단어를 저장하고, 간격 반복으로 평생 기억합니다.">
 <meta property="og:url" content="https://moavoca.com/">
 <meta property="og:image" content="https://moavoca.com/og-image.png">
 
-<!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MoaVoca — AI Vocabulary Learning">
-<meta name="twitter:description" content="Save vocabulary from any source and actually remember it. Spaced repetition across 8 languages.">
+<meta name="twitter:title" content="MoaVoca — 8개 언어 AI 단어 학습">
+<meta name="twitter:description" content="드라마·책·수업에서 만난 단어를 저장하고, 간격 반복으로 평생 기억합니다.">
 <meta name="twitter:image" content="https://moavoca.com/og-image.png">
 
-<!-- Structured data — helps Google render rich results -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -31,9 +29,10 @@
   "url": "https://moavoca.com",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web, iOS, Android",
-  "description": "AI vocabulary learning with spaced repetition across 8 languages.",
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "publisher": { "@type": "Organization", "name": "Funston" }
+  "description": "AI 단어 학습 앱. 간격 반복으로 8개 언어 단어를 평생 기억하세요.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "publisher": { "@type": "Organization", "name": "Funston" },
+  "inLanguage": "ko"
 }
 </script>
 
@@ -44,78 +43,625 @@
      crossorigin="anonymous"></script>
 
 <style>
+  :root {
+    --bg: #F4F1EA;
+    --surface: #ECE6DA;
+    --surface-2: #F8F5EF;
+    --border: #E5DFD3;
+    --text-1: #2A2620;
+    --text-2: #5C5448;
+    --text-3: #7B7366;
+    --text-4: #A79E90;
+    --accent: #2EC4A5;
+    --accent-deep: #1E9E84;
+    --accent-soft: rgba(46, 196, 165, 0.08);
+    --shadow-float: 0 8px 24px rgba(42, 38, 32, 0.08), 0 2px 6px rgba(42, 38, 32, 0.04);
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F4F1EA; color: #2A2620; }
-  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; text-align: center; }
-  .wordmark { display: inline-block; margin-bottom: 24px; font-size: 56px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
-  .wordmark .accent { color: #2EC4A5; }
-  .wordmark .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2EC4A5; margin-left: 4px; vertical-align: baseline; transform: translateY(-2px); }
-  h1 { font-size: 24px; font-weight: 500; margin-bottom: 12px; color: #2A2620; letter-spacing: 0.01em; }
-  .subtitle { font-size: 18px; color: #7B7366; margin-bottom: 48px; line-height: 1.6; }
-  .features { text-align: left; margin-bottom: 48px; }
-  .feature { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
-  .feature-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-  .feature h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-  .feature p { font-size: 14px; color: #7B7366; line-height: 1.5; }
-  .cta-primary { display: inline-block; padding: 16px 40px; border-radius: 12px; background: #2EC4A5; color: #2A2620; font-size: 16px; font-weight: 700; text-decoration: none; margin-bottom: 16px; transition: transform 0.1s, background 0.15s; }
-  .cta-primary:hover { background: #1E9E84; transform: translateY(-1px); }
-  .cta-note { font-size: 13px; color: #A79E90; margin-bottom: 36px; }
-  .badges { display: flex; gap: 16px; justify-content: center; margin-bottom: 48px; flex-wrap: wrap; }
-  .badge { display: inline-block; padding: 14px 32px; border-radius: 12px; background: #ECE6DA; border: 1px solid #E5DFD3; color: #7B7366; font-size: 14px; text-decoration: none; }
-  .links { margin-top: 48px; padding-top: 32px; border-top: 1px solid #E5DFD3; }
-  .links a { color: #7B7366; text-decoration: none; font-size: 14px; margin: 0 16px; }
-  .links a:hover { color: #2A2620; }
-  .contact { margin-top: 24px; font-size: 13px; color: #A79E90; }
-  .operator { margin-top: 8px; font-size: 12px; color: #A79E90; line-height: 1.6; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text-1);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  /* Wordmark */
+  .wordmark { display: inline-block; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .wordmark .accent { color: var(--accent); }
+  .wordmark .dot { display: inline-block; border-radius: 50%; background: var(--accent); }
+
+  /* Sections */
+  section { padding: 96px 0; border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: none; }
+  .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; color: var(--accent-deep); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .section-title { font-size: 36px; font-weight: 700; letter-spacing: -0.015em; line-height: 1.2; margin-bottom: 16px; color: var(--text-1); }
+  .section-lead { font-size: 17px; color: var(--text-3); line-height: 1.6; max-width: 600px; }
+  .section-header { margin-bottom: 56px; text-align: center; }
+  .section-header .section-lead { margin: 0 auto; }
+
+  /* Hero */
+  .hero { padding: 80px 0 64px; }
+  .hero .container { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 32px; }
+  .hero .wordmark { font-size: 56px; margin-bottom: 8px; }
+  .hero .wordmark .dot { width: 11px; height: 11px; margin-left: 5px; vertical-align: baseline; transform: translateY(-2px); }
+  .hero h1 { font-size: 48px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; color: var(--text-1); max-width: 720px; }
+  .hero .subtitle { font-size: 19px; color: var(--text-3); max-width: 640px; line-height: 1.6; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+  .cta-primary { display: inline-block; padding: 16px 36px; border-radius: 14px; background: var(--accent); color: #ffffff; font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: var(--shadow-float); transition: transform 0.1s ease, background 0.15s ease; }
+  .cta-primary:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .cta-secondary { display: inline-block; padding: 16px 28px; border-radius: 14px; background: transparent; color: var(--text-2); font-size: 16px; font-weight: 600; text-decoration: none; border: 1px solid var(--border); }
+  .cta-secondary:hover { color: var(--text-1); border-color: var(--text-3); }
+  .cta-note { font-size: 13px; color: var(--text-4); margin-top: -8px; }
+
+  /* Hero mockup — CSS-rendered phone frame */
+  .hero-mockup { margin-top: 24px; display: flex; justify-content: center; }
+  .phone-frame { width: 280px; padding: 16px 12px; border-radius: 32px; background: var(--surface-2); border: 1px solid var(--border); box-shadow: var(--shadow-float); }
+  .phone-frame .phone-screen { background: var(--bg); border-radius: 22px; padding: 18px 14px; }
+  .mock-card { background: #ffffff; border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+  .mock-card-word { font-size: 22px; font-weight: 700; color: var(--text-1); }
+  .mock-card-reading { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+  .mock-card-meaning { font-size: 13px; color: var(--text-2); margin-top: 10px; line-height: 1.5; }
+  .mock-card-example { font-size: 12px; color: var(--text-3); margin-top: 8px; line-height: 1.5; font-style: italic; }
+  .mock-tabbar { display: flex; justify-content: space-around; margin-top: 14px; padding: 8px 0; border-top: 1px solid var(--border); }
+  .mock-tabbar span { width: 18px; height: 18px; border-radius: 4px; background: var(--surface); }
+  .mock-tabbar span.active { background: var(--accent); }
+
+  /* Why different — 3 cards */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .why-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
+  .why-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
+  .why-card p { font-size: 15px; color: var(--text-3); line-height: 1.6; }
+  .why-card .step-num { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-deep); font-size: 13px; font-weight: 700; line-height: 28px; text-align: center; margin-bottom: 16px; }
+
+  /* Languages showcase */
+  .lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .lang-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+  .lang-card .lang-name { font-size: 12px; font-weight: 700; color: var(--accent-deep); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 10px; }
+  .lang-card .lang-word { font-size: 20px; font-weight: 700; color: var(--text-1); }
+  .lang-card .lang-reading { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+  .lang-card .lang-translation { font-size: 14px; color: var(--text-2); margin-top: 10px; line-height: 1.5; }
+
+  /* How it works */
+  .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+  .works-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .works-mock { width: 180px; height: 280px; border-radius: 22px; background: var(--surface); border: 1px solid var(--border); padding: 14px 10px; margin-bottom: 20px; }
+  .works-mock .mock-mini { background: #ffffff; border: 1px solid var(--border); border-radius: 10px; padding: 10px; margin-bottom: 6px; }
+  .works-mock .mock-mini-title { font-size: 11px; font-weight: 700; color: var(--text-1); }
+  .works-mock .mock-mini-sub { font-size: 9px; color: var(--text-3); margin-top: 2px; }
+  .works-mock .mock-progress { height: 4px; background: var(--surface); border-radius: 2px; margin-top: 10px; overflow: hidden; }
+  .works-mock .mock-progress .bar { height: 100%; background: var(--accent); border-radius: 2px; }
+  .works-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-1); }
+  .works-card p { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+
+  /* Features */
+  .feat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .feat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .feat-card h3 { font-size: 16px; font-weight: 700; color: var(--text-1); margin-bottom: 8px; }
+  .feat-card p { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+  .feat-mark { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: middle; transform: translateY(-2px); }
+
+  /* Exams */
+  .exam-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .exam-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .exam-card .exam-flag { font-size: 11px; font-weight: 700; color: var(--accent-deep); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+  .exam-card h3 { font-size: 17px; font-weight: 700; color: var(--text-1); margin-bottom: 6px; }
+  .exam-card p { font-size: 14px; color: var(--text-3); line-height: 1.6; }
+  .exam-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .exam-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); font-size: 12px; color: var(--text-2); }
+
+  /* Pricing */
+  .price-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; max-width: 760px; margin: 0 auto; }
+  .price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 32px; }
+  .price-card.featured { border-color: var(--accent); background: var(--surface-2); position: relative; }
+  .price-badge { position: absolute; top: -10px; right: 24px; background: var(--accent); color: #ffffff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; letter-spacing: 0.05em; }
+  .price-tier { font-size: 13px; font-weight: 700; color: var(--accent-deep); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  .price-amount { font-size: 32px; font-weight: 800; color: var(--text-1); margin-bottom: 4px; }
+  .price-amount .currency { font-size: 18px; color: var(--text-3); font-weight: 600; }
+  .price-period { font-size: 13px; color: var(--text-3); margin-bottom: 20px; }
+  .price-feat { font-size: 14px; color: var(--text-2); padding: 8px 0; border-top: 1px dashed var(--border); display: flex; gap: 8px; }
+  .price-feat:first-of-type { border-top: none; }
+  .price-feat::before { content: "·"; color: var(--accent); font-weight: 700; }
+  .price-note { font-size: 13px; color: var(--text-4); margin-top: 20px; text-align: center; }
+
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+  .faq-item:first-child { border-top: 1px solid var(--border); }
+  .faq-item summary { padding: 20px 0; font-size: 16px; font-weight: 600; color: var(--text-1); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-size: 22px; color: var(--text-3); font-weight: 400; flex-shrink: 0; transition: transform 0.2s; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .faq-body { padding: 0 0 20px; font-size: 15px; color: var(--text-3); line-height: 1.7; }
+  .faq-item .faq-body a { color: var(--accent-deep); text-decoration: underline; }
+
+  /* Final CTA */
+  .cta-final { text-align: center; padding: 96px 0; background: var(--surface-2); border-top: 1px solid var(--border); }
+  .cta-final h2 { font-size: 32px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 14px; color: var(--text-1); }
+  .cta-final p { font-size: 16px; color: var(--text-3); margin-bottom: 28px; }
+
+  /* Footer */
+  footer { padding: 48px 0 64px; background: var(--bg); border-top: 1px solid var(--border); }
+  .footer-grid { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+  .footer-brand .wordmark { font-size: 24px; }
+  .footer-brand .wordmark .dot { width: 6px; height: 6px; margin-left: 3px; vertical-align: baseline; transform: translateY(-1px); }
+  .footer-brand p { font-size: 13px; color: var(--text-4); margin-top: 8px; }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 16px 24px; }
+  .footer-links a { font-size: 14px; color: var(--text-3); text-decoration: none; }
+  .footer-links a:hover { color: var(--text-1); }
+  .footer-legal { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-4); line-height: 1.7; }
+
+  /* Responsive */
+  @media (max-width: 880px) {
+    section { padding: 72px 0; }
+    .hero { padding: 56px 0 48px; }
+    .hero h1 { font-size: 34px; }
+    .hero .wordmark { font-size: 44px; }
+    .hero .subtitle { font-size: 16px; }
+    .section-title { font-size: 28px; }
+    .why-grid, .works-grid { grid-template-columns: 1fr; }
+    .lang-grid, .feat-grid, .exam-grid { grid-template-columns: 1fr 1fr; }
+    .price-grid { grid-template-columns: 1fr; }
+    .cta-final h2 { font-size: 26px; }
+  }
+  @media (max-width: 520px) {
+    .lang-grid, .feat-grid, .exam-grid { grid-template-columns: 1fr; }
+  }
 </style>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
 </head>
 <body>
-<div class="container">
-  <div class="wordmark">Moa<span class="accent">Voca</span><span class="dot"></span></div>
-  <h1>AI Vocabulary Learning</h1>
-  <p class="subtitle">Save vocabulary from any source — drama, books, lessons — and actually remember it.<br>Spaced repetition across 8 languages.</p>
 
-  <div class="features">
-    <div class="feature">
-      <span class="feature-icon">&#x1F50D;</span>
-      <div>
-        <h3>Instant AI Definitions</h3>
-        <p>Context-aware definitions while you read or study. Across 8 languages.</p>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="wordmark">Moa<span class="accent">Voca</span><span class="dot"></span></div>
+    <h1>당신이 진짜 기억하는 단어들.</h1>
+    <p class="subtitle">드라마·책·수업에서 만난 단어를 저장하고, 간격 반복으로 평생 기억합니다.<br>영어, 한국어, 일본어, 중국어, 스페인어, 프랑스어, 독일어, 이탈리아어 — 8개 언어 지원.</p>
+    <div class="cta-row">
+      <a href="/app/" class="cta-primary" data-cta="open_web_app">웹앱 시작하기 &rarr;</a>
+      <a href="#features" class="cta-secondary">기능 더 보기</a>
     </div>
-    <div class="feature">
-      <span class="feature-icon">&#x1F4DA;</span>
-      <div>
-        <h3>Organized Word Lists</h3>
-        <p>Create a word list for each book or topic. Your vocabulary, organized.</p>
-      </div>
-    </div>
-    <div class="feature">
-      <span class="feature-icon">&#x1F504;</span>
-      <div>
-        <h3>Spaced Repetition Review</h3>
-        <p>Saved words come back at the right time — so they actually stick.</p>
+    <p class="cta-note">무료로 시작 · 신용카드 불필요</p>
+
+    <div class="hero-mockup">
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="mock-card">
+            <div class="mock-card-word">serendipity</div>
+            <div class="mock-card-reading">/ˌsɛrənˈdɪpɪti/</div>
+            <div class="mock-card-meaning">우연히 찾아온 좋은 일. 찾으려 하지 않았는데 발견하게 되는 행운.</div>
+            <div class="mock-card-example">"It was pure serendipity that we met."</div>
+          </div>
+          <div class="mock-tabbar">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <a href="/app/" class="cta-primary" data-cta="open_web_app">Open Web App &rarr;</a>
-  <p class="cta-note">Free to start. No credit card required.</p>
-
-  <div class="badges">
-    <span class="badge">Coming soon on Google Play</span>
-    <span class="badge">Coming soon on App Store</span>
+<!-- WHY DIFFERENT -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">왜 다른가</span>
+      <h2 class="section-title">단어장 앱은 많지만, 진짜 기억에 남는 건 드뭅니다.</h2>
+      <p class="section-lead">MoaVoca는 발견·이해·기억 세 단계 모두에 AI와 검증된 사전을 함께 씁니다.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="step-num">1</div>
+        <h3>문맥에 맞는 AI 정의</h3>
+        <p>사전 그대로의 무미건조한 정의 대신, 단어가 등장한 상황에 맞춘 자연스러운 해석. 다의어는 의미별로 분리해 정확히 짚어줍니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="step-num">2</div>
+        <h3>8개 언어, 진짜 원어민 발음</h3>
+        <p>영어·한국어·일본어·중국어·스페인어·프랑스어·독일어·이탈리아어. 각 언어 남녀 원어민 음성으로 듣고, 정확한 발음 표기까지.</p>
+      </div>
+      <div class="why-card">
+        <div class="step-num">3</div>
+        <h3>간격 반복으로 평생 기억</h3>
+        <p>잊을 때쯤 다시 보여주는 알고리즘. 하루 5분 학습이 장기 기억으로 정착하도록 설계됐습니다.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="links">
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="terms.html">Terms of Service</a>
-    <a href="business-info.html">Business Info</a>
-    <a href="licenses.html">Open Source Licenses</a>
+<!-- LANGUAGES SHOWCASE -->
+<section id="languages">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">8개 언어</span>
+      <h2 class="section-title">각 언어의 결을 그대로 살려 학습합니다.</h2>
+      <p class="section-lead">번역할 수 없는 단어, 문화에 뿌리내린 표현 — 그 미묘함까지 담아냅니다.</p>
+    </div>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-name">English</div>
+        <div class="lang-word">serendipity</div>
+        <div class="lang-reading">/ˌsɛrənˈdɪpɪti/</div>
+        <div class="lang-translation">우연한 발견. 찾지 않았는데 만난 행운.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">日本語</div>
+        <div class="lang-word">木漏れ日</div>
+        <div class="lang-reading">こもれび</div>
+        <div class="lang-translation">나뭇잎 사이로 비치는 햇살.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">中文</div>
+        <div class="lang-word">默契</div>
+        <div class="lang-reading">mòqì</div>
+        <div class="lang-translation">말없이 통하는 마음, 암묵적 이해.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">한국어</div>
+        <div class="lang-word">눈치</div>
+        <div class="lang-reading">[눈치]</div>
+        <div class="lang-translation">분위기를 읽고 행동하는 사회적 감각.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Español</div>
+        <div class="lang-word">sobremesa</div>
+        <div class="lang-reading">/so.βɾeˈme.sa/</div>
+        <div class="lang-translation">식사 후 식탁에 남아 이어가는 대화 시간.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Français</div>
+        <div class="lang-word">dépaysement</div>
+        <div class="lang-reading">/de.pɛ.iz.mɑ̃/</div>
+        <div class="lang-translation">익숙한 환경을 떠난 낯섦의 감각.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Deutsch</div>
+        <div class="lang-word">Fernweh</div>
+        <div class="lang-reading">/ˈfɛʁnveː/</div>
+        <div class="lang-translation">먼 곳, 가보지 못한 땅을 향한 그리움.</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-name">Italiano</div>
+        <div class="lang-word">abbiocco</div>
+        <div class="lang-reading">/abˈbjɔk.ko/</div>
+        <div class="lang-translation">든든히 먹은 뒤 몰려오는 졸음.</div>
+      </div>
+    </div>
   </div>
-  <p class="contact">Contact: support@moavoca.com</p>
-  <p class="operator">&copy; 2026 Funston (&#54168;&#49828;&#53456;) &middot; Business Registration No. 774-17-02956</p>
-</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">어떻게 작동하나</span>
+      <h2 class="section-title">저장하고, 학습하고, 잊을 때쯤 다시.</h2>
+      <p class="section-lead">하루 5분으로 충분합니다. 매일의 작은 반복이 진짜 어휘력이 됩니다.</p>
+    </div>
+    <div class="works-grid">
+      <div class="works-card">
+        <div class="works-mock">
+          <div class="mock-mini">
+            <div class="mock-mini-title">drama vocab</div>
+            <div class="mock-mini-sub">142 words · today +6</div>
+          </div>
+          <div class="mock-mini">
+            <div class="mock-mini-title">TOEIC 핵심</div>
+            <div class="mock-mini-sub">580 words · today +12</div>
+          </div>
+          <div class="mock-mini">
+            <div class="mock-mini-title">일본 드라마</div>
+            <div class="mock-mini-sub">89 words · today +3</div>
+          </div>
+        </div>
+        <h3>1. 저장</h3>
+        <p>드라마·책·수업에서 만난 단어를 한 번에 단어장에 모아둡니다. 사진 OCR로 책장 한 페이지를 통째로도 가능.</p>
+      </div>
+      <div class="works-card">
+        <div class="works-mock">
+          <div class="mock-mini">
+            <div class="mock-mini-title">épatant</div>
+            <div class="mock-mini-sub">놀라울 만큼 멋진</div>
+          </div>
+          <div class="mock-mini">
+            <div class="mock-mini-title">발음 듣기 · 예문 4개</div>
+            <div class="mock-mini-sub">/e.pa.tɑ̃/ — 원어민 음성</div>
+          </div>
+          <div class="mock-progress"><div class="bar" style="width: 60%"></div></div>
+        </div>
+        <h3>2. 학습</h3>
+        <p>AI가 문맥에 맞는 정의·예문·발음을 한 번에 정리해줍니다. 다의어도 의미별로 분리.</p>
+      </div>
+      <div class="works-card">
+        <div class="works-mock">
+          <div class="mock-mini">
+            <div class="mock-mini-title">오늘 복습할 단어</div>
+            <div class="mock-mini-sub">12개 · 약 4분</div>
+          </div>
+          <div class="mock-mini">
+            <div class="mock-mini-title">스트릭 14일</div>
+            <div class="mock-mini-sub">정확도 92%</div>
+          </div>
+          <div class="mock-progress"><div class="bar" style="width: 92%"></div></div>
+        </div>
+        <h3>3. 복습</h3>
+        <p>간격 반복 알고리즘이 잊을 때쯤 다시 보여줍니다. 5분 학습으로 장기 기억 정착.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">기능</span>
+      <h2 class="section-title">단어 하나를 제대로 이해하기 위한 모든 것.</h2>
+      <p class="section-lead">학습에 필요한 도구를 한 앱에 모았습니다. 추가 결제 없이 무료로 시작 가능합니다.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>AI 문맥 정의</h3>
+        <p>OpenAI 기반 정의 + 검증된 사전(Wiktionary/JMdict/CC-CEDICT/krdict) 2단계 검증. 다의어도 의미별로 분리해 보여줍니다.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>원어민 발음</h3>
+        <p>Azure Neural 음성으로 8개 언어 남녀 원어민 발음. 발음 표기(IPA/한자 읽기)도 정확히 제공.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>사진 OCR 추출</h3>
+        <p>책 페이지·드라마 자막을 사진 한 장으로 단어장에 추가. 외국어 텍스트를 자동으로 인식합니다.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>시험 큐레이션</h3>
+        <p>TOEIC·JLPT·HSK·TOPIK·DELE·DELF·Goethe·CILS 출제 빈도 기반 큐레이션 단어장 무료 제공.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>친구와 함께</h3>
+        <p>친구를 추가하고 단어장을 공유하세요. 스트릭과 정확도를 비교하며 함께 학습할 수 있습니다.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>커뮤니티 단어장</h3>
+        <p>다른 학습자가 만든 단어장을 다운로드해 바로 학습. 좋아요·다운로드 수로 인기 단어장을 확인하세요.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>학습 통계</h3>
+        <p>일별 학습량, 정확도, 연속 학습 일수(스트릭)를 한눈에. 약점 단어를 자동 추적합니다.</p>
+      </div>
+      <div class="feat-card">
+        <h3><span class="feat-mark"></span>학습 알림</h3>
+        <p>잊을 때쯤 부드럽게 알림. 시간대·횟수 모두 조절 가능. 스트릭을 지키도록 도와줍니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXAMS -->
+<section id="exams">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">시험 대비</span>
+      <h2 class="section-title">주요 어학 시험 큐레이션 단어장.</h2>
+      <p class="section-lead">출제 빈도 기준으로 선별된 단어장을 무료로 제공합니다. 다운로드 후 바로 학습 가능합니다.</p>
+    </div>
+    <div class="exam-grid">
+      <div class="exam-card">
+        <div class="exam-flag">English</div>
+        <h3>TOEIC · TOEFL</h3>
+        <p>레벨별 빈출 단어. 비즈니스·일상·학술 영역으로 분리.</p>
+        <div class="exam-list">
+          <span class="exam-pill">TOEIC 600</span>
+          <span class="exam-pill">TOEIC 800</span>
+          <span class="exam-pill">TOEIC 900</span>
+          <span class="exam-pill">TOEFL 핵심</span>
+        </div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-flag">日本語</div>
+        <h3>JLPT</h3>
+        <p>N1부터 N5까지 레벨별 어휘. 한자 읽기와 의미 함께.</p>
+        <div class="exam-list">
+          <span class="exam-pill">JLPT N5</span>
+          <span class="exam-pill">N4</span>
+          <span class="exam-pill">N3</span>
+          <span class="exam-pill">N2</span>
+          <span class="exam-pill">N1</span>
+        </div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-flag">中文</div>
+        <h3>HSK</h3>
+        <p>HSK 1급부터 6급까지 단계별 단어장. 병음과 의미 함께.</p>
+        <div class="exam-list">
+          <span class="exam-pill">HSK 1</span>
+          <span class="exam-pill">HSK 2</span>
+          <span class="exam-pill">HSK 3</span>
+          <span class="exam-pill">HSK 4</span>
+          <span class="exam-pill">HSK 5</span>
+          <span class="exam-pill">HSK 6</span>
+        </div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-flag">한국어</div>
+        <h3>TOPIK</h3>
+        <p>한국어 능력 시험 초·중·고급 빈출 단어.</p>
+        <div class="exam-list">
+          <span class="exam-pill">TOPIK 초급</span>
+          <span class="exam-pill">중급</span>
+          <span class="exam-pill">고급</span>
+        </div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-flag">Español</div>
+        <h3>DELE</h3>
+        <p>스페인어 능력 시험 A1부터 C2까지 빈출 어휘.</p>
+        <div class="exam-list">
+          <span class="exam-pill">A1</span>
+          <span class="exam-pill">A2</span>
+          <span class="exam-pill">B1</span>
+          <span class="exam-pill">B2</span>
+          <span class="exam-pill">C1</span>
+        </div>
+      </div>
+      <div class="exam-card">
+        <div class="exam-flag">Français · Deutsch · Italiano</div>
+        <h3>DELF · Goethe · CILS</h3>
+        <p>프랑스어·독일어·이탈리아어 어학 시험 레벨별 단어장도 함께 제공합니다.</p>
+        <div class="exam-list">
+          <span class="exam-pill">DELF B1</span>
+          <span class="exam-pill">Goethe B2</span>
+          <span class="exam-pill">CILS B1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">가격</span>
+      <h2 class="section-title">무료로 충분히, 더 깊이는 Premium.</h2>
+      <p class="section-lead">대부분의 기능을 무료로 쓸 수 있습니다. Premium은 일일 제한 없이 학습하고 싶을 때만.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="price-tier">Free</div>
+        <div class="price-amount"><span class="currency">₩</span>0</div>
+        <div class="price-period">평생 무료</div>
+        <div class="price-feat">단어 저장 무제한</div>
+        <div class="price-feat">AI 정의 (일일 제한)</div>
+        <div class="price-feat">간격 반복 복습</div>
+        <div class="price-feat">8개 언어 · 원어민 발음</div>
+        <div class="price-feat">사진 OCR 월 10회</div>
+        <div class="price-feat">시험 큐레이션 단어장</div>
+        <div class="price-feat">친구·커뮤니티 기능</div>
+        <div class="price-feat">광고 포함</div>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">추천</div>
+        <div class="price-tier">Premium</div>
+        <div class="price-amount"><span class="currency">₩</span>9,000<span style="font-size:14px; color:var(--text-3); font-weight:500;"> / 월</span></div>
+        <div class="price-period">연간 ₩55,000 (44% 할인)</div>
+        <div class="price-feat">Free의 모든 기능</div>
+        <div class="price-feat">AI 정의 무제한</div>
+        <div class="price-feat">사진 OCR 월 300회</div>
+        <div class="price-feat">광고 제거</div>
+        <div class="price-feat">우선 학습 지원</div>
+        <div class="price-feat">7일 무료 체험</div>
+      </div>
+    </div>
+    <p class="price-note">App Store/Google Play 결제 · 언제든지 취소 가능</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">자주 묻는 질문</span>
+      <h2 class="section-title">처음 쓰는 분이 가장 많이 물어보는 것들.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>MoaVoca는 사전인가요?</summary>
+        <div class="faq-body">아닙니다. MoaVoca는 학습 도구입니다. 단어를 한 번 찾아보고 끝내는 사전이 아니라, 단어를 저장해 두고 잊을 때쯤 다시 보여줘서 진짜 기억에 남도록 돕는 앱입니다. AI 정의는 학습 과정에서 의미를 빠르게 잡기 위한 보조 기능입니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>어떤 언어를 지원하나요?</summary>
+        <div class="faq-body">현재 영어, 한국어, 일본어, 중국어(간체), 스페인어, 프랑스어, 독일어, 이탈리아어 8개 언어를 지원합니다. 모국어와 학습 목표어를 자유롭게 조합할 수 있습니다 (예: 한국어 → 일본어, 영어 → 스페인어).</div>
+      </details>
+      <details class="faq-item">
+        <summary>무료로 어디까지 쓸 수 있나요?</summary>
+        <div class="faq-body">단어 저장 개수에 제한이 없고, 간격 반복 복습·8개 언어 원어민 발음·시험 큐레이션 단어장·친구·커뮤니티 기능을 모두 무료로 쓸 수 있습니다. AI 정의 호출 횟수와 사진 OCR 횟수만 일일/월간 제한이 있고, 광고가 포함됩니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>오프라인에서도 쓸 수 있나요?</summary>
+        <div class="faq-body">이미 다운로드한 단어장의 복습은 오프라인에서도 가능합니다. 단, 새 단어의 AI 정의·발음 생성·OCR은 서버 통신이 필요하므로 인터넷 연결이 있어야 합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>발음은 진짜 원어민인가요?</summary>
+        <div class="faq-body">Microsoft Azure Neural Voice를 사용합니다. 8개 언어 각각에 대해 남녀 원어민 음성을 제공하며, 자연스러운 억양과 호흡까지 재현됩니다. 자동 재생 속도는 언어별로 보정해 일관된 학습 경험을 보장합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>시험 대비에 효과가 있나요?</summary>
+        <div class="faq-body">TOEIC·JLPT·HSK·TOPIK 등 주요 어학 시험의 출제 빈도 데이터를 기반으로 큐레이션된 단어장을 무료로 제공합니다. 간격 반복 알고리즘이 잊을 때쯤 다시 보여주므로, 단기 암기가 아닌 장기 기억으로 정착시키는 데 적합합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>광고는 어떻게 작동하나요?</summary>
+        <div class="faq-body">무료 사용자에게는 화면 하단 배너 광고와 일부 보상형 광고(보면 추가 학습 기회 획득)가 표시됩니다. 학습 중인 카드 위에 끼어드는 전면 광고는 없습니다. Premium 구독 시 모든 광고가 사라집니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>어린이도 쓸 수 있나요?</summary>
+        <div class="faq-body">앱 등급은 청소년·성인 학습자에 맞춰 설계됐습니다. 차별·혐오 표현은 단어 풀에서 제외하지만, 일반적인 어휘는 학습 가치를 위해 노출됩니다. 초등학생용 어휘 학습이 필요한 경우 다른 전용 앱을 권장합니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>데이터는 어떻게 보관되나요?</summary>
+        <div class="faq-body">학습 진도·단어장은 Supabase 클라우드에 안전하게 보관됩니다. 비밀번호는 해시 처리되어 운영자도 볼 수 없으며, OCR 원본 이미지는 처리 후 즉시 폐기됩니다. 자세한 내용은 <a href="privacy.html">개인정보처리방침</a>을 참조하세요.</div>
+      </details>
+      <details class="faq-item">
+        <summary>계정 삭제는 어떻게 하나요?</summary>
+        <div class="faq-body">앱 내 설정 → 계정 → 계정 삭제로 즉시 가능합니다. 삭제 시 단어장·학습 기록·친구 관계 등 모든 개인 데이터가 30일 이내에 영구 삭제됩니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>iOS / Android 앱은 언제 나오나요?</summary>
+        <div class="faq-body">현재 App Store와 Google Play에 출시 준비 중입니다. 그동안에는 웹 앱(<a href="/app/">moavoca.com/app</a>)으로 동일한 기능을 모두 이용할 수 있습니다.</div>
+      </details>
+      <details class="faq-item">
+        <summary>구독은 어떻게 취소하나요?</summary>
+        <div class="faq-body">App Store 또는 Google Play 결제 설정에서 언제든지 취소할 수 있습니다. 취소 후에도 결제 기간이 끝날 때까지는 Premium 기능을 계속 사용할 수 있습니다.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final">
+  <div class="narrow">
+    <h2>오늘 만난 단어, 진짜 내 것으로.</h2>
+    <p>5분이면 충분합니다. 무료로 시작하세요.</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a href="/app/" class="cta-primary" data-cta="open_web_app_final">웹앱 시작하기 &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="wordmark">Moa<span class="accent">Voca</span><span class="dot"></span></div>
+        <p>8개 언어 AI 단어 학습</p>
+      </div>
+      <div class="footer-links">
+        <a href="#languages">언어</a>
+        <a href="#features">기능</a>
+        <a href="#exams">시험</a>
+        <a href="#pricing">가격</a>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">개인정보처리방침</a>
+        <a href="terms.html">이용약관</a>
+        <a href="business-info.html">사업자 정보</a>
+        <a href="licenses.html">오픈소스 라이선스</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      문의: <a href="mailto:support@moavoca.com" style="color:var(--text-3);">support@moavoca.com</a><br>
+      &copy; 2026 Funston (펀스턴) · 사업자등록번호 774-17-02956 · 통신판매업신고 제2026-서울구로-0893호<br>
+      대표: 박준성 · 주소: 서울특별시 구로구 구로중앙로 207, 지하 1층 B36-S77호 (오퍼스 원)
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
