@@ -16,6 +16,7 @@ export interface InventorySnapshot {
   points: number;
   streakFreezes: number;
   xpBoostActiveUntil: string | null; // ISO timestamp or null
+  comebackBoostActiveUntil: string | null; // ISO timestamp or null
 }
 
 type Listener = (snap: InventorySnapshot) => void;
@@ -25,6 +26,7 @@ let _snap: InventorySnapshot = {
   points: 0,
   streakFreezes: 0,
   xpBoostActiveUntil: null,
+  comebackBoostActiveUntil: null,
 };
 
 function notify() {
@@ -54,6 +56,18 @@ export function boostMinutesLeft(snap: InventorySnapshot = _snap): number {
   return Math.ceil(ms / 60_000);
 }
 
+export function isComebackBoostActive(snap: InventorySnapshot = _snap): boolean {
+  if (!snap.comebackBoostActiveUntil) return false;
+  return Date.parse(snap.comebackBoostActiveUntil) > Date.now();
+}
+
+export function comebackBoostMinutesLeft(snap: InventorySnapshot = _snap): number {
+  if (!snap.comebackBoostActiveUntil) return 0;
+  const ms = Date.parse(snap.comebackBoostActiveUntil) - Date.now();
+  if (ms <= 0) return 0;
+  return Math.ceil(ms / 60_000);
+}
+
 /** Fetch authoritative inventory from server. Call on app start + after mutations. */
 export async function refreshInventory(): Promise<InventorySnapshot> {
   try {
@@ -64,6 +78,7 @@ export async function refreshInventory(): Promise<InventorySnapshot> {
       points: typeof row.points === 'number' ? row.points : 0,
       streakFreezes: typeof row.streak_freezes === 'number' ? row.streak_freezes : 0,
       xpBoostActiveUntil: row.xp_boost_active_until ?? null,
+      comebackBoostActiveUntil: row.comeback_boost_until ?? null,
     };
     notify();
   } catch { /* offline — keep stale snap */ }
@@ -134,10 +149,37 @@ export async function purchaseItem(itemId: StoreItemId): Promise<InventorySnapsh
       points: row.points_after ?? _snap.points,
       streakFreezes: row.freezes_after ?? _snap.streakFreezes,
       xpBoostActiveUntil: row.boost_until ?? _snap.xpBoostActiveUntil,
+      comebackBoostActiveUntil: _snap.comebackBoostActiveUntil,
     };
     notify();
   }
   return _snap;
+}
+
+/**
+ * Server-checked activation of the Comeback Boost. Caller is expected to fire
+ * this once per app cold-start; the server enforces eligibility (3+ day gap
+ * since last study) and refuses re-activation while a boost is already active.
+ * Returns whether a *new* boost was just activated this call.
+ */
+export async function activateComebackBoostIfEligible(): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.rpc('activate_comeback_boost_if_eligible');
+    if (error) return false;
+    const row = Array.isArray(data) ? data[0] : data;
+    if (!row) return false;
+    if (row.boost_until) {
+      _snap = {
+        ..._snap,
+        comebackBoostActiveUntil: row.boost_until,
+        streakFreezes: typeof row.freezes_after === 'number' ? row.freezes_after : _snap.streakFreezes,
+      };
+      notify();
+    }
+    return !!row.activated;
+  } catch {
+    return false;
+  }
 }
 
 /**

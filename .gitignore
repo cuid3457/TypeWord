@@ -49,3 +49,6 @@ app-example
 android/app/release.keystore
 android/gradle.properties
 
+scripts/.last-version-bump
+scripts/.xcode-bump.log
+scripts/v4-sweep/reports/

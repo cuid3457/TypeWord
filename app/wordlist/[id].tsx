@@ -850,6 +850,7 @@ function WordRow({
   };
   const { i18n } = useTranslation();
   const [enriching, setEnriching] = useState(false);
+  const [enrichError, setEnrichError] = useState(false);
   const meanings = word.result.meanings ?? [];
   const { examples } = word.result;
   const hasDetails = !!examples?.length;
@@ -864,6 +865,7 @@ function WordRow({
     // handles server↔local content sync on app launch + foreground.
     if (!expanded && !hasDetails && !enriching) {
       setEnriching(true);
+      setEnrichError(false);
       try {
         const res = await lookupWord({
           word: word.word,
@@ -881,10 +883,37 @@ function WordRow({
         await updateWordResult(word.id, res.result);
         onEnriched(res.result);
       } catch {
-        // silently fail
+        setEnrichError(true);
       } finally {
         setEnriching(false);
       }
+    }
+  };
+
+  const retryEnrich = async () => {
+    if (enriching) return;
+    setEnriching(true);
+    setEnrichError(false);
+    try {
+      const res = await lookupWord({
+        word: word.word,
+        sourceLang: book.sourceLang,
+        targetLang: book.targetLang ?? 'en',
+        bookId: book.id,
+        mode: 'enrich',
+        meanings: word.result.meanings?.map((m) => ({
+          definition: m.definition,
+          partOfSpeech: m.partOfSpeech,
+          gender: m.gender,
+          register: m.register,
+        })),
+      });
+      await updateWordResult(word.id, res.result);
+      onEnriched(res.result);
+    } catch {
+      setEnrichError(true);
+    } finally {
+      setEnriching(false);
     }
   };
 
@@ -964,6 +993,24 @@ function WordRow({
           {enriching ? (
             <View className="items-center py-4">
               <ActivityIndicator size="small" />
+            </View>
+          ) : enrichError && !hasDetails ? (
+            <View className="items-center py-4">
+              <MaterialIcons name="error-outline" size={24} color="#A79E90" />
+              <Text className="mt-2 text-xs text-muted">{t('error.load_failed')}</Text>
+              <Pressable
+                onPress={(e) => {
+                  e.stopPropagation?.();
+                  retryEnrich();
+                }}
+                className="mt-3 rounded-lg bg-clay px-4 py-2 dark:bg-clay-dark"
+                accessibilityRole="button"
+                accessibilityLabel={t('error.retry')}
+              >
+                <Text className="text-xs font-semibold text-ink dark:text-ink-dark">
+                  {t('error.retry')}
+                </Text>
+              </Pressable>
             </View>
           ) : (
             <>

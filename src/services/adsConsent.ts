@@ -33,12 +33,31 @@ function showAttPrePrompt(): Promise<boolean> {
 }
 
 /**
+ * Constrain ad content to Teen-rated (matches App Store 12+ / Play Teen).
+ * Run before any ad request so the first request honors the cap.
+ */
+async function applyRequestConfiguration(): Promise<void> {
+  try {
+    const ads = require('react-native-google-mobile-ads');
+    const mobileAds = ads.default;
+    const { MaxAdContentRating } = ads;
+    await mobileAds().setRequestConfiguration({
+      maxAdContentRating: MaxAdContentRating.T,
+      tagForChildDirectedTreatment: false,
+    });
+  } catch {
+    // SDK unavailable — non-blocking
+  }
+}
+
+/**
  * Request UMP consent then ATT permission on app boot.
- * Order matters: UMP (GDPR/CCPA) first, then ATT (iOS IDFA).
+ * Order matters: request configuration → UMP (GDPR/CCPA) → ATT (iOS IDFA).
  * Safe to call every launch — each SDK only shows its prompt when needed.
  */
 export async function requestAdsConsent(): Promise<void> {
   if (isExpoGo) return;
+  await applyRequestConfiguration();
   try {
     const { AdsConsent } = require('react-native-google-mobile-ads');
     await AdsConsent.gatherConsent();

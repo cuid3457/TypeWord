@@ -11,7 +11,10 @@ import { compareDictation } from '@src/utils/dictationCompare';
 import { splitMarkerParticle } from '@src/utils/splitMarkerParticle';
 import type { StoredWord } from '@src/db/queries';
 
-type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank';
+// cloze_listening shares fill_blank's rendering — both show the same masked
+// sentence + choices UI. The audio difference is handled in the parent
+// effect (auto TTS on card mount), not here.
+type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening';
 
 interface Props {
   mode: ReviewMode;
@@ -515,7 +518,8 @@ export function ReviewCardContent({
       );
     }
 
-    case 'fill_blank': {
+    case 'fill_blank':
+    case 'cloze_listening': {
       // Show example sentence with the target word replaced by an underline
       // blank, then 4 word choices. Picks from the session's same-source-lang
       // pool. Falls back to the choice picker on words without examples.

@@ -5,24 +5,21 @@ import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   AppState,
-  FlatList,
-  Modal,
   Pressable,
   RefreshControl,
+  ScrollView,
   Text,
   View,
 } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { AvatarCircle } from '@/components/avatar-circle';
+import { AvatarMenu } from '@/components/avatar-menu';
+import { BackgroundPicker } from '@/components/background-picker';
 import { TabletContainer } from '@/components/tablet-container';
-import { Gesture, GestureDetector, GestureHandlerRootView } from 'react-native-gesture-handler';
-import Animated, { runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { Toast } from '@/components/toast';
 import { Card } from '@/components/ui/card';
-import { NicknameModal } from '@/components/nickname-modal';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
-import { AddFriendByUsernameModal } from '@/components/add-friend-by-username-modal';
-import { TargetReportModal } from '@/components/target-report-modal';
 import { NativeAdCard } from '@/components/native-ad-card';
 import { useRefreshNotificationBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
@@ -31,14 +28,15 @@ import { haptic } from '@src/services/hapticService';
 import { getTodayStreakDate, type StreakInfo } from '@src/services/streakService';
 import { getLevel, getTotalXP, subscribeXP } from '@src/services/xpService';
 import {
-  blockUser,
-  FriendsError,
   listIncomingRequests,
-  removeFriend,
-  sendPoke,
-  type FriendRow,
   type MyProfile,
 } from '@src/services/friendsService';
+import { getMysteryBoxState, refreshMysteryBoxState, subscribeMysteryBox } from '@src/services/mysteryBoxService';
+import { getStatsSnapshot, type StatsSnapshot } from '@src/services/statsService';
+import { getDormantCount } from '@src/db/queries';
+import { isPearlCompletedToday } from '@src/services/pearlDailyService';
+
+const PEARL_DAILY_CAP = 5;
 
 export default function DashboardScreen() {
   const { t } = useTranslation();
@@ -55,8 +53,16 @@ export default function DashboardScreen() {
   const [streak, setStreak] = useState<StreakInfo | null>(initialSnap?.streak ?? null);
   const [studiedDates, setStudiedDates] = useState<Set<string>>(initialSnap?.studiedDates ?? new Set());
   const [frozenDates, setFrozenDates] = useState<Set<string>>(initialSnap?.frozenDates ?? new Set());
-  const [friends, setFriends] = useState<FriendRow[]>(initialSnap?.friends ?? []);
+  const [friendCount, setFriendCount] = useState<number>(initialSnap?.friends?.length ?? 0);
   const [totalXP, setTotalXP] = useState<number>(getTotalXP());
+  const [stats, setStats] = useState<StatsSnapshot | null>(null);
+  const [dormantCount, setDormantCount] = useState<number>(0);
+  const [pearlDoneToday, setPearlDoneToday] = useState<boolean>(false);
+  const [boxState, setBoxState] = useState(getMysteryBoxState());
+  useEffect(() => subscribeMysteryBox(setBoxState), []);
+  useEffect(() => { refreshMysteryBoxState().catch(() => {}); }, []);
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  const [showBgPicker, setShowBgPicker] = useState(false);
 
   useEffect(() => {
     const unsub = subscribeXP(setTotalXP);
@@ -67,10 +73,6 @@ export default function DashboardScreen() {
   const showToast = useCallback((msg: string, type: 'success' | 'error' = 'error') => {
     setToast({ msg, type });
   }, []);
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showActionMenu, setShowActionMenu] = useState<FriendRow | null>(null);
-  const [reportTarget, setReportTarget] = useState<FriendRow | null>(null);
-  const [showNameModal, setShowNameModal] = useState(false);
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
@@ -88,6 +90,27 @@ export default function DashboardScreen() {
     refreshTabBadge();
   }, [refreshTabBadge]);
 
+  const reloadStats = useCallback(async () => {
+    try {
+      setStats(await getStatsSnapshot());
+    } catch {
+      /* silent — dashboard mini-widget falls back to last value */
+    }
+  }, []);
+
+  const reloadDormant = useCallback(async () => {
+    try {
+      const [count, done] = await Promise.all([
+        getDormantCount(),
+        isPearlCompletedToday(),
+      ]);
+      setDormantCount(count);
+      setPearlDoneToday(done);
+    } catch {
+      /* silent — card just won't show if the count read fails */
+    }
+  }, []);
+
   // Subscribe to the module-level cache so any refresh (boot prefetch,
   // tab focus, or outside this screen) flows in via setState here.
   useEffect(() => {
@@ -96,7 +119,7 @@ export default function DashboardScreen() {
       setStreak(snap.streak);
       setStudiedDates(snap.studiedDates);
       setFrozenDates(snap.frozenDates);
-      setFriends(snap.friends);
+      setFriendCount(snap.friends.length);
       setLoading(false);
     });
   }, []);
@@ -106,12 +129,14 @@ export default function DashboardScreen() {
   useFocusEffect(useCallback(() => {
     refreshDashboard().finally(() => setLoading(false));
     reloadUnread();
-  }, [reloadUnread]));
+    reloadStats();
+    reloadDormant();
+  }, [reloadUnread, reloadStats, reloadDormant]));
 
   // Foreground push: when any push notification arrives while the dashboard
-  // is open, useFocusEffect won't re-fire (already focused) so badge + lists
-  // would stay stale. Refresh unconditionally — both refresh fns are cheap
-  // and deduped, and iOS data-shape quirks made type-based gating unreliable.
+  // is open, useFocusEffect won't re-fire (already focused) so badge would
+  // stay stale. Refresh unconditionally — both refresh fns are cheap and
+  // deduped.
   useEffect(() => {
     let sub: { remove: () => void } | null = null;
     (async () => {
@@ -129,44 +154,16 @@ export default function DashboardScreen() {
   // Background → foreground transition. iOS in particular: when the user
   // backgrounds the app (e.g. to accept on another device), useFocusEffect
   // doesn't re-fire on return since dashboard never lost navigation focus.
-  // Refresh on AppState 'active' so the friends list catches up even when
-  // the push listener missed (push delivered while backgrounded).
   useEffect(() => {
     const sub = AppState.addEventListener('change', (state) => {
       if (state === 'active') {
         refreshDashboard().catch(() => { /* silent */ });
         reloadUnread();
+        reloadStats();
       }
     });
     return () => sub.remove();
-  }, [reloadUnread]);
-
-  // Realtime subscription: drive friends-list refresh from Postgres
-  // INSERT events on the friendships table. This is the primary signal
-  // for "the other side accepted my request" — more reliable than push
-  // notifications, which iOS does not deliver to the foreground listener
-  // consistently. Subscribes once after auth is ready.
-  useEffect(() => {
-    let unsub: (() => void) | null = null;
-    let unsubPokes: (() => void) | null = null;
-    let cancelled = false;
-    (async () => {
-      const { supabase } = await import('@src/api/supabase');
-      const { data: { session } } = await supabase.auth.getSession();
-      const uid = session?.user?.id;
-      if (!uid || session?.user?.is_anonymous || cancelled) return;
-      const { subscribeFriendshipsForUser, subscribePokesForUser } = await import('@src/services/friendsService');
-      unsub = subscribeFriendshipsForUser(uid, () => {
-        refreshDashboard().catch(() => { /* silent */ });
-        reloadUnread();
-      });
-      unsubPokes = subscribePokesForUser(uid, () => {
-        reloadUnread();
-      });
-    })();
-    return () => { cancelled = true; unsub?.(); unsubPokes?.(); };
-  }, [reloadUnread]);
-
+  }, [reloadUnread, reloadStats]);
 
   if (loading) {
     return (
@@ -179,40 +176,34 @@ export default function DashboardScreen() {
   const isAnon = profile?.isAnonymous ?? true;
   const hasUsername = !!profile?.username;
   const displayName = profile?.displayName || t('dashboard.unnamed');
-  const avatarLetter = hasUsername
-    ? displayName.charAt(0).toUpperCase()
-    : isAnon
-      ? t('dashboard.guest').charAt(0).toUpperCase()
-      : '?';
+  const avatarName = hasUsername ? displayName : isAnon ? t('dashboard.guest') : '?';
 
   return (
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'left', 'right']}>
       <TabletContainer>
-      <FlatList
-        data={isAnon ? [] : friends}
-        keyExtractor={(f) => f.friendId}
-        contentContainerStyle={{ paddingBottom: 80 + insets.bottom }}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={async () => {
-              haptic.tap();
-              setRefreshing(true);
-              try {
-                await Promise.all([refreshDashboard(), reloadUnread()]);
-              } finally {
-                setRefreshing(false);
-              }
-            }}
-            tintColor="#2EC4A5"
-            colors={['#2EC4A5']}
-          />
-        }
-        ListHeaderComponent={
+        <ScrollView
+          contentContainerStyle={{ paddingBottom: 80 + insets.bottom }}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={async () => {
+                haptic.tap();
+                setRefreshing(true);
+                try {
+                  await Promise.all([refreshDashboard(), reloadUnread(), reloadStats()]);
+                } finally {
+                  setRefreshing(false);
+                }
+              }}
+              tintColor="#2EC4A5"
+              colors={['#2EC4A5']}
+            />
+          }
+        >
           <View className="px-6">
             <View className="flex-row items-center justify-between pt-6">
               <View>
-                <Text className="text-[28px] font-bold tracking-tight text-ink dark:text-ink-dark">
+                <Text className="text-3xl font-extrabold tracking-tight text-ink dark:text-ink-dark">
                   {t('dashboard.title')}
                 </Text>
               </View>
@@ -263,11 +254,19 @@ export default function DashboardScreen() {
             {/* My Profile Card */}
             <Card className="mt-6 p-5">
               <View className="flex-row items-center">
-                <View className="h-14 w-14 items-center justify-center rounded-full" style={{ backgroundColor: hasUsername ? '#2EC4A5' : '#A79E90' }}>
-                  <Text className="text-2xl font-bold text-white">
-                    {avatarLetter}
-                  </Text>
-                </View>
+                <Pressable
+                  onPress={() => { if (!isAnon) setShowAvatarMenu(true); }}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('avatar_menu.title')}
+                  hitSlop={6}
+                >
+                  <AvatarCircle
+                    name={avatarName}
+                    backgroundId={hasUsername ? boxState.equippedBackgroundId : null}
+                    size={56}
+                  />
+                </Pressable>
+
                 <View className="ml-3 flex-1">
                   {isAnon ? (
                     <Text className="text-lg font-bold text-ink dark:text-ink-dark">
@@ -275,7 +274,7 @@ export default function DashboardScreen() {
                     </Text>
                   ) : hasUsername ? (
                     <>
-                      <Pressable onPress={() => setShowNameModal(true)} className="flex-row items-center">
+                      <Pressable onPress={() => setShowProfileSetup(true)} className="flex-row items-center">
                         <Text className="text-lg font-bold text-ink dark:text-ink-dark" numberOfLines={1}>
                           {displayName}
                         </Text>
@@ -327,117 +326,144 @@ export default function DashboardScreen() {
                   </View>
                 );
               })()}
+
+              {/* Friends entry — gated for anonymous users */}
+              {!isAnon ? (
+                <Pressable
+                  onPress={() => { haptic.tap(); router.push('/friends'); }}
+                  className="mt-4 flex-row items-center justify-between rounded-xl border border-line py-3 pl-4 pr-3 dark:border-line-dark"
+                  accessibilityRole="button"
+                  accessibilityLabel={t('friends.title')}
+                >
+                  <View className="flex-row items-center">
+                    <MaterialIcons name="people-outline" size={20} color={dark ? '#F1ECE2' : '#2A2620'} />
+                    <Text className="ml-2 text-sm font-semibold text-ink dark:text-ink-dark">
+                      {t('friends.title')}
+                    </Text>
+                    <Text className="ml-2 text-sm text-muted">{friendCount}</Text>
+                  </View>
+                  <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
+                </Pressable>
+              ) : null}
             </Card>
+
+            {/* Native ad slot — placed between profile and calendar so it
+                rides the natural pause after the user reads their headline
+                stats, before the data-dense calendar/mastery widgets.
+                marginTop on the component itself (not an outer wrapper)
+                so an unloaded/null ad takes zero vertical space — keeps
+                the profile→pearl gap consistent with the other cards. */}
+            <NativeAdCard marginTop={24} />
+
+            {/* Word Pearl entry — directly between the ad slot and the
+                calendar so the surrounding mt-6 spacing matches every
+                other learning card on the page. Daily-capped: once
+                today's batch is done, the card hides until tomorrow so
+                the feature stays scarce. */}
+            {dormantCount > 0 && !pearlDoneToday ? (
+              <Pressable
+                onPress={() => { haptic.tap(); router.push('/word-pearl'); }}
+                accessibilityRole="button"
+                accessibilityLabel={t('pearl.title')}
+              >
+                <Card className="mt-6 p-5">
+                  <View className="flex-row items-center">
+                    <View className="h-12 w-12 items-center justify-center rounded-full" style={{ backgroundColor: dark ? '#2A261E' : '#FFFFFF', borderWidth: 1, borderColor: dark ? '#3A352B' : '#ECE6DA' }}>
+                      <Text style={{ fontSize: 24 }}>🦪</Text>
+                    </View>
+                    <View className="ml-3 flex-1">
+                      <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                        {t('pearl.dashboard_title')}
+                      </Text>
+                      <Text className="mt-0.5 text-xs text-muted">
+                        {t('pearl.dashboard_subtitle', { count: Math.min(PEARL_DAILY_CAP, dormantCount) })}
+                      </Text>
+                    </View>
+                    <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
+                  </View>
+                </Card>
+              </Pressable>
+            ) : null}
+
+            {/* Weekly recap card — surfaces only on Sundays so the user
+                gets a once-a-week "what you did this week" moment that
+                doubles as a share hook. */}
+            {new Date().getDay() === 0 ? (
+              <Pressable
+                onPress={() => { haptic.tap(); router.push('/weekly-recap'); }}
+                accessibilityRole="button"
+                accessibilityLabel={t('weekly.title')}
+              >
+                <Card className="mt-6 p-5">
+                  <View className="flex-row items-center">
+                    <View className="h-12 w-12 items-center justify-center rounded-full" style={{ backgroundColor: '#2EC4A510', borderWidth: 1, borderColor: '#2EC4A5' }}>
+                      <MaterialIcons name="insights" size={22} color="#2EC4A5" />
+                    </View>
+                    <View className="ml-3 flex-1">
+                      <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                        {t('weekly.card_title')}
+                      </Text>
+                      <Text className="mt-0.5 text-xs text-muted">
+                        {t('weekly.card_subtitle')}
+                      </Text>
+                    </View>
+                    <MaterialIcons name="chevron-right" size={20} color="#A79E90" />
+                  </View>
+                </Card>
+              </Pressable>
+            ) : null}
 
             {/* Monthly study calendar. Studied days are mint-filled; today
                 gets a mint ring. Tap < > to scroll through past/future
-                months — past data covers ~2 years (see getStudiedDates). */}
-            <Card className="mt-6 p-5">
-              <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
-                {t('dashboard.activity_title')}
-              </Text>
-              <ActivityCalendar studiedDates={studiedDates} frozenDates={frozenDates} dark={dark} />
-            </Card>
-
-            {/* Friends section — gated for anonymous users */}
-            {isAnon ? (
-              <View className="mt-6 items-center rounded-[20px] border border-dashed border-line p-6 dark:border-line-dark">
-                <MaterialIcons name="people-outline" size={40} color="#A79E90" />
-                <Text className="mt-3 text-center text-base font-semibold text-ink dark:text-ink-dark">
-                  {t('dashboard.signup_title')}
-                </Text>
-                <Text className="mt-1 text-center text-sm text-muted">
-                  {t('dashboard.signup_message')}
-                </Text>
-                <Pressable
-                  onPress={() => router.push('/auth')}
-                  className="mt-4 rounded-xl bg-ink px-6 py-3 dark:bg-ink-dark"
-                >
-                  <Text className="text-sm font-semibold text-white dark:text-black">
-                    {t('dashboard.signup_cta')}
+                months — past data covers ~2 years (see getStudiedDates).
+                Whole card is pressable → opens the full Stats page. */}
+            <Pressable
+              onPress={() => { haptic.tap(); router.push('/stats'); }}
+              accessibilityRole="button"
+              accessibilityLabel={t('stats.title')}
+            >
+              <Card className="mt-6 p-5">
+                <View className="flex-row items-center justify-between">
+                  <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                    {t('dashboard.activity_title')}
                   </Text>
-                </Pressable>
-              </View>
-            ) : (
-              <>
-                <View className="mt-6 flex-row items-center justify-between">
-                  <Text className="text-xl font-semibold text-ink dark:text-ink-dark">
-                    {t('dashboard.friends_count', { count: friends.length })}
-                  </Text>
-                  <Pressable
-                    onPress={() => setShowAddModal(true)}
-                    className="rounded-xl bg-ink p-3 dark:bg-ink-dark"
-                    disabled={!hasUsername}
-                    accessibilityLabel={t('dashboard.add_friend')}
-                    accessibilityRole="button"
-                  >
-                    <MaterialIcons name="add" size={20} color={dark ? '#000' : '#fff'} />
-                  </Pressable>
+                  <View className="flex-row items-center">
+                    <Text className="text-xs text-muted">{t('stats.view_more')}</Text>
+                    <MaterialIcons name="chevron-right" size={18} color="#A79E90" />
+                  </View>
                 </View>
-              </>
-            )}
-            <View className="mt-4">
-              <NativeAdCard />
-            </View>
-          </View>
-        }
-        renderItem={({ item }) => (
-          <Pressable
-            onLongPress={() => setShowActionMenu(item)}
-            className="mx-6 mt-3 rounded-[20px] border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark"
-          >
-            <View className="flex-row items-center">
-              <View className="h-10 w-10 items-center justify-center rounded-full bg-clay dark:bg-clay-dark">
-                <Text className="text-base font-bold text-muted dark:text-muted-dark">
-                  {item.displayName.charAt(0).toUpperCase()}
-                </Text>
-              </View>
-              <View className="ml-3 flex-1">
-                <Text className="text-base font-semibold text-ink dark:text-ink-dark" numberOfLines={1}>
-                  {item.displayName}
-                </Text>
-                {item.username ? (
-                  <Text className="text-xs text-muted" numberOfLines={1}>
-                    @{item.username}
-                  </Text>
-                ) : null}
-              </View>
+                <ActivityCalendar studiedDates={studiedDates} frozenDates={frozenDates} dark={dark} />
+              </Card>
+            </Pressable>
+
+            {/* Stats summary card — small surface that previews mastery and
+                deep-links into the full Stats page. Tap-through targets the
+                same /stats route as the calendar card for symmetry. */}
+            {!isAnon && stats && stats.srs.total > 0 ? (
               <Pressable
-                onPress={() => setShowActionMenu(item)}
-                className="-mr-2 p-2"
-                accessibilityLabel={t('common.more')}
+                onPress={() => { haptic.tap(); router.push('/stats'); }}
                 accessibilityRole="button"
-                hitSlop={8}
+                accessibilityLabel={t('stats.title')}
               >
-                <MaterialIcons name="more-vert" size={22} color="#A79E90" />
+                <Card className="mt-6 p-5">
+                  <View className="flex-row items-center justify-between">
+                    <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                      {t('stats.mastery_title')}
+                    </Text>
+                    <View className="flex-row items-center">
+                      <Text className="text-xs text-muted">{t('stats.view_more')}</Text>
+                      <MaterialIcons name="chevron-right" size={18} color="#A79E90" />
+                    </View>
+                  </View>
+                  <MasteryBar dist={stats.srs} dark={dark} />
+                  <Text className="mt-2 text-xs text-muted">
+                    {t('stats.total_cards', { count: stats.srs.total })}
+                  </Text>
+                </Card>
               </Pressable>
-            </View>
-            {item.statsPublic ? (
-              <View className="mt-3 flex-row items-center gap-2">
-                <StatChip icon="🔥" value={item.streakCurrent ?? 0} label={t('dashboard.stat_streak_short')} />
-                <StatChip icon="⭐" value={getLevel(item.xpTotal ?? 0).level} label="Lv" />
-              </View>
-            ) : (
-              <Text className="mt-2 text-xs text-faint">{t('dashboard.stats_hidden')}</Text>
-            )}
-            <PokeButton
-              friend={item}
-              onSent={(name) => showToast(t('dashboard.poke_sent_toast', { name }), 'success')}
-              onError={(msg) => showToast(msg, 'error')}
-            />
-          </Pressable>
-        )}
-        ListEmptyComponent={
-          !isAnon && friends.length === 0 ? (
-            <View className="mt-8 items-center px-8">
-              <MaterialIcons name="people-outline" size={48} color="#A79E90" />
-              <Text className="mt-3 text-center text-sm text-muted">
-                {t('dashboard.empty')}
-              </Text>
-            </View>
-          ) : null
-        }
-      />
+            ) : null}
+          </View>
+        </ScrollView>
       </TabletContainer>
 
       <Toast
@@ -446,32 +472,6 @@ export default function DashboardScreen() {
         type={toast?.type ?? 'error'}
         onHide={() => setToast(null)}
         style={{ position: 'absolute', bottom: insets.bottom + 32, left: 0, right: 0 }}
-      />
-
-      <AddFriendByUsernameModal
-        visible={showAddModal}
-        onClose={() => setShowAddModal(false)}
-        onRequestSent={(uname) => {
-          setShowAddModal(false);
-          showToast(t('dashboard.request_sent_toast', { username: uname }), 'success');
-          reloadUnread();
-        }}
-        onAutoAccepted={(uname) => {
-          setShowAddModal(false);
-          showToast(t('dashboard.added', { name: `@${uname}` }), 'success');
-          refreshDashboard();
-        }}
-        onError={(message) => showToast(message, 'error')}
-      />
-
-      <NicknameModal
-        visible={showNameModal}
-        initialName={profile?.displayName ?? ''}
-        onSaved={() => {
-          setShowNameModal(false);
-          refreshDashboard();
-        }}
-        onCancel={() => setShowNameModal(false)}
       />
 
       <ProfileSetupModal
@@ -487,38 +487,13 @@ export default function DashboardScreen() {
         onCancel={() => setShowProfileSetup(false)}
       />
 
-      <ActionMenu
-        friend={showActionMenu}
-        onClose={() => setShowActionMenu(null)}
-        onUnfriend={async (id) => {
-          await removeFriend(id);
-          setShowActionMenu(null);
-          showToast(t('dashboard.unfriended'), 'success');
-          refreshDashboard();
-        }}
-        onBlock={async (id) => {
-          await blockUser(id);
-          setShowActionMenu(null);
-          showToast(t('dashboard.blocked'), 'success');
-          refreshDashboard();
-        }}
-        onReport={(id) => {
-          const f = showActionMenu;
-          setShowActionMenu(null);
-          if (f && f.friendId === id) setReportTarget(f);
-        }}
+      <AvatarMenu
+        visible={showAvatarMenu}
+        onClose={() => setShowAvatarMenu(false)}
+        onPickBackground={() => setShowBgPicker(true)}
+        onPickCharacter={() => router.push('/mystery-box')}
       />
-
-      <TargetReportModal
-        visible={!!reportTarget}
-        target={reportTarget ? { kind: 'user', id: reportTarget.friendId, label: reportTarget.displayName } : null}
-        onClose={() => setReportTarget(null)}
-        onSubmitted={() => {
-          setReportTarget(null);
-          showToast(t('report.submitted'), 'success');
-        }}
-      />
-
+      <BackgroundPicker visible={showBgPicker} onClose={() => setShowBgPicker(false)} />
     </SafeAreaView>
   );
 }
@@ -678,156 +653,58 @@ function StatChip({ icon, label, value, dimmed }: {
   );
 }
 
-function PokeButton({
-  friend,
-  onSent,
-  onError,
+const STAGE_COLORS: Record<'new' | 'learning' | 'reviewing' | 'mastered', string> = {
+  new: '#A79E90',
+  learning: '#F59E0B',
+  reviewing: '#3B82F6',
+  mastered: '#2EC4A5',
+};
+
+/**
+ * Single horizontal stacked bar showing the share of cards in each SRS
+ * stage. Counts < 1% of the total are still rendered (1px min) so the
+ * legend below stays honest, but they won't visually crowd the bar.
+ */
+function MasteryBar({
+  dist,
+  dark,
 }: {
-  friend: FriendRow;
-  onSent: (name: string) => void;
-  onError: (msg: string) => void;
+  dist: { new: number; learning: number; reviewing: number; mastered: number; total: number };
+  dark: boolean;
 }) {
   const { t } = useTranslation();
-  const [busy, setBusy] = useState(false);
-  const submit = async () => {
-    if (busy) return;
-    haptic.tap();
-    setBusy(true);
-    try {
-      await sendPoke(friend.friendId);
-      onSent(friend.displayName || friend.username || 'friend');
-    } catch (e) {
-      if (e instanceof FriendsError) {
-        if (e.code === 'not_friends') onError(t('dashboard.poke_not_friends'));
-        else if (e.code === 'must_sign_up') onError(t('dashboard.signup_required'));
-        else onError(t('error.title'));
-      } else {
-        onError(t('error.title'));
-      }
-    } finally {
-      setBusy(false);
-    }
-  };
+  if (dist.total <= 0) return null;
+  const segments: { key: 'new' | 'learning' | 'reviewing' | 'mastered'; count: number }[] = [
+    { key: 'new', count: dist.new },
+    { key: 'learning', count: dist.learning },
+    { key: 'reviewing', count: dist.reviewing },
+    { key: 'mastered', count: dist.mastered },
+  ];
   return (
-    <Pressable
-      onPress={submit}
-      disabled={busy}
-      className="mt-3 flex-row items-center justify-center rounded-lg bg-ink px-3 py-2 dark:bg-ink-dark"
-      accessibilityLabel={t('dashboard.poke')}
-      accessibilityRole="button"
-    >
-      {busy ? (
-        <ActivityIndicator size="small" color="#A79E90" />
-      ) : (
-        <>
-          <Text className="text-base">👉</Text>
-          <Text className="ml-2 text-sm font-semibold text-white dark:text-black">
-            {t('dashboard.poke')}
-          </Text>
-        </>
-      )}
-    </Pressable>
-  );
-}
-
-function ActionMenu({ friend, onClose, onUnfriend, onBlock, onReport }: {
-  friend: FriendRow | null;
-  onClose: () => void;
-  onUnfriend: (id: string) => void;
-  onBlock: (id: string) => void;
-  onReport: (id: string) => void;
-}) {
-  const { t } = useTranslation();
-  const colorScheme = useColorScheme();
-  const dark = colorScheme === 'dark';
-  const visible = !!friend;
-  const translateY = useSharedValue(1000);
-
-  useEffect(() => {
-    if (visible) {
-      translateY.value = 1000;
-      requestAnimationFrame(() => {
-        translateY.value = withTiming(0, { duration: 300 });
-      });
-    }
-  }, [visible, translateY]);
-
-  const dismiss = useCallback(() => {
-    translateY.value = withTiming(1000, { duration: 220 }, (finished) => {
-      if (finished) runOnJS(onClose)();
-    });
-  }, [onClose, translateY]);
-
-  const panGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .onUpdate((e) => {
-          if (e.translationY > 0) translateY.value = e.translationY;
-        })
-        .onEnd((e) => {
-          if (e.translationY > 120 || e.velocityY > 800) {
-            translateY.value = withTiming(1000, { duration: 200 }, (finished) => {
-              if (finished) runOnJS(onClose)();
-            });
-          } else {
-            translateY.value = withTiming(0, { duration: 220 });
-          }
-        }),
-    [onClose, translateY],
-  );
-
-  const sheetStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: translateY.value }],
-  }));
-
-  if (!friend) return null;
-  return (
-    <Modal visible transparent animationType="none" onRequestClose={dismiss} statusBarTranslucent>
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Pressable
-          onPress={dismiss}
-          style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' }}
-        >
-          <GestureDetector gesture={panGesture}>
-            <Animated.View
-              style={[
-                {
-                  backgroundColor: dark ? '#1E1B15' : '#FCFBF7',
-                  borderTopLeftRadius: 24,
-                  borderTopRightRadius: 24,
-                  padding: 24,
-                  paddingBottom: 32,
-                },
-                sheetStyle,
-              ]}
-            >
-              <Pressable onPress={() => {}}>
-                <View className="mb-3 items-center">
-                  <View className="h-1 w-10 rounded-full bg-line dark:bg-line-dark" />
-                </View>
-                <Text className="text-lg font-bold text-ink dark:text-ink-dark">
-                  {friend.displayName}
-                </Text>
-                <Pressable onPress={() => onUnfriend(friend.friendId)} className="mt-4 flex-row items-center py-3">
-                  <MaterialIcons name="person-remove" size={22} color="#7B7366" />
-                  <Text className="ml-3 text-base text-ink dark:text-ink-dark">{t('dashboard.unfriend')}</Text>
-                </Pressable>
-                <Pressable onPress={() => onBlock(friend.friendId)} className="flex-row items-center py-3">
-                  <MaterialIcons name="block" size={22} color="#ef4444" />
-                  <Text className="ml-3 text-base text-red-500">{t('dashboard.block')}</Text>
-                </Pressable>
-                <Pressable onPress={() => onReport(friend.friendId)} className="flex-row items-center py-3">
-                  <MaterialIcons name="flag" size={22} color="#ef4444" />
-                  <Text className="ml-3 text-base text-red-500">{t('dashboard.report')}</Text>
-                </Pressable>
-                <Pressable onPress={dismiss} className="mt-3 items-center py-3">
-                  <Text className="text-sm text-muted">{t('common.cancel')}</Text>
-                </Pressable>
-              </Pressable>
-            </Animated.View>
-          </GestureDetector>
-        </Pressable>
-      </GestureHandlerRootView>
-    </Modal>
+    <View className="mt-3">
+      <View
+        className="h-2.5 w-full overflow-hidden rounded-full"
+        style={{ backgroundColor: dark ? '#2A261E' : '#ECE6DA', flexDirection: 'row' }}
+      >
+        {segments.map((s) =>
+          s.count > 0 ? (
+            <View
+              key={s.key}
+              style={{ flex: s.count, backgroundColor: STAGE_COLORS[s.key] }}
+            />
+          ) : null,
+        )}
+      </View>
+      <View className="mt-2 flex-row flex-wrap gap-x-3 gap-y-1">
+        {segments.map((s) => (
+          <View key={s.key} className="flex-row items-center">
+            <View className="h-2 w-2 rounded-full" style={{ backgroundColor: STAGE_COLORS[s.key] }} />
+            <Text className="ml-1.5 text-xs text-muted">
+              {t(`stats.stage_${s.key}` as const)} {s.count}
+            </Text>
+          </View>
+        ))}
+      </View>
+    </View>
   );
 }

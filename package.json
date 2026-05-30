@@ -1,7 +1,7 @@
 {
   "name": "typeword",
   "main": "expo-router/entry",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -9,7 +9,9 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "test": "jest"
+    "test": "jest",
+    "bump": "node scripts/bump-version.mjs",
+    "bump:force": "FORCE_BUMP=1 node scripts/bump-version.mjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -34,8 +36,10 @@
     "expo-image": "~3.0.11",
     "expo-image-manipulator": "~14.0.8",
     "expo-image-picker": "~17.0.10",
+    "expo-linear-gradient": "~15.0.8",
     "expo-linking": "~8.0.11",
     "expo-localization": "~17.0.8",
+    "expo-navigation-bar": "~5.0.10",
     "expo-notifications": "~0.32.16",
     "expo-print": "~15.0.8",
     "expo-router": "~6.0.23",

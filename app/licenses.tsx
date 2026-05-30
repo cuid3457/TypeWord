@@ -13,6 +13,41 @@ interface License {
   license: string;
 }
 
+// Dictionary data sources — CC BY-SA requires attribution on derivative use.
+// These power the word-lookup pipeline for the 8 supported source languages.
+interface DictionarySource {
+  name: string;
+  description: string;
+  license: string;
+  url: string;
+}
+const DICTIONARY_SOURCES: DictionarySource[] = [
+  {
+    name: 'krdict (한국어기초사전)',
+    description: 'Korean dictionary (NIKL, National Institute of Korean Language)',
+    license: 'CC BY-SA 2.0 KR',
+    url: 'https://krdict.korean.go.kr/',
+  },
+  {
+    name: 'JMdict',
+    description: 'Japanese-multilingual dictionary (EDRDG)',
+    license: 'CC BY-SA 4.0',
+    url: 'https://www.edrdg.org/jmdict/j_jmdict.html',
+  },
+  {
+    name: 'CC-CEDICT',
+    description: 'Chinese-English dictionary',
+    license: 'CC BY-SA 4.0',
+    url: 'https://www.mdbg.net/chinese/dictionary?page=cc-cedict',
+  },
+  {
+    name: 'Wiktionary (via kaikki.org)',
+    description: 'English/Spanish/French/German/Italian entries',
+    license: 'CC BY-SA 4.0',
+    url: 'https://kaikki.org/',
+  },
+];
+
 const LICENSES: License[] = [
   { name: '@expo/vector-icons', version: '15.1.1', license: 'MIT' },
   { name: '@react-native-async-storage/async-storage', version: '2.2.0', license: 'MIT' },
@@ -98,7 +133,30 @@ export default function LicensesScreen() {
                 {t('settings.licenses')}
               </Text>
             </View>
-            <Text className="mt-4 mb-4 text-sm text-muted">
+
+            {/* Dictionary data attribution — CC BY-SA compliance. */}
+            <Text className="mt-4 mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
+              {t('settings.dict_sources_header')}
+            </Text>
+            <Text className="mb-3 text-xs text-faint">
+              {t('settings.dict_sources_intro')}
+            </Text>
+            {DICTIONARY_SOURCES.map((d) => (
+              <Pressable
+                key={d.name}
+                onPress={() => Linking.openURL(d.url)}
+                className="mb-2 rounded-lg border border-line p-3 dark:border-line-dark"
+              >
+                <Text className="text-sm font-medium text-ink dark:text-ink-dark">{d.name}</Text>
+                <Text className="mt-0.5 text-xs text-muted">{d.description}</Text>
+                <Text className="mt-0.5 text-xs text-faint">{d.license}</Text>
+              </Pressable>
+            ))}
+
+            <Text className="mt-6 mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
+              {t('settings.software_licenses_header')}
+            </Text>
+            <Text className="mb-4 text-sm text-muted">
               {t('settings.licenses_description', { count: LICENSES.length })}
             </Text>
           </>

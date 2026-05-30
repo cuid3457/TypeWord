@@ -23,7 +23,7 @@ export interface UserSettings {
   sessionCount?: number;
   /** Last review mode the user chose. Restored as the default selection
    *  on the next session so users don't have to re-pick every time. */
-  reviewMode?: 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
+  reviewMode?: 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening' | 'auto';
   /** Last review order the user chose. Restored on the next session. */
   reviewOrder?: 'newest' | 'shuffle';
   notificationsEnabled?: boolean;
@@ -31,8 +31,8 @@ export interface UserSettings {
   sfxEnabled?: boolean;
   /** 'F' or 'M' — chosen TTS voice gender, applied across all languages. */
   voiceGender?: 'F' | 'M';
-  /** TTS playback rate. 1.0 = natural per-voice speed (with correction); 0.8/1.2 = ±20%. */
-  voiceRate?: 0.8 | 1.0 | 1.2;
+  /** TTS playback rate. 1.0 = natural per-voice speed (with correction). */
+  voiceRate?: 0.75 | 1.0 | 1.25 | 1.5;
   /** Auto-play TTS at the start of each review card. Defaults to true. */
   autoPlayTts?: boolean;
 }

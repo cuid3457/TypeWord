@@ -25,12 +25,14 @@ const INF = Number.POSITIVE_INFINITY;
 // privilege — server reads profiles.plan for the real tier.
 const ENDPOINT_LIMITS: Record<string, EndpointLimits> = {
   "word-lookup": {
-    // No tier differentiation — this cap is purely an abuse guard against
-    // runaway scripts / scrapers, not a paywall lever. 60/min = 30 user
-    // searches/min (each search is 2 calls: quick + enrich) which is far
-    // above any human typing rate for either tier.
-    free: { perMinute: 60, perHour: INF, perDay: INF, perMonth: INF },
-    pro:  { perMinute: 60, perHour: INF, perDay: INF, perMonth: INF },
+    // 60/min cap = abuse guard against typing-rate runaway (each user search
+    // is 2 calls: quick + enrich, so 30 searches/min — well above any human).
+    // perDay cap is the real cost ceiling: at Latin SELECT $0.000732/call a
+    // free user maxes at $0.07/day, a premium user $1.46/day. Premium 2000/day
+    // is ~7x what a heavy power-user actually does (200~300/day), invisible
+    // to real users but bounds bot-driven cost burn.
+    free: { perMinute: 60, perHour: INF, perDay: 100,  perMonth: INF },
+    pro:  { perMinute: 60, perHour: INF, perDay: 2000, perMonth: INF },
   },
   "tts-synthesize": {
     // No per-user limit — TTS is always downstream of either a word-lookup
@@ -53,8 +55,11 @@ const ENDPOINT_LIMITS: Record<string, EndpointLimits> = {
     pro:  { perMinute: 60, perHour: INF, perDay: INF, perMonth: INF },
   },
   "image-extract": {
-    free: { perMinute: 5, perHour: 30, perDay: INF, perMonth: INF },
-    pro:  { perMinute: 10, perHour: 60, perDay: INF, perMonth: INF },
+    // No per-user min/hour cap — monthly cap (free 3 / premium 300) in
+    // image-extract/index.ts is the real ceiling and bounds Azure spend.
+    // System-wide perMinute (1000) below handles DDoS.
+    free: { perMinute: INF, perHour: INF, perDay: INF, perMonth: INF },
+    pro:  { perMinute: INF, perHour: INF, perDay: INF, perMonth: INF },
   },
 };
 

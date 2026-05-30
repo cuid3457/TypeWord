@@ -3,7 +3,7 @@
  *
  * Tapping the icon opens a small modal with two rows:
  *   - Voice gender: F / M
- *   - Playback rate: ×0.8 / ×1.0 / ×1.2
+ *   - Playback rate: ×0.75 / ×1.0 / ×1.25 / ×1.5
  *
  * Updates persist to user settings immediately (single source of truth);
  * other voice-using screens see changes on next playback.
@@ -17,8 +17,8 @@ import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { haptic } from '@src/services/hapticService';
 
-type Rate = 0.8 | 1.0 | 1.2;
-const RATES: Rate[] = [0.8, 1.0, 1.2];
+type Rate = 0.75 | 1.0 | 1.25 | 1.5;
+const RATES: Rate[] = [0.75, 1.0, 1.25, 1.5];
 
 interface VoiceToggleProps {
   /** Override icon color (e.g. dark headers). Defaults to theme-aware tint. */
@@ -103,7 +103,7 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
 
             {/* Rate row */}
             <Text style={{ fontSize: 13, color: subtle, marginBottom: 8 }}>재생 속도</Text>
-            <View style={{ flexDirection: 'row', gap: 8 }}>
+            <View style={{ flexDirection: 'row', gap: 6 }}>
               {RATES.map((r) => {
                 const active = rate === r;
                 const locked = !premium && r !== 1.0;
@@ -126,14 +126,14 @@ export function VoiceToggle({ iconColor, iconSize = 22 }: VoiceToggleProps) {
                       alignItems: 'center',
                       flexDirection: 'row',
                       justifyContent: 'center',
-                      gap: 4,
+                      gap: 3,
                     }}
                   >
-                    <Text style={{ fontSize: 15, fontWeight: '600', color: active ? '#fff' : textColor }}>
-                      ×{r.toFixed(1)}
+                    <Text style={{ fontSize: 14, fontWeight: '600', color: active ? '#fff' : textColor }}>
+                      ×{r}
                     </Text>
                     {locked ? (
-                      <MaterialIcons name="lock" size={13} color={subtle} />
+                      <MaterialIcons name="lock" size={12} color={subtle} />
                     ) : null}
                   </Pressable>
                 );

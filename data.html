@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dictionary Data Sources - MoaVoca</title>
+<meta name="description" content="Dictionary data sources used by MoaVoca, attributed under CC BY-SA. Download the underlying datasets and verify our attribution.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F4F1EA; color: #2A2620; line-height: 1.7; }
+  .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
+  a.back { color: #7B7366; text-decoration: none; font-size: 14px; }
+  a.back:hover { color: #2A2620; }
+  h1 { font-size: 36px; font-weight: 700; color: #2A2620; margin: 24px 0 8px; }
+  h2 { font-size: 18px; font-weight: 700; color: #2A2620; margin: 32px 0 12px; }
+  .subtitle { font-size: 14px; color: #A79E90; margin-bottom: 24px; }
+  p { font-size: 15px; color: #4A4238; margin-bottom: 12px; }
+  .intro { background: #ECE6DA; padding: 20px 24px; border-radius: 8px; margin: 16px 0 32px; font-size: 14px; color: #4A4238; }
+  .intro strong { color: #2A2620; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 14px; }
+  th { text-align: left; font-size: 12px; color: #7B7366; padding: 10px 12px; border-bottom: 1px solid #E5DFD3; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+  td { padding: 12px; border-bottom: 1px solid #ECE6DA; vertical-align: top; }
+  td a { color: #7B7366; text-decoration: none; }
+  td a:hover { color: #2A2620; text-decoration: underline; }
+  td.lang { font-weight: 600; color: #2A2620; width: 100px; }
+  .license-badge { display: inline-block; font-size: 11px; color: #5A5247; background: #E5DFD3; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+  ul { padding-left: 20px; margin: 8px 0 16px; }
+  li { font-size: 14px; color: #4A4238; margin-bottom: 6px; }
+  .note { font-size: 13px; color: #7B7366; margin-top: 16px; padding: 12px 16px; background: #ECE6DA; border-radius: 6px; }
+  .contact { margin-top: 32px; padding: 20px; background: #ECE6DA; border-radius: 8px; font-size: 14px; color: #4A4238; }
+  .contact a { color: #2A2620; font-weight: 600; }
+</style>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back">&larr; Back to MoaVoca</a>
+  <h1>Dictionary Data Sources</h1>
+  <p class="subtitle">Attribution and download links for the dictionaries that power MoaVoca's word lookups.</p>
+
+  <div class="intro">
+    MoaVoca builds its word lookup feature on top of several openly-licensed dictionary datasets, all distributed under <strong>Creative Commons Attribution-ShareAlike (CC BY-SA)</strong>. Per the ShareAlike clause, the underlying data remains freely redistributable from the original publishers — the links below take you directly to the upstream sources.
+  </div>
+
+  <h2>Sources</h2>
+  <table>
+    <thead>
+      <tr><th>Language</th><th>Source</th><th>License</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="lang">Korean</td>
+        <td>
+          <a href="https://krdict.korean.go.kr/" target="_blank" rel="noopener">krdict (한국어기초사전)</a><br>
+          <a href="https://krdict.korean.go.kr/openApi/openApiInfo" style="font-size:13px;">API & dataset access</a> — National Institute of Korean Language
+        </td>
+        <td><span class="license-badge">CC BY-SA 2.0 KR</span></td>
+      </tr>
+      <tr>
+        <td class="lang">Japanese</td>
+        <td>
+          <a href="https://www.edrdg.org/jmdict/edict.html" target="_blank" rel="noopener">JMdict / EDICT</a><br>
+          <a href="https://www.edrdg.org/jmdict/j_jmdict.html" style="font-size:13px;">Download page</a> — Electronic Dictionary Research and Development Group (EDRDG)
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0</span></td>
+      </tr>
+      <tr>
+        <td class="lang">Chinese</td>
+        <td>
+          <a href="https://www.mdbg.net/chinese/dictionary?page=cc-cedict" target="_blank" rel="noopener">CC-CEDICT</a><br>
+          <a href="https://www.mdbg.net/chinese/dictionary?page=cedict" style="font-size:13px;">Download page</a> — MDBG / community-maintained
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0</span></td>
+      </tr>
+      <tr>
+        <td class="lang">English</td>
+        <td>
+          <a href="https://kaikki.org/dictionary/English/" target="_blank" rel="noopener">Wiktionary (English) via kaikki.org</a><br>
+          <a href="https://kaikki.org/dictionary/English/raw-wiktextract-data.json.gz" style="font-size:13px;">Raw dataset</a> — extracted from English Wiktionary
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0 / GFDL</span></td>
+      </tr>
+      <tr>
+        <td class="lang">Spanish</td>
+        <td>
+          <a href="https://kaikki.org/dictionary/Spanish/" target="_blank" rel="noopener">Wiktionary (Spanish) via kaikki.org</a><br>
+          <a href="https://kaikki.org/dictionary/Spanish/raw-wiktextract-data.json.gz" style="font-size:13px;">Raw dataset</a>
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0 / GFDL</span></td>
+      </tr>
+      <tr>
+        <td class="lang">French</td>
+        <td>
+          <a href="https://kaikki.org/dictionary/French/" target="_blank" rel="noopener">Wiktionary (French) via kaikki.org</a><br>
+          <a href="https://kaikki.org/dictionary/French/raw-wiktextract-data.json.gz" style="font-size:13px;">Raw dataset</a>
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0 / GFDL</span></td>
+      </tr>
+      <tr>
+        <td class="lang">German</td>
+        <td>
+          <a href="https://kaikki.org/dictionary/German/" target="_blank" rel="noopener">Wiktionary (German) via kaikki.org</a><br>
+          <a href="https://kaikki.org/dictionary/German/raw-wiktextract-data.json.gz" style="font-size:13px;">Raw dataset</a>
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0 / GFDL</span></td>
+      </tr>
+      <tr>
+        <td class="lang">Italian</td>
+        <td>
+          <a href="https://kaikki.org/dictionary/Italian/" target="_blank" rel="noopener">Wiktionary (Italian) via kaikki.org</a><br>
+          <a href="https://kaikki.org/dictionary/Italian/raw-wiktextract-data.json.gz" style="font-size:13px;">Raw dataset</a>
+        </td>
+        <td><span class="license-badge">CC BY-SA 4.0 / GFDL</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How we use this data</h2>
+  <ul>
+    <li>Dictionary entries are imported with minimal modification — primarily Unicode normalization and indexing for fast lookup.</li>
+    <li>Headword, part-of-speech, definitions, and pronunciation fields preserve the original wording from the upstream source.</li>
+    <li>AI-generated example sentences and contextual translations produced by our internal pipeline are <em>derivative works of the input word only</em>, not of the dictionary definition itself, and are attributed to MoaVoca rather than to the upstream dictionary.</li>
+  </ul>
+
+  <div class="note">
+    <strong>License compliance.</strong> MoaVoca's use of these sources satisfies the BY (attribution) clause via this page and the in-app credits at <em>Settings &rarr; Open Source Licenses &rarr; Dictionary Data Sources</em>. The SA (ShareAlike) clause is satisfied by directing redistribution to the upstream publishers, who maintain the canonical CC BY-SA datasets in current form.
+  </div>
+
+  <div class="contact">
+    <strong>Need our processed copy?</strong><br>
+    Researchers, developers, or fellow open-source projects who would like a snapshot of MoaVoca's import-normalized dataset (rather than the upstream original) may request one by emailing <a href="mailto:support@moavoca.com?subject=Dictionary%20dataset%20request">support@moavoca.com</a>. We respond within 30 days as required by CC BY-SA 4.0 §6(b).
+  </div>
+</div>
+</body>
+</html>

@@ -163,6 +163,25 @@ export default function StoreScreen() {
           ))}
         </View>
 
+        {/* Mystery Box entry */}
+        <SectionLabel icon="card-giftcard" tint="#D9A441" text={t('store.group_mystery_box')} />
+        <Pressable
+          onPress={() => router.push('/mystery-box')}
+          className="rounded-[16px] border border-line bg-surface p-4 active:opacity-80 dark:border-line-dark dark:bg-surface-dark"
+          accessibilityRole="button"
+        >
+          <View className="flex-row items-center">
+            <View className="h-12 w-12 items-center justify-center rounded-2xl" style={{ backgroundColor: 'rgba(217,164,65,0.16)' }}>
+              <MaterialIcons name="card-giftcard" size={26} color="#D9A441" />
+            </View>
+            <View className="ml-3 flex-1">
+              <Text className="text-[15px] font-bold text-ink dark:text-ink-dark">{t('store.mystery_box_title')}</Text>
+              <Text className="mt-0.5 text-xs text-muted" numberOfLines={2}>{t('store.mystery_box_desc')}</Text>
+            </View>
+            <MaterialIcons name="chevron-right" size={22} color="#7B7366" />
+          </View>
+        </Pressable>
+
         {/* How to earn */}
         <View className="mt-6 rounded-[16px] bg-clay p-[18px] dark:bg-clay-dark">
           <View className="flex-row items-center gap-1.5">

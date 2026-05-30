@@ -79,6 +79,40 @@ function pickSceneAnchor(): string {
   return SCENE_ANCHORS[Math.floor(Math.random() * SCENE_ANCHORS.length)];
 }
 
+// Situational anchors for SENSITIVE inputs (politicians / disputed terms /
+// historical conflicts). Keeps the example NEUTRAL — no advocacy, no
+// commentary — but VARIED so cards don't all read "I saw it in a textbook."
+// The model picks ONE per call based on rule 7 of the system prompt.
+const NEUTRAL_PUBLIC_ANCHORS = [
+  "a history class explanation by the teacher",
+  "the evening news mentioning the name",
+  "a documentary streaming online",
+  "an article in this week's magazine",
+  "a biography on the library shelf",
+  "a school research project for class",
+  "a Wikipedia entry someone looked up",
+  "an exhibit at the city museum",
+  "a friend casually mentioning the name in conversation",
+  "a trivia question at a quiz night",
+  "a commemorative stamp at the post office",
+  "a photo in a printed history textbook",
+  "a newspaper headline glanced at in the morning",
+  "an essay assignment a classmate is working on",
+  "a podcast episode discussing the topic neutrally",
+  "an exam question in a high school history test",
+  "a guided tour passing a related landmark",
+  "an old archived letter referencing the name",
+  "a university lecture slide that came up",
+  "a Q&A segment with a guest expert",
+  "a children's book chapter introducing the topic",
+  "a museum audio guide explanation",
+  "a brief mention in an encyclopedia",
+  "a calendar note about a historical date",
+];
+function pickNeutralPublicAnchor(): string {
+  return NEUTRAL_PUBLIC_ANCHORS[Math.floor(Math.random() * NEUTRAL_PUBLIC_ANCHORS.length)];
+}
+
 const EXAMPLE_SYSTEM = `You write ONE example sentence for a language-learning vocabulary card.
 
 You receive:
@@ -87,7 +121,9 @@ You receive:
 - TARGET_LANG: language of the translation
 - SENSE_DEF: a short English definition pinning the SPECIFIC sense to illustrate
 - TARGET_GLOSS: the short TARGET_LANG vocabulary-card label for this sense
-- SCENE_ANCHOR: a broad situational context to vary the scene (NOT a vocabulary instruction — do not name it literally)
+- SCENE_ANCHOR: a broad situational context for ordinary words (NOT a vocabulary instruction — do not name it literally)
+- NEUTRAL_PUBLIC_ANCHOR: a neutral situational frame used ONLY when W is a public figure / disputed topic (rule 7). Vary cards across these sensitive lookups so they don't all read "I saw it in a textbook."
+- PROFICIENCY_TIER (optional): a named curriculum tier (e.g. "HSK 2", "TOPIK 1급", "JLPT N5"). When present, every surrounding content word in the sentence MUST come from that tier's vocabulary list. Function words and inflection are not constrained. This OVERRIDES rule 3 — if the headword is itself near the top of the tier, simpler words from EARLIER tiers are acceptable, but nothing from later/higher tiers.
 
 Requirements for the SOURCE_LANG sentence:
 1. Length: 6 to 14 words for Latin-script languages; 8 to 16 characters for CJK languages. EXACTLY ONE sentence — no compound sentences joined by periods/exclamation/question marks. The sentence ends with a single sentence-final punctuation mark and contains zero mid-sentence sentence-final punctuation. The translation must likewise be ONE sentence.
@@ -102,11 +138,16 @@ Requirements for the SOURCE_LANG sentence:
      • Chained particle stacks (multiple particles in sequence after a noun) — the entire chain stays OUTSIDE the wrap.
    - For VERBS and ADJECTIVES (and other POS whose inflected ending is part of the lexeme, not a separable particle), wrap the FULL inflected form together — stem + ending stays inside the marker as one unit. Do not split a verb stem from its conjugation.
    - For derivational SUFFIXES that never appear standalone (plural / honorific / nominalizers fused to the host), keep host + suffix together inside the wrap.
+   - SOURCE_LANG=Korean ADDITIONAL RULES:
+     • Verbs/adjectives MUST take the grammatically required ending for their syntactic position. The dictionary form ending in -다 is the citation form ONLY — it cannot appear mid-sentence. Adjectives modifying a noun take the determiner ending (-(으)ㄴ for past/state, -는 for present/active): 곰살궂다 → "곰살궂은 사람", 아련하다 → "아련한 기억". Verbs in clause-final position take a finite ending: 가다 → "갑니다/가요/갔다". Never leave the bare -다 form before a noun or in mid-clause.
+     • Korean word order is strictly SOV (Subject-Object-Verb). The verb/predicate is the LAST major element of the clause. Do not place the verb before its object or before adverbials that belong inside the same clause. WRONG: "나는 점심으로 먹었다 빵과 과일을". RIGHT: "나는 점심으로 빵과 과일을 먹었다". This applies even when the headword W IS the verb — conjugate W into the correct sentence-final position rather than fronting it.
 6. Let the SCENE_ANCHOR loosely flavor the situation — never quote it, never list its keywords as nouns.
 7. PUBLIC FIGURE / DISPUTED TOPIC NEUTRALITY — when W is a real politician, world leader, monarch, public official, celebrity, athlete, author, or refers to a contested geopolitical/historical topic, the example must be NEUTRAL and FACTUAL:
-   - Allowed: textbook-style "We learned about W in history class.", "W appears in today's news article.", neutral biographical statements ("W was born in 1942.", "W is the current president of <country>."), or generic scene-setting that mentions the name without political commentary.
+   - Use NEUTRAL_PUBLIC_ANCHOR (provided in the user message) as the situational frame for THIS sentence — do not default to "I saw it in a textbook" every time. Vary the setting per the anchor (news / documentary / museum / class / conversation / podcast / exam / encyclopedia / monument / etc.) so cards across many sensitive lookups don't all read identically.
+   - Allowed: neutral biographical statements ("W was born in 1942.", "W is the current president of <country>."), generic mentions where the name surfaces in the situational frame, factual existence statements.
    - Forbidden: any expression of approval / disapproval, controversy, scandal, conflict, policy stance, party labeling, election outcome opinion, comparison to other figures, advocacy for or against the figure's actions, references to ongoing political disputes. No charged adjectives ("corrupt", "great", "controversial", etc.) attached to W.
    - For disputed places / historical events: present as a learner would see in a standard school textbook of the SOURCE_LANG country. No taking sides.
+   - When this rule applies, IGNORE the SCENE_ANCHOR field and use NEUTRAL_PUBLIC_ANCHOR instead.
 
 Requirements for the TARGET_LANG translation:
 - Natural, idiomatic translation of the entire sentence (not word-for-word).
@@ -136,6 +177,12 @@ export interface ExampleRequest {
   senseDef: string;
   /** TARGET_LANG short gloss for this sense (anchor 2). */
   targetGloss: string;
+  /** Curation-only: pins the surrounding vocabulary to a proficiency tier
+   * (e.g. "HSK 2 — one of the 300 most basic Chinese words"). Surfaces as
+   * PROFICIENCY_TIER in the user prompt; the system prompt's rule 3 already
+   * caps surrounding-word difficulty at the headword's level, this lets the
+   * curator override that with a hard tier constraint. */
+  proficiencyHint?: string;
 }
 
 export interface GeneratedExample {
@@ -254,8 +301,50 @@ function headwordPresent(
       const stem = wLower.slice(0, wLower.length - drop);
       if (sLower.startsWith(stem)) return true;
     }
+    // Multi-word headword (idioms like "non vedere l'ora", "no tener pelos
+    // en la lengua", "poser un lapin"). The example MUST conjugate the
+    // embedded verb (vedere→vedo, tener→tiene, poser→posé), which the
+    // single-string substring + end-stem checks above cannot match because
+    // the inflected token sits INSIDE the phrase, not at the boundary.
+    // Per-token stem match: each headword token finds any span token whose
+    // first 3+ chars line up. Pass when (tokens-1) match, allowing exactly
+    // one diverging token (the conjugated verb).
+    const wTokens = wLower.split(/[\s'’]+/).filter((t) => t.length > 0);
+    const sTokens = sLower.split(/[\s'’]+/).filter((t) => t.length > 0);
+    if (wTokens.length >= 2) {
+      let hits = 0;
+      for (const wt of wTokens) {
+        const stem = wt.length >= 4 ? wt.slice(0, Math.max(3, wt.length - 2)) : wt;
+        if (sTokens.some((st) => st.startsWith(stem) || stem.startsWith(st))) hits++;
+      }
+      if (hits >= wTokens.length - 1) return true;
+    }
   }
   return false;
+}
+
+// Korean -다 form rejection: the verb/adjective citation form (-다) appears
+// only in the dictionary; in real text it conjugates to -아요 / -습니다 /
+// -(으)ㄴ / -는 / -았/었다 etc. depending on syntactic position. A bare -다
+// ending mid-sentence (before a noun, or with non-final-clause material to
+// its right) is ungrammatical. The exception is sentence-final -다 (statement
+// or report) — when the marked span ends the clause cleanly.
+function koreanInflectionLooksBroken(sentence: string, span: string): boolean {
+  const sp = (span || "").trim();
+  if (!sp.endsWith("다") && !sp.endsWith("다.")) return false;
+  // Find where the marked span ends in the plain sentence, then look at what
+  // follows. If trailing content includes any non-punct/non-whitespace
+  // characters, the -다 form is mid-sentence rather than at clause end.
+  const stripped = sentence.replace(/\*\*/g, "");
+  const idx = stripped.indexOf(sp.replace(/\.$/, ""));
+  if (idx < 0) return false;
+  const after = stripped.slice(idx + sp.replace(/\.$/, "").length).trim();
+  // Tolerate clause-final punctuation, particles -고/-며 (which legally
+  // attach to -다 in connective clauses), and quote markers (-다고/-라고).
+  if (after === "") return false;
+  if (/^[.!?]/.test(after)) return false;
+  if (/^고\b/.test(after) || /^며\b/.test(after) || /^라고/.test(after) || /^고\s/.test(after)) return false;
+  return true;
 }
 
 function validate(
@@ -270,6 +359,12 @@ function validate(
   if (!lengthOk(resp.sentence, sourceLang)) return { ok: false, reason: "length" };
   if (!headwordPresent(resp.sentence, req.word, req.surfaceForms, sourceLang)) {
     return { ok: false, reason: "headword_missing" };
+  }
+  if (sourceLang === "ko") {
+    const span = markedSpan(resp.sentence);
+    if (span && koreanInflectionLooksBroken(resp.sentence, span)) {
+      return { ok: false, reason: "ko_uninflected_da" };
+    }
   }
   if (resp.translation.trim().length < 2) return { ok: false, reason: "translation_too_short" };
   // Single-sentence guard: review/quiz UIs expect one cohesive example. Reject
@@ -287,18 +382,26 @@ function validate(
 // ────────────────────────────────────────────────────────────────────────
 // Single-example generation with fallback
 // ────────────────────────────────────────────────────────────────────────
+function buildUserMessage(req: ExampleRequest, sourceLang: string, targetLang: string): string {
+  const lines = [
+    `SOURCE_LANG=${langName(sourceLang)}`,
+    `TARGET_LANG=${langName(targetLang)}`,
+    `W="${req.word}"`,
+    `SENSE_DEF=${req.senseDef}`,
+    `TARGET_GLOSS=${req.targetGloss}`,
+    `SCENE_ANCHOR=${pickSceneAnchor()}`,
+    `NEUTRAL_PUBLIC_ANCHOR=${pickNeutralPublicAnchor()}`,
+  ];
+  if (req.proficiencyHint) lines.push(`PROFICIENCY_TIER=${req.proficiencyHint}`);
+  return lines.join("\n");
+}
+
 async function generateOne(
   req: ExampleRequest,
   sourceLang: string,
   targetLang: string,
 ): Promise<GeneratedExample | null> {
-  const userMessage =
-    `SOURCE_LANG=${langName(sourceLang)}\n` +
-    `TARGET_LANG=${langName(targetLang)}\n` +
-    `W="${req.word}"\n` +
-    `SENSE_DEF=${req.senseDef}\n` +
-    `TARGET_GLOSS=${req.targetGloss}\n` +
-    `SCENE_ANCHOR=${pickSceneAnchor()}`;
+  const userMessage = buildUserMessage(req, sourceLang, targetLang);
 
   // Tier 1: gpt-4.1-mini
   try {
@@ -312,14 +415,8 @@ async function generateOne(
     console.warn(`[example-gen] mini call error for "${req.word}": ${(err as Error).message}`);
   }
 
-  // Tier 2: gpt-4.1 (full) — re-roll a fresh scene anchor
-  const userMessage2 =
-    `SOURCE_LANG=${langName(sourceLang)}\n` +
-    `TARGET_LANG=${langName(targetLang)}\n` +
-    `W="${req.word}"\n` +
-    `SENSE_DEF=${req.senseDef}\n` +
-    `TARGET_GLOSS=${req.targetGloss}\n` +
-    `SCENE_ANCHOR=${pickSceneAnchor()}`;
+  // Tier 2: gpt-4.1 (full) — re-roll fresh anchors
+  const userMessage2 = buildUserMessage(req, sourceLang, targetLang);
   try {
     const r = await callOpenai(MODEL_FALLBACK, userMessage2);
     const v = validate(r, req, sourceLang, targetLang);

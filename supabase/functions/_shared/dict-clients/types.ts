@@ -14,6 +14,9 @@ export interface DictSense {
   translations_by_lang?: Record<string, string>;
   /** 사전 메타: 품사, register 태그 등. AI judge prompt에 활용. */
   pos?: string;
+  /** AI judge가 추론한 보조 POS. 사전 pos가 "expression"/"symbol" 같이 학습자에
+   *  도움 안 되는 카테고리로 떨어질 때 fallback으로 사용. */
+  llm_pos?: string;
   grade?: string; // krdict word_grade ("초급" / "중급" / "고급")
   misc_tags?: string[]; // JMdict misc (arch/obs/col/vulg etc.)
   /** 동음이의 인덱스 (krdict sup_no, jmdict seq별 entry 묶음). */

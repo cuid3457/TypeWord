@@ -25,7 +25,6 @@ import { findCountry, getSortedCountries, localizedCountryName } from '@src/cons
 import { useUserSettings } from '@src/hooks/useUserSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { haptic } from '@src/services/hapticService';
-import { showAdsPrivacyOptions } from '@src/services/adsConsent';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { getEmail, isApplePrivateRelay, signOut } from '@src/services/authService';
 import { consumePaywallPending } from '@src/services/paywallPending';
@@ -46,7 +45,6 @@ export default function SettingsScreen() {
   const { isTablet } = useTablet();
   const { height: windowHeight } = useWindowDimensions();
   const [editing, setEditing] = useState<EditingField>(null);
-  const [adModal, setAdModal] = useState(false);
   const [resetModal, setResetModal] = useState(false);
   const notifAvailable = isNotificationAvailable();
   const [notifUnavailableModal, setNotifUnavailableModal] = useState(false);
@@ -419,9 +417,9 @@ export default function SettingsScreen() {
           style={isTablet ? { gap: 12 } : undefined}
         >
           {([
-            // rate_app + ad_privacy hidden on web: expo-store-review +
-            // AdMob consent are both no-ops in the browser, so the
-            // entries would just open "unavailable" placeholders.
+            // rate_app hidden on web: expo-store-review is a no-op in the
+            // browser, so the entry would just open an "unavailable"
+            // placeholder.
             Platform.OS !== 'web' ? {
               key: 'rate_app',
               onPress: async () => {
@@ -439,17 +437,7 @@ export default function SettingsScreen() {
               },
             } : null,
             { key: 'contact', onPress: () => router.push('/inquiry') },
-            { key: 'terms', onPress: () => router.push('/terms') },
-            { key: 'privacy', onPress: () => router.push('/privacy') },
-            { key: 'business_info', onPress: () => router.push('/business-info') },
-            Platform.OS !== 'web' ? {
-              key: 'ad_privacy',
-              onPress: async () => {
-                const shown = await showAdsPrivacyOptions();
-                if (!shown) setAdModal(true);
-              },
-            } : null,
-            { key: 'licenses', onPress: () => router.push('/licenses') },
+            { key: 'legal_policies', onPress: () => router.push('/legal-policies') },
           ].filter(Boolean) as { key: string; onPress: () => void }[]).map((b, i) => (
             <Pressable
               key={b.key}
@@ -476,14 +464,6 @@ export default function SettingsScreen() {
         </Pressable>
       </ScrollView>
       </TabletContainer>
-
-      <AppModal
-        visible={adModal}
-        title={t('settings.ad_privacy')}
-        message={t('settings.ad_privacy_unavailable')}
-        buttonText={t('review.check')}
-        onClose={() => setAdModal(false)}
-      />
 
       <AppModal
         visible={notifUnavailableModal}

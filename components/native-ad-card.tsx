@@ -27,7 +27,10 @@ type LoadedAd = {
  * via NativeAdView's wrapping; the explicit CTA button only emphasizes the
  * action affordance.
  */
-export function NativeAdCard() {
+/** Optional outer margin. When the ad is not loaded the component returns
+ * null and the margin disappears with it — useful for slots where an
+ * empty wrapper would otherwise leave visible whitespace. */
+export function NativeAdCard({ marginTop = 0 }: { marginTop?: number }) {
   const premium = usePremium();
   const [loaded, setLoaded] = useState<LoadedAd | null>(null);
   const [NativeAdViewComponent, setNativeAdViewComponent] = useState<React.ComponentType<{ nativeAd: unknown; children: React.ReactNode; style?: object }> | null>(null);
@@ -74,7 +77,7 @@ export function NativeAdCard() {
   const Wrapper = NativeAdViewComponent;
 
   return (
-    <Wrapper nativeAd={loaded.ad} style={{ width: '100%' }}>
+    <Wrapper nativeAd={loaded.ad} style={{ width: '100%', marginTop }}>
       <View className="rounded-2xl border border-line bg-surface p-4 dark:border-line-dark dark:bg-surface-dark">
         <View className="mb-2 flex-row items-center justify-between">
           <Text className="text-[10px] font-bold uppercase tracking-wider text-faint">광고</Text>

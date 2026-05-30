@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-import { getStreak, getPreferredNotificationHour } from './streakService';
+import { getStreak, getPreferredNotificationTime } from './streakService';
 import { getReviewableCount, getRecentBookName, getWeeklyStudyCount, getBooksForNotifications } from '@src/db/queries';
 import { captureError } from './sentry';
 
@@ -112,8 +112,12 @@ export async function getDevicePushToken(): Promise<DevicePushToken | null> {
 
 export interface NotificationTranslations {
   reviewTitle: string;
+  reviewTitle2: string;
+  reviewTitle3: string;
   reviewBody: string;
   addTitle: string;
+  addTitle2: string;
+  addTitle3: string;
   addBody: string;
   streakSuffix: string;
   return7dTitle: string;
@@ -136,8 +140,12 @@ export interface NotificationTranslations {
 export function getNotificationTranslations(t: (key: string) => string): NotificationTranslations {
   return {
     reviewTitle: t('notification.review_title'),
+    reviewTitle2: t('notification.review_title_2'),
+    reviewTitle3: t('notification.review_title_3'),
     reviewBody: t('notification.review_body'),
     addTitle: t('notification.add_title'),
+    addTitle2: t('notification.add_title_2'),
+    addTitle3: t('notification.add_title_3'),
     addBody: t('notification.add_body'),
     streakSuffix: t('notification.streak_suffix'),
     return7dTitle: t('notification.return_7d_title'),
@@ -172,16 +180,26 @@ export function getDailyContent(
   let title: string;
   let body: string;
 
+  // Rotate through 3 title variants so the same user doesn't see the same
+  // copy day after day — feels like nagging otherwise. Body stays consistent
+  // (data-driven anyway via count/bookName).
+  const variant = Math.floor(Math.random() * 3);
+
   if (useReviewType) {
-    title = tr.reviewTitle;
+    const reviewTitles = [tr.reviewTitle, tr.reviewTitle2, tr.reviewTitle3];
+    title = reviewTitles[variant];
     const raw = bookName
       ? tr.reviewBody.replace('{{bookName}}', bookName)
       : stripBookName(tr.reviewBody);
     body = raw.replace('{{count}}', String(dueCount));
   } else {
-    title = bookName
-      ? tr.addTitle.replace('{{bookName}}', bookName)
-      : stripBookName(tr.addTitle);
+    // Personalized variant (uses bookName) only when we have it; otherwise
+    // round-robin the two generic variants.
+    if (variant === 0 && bookName) {
+      title = tr.addTitle.replace('{{bookName}}', bookName);
+    } else {
+      title = variant === 2 ? tr.addTitle3 : tr.addTitle2;
+    }
     body = tr.addBody;
   }
 
@@ -312,11 +330,13 @@ async function doReschedule(tr: NotificationTranslations): Promise<void> {
   if (!Notifications) return;
   await Notifications.cancelAllScheduledNotificationsAsync();
 
-  const hour = await getPreferredNotificationHour();
+  const { hour, minute } = await getPreferredNotificationTime();
   const dueCount = await getReviewableCount();
   const { current: streak, todayDone } = await getStreak();
   const bookName = await getRecentBookName();
   const weeklyCount = await getWeeklyStudyCount();
+  // Per-book schedules still bucket by hour for compatibility with the
+  // existing per-list picker UI (hour selector, no minute granularity).
   const notifBooks = await getBooksForNotifications(hour);
 
   // Hard cap: at most one learning ping per day across all sources
@@ -347,13 +367,13 @@ async function doReschedule(tr: NotificationTranslations): Promise<void> {
   if (notifBooks.length === 0) {
     if (!todayDone && !claimedDays.has(0)) {
       const content = getDailyContent(tr, dueCount, streak, bookName);
-      await scheduleAtDay(0, hour, content.title, content.body);
+      await scheduleAtDay(0, hour, content.title, content.body, minute);
       claimedDays.add(0);
     }
     for (const day of [1, 2, 3]) {
       if (claimedDays.has(day)) continue;
       const content = getDailyContent(tr, dueCount, streak, bookName);
-      await scheduleAtDay(day, hour, content.title, content.body);
+      await scheduleAtDay(day, hour, content.title, content.body, minute);
       claimedDays.add(day);
     }
   }
@@ -363,7 +383,7 @@ async function doReschedule(tr: NotificationTranslations): Promise<void> {
   for (const day of [7, 10, 21, 51, 81]) {
     if (claimedDays.has(day)) continue;
     const content = getReengagementContent(tr, day, dueCount);
-    await scheduleAtDay(day, hour, content.title, content.body);
+    await scheduleAtDay(day, hour, content.title, content.body, minute);
     claimedDays.add(day);
   }
 

@@ -64,10 +64,14 @@ export default function ReviewScreen() {
   const params = useLocalSearchParams<{ bookId?: string }>();
 
   type ReviewOrder = 'newest' | 'shuffle';
-  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
+  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening' | 'auto';
   // Modes a single card can actually render (auto resolves into one of these per card).
   type ResolvedMode = Exclude<ReviewMode, 'auto'>;
-  const AUTO_CANDIDATE_MODES: ResolvedMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank'];
+  // cloze_listening = fill_blank UI + auto TTS playback at card mount.
+  // Shares the markered-example requirement with fill_blank/context.
+  const AUTO_CANDIDATE_MODES: ResolvedMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank', 'cloze_listening'];
+  const isBlankMode = (m: string | undefined | null): boolean =>
+    m === 'fill_blank' || m === 'cloze_listening';
   // Indices of examples whose translation contains highlight markers. context
   // and fill_blank both surface the translation as the bridge between sentence
   // and word — examples missing that bridge (e.g. negated form 모르다 for 知道)
@@ -129,7 +133,7 @@ export default function ReviewScreen() {
   const [limitTotal, setLimitTotal] = useState<number>(50);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitAdAvailable, setLimitAdAvailable] = useState(false);
-  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, auto: Infinity });
+  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, cloze_listening: Infinity, auto: Infinity });
 
   // Settings modal state
   const [showSettings, setShowSettings] = useState(false);
@@ -616,7 +620,7 @@ export default function ReviewScreen() {
       // example sentence and its translation. Drop words with no markered
       // example so every card can render that bridge; auto mode handles this
       // per-card by demoting these cards out of the fill_blank/context pool.
-      if (reviewMode === 'fill_blank' || reviewMode === 'context') {
+      if (isBlankMode(reviewMode) || reviewMode === 'context') {
         ordered = ordered.filter((w) => markeredExampleIndices(w.result.examples).length > 0);
       }
 
@@ -642,7 +646,7 @@ export default function ReviewScreen() {
             const hasMarkered = markeredExampleIndices(w.result.examples).length > 0;
             const pool = hasMarkered
               ? AUTO_CANDIDATE_MODES
-              : AUTO_CANDIDATE_MODES.filter((m) => m !== 'fill_blank' && m !== 'context');
+              : AUTO_CANDIDATE_MODES.filter((m) => !isBlankMode(m) && m !== 'context');
             return pool[Math.floor(Math.random() * pool.length)];
           })
         : [];
@@ -729,14 +733,15 @@ export default function ReviewScreen() {
         setContextExampleIdx(exIdx);
         generateChoices(ordered, 0, tgtLangMap, reviewMode === 'context' ? exIdx : undefined);
       }
-      if (reviewMode === 'fill_blank' && ordered.length > 0) {
+      if (isBlankMode(reviewMode) && ordered.length > 0) {
         const pool = markeredExampleIndices(ordered[0]?.result.examples);
         const exIdx = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : 0;
         setContextExampleIdx(exIdx);
         generateFillBlankChoices(ordered, 0, langMap, exIdx);
       }
-    } catch {
-      setPickerError(true);
+    } catch (e) {
+      setPickerError(e instanceof Error && e.message ? e.message : 'unknown');
+      setPhase('picker');
     } finally {
       setReviewLoading(false);
     }
@@ -962,7 +967,7 @@ export default function ReviewScreen() {
       if (cur) {
         if (activeMode === 'context') {
           correct = findContextDefinition(cur, contextExampleIdx);
-        } else if (activeMode === 'fill_blank') {
+        } else if (isBlankMode(activeMode)) {
           // Must match what generateFillBlankChoices put in `choices` —
           // the markered form from this card's chosen example, not the
           // headword. Modulo-wrap mirrors the renderer so a stale idx
@@ -1113,7 +1118,7 @@ export default function ReviewScreen() {
     if ((activeMode === 'choice' || activeMode === 'context') && choiceSelected !== null) {
       return choices[choiceSelected] === correctDefinition ? 'got_it' : 'still_learning';
     }
-    if (activeMode === 'fill_blank' && choiceSelected !== null && current) {
+    if (isBlankMode(activeMode) && choiceSelected !== null && current) {
       return choices[choiceSelected] === current.word ? 'got_it' : 'still_learning';
     }
     if (activeMode === 'dictation' && dictationChecked && current) {
@@ -1365,15 +1370,15 @@ export default function ReviewScreen() {
     // be stale — the setContextExampleIdx call above is queued and won't
     // apply until the next render, so the auto-play would use the previous
     // card's index and play a sentence that doesn't match what's on screen.
-    const needsExampleIdx = m === 'choice' || m === 'context' || m === 'fill_blank';
+    const needsExampleIdx = m === 'choice' || m === 'context' || isBlankMode(m);
     const pickedExIdx = needsExampleIdx
-      ? pickExampleIdx(m === 'context' || m === 'fill_blank')
+      ? pickExampleIdx(m === 'context' || isBlankMode(m))
       : 0;
     if (m === 'choice' || m === 'context') {
       setContextExampleIdx(pickedExIdx);
       generateChoices(words, index, undefined, m === 'context' ? pickedExIdx : undefined);
     }
-    if (m === 'fill_blank') {
+    if (isBlankMode(m)) {
       setContextExampleIdx(pickedExIdx);
       generateFillBlankChoices(words, index, undefined, pickedExIdx);
     }
@@ -1401,7 +1406,10 @@ export default function ReviewScreen() {
         ttsTimer = setTimeout(() => {
           if (m === 'dictation' || m === 'choice' || (m === 'flashcard' && !cardReversed)) {
             playWord();
-          } else if (m === 'context') {
+          } else if (m === 'context' || m === 'cloze_listening') {
+            // cloze_listening reads the full sentence so the user has to
+            // pick up the blanked word from audio context, matching how
+            // the word actually appears in conversation.
             const examples = w.result.examples ?? [];
             const ex = examples[pickedExIdx] ?? examples[0];
             if (ex?.sentence) {
@@ -1430,7 +1438,7 @@ export default function ReviewScreen() {
   }, [index, phase, targetLangs]);
 
   const isAnswered =
-    activeMode === 'choice' || activeMode === 'context' || activeMode === 'fill_blank' ? choiceSelected !== null
+    activeMode === 'choice' || activeMode === 'context' || isBlankMode(activeMode) ? choiceSelected !== null
     : activeMode === 'dictation' ? dictationChecked
     : flipped;
 
@@ -1441,7 +1449,7 @@ export default function ReviewScreen() {
   const correctDefinition = phase === 'review' && words[index]
     ? activeMode === 'context'
       ? findContextDefinition(words[index], contextExampleIdx)
-      : activeMode === 'fill_blank'
+      : isBlankMode(activeMode)
       ? (() => {
           const examples = words[index].result.examples ?? [];
           const ex = examples.length > 0

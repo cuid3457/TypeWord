@@ -85,7 +85,15 @@ function validateLookupInput(body: unknown): WordLookupRequest {
     throw new Error("Body must be a JSON object");
   }
   const b = body as Record<string, unknown>;
-  const word = typeof b.word === "string" ? b.word.trim() : "";
+  // Strip ASCII / Unicode control chars and zero-width joiners that can
+  // break prompt formatting, pollute logs, or spoof what the user sees.
+  // C0 (U+0000-U+001F) + DEL (U+007F) + C1 (U+0080-U+009F) +
+  // zero-width/bidi (U+200B-U+200F, U+202A-U+202E) +
+  // line/para separators (U+2028, U+2029) + word joiner (U+2060) + BOM (U+FEFF).
+  const rawWord = typeof b.word === "string" ? b.word : "";
+  const word = rawWord
+    .replace(/[\u0000-\u001F\u007F-\u009F\u200B-\u200F\u202A-\u202E\u2028\u2029\u2060\uFEFF]/g, "")
+    .trim();
   const sourceLang = typeof b.sourceLang === "string" ? b.sourceLang : "";
   const targetLang = typeof b.targetLang === "string" ? b.targetLang : "";
   if (!word) throw new Error("word must not be empty");
@@ -96,7 +104,13 @@ function validateLookupInput(body: unknown): WordLookupRequest {
   const limit = LANG_LENGTH_LIMITS[sourceLang] ?? DEFAULT_LENGTH_LIMIT;
   if (word.length > limit) throw new Error("PHRASE_TOO_LONG");
   const mode = b.mode === "enrich" ? "enrich" : "quick";
-  return { word, sourceLang, targetLang, mode } as WordLookupRequest;
+  const readingHint = typeof b.readingHint === "string" && b.readingHint.trim().length > 0
+    ? b.readingHint.trim().slice(0, 200)
+    : undefined;
+  const proficiencyHint = typeof b.proficiencyHint === "string" && b.proficiencyHint.trim().length > 0
+    ? b.proficiencyHint.trim().slice(0, 300)
+    : undefined;
+  return { word, sourceLang, targetLang, mode, readingHint, proficiencyHint } as WordLookupRequest;
 }
 
 // Run a promise after the response has been sent. Uses Deno's EdgeRuntime.waitUntil
@@ -117,8 +131,14 @@ function fireAndForget<T>(p: Promise<T>): void {
 // ────────────────────────────────────────────────────────────────────────
 async function callDictionary(word: string, sourceLang: string, targetLang: string): Promise<DictEntry[]> {
   if (sourceLang === "ko") {
-    const trans_lang = KRDICT_TRANS_LANG[targetLang] ?? KRDICT_TRANS_LANG.en;
-    return await krdictSearch(word, trans_lang);
+    // ALWAYS query krdict with trans_lang=en. The krdict XML response only
+    // ships one translation per sense in the requested language, and the
+    // client stores it in DictSense.en_translation. If we asked for fr, the
+    // French gloss would land in en_translation (wrong field), polluting
+    // every downstream English-vs-other check. By fixing trans_lang=en we
+    // keep en_translation truthful; the AI judge handles target_lang
+    // translation via target_translation (judgeUnified field).
+    return await krdictSearch(word, KRDICT_TRANS_LANG.en);
   }
   if (sourceLang === "ja") {
     return await jmdictSearch(supabase, word);
@@ -167,7 +187,7 @@ interface SenseGroup {
  * 또한 entry가 달라도 같은 영어 번역으로 옮겨지는 경우 (예: 이 대명사 + 이 관형사 둘 다 "this")
  * 는 학습자 입장에선 같은 의미이므로 추가로 합침.
  */
-function groupByEntryThenTranslation(judged: JudgedSense[]): SenseGroup[] {
+function groupByEntryThenTranslation(judged: JudgedSense[], targetLang?: string): SenseGroup[] {
   // Layer 1: 사전 entry 기준 그룹화. sense_id 형식 "{entry}:{sub}" — entry prefix 추출.
   const entryGroups = new Map<string, JudgedSense[]>();
   for (const j of judged) {
@@ -183,19 +203,27 @@ function groupByEntryThenTranslation(judged: JudgedSense[]): SenseGroup[] {
   }
 
   // Layer 2: representative끼리 같은 번역이면 합치기.
-  //   display_translation(target_lang 짧은 번역)이 있으면 그것이 그룹 키.
-  //   없으면 en_translation 사용. 둘 다 없으면 source_def fallback.
+  //   display_translation(LLM target_lang short translation) > en_override
+  //   (transliteration fix) > en_translation (dict's English gloss).
+  //   source_def는 SOURCE LANG 정의라서 폴백으로 쓰면 안 됨 — 영어 글로스가
+  //   없으면 의미 자체를 drop (cards with Korean/Chinese definitions in a
+  //   French slot were the most common audit failure).
+  //   en_translation fallback only when target IS English. For non-EN target,
+  //   showing the dict's raw English gloss in a French/Italian/etc card is
+  //   worse than dropping the sense — drop it.
+  const isEnTarget = targetLang === "en" || !targetLang;
   const groups = new Map<string, SenseGroup>();
   for (const j of entryReps) {
     const display =
       j.display_translation ??
       j.en_override ??
-      j.sense.en_translation ??
-      j.sense.source_def ??
+      (isEnTarget ? j.sense.en_translation : undefined) ??
       "";
-    const key = display.trim().toLowerCase();
+    const trimmed = display.trim();
+    if (!trimmed) continue; // no learner-facing label → omit this sense
+    const key = trimmed.toLowerCase();
     if (!groups.has(key)) {
-      groups.set(key, { en_key: key, display_en: display.trim(), max_score: j.score, senses: [j] });
+      groups.set(key, { en_key: key, display_en: trimmed, max_score: j.score, senses: [j] });
     } else {
       const g = groups.get(key)!;
       g.senses.push(j);
@@ -322,18 +350,22 @@ async function fetchExamplesViaCanonical(
   targetLang: string,
   groups: SenseGroup[],
   readingVariants: string[] = [],
+  opts: { proficiencyHint?: string; ignoreCanonical?: boolean } = {},
 ): Promise<Map<string, ExampleResult>> {
   const out = new Map<string, ExampleResult>();
   if (groups.length === 0) return out;
 
-  // 1. canonical 조회
+  // 1. canonical 조회. ignoreCanonical (curation forceFresh) 일 때는 entry id는
+  //    여전히 필요하니까 조회하되, examples는 빈 배열로 취급해 miss path만 탄다.
   const { data: entry } = await supabase
     .from("word_entries")
     .select("id, examples")
     .eq("word", word)
     .eq("word_lang", sourceLang)
     .maybeSingle();
-  const canonical = (entry?.examples ?? []) as CanonicalExampleRow[];
+  const canonical = opts.ignoreCanonical
+    ? ([] as CanonicalExampleRow[])
+    : ((entry?.examples ?? []) as CanonicalExampleRow[]);
 
   // Match canonical to current groups by senseId so cross-target reuse
   // doesn't pair sentence-of-sense-A with meaningIndex-of-sense-B.
@@ -372,7 +404,8 @@ async function fetchExamplesViaCanonical(
 
   // Miss path: generate sentence + translation for groups without canonical
   // coverage. Append the new canonical rows to the existing list so future
-  // lookups see them.
+  // lookups see them. With ignoreCanonical (curation forceFresh) every group
+  // is a miss and the new rows REPLACE the previous canonical list.
   if (misses.length > 0) {
     const reqs: ExampleRequest[] = misses.map(({ g }) => ({
       key: g.en_key,
@@ -384,6 +417,7 @@ async function fetchExamplesViaCanonical(
         g.senses[0]?.sense.source_def ??
         g.display_en,
       targetGloss: g.display_en,
+      proficiencyHint: opts.proficiencyHint,
     }));
     const gen = await generateExamples(reqs, sourceLang, targetLang);
     const newRows: CanonicalExampleRow[] = [];
@@ -398,7 +432,9 @@ async function fetchExamplesViaCanonical(
       });
     }
     if (newRows.length > 0 && entry?.id) {
-      const merged = [...canonical, ...newRows];
+      // ignoreCanonical: drop the prior list so stale rows from an earlier
+      // curation pass don't survive forever. Normal call (no force) appends.
+      const merged = opts.ignoreCanonical ? newRows : [...canonical, ...newRows];
       await supabase.from("word_entries").update({ examples: merged }).eq("id", entry.id);
     }
   }
@@ -412,6 +448,7 @@ async function fetchExamples(
   targetLang: string,
   groups: SenseGroup[],
   readingVariants: string[] = [],
+  proficiencyHint?: string,
 ): Promise<Map<string, ExampleResult>> {
   const out = new Map<string, ExampleResult>();
   if (groups.length === 0) return out;
@@ -432,6 +469,7 @@ async function fetchExamples(
       surfaceForms: readingVariants,
       senseDef,
       targetGloss,
+      proficiencyHint,
     };
   });
 
@@ -500,7 +538,23 @@ function toWordMeanings(
     // Store POS in CANONICAL ENGLISH ("noun"/"verb"/...). The client localizes
     // to the user's UI language at render time so a Korean user sees "명사"
     // regardless of whether the lookup target is ko or en.
-    const pos = posCanonical(firstSense?.pos, source ?? "");
+    // Source routing: cedict + neologism path return English POS strings the
+    // LLM produced (judge inferred them); both use the "llm" POS_MAP rather
+    // than the dict-specific maps. dict-supplied POS (krdict/jmdict/wiktionary)
+    // still routes to its native map.
+    const posSource = source === "cedict" || source === "llm" || !source
+      ? "llm"
+      : source;
+    let pos = posCanonical(firstSense?.pos, posSource);
+    // Krdict ships some senses with 조사 / 의존명사 / 어미 / 보조 동사 / 관형사
+    // which map to category 9 (expression) or 11 (symbol) — those labels
+    // confuse learners. When the LLM inferred a more concrete POS for this
+    // sense (e.g. "pronoun" or "noun"), prefer it. The LLM has the full
+    // sense context and tends to produce learner-appropriate labels.
+    if ((pos === "expression" || pos === "symbol" || !pos) && firstSense?.llm_pos) {
+      const fallback = posCanonical(firstSense.llm_pos, "llm");
+      if (fallback && fallback !== "expression" && fallback !== "symbol") pos = fallback;
+    }
     return {
       definition: g.display_en,
       partOfSpeech: pos,
@@ -691,12 +745,30 @@ async function saveCacheTranslation(
 //
 // 결과는 word_entries.source='llm'로 저장하여 dict-sourced 엔트리와 구분됨.
 // process-report가 신고를 받으면 source='llm' 엔트리는 더 자유롭게 regen 가능.
+// Cheap pre-filter for UNAMBIGUOUS sentence input before paying for a
+// neologism LLM call. Only trips on terminal punctuation (. ! ? 。 ！ ？)
+// since that's the one signal with near-zero false positives. Token-count
+// heuristics catch long idioms ("Tomaten auf den Augen haben" = 5 tokens
+// but a fixed idiom), so we let the LLM handle them with the strengthened
+// idiom carve-out in the neologism prompt.
+function looksLikeSentence(word: string, _sourceLang: string): boolean {
+  const trimmed = word.trim();
+  if (trimmed.length === 0) return false;
+  return /[.!?。！？]$/.test(trimmed);
+}
+
 async function handleDictMiss(
   word: string,
   sourceLang: string,
   targetLang: string,
   mode: "quick" | "enrich",
+  proficiencyHint?: string,
 ): Promise<{ result: WordLookupResult; cached: boolean }> {
+  // Short-circuit unambiguous sentences before spending an LLM call.
+  if (looksLikeSentence(word, sourceLang)) {
+    return { result: { headword: word, meanings: [], note: "sentence" }, cached: false };
+  }
+
   let verdict;
   try {
     verdict = await validateNeologism(word, sourceLang, targetLang);
@@ -708,6 +780,9 @@ async function handleDictMiss(
     };
   }
 
+  if (verdict.verdict === "sentence") {
+    return { result: { headword: word, meanings: [], note: "sentence" }, cached: false };
+  }
   if (verdict.verdict === "non_word") {
     return { result: { headword: word, meanings: [], note: "non_word" }, cached: false };
   }
@@ -735,9 +810,28 @@ async function handleDictMiss(
 
   // Build synthetic SenseGroups (one group per sense — neologisms aren't typically
   // multi-sense in our 1-4 cap, and we want to surface all listed meanings).
+  // target_gloss occasionally leaks source-script (e.g. "윤석열" returned for
+  // an English target on a Korean proper noun); fall back to en_def so the
+  // card shows real English instead of the unrenderable source string.
+  const safeGloss = (gloss: string, enDef: string): string => {
+    const g = (gloss || "").trim();
+    const e = (enDef || "").trim();
+    if (!g) return e;
+    if (targetLang === sourceLang) return g;
+    const isLatin = ["en", "es", "fr", "de", "it"].includes(targetLang);
+    const cjkU = /[一-鿿]/;
+    const hangul = /[가-힣]/;
+    const kana = /[぀-ゟ゠-ヿ]/;
+    if (isLatin && !/[a-zA-Z]/.test(g)) return e || g;
+    if (targetLang === "ko" && !hangul.test(g)) return e || g;
+    if (targetLang === "ja" && !kana.test(g) && !cjkU.test(g)) return e || g;
+    if (targetLang === "zh-CN" && !cjkU.test(g)) return e || g;
+    if (g.trim() === word.trim()) return e || g;
+    return g;
+  };
   const groups: SenseGroup[] = verdict.senses.map((s, idx) => ({
     en_key: `llm:${idx}`,
-    display_en: s.target_gloss,
+    display_en: safeGloss(s.target_gloss, s.en_def),
     max_score: s.frequency_score,
     senses: [
       {
@@ -763,11 +857,12 @@ async function handleDictMiss(
   // documented in [[project_v4_quick_enrich_canonical]] and keeps quick
   // mode at the 2.5-3s target instead of stacking N parallel LLM example
   // calls + an LLM judge call on top of validateNeologism.
-  // dict-miss path has no real dict source — pass undefined so POS just empties.
-  const meanings = toWordMeanings(groups, undefined);
+  // dict-miss path: pass "llm" so POS routes through the LLM POS map and
+  // the neologism-supplied English POS strings (noun/verb/...) render.
+  const meanings = toWordMeanings(groups, "llm");
   let examples: WordExample[] = [];
   if (mode === "enrich") {
-    const exampleMap = await fetchExamples(word, sourceLang, targetLang, groups, []);
+    const exampleMap = await fetchExamples(word, sourceLang, targetLang, groups, [], proficiencyHint);
     const rawExamples = toWordExamples(groups, exampleMap);
     // LLM judge stays only in the dict-miss enrich path. Dict-miss words
     // have no authoritative sense split, so the judge catches the joint
@@ -799,6 +894,7 @@ async function enrichExistingCache(
   cached: CachedHit,
   sourceLang: string,
   targetLang: string,
+  proficiencyHint?: string,
 ): Promise<{ result: WordLookupResult; cached: boolean }> {
   const meanings = cached.result.meanings;
   if (meanings.length === 0) {
@@ -867,6 +963,7 @@ async function enrichExistingCache(
       surfaceForms: [],
       senseDef: m.definition,
       targetGloss: m.definition,
+      proficiencyHint,
     }));
     const gen = await generateExamples(reqs, sourceLang, targetLang);
     for (const { idx, sid } of misses) {
@@ -914,31 +1011,50 @@ async function enrichExistingCache(
 // ────────────────────────────────────────────────────────────────────────
 // Main handler
 // ────────────────────────────────────────────────────────────────────────
-async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResult; cached: boolean }> {
-  const { word, sourceLang, targetLang } = req;
+async function handle(
+  req: WordLookupRequest,
+  opts: { forceFresh?: boolean; forceFreshTranslation?: boolean } = {},
+): Promise<{ result: WordLookupResult; cached: boolean }> {
+  const { word, sourceLang, targetLang, readingHint, proficiencyHint } = req;
   if (!word || !sourceLang || !targetLang) {
     throw new Error("word, sourceLang, targetLang are required");
   }
   // Default 'quick' (faster). Clients explicitly request 'enrich' on save.
   const mode: "quick" | "enrich" = req.mode === "enrich" ? "enrich" : "quick";
+  const forceFresh = opts.forceFresh === true;
+  const forceFreshTranslation = opts.forceFreshTranslation === true;
 
-  // 1. 캐시 — quick은 examples 비어있어도 hit, enrich는 LLM 예문 확보돼야 hit
-  const cached = await getCached(word, sourceLang, targetLang);
-  if (cached) {
-    if (mode === "quick") return { result: cached.result, cached: true };
-    if (mode === "enrich" && !cached.exampleslessEnrichNeeded) {
-      return { result: cached.result, cached: true };
+  // 1. 캐시 — quick은 examples 비어있어도 hit, enrich는 LLM 예문 확보돼야 hit.
+  //    force* 플래그가 켜진 curation call은 캐시를 통째로 무시하고 fresh path로.
+  if (!forceFresh && !forceFreshTranslation) {
+    const cached = await getCached(word, sourceLang, targetLang);
+    if (cached) {
+      if (mode === "quick") return { result: cached.result, cached: true };
+      if (mode === "enrich" && !cached.exampleslessEnrichNeeded) {
+        return { result: cached.result, cached: true };
+      }
+      // enrich + examples 부족 → cache의 meanings은 유지하고 examples만 LLM 보강
+      return await enrichExistingCache(cached, sourceLang, targetLang, proficiencyHint);
     }
-    // enrich + examples 부족 → cache의 meanings은 유지하고 examples만 LLM 보강
-    return await enrichExistingCache(cached, sourceLang, targetLang);
   }
 
   // 2. 사전 호출
-  const entries = await callDictionary(word, sourceLang, targetLang);
+  let entries = await callDictionary(word, sourceLang, targetLang);
+  // readingHint: polysemy disambiguation for CJK polyphones (e.g. zh-CN 长
+  // cháng vs zhǎng). Dict entries already split by reading, so we just keep
+  // matching entries. Substring match is tolerant of "cháng — long" style
+  // hints that include extra prose.
+  if (readingHint && entries.length > 1) {
+    const matched = entries.filter((e) =>
+      typeof e.reading === "string" && e.reading.length > 0 &&
+      (readingHint.includes(e.reading) || e.reading.includes(readingHint)),
+    );
+    if (matched.length > 0) entries = matched;
+  }
   if (entries.length === 0) {
     // 사전 miss — 2-stage LLM fallback. mode passed so quick can skip
     // example generation (consistent with dict path's quick behaviour).
-    return await handleDictMiss(word, sourceLang, targetLang, mode);
+    return await handleDictMiss(word, sourceLang, targetLang, mode, proficiencyHint);
   }
 
   // 3. AI judge — unified single LLM call (Phase 1 prototype 패턴): SCORE + OVERRIDE + TRANSLATE.
@@ -953,11 +1069,11 @@ async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResul
     // handleDictMiss gives the LLM a chance to recognise the real-world
     // sense the dict missed (place name, etc.) instead of telling the user
     // it's not a word.
-    return await handleDictMiss(word, sourceLang, targetLang, mode);
+    return await handleDictMiss(word, sourceLang, targetLang, mode, proficiencyHint);
   }
 
   // 4. 그룹화 + 정렬 (entry × 번역 동일성, 학습자 부담 ↓)
-  const groups = groupByEntryThenTranslation(judged);
+  const groups = groupByEntryThenTranslation(judged, targetLang);
 
   // 5. Build the response. For quick mode examples are empty (search screen
   //    skips them); enrich computes examples synchronously via canonical reuse.
@@ -967,8 +1083,13 @@ async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResul
     try {
       const headwordForGen = entries[0]?.headword ?? word;
       const readingVariants = entries[0]?.reading ? [entries[0].reading] : [];
+      // forceFresh discards existing canonical examples — the curation
+      // operator asked for a complete regeneration. forceFreshTranslation
+      // keeps canonical so cross-target iterations share the same source
+      // sentence, mirroring v2 semantics.
       const exampleMap = await fetchExamplesViaCanonical(
         word, headwordForGen, sourceLang, targetLang, groups, readingVariants,
+        { proficiencyHint, ignoreCanonical: forceFresh },
       );
       const rawExamples = toWordExamples(groups, exampleMap);
       // Dict-sourced: senseDef came from an authoritative dictionary entry,
@@ -994,8 +1115,25 @@ async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResul
   //    on these writes completing. Frees the user from ~200-400ms of DB latency
   //    on every miss. EdgeRuntime.waitUntil (inside fireAndForget) keeps the
   //    isolate alive until the chain finishes.
+  //
+  //    Note: fetchExamplesViaCanonical's inline update is skipped on first
+  //    lookup because word_entries doesn't have a row yet (id is null). We
+  //    persist canonical examples here AFTER saveCacheCanonical creates the
+  //    row, so the second target_lang call can reuse them instead of
+  //    regenerating — the 40% cross-target savings that the canonical-reuse
+  //    design promised.
+  const canonicalExampleRows: CanonicalExampleRow[] = examples
+    .map((ex) => {
+      const idx = ex.meaningIndex ?? 0;
+      const senseId = groups[idx]?.senses[0]?.sense.sense_id;
+      return senseId ? { sentence: ex.sentence, meaningIndex: idx, senseId } : null;
+    })
+    .filter((r): r is CanonicalExampleRow => r !== null);
   fireAndForget((async () => {
     const entryId = await saveCacheCanonical(word, sourceLang, entries, judged);
+    if (canonicalExampleRows.length > 0) {
+      await supabase.from("word_entries").update({ examples: canonicalExampleRows }).eq("id", entryId);
+    }
     await saveCacheTranslation(entryId, targetLang, meanings, examples);
   })());
 
@@ -1005,6 +1143,20 @@ async function handle(req: WordLookupRequest): Promise<{ result: WordLookupResul
 // ────────────────────────────────────────────────────────────────────────
 // HTTP serve
 // ────────────────────────────────────────────────────────────────────────
+// SHA-256(ip) first 16 hex chars — short, non-reversible IP key for per-IP
+// counting. We never persist raw IPs.
+async function hashIp(ip: string): Promise<string> {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
+  return Array.from(new Uint8Array(buf).slice(0, 8))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+// IP daily cap: backup against multi-account bot farms on one IP. Set high so
+// shared NAT IPs (Korean mobile carriers can host hundreds of legit users)
+// aren't impacted, while still bounding the worst case.
+const IP_DAILY_LIMIT = 5000;
+
 Deno.serve(async (req) => {
   const corsHeaders = getCorsHeaders(req);
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -1013,6 +1165,65 @@ Deno.serve(async (req) => {
       status: 405,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
+  }
+
+  // ── IP rate limit (pre-auth — runs before JWT validation) ──
+  // Extract client IP from edge headers. x-forwarded-for first hop is the
+  // user; Supabase's edge proxy chain may add more. cf-connecting-ip is a
+  // common alt. Falls back to a stable "unknown" so a missing header doesn't
+  // mean unlimited.
+  //
+  // Service-role callers (curation scripts, sweep harness) bypass the IP cap
+  // — they share the operator's IP and would otherwise exhaust the daily
+  // 5000-call budget after a single bulk run. We probe the Authorization
+  // header BEFORE the cap so operator tooling stays unblocked. Detection
+  // matches the post-auth path: constant-time compare against the env-injected
+  // service-role secret, so a forged "Bearer service_role" token still hits
+  // the cap.
+  const ipRaw = (req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()) ||
+    req.headers.get("cf-connecting-ip") ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+  const earlyAuth = req.headers.get("Authorization") ?? "";
+  const earlyJwt = earlyAuth.replace(/^Bearer\s+/i, "");
+  const envSecretEarly = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+  const isServiceRoleEarly = (() => {
+    if (envSecretEarly.length === 0 || earlyJwt.length !== envSecretEarly.length) return false;
+    const ae = new TextEncoder().encode(earlyJwt);
+    const be = new TextEncoder().encode(envSecretEarly);
+    let diff = 0;
+    for (let i = 0; i < ae.byteLength; i++) diff |= ae[i] ^ be[i];
+    return diff === 0;
+  })();
+  // Operator IP allowlist (comma-separated hashes in IP_HASH_ALLOWLIST env)
+  // — operator dev/test rigs that legitimately fire thousands of lookups
+  // (prompt sweeps, curation harness from a workstation IP). Bypass the cap
+  // entirely so prompt iteration isn't blocked by the per-IP guard.
+  const ipHashAllowlist = new Set(
+    (Deno.env.get("IP_HASH_ALLOWLIST") ?? "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+  if (!isServiceRoleEarly) {
+    try {
+      const ipHash = await hashIp(ipRaw);
+      if (!ipHashAllowlist.has(ipHash)) {
+        const { data: ipCheck } = await supabase.rpc("check_and_inc_ip_limit", {
+          p_ip_hash: ipHash,
+          p_limit: IP_DAILY_LIMIT,
+        });
+        if (ipCheck && typeof ipCheck === "object" && (ipCheck as { over?: boolean }).over) {
+          return new Response(
+            JSON.stringify({ error: "Daily IP request limit reached. Please try again tomorrow." }),
+            { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+          );
+        }
+      }
+    } catch (err) {
+      // Fail-open if IP table query fails — per-user cap still applies downstream.
+      console.warn("[v4 ip-limit] check failed:", (err as Error).message);
+    }
   }
 
   // ── Auth ──
@@ -1038,10 +1249,15 @@ Deno.serve(async (req) => {
   }
   const isWarmOnlyRequest = parsedBody.warm_only === true;
 
-  // Detect anon role (new sb_publishable_ keys or legacy anon JWT) against
-  // the env-injected key in constant time. Anon callers can issue warm-only
-  // pings without a session.
+  // Detect anon / service-role tokens (new sb_publishable_ / sb_secret_ keys
+  // or legacy JWTs) against env-injected keys in constant time.
+  //   • Anon callers can issue warm-only pings without a session.
+  //   • Service-role callers are operator tooling (curation scripts) — skip
+  //     user auth + rate limits, and unlock force* regen flags. SECURITY:
+  //     never trust a base64-decoded JWT `role` claim — only the raw-token
+  //     constant-time compare against the env secret proves service-role.
   const envAnon = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+  const envSecret = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
   function timingSafeEq(a: string, b: string): boolean {
     if (a.length !== b.length || a.length === 0) return false;
     const ae = new TextEncoder().encode(a);
@@ -1051,9 +1267,14 @@ Deno.serve(async (req) => {
     return diff === 0;
   }
   const isAnonRole = envAnon.length > 0 && timingSafeEq(jwt, envAnon);
+  const isServiceRole = envSecret.length > 0 && timingSafeEq(jwt, envSecret);
 
   let userId: string;
-  if (isWarmOnlyRequest && isAnonRole) {
+  if (isServiceRole) {
+    // Operator tooling (scripts/curation/*). Skip user lookup; rate limit
+    // bypass happens later via the isServiceRole flag.
+    userId = "";
+  } else if (isWarmOnlyRequest && isAnonRole) {
     // Warm ping: skip user auth, fall through to the warm handler below.
     userId = "";
   } else {
@@ -1155,8 +1376,11 @@ Deno.serve(async (req) => {
   }
 
   // ── Rate limit ──
+  // Service-role tooling bypasses both per-user and per-IP caps — curation
+  // runs need to fire hundreds of lookups in a row without tripping the
+  // word-lookup limit a normal user would hit.
   try {
-    await enforceAllLimits(supabase, userId, "word-lookup");
+    if (!isServiceRole) await enforceAllLimits(supabase, userId, "word-lookup");
   } catch (err) {
     if (err instanceof RateLimitError || err instanceof BudgetExhaustedError) {
       return new Response(JSON.stringify({ error: err.message }), {
@@ -1278,8 +1502,18 @@ Deno.serve(async (req) => {
     }
   }
 
+  // Curation-only regen flags. Honored only under service-role auth so users
+  // can never force a fresh OpenAI run (would let them drain the budget on
+  // any cached word). forceFresh skips both the cached translation AND any
+  // pre-existing canonical examples (full regen); forceFreshTranslation skips
+  // ONLY the translation cache so multi-target curation iterations preserve
+  // the canonical example sentence across target_langs.
+  const forceFresh = isServiceRole && (parsedBody as { forceFresh?: unknown }).forceFresh === true;
+  const forceFreshTranslation = isServiceRole &&
+    (parsedBody as { forceFreshTranslation?: unknown }).forceFreshTranslation === true;
+
   try {
-    const out = await handle(request);
+    const out = await handle(request, { forceFresh, forceFreshTranslation });
     fireAndForget(logApiCall(supabase, {
       userId,
       endpoint: ENDPOINT,

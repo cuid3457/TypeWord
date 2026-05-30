@@ -104,12 +104,14 @@ export default function WordlistLibraryScreen() {
     return itemsInCategory.filter((i) => i.sourceLang === activeLang);
   }, [itemsInCategory, activeLang]);
 
-  // Inject native ad markers every N items. Phone (single column) = 10,
-  // tablet (2-col grid) = 20 so the visual cadence matches across layouts.
+  // Inject native ad markers: one at the top + one every N items thereafter.
+  // Phone (single column) = 10, tablet (2-col grid) = 20.
   const dataWithAds = useMemo<Array<(typeof filtered)[number] | { __ad: true; key: string }>>(() => {
     if (filtered.length === 0) return [];
-    const adsEvery = isTablet ? 20 : 10;
-    const out: Array<(typeof filtered)[number] | { __ad: true; key: string }> = [];
+    const adsEvery = 7;
+    const out: Array<(typeof filtered)[number] | { __ad: true; key: string }> = [
+      { __ad: true, key: 'ad-top' },
+    ];
     filtered.forEach((item, idx) => {
       out.push(item);
       if ((idx + 1) % adsEvery === 0 && idx < filtered.length - 1) {

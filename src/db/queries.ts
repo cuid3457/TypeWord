@@ -673,6 +673,44 @@ export async function getReviewableCount(bookId?: string | null): Promise<number
   return row?.cnt ?? 0;
 }
 
+/**
+ * Words the user hasn't touched in {dayThreshold}+ days but has reviewed at
+ * least once. "Pearls" in the Word Pearl flow — dormant memory traces that
+ * benefit from intentional re-exposure beyond the regular SRS schedule.
+ * Excludes brand-new cards (review_count === 0) so the empty-account state
+ * doesn't surface every saved word as a pearl.
+ */
+export interface DormantWord {
+  id: string;
+  word: string;
+  book_id: string | null;
+  result_json: string;
+}
+
+export async function getDormantWords(limit: number, dayThreshold = 14): Promise<DormantWord[]> {
+  const db = await getDb();
+  const cutoff = Date.now() - dayThreshold * 86_400_000;
+  return await db.getAllAsync<DormantWord>(
+    `SELECT id, word, book_id, result_json
+     FROM user_words
+     WHERE updated_at < ? AND review_count > 0
+     ORDER BY updated_at ASC
+     LIMIT ?`,
+    [cutoff, limit],
+  );
+}
+
+export async function getDormantCount(dayThreshold = 14): Promise<number> {
+  const db = await getDb();
+  const cutoff = Date.now() - dayThreshold * 86_400_000;
+  const row = await db.getFirstAsync<{ cnt: number }>(
+    `SELECT COUNT(*) as cnt FROM user_words
+     WHERE updated_at < ? AND review_count > 0`,
+    [cutoff],
+  );
+  return row?.cnt ?? 0;
+}
+
 export async function getRecentBookName(): Promise<string | null> {
   const db = await getDb();
   const row = await db.getFirstAsync<{ title: string }>(

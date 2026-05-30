@@ -22,12 +22,21 @@ import { haptic } from '@src/services/hapticService';
 export default function MyUploadsScreen() {
   const { t } = useTranslation();
   const [items, setItems] = useState<CommunityWordlistMeta[] | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<CommunityWordlistMeta | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const reload = useCallback(() => {
-    listMyUploads().then(setItems).catch(() => setItems([]));
+    listMyUploads()
+      .then((data) => {
+        setItems(data);
+        setLoadError(false);
+      })
+      .catch(() => {
+        setItems([]);
+        setLoadError(true);
+      });
   }, []);
 
   const handlePullRefresh = useCallback(async () => {
@@ -36,8 +45,9 @@ export default function MyUploadsScreen() {
     try {
       const data = await listMyUploads();
       setItems(data);
+      setLoadError(false);
     } catch {
-      // silent
+      setLoadError(true);
     } finally {
       setRefreshing(false);
     }
@@ -45,6 +55,7 @@ export default function MyUploadsScreen() {
 
   useFocusEffect(useCallback(() => {
     setItems(null);
+    setLoadError(false);
     reload();
   }, [reload]));
 
@@ -83,6 +94,31 @@ export default function MyUploadsScreen() {
       {items === null ? (
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator color="#7B7366" />
+        </View>
+      ) : loadError && items.length === 0 ? (
+        <View className="flex-1 items-center justify-center px-10">
+          <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+          <Text className="mt-4 text-xl font-bold text-ink dark:text-ink-dark">
+            {t('error.title')}
+          </Text>
+          <Text className="mt-2 text-center text-sm text-muted">
+            {t('error.message')}
+          </Text>
+          <Pressable
+            onPress={() => {
+              haptic.tap();
+              setItems(null);
+              setLoadError(false);
+              reload();
+            }}
+            className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
+            accessibilityRole="button"
+            accessibilityLabel={t('error.retry')}
+          >
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
+              {t('error.retry')}
+            </Text>
+          </Pressable>
         </View>
       ) : items.length === 0 ? (
         <View className="flex-1 items-center justify-center px-8">

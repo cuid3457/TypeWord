@@ -937,6 +937,15 @@ export default {
     cta: '背景',
     empty_catalog: '正在准备背景色。',
   },
+  avatar_menu: {
+    title: '装饰头像',
+    background_title: '背景色',
+    background_subtitle: '20 种颜色自由选择',
+    character_title: '角色',
+    character_subtitle: '神秘宝箱中获得',
+    character_coming_soon: '正在准备角色',
+    coming_soon_badge: '即将',
+  },
   mystery_box: {
     title: '神秘宝箱',
     character_cta: '角色',

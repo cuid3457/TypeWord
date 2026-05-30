@@ -757,6 +757,15 @@ export default {
     cta: '背景',
     empty_catalog: '背景色を準備中です。',
   },
+  avatar_menu: {
+    title: 'プロフィールをカスタマイズ',
+    background_title: '背景色',
+    background_subtitle: '20色から自由に選択',
+    character_title: 'キャラクター',
+    character_subtitle: 'ミステリーボックスで入手',
+    character_coming_soon: 'キャラクターを準備中です',
+    coming_soon_badge: '近日',
+  },
   mystery_box: {
     title: 'ミステリーボックス',
     character_cta: 'キャラクター',

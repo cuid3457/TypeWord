@@ -45,8 +45,10 @@ export default function CommunityUploadScreen() {
   };
 
   useEffect(() => {
-    listOriginalBooks().then((bs) => setBooks(bs.filter((b) => b.wordCount > 0)));
-  }, []);
+    listOriginalBooks()
+      .then((bs) => setBooks(bs.filter((b) => b.wordCount > 0)))
+      .catch(() => showToast(t('error.refresh_failed')));
+  }, [t]);
 
   useEffect(() => {
     if (picked) setTitle(picked.title);
@@ -107,7 +109,14 @@ export default function CommunityUploadScreen() {
     // shows in the library list / wordlist detail. If absent, prompt once
     // and resume upload after save.
     setSubmitting(true);
-    const profile = await getMyProfile().catch(() => null);
+    let profile;
+    try {
+      profile = await getMyProfile();
+    } catch {
+      setSubmitting(false);
+      showToast(t('error.refresh_failed'));
+      return;
+    }
     setSubmitting(false);
     const nickname = profile?.displayName?.trim() ?? '';
     if (!nickname) {
@@ -143,7 +152,7 @@ export default function CommunityUploadScreen() {
         <Pressable
           onPress={submit}
           disabled={!picked || !title.trim() || submitting}
-          className="rounded-xl p-3"
+          className="rounded-full p-3"
           style={{
             backgroundColor: !picked || !title.trim() || submitting ? '#A79E90' : '#2EC4A5',
           }}

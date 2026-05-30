@@ -35,7 +35,8 @@ function langName(code: string): string {
 const VALIDATE_SYSTEM = `You are a vocabulary validator for a language-learning app. The headword W was NOT found in the authoritative dictionary for SOURCE_LANG. Decide what W is.
 
 Verdicts:
-- "valid_word": A real word or short phrase used by real SOURCE_LANG speakers. Includes: slang, internet/SNS neologisms, regional/dialect terms, technical/jargon terms, recent loanwords, proper-noun-derived common usage, and PROPER NOUNS of real public figures / places / works that a learner would plausibly encounter (politicians, world leaders, celebrities, historical figures, well-known place names, famous titles). "Not in the standard dictionary" alone does NOT make it invalid.
+- "valid_word": A real word or short phrase a SOURCE_LANG speaker would treat as a SINGLE LEXICALIZED UNIT — they have it memorized as a fixed chunk rather than constructing it word-by-word at speech time. Includes: regular words, slang, internet/SNS neologisms, regional/dialect terms, technical/jargon terms, recent loanwords, proper-noun-derived common usage, PROPER NOUNS of real public figures / places / works (politicians, world leaders, celebrities, historical figures, well-known place names, famous titles), AND fixed multi-word expressions: idioms, proverbs, set-piece exclamations, imperatives used as ritualized exclamations, polite formulas, common greetings/farewells. A phrase may have full sentence-level grammar (subject + verb + object, or imperative + ending) and STILL be valid_word if it is memorized and used as one unit, not freshly composed. "Not in the standard dictionary" alone does NOT make it invalid.
+- "sentence": W is a FREELY COMPOSED, NOVEL utterance the speaker built word-by-word at speech time, not a memorized expression. Diagnostic test: would a native learner of SOURCE_LANG look this up to memorize it as a unit, or would they just parse its meaning from the words? If parse-from-parts, it's a sentence. Surface cues that SUPPORT (not decide) sentence: terminal sentence punctuation (. ! ? 。 ！ ？), description of a specific real-world event or state, free-content nouns / named entities slotted into a productive frame. TIEBREAKER on borderline cases — if W could plausibly be a fixed expression a learner would memorize, choose "valid_word". (Rationale: a user pasting a productive sentence into a vocabulary lookup expects no lexical content back; if there is a non-trivial chance the input IS a memorized expression, surface it.)
 - "typo": Likely a misspelling or close-miss of a real SOURCE_LANG word. Prefer this verdict over "non_word" whenever W is within a small edit-distance (1-2 char insertions/deletions/substitutions) of a common SOURCE_LANG word. Examples of patterns to catch: missing letters (powr→power, gud→good), doubled/missing doubles (recieve→receive, accomodate→accommodate), letter swaps (thier→their, teh→the), common phonetic mis-spellings. When unsure between "typo" and "non_word", choose "typo" and propose the closest real word.
 - "non_word": Gibberish, random characters, keyboard mashing (asdfgh, qwerty patterns), mojibake, or otherwise not a recognizable word in any language AND not within plausible edit distance of one.
 - "wrong_language": A real word, but clearly in a language other than SOURCE_LANG.
@@ -57,20 +58,22 @@ PUBLIC FIGURES / DISPUTED TOPICS — NEUTRAL CARD RULE:
 - For real politicians, world leaders, monarchs, or other public officials: en_def must be a BRIEF, NEUTRAL, FACTUAL descriptor — full name + role + country/affiliation only. No opinions, no controversies, no current-events commentary, no party-aligned framing. Example pattern: "Joe Biden, American politician (46th U.S. President)." Limit to ONE sense.
 - For celebrities / artists / athletes / authors: same pattern — "<full name>, <profession> from <country>".
 - For places involved in geopolitical disputes (contested islands, contested historical events, contested place names): use a neutral textbook tone. Acknowledge the term without taking sides; if a Korean / Japanese / Chinese learner is the audience, present the term as they would encounter it in their country's standard textbook. Do not insert advocacy or political framing.
-- target_gloss for public figures: just the name in TARGET_LANG (e.g. target_gloss="조 바이든"). Do NOT cram biography into the gloss.
+- target_gloss for public figures: the name rendered in TARGET_LANG's script using TARGET_LANG's standard transliteration. For Latin-script targets (en/es/fr/de/it) use the established romanization. For ja use the established kana/kanji rendering. For zh-CN use the established hanzi. For ko use Hangul. NEVER leave the name in the source script — outputting "윤석열" when TARGET_LANG=English or French is a bug. Do NOT cram biography into the gloss.
+
+TARGET_GLOSS GENERAL CONSTRAINT (all valid_word senses): produce target_gloss in TARGET_LANG's script using TARGET_LANG vocabulary. Even for loanwords or neologisms where the source spelling is recognizable in TARGET_LANG, write the locally-standard form. Never echo the source headword W verbatim into target_gloss.
 
 For non-valid_word verdicts, "senses" must be an empty array.
 
 Output strict JSON:
 {
-  "verdict": "valid_word" | "typo" | "non_word" | "wrong_language",
+  "verdict": "valid_word" | "sentence" | "typo" | "non_word" | "wrong_language",
   "correction": "<intended form if typo, else empty string>",
   "senses": [
     { "en_def": "...", "target_gloss": "...", "pos": "...", "frequency_score": <0-100> }
   ]
 }`;
 
-export type NeologismVerdict = "valid_word" | "typo" | "non_word" | "wrong_language";
+export type NeologismVerdict = "valid_word" | "sentence" | "typo" | "non_word" | "wrong_language";
 
 export interface NeologismSense {
   en_def: string;
@@ -113,6 +116,12 @@ export async function validateNeologism(
   const body = await res.json();
   const parsed = JSON.parse(body.choices[0].message.content) as NeologismResult;
 
+  // Strip meta-category prefixes some models prepend on idiom/phrase entries
+  // ("idiom: substitute", "expression - …"). The learner card needs the
+  // lexical item only — the category is already conveyed by POS.
+  const stripMeta = (s: string) =>
+    s.replace(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)\s*[,:.\-]\s*/i, "").trim();
+
   // Defensive: ensure shape integrity
   return {
     verdict: parsed.verdict,
@@ -120,8 +129,8 @@ export async function validateNeologism(
     senses: Array.isArray(parsed.senses)
       ? parsed.senses
           .map((s) => ({
-            en_def: (s.en_def ?? "").trim(),
-            target_gloss: (s.target_gloss ?? "").trim(),
+            en_def: stripMeta((s.en_def ?? "").trim()),
+            target_gloss: stripMeta((s.target_gloss ?? "").trim()),
             pos: (s.pos ?? "").trim(),
             frequency_score: Math.max(0, Math.min(100, Number(s.frequency_score) || 0)),
           }))

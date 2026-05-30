@@ -6,8 +6,12 @@ jest.mock('../sentry', () => ({ captureError: jest.fn() }));
 
 const mockTranslations: NotificationTranslations = {
   reviewTitle: '✏️ Time to review!',
+  reviewTitle2: '🔁 One more pass before you forget!',
+  reviewTitle3: '⏰ Words are waiting for you',
   reviewBody: "'{{bookName}}': {{count}} words waiting for review",
   addTitle: "✏️ Grow your '{{bookName}}' list!",
+  addTitle2: '🌱 Add just one new word today',
+  addTitle3: '📖 What new word will you meet today?',
   addBody: 'Add new words and start today\'s study session',
   streakSuffix: '({{count}}-day🔥)',
   return7dTitle: '📖 A week without review',

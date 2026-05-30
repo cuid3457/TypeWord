@@ -290,7 +290,19 @@ export async function getStudiedDates(daysBack: number): Promise<Set<string>> {
   return getQualifiedDates(rangeStartMs, todayEndMs);
 }
 
-export async function getPreferredNotificationHour(): Promise<number> {
+/**
+ * Returns the time we should ping the user — 5 minutes *before* their typical
+ * study start. Looks at each day's earliest study event over the last 14 days,
+ * takes the median (robust to outliers like one late-night cram session), and
+ * subtracts 5 minutes. Default 21:00 when there isn't enough history.
+ *
+ * Why "before" and not "after": Hooked-style triggers work when they arrive
+ * at the moment the user was about to act anyway. Landing 5 min after their
+ * usual start time misses users who already context-switched to something
+ * else. 5 min is the sweet spot — close enough to feel timely, not far
+ * enough to feel like nagging.
+ */
+export async function getPreferredNotificationTime(): Promise<{ hour: number; minute: number }> {
   const db = await getDb();
   const twoWeeksAgo = Date.now() - 14 * DAY_MS;
 
@@ -305,13 +317,27 @@ export async function getPreferredNotificationHour(): Promise<number> {
     [twoWeeksAgo, twoWeeksAgo],
   );
 
-  if (rows.length < 3) return 21;
+  if (rows.length < 3) return { hour: 21, minute: 0 };
 
-  const hours = rows.map((r) => new Date(r.ts).getHours());
-  const sum = hours.reduce((a, b) => a + b, 0);
-  const avgStudyHour = Math.round(sum / hours.length);
-  let notifHour = avgStudyHour + 1;
-  if (notifHour >= 24) notifHour -= 24;
+  const minutesOfDay = rows
+    .map((r) => {
+      const d = new Date(r.ts);
+      return d.getHours() * 60 + d.getMinutes();
+    })
+    .sort((a, b) => a - b);
+  const median = minutesOfDay[Math.floor(minutesOfDay.length / 2)];
 
-  return notifHour;
+  let notifMin = median - 5;
+  if (notifMin < 0) notifMin += 24 * 60;
+
+  return {
+    hour: Math.floor(notifMin / 60),
+    minute: notifMin % 60,
+  };
+}
+
+/** Backwards-compatible wrapper for callers that only need the hour. */
+export async function getPreferredNotificationHour(): Promise<number> {
+  const { hour } = await getPreferredNotificationTime();
+  return hour;
 }

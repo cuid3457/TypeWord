@@ -22,17 +22,38 @@ const admin = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
 });
 
 // Helper to keep slugs / metadata consistent.
-function exam({ slug, names, source, examType, level, order, descKo }) {
+// `descKo` is the legacy single-language path; `descriptions` is the
+// multi-language map (preferred for Phase 1+).
+// `isActive` lets Phase 1 cards surface as "Coming soon" before words land.
+function exam({ slug, names, source, examType, level, order, descKo, descriptions, isActive }) {
+  const description_i18n = descriptions || (descKo ? { ko: descKo, en: '' } : {});
   return {
     slug,
     name_i18n: names,
-    description_i18n: descKo ? { ko: descKo, en: '' } : {},
+    description_i18n,
     source_lang: source,
     exam_type: examType,
     level,
     category: 'exam',
     display_order: order,
-    is_active: false,
+    is_active: isActive ?? false,
+  };
+}
+
+// Foundation = frequency / corpus-derived lists (NGSL, NVdB, …). Visible by
+// default so they show as "Coming soon" cards before words are populated.
+function foundation({ slug, names, source, order, descKo, descriptions, isActive }) {
+  const description_i18n = descriptions || (descKo ? { ko: descKo, en: '' } : {});
+  return {
+    slug,
+    name_i18n: names,
+    description_i18n,
+    source_lang: source,
+    exam_type: null,
+    level: null,
+    category: 'foundation',
+    display_order: order,
+    is_active: isActive ?? true,
   };
 }
 
@@ -44,9 +65,14 @@ const LISTS = [
   exam({ slug: 'hsk-2', source: 'zh-CN', examType: 'HSK', level: '2', order: 12,
     names: { ko: 'HSK 2급', en: 'HSK Level 2', 'zh-CN': 'HSK 二级', ja: 'HSK 2級' },
     descKo: 'HSK 2급 신규 어휘 150선' }),
-  exam({ slug: 'hsk-3', source: 'zh-CN', examType: 'HSK', level: '3', order: 13,
+  exam({ slug: 'hsk-3', source: 'zh-CN', examType: 'HSK', level: '3', order: 13, isActive: true,
     names: { ko: 'HSK 3급', en: 'HSK Level 3', 'zh-CN': 'HSK 三级', ja: 'HSK 3級' },
-    descKo: 'HSK 3급 신규 어휘 300선' }),
+    descriptions: {
+      ko: 'HSK 3급 신규 어휘 약 600선. 중국어 입문에서 중급으로 넘어가는 분기 단계.',
+      en: 'About 600 new vocabulary items for HSK Level 3 — the bridge from beginner to intermediate Mandarin.',
+      'zh-CN': 'HSK 三级新词约 600 个 — 由入门迈入中级的关键阶段。',
+      ja: 'HSK 3級の新出語彙 約600語。中国語の入門から中級への橋渡し。',
+    } }),
   exam({ slug: 'hsk-4', source: 'zh-CN', examType: 'HSK', level: '4', order: 14,
     names: { ko: 'HSK 4급', en: 'HSK Level 4', 'zh-CN': 'HSK 四级', ja: 'HSK 4級' },
     descKo: 'HSK 4급 신규 어휘 600선' }),
@@ -101,9 +127,14 @@ const LISTS = [
   exam({ slug: 'jlpt-n4', source: 'ja', examType: 'JLPT', level: 'N4', order: 42,
     names: { ko: 'JLPT N4', en: 'JLPT N4', ja: 'JLPT N4' },
     descKo: 'JLPT N4 신규 어휘 약 800선' }),
-  exam({ slug: 'jlpt-n3', source: 'ja', examType: 'JLPT', level: 'N3', order: 43,
-    names: { ko: 'JLPT N3', en: 'JLPT N3', ja: 'JLPT N3' },
-    descKo: 'JLPT N3 신규 어휘 약 1,800선' }),
+  exam({ slug: 'jlpt-n3', source: 'ja', examType: 'JLPT', level: 'N3', order: 43, isActive: true,
+    names: { ko: 'JLPT N3', en: 'JLPT N3', ja: 'JLPT N3', 'zh-CN': 'JLPT N3' },
+    descriptions: {
+      ko: 'JLPT N3 빈출 어휘 약 1,800선. 일본 거주·취업의 사실상 입문 기준선.',
+      en: 'About 1,800 vocabulary items frequently seen on JLPT N3 — the practical entry line for working in Japan.',
+      ja: 'JLPT N3 頻出語彙 約1,800語。日本での生活・就職の入り口。',
+      'zh-CN': 'JLPT N3 高频词汇约 1,800 — 在日本生活·就业的入门线。',
+    } }),
   exam({ slug: 'jlpt-n2', source: 'ja', examType: 'JLPT', level: 'N2', order: 44,
     names: { ko: 'JLPT N2', en: 'JLPT N2', ja: 'JLPT N2' },
     descKo: 'JLPT N2 신규 어휘 약 2,000선' }),
@@ -132,9 +163,21 @@ const LISTS = [
   exam({ slug: 'gsl', source: 'en', examType: 'GSL', level: null, order: 55,
     names: { ko: 'GSL 일반 빈출 (West 1953)', en: 'GSL General Service List' },
     descKo: '일반 영어 빈출 2,000단어 (영어 학습 기초)' }),
-  exam({ slug: 'ngsl', source: 'en', examType: 'NGSL', level: null, order: 56,
-    names: { ko: 'NGSL 현대 일반 빈출 (Browne 2014)', en: 'NGSL New General Service List' },
-    descKo: '현대 영어 빈출 2,800단어' }),
+  foundation({ slug: 'ngsl', source: 'en', order: 56, isActive: true,
+    names: {
+      ko: 'NGSL 영어 핵심 어휘 2,800',
+      en: 'NGSL — New General Service List',
+      ja: 'NGSL 英語高頻度 2,800',
+      'zh-CN': 'NGSL 英语高频 2,800',
+      es: 'NGSL — Vocabulario inglés esencial',
+      fr: 'NGSL — Anglais essentiel',
+      de: 'NGSL — Englischer Kernwortschatz',
+      it: 'NGSL — Inglese essenziale',
+    },
+    descriptions: {
+      ko: '일상·기사·학술 텍스트의 약 92%를 커버하는 현대 영어 고빈도 어휘 2,800개. Browne · Culligan · Phillips 공개 (CC BY-SA).',
+      en: 'The 2,809 most frequent words in modern English — covering ~92% of general texts. By Browne, Culligan & Phillips (CC BY-SA).',
+    } }),
   exam({ slug: 'opic-conversational', source: 'en', examType: 'OPIc', level: null, order: 57,
     names: { ko: 'OPIc 회화 어휘', en: 'OPIc Conversational Vocabulary' },
     descKo: 'OPIc 회화 시험 빈출 표현 및 어휘' }),
@@ -143,9 +186,13 @@ const LISTS = [
     descKo: 'SAT 시험 빈출 고급 어휘' }),
 
   // ───── 스페인어 (es) ─────
-  exam({ slug: 'dele-a1', source: 'es', examType: 'DELE', level: 'A1', order: 61,
+  exam({ slug: 'dele-a1', source: 'es', examType: 'DELE', level: 'A1', order: 61, isActive: true,
     names: { ko: 'DELE A1', en: 'DELE A1', es: 'DELE A1' },
-    descKo: 'Cervantes 공식 DELE A1 어휘' }),
+    descriptions: {
+      ko: 'DELE A1 대비 스페인어 입문 어휘 약 600선. 인사·숫자·가족·일상.',
+      en: 'About 600 essential Spanish words aligned with DELE A1 — greetings, numbers, family, daily life.',
+      es: 'Vocabulario esencial de español para el nivel A1 del DELE — unas 600 palabras.',
+    } }),
   exam({ slug: 'dele-a2', source: 'es', examType: 'DELE', level: 'A2', order: 62,
     names: { ko: 'DELE A2', en: 'DELE A2', es: 'DELE A2' },
     descKo: 'DELE A2 신규 어휘' }),
@@ -163,17 +210,25 @@ const LISTS = [
   // delf-a1, delf-a2 placeholders removed: actual content lives in
   // delf-a1-part-1/2 and delf-a2-part-1/2 (curated via data/*.json).
   // delf-b1 placeholder removed: actual content in delf-b1-part-1/2/3/4.
-  exam({ slug: 'delf-b2', source: 'fr', examType: 'DELF', level: 'B2', order: 74,
+  exam({ slug: 'delf-b2', source: 'fr', examType: 'DELF', level: 'B2', order: 74, isActive: true,
     names: { ko: 'DELF B2', en: 'DELF B2', fr: 'DELF B2' },
-    descKo: 'DELF B2 신규 어휘' }),
+    descriptions: {
+      ko: 'DELF B2 대비 프랑스어 중상급 어휘. 프랑스 대학 입학·전문직 비자의 사실상 기준선.',
+      en: 'Upper-intermediate French vocabulary aligned with DELF B2 — the de facto entry line for French universities.',
+      fr: 'Vocabulaire de niveau B2 pour le DELF — niveau requis pour entrer dans les universités françaises.',
+    } }),
   exam({ slug: 'dalf-c1', source: 'fr', examType: 'DALF', level: 'C1', order: 75,
     names: { ko: 'DALF C1', en: 'DALF C1', fr: 'DALF C1' },
     descKo: 'DALF C1 고급 어휘' }),
 
   // ───── 독일어 (de) ─────
-  exam({ slug: 'goethe-a1', source: 'de', examType: 'Goethe', level: 'A1', order: 81,
-    names: { ko: 'Goethe A1', en: 'Goethe A1', de: 'Goethe A1' },
-    descKo: '괴테 인스티튜트 A1 어휘 (Start Deutsch 1)' }),
+  exam({ slug: 'goethe-a1', source: 'de', examType: 'Goethe', level: 'A1', order: 81, isActive: true,
+    names: { ko: 'Goethe A1', en: 'Goethe-Zertifikat A1', de: 'Goethe-Zertifikat A1' },
+    descriptions: {
+      ko: '괴테 인스티튜트 A1 시험(Start Deutsch 1) 대비 어휘 약 650선. 독일 거주·이민 입문 단계.',
+      en: 'About 650 words for Goethe-Institut A1 (Start Deutsch 1) — the entry level for living in or moving to Germany.',
+      de: 'Wortschatz für Goethe-Zertifikat A1 (Start Deutsch 1) — etwa 650 Wörter.',
+    } }),
   exam({ slug: 'goethe-a2', source: 'de', examType: 'Goethe', level: 'A2', order: 82,
     names: { ko: 'Goethe A2', en: 'Goethe A2', de: 'Goethe A2' },
     descKo: 'Goethe A2 신규 어휘' }),
@@ -188,9 +243,13 @@ const LISTS = [
     descKo: 'Goethe C1 고급 어휘' }),
 
   // ───── 이탈리아어 (it) ─────
-  exam({ slug: 'cils-a1', source: 'it', examType: 'CILS', level: 'A1', order: 91,
+  exam({ slug: 'cils-a1', source: 'it', examType: 'CILS', level: 'A1', order: 91, isActive: true,
     names: { ko: 'CILS A1', en: 'CILS A1', it: 'CILS A1' },
-    descKo: 'Siena 대학 CILS A1 어휘' }),
+    descriptions: {
+      ko: '이탈리아어 A1 입문 어휘 (De Mauro 신新 기초어휘집 Fondamentale 기반, CILS A1 대비).',
+      en: 'Italian A1 essentials based on De Mauro\'s Nuovo Vocabolario di Base (Fondamentale tier) — aligned with CILS A1.',
+      it: 'Vocabolario italiano di livello A1, basato sul Nuovo Vocabolario di Base di De Mauro (fascia Fondamentale).',
+    } }),
   exam({ slug: 'cils-a2', source: 'it', examType: 'CILS', level: 'A2', order: 92,
     names: { ko: 'CILS A2', en: 'CILS A2', it: 'CILS A2' },
     descKo: 'CILS A2 신규 어휘' }),
@@ -262,19 +321,43 @@ const LISTS = [
   topic({ slug: 'topic-travel-fr', source: 'fr', order: 241,
     names: { ko: '프랑스어 여행 회화', fr: 'Français pour voyager' },
     descKo: '관광, 호텔, 식당 등 프랑스 여행 어휘' }),
+
+  // ───── 한국어 (ko) — Hallyu Tier 1 ─────
+  topic({ slug: 'topic-honorifics-ko', source: 'ko', order: 251,
+    names: {
+      ko: '한국 호칭·관계 어휘',
+      en: 'Korean Address Terms & Honorifics',
+      ja: '韓国の呼称・敬称',
+      'zh-CN': '韩语称呼·敬语',
+      es: 'Tratamientos coreanos (oppa, eonni, etc.)',
+      fr: 'Termes d’adresse coréens (oppa, eonni…)',
+      de: 'Koreanische Anredeformen (oppa, eonni…)',
+      it: 'Appellativi coreani (oppa, eonni…)',
+    },
+    descriptions: {
+      ko: '오빠/언니/형/누나/선배/후배/씨/님 등 K-드라마·K-pop 학습자가 가장 헷갈리는 한국어 호칭 약 80선.',
+      en: 'About 80 Korean address terms — oppa, eonni, hyung, noona, sunbae, hubae — that K-drama and K-pop fans constantly run into.',
+      ja: 'K-ドラマ・K-popでよく聞く韓国の呼称 約80語 — オッパ／オンニ／ヒョン／ヌナ／先輩／後輩 ほか。',
+      'zh-CN': 'K-drama·K-pop 中常见的韩语称呼约 80 个 — 哥/姐/前辈/后辈/씨/님 等。',
+      es: 'Unas 80 formas de tratamiento coreanas — oppa, eonni, hyung, noona — clave para fans de K-drama y K-pop.',
+      fr: 'Environ 80 termes d’adresse coréens — oppa, eonni, hyung, noona — essentiels pour les fans de K-drama et K-pop.',
+      de: 'Etwa 80 koreanische Anredeformen — oppa, eonni, hyung, noona — die K-Drama- und K-Pop-Fans ständig begegnen.',
+      it: 'Circa 80 appellativi coreani — oppa, eonni, hyung, noona — fondamentali per chi segue K-drama e K-pop.',
+    } }),
 ];
 
-function topic({ slug, source, names, descKo, order }) {
+function topic({ slug, source, names, descKo, descriptions, order, isActive }) {
+  const description_i18n = descriptions || (descKo ? { ko: descKo, en: '' } : {});
   return {
     slug,
     name_i18n: names,
-    description_i18n: descKo ? { ko: descKo, en: '' } : {},
+    description_i18n,
     source_lang: source,
     exam_type: null,
     level: null,
     category: 'topic',
     display_order: order,
-    is_active: true, // visible in topic library; word_count=0 triggers "Coming soon" badge
+    is_active: isActive ?? true, // topics visible by default; word_count=0 shows "Coming soon" badge
   };
 }
 
@@ -291,25 +374,36 @@ async function main() {
       .maybeSingle();
 
     if (existing) {
-      // Don't overwrite is_active for already-populated lists.
+      // For populated lists, preserve is_active (don't accidentally hide a
+      // shipped list). For empty skeletons, sync is_active from the seed so
+      // Phase 1 cards can surface as "Coming soon" before words land.
+      const updates = {
+        name_i18n: row.name_i18n,
+        description_i18n: row.description_i18n,
+        source_lang: row.source_lang,
+        exam_type: row.exam_type,
+        level: row.level,
+        category: row.category,
+        display_order: row.display_order,
+      };
+      if (existing.word_count === 0) {
+        updates.is_active = row.is_active;
+      }
       const { error } = await admin
         .from('curated_wordlists')
-        .update({
-          name_i18n: row.name_i18n,
-          description_i18n: row.description_i18n,
-          source_lang: row.source_lang,
-          exam_type: row.exam_type,
-          level: row.level,
-          category: row.category,
-          display_order: row.display_order,
-        })
+        .update(updates)
         .eq('id', existing.id);
       if (error) console.error(`✗ ${row.slug}: ${error.message}`);
-      else console.log(`  updated ${row.slug} (kept is_active=${existing.is_active}, word_count=${existing.word_count})`);
+      else {
+        const activeNote = existing.word_count === 0
+          ? `is_active→${row.is_active}`
+          : `kept is_active=${existing.is_active}`;
+        console.log(`  updated ${row.slug} (${activeNote}, word_count=${existing.word_count})`);
+      }
     } else {
       const { error } = await admin.from('curated_wordlists').insert(row);
       if (error) console.error(`✗ ${row.slug}: ${error.message}`);
-      else console.log(`  inserted ${row.slug} (is_active=false)`);
+      else console.log(`  inserted ${row.slug} (is_active=${row.is_active})`);
     }
   }
 

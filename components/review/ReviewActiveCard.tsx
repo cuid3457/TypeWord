@@ -14,7 +14,7 @@ import { ReviewLimitModal } from '@/components/review-limit-modal';
 import type { StoredWord } from '@src/db/queries';
 
 // Reviewer-facing mode (the per-card resolved mode that ReviewCardContent renders).
-type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank';
+type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening';
 
 interface Props {
   index: number;

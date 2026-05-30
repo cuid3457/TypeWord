@@ -228,8 +228,8 @@ export function ReviewPicker({
             ) : null}
           </View>
         }
-        ListFooterComponent={bookCounts.length > 0 ? (
-          <View className="mt-3 px-6">
+        ListHeaderComponent={bookCounts.length > 0 ? (
+          <View className="mb-3 px-6">
             <NativeAdCard />
           </View>
         ) : null}

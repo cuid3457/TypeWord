@@ -15,7 +15,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { floatingShadow } from '@/components/ui/card';
 import { webCursor } from '@/components/ui/pressable-card';
@@ -25,6 +25,7 @@ import { AppModal } from '@/components/app-modal';
 import { StreakBanner } from '@/components/streak-banner';
 import { WordlistCreateModal } from '@/components/wordlist-create-modal';
 import { NativeAdCard } from '@/components/native-ad-card';
+import { Toast } from '@/components/toast';
 import { useRefreshReviewBadge } from '@/app/(tabs)/_layout';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium, useTier } from '@src/hooks/usePremium';
@@ -78,6 +79,9 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
   const [streak, setStreak] = useState<StreakInfo | null>(initialHome?.streak ?? null);
+  const [loadError, setLoadError] = useState(false);
+  const [toastMsg, setToastMsg] = useState('');
+  const insets = useSafeAreaInsets();
   const longPressedRef = useRef(false);
   const flatListRef = useRef<FlatList<BookWithCount | { __ad: true; key: string }>>(null);
   const highlightTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -91,9 +95,26 @@ export default function HomeScreen() {
     });
   }, []);
 
+  const booksLenRef = useRef(books.length);
+  booksLenRef.current = books.length;
   const loadBooks = useCallback(async (sort: BookSortMode, reversed: boolean) => {
-    await refreshHome(sort, reversed).finally(() => setLoading(false));
-  }, []);
+    try {
+      await refreshHome(sort, reversed);
+      setLoadError(false);
+    } catch {
+      // If we already have cached books, just flash a toast so the user
+      // knows the refresh failed — they keep the stale list rather than
+      // losing the screen. With no cached books, fall through to the
+      // inline error state below.
+      if (booksLenRef.current > 0) {
+        setToastMsg(t('error.refresh_failed'));
+      } else {
+        setLoadError(true);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [t]);
 
   useFocusEffect(
     useCallback(() => {
@@ -450,6 +471,30 @@ export default function HomeScreen() {
           <View className="flex-1 items-center justify-center">
             <ActivityIndicator size="large" color="#2EC4A5" />
           </View>
+        ) : loadError && books.length === 0 ? (
+          <View className="flex-1 items-center justify-center px-10">
+            <MaterialIcons name="error-outline" size={48} color="#A79E90" />
+            <Text className="mt-4 text-xl font-bold text-ink dark:text-ink-dark">
+              {t('error.title')}
+            </Text>
+            <Text className="mt-2 text-center text-sm text-muted">
+              {t('error.message')}
+            </Text>
+            <Pressable
+              onPress={() => {
+                haptic.tap();
+                setLoading(true);
+                loadBooks(sortMode, sortReversed);
+              }}
+              className="mt-8 items-center rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
+              accessibilityRole="button"
+              accessibilityLabel={t('error.retry')}
+            >
+              <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
+                {t('error.retry')}
+              </Text>
+            </Pressable>
+          </View>
         ) : books.length === 0 ? (
           <View className="flex-1 items-center justify-center px-10">
             <View className="h-32 w-32 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
@@ -573,6 +618,13 @@ export default function HomeScreen() {
           onClose={() => setShowCreateModal(false)}
           onPickBlank={() => router.push('/wordlist/new')}
           onPickBrowse={() => router.push('/wordlist/library')}
+        />
+        <Toast
+          visible={!!toastMsg}
+          message={toastMsg}
+          type="error"
+          onHide={() => setToastMsg('')}
+          style={{ position: 'absolute', bottom: insets.bottom + 80, left: 0, right: 0 }}
         />
     </SafeAreaView>
   );

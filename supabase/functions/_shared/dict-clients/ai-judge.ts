@@ -295,7 +295,16 @@ function selectKept(
   // 단위"). Filtering on the winner (not every sub-sense) means a measure-word
   // entry drops entirely instead of surfacing a minor sibling. Inert elsewhere.
   const isKoCounter = (def?: string) => /(세는|나타내는)\s*단위/.test(def ?? "");
-  const reps = Array.from(bestPerBranch.values()).filter((r) => !isKoCounter(r.sense.source_def));
+  // Drop Korean auxiliary verbs / dependent nouns (보조 동사, 의존 명사) when
+  // ANY other content sense exists for the same headword. krdict's auxiliary
+  // senses (먹다's "try/cope", 있다's "exist as auxiliary", 보다's "perceive")
+  // ship with bad cross-language translations (먹다→zh-CN "不喜欢" is a real
+  // example) AND grammatically only attach to a host verb, so a standalone
+  // card is noise for learners. Keep them ONLY if no main-pos sense survived.
+  const isKoAuxOrDep = (pos?: string) => /보조|의존|어미|접사/.test(pos ?? "");
+  const allReps = Array.from(bestPerBranch.values()).filter((r) => !isKoCounter(r.sense.source_def));
+  const contentReps = allReps.filter((r) => !isKoAuxOrDep(r.sense.pos));
+  const reps = contentReps.length > 0 ? contentReps : allReps;
 
   // 고급(advanced) gate: on a POLYSEMOUS word (>2 meanings) drop advanced-grade
   // homonyms so rare ones (눈 그물눈/새싹눈, 배 double) don't clutter the everyday
@@ -309,12 +318,172 @@ function selectKept(
 }
 
 // Deterministic target gloss that needs no LLM: a dict-provided translation, or
-// the English gloss itself when the target language is English.
+// the English gloss itself when the target language is English. NEVER falls
+// back to source_def — that field contains the SOURCE-LANG definition (Korean
+// for krdict, Chinese for cedict) and would leak as the card label.
 function prefillTranslation(sense: DictSense, targetLang: string): string | null {
   const pre = sense.translations_by_lang?.[targetLang];
-  if (pre) return pre;
-  if (targetLang === "en") return sense.en_translation ?? sense.source_def;
+  if (pre) {
+    // krdict ships some entries with a long comma-separated synonym list
+    // (e.g. 집→fr "maison, foyer, demeure, habitation, domicile,
+    // résidence, logis, pavillon, lotissement, appartement, logement,
+    // immeuble"). A learner card label needs ONE primary translation, not
+    // 12. Take the first item; the others are paraphrases of the same sense.
+    if (pre.includes(",")) return pre.split(",")[0].trim();
+    return pre;
+  }
+  if (targetLang === "en") return sense.en_translation ?? null;
   return null;
+}
+
+// Cheap check for romanization leakage in the English override — if the LLM
+// just echoed the source headword's letters back instead of producing an
+// English word (돈→"don", 먹다→"meokda", 말→"mal"), reject it so the card
+// falls back to en_translation or omits the sense.
+function isLikelyRomanization(en: string, sourceWord: string): boolean {
+  const e = en.trim().toLowerCase();
+  if (!e) return false;
+  if (!/^[a-z\s-]+$/.test(e)) return false; // only consider all-Latin strings
+  if (e.length > 12) return false; // long Latin strings are real English
+  // If the override is identical to the source headword (CJK case impossible,
+  // Latin source where override = source = just echoing) OR is one of the
+  // common romanization patterns that map source phonemes → Latin syllables,
+  // reject. The "≤ 1 vowel cluster + ≤ 3 syllables" check would over-fire;
+  // the strongest signal is the source-word echo.
+  if (e === sourceWord.trim().toLowerCase()) return true;
+  return false;
+}
+
+// Phonetic match: is EN a likely romanization of the SOURCE_LANG headword W?
+// We do NOT try to build a full romanizer — that needs language-specific
+// tables and would still miss edge cases. Instead we check the strongest
+// signal: does EN start with the same consonant + vowel sound as W's first
+// syllable? "money" for 돈 fails (m ≠ d); "don" for 돈 passes (d-o-n matches
+// ㄷㅗㄴ). False positives are very rare because real English glosses rarely
+// share the initial CV of an unrelated CJK headword.
+//
+// Korean (Hangul) initial-consonant + initial-vowel romanization table per
+// Revised Romanization (most common). Japanese / Chinese are NOT checked here
+// — JMdict / CEDICT don't ship raw romanizations as senses the way krdict
+// occasionally does, so the leak pattern is Korean-specific in practice.
+const KO_INITIAL_CONS: Record<string, string[]> = {
+  ㄱ: ["g", "k"], ㄲ: ["kk", "g"], ㄴ: ["n"], ㄷ: ["d", "t"], ㄸ: ["tt", "d"],
+  ㄹ: ["r", "l"], ㅁ: ["m"], ㅂ: ["b", "p"], ㅃ: ["pp", "b"], ㅅ: ["s"],
+  ㅆ: ["ss", "s"], ㅇ: [""], ㅈ: ["j"], ㅉ: ["jj"], ㅊ: ["ch"], ㅋ: ["k"],
+  ㅌ: ["t"], ㅍ: ["p"], ㅎ: ["h"],
+};
+const KO_VOWEL: Record<string, string[]> = {
+  ㅏ: ["a"], ㅐ: ["ae", "e"], ㅑ: ["ya"], ㅒ: ["yae"], ㅓ: ["eo", "u", "o"],
+  ㅔ: ["e"], ㅕ: ["yeo", "yu", "yo"], ㅖ: ["ye"], ㅗ: ["o"], ㅘ: ["wa"],
+  ㅙ: ["wae"], ㅚ: ["oe", "we"], ㅛ: ["yo"], ㅜ: ["u", "oo"], ㅝ: ["wo", "wo"],
+  ㅞ: ["we"], ㅟ: ["wi"], ㅠ: ["yu"], ㅡ: ["eu", "u"], ㅢ: ["ui"], ㅣ: ["i"],
+};
+function koHangulRomanizationPrefixes(word: string | undefined | null): string[] {
+  if (!word) return [];
+  const syllable = word.trim().charAt(0);
+  const code = syllable.charCodeAt(0);
+  if (code < 0xAC00 || code > 0xD7A3) return [];
+  const offset = code - 0xAC00;
+  const consIdx = Math.floor(offset / 588);
+  const vowelIdx = Math.floor((offset % 588) / 28);
+  const consList = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"];
+  const vowelList = ["ㅏ","ㅐ","ㅑ","ㅒ","ㅓ","ㅔ","ㅕ","ㅖ","ㅗ","ㅘ","ㅙ","ㅚ","ㅛ","ㅜ","ㅝ","ㅞ","ㅟ","ㅠ","ㅡ","ㅢ","ㅣ"];
+  const cons = KO_INITIAL_CONS[consList[consIdx]] ?? [];
+  const vowels = KO_VOWEL[vowelList[vowelIdx]] ?? [];
+  const out: string[] = [];
+  for (const c of cons) for (const v of vowels) out.push((c + v).toLowerCase());
+  return out;
+}
+
+function isDictRomanizationLeak(en: string | undefined | null, sourceLang: string, sourceWord: string): boolean {
+  const e = (en ?? "").trim();
+  if (!e) return false;
+  // Only ko has the empirical pattern of krdict shipping romaja as EN for rare
+  // senses. Extend to ja/zh later if data shows it.
+  if (sourceLang !== "ko") return false;
+  if (!/^[a-zA-Z][a-zA-Z'\-]{0,12}$/.test(e)) return false;
+  if (/\s/.test(e)) return false; // multi-word EN is a real gloss
+  const lower = e.toLowerCase();
+  const prefixes = koHangulRomanizationPrefixes(sourceWord);
+  if (prefixes.length === 0) return false;
+  // EN qualifies as a romanization leak ONLY when it starts with one of the
+  // valid romaja prefixes for W's first syllable AND its overall length is
+  // close to W's syllable count × ~2 chars (typical romaja ratio). The
+  // first-syllable prefix check alone catches "don"/"mal"/"meokda" but not
+  // "money" (m ≠ d for 돈).
+  if (!prefixes.some((p) => lower.startsWith(p))) return false;
+  return true;
+}
+
+// Common English function words / very-frequent stems that, when they
+// appear as the ENTIRE non-English target translation, signal an English
+// leak (LLM produced English where it should have produced the target lang).
+// Excludes loanwords that double as native vocabulary in many languages.
+const COMMON_ENGLISH_LEAK = new Set([
+  "money", "can", "to", "and", "or", "the", "a", "an", "is", "are", "was",
+  "were", "be", "been", "have", "has", "had", "do", "does", "did", "thing",
+  "way", "say", "see", "get", "make", "go", "good", "bad", "big", "small",
+  "new", "old", "all", "any", "some", "no", "not", "yes", "people", "person",
+  "man", "woman", "child", "child", "house", "home", "car", "water", "food",
+  "time", "day", "year", "for", "with", "without", "of", "by", "from", "in",
+  "on", "at", "out", "up", "down", "back",
+  // multi-word phrases the LLM commonly emits as English glosses
+  "to have", "to be", "to do", "to go", "to make", "to take", "to give",
+  "to know", "to want", "to say", "to see", "to come", "to use",
+  "to have the skill", "to know how to",
+  "to look forward to", "to look forward",
+  "abdomen; belly", "abdomen", "belly", "to think",
+]);
+function looksLikeEnglishLeak(text: string): boolean {
+  const lower = text.toLowerCase().trim();
+  if (COMMON_ENGLISH_LEAK.has(lower)) return true;
+  // Multi-word: split on ; and , then check each chunk
+  for (const chunk of lower.split(/[;,]/).map((c) => c.trim()).filter(Boolean)) {
+    if (COMMON_ENGLISH_LEAK.has(chunk)) return true;
+  }
+  return false;
+}
+
+// Reject obviously-wrong target_translation values that would otherwise leak
+// through. The strongest patterns are: (a) the translation is exactly the
+// source headword echoed back, (b) the translation script does not match
+// the target language's expected script (Hangul translation for a French
+// target, etc. — pure script mismatch is unrecoverable garbage).
+function translationLooksWrong(
+  tr: string, sourceWord: string, sourceLang: string, targetLang: string,
+): boolean {
+  const t = tr.trim();
+  if (!t) return true;
+  if (sourceLang === targetLang) return false;
+  // Source-word echo (e.g. 커피→fr translation = "커피"): strongest leak.
+  if (t === sourceWord.trim()) return true;
+  // Script mismatch — translation should contain the target lang's script.
+  const hasHangul = /[가-힣]/.test(t);
+  const hasHiraganaKatakana = /[぀-ゟ゠-ヿ]/.test(t);
+  const hasCjkUnified = /[一-鿿]/.test(t);
+  const hasLatin = /[a-zA-Z]/.test(t);
+  if (targetLang === "ko" && !hasHangul) return true;
+  if (targetLang === "ja" && !hasHiraganaKatakana && !hasCjkUnified) return true;
+  if (targetLang === "zh-CN" && !hasCjkUnified) return true;
+  if (["en", "es", "fr", "de", "it"].includes(targetLang) && !hasLatin) return true;
+  // Source-script characters in a Latin target slot. Korean def with
+  // apostrophes/punct (e.g. "'나의'가 줄어든 말.") slips past the Latin
+  // check above because the apostrophe is Latin punctuation. Reject when
+  // any non-target script appears in a Latin target slot.
+  if (["en", "es", "fr", "de", "it"].includes(targetLang)) {
+    if (hasHangul || hasHiraganaKatakana || hasCjkUnified) return true;
+  }
+  // Symmetric check for CJK targets: a Latin string MIXED with the source
+  // script for a CJK target slot is also wrong.
+  if (targetLang === "ko" && (hasHiraganaKatakana || hasCjkUnified) && !hasHangul) return true;
+  if (targetLang === "ja" && hasHangul) return true;
+  if (targetLang === "zh-CN" && (hasHangul || hasHiraganaKatakana)) return true;
+  // English leaking into a non-English Latin target (돈→fr "money", 会→fr
+  // "can; to have the skill", 배→it "abdomen; belly").
+  if (["es", "fr", "de", "it"].includes(targetLang) && looksLikeEnglishLeak(t)) {
+    return true;
+  }
+  return false;
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -337,18 +506,21 @@ General profanity / slang / casual derogatory that is NOT discriminatory or hara
 
 (2) branch (int): senses that are the SAME underlying meaning share a branch number (even if surface translations differ); genuinely DISTINCT meanings or unrelated homonyms get DIFFERENT numbers. Start at 0.
 
-(3) en_override (string): if the existing English gloss (EN) is a TRANSLITERATION (romanization of W, not a recognizable English word/phrase), replace it with meaningful English derived from SOURCE_DEF. If EN already conveys meaning, return "".
+(3) en_override (string): replace EN with meaningful English when EN is a TRANSLITERATION (romanized spelling of W in Latin letters with no English meaning) rather than a real English gloss. Apply this check aggressively for CJK source languages (Korean / Japanese / Chinese): when EN is an all-Latin string ≤10 characters AND looks like a plausible romanization of W's pronunciation, it IS a transliteration EVEN IF the same letter sequence happens to be a real English word in another context (e.g. "don" is real English but for Korean W="돈" it's romaja, not the Spanish/mafia sense; "mal" is real English but for Korean W="말" it's romaja). Decide based on whether the EN string would serve as a USEFUL learner gloss for W's meaning, not whether the letter sequence exists in some English context. When EN already conveys W's meaning to a monolingual English reader, return "".
 
-(4) target_translation (string): the natural TARGET_LANG word/phrase (1-3 words MAX) for this sense.
-- Return "" when SOURCE_LANG equals TARGET_LANG, or when PRE_TARGET is already provided, or when TARGET_LANG is English and EN already conveys meaning.
-- Otherwise a recognizable TARGET_LANG lexical item, not a paraphrase. Different senses must take different translations.
+(4) pos (string): part of speech for THIS sense in lowercase English (noun / verb / adjective / adverb / interjection / pronoun / proper noun / particle / phrase / numeral / preposition / conjunction / determiner / symbol). When the source dictionary did NOT provide a structural POS (CEDICT for Chinese is the common case), infer from the SOURCE_DEF + EN. Always return a value — empty pos means the card label cannot render. Return the most specific applicable POS.
+
+(5) target_translation (string): the natural TARGET_LANG word/phrase (1-3 words MAX) for this sense.
+- Return "" ONLY when SOURCE_LANG equals TARGET_LANG, or when PRE_TARGET is already provided.
+- Otherwise ALWAYS produce a TARGET_LANG translation — never return "" just because W is a loanword in TARGET_LANG, never echo W or its romanization, never echo SOURCE_DEF. The TARGET_LANG translation must be in the TARGET_LANG's script using TARGET_LANG vocabulary.
+- A recognizable TARGET_LANG lexical item, not a paraphrase. Different senses must take different translations.
 - For grammatical particles / function words / bound morphemes (Korean 조사, Japanese 助詞, Chinese 助词): never echo the dictionary definition — output a SHORT learner-card label ("topic marker", "object marker", "past tense", …), 1-3 words MAX.
-- For real public figures (politicians/world leaders/celebrities/historical figures): output just the full name in TARGET_LANG (e.g. "조 바이든", "Donald Trump") — no biographical commentary. Keep neutral and factual; let the learner card itself stay minimal.
+- For real public figures (politicians/world leaders/celebrities/historical figures): output just the full name in TARGET_LANG using the TARGET_LANG's standard transliteration/translation of that name (e.g. for "Yoon Suk-yeol": output the romanized name when TARGET_LANG uses Latin script, or the established CJK rendering when TARGET_LANG is ja/zh-CN). Never leave the name in the source script.
 
 Output strict JSON (id is the integer from the input, no other keys):
 {
   "results": [
-    { "id": <int>, "frequency_score": <0-100>, "branch": <int>, "en_override": "<...>", "target_translation": "<...>" }
+    { "id": <int>, "frequency_score": <0-100>, "branch": <int>, "en_override": "<...>", "pos": "<...>", "target_translation": "<...>" }
   ]
 }`;
 
@@ -357,6 +529,7 @@ interface UnifiedItem {
   frequency_score: number;
   branch?: number;
   en_override?: string;
+  pos?: string;
   target_translation?: string;
 }
 
@@ -379,6 +552,7 @@ async function judgeUnifiedSingle(
   const signalByIdx: Record<string, SenseSignal> = {};
   const overrideByIdx: Record<string, string> = {};
   const transByIdx: Record<string, string> = {};
+  const posByIdx: Record<string, string> = {};
   resp.results?.forEach((r, ord) => {
     const key = String(r.id);
     signalByIdx[key] = {
@@ -386,23 +560,62 @@ async function judgeUnifiedSingle(
       branch: typeof r.branch === "number" ? r.branch : 1000 + ord,
     };
     const ov = (r.en_override ?? "").trim();
-    if (ov) overrideByIdx[key] = ov;
+    if (ov && !isLikelyRomanization(ov, word)) overrideByIdx[key] = ov;
     const tr = (r.target_translation ?? "").trim();
-    if (tr) transByIdx[key] = tr;
+    if (tr && !translationLooksWrong(tr, word, sourceLang, targetLang)) transByIdx[key] = tr;
+    const pos = (r.pos ?? "").trim();
+    if (pos) posByIdx[key] = pos;
   });
 
   const keptReps = selectKept(allSenses, signalByIdx, sourceLang, entries[0]?.source);
-  return keptReps.map((r) => {
-    const key = String(r.idx);
-    const prefill = prefillTranslation(r.sense, targetLang);
-    return {
-      sense: r.sense,
-      score: r.score,
-      reasoning: "",
-      en_override: overrideByIdx[key],
-      display_translation: prefill ?? transByIdx[key],
-    } as JudgedSense;
-  });
+  return keptReps
+    .map((r) => {
+      const key = String(r.idx);
+      const prefill = prefillTranslation(r.sense, targetLang);
+      const overrideEn = overrideByIdx[key];
+      // LLM-inferred POS sits in two slots:
+      //   • `pos` is overwritten only when the source dict didn't carry one
+      //     (CEDICT case) so dict-supplied POS stays authoritative for
+      //     well-tagged sources (krdict / jmdict / wiktionary).
+      //   • `llm_pos` always carries the LLM's reading as a backup field
+      //     used downstream (e.g. when dict POS maps to "expression"/"symbol"
+      //     and we want a more learner-friendly label).
+      const sense = !r.sense.pos && posByIdx[key]
+        ? { ...r.sense, pos: posByIdx[key], llm_pos: posByIdx[key] }
+        : { ...r.sense, llm_pos: posByIdx[key] };
+      // Display chain for EN target: prefer overrideEn over prefill, because
+      // prefill comes from sense.en_translation (which may be a romanization
+      // the override is correcting). For non-EN target, prefill is the proper
+      // target_lang gloss and wins.
+      const displayTrans = (targetLang === "en" && overrideEn)
+        ? overrideEn
+        : (prefill ?? transByIdx[key]);
+      return {
+        sense,
+        score: r.score,
+        reasoning: "",
+        en_override: overrideEn,
+        display_translation: displayTrans,
+      } as JudgedSense;
+    })
+    // Final defense — drop senses whose user-visible label is unusable:
+    //   • Romanization leak (override or dict gloss is just romaja: 돈→"don")
+    //   • Source-script leak in en_translation (krdict ships the Korean
+    //     definition when no English gloss exists: 내→"'나의'가 줄어든 말.")
+    .filter((j) => {
+      const candidates = [j.en_override, j.sense.en_translation, j.display_translation].filter((s): s is string => !!s);
+      if (candidates.length === 0) return false;
+      // For Korean source + en target: drop if en_translation is itself
+      // Hangul text (krdict fallback for senses without English glosses).
+      if (sourceLang === "ko" && targetLang === "en" &&
+          j.sense.en_translation && /[가-힣]/.test(j.sense.en_translation) &&
+          !(j.en_override && j.en_override.trim().length > 0) &&
+          !(j.display_translation && !/[가-힣]/.test(j.display_translation))) {
+        return false;
+      }
+      // If EVERY candidate label is a romanization leak, drop the sense.
+      return !candidates.every((c) => isDictRomanizationLeak(c, sourceLang, word));
+    });
 }
 
 /**
@@ -467,16 +680,22 @@ export async function judgeAndTranslate(
   for (const o of overrideResp.overrides ?? []) {
     const ov = (o.translation_override ?? "").trim();
     const k = kept[Number(o.id)];
-    if (ov && k) k.en_override = ov;
+    if (ov && k && !isLikelyRomanization(ov, word)) k.en_override = ov;
   }
   if (translateResp) {
     for (const t of translateResp.translations ?? []) {
       const v = (t.translation ?? "").trim();
       const k = kept[Number(t.id)];
-      if (v && k) k.display_translation = v;
+      if (v && k && !translationLooksWrong(v, word, sourceLang, targetLang)) k.display_translation = v;
     }
   }
-  return kept;
+  // Drop romanization-leak senses (CJK dict shipped EN as romaja, LLM didn't
+  // override or echoed the romanization). Same defense as judgeUnifiedSingle.
+  return kept.filter((j) => {
+    const candidates = [j.en_override, j.sense.en_translation, j.display_translation].filter((s): s is string => !!s);
+    if (candidates.length === 0) return false;
+    return !candidates.every((c) => isDictRomanizationLeak(c, sourceLang, word));
+  });
 }
 
 // ────────────────────────────────────────────────────────────────────────

@@ -49,7 +49,7 @@ async function processOneWord(list, row, proficiencyHint) {
     const tl = TARGETS[i];
     // First iteration regenerates canonical + translation; later iterations
     // reuse the just-saved canonical and refresh translation only.
-    const r = await admin.functions.invoke('word-lookup-v2', {
+    const r = await admin.functions.invoke('word-lookup-v4', {
       body: {
         word,
         sourceLang: list.source_lang,

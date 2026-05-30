@@ -45,9 +45,9 @@ const DRY_RUN = process.argv.includes('--dry-run');
 function getIssueType(issue) { return issue.split(':')[0]; }
 
 async function lookupWord(word, sourceLang, targetLang, proficiencyHint) {
-  // v2 single enrich call: canonical (COMBINED_QUICK) + ANALYZE_ENRICH +
-  // TRANSLATE_SENTENCE in one request. forceFresh re-runs everything.
-  const r = await admin.functions.invoke('word-lookup-v2', {
+  // v4 dict-first enrich: dict lookup + ai-judge + canonical example reuse
+  // in one call. forceFresh skips cache and any prior canonical examples.
+  const r = await admin.functions.invoke('word-lookup-v4', {
     body: {
       word, sourceLang, targetLang, mode: 'enrich',
       forceFresh: true, proficiencyHint,

@@ -107,14 +107,16 @@ export function Paywall() {
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark" edges={['top', 'bottom', 'left', 'right']}>
       <Stack.Screen options={{ headerShown: false }} />
 
-      {/* App bar */}
-      <View className="h-11 flex-row items-center px-5">
-        <Pressable onPress={closePage} className="mr-1 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
-          <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
-        </Pressable>
-        <Text className="text-lg font-bold text-ink dark:text-ink-dark">
-          MoaVoca {t('premium.title')}
-        </Text>
+      {/* App bar — matches terms.tsx pattern (padding 24, mr-2 p-1, text-base font-semibold) */}
+      <View style={{ paddingHorizontal: 24, paddingTop: 24 }}>
+        <View className="h-11 flex-row items-center">
+          <Pressable onPress={closePage} className="mr-2 p-1" accessibilityLabel={t('common.back')} accessibilityRole="button" hitSlop={8}>
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+          </Pressable>
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
+            MoaVoca {t('premium.title')}
+          </Text>
+        </View>
       </View>
 
       <ScrollView className="flex-1" contentContainerStyle={{ paddingHorizontal: 22, paddingBottom: 24 }}>
@@ -145,8 +147,14 @@ export function Paywall() {
           ))}
         </Card>
 
-        {/* Plan selector */}
+        {/* Plan selector — Monthly left, Annual right */}
         <View className="mt-6 flex-row gap-3">
+          <PlanCard
+            label={t('premium.monthly')}
+            price={monthlyPrice}
+            selected={plan === 'monthly'}
+            onPress={() => setPlan('monthly')}
+          />
           <PlanCard
             label={t('premium.annual')}
             price={annualPrice}
@@ -155,12 +163,6 @@ export function Paywall() {
             selected={plan === 'annual'}
             onPress={() => setPlan('annual')}
           />
-          <PlanCard
-            label={t('premium.monthly')}
-            price={monthlyPrice}
-            selected={plan === 'monthly'}
-            onPress={() => setPlan('monthly')}
-          />
         </View>
 
         {/* Disclosure (Apple 3.1.2(a) / Play) — must stay on the paywall */}
@@ -168,28 +170,36 @@ export function Paywall() {
           {t('premium.disclosure', { monthlyPrice, annualPrice })}
         </Text>
 
-        {/* Links — restore / manage / legal (compliance: terms+privacy+business reachable) */}
-        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-3 gap-y-1">
-          <Pressable onPress={handleRestore} disabled={restoring}>
-            <Text className="text-[11px] text-faint underline">
+        {/* Subscription actions — restore + manage (primary fine-print actions) */}
+        <View className="mt-4 flex-row items-center justify-center gap-x-6">
+          <Pressable onPress={handleRestore} disabled={restoring} hitSlop={8}>
+            <Text className="text-xs text-muted underline">
               {restoring ? t('premium.restoring') : t('premium.restore')}
             </Text>
           </Pressable>
-          <Text className="text-[11px] text-faint">·</Text>
           <Pressable onPress={() => {
             const url = Platform.OS === 'ios'
               ? 'https://apps.apple.com/account/subscriptions'
               : 'https://play.google.com/store/account/subscriptions';
             Linking.openURL(url).catch(() => {});
-          }}>
-            <Text className="text-[11px] text-faint underline">{t('premium.manage_subscription')}</Text>
+          }} hitSlop={8}>
+            <Text className="text-xs text-muted underline">{t('premium.manage_subscription')}</Text>
+          </Pressable>
+        </View>
+
+        {/* Legal links — terms / privacy / business info (compliance) */}
+        <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-2 gap-y-1">
+          <Pressable onPress={() => router.push('/terms')} hitSlop={6}>
+            <Text className="text-[11px] text-faint underline">{t('settings.terms')}</Text>
           </Pressable>
           <Text className="text-[11px] text-faint">·</Text>
-          <Pressable onPress={() => router.push('/terms')}><Text className="text-[11px] text-faint underline">{t('settings.terms')}</Text></Pressable>
+          <Pressable onPress={() => router.push('/privacy')} hitSlop={6}>
+            <Text className="text-[11px] text-faint underline">{t('settings.privacy')}</Text>
+          </Pressable>
           <Text className="text-[11px] text-faint">·</Text>
-          <Pressable onPress={() => router.push('/privacy')}><Text className="text-[11px] text-faint underline">{t('settings.privacy')}</Text></Pressable>
-          <Text className="text-[11px] text-faint">·</Text>
-          <Pressable onPress={() => router.push('/business-info')}><Text className="text-[11px] text-faint underline">{t('settings.business_info')}</Text></Pressable>
+          <Pressable onPress={() => router.push('/business-info')} hitSlop={6}>
+            <Text className="text-[11px] text-faint underline">{t('settings.business_info')}</Text>
+          </Pressable>
         </View>
 
         {message ? <Text className="mt-2 text-center text-sm text-muted">{message}</Text> : null}

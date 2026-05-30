@@ -19,9 +19,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
 import { Card } from '@/components/ui/card';
 import { AppModal } from '@/components/app-modal';
+import { AvatarCircle } from '@/components/avatar-circle';
+import { AvatarMenu } from '@/components/avatar-menu';
+import { BackgroundPicker } from '@/components/background-picker';
 import { ProfileSetupModal } from '@/components/profile-setup-modal';
 import { Toast } from '@/components/toast';
 import { getMyProfile, type MyProfile } from '@src/services/friendsService';
+import {
+  getMysteryBoxState,
+  refreshMysteryBoxState,
+  subscribeMysteryBox,
+} from '@src/services/mysteryBoxService';
 import {
   getEmail,
   getAuthProvider,
@@ -89,7 +97,14 @@ export default function ProfileScreen() {
   const [reauthError, setReauthError] = useState<string | null>(null);
   const [myProfile, setMyProfile] = useState<MyProfile | null>(null);
   const [showProfileSetup, setShowProfileSetup] = useState(false);
+  const [showBgPicker, setShowBgPicker] = useState(false);
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
   const premium = usePremium();
+
+  // Mystery-box equipped state (applied to the avatar circle).
+  const [boxState, setBoxState] = useState(getMysteryBoxState());
+  useEffect(() => subscribeMysteryBox(setBoxState), []);
+  useEffect(() => { refreshMysteryBoxState().catch(() => {}); }, []);
 
   const reloadProfile = () => {
     getMyProfile().then(setMyProfile).catch(() => setMyProfile(null));
@@ -173,14 +188,22 @@ export default function ProfileScreen() {
             </Text>
           </View>
 
-          {/* Identity hero */}
+          {/* Identity hero — avatar tap opens the customization menu;
+              the explicit "Edit" button stays for nickname/username. */}
           {myProfile && !myProfile.isAnonymous ? (
             <Card className="mt-4 items-center p-6">
-              <View className="h-[72px] w-[72px] items-center justify-center rounded-full bg-accent">
-                <Text className="text-3xl font-extrabold text-white">
-                  {(myProfile.displayName || '?').charAt(0).toUpperCase()}
-                </Text>
-              </View>
+              <Pressable
+                onPress={() => setShowAvatarMenu(true)}
+                accessibilityRole="button"
+                accessibilityLabel={t('avatar_menu.title')}
+                hitSlop={6}
+              >
+                <AvatarCircle
+                  name={myProfile.displayName}
+                  backgroundId={boxState.equippedBackgroundId}
+                  size={72}
+                />
+              </Pressable>
               <Text className="mt-3.5 text-xl font-extrabold text-ink dark:text-ink-dark" numberOfLines={1}>
                 {myProfile.displayName || t('dashboard.unnamed')}
               </Text>
@@ -630,6 +653,14 @@ export default function ProfileScreen() {
         }}
         onCancel={() => setShowProfileSetup(false)}
       />
+
+      <AvatarMenu
+        visible={showAvatarMenu}
+        onClose={() => setShowAvatarMenu(false)}
+        onPickBackground={() => setShowBgPicker(true)}
+        onPickCharacter={() => router.push('/mystery-box')}
+      />
+      <BackgroundPicker visible={showBgPicker} onClose={() => setShowBgPicker(false)} />
     </SafeAreaView>
   );
 

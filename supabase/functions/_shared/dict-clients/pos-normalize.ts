@@ -72,7 +72,26 @@ const POS_MAP: Record<string, Record<string, number>> = {
     num: 10,
     pref: 11, suf: 11, unc: 11,
   },
-  cedict: {}, // CEDICT doesn't expose POS structurally
+  cedict: {}, // CEDICT doesn't expose POS structurally — POS comes from the AI judge instead (see unified judge's pos field).
+  // LLM-derived POS strings (neologism path + judge-inferred POS). Same
+  // English vocabulary as wiktionary's map plus a few learner-card synonyms
+  // that GPT models commonly emit.
+  llm: {
+    noun: 0, n: 0,
+    verb: 1, v: 1,
+    adjective: 2, adj: 2,
+    adverb: 3, adv: 3,
+    preposition: 4, prep: 4, postposition: 4, postp: 4,
+    conjunction: 5, conj: 5,
+    interjection: 6, intj: 6, interj: 6, exclamation: 6,
+    pronoun: 7, pron: 7,
+    "proper noun": 8, "proper-noun": 8, name: 8,
+    phrase: 9, expression: 9, idiom: 9, proverb: 9, particle: 9, prt: 9,
+    article: 9, det: 9, determiner: 9, "auxiliary verb": 9, aux: 9,
+    numeral: 10, num: 10, "cardinal-number": 10, "ordinal-number": 10,
+    symbol: 11, letter: 11, abbrev: 11, abbreviation: 11,
+    prefix: 11, suffix: 11, affix: 11,
+  },
 };
 
 // Canonical English POS labels by index. Client localizes to UI language via

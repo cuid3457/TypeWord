@@ -28,6 +28,7 @@ import MaterialIconsFont from '@expo/vector-icons/build/vendor/react-native-vect
 
 SplashScreen.preventAutoHideAsync();
 
+import { ComebackBoostModal } from '@/components/comeback-boost-modal';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { OfflineBanner } from '@/components/offline-banner';
 import { SplashOverlay } from '@/components/splash-overlay';
@@ -70,6 +71,7 @@ export default function RootLayout() {
   const { t, i18n } = useTranslation();
   const segments = useSegments();
   const [celebrateInfo, setCelebrateInfo] = useState<CelebrateInfo | null>(null);
+  const [showComebackBoost, setShowComebackBoost] = useState(false);
 
   useEffect(() => {
     const sub = DeviceEventEmitter.addListener(CELEBRATE_EVENT, (info: CelebrateInfo) => {
@@ -161,10 +163,15 @@ export default function RootLayout() {
     setTimeout(() => {
       (async () => {
         try {
-          const { refreshInventory } = await import('@src/services/pointsService');
+          const { refreshInventory, activateComebackBoostIfEligible } = await import('@src/services/pointsService');
           await refreshInventory();
           const { reconcileStreakFreezeConsumption } = await import('@src/services/streakService');
           await reconcileStreakFreezeConsumption();
+          // Comeback Boost: server checks 3+ day inactivity and grants 24h
+          // point multiplier + 1 freeze. Only the freshly-activated case
+          // triggers the modal (re-activations during an active window noop).
+          const activated = await activateComebackBoostIfEligible();
+          if (activated) setShowComebackBoost(true);
         } catch { /* silent */ }
       })();
     }, 3000);
@@ -461,7 +468,11 @@ export default function RootLayout() {
             <Stack.Screen name="wordlist/add/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="auth" options={{ headerShown: false }} />
             <Stack.Screen name="profile" options={{ headerShown: false }} />
+            <Stack.Screen name="friends" options={{ headerShown: false }} />
+            <Stack.Screen name="stats" options={{ headerShown: false }} />
             <Stack.Screen name="subscription" options={{ headerShown: false }} />
+            <Stack.Screen name="word-pearl" options={{ headerShown: false }} />
+            <Stack.Screen name="weekly-recap" options={{ headerShown: false }} />
             <Stack.Screen name="terms" options={{ title: '' }} />
             <Stack.Screen name="privacy" options={{ title: '' }} />
           </Stack>
@@ -516,6 +527,10 @@ export default function RootLayout() {
             </View>
           </View>
         </Modal>
+        <ComebackBoostModal
+          visible={showComebackBoost}
+          onClose={() => setShowComebackBoost(false)}
+        />
         <SplashOverlay />
         <StatusBar style="auto" />
       </ThemeProvider>

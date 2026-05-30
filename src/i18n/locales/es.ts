@@ -738,6 +738,15 @@ export default {
     cta: 'Fondo',
     empty_catalog: 'Los fondos se están preparando.',
   },
+  avatar_menu: {
+    title: 'Personalizar perfil',
+    background_title: 'Color de fondo',
+    background_subtitle: 'Elige libremente entre 20 colores',
+    character_title: 'Personaje',
+    character_subtitle: 'Obtén con la Caja Misteriosa',
+    character_coming_soon: 'Los personajes están en camino',
+    coming_soon_badge: 'Pronto',
+  },
   mystery_box: {
     title: 'Caja Misteriosa',
     character_cta: 'Personajes',

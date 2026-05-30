@@ -19,6 +19,7 @@ export interface FriendRow {
   statsPublic: boolean;
   streakCurrent: number | null;
   xpTotal: number | null;
+  equippedBackgroundId: string | null;
 }
 
 export class FriendsError extends Error {
@@ -122,6 +123,7 @@ export async function listFriends(): Promise<FriendRow[]> {
     stats_public: boolean;
     streak_current: number | null;
     xp_total: number | null;
+    equipped_background_id: string | null;
   }>).map((r) => ({
     friendId: r.friend_id,
     displayName: r.display_name,
@@ -129,6 +131,7 @@ export async function listFriends(): Promise<FriendRow[]> {
     statsPublic: r.stats_public,
     streakCurrent: r.streak_current,
     xpTotal: r.xp_total,
+    equippedBackgroundId: r.equipped_background_id ?? null,
   }));
 }
 

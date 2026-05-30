@@ -518,13 +518,15 @@ export default function AddWordScreen() {
             const ipaPromise = sameInput && earlyIpaPromise
               ? earlyIpaPromise
               : fetchIpa(hw, sourceLang);
-            ipaPromise.then((ipa) => {
-              if (ipa) {
-                setResponse((prev) =>
-                  prev ? { ...prev, result: { ...prev.result, ipa } } : prev,
-                );
-              }
-            });
+            ipaPromise
+              .then((ipa) => {
+                if (ipa) {
+                  setResponse((prev) =>
+                    prev ? { ...prev, result: { ...prev.result, ipa } } : prev,
+                  );
+                }
+              })
+              .catch(() => { /* IPA is enrichment; word is already saveable without it */ });
           }
           if (finalRes.source !== 'local') {
             startEnrich(finalRes, forwardWord, sourceLang, targetLang, book.id);

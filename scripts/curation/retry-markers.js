@@ -24,8 +24,8 @@ function check(word, lang, r, sourceLang) {
 }
 
 async function lookup(word, sourceLang, targetLang) {
-  // v2 single enrich call returns full result (meanings + examples + syn/ant).
-  const r = await admin.functions.invoke('word-lookup-v2', {
+  // v4 dict-first enrich: full canonical + translation + examples in one call.
+  const r = await admin.functions.invoke('word-lookup-v4', {
     body: { word, sourceLang, targetLang, mode: 'enrich', forceFresh: true },
   });
   if (r.error) throw new Error('lookup: ' + r.error.message);
