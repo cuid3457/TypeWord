@@ -5,7 +5,7 @@
 //   • mode=set      → same checks + persists to profiles.username
 //
 // Format rules:
-//   - 3-20 NFC code points
+//   - 4-20 NFC code points
 //   - Single script only: latin / hangul / kana_kanji / han / cyrillic
 //   - Allowed chars: script-specific letters + 0-9 + . + _
 //   - Must start with a letter, must not end with . or _
@@ -36,7 +36,7 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:4173",
 ]);
 
-const MIN_LEN = 3;
+const MIN_LEN = 4;
 const MAX_LEN = 20;
 
 function getCorsHeaders(req: Request) {

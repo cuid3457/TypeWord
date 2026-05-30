@@ -205,15 +205,27 @@ export async function fetchCloudXp(): Promise<number> {
   return Number(data ?? 0);
 }
 
-export async function setDisplayName(name: string): Promise<void> {
-  const { data: session } = await supabase.auth.getSession();
-  const uid = session.session?.user?.id;
-  if (!uid) throw new FriendsError('Not authenticated', 'unauthenticated');
-  const { error } = await supabase
-    .from('profiles')
-    .update({ display_name: name.trim() })
-    .eq('user_id', uid);
-  if (error) throw mapPgError(error);
+export interface DisplayNameValidation {
+  ok: boolean;
+  code?: 'too_short' | 'too_long' | 'blocklist_match' | 'moderation_flagged'
+       | 'unauthorized' | 'write_failed' | 'server_error';
+  normalized?: string;
+}
+
+export async function setDisplayName(name: string): Promise<DisplayNameValidation> {
+  const { data, error } = await supabase.functions.invoke<DisplayNameValidation>('display-name-set', {
+    body: { mode: 'set', display_name: name },
+  });
+  if (error) return { ok: false, code: 'server_error' };
+  return data ?? { ok: false, code: 'server_error' };
+}
+
+export async function validateDisplayName(name: string): Promise<DisplayNameValidation> {
+  const { data, error } = await supabase.functions.invoke<DisplayNameValidation>('display-name-set', {
+    body: { mode: 'validate', display_name: name },
+  });
+  if (error) return { ok: false, code: 'server_error' };
+  return data ?? { ok: false, code: 'server_error' };
 }
 
 export async function setStatsPublic(visible: boolean): Promise<void> {

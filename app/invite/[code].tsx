@@ -113,7 +113,14 @@ export default function InviteScreen() {
     if (!trimmed) return;
     setState({ kind: 'loading' });
     try {
-      await setDisplayName(trimmed);
+      const dn = await setDisplayName(trimmed);
+      if (!dn.ok) {
+        const msg = dn.code === 'blocklist_match' || dn.code === 'moderation_flagged'
+          ? t('nickname_modal.error_inappropriate')
+          : t('invite.error_unknown');
+        setState({ kind: 'error', message: msg });
+        return;
+      }
       await ensureFriendCode();
       await processFriendAndBonus(state.code, t, setState);
     } catch (e) {

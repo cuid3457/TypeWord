@@ -92,7 +92,7 @@ export function ProfileSetupModal({
 
   // Debounced server-side validation when username changes.
   const runValidation = useCallback(async (value: string) => {
-    if (!value || value.length < 3) {
+    if (!value || value.length < 4) {
       setValidation({ phase: 'idle' });
       return;
     }
@@ -121,17 +121,21 @@ export function ProfileSetupModal({
     if (!canSave) return;
     setSaving(true);
     try {
-      // Display name first (cheap profiles update). If username conflicts in
-      // the race window we still persist the display name change — that's a
-      // fine outcome.
-      await setDisplayName(displayName.trim());
+      // Display name goes through the moderated edge function (blocklist
+      // + OpenAI moderation), same gate as username.
+      const dnResult = await setDisplayName(displayName.trim());
+      if (!dnResult.ok) {
+        setValidation({ phase: 'error', code: dnResult.code === 'blocklist_match' || dnResult.code === 'moderation_flagged' ? 'blocklist_match' : (dnResult.code ?? 'invalid_format') });
+        setSaving(false);
+        return;
+      }
       const result = await setUsername(username);
       if (!result.ok) {
         setValidation({ phase: 'error', code: result.code ?? 'taken' });
         setSaving(false);
         return;
       }
-      onSaved({ displayName: displayName.trim(), username: result.normalized ?? username });
+      onSaved({ displayName: dnResult.normalized ?? displayName.trim(), username: result.normalized ?? username });
     } catch {
       // silent — keep modal open so user can retry
     } finally {

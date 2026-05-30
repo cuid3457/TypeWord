@@ -5,6 +5,8 @@ import { ActivityIndicator, Pressable, Text, TextInput } from 'react-native';
 import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { setDisplayName } from '@src/services/friendsService';
 
+type ErrorCode = 'blocklist_match' | 'moderation_flagged' | 'too_short' | 'too_long' | 'other' | null;
+
 /**
  * Required nickname-collection modal. Shown lazily at the first action
  * that needs a public-facing name (currently community wordlist upload;
@@ -27,24 +29,46 @@ export function NicknameModal({
   const { t } = useTranslation();
   const [name, setName] = useState(initialName ?? '');
   const [saving, setSaving] = useState(false);
+  const [errCode, setErrCode] = useState<ErrorCode>(null);
 
   useEffect(() => {
-    if (visible) setName(initialName ?? '');
+    if (visible) {
+      setName(initialName ?? '');
+      setErrCode(null);
+    }
   }, [visible, initialName]);
 
   const submit = async () => {
     const trimmed = name.trim();
     if (!trimmed || saving) return;
     setSaving(true);
+    setErrCode(null);
     try {
-      await setDisplayName(trimmed);
-      onSaved(trimmed);
-    } catch {
-      // silent — user can retry; cancel is also available
+      const result = await setDisplayName(trimmed);
+      if (!result.ok) {
+        const c = result.code;
+        setErrCode(
+          c === 'blocklist_match' || c === 'moderation_flagged'
+            ? 'blocklist_match'
+            : c === 'too_short' || c === 'too_long'
+              ? c
+              : 'other',
+        );
+        return;
+      }
+      onSaved(result.normalized ?? trimmed);
     } finally {
       setSaving(false);
     }
   };
+
+  const errorMessage = (() => {
+    if (!errCode) return null;
+    if (errCode === 'blocklist_match') return t('nickname_modal.error_inappropriate');
+    if (errCode === 'too_long') return t('nickname_modal.error_too_long');
+    if (errCode === 'too_short') return t('nickname_modal.error_too_short');
+    return t('nickname_modal.error_generic');
+  })();
 
   return (
     <BottomSheetShell visible={visible} onRequestClose={onCancel} animationType="fade">
@@ -58,13 +82,16 @@ export function NicknameModal({
           </Text>
           <TextInput
             value={name}
-            onChangeText={setName}
+            onChangeText={(v) => { setErrCode(null); setName(v); }}
             placeholder={t('nickname_modal.placeholder')}
             placeholderTextColor="#A79E90"
             maxLength={20}
             autoFocus
             className="mt-4 rounded-xl border border-line px-4 py-3 text-base text-ink dark:border-line-dark dark:text-ink-dark"
           />
+          {errorMessage ? (
+            <Text className="mt-2 text-xs text-danger">{errorMessage}</Text>
+          ) : null}
           <Pressable
             onPress={submit}
             disabled={!name.trim() || saving}
