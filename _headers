@@ -11,9 +11,12 @@
 #                       load no external resources, so they get a strict
 #                       lock-down CSP that overrides the /* CSP.
 #
-# Before shipping AdSense / a web payment SDK, add an explicit script-src +
-# connect-src + frame-src CSP scoped to /app/* and TEST the SPA against it
-# (see project_web_adsense_plan memory).
+# The Expo Web SPA at /app/* still gets the lax /* CSP. When adding AdSense
+# ads to the SPA itself, add an explicit script-src + connect-src + frame-src
+# CSP scoped to /app/* and TEST the SPA against it (see project_web_adsense_plan).
+#
+# AdSense verification is hosted on / (index.html) — CSP for that path
+# allowlists googlesyndication / doubleclick / adtrafficquality.
 
 /*
   X-Frame-Options: DENY
@@ -24,10 +27,10 @@
   Content-Security-Policy: frame-ancestors 'none'; object-src 'none'; base-uri 'self'
 
 /
-  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:; font-src https://cdn.jsdelivr.net; connect-src https://cloudflareinsights.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com; font-src https://cdn.jsdelivr.net; connect-src https://cloudflareinsights.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:; font-src https://cdn.jsdelivr.net; connect-src https://cloudflareinsights.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' https://static.cloudflareinsights.com https://pagead2.googlesyndication.com https://*.googlesyndication.com; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com; font-src https://cdn.jsdelivr.net; connect-src https://cloudflareinsights.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.googlesyndication.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
 
 /privacy.html
   Content-Security-Policy: default-src 'none'; script-src 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:; font-src https://cdn.jsdelivr.net; connect-src https://cloudflareinsights.com; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
