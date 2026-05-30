@@ -1,0 +1,45 @@
+# Pre-launch lockdown — block all crawlers until production is ready.
+#
+# To unlock when launching:
+#   1. Replace "Disallow: /" with "Allow: /" for the wildcard rule
+#      (and delete the named AI crawler blocks if you want them allowed too)
+#   2. Uncomment the Sitemap line below
+#   3. Remove <meta name="robots" content="noindex, nofollow"> from index.html
+#   4. Push.
+
+User-agent: *
+Disallow: /
+
+# Major AI / LLM crawlers — explicit block (some bots check their named
+# user-agent first and may ignore the wildcard).
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: Omgilibot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+# Sitemap: https://moavoca.com/sitemap.xml

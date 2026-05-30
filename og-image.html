@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MoaVoca — OG Image Template (1200×630)</title>
+<!--
+  How to export this as og-image.png (1200×630)
+  ─────────────────────────────────────────────
+  EASIEST (Chrome / Edge — recommended):
+    1. Open this file in the browser.
+    2. Open DevTools (Cmd+Opt+I).
+    3. In the Elements panel, right-click the <div class="canvas"> node.
+    4. Choose "Capture node screenshot" → PNG saves at exactly 1200×630.
+    5. Rename to og-image.png and put it in TypeWord/ (same folder as
+       index.html). Deploy.
+
+  ALTERNATIVE (any browser):
+    1. Open DevTools → toggle device toolbar (Cmd+Shift+M).
+    2. Set viewport to 1200 × 630, scale 100%.
+    3. Use the "Capture screenshot" option in the device toolbar's "..." menu.
+
+  After deploy, verify the preview renders correctly:
+    https://www.opengraph.xyz/  (paste moavoca.com)
+-->
+<link rel="stylesheet" as="style" crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #F4F1EA;
+    color: #2A2620;
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .canvas {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 80px;
+    text-align: center;
+  }
+  .wordmark {
+    font-size: 140px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 56px;
+  }
+  .wordmark .accent { color: #2EC4A5; }
+  .wordmark .dot {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #2EC4A5;
+    margin-left: 10px;
+    vertical-align: baseline;
+    transform: translateY(-5px);
+  }
+  .headline {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    max-width: 980px;
+  }
+  .subline {
+    font-size: 28px;
+    font-weight: 500;
+    color: #7B7366;
+    letter-spacing: 0.01em;
+  }
+  .url {
+    position: absolute;
+    bottom: 36px;
+    right: 48px;
+    font-size: 22px;
+    font-weight: 500;
+    color: #A79E90;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="wordmark">Moa<span class="accent">Voca</span><span class="dot"></span></div>
+  <div class="headline">The words you actually remember.</div>
+  <div class="subline">Spaced repetition · 8 languages</div>
+  <div class="url">moavoca.com</div>
+</div>
+</body>
+</html>
