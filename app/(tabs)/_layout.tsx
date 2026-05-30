@@ -1,6 +1,6 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Tabs, useFocusEffect } from 'expo-router';
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -172,6 +172,9 @@ export default function TabLayout() {
   const [notificationCount, setNotificationCount] = useState(0);
   const [tabBarHidden, setTabBarHidden] = useState(false);
   const insets = useSafeAreaInsets();
+  // Hydration guard for viewport-dependent rendering — see isWebTop below.
+  const [isHydrated, setIsHydrated] = useState(false);
+  useEffect(() => { setIsHydrated(true); }, []);
 
   const tabBarVisibility = useMemo(
     () => ({ hidden: tabBarHidden, setHidden: setTabBarHidden }),
@@ -216,7 +219,14 @@ export default function TabLayout() {
   // Native always uses the bottom bar with the ad slot.
   const isWeb = Platform.OS === 'web';
   const { isTablet: isWideViewport } = useTablet();
-  const isWebTop = isWeb && isWideViewport;
+  // SSR consideration: useTablet → useWindowDimensions has no real value
+  // during expo static export, so isWideViewport is always false at SSR.
+  // Without the isHydrated guard, the first client render on desktop would
+  // swap renderTabBar from <BottomTabBar/> (SSR) to <WebTopTabBar/> →
+  // React hydration mismatch (#418). Gate on isHydrated so the first
+  // client render matches SSR; the useEffect then swaps in the desktop
+  // top bar on the second render.
+  const isWebTop = isHydrated && isWeb && isWideViewport;
 
   const renderTabBar = useCallback(
     (props: BottomTabBarProps) => {
