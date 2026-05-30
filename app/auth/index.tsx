@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -54,6 +54,22 @@ export default function AuthScreen() {
   const [signedUpEmail, setSignedUpEmail] = useState<string | null>(null);
   const [resending, setResending] = useState(false);
 
+  // Optional ?next=<path> support so a CTA like
+  //   router.push('/auth?next=/wordlist/abc/add')
+  // returns the user to where they came from after sign-in. Only same-origin
+  // paths are honored (must start with "/" and not "//") to block open-redirect.
+  // NB: email-signup flow goes through a confirm-email deep-link, which still
+  // routes to /(tabs)/settings in _layout.tsx — next is only honored for the
+  // synchronous flows (email login + Google + Apple).
+  const params = useLocalSearchParams();
+  const nextRaw = typeof params.next === 'string' ? params.next : null;
+  const nextPath =
+    nextRaw && nextRaw.startsWith('/') && !nextRaw.startsWith('//') ? nextRaw : null;
+  const goAfterAuth = () => {
+    if (nextPath) router.replace(nextPath);
+    else router.back();
+  };
+
   const showToast = (msg: string, type: 'error' | 'success' = 'error') => {
     setToast({ message: msg, type });
   };
@@ -100,7 +116,7 @@ export default function AuthScreen() {
           setSignedUpEmail(email.trim());
           showToast(t('auth.verify_email'), 'success');
         } else {
-          router.back();
+          goAfterAuth();
         }
       }
     } catch (err) {
@@ -149,7 +165,7 @@ export default function AuthScreen() {
                 if (result.error) {
                   if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
                 } else {
-                  router.back();
+                  goAfterAuth();
                 }
               } catch (err) {
                 setGoogleLoading(false);
@@ -199,7 +215,7 @@ export default function AuthScreen() {
                   if (result.error) {
                     if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
                   } else {
-                    router.back();
+                    goAfterAuth();
                   }
                 } catch (err) {
                   setAppleLoading(false);
@@ -217,7 +233,7 @@ export default function AuthScreen() {
                   if (result.error) {
                     if (result.error !== 'cancelled') showToast(t(mapAuthError(result.error)));
                   } else {
-                    router.back();
+                    goAfterAuth();
                   }
                 } catch (err) {
                   setAppleLoading(false);

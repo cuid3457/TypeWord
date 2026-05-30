@@ -199,6 +199,7 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
+    const LAST_USER_KEY = 'typeword.lastSignedInUserId';
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         // User-switch guard: if the new session is a different user than
@@ -213,6 +214,7 @@ export default function RootLayout() {
         // Async, but kicked off before syncAll so the clear completes
         // first. We chain syncAll inside the .then to preserve order.
         const newUserId = session?.user?.id ?? null;
+        const newUserIsAnonymous = !!session?.user?.is_anonymous;
         const initAndSync = (async () => {
           // User-switch wipe: OAuth popup sign-in replaces the session
           // in place without emitting SIGNED_OUT, so clearLocalData()
@@ -226,12 +228,17 @@ export default function RootLayout() {
           // following call became `undefined()` → TypeError caught by the
           // root ErrorBoundary, blanking every screen mounted afterward.
           try {
-            const LAST_USER_KEY = 'typeword.lastSignedInUserId';
             const prevUserId = await AsyncStorage.getItem(LAST_USER_KEY);
             if (newUserId && prevUserId && prevUserId !== newUserId) {
               await clearLocalData();
             }
-            if (newUserId) await AsyncStorage.setItem(LAST_USER_KEY, newUserId);
+            // Only stamp LAST_USER_KEY for real (non-anonymous) sessions.
+            // Storing the anonymous UUID would cause the NEXT real sign-in
+            // (= account creation from anon) to be treated as a user-switch
+            // and wipe the SQLite work the user just did anonymously.
+            if (newUserId && !newUserIsAnonymous) {
+              await AsyncStorage.setItem(LAST_USER_KEY, newUserId);
+            }
           } catch (err) {
             captureError(err, { service: '_layout', fn: 'signedIn:userSwitchGuard' });
           }
@@ -290,6 +297,10 @@ export default function RootLayout() {
       if (event === 'SIGNED_OUT') {
         setUser(null);
         resetUser().catch(captureError);
+        // Clear LAST_USER_KEY so a subsequent anon→signup flow doesn't
+        // trigger the user-switch wipe (which would destroy any anonymous
+        // work the user does between this signOut and the next signup).
+        AsyncStorage.removeItem(LAST_USER_KEY).catch(() => {});
         // Drop in-memory module-level state that survives signOut
         // because AsyncStorage clears don't touch JS module caches.
         // xpService's `_total` was the visible bug: after Google
