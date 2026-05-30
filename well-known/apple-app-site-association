@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "5UDNYL5YTJ.app.typeword.app",
+        "paths": ["/app/invite/*"]
+      }
+    ]
+  }
+}

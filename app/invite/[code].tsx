@@ -9,9 +9,10 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Pressable, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Linking, Platform, Pressable, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Clipboard from 'expo-clipboard';
 
 import { TabletContainer } from '@/components/tablet-container';
 import { supabase } from '@src/api/supabase';
@@ -151,31 +152,7 @@ export default function InviteScreen() {
       ) : state.kind === 'needs_name' ? (
         <NicknameStep onSubmit={submitName} t={t} />
       ) : state.kind === 'needs_signup' ? (
-        <View className="items-center">
-          <View className="rounded-full bg-blue-100 p-4 dark:bg-blue-900">
-            <MaterialIcons name="person-add" size={48} color="#3b82f6" />
-          </View>
-          <Text className="mt-4 text-center text-2xl font-bold text-ink dark:text-ink-dark">
-            {t('invite.signup_title')}
-          </Text>
-          <Text className="mt-2 text-center text-base text-muted">
-            {t('invite.signup_message', { code: state.code })}
-          </Text>
-          <Pressable
-            onPress={() => router.replace('/auth')}
-            className="mt-8 rounded-xl bg-ink px-8 py-4 dark:bg-ink-dark"
-          >
-            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
-              {t('invite.signup_cta')}
-            </Text>
-          </Pressable>
-          <Pressable
-            onPress={() => router.replace('/(tabs)')}
-            className="mt-3 px-4 py-2"
-          >
-            <Text className="text-sm text-muted">{t('common.skip')}</Text>
-          </Pressable>
-        </View>
+        <NeedsSignupView code={state.code} t={t} />
       ) : (
         <View className="items-center">
           <View className="rounded-full bg-danger-soft p-4 dark:bg-danger-soft-dark">
@@ -199,6 +176,121 @@ export default function InviteScreen() {
       )}
       </TabletContainer>
     </SafeAreaView>
+  );
+}
+
+// Shown when the invite link was opened by a guest. Mobile guests can sign
+// up in-app (auto-applies the pending invite after auth). Web visitors who
+// landed here from a shared link see the App Store / Play badges + the
+// visible code, since there's no app session to bounce them to.
+function NeedsSignupView({
+  code,
+  t,
+}: {
+  code: string;
+  t: (key: string, opts?: Record<string, unknown>) => string;
+}) {
+  const isWeb = Platform.OS === 'web';
+  const [copied, setCopied] = useState(false);
+
+  const onCopy = async () => {
+    try {
+      await Clipboard.setStringAsync(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* ignore */ }
+  };
+
+  const openStore = (target: 'ios' | 'android') => {
+    Linking.openURL(`https://moavoca.com/get/${target}`).catch(() => { /* no-op */ });
+  };
+
+  return (
+    <View className="w-full max-w-sm items-center">
+      <View className="rounded-full bg-accent-soft p-4 dark:bg-accent-soft-dark">
+        <MaterialIcons name="card-giftcard" size={48} color="#2EC4A5" />
+      </View>
+      <Text className="mt-4 text-center text-2xl font-bold text-ink dark:text-ink-dark">
+        {t('invite.signup_title')}
+      </Text>
+
+      {/* Always-visible code block — works whether user signs up here or
+          copies the code and pastes it manually in-app after install. */}
+      <Pressable
+        onPress={onCopy}
+        className="mt-6 w-full items-center rounded-xl border border-line bg-canvas p-4 dark:border-line-dark dark:bg-canvas-dark"
+        accessibilityRole="button"
+        accessibilityLabel={t('common.copy')}
+      >
+        <Text className="text-xs text-muted">{t('invite.code_label')}</Text>
+        <Text className="mt-1 text-3xl font-bold tracking-[6px] text-ink dark:text-ink-dark">
+          {code}
+        </Text>
+        <View className="mt-2 flex-row items-center">
+          <MaterialIcons
+            name={copied ? 'check' : 'content-copy'}
+            size={14}
+            color={copied ? '#2EC4A5' : '#7B7366'}
+          />
+          <Text className={`ml-1 text-xs ${copied ? 'text-accent-deep' : 'text-muted'}`}>
+            {copied ? t('common.copied') : t('common.copy')}
+          </Text>
+        </View>
+      </Pressable>
+
+      {isWeb ? (
+        <View className="mt-6 w-full">
+          <Text className="text-center text-sm text-muted">
+            {t('invite.download_app')}
+          </Text>
+          <View className="mt-3 flex-row gap-2">
+            <Pressable
+              onPress={() => openStore('ios')}
+              className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
+              accessibilityRole="button"
+            >
+              <Text className="text-xs text-muted">Download on the</Text>
+              <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                App Store
+              </Text>
+            </Pressable>
+            <Pressable
+              onPress={() => openStore('android')}
+              className="flex-1 items-center rounded-xl border border-line py-3 dark:border-line-dark"
+              accessibilityRole="button"
+            >
+              <Text className="text-xs text-muted">Get it on</Text>
+              <Text className="text-sm font-semibold text-ink dark:text-ink-dark">
+                Google Play
+              </Text>
+            </Pressable>
+          </View>
+          <Text className="mt-4 text-center text-xs text-muted">
+            {t('invite.enter_code_after_install')}
+          </Text>
+        </View>
+      ) : (
+        <>
+          <Text className="mt-3 text-center text-sm text-muted">
+            {t('invite.signup_message', { code })}
+          </Text>
+          <Pressable
+            onPress={() => router.replace('/auth')}
+            className="mt-6 w-full items-center rounded-xl bg-ink py-4 dark:bg-ink-dark"
+          >
+            <Text className="text-base font-semibold text-canvas dark:text-canvas-dark">
+              {t('invite.signup_cta')}
+            </Text>
+          </Pressable>
+          <Pressable
+            onPress={() => router.replace('/(tabs)')}
+            className="mt-3 px-4 py-2"
+          >
+            <Text className="text-sm text-muted">{t('common.skip')}</Text>
+          </Pressable>
+        </>
+      )}
+    </View>
   );
 }
 

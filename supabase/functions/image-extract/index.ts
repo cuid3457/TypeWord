@@ -177,15 +177,23 @@ Deno.serve(async (req: Request) => {
   // if timezone not set. Refunds on OpenAI-side failure (see catch block).
   const { data: profile } = await admin
     .from("profiles")
-    .select("plan, timezone")
+    .select("plan, bonus_premium_until, timezone")
     .eq("user_id", userId)
     .single();
 
   const userTimezone = profile?.timezone ?? "UTC";
-  const limit = imageLimitForPlan(profile?.plan);
+  // Referral bonus_premium_until upgrades free → premium for the duration
+  // of the bonus window, matching the client tier computer in
+  // subscriptionService._computeTier.
+  const bonusActive =
+    typeof profile?.bonus_premium_until === "string" &&
+    Date.parse(profile.bonus_premium_until) > Date.now();
+  const effectivePlan = bonusActive ? "premium" : profile?.plan;
+  const limit = imageLimitForPlan(effectivePlan);
   console.log("[image-extract] profile loaded", {
     userId,
     plan: profile?.plan,
+    bonusActive,
     timezone: userTimezone,
     limit,
   });

@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.typeword.app",
+      "sha256_cert_fingerprints": [
+        "47:3A:7A:99:D2:2C:5E:3C:9A:67:69:6D:E7:76:62:02:7A:2A:CB:6E:71:D5:0A:BD:51:4C:33:3A:DE:45:2F:BB"
+      ]
+    }
+  }
+]

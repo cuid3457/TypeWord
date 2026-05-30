@@ -12,6 +12,13 @@
 #
 # Order matters — most specific first.
 
+# Store download redirects. Stable URLs the invite page links to —
+# easier to keep up to date than hardcoded store URLs scattered in code.
+# After the iOS App Store listing goes live, update /get/ios below with
+# the real apps.apple.com/app/id<ID> URL.
+/get/android  https://play.google.com/store/apps/details?id=app.typeword.app  302
+/get/ios      https://apps.apple.com/app/moavoca/id6749999999                 302
+
 # SPA mode (app.json web.output = "single"): expo emits a single
 # /app/index.html shell and the router does all path matching client-side.
 # CF Pages serves real static files first (e.g. /app/_expo/static/js/...),

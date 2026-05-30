@@ -2,7 +2,7 @@
   "expo": {
     "name": "MoaVoca",
     "slug": "typeword",
-    "version": "1.0.0",
+    "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "typeword",
@@ -20,7 +20,21 @@
       "package": "app.typeword.app",
       "allowBackup": false,
       "googleServicesFile": "./android/app/google-services.json",
-      "permissions": ["com.android.vending.BILLING"]
+      "permissions": ["com.android.vending.BILLING"],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "moavoca.com",
+              "pathPrefix": "/app/invite"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "ios": {
       "supportsTablet": true,
@@ -28,6 +42,7 @@
       "buildNumber": "9",
       "appleTeamId": "5UDNYL5YTJ",
       "usesAppleSignIn": true,
+      "associatedDomains": ["applinks:moavoca.com"],
       "googleServicesFile": "./ios/TypeWord/GoogleService-Info.plist",
       "infoPlist": {
         "NSUserTrackingUsageDescription": "This identifier will be used to deliver personalized ads to you.",
