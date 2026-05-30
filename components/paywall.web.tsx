@@ -99,15 +99,17 @@ export function Paywall() {
 
       <TabletContainer>
       {/* Header */}
-      <View className="flex-row items-center px-4 py-2">
-        <Pressable
-          onPress={closePage}
-          className="p-2"
-          accessibilityLabel={t('common.back')}
-          accessibilityRole="button"
-        >
-          <MaterialIcons name="arrow-back" size={24} color={dark ? '#fff' : '#000'} />
-        </Pressable>
+      <View style={{ paddingTop: 24, paddingHorizontal: 24 }}>
+        <View className="mb-4 h-11 flex-row items-center">
+          <Pressable
+            onPress={closePage}
+            className="mr-2 p-1"
+            accessibilityLabel={t('common.back')}
+            accessibilityRole="button"
+          >
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+          </Pressable>
+        </View>
       </View>
 
       <ScrollView
