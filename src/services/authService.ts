@@ -1,11 +1,12 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
-import { Alert, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import i18n from 'i18next';
 
 import { supabase } from '@src/api/supabase';
 import { getUserSettings } from '@src/storage/userSettings';
+import { showAppConfirm } from './appModalHost';
 import { setUser } from './sentry';
 
 const REDIRECT_URL = 'typeword://auth/callback';
@@ -670,25 +671,24 @@ export async function confirmAndSetSessionFromDeepLink(
   };
   const displayEmail = newEmail || t('auth.unknown_email', 'unknown');
 
-  const confirmed = await new Promise<boolean>((resolve) => {
-    const isSwitch = !!currentUserId && !currentIsAnon && currentEmail !== newEmail;
-    const title = isSwitch
-      ? t('auth.deeplink_switch_title', 'Switch account?')
-      : t('auth.deeplink_signin_title', 'Sign in?');
-    const message = isSwitch
-      ? t('auth.deeplink_switch_message', `You are signed in as ${currentEmail}. Switch to ${displayEmail}?`)
-          .replace('{current}', currentEmail ?? '')
-          .replace('{next}', displayEmail)
-      : t('auth.deeplink_signin_message', `Sign in as ${displayEmail}?`)
-          .replace('{email}', displayEmail);
-    Alert.alert(title, message, [
-      { text: t('settings.cancel', 'Cancel'), style: 'cancel', onPress: () => resolve(false) },
-      {
-        text: isSwitch ? t('auth.deeplink_switch_confirm', 'Switch') : t('auth.deeplink_signin_confirm', 'Sign In'),
-        style: isSwitch ? 'destructive' : 'default',
-        onPress: () => resolve(true),
-      },
-    ], { cancelable: true, onDismiss: () => resolve(false) });
+  const isSwitch = !!currentUserId && !currentIsAnon && currentEmail !== newEmail;
+  const title = isSwitch
+    ? t('auth.deeplink_switch_title', 'Switch account?')
+    : t('auth.deeplink_signin_title', 'Sign in?');
+  const message = isSwitch
+    ? t('auth.deeplink_switch_message', `You are signed in as ${currentEmail}. Switch to ${displayEmail}?`)
+        .replace('{current}', currentEmail ?? '')
+        .replace('{next}', displayEmail)
+    : t('auth.deeplink_signin_message', `Sign in as ${displayEmail}?`)
+        .replace('{email}', displayEmail);
+  const confirmed = await showAppConfirm({
+    title,
+    message,
+    cancelText: t('settings.cancel', 'Cancel'),
+    confirmText: isSwitch
+      ? t('auth.deeplink_switch_confirm', 'Switch')
+      : t('auth.deeplink_signin_confirm', 'Sign In'),
+    destructive: isSwitch,
   });
 
   if (!confirmed) return { applied: false };

@@ -35,6 +35,7 @@ import MaterialIconsFont from '@expo/vector-icons/build/vendor/react-native-vect
 
 SplashScreen.preventAutoHideAsync();
 
+import { AppModalHost } from '@/components/app-modal-host';
 import { ComebackBoostModal } from '@/components/comeback-boost-modal';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { OfflineBanner } from '@/components/offline-banner';
@@ -541,6 +542,7 @@ export default function RootLayout() {
           onClose={() => setShowComebackBoost(false)}
         />
         <SplashOverlay />
+        <AppModalHost />
         <StatusBar style="auto" />
       </ThemeProvider>
     </ErrorBoundary>
