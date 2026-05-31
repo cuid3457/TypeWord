@@ -104,26 +104,32 @@ export async function getWeeklyRecap(): Promise<WeeklyRecap> {
   const db = await getDb();
   const now = new Date();
   const dayOfWeek = now.getDay();
-  const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  // Recap the most recently *completed* week so the numbers don't
+  // collapse to zero the moment a new week starts. Sunday is treated
+  // as the closing day of the current week (recap = this Mon → today).
+  // Mon–Sat already belong to a new week, so we roll back to the
+  // previous Monday (recap = last Mon → last Sun).
+  const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek + 6;
   const monday = new Date(now);
   monday.setDate(monday.getDate() - daysSinceMonday);
   monday.setHours(4, 0, 0, 0);
   const startMs = monday.getTime();
+  const endMs = startMs + 7 * 24 * 60 * 60 * 1000;
 
   const reviewedRow = await db.getFirstAsync<{ cnt: number }>(
-    `SELECT COUNT(*) as cnt FROM user_words WHERE updated_at >= ? AND review_count > 0`,
-    [startMs],
+    `SELECT COUNT(*) as cnt FROM user_words WHERE updated_at >= ? AND updated_at < ? AND review_count > 0`,
+    [startMs, endMs],
   );
   const addedRow = await db.getFirstAsync<{ cnt: number }>(
-    `SELECT COUNT(*) as cnt FROM user_words WHERE created_at >= ?`,
-    [startMs],
+    `SELECT COUNT(*) as cnt FROM user_words WHERE created_at >= ? AND created_at < ?`,
+    [startMs, endMs],
   );
   const hardestRows = await db.getAllAsync<{ word: string }>(
     `SELECT word FROM user_words
-     WHERE updated_at >= ? AND review_count > 0
+     WHERE updated_at >= ? AND updated_at < ? AND review_count > 0
      ORDER BY ease_factor ASC, updated_at DESC
      LIMIT 3`,
-    [startMs],
+    [startMs, endMs],
   );
 
   const streak = await getStreak();
