@@ -82,6 +82,7 @@ export async function syncAll(): Promise<void> {
 
     const pendingDeleteIds = await getPendingDeleteIds();
     await pullBooks(since, pendingDeleteIds);
+    await reconcileBookDeletes(pendingDeleteIds);
     await pullWords(since, pendingDeleteIds);
     await pullStudyDates(since);
     // pullCacheUpdates removed 2026-05-14 — v1's check_word_updates RPC
@@ -395,6 +396,51 @@ async function pullBooks(since: string, pendingDeleteIds: Set<string>) {
     if (data.length < PULL_PAGE_SIZE) break;
     from += PULL_PAGE_SIZE;
   }
+}
+
+// Reconcile local books against the server's authoritative list. Without
+// this, a delete on device A propagates to the server (hard delete) but
+// device B's local DB keeps the row forever because pullBooks only fetches
+// rows with `updated_at > since` — server has no tombstone to broadcast.
+//
+// Cheap query: SELECT id WHERE user_id = me, paginated. Books are usually
+// well under 100/user so this is sub-100ms total. We DON'T do the
+// equivalent pass for user_words yet (could be 1000+ rows; bulk-delete on
+// one device propagates via the parent book reconcile below — orphaned
+// rows get cascaded as soon as the book disappears locally).
+async function reconcileBookDeletes(pendingDeleteIds: Set<string>) {
+  const userId = await getSessionUserId();
+  if (!userId) return;
+  const db = await getDb();
+
+  const serverIds = new Set<string>();
+  let from = 0;
+  while (true) {
+    await getSessionUserId(); // abort if session swapped mid-sync
+    const { data } = await supabase
+      .from('books')
+      .select('id')
+      .eq('user_id', userId)
+      .range(from, from + PULL_PAGE_SIZE - 1);
+    if (!data || data.length === 0) break;
+    for (const row of data) serverIds.add(row.id);
+    if (data.length < PULL_PAGE_SIZE) break;
+    from += PULL_PAGE_SIZE;
+  }
+
+  const localBooks = await db.getAllAsync<{ id: string }>('SELECT id FROM books');
+  const stale: string[] = [];
+  for (const { id } of localBooks) {
+    if (!serverIds.has(id) && !pendingDeleteIds.has(id)) stale.push(id);
+  }
+  if (stale.length === 0) return;
+
+  // Cascade: kill the book's words first, then the book row itself.
+  for (const id of stale) {
+    await db.runAsync('DELETE FROM user_words WHERE book_id = ?', [id]);
+    await db.runAsync('DELETE FROM books WHERE id = ?', [id]);
+  }
+  console.log(`[sync] reconciled ${stale.length} stale local books`);
 }
 
 async function pullWords(since: string, pendingDeleteIds: Set<string>) {
