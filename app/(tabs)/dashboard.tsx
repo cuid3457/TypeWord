@@ -385,10 +385,11 @@ export default function DashboardScreen() {
               </Pressable>
             ) : null}
 
-            {/* Weekly recap card — surfaces only on Sundays so the user
-                gets a once-a-week "what you did this week" moment that
-                doubles as a share hook. */}
-            {new Date().getDay() === 0 ? (
+            {/* Weekly recap card — surfaces Sun + Mon so the wrap-up
+                moment doubles as a share hook AND users who missed it
+                Sunday still see it Monday. Tue–Sat is heads-down
+                learning, no recap noise. */}
+            {(() => { const d = new Date().getDay(); return d === 0 || d === 1; })() ? (
               <Pressable
                 onPress={() => { haptic.tap(); router.push('/weekly-recap'); }}
                 accessibilityRole="button"
