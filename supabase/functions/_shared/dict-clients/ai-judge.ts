@@ -38,7 +38,24 @@ const SCORE_MAX_SENSES = 60;
 // we actually translate + show. This bounds the expensive translate output
 // AND the learner card length. Senses are sorted by score desc before this
 // cut, so we keep the most common meanings regardless of dict order.
-const TRANSLATE_MAX_SENSES = 5;
+//
+// 2026-05-31: Lowered 5 → 4. Policy: show only "truly-everyday distinct
+// meanings". For "배" we want 신체/탈것/과일/배수 — and never more than 4
+// even when the dict ships a richer polysemy (zh "上" 20+ senses → top 4
+// only). Cap is upper bound, not target: a single-meaning word stays 1.
+const TRANSLATE_MAX_SENSES = 4;
+
+// POLYSEMY_FREQ_FLOOR — on a polysemous headword (more than one branch
+// surviving) require each kept sense to clear an "everyday" frequency bar.
+// Suppresses rare literary/technical/archaic homonyms (zh "上" classical
+// poetic shades, ja archaic readings) while keeping the four 일상 meanings
+// of "배" (신체/탈것/과일/배수 — LLM scores these 50–80).
+//
+// 50 chosen empirically: krdict initial-meaning examples land 70–90,
+// secondary daily meanings 50–70, archaic/literary 30–45. Floor at 50 keeps
+// the daily set without admitting "occasional formal" senses. Combined with
+// MAX_SENSES=4 it caps cards even when several senses clear the floor.
+const POLYSEMY_FREQ_FLOOR = 50;
 
 // SOURCE_DEF can be a long encyclopedic gloss. The judge only needs enough
 // to gauge frequency + produce a short translation, so truncate to keep the
@@ -252,12 +269,15 @@ function selectKept(
   sourceLang: string,
   source: string | undefined,
 ): Array<{ sense: DictSense; score: number; idx: number }> {
-  // For krdict/jmdict/cedict/freedict the sense_id prefix is the dictionary
-  // ENTRY (one etymology / homonym): branch by it so the non-deterministic LLM
-  // branch can never merge two distinct homonyms (the "배 pear disappears" bug).
-  // Wiktionary's prefix is unique per sense, so there the LLM branch is the only
-  // grouping signal (power: ability / authority / force → distinct cards).
-  const prefixIsEntry = source !== "wiktionary";
+  // Only krdict/freedict ship one dictionary entry per homonym, so their
+  // sense_id prefix IS a meaningful homonym signal — group by it.
+  //
+  // JMdict/CC-CEDICT pack every meaning of a headword into a single entry
+  // (jmdict_seq / cedict row), so the prefix is constant across senses and
+  // would collapse all senses into one rep. Use the LLM branch instead.
+  // Wiktionary's per-sense prefix is unique by construction; LLM branch is
+  // the only useful signal there too.
+  const prefixIsEntry = source === "krdict" || source === "freedict";
   // Bound/grammatical morpheme (Korean 조사/어미/접사/보조) — exempt from the
   // grade-survival floor so low-value ones (배 무리-접미사) can still drop.
   const isBoundPos = (pos?: string) => /조사|어미|접사|보조/.test(pos ?? "");
@@ -267,11 +287,13 @@ function selectKept(
     const r = signalByIdx[String(i)];
     const llmScore = r?.score ?? 0;
     const base = gradeBaseline(s.grade);
-    let score = base !== null ? Math.round(base + (llmScore - 50) * 0.3) : llmScore;
-    // krdict word_grade is authoritative: a graded CONTENT word can't be dropped
-    // by an LLM under-score (배/double blends to 29, one point under threshold),
-    // so floor its survival at the grade baseline; the LLM nudge only ranks up.
-    if (base !== null && !isBoundPos(s.pos)) score = Math.max(score, base);
+    // Score = LLM's frequency_score (the authority), with grade providing a
+    // safety floor so a single LLM under-score can't drop a common graded
+    // content word. The LLM is trusted to RANK UP (배/pear advanced but
+    // daily → LLM 80 wins over grade 38); grade only prevents downside.
+    let score = base !== null && !isBoundPos(s.pos)
+      ? Math.max(llmScore, base)
+      : llmScore;
     if (score < FREQ_THRESHOLD) return;
     const branchKey = prefixIsEntry ? `e:${s.sense_id.split(":")[0]}` : `b:${r?.branch ?? 1000 + i}`;
     survivors.push({ sense: s, score, branchKey, idx: i });
@@ -306,13 +328,18 @@ function selectKept(
   const contentReps = allReps.filter((r) => !isKoAuxOrDep(r.sense.pos));
   const reps = contentReps.length > 0 ? contentReps : allReps;
 
-  // 고급(advanced) gate: on a POLYSEMOUS word (>2 meanings) drop advanced-grade
-  // homonyms so rare ones (눈 그물눈/새싹눈, 배 double) don't clutter the everyday
-  // ones; on a few-meaning word — or one with no common meaning (심오하다) — keep
-  // them so the card isn't sparse/empty. Advanced grade exists only in krdict.
-  const isAdvanced = (grade?: string) => (grade ?? "").includes("고급");
-  const coreReps = reps.filter((r) => !isAdvanced(r.sense.grade));
-  const selected = reps.length <= 2 || coreReps.length === 0 ? reps : coreReps;
+  // Polysemy frequency gate: when a word has multiple distinct branches
+  // (homonym/polysemy), keep only senses scoring at or above the everyday
+  // floor. This is purely score-based — grade no longer cuts directly
+  // (the score formula already factored it as a baseline). A daily-frequent
+  // advanced-graded sense (배 pear scoring 75) passes; an obscure mid-grade
+  // sense scoring 45 does not. Single-meaning words bypass (would have one
+  // rep anyway).
+  const everyday = reps.filter((r) => r.score >= POLYSEMY_FREQ_FLOOR);
+  // If gate would erase EVERY sense (the word has no everyday meaning, e.g.
+  // an entirely literary/technical headword), fall back to the un-gated reps
+  // so the card isn't empty. This is the "심오하다 stays" exception.
+  const selected = everyday.length === 0 ? reps : everyday;
 
   return selected.sort((a, b) => b.score - a.score).slice(0, TRANSLATE_MAX_SENSES);
 }

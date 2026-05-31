@@ -19,6 +19,7 @@ const listeners = new Set<Listener>();
 let _rcTier: Tier = 'free';
 let _serverTier: Tier = 'free'; // profiles.plan — captures web Paddle subs that RC doesn't see
 let _bonusUntilMs = 0; // epoch ms; treated as premium when now() <= this (referral bonus)
+let _subscriptionSource: string | null = null; // profiles.subscription_source — drives manage/cancel routing
 let _initialized = false;
 
 function notify() {
@@ -65,6 +66,38 @@ export function subscribePremium(listener: (premium: boolean) => void): () => vo
   return subscribeTier((t) => listener(t === 'premium'));
 }
 
+/**
+ * Returns the URL that the "Manage / Cancel subscription" buttons should
+ * open, routed to the channel the user actually paid through. Mobile-IAP
+ * subscribers go to App Store / Play Store; web-Paddle (or other future
+ * web providers) go to support email until a customer portal is wired.
+ *
+ * Falls back to Apple/Google Store URLs when source is unknown — legacy
+ * users predating subscription_source still need a sensible default.
+ */
+export function getSubscriptionManagementUrl(): string {
+  switch (_subscriptionSource) {
+    case 'web_paddle':
+    case 'web_toss':
+    case 'web_stripe':
+      return 'mailto:support@moavoca.com?subject=Subscription%20Management';
+    case 'rc':
+    case 'bonus':
+    case null:
+    default:
+      return Platform.select({
+        ios: 'https://apps.apple.com/account/subscriptions',
+        android: 'https://play.google.com/store/account/subscriptions',
+        default: 'https://play.google.com/store/account/subscriptions',
+      }) as string;
+  }
+}
+
+/** Raw subscription source for callers that need to render channel-aware UI. */
+export function getSubscriptionSource(): string | null {
+  return _subscriptionSource;
+}
+
 async function cacheTier(tier: Tier) {
   _rcTier = tier;
   await AsyncStorage.setItem(TIER_CACHE_KEY, tier);
@@ -109,7 +142,7 @@ export async function refreshBonusPremium(): Promise<void> {
     }
     const { data: profile } = await supabase
       .from('profiles')
-      .select('plan, bonus_premium_until')
+      .select('plan, bonus_premium_until, subscription_source')
       .eq('user_id', uid)
       .maybeSingle();
 
@@ -119,6 +152,7 @@ export async function refreshBonusPremium(): Promise<void> {
       : 'free';
     _serverTier = serverTier;
     await AsyncStorage.setItem(SERVER_TIER_CACHE_KEY, serverTier);
+    _subscriptionSource = (profile as { subscription_source?: string | null } | null)?.subscription_source ?? null;
 
     const raw = (profile as { bonus_premium_until?: string | null } | null)?.bonus_premium_until;
     const ms = raw ? Date.parse(raw) : 0;

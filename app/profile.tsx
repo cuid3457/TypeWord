@@ -50,12 +50,7 @@ import { clearLocalData } from '@src/db';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { useNetworkStatus } from '@src/hooks/useNetworkStatus';
-
-const SUBSCRIPTION_URL = Platform.select({
-  ios: 'https://apps.apple.com/account/subscriptions',
-  android: 'https://play.google.com/store/account/subscriptions',
-  default: 'https://play.google.com/store/account/subscriptions',
-}) as string;
+import { getSubscriptionManagementUrl } from '@src/services/subscriptionService';
 
 // Stable churn-feedback keys. Order is rendering order; localized labels
 // come from `auth.deletion_reason_<key>` in each locale.
@@ -331,10 +326,13 @@ export default function ProfileScreen() {
             </View>
           ) : null}
 
-          {/* Cancel subscription (premium) — neutral; actual cancel is in the store */}
+          {/* Cancel subscription (premium) — routes to the channel the user
+              actually paid through (Apple/Google store for IAP, support email
+              for web Paddle). Otherwise the button dead-ends on a store that
+              shows no matching subscription. */}
           {premium ? (
             <Pressable
-              onPress={() => { Linking.openURL(SUBSCRIPTION_URL).catch(() => {}); }}
+              onPress={() => { Linking.openURL(getSubscriptionManagementUrl()).catch(() => {}); }}
               className="mt-5 items-center rounded-[14px] border border-line bg-surface py-4 dark:border-line-dark dark:bg-surface-dark"
             >
               <Text className="text-base font-medium text-ink dark:text-ink-dark">
@@ -391,7 +389,7 @@ export default function ProfileScreen() {
         message={t('auth.subscription_warning_message')}
         secondaryText={t('auth.manage_subscription')}
         onSecondary={() => {
-          Linking.openURL(SUBSCRIPTION_URL).catch(() => {});
+          Linking.openURL(getSubscriptionManagementUrl()).catch(() => {});
         }}
         buttonText={t('settings.cancel')}
         confirmText={t('auth.continue_delete')}

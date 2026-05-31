@@ -19,6 +19,7 @@ import { setPaywallPending } from '@src/services/paywallPending';
 import { haptic } from '@src/services/hapticService';
 import {
   getOfferings,
+  getSubscriptionManagementUrl,
   purchaseAnnual,
   purchaseMonthly,
   restorePurchases,
@@ -178,10 +179,10 @@ export function Paywall() {
             </Text>
           </Pressable>
           <Pressable onPress={() => {
-            const url = Platform.OS === 'ios'
-              ? 'https://apps.apple.com/account/subscriptions'
-              : 'https://play.google.com/store/account/subscriptions';
-            Linking.openURL(url).catch(() => {});
+            // Route to the channel the user actually paid through (RC → store,
+            // web Paddle → support email) so the cancel button doesn't dead-end
+            // on a store with no matching subscription.
+            Linking.openURL(getSubscriptionManagementUrl()).catch(() => {});
           }} hitSlop={8}>
             <Text className="text-xs text-muted underline">{t('premium.manage_subscription')}</Text>
           </Pressable>

@@ -26,6 +26,7 @@ const listeners = new Set<Listener>();
 
 let _serverTier: Tier = 'free';
 let _bonusUntilMs = 0;
+let _subscriptionSource: string | null = null;
 
 function _computeTier(): Tier {
   if (_serverTier === 'premium') return 'premium';
@@ -70,6 +71,35 @@ export function subscribePremium(listener: (premium: boolean) => void): () => vo
 }
 
 /**
+ * URL the "Manage / Cancel subscription" buttons should open. Routes to
+ * the channel the user actually paid through — Apple/Google for IAP, a
+ * support mailto for web Paddle/Toss/Stripe until a per-provider customer
+ * portal is wired. Defaults to the store URLs when source is unknown
+ * (legacy users without subscription_source set).
+ */
+export function getSubscriptionManagementUrl(): string {
+  switch (_subscriptionSource) {
+    case 'web_paddle':
+    case 'web_toss':
+    case 'web_stripe':
+      return 'mailto:support@moavoca.com?subject=Subscription%20Management';
+    case 'rc':
+    case 'bonus':
+    case null:
+    default:
+      // RC subscriptions on the web → still route to Apple/Google management.
+      // We don't know which store from the source alone; the App Store URL
+      // works for iOS users browsing on any device, Play Store for Android.
+      // Default to the universal account-subscriptions landing for Google.
+      return 'https://play.google.com/store/account/subscriptions';
+  }
+}
+
+export function getSubscriptionSource(): string | null {
+  return _subscriptionSource;
+}
+
+/**
  * Refresh entitlement from the server. Reads profiles.plan +
  * bonus_premium_until in a single roundtrip. profiles.plan is kept current
  * by the RC and web-subscription webhooks, so this captures both
@@ -87,7 +117,7 @@ export async function refreshBonusPremium(): Promise<void> {
     }
     const { data: profile } = await supabase
       .from('profiles')
-      .select('plan, bonus_premium_until')
+      .select('plan, bonus_premium_until, subscription_source')
       .eq('user_id', uid)
       .maybeSingle();
     const planRaw = (profile as { plan?: string | null } | null)?.plan;
@@ -99,6 +129,7 @@ export async function refreshBonusPremium(): Promise<void> {
     const ms = raw ? Date.parse(raw) : 0;
     _bonusUntilMs = Number.isFinite(ms) ? ms : 0;
     await AsyncStorage.setItem(BONUS_UNTIL_CACHE_KEY, String(_bonusUntilMs));
+    _subscriptionSource = (profile as { subscription_source?: string | null } | null)?.subscription_source ?? null;
     await cacheTier(tier);
   } catch (e) {
     captureError(e, { service: 'subscriptionService.web', fn: 'refreshBonusPremium' });

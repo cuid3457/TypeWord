@@ -20,6 +20,7 @@ import { TabletContainer } from '@/components/tablet-container';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { usePremium } from '@src/hooks/usePremium';
 import {
+  getSubscriptionManagementUrl,
   purchaseAnnual,
   purchaseMonthly,
   refreshBonusPremium,
@@ -259,7 +260,7 @@ export function Paywall() {
                 this can swap to a portal URL fetched server-side. */}
             <View className="mt-4 flex-row items-center justify-center gap-x-6">
               <Pressable
-                onPress={() => Linking.openURL('mailto:support@moavoca.com?subject=Subscription%20Management')}
+                onPress={() => Linking.openURL(getSubscriptionManagementUrl())}
                 hitSlop={8}
               >
                 <Text className="text-xs text-muted underline">{t('premium.manage_subscription')}</Text>

@@ -1700,7 +1700,70 @@ Deno.serve(async (req) => {
       );
     }
 
-    // Cache miss → OpenAI.
+    // Cache miss → forward-mirror reverse lookup.
+    //
+    // Run the FORWARD pipeline on (inputWord, sourceLang=inputLang,
+    // targetLang=studyLang). Forward does the canonical dict lookup + AI
+    // judge gate (with the same 4-sense cap as the learner card) and returns
+    // exactly the meanings a learner-card would show. Each meaning's
+    // translation = a candidate headword in studyLang. This guarantees
+    // forward/reverse result-set parity: "ko 배 검색" forward → 4 meanings,
+    // "ko 배 reverse to en" → same 4 candidates (abdomen/boat/pear/double).
+    //
+    // The forward pipeline already caches into word_entries +
+    // word_translations, so once curated, reverse hits are ~50ms
+    // (DB-only). Cold reverse pays the forward LLM judge cost once.
+    try {
+      const fwdResult = await handle(
+        { word: inputWord, sourceLang: inputLang, targetLang: studyLang, mode: "quick" },
+      );
+      const meanings = fwdResult.result.meanings ?? [];
+      if (meanings.length > 0) {
+        const candidates = meanings
+          .map((m) => ({
+            headword: (m.definition ?? "").trim(),
+            hint: m.partOfSpeech ? `[${m.partOfSpeech}]` : "",
+          }))
+          .filter((c) => c.headword.length > 0);
+        // Dedup defensively (different senses occasionally translate to the
+        // same word; the forward pipeline already merges by-translation but
+        // not always strict on capitalization).
+        const seen = new Set<string>();
+        const uniq = candidates.filter((c) => {
+          const k = c.headword.normalize("NFC").toLowerCase();
+          if (seen.has(k)) return false;
+          seen.add(k);
+          return true;
+        });
+        if (uniq.length > 0) {
+          fireAndForget(saveReverseLookup(supabase, {
+            input_word: inputWord,
+            input_lang: inputLang,
+            target_lang: studyLang,
+            candidates: uniq,
+            note: null,
+            model: "forward-mirror",
+            prompt_version: REVERSE_PROMPT_VERSION,
+          }));
+          fireAndForget(logApiCall(supabase, {
+            userId, endpoint: ENDPOINT, cacheHit: false, costUsd: 0,
+            durationMs: Date.now() - startedAt, status: "ok",
+          }));
+          return new Response(
+            JSON.stringify({ result: { candidates: uniq } }),
+            { headers: { ...corsHeaders, "Content-Type": "application/json" } },
+          );
+        }
+      }
+    } catch (err) {
+      // Forward path failure is non-fatal — fall through to LLM. Common
+      // case: dict miss + the LLM neologism fallback throws because the
+      // input is a sentence/non-word. We want the reverse LLM prompt
+      // (which has 'sentence'/'non_word' notes) to take over from here.
+      console.warn(`[v4 reverse] forward-mirror failed: ${(err as Error).message}`);
+    }
+
+    // Forward miss → OpenAI reverse-lookup prompt (with verification gate).
     const openaiKey = Deno.env.get("OPENAI_API_KEY") ?? "";
     try {
       const systemPrompt = buildReverseLookupSystemPrompt(inputLang, studyLang);
