@@ -171,6 +171,7 @@ export default {
     empty: '\u00a1Todo al d\u00eda!',
     empty_hint: 'Las palabras guardadas aparecer\u00e1n aqu\u00ed para repasar.',
     empty_no_lists: 'Crea una lista de palabras y añade palabras\npara empezar a repasar.',
+    empty_action: 'Crear una lista',
     show_answer: 'Ver respuesta',
     dictation_typo_hint: 'Escribiste: {{input}} (cuidado con la ortograf\u00eda)',
     dictation_placeholder: 'Escribe aqu\u00ed',
@@ -718,6 +719,7 @@ export default {
     download_success: "Lista añadida",
     empty_title: "Aún no hay listas",
     empty_hint: "¡Sé el primero en compartir!",
+    empty_action: "Compartir una lista",
   },
   nickname_modal: {
     title: 'Elige un apodo',

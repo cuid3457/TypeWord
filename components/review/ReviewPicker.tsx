@@ -1,9 +1,11 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { router } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, Keyboard, Platform, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
+import { FlatList, Image, Keyboard, Platform, Pressable, RefreshControl, Text, TextInput, View } from 'react-native';
 import { refreshReview } from '@src/services/reviewCache';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabletContainer } from '@/components/tablet-container';
+import { haptic } from '@src/services/hapticService';
 import { useTablet } from '@src/hooks/useTablet';
 import { useTranslation } from 'react-i18next';
 import type { RefObject } from 'react';
@@ -218,17 +220,40 @@ export function ReviewPicker({
           ? { flexGrow: 1, paddingHorizontal: 24 }
           : { paddingTop: 24, paddingBottom: 24, gap: isTablet ? 12 : 0 }}
         ListEmptyComponent={
-          <View className="flex-1 items-center justify-center px-6">
-            <MaterialIcons name={hasWords ? 'check-circle' : 'menu-book'} size={56} color={hasWords ? '#2EC4A5' : '#A79E90'} />
-            <Text className="mt-4 text-center text-base text-muted">
-              {hasWords ? t('review.empty') : t('review.empty_no_lists')}
-            </Text>
-            {hasWords ? (
+          hasWords ? (
+            <View className="flex-1 items-center justify-center px-6">
+              <MaterialIcons name="check-circle" size={56} color="#2EC4A5" />
+              <Text className="mt-4 text-center text-base text-muted">
+                {t('review.empty')}
+              </Text>
               <Text className="mt-1 text-center text-sm text-faint">
                 {t('review.empty_hint')}
               </Text>
-            ) : null}
-          </View>
+            </View>
+          ) : (
+            <View className="flex-1 items-center justify-center px-10">
+              <View className="h-32 w-32 items-center justify-center rounded-full bg-accent-soft dark:bg-accent-soft-dark">
+                <Image
+                  source={require('../../assets/images/android-icon-foreground.png')}
+                  style={{ width: 104, height: 104 }}
+                  resizeMode="contain"
+                />
+              </View>
+              <Text className="mt-5 text-center text-lg font-bold text-ink dark:text-ink-dark">
+                {t('review.empty_no_lists')}
+              </Text>
+              <Pressable
+                onPress={() => { haptic.tap(); router.push('/(tabs)'); }}
+                className="mt-5 rounded-xl bg-accent px-6 py-3"
+                accessibilityRole="button"
+                accessibilityLabel={t('review.empty_action')}
+              >
+                <Text className="text-sm font-bold text-white">
+                  {t('review.empty_action')}
+                </Text>
+              </Pressable>
+            </View>
+          )
         }
         ListHeaderComponent={bookCounts.length > 0 ? (
           <View className="mb-3 px-6">

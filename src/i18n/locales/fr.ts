@@ -171,6 +171,7 @@ export default {
     empty: 'Tout est \u00e0 jour !',
     empty_hint: 'Les mots sauvegard\u00e9s appara\u00eetront ici pour r\u00e9vision.',
     empty_no_lists: 'Créez une liste de mots et ajoutez des mots\npour commencer la révision.',
+    empty_action: 'Créer une liste',
     show_answer: 'Voir la r\u00e9ponse',
     dictation_typo_hint: 'Vous avez tap\u00e9 : {{input}} (attention \u00e0 l\'orthographe)',
     dictation_placeholder: 'Tapez ici',
@@ -718,6 +719,7 @@ export default {
     download_success: "Liste ajoutée",
     empty_title: "Aucune liste pour le moment",
     empty_hint: "Soyez le premier à partager !",
+    empty_action: "Partager une liste",
   },
   nickname_modal: {
     title: 'Choisir un pseudo',

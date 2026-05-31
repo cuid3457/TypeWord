@@ -190,6 +190,7 @@ export default {
     empty: 'すべて完了！',
     empty_hint: '保存した単語がここに復習カードとして表示されます。',
     empty_no_lists: '単語帳を作成して単語を追加し、\n復習を始めましょう。',
+    empty_action: '単語帳を作る',
     show_answer: '答えを見る',
     dictation_typo_hint: '入力: {{input}} (入力ミスに注意)',
     dictation_placeholder: 'ここに入力',
@@ -737,6 +738,7 @@ export default {
     download_success: "単語帳を追加しました",
     empty_title: "まだ単語帳がありません",
     empty_hint: "最初に共有してみましょう。",
+    empty_action: "単語帳を共有する",
   },
   nickname_modal: {
     title: 'ニックネームを設定',

@@ -357,6 +357,16 @@ export default function LibraryTabScreen() {
                 <Text className="mt-2 text-center text-sm text-muted">
                   {t('library_tab.empty_hint')}
                 </Text>
+                <Pressable
+                  onPress={handleUploadPress}
+                  className="mt-5 rounded-xl bg-accent px-6 py-3"
+                  accessibilityRole="button"
+                  accessibilityLabel={t('library_tab.empty_action')}
+                >
+                  <Text className="text-sm font-bold text-white">
+                    {t('library_tab.empty_action')}
+                  </Text>
+                </Pressable>
               </View>
             )
           }

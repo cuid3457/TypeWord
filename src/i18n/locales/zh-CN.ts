@@ -370,6 +370,7 @@ export default {
     empty: '全部完成！',
     empty_hint: '保存的单词将在此显示为复习卡片。',
     empty_no_lists: '创建单词本并添加单词，\n开始复习吧。',
+    empty_action: '创建单词本',
     show_answer: '显示答案',
     dictation_typo_hint: '你输入的: {{input}} (注意拼写)',
     dictation_placeholder: '在此输入',
@@ -917,6 +918,7 @@ export default {
     download_success: "已添加单词本",
     empty_title: "还没有单词本",
     empty_hint: "成为第一个分享的人！",
+    empty_action: "分享单词本",
   },
   nickname_modal: {
     title: '设置昵称',

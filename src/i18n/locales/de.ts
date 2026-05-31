@@ -168,6 +168,7 @@ export default {
     empty: 'Alles erledigt!',
     empty_hint: 'Gespeicherte W\u00f6rter erscheinen hier zur Wiederholung.',
     empty_no_lists: 'Erstelle eine Wortliste und füge Wörter hinzu,\num mit dem Wiederholen zu beginnen.',
+    empty_action: 'Liste erstellen',
     show_answer: 'Antwort zeigen',
     dictation_typo_hint: 'Eingegeben: {{input}} (Achte auf den Tippfehler)',
     dictation_placeholder: 'Hier eingeben',
@@ -700,6 +701,7 @@ export default {
     download_success: "Wortliste hinzugefügt",
     empty_title: "Noch keine Wortlisten",
     empty_hint: "Sei der Erste, der teilt!",
+    empty_action: "Liste teilen",
   },
   nickname_modal: {
     title: 'Spitznamen wählen',

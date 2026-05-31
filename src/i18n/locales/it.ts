@@ -164,6 +164,7 @@ export default {
     empty: 'Tutto fatto!',
     empty_hint: 'Le parole salvate appariranno qui per il ripasso.',
     empty_no_lists: 'Crea un elenco di parole e aggiungi parole\nper iniziare a ripassare.',
+    empty_action: 'Crea una lista',
     show_answer: 'Mostra risposta',
     dictation_typo_hint: 'Hai scritto: {{input}} (attenzione al refuso)',
     dictation_placeholder: 'Scrivi qui',
@@ -695,6 +696,7 @@ export default {
     download_success: "Lista aggiunta",
     empty_title: "Ancora nessuna lista",
     empty_hint: "Sii il primo a condividere!",
+    empty_action: "Condividi una lista",
   },
   nickname_modal: {
     title: 'Scegli un soprannome',
