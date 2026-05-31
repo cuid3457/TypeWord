@@ -16,6 +16,7 @@ import { Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { getDormantWords, updateReviewResult, type DormantWord } from '@src/db/queries';
 import { haptic } from '@src/services/hapticService';
@@ -264,15 +265,17 @@ export default function WordPearlScreen() {
   return (
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
       <Stack.Screen options={{ headerShown: false }} />
-      <View className="h-11 flex-row items-center mt-6 mb-4 px-6">
-        <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('pearl.close')}>
-          <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
-        </Pressable>
-        <Text className="text-base font-semibold text-ink dark:text-ink-dark">
-          {t('pearl.title')}
-        </Text>
-      </View>
-      {renderBody()}
+      <TabletContainer>
+        <View className="h-11 flex-row items-center mt-6 mb-4 px-6">
+          <Pressable onPress={() => router.back()} className="mr-2 p-1" accessibilityLabel={t('pearl.close')}>
+            <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+          </Pressable>
+          <Text className="text-base font-semibold text-ink dark:text-ink-dark">
+            {t('pearl.title')}
+          </Text>
+        </View>
+        {renderBody()}
+      </TabletContainer>
     </SafeAreaView>
   );
 }
