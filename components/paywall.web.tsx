@@ -11,7 +11,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { router, Stack } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ActivityIndicator, Linking, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -58,6 +58,23 @@ export function Paywall() {
     if (router.canGoBack()) router.back();
     else router.replace('/');
   };
+
+  // Auto-dismiss after free → premium transition. The user paid (or refreshed
+  // status after a mobile purchase) — there's nothing useful left to show on
+  // the paywall. We return them to the screen they came from. Existing-premium
+  // visitors (e.g. checking subscription state) keep the page open because
+  // wasFreeAtMount stays false for them.
+  const wasFreeAtMountRef = useRef(!premium);
+  useEffect(() => {
+    if (wasFreeAtMountRef.current && premium) {
+      wasFreeAtMountRef.current = false;
+      const timer = setTimeout(() => {
+        if (router.canGoBack()) router.back();
+        else router.replace('/');
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [premium]);
 
   const handleRefreshStatus = async () => {
     setRefreshing(true);
