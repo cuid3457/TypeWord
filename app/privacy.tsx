@@ -1,12 +1,19 @@
 import { router, Stack } from 'expo-router';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { TabletContainer } from '@/components/tablet-container';
+import { Toast } from '@/components/toast';
+import {
+  exportAccountDataJson,
+  NotSignedInError,
+  AnonymousExportError,
+} from '@src/services/accountExportService';
 
-const EFFECTIVE_DATE = '2026-05-11';
+const EFFECTIVE_DATE = '2026-06-01';
 
 // Business registration info has been moved to app/business-info.tsx.
 // Privacy policy text references it via Settings → 사업자 정보. Phone
@@ -26,6 +33,26 @@ const PROVIDER_EN = {
 export default function PrivacyPolicyScreen() {
   const { t, i18n } = useTranslation();
   const isKo = i18n.language === 'ko';
+  const [exporting, setExporting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
+
+  const handleExport = async () => {
+    if (exporting) return;
+    setExporting(true);
+    try {
+      await exportAccountDataJson();
+    } catch (err) {
+      if (err instanceof NotSignedInError) {
+        setToast({ message: t('auth.export_data_signin_required'), type: 'error' });
+      } else if (err instanceof AnonymousExportError) {
+        setToast({ message: t('auth.export_data_anonymous'), type: 'error' });
+      } else {
+        setToast({ message: t('auth.export_data_failed'), type: 'error' });
+      }
+    } finally {
+      setExporting(false);
+    }
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-canvas dark:bg-canvas-dark">
@@ -40,10 +67,56 @@ export default function PrivacyPolicyScreen() {
             {t('settings.privacy')}
           </Text>
         </View>
-        {isKo ? <PolicyKo /> : <PolicyEn />}
+        {isKo
+          ? <PolicyKo onExport={handleExport} exporting={exporting} exportLabel={t('auth.export_data')} />
+          : <PolicyEn onExport={handleExport} exporting={exporting} exportLabel={t('auth.export_data')} />}
       </ScrollView>
+      <Toast
+        visible={!!toast}
+        message={toast?.message ?? ''}
+        type={toast?.type}
+        onHide={() => setToast(null)}
+        style={{
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          justifyContent: 'center',
+          pointerEvents: 'none',
+        }}
+      />
       </TabletContainer>
     </SafeAreaView>
+  );
+}
+
+type PolicyProps = {
+  onExport: () => void;
+  exporting: boolean;
+  exportLabel: string;
+};
+
+function ExportButton({ onExport, exporting, exportLabel }: PolicyProps) {
+  return (
+    <Pressable
+      onPress={onExport}
+      disabled={exporting}
+      className="mb-3 mt-1 flex-row items-center justify-center gap-1.5 rounded-[14px] border border-line bg-surface py-3.5 dark:border-line-dark dark:bg-surface-dark"
+      accessibilityRole="button"
+      accessibilityLabel={exportLabel}
+    >
+      {exporting ? (
+        <ActivityIndicator color="#7B7366" />
+      ) : (
+        <>
+          <MaterialIcons name="download" size={18} color="#5C5448" />
+          <Text className="text-sm font-medium text-ink dark:text-ink-dark">
+            {exportLabel}
+          </Text>
+        </>
+      )}
+    </Pressable>
   );
 }
 
@@ -71,7 +144,7 @@ function Bullet({ children }: { children: string }) {
   );
 }
 
-function PolicyKo() {
+function PolicyKo({ onExport, exporting, exportLabel }: PolicyProps) {
   return (
     <View>
       <Text className="text-2xl font-bold text-ink dark:text-ink-dark">
@@ -86,7 +159,7 @@ function PolicyKo() {
       <SectionTitle>1. 수집하는 정보</SectionTitle>
       <P>MoaVoca(이하 "앱")는 서비스 제공을 위해 아래 정보를 수집합니다.</P>
       <Bullet>이메일 주소: 계정 등록 및 로그인 시 수집 (선택 사항)</Bullet>
-      <Bullet>비밀번호: 이메일 계정 인증 목적으로 수집되며 암호화되어 저장됩니다</Bullet>
+      <Bullet>비밀번호: 이메일 계정 인증 목적으로 수집되며, Supabase Auth에 단방향 솔티드 해시(salted hash) 형태로만 저장되어 운영자도 원문을 확인할 수 없습니다</Bullet>
       <Bullet>Google 프로필 정보: Google 로그인 시 이메일 주소와 이름이 수집됩니다 (선택 사항)</Bullet>
       <Bullet>Apple 계정 정보: Apple 로그인 시 Apple ID에 연결된 이메일 주소와 이름이 수집됩니다 (선택 사항). "Hide My Email" 사용 시 Apple이 생성한 익명 릴레이 주소만 전달받으며, 사용자의 실제 이메일 주소는 알 수 없습니다.</Bullet>
       <Bullet>표시 이름(닉네임): 친구·공유 기능에서 다른 사용자에게 노출되는 이름. 사용자가 직접 설정합니다.</Bullet>
@@ -158,32 +231,74 @@ function PolicyKo() {
       <SectionTitle>12. 광고 식별자 (iOS ATT / Android GAID)</SectionTitle>
       <P>iOS에서는 처음 앱 실행 시 광고 식별자(IDFA) 사용 동의를 묻는 시스템 팝업이 표시될 수 있습니다. Android에서는 Google 광고 ID(GAID)가 사용되며, 기기 설정에서 광고 개인화를 제한하거나 광고 ID를 재설정할 수 있습니다. 동의/허용 여부는 광고 개인화 정도에만 영향을 미치며, 거부하더라도 앱의 기본 기능 사용에는 제한이 없습니다. 유럽(GDPR) 및 캘리포니아(CCPA) 지역 사용자에게는 별도의 광고 개인정보 동의 화면이 표시됩니다.</P>
 
-      <SectionTitle>13. 데이터 보관 및 삭제</SectionTitle>
-      <P>기기에 저장된 단어장 데이터는 앱 삭제 시 함께 삭제됩니다. 설정 화면의 "초기화" 기능을 통해 언제든 기기 내 모든 데이터를 삭제할 수 있습니다.</P>
-      <P>계정을 등록한 사용자는 설정 화면에서 계정 삭제를 요청할 수 있으며, 삭제 시 서버에 저장된 이메일, 단어장 데이터, 표시 이름, 친구 관계, 공유 단어장 등 모든 정보가 영구적으로 삭제됩니다.</P>
-      <P>구독 해지 후에도 서버 데이터는 계정 삭제를 요청할 때까지 보관됩니다.</P>
-      <P>국세청 부가가치세·종합소득세 신고 의무에 따라, 결제·정산과 관련된 거래 기록은 관계 법령에서 정한 기간(통상 5년) 동안 보관된 후 파기됩니다. 단, 해당 기록에서 개인정보는 가명·비식별화되어 처리됩니다.</P>
+      <SectionTitle>13. 처리 목적별 보관 기간</SectionTitle>
+      <P>운영자는 개인정보보호법 제15조에 따라 수집한 개인정보를 아래 목적·기간 내에서만 처리합니다.</P>
+      <Bullet>학습 기능 제공(단어장·진도·언어 설정 등): 회원 탈퇴 시까지</Bullet>
+      <Bullet>계정 인증(이메일, 비밀번호 해시, OAuth 식별자): 회원 탈퇴 시까지</Bullet>
+      <Bullet>친구·커뮤니티 기능(표시 이름, 친구 관계, 공유 단어장): 사용자가 삭제하거나 탈퇴 시까지</Bullet>
+      <Bullet>부정 이용 방지·API 사용 기록: 90일</Bullet>
+      <Bullet>결제·정산 거래 기록: 부가가치세법·소득세법·전자상거래법 등에 따라 5년 보관 후 파기. 보관 기간 중 개인 식별 정보는 가명·비식별화 처리</Bullet>
+      <Bullet>개인 맞춤형 광고 식별자(IDFA/GAID): 동의 시점부터 광고 네트워크 정책상 최대 2년</Bullet>
+      <Bullet>오류·진단 로그(Sentry): 90일</Bullet>
 
-      <SectionTitle>14. 계정 및 인증</SectionTitle>
-      <P>앱은 회원가입 없이 사용할 수 있습니다. 클라우드 백업 및 동기화를 이용하려면 이메일, Google 계정 또는 Apple 계정으로 로그인할 수 있습니다.</P>
-      <P>이메일 계정 등록 시 이메일 인증을 통해 본인 확인을 진행합니다. 비밀번호는 암호화되어 저장되며, 운영자가 비밀번호 원문을 확인할 수 없습니다.</P>
+      <SectionTitle>14. 데이터 보관 및 삭제</SectionTitle>
+      <P>기기에 저장된 단어장 데이터는 앱 삭제 시 함께 삭제됩니다. 설정 화면의 "초기화" 기능을 통해 언제든 기기 내 모든 데이터를 삭제할 수 있습니다.</P>
+      <P>계정을 등록한 사용자는 설정 화면에서 계정 삭제를 요청할 수 있으며, 운영자는 본인 확인 후 30일 이내에 서버에 저장된 이메일, OAuth 식별자, 단어장 데이터, 학습 진도, 표시 이름, 친구 관계, 공유 단어장, 푸시 토큰, 알림 설정 등 모든 정보를 영구 삭제합니다. 통상 즉시 또는 수 분 내 처리되나 백업·복구 사이클 등 기술적 사유로 최대 30일이 소요될 수 있습니다.</P>
+      <P>구독 해지 후에도 서버 데이터는 계정 삭제를 요청할 때까지 보관됩니다. 결제·정산 관련 거래 기록은 위 §13에 따라 별도 보관됩니다.</P>
+
+      <SectionTitle>15. 개인정보의 국외이전</SectionTitle>
+      <P>본 서비스는 §4에 열거된 외부 서비스를 이용하는 과정에서 사용자의 개인정보를 대한민국 외 국가로 이전합니다(개인정보보호법 제28조의8 고지 사항).</P>
+      <Bullet>이전받는 자: §4에 명시된 처리 위탁업체(Supabase, OpenAI, Microsoft Azure, Apple, Google, RevenueCat, Sentry, AWS, freedictionaryapi.com 등)</Bullet>
+      <Bullet>이전되는 국가: 주로 미국. Azure는 East US 또는 가장 가까운 Azure 리전</Bullet>
+      <Bullet>이전 시점·방법: 사용자가 해당 기능을 이용하는 시점에 HTTPS/TLS 암호화 통신을 통해 지속적으로 이전</Bullet>
+      <Bullet>이전 항목: 위탁업체별로 §4에 기재된 항목 범위 내</Bullet>
+      <Bullet>이전 목적: §4의 각 위탁업체 목적란에 기재</Bullet>
+      <Bullet>이전받는 자의 보관 기간: 각 위탁업체의 자체 보관 정책에 따르며, 운영자는 삭제 요청을 위탁업체에 전달합니다</Bullet>
+      <P>이용자는 회원가입을 하지 않음으로써 국외이전을 거부할 수 있으며, 이 경우에도 앱의 오프라인 학습 기능은 이용 가능합니다. 이미 가입한 사용자는 §16의 절차에 따라 계정 삭제 또는 동의 철회를 요청할 수 있습니다.</P>
+
+      <SectionTitle>16. 정보주체의 권리</SectionTitle>
+      <P>거주 지역에 관계없이 사용자는 자신의 개인정보에 대해 아래 권리를 행사할 수 있습니다(개인정보보호법 제35조 이하, GDPR 제15-22조, CCPA §1798.100 이하).</P>
+      <Bullet>열람권 — 운영자가 보유한 본인의 개인정보 사본 요청</Bullet>
+      <Bullet>정정·삭제권 — 부정확한 정보의 정정 또는 삭제 요청. 계정 삭제는 설정 → 계정 → 계정 삭제 메뉴 또는 이메일 요청</Bullet>
+      <Bullet>처리정지권 — 처리에 대한 일시적 또는 영구적 정지 요청</Bullet>
+      <Bullet>이동권 — 본인이 제공한 데이터를 기계 판독 가능한 형식으로 받을 권리. 프리미엄 사용자는 앱 내에서 단어장을 CSV로 내보낼 수 있으며, 전체 계정 데이터의 JSON 내보내기는 아래 버튼으로 즉시 받거나 이메일 요청 시 30일 이내에 제공합니다</Bullet>
+      <ExportButton onExport={onExport} exporting={exporting} exportLabel={exportLabel} />
+      <Bullet>동의 철회권 — 이미 처리된 부분에 영향을 주지 않는 범위에서 언제든 동의 철회</Bullet>
+      <Bullet>자동화된 결정 거부권 — 운영자는 사용자에 대해 자동화된 의사결정만으로 법적 효과를 야기하는 처리는 하지 않습니다</Bullet>
+      <P>{`권리 행사 방법: 앱 내 설정에서 가능한 경우 직접 처리하거나, ${PROVIDER_KO.email}로 본인 확인이 가능한 정보와 함께 이메일을 보내주시면 통상 30일 이내에 답변드립니다. 행사 거부 시 그 사유와 이의 제기 방법을 함께 통지합니다.`}</P>
+      <P>개인정보 처리에 관한 불만은 개인정보보호위원회(privacy.go.kr) 및 한국인터넷진흥원(KISA) 개인정보침해신고센터(privacy.kisa.or.kr · ☎ 118)에 신고할 수 있습니다. EU 거주자는 거주국 감독기관에, 영국 거주자는 ICO에, 캘리포니아 거주자는 CCPA 권리를 행사할 수 있습니다.</P>
+
+      <SectionTitle>17. 보안 조치 및 침해 통지</SectionTitle>
+      <P>운영자는 개인정보 보호를 위해 다음과 같은 기술적·관리적 보호 조치를 시행합니다.</P>
+      <Bullet>모든 서버 통신은 TLS 1.2 이상으로 암호화</Bullet>
+      <Bullet>인증 토큰은 iOS Keychain 또는 Android EncryptedSharedPreferences에 저장. 평문 AsyncStorage 저장 금지</Bullet>
+      <Bullet>서비스 권한 키는 서버 외부로 반출 금지</Bullet>
+      <Bullet>정기적인 보안 감사 및 보안 패치 적용(최근 감사: 2026년 5월)</Bullet>
+      <P>중대한 개인정보 침해 사고가 발생한 경우, 운영자는 관련 법령(개인정보보호법 제34조, GDPR 제33-34조, CCPA §1798.82)에 따라 인지 후 부당한 지체 없이 사용자 및 감독기관에 통지하며, 법령상 요구되는 경우 72시간 이내에 통지합니다.</P>
+
+      <SectionTitle>18. 계정 및 인증</SectionTitle>
+      <P>앱은 회원가입 없이 제한된 익명 모드로 사용할 수 있습니다. 클라우드 동기화, 친구·커뮤니티, 프리미엄 기능 이용을 위해서는 이메일·Google·Apple 계정으로 로그인이 필요합니다.</P>
+      <P>이메일 계정 등록 시 이메일 인증을 통해 본인 확인을 진행합니다. 비밀번호는 Supabase Auth에 단방향 솔티드 해시(salted hash)로만 저장되며, 운영자가 원문을 확인할 수 없습니다.</P>
       <P>Google 로그인 시 Google 계정의 이메일 주소와 프로필 정보(이름)가 수집됩니다. Google 계정의 비밀번호는 앱에서 처리하지 않습니다.</P>
       <P>Apple 로그인 시 Apple ID에 연결된 이메일 주소와 이름이 수집됩니다. "Hide My Email"을 선택하면 Apple이 익명 릴레이 주소를 생성하여 전달하며, 운영자는 사용자의 실제 이메일을 알 수 없습니다. Apple 계정의 비밀번호 및 인증 절차는 Apple이 처리하며 앱에서 직접 다루지 않습니다.</P>
 
-      <SectionTitle>15. 아동 개인정보 보호</SectionTitle>
-      <P>본 앱은 만 14세 미만 아동의 개인정보를 의도적으로 수집하지 않습니다. 만 14세 미만 사용자는 보호자의 동의 하에 앱을 사용해야 합니다.</P>
+      <SectionTitle>19. EU/UK 대리인</SectionTitle>
+      <P>현재까지 운영자는 GDPR 제27조 EU/UK 대리인을 별도 지정하고 있지 않습니다. EU·영국 거주 정보주체는 운영자에게 직접 연락할 수 있으며, 별도 대리인 지정을 요청하시면 합리적인 기간 내에 지정하여 안내드립니다.</P>
 
-      <SectionTitle>16. 변경 사항 고지</SectionTitle>
+      <SectionTitle>20. 아동 개인정보 보호</SectionTitle>
+      <P>본 앱은 App Store 12+, Google Play Teen 등급으로 만 14세 미만 아동을 대상으로 하지 않습니다. 운영자는 만 14세 미만(개인정보보호법·정보통신망법 기준) 및 만 13세 미만(미국 COPPA 기준)의 가입·이용을 허용하지 않으며, 해당 사실이 확인되는 경우 관련 개인정보를 즉시 삭제합니다. 아동의 개인정보가 수집된 사실을 알게 된 경우 즉시 {PROVIDER_KO.email}로 연락해 주시기 바랍니다.</P>
+
+      <SectionTitle>21. 변경 사항 고지</SectionTitle>
       <P>개인정보처리방침이 변경될 경우, 앱 내 공지를 통해 사전에 안내합니다.</P>
 
-      <SectionTitle>17. 문의</SectionTitle>
+      <SectionTitle>22. 문의</SectionTitle>
       <P>개인정보와 관련한 문의는 이메일로 보내주시면 답변드리겠습니다.</P>
       <P>{`이메일: ${PROVIDER_KO.email}`}</P>
     </View>
   );
 }
 
-function PolicyEn() {
+function PolicyEn({ onExport, exporting, exportLabel }: PolicyProps) {
   return (
     <View>
       <Text className="text-2xl font-bold text-ink dark:text-ink-dark">
@@ -198,7 +313,7 @@ function PolicyEn() {
       <SectionTitle>1. Information We Collect</SectionTitle>
       <P>MoaVoca ("the App") collects the following information to provide its services.</P>
       <Bullet>Email address: collected when you register an account (optional)</Bullet>
-      <Bullet>Password: collected for email account authentication and stored in encrypted form</Bullet>
+      <Bullet>Password: collected for email account authentication and stored only as a one-way salted hash on Supabase Auth — we cannot view the plaintext password</Bullet>
       <Bullet>Google profile information: email address and name are collected when signing in with Google (optional)</Bullet>
       <Bullet>Apple account information: email address and name linked to your Apple ID are collected when signing in with Apple (optional). If you choose "Hide My Email", only an Apple-generated anonymous relay address is passed to us — we cannot see your real email address.</Bullet>
       <Bullet>Display name (nickname): the name shown to other users in friend and sharing features. Set by you.</Bullet>
@@ -270,25 +385,67 @@ function PolicyEn() {
       <SectionTitle>12. Advertising Identifiers (iOS ATT / Android GAID)</SectionTitle>
       <P>On iOS, the system may show a tracking permission prompt (IDFA) the first time you launch the App. On Android, the Google Advertising ID (GAID) is used; you can limit ad personalization or reset the GAID in your device settings. Your decision affects only ad personalization — declining does not restrict the app's core functionality. Users in the EU (GDPR) and California (CCPA) will see a separate ad consent screen.</P>
 
-      <SectionTitle>13. Data Retention and Deletion</SectionTitle>
+      <SectionTitle>13. Retention by Processing Purpose</SectionTitle>
+      <P>We process personal data only for the purposes and retention periods set out below (Korean PIPA Article 15; GDPR Article 13(2)(a)).</P>
+      <Bullet>Provide learning features (wordlists, study progress, language settings): until account deletion</Bullet>
+      <Bullet>Account authentication (email, password hash, OAuth identifiers): until account deletion</Bullet>
+      <Bullet>Friend & community features (display name, friend graph, public wordlists): until you remove the content or delete the account</Bullet>
+      <Bullet>Abuse prevention and API usage logs: 90 days</Bullet>
+      <Bullet>Subscription billing records: 5 years, per Korean VAT, income-tax, and e-commerce-consumer-protection law; personal identifiers in those records are pseudonymized or de-identified</Bullet>
+      <Bullet>Personalized advertising identifiers (IDFA/GAID): per the ad network's policy, up to 2 years from consent</Bullet>
+      <Bullet>Crash and diagnostic logs (Sentry): 90 days</Bullet>
+
+      <SectionTitle>14. Data Storage and Deletion</SectionTitle>
       <P>Locally stored wordlist data is deleted when you uninstall the app. You can also delete all on-device data at any time using the "Reset" option in Settings.</P>
-      <P>If you have registered an account, you can request account deletion from the Settings screen. Upon deletion, all server-stored data including your email, wordlist data, display name, friend relationships, and shared wordlists will be permanently removed.</P>
-      <P>Server data is retained after subscription cancellation until you request account deletion.</P>
-      <P>To comply with Korean tax-reporting obligations (VAT and income tax), payment- and settlement-related transaction records are retained for the period required by applicable law (typically 5 years) before being deleted. Within those records, personal information is pseudonymized or de-identified.</P>
+      <P>If you have registered an account, you can request account deletion from the Settings screen or by email. After verifying your identity, we will permanently delete all server-stored data (email, OAuth identifiers, wordlist data, learning progress, display name, friend graph, shared wordlists, push tokens, notification settings) within 30 days. In most cases the deletion completes immediately or within minutes; technical reasons such as backup-rotation cycles may take up to 30 days.</P>
+      <P>Server data is retained after subscription cancellation until you request account deletion. Payment- and settlement-related transaction records are retained separately under §13.</P>
 
-      <SectionTitle>14. Accounts and Authentication</SectionTitle>
-      <P>The App can be used without creating an account. To use cloud backup and sync, you may sign in with your email, Google account, or Apple account.</P>
-      <P>Email verification is used to confirm your identity during email registration. Passwords are stored in encrypted form and cannot be viewed by the Provider.</P>
-      <P>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google account password is not processed by the App.</P>
-      <P>When signing in with Apple, the email address and name linked to your Apple ID are collected. If you choose "Hide My Email", Apple generates an anonymous relay address that is provided to us instead of your real email — we cannot see your real email address. Apple account password and authentication are handled by Apple and are not processed by the App directly.</P>
+      <SectionTitle>15. International Data Transfers</SectionTitle>
+      <P>Some processors listed in §4 process personal data outside the Republic of Korea (Korean PIPA Article 28-8 disclosure).</P>
+      <Bullet>Recipients: the processors listed in §4 (Supabase, OpenAI, Microsoft Azure, Apple, Google, RevenueCat, Sentry, AWS, freedictionaryapi.com, etc.)</Bullet>
+      <Bullet>Recipient country: primarily the United States; Azure may use East US or the nearest Azure region</Bullet>
+      <Bullet>Time and method of transfer: continuously, via encrypted HTTPS/TLS, at the time the relevant feature is used</Bullet>
+      <Bullet>Categories of data: as detailed per processor in §4</Bullet>
+      <Bullet>Purpose: as detailed per processor in §4</Bullet>
+      <Bullet>Retention by recipients: per each processor's own policy; we instruct them to delete on request</Bullet>
+      <P>You may decline the overseas transfer of your personal data by not creating an account — the App's offline learning features remain usable without sign-up. If you have already created an account and wish to withdraw consent, use the account-deletion process described in §16.</P>
 
-      <SectionTitle>15. Children's Privacy</SectionTitle>
-      <P>This App does not knowingly collect personal information from children under the age of 14 (in line with Korean law) or under the age of 13 (in line with US COPPA). Users below the applicable age should use the App only with parental consent.</P>
+      <SectionTitle>16. Your Rights</SectionTitle>
+      <P>Regardless of where you live, you have the following rights over your personal data (Korean PIPA Articles 35–37; GDPR Articles 15–22; CCPA §§1798.100 et seq.).</P>
+      <Bullet>Right of access — request a copy of the personal data we hold about you</Bullet>
+      <Bullet>Right to correction / deletion — correct inaccurate data or request erasure. In-app: Settings → Account → Delete Account. By email: a request from your registered address</Bullet>
+      <Bullet>Right to restriction of processing</Bullet>
+      <Bullet>Right to data portability — receive your data in a machine-readable format. Premium users can export wordlists as CSV in-app; a full JSON export of all account data is available instantly via the button below, or by email request within 30 days</Bullet>
+      <ExportButton onExport={onExport} exporting={exporting} exportLabel={exportLabel} />
+      <Bullet>Right to withdraw consent at any time, without affecting prior processing</Bullet>
+      <Bullet>No solely automated decision-making — we do not make decisions producing legal effects on you based solely on automated processing</Bullet>
+      <P>{`How to exercise: where available, use the in-app controls; otherwise email ${PROVIDER_EN.email} with sufficient information to verify your identity. We respond within 30 days. If we decline, we will explain why and how to appeal.`}</P>
+      <P>You may also lodge a complaint with your data-protection authority: the Personal Information Protection Commission of Korea (privacy.go.kr) and KISA (privacy.kisa.or.kr, ☎ 118) for Korea; your national supervisory authority for the EU; the ICO for the UK; or exercise CCPA rights as a California resident.</P>
 
-      <SectionTitle>16. Changes to This Policy</SectionTitle>
+      <SectionTitle>17. Security Measures and Breach Notification</SectionTitle>
+      <P>We implement the following technical and organizational safeguards.</P>
+      <Bullet>All server connections use TLS 1.2 or higher</Bullet>
+      <Bullet>Authentication tokens are stored in iOS Keychain or Android EncryptedSharedPreferences — never plaintext AsyncStorage</Bullet>
+      <Bullet>Service-role keys never leave the server</Bullet>
+      <Bullet>Periodic security audits and prompt hardening updates (latest audit: May 2026)</Bullet>
+      <P>In the event of a personal-data breach, we will notify affected users and the relevant supervisory authority without undue delay, and within 72 hours where required by applicable law (Korean PIPA Article 34; GDPR Articles 33–34; CCPA §1798.82).</P>
+
+      <SectionTitle>18. Accounts and Authentication</SectionTitle>
+      <P>The App can be used without an account in a limited anonymous mode. For cloud sync, friends/community, and premium features, you sign in with email + password, Apple Sign In, or Google Sign-In.</P>
+      <P>Email verification is required during email registration. Passwords are stored only as one-way salted hashes on Supabase Auth and cannot be viewed by the Provider.</P>
+      <P>When signing in with Google, your Google account email address and profile information (name) are collected. Your Google password is not processed by the App.</P>
+      <P>When signing in with Apple, the email address and name linked to your Apple ID are collected. If you choose "Hide My Email", Apple generates an anonymous relay address that is provided to us instead of your real email — we cannot see your real email address. Apple handles password and authentication.</P>
+
+      <SectionTitle>19. EU / UK Representative</SectionTitle>
+      <P>The Provider has not currently designated a GDPR Article 27 representative in the EU or UK. EU and UK data subjects may contact us directly at the email below; on reasonable request we will appoint a representative within a reasonable period for your jurisdiction.</P>
+
+      <SectionTitle>20. Children's Privacy</SectionTitle>
+      <P>The App is rated 12+ on the App Store and Teen on Google Play and is not directed at children. The Service is not available to children under 14 (per Korean PIPA / 정보통신망법) or under 13 (per US COPPA). If we become aware of personal information collected from a child below the applicable age, we will delete it promptly. Please contact us at {PROVIDER_EN.email} if you believe a child has provided personal data.</P>
+
+      <SectionTitle>21. Changes to This Policy</SectionTitle>
       <P>If this Privacy Policy is updated, we will notify you through an in-app notice prior to the changes taking effect.</P>
 
-      <SectionTitle>17. Contact Us</SectionTitle>
+      <SectionTitle>22. Contact Us</SectionTitle>
       <P>For privacy-related inquiries, please reach out by email.</P>
       <P>{`Email: ${PROVIDER_EN.email}`}</P>
     </View>

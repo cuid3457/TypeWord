@@ -344,7 +344,7 @@ export default function ProfileScreen() {
           {/* Danger zone */}
           <Pressable
             onPress={() => setLogoutModal(true)}
-            className={`${premium ? 'mt-3' : 'mt-5'} flex-row items-center justify-center gap-1.5 rounded-[14px] border border-danger bg-surface py-4 dark:bg-surface-dark`}
+            className="mt-5 flex-row items-center justify-center gap-1.5 rounded-[14px] border border-danger bg-surface py-4 dark:bg-surface-dark"
             accessibilityRole="button"
           >
             <MaterialIcons name="logout" size={18} color="#E0654F" />
@@ -598,10 +598,12 @@ export default function ProfileScreen() {
                       result = await reauthAndDeleteAccount(reauthPassword, feedback);
                     } else if (provider === 'apple') {
                       const r = await signInWithApple();
+                      if (r.error === 'cancelled') return;
                       if (r.error) { setReauthError(r.error); return; }
                       result = await deleteAccount(feedback);
                     } else if (provider === 'google') {
                       const r = await signInWithGoogle();
+                      if (r.error === 'cancelled') return;
                       if (r.error) { setReauthError(r.error); return; }
                       result = await deleteAccount(feedback);
                     } else {

@@ -4,7 +4,7 @@ import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 import i18n from 'i18next';
 
-import { supabase } from '@src/api/supabase';
+import { supabase, SUPABASE_URL } from '@src/api/supabase';
 import { getUserSettings } from '@src/storage/userSettings';
 import { showAppConfirm } from './appModalHost';
 import { setUser } from './sentry';
@@ -300,6 +300,14 @@ async function signInWithOAuthPopup(provider: 'google' | 'apple'): Promise<{ err
         if (popup.closed) return; // closed timer will handle
         try {
           const href = popup.location.href; // throws while cross-origin
+          // Defense in depth (P4-M-A-1 2026-06-01): assert same-origin
+          // before reading tokens from the URL. Without this, a redirect
+          // chain through an open redirect on moavoca.com or a popup
+          // landing on a different host could feed attacker-controlled
+          // tokens into setSession. The postMessage path already does an
+          // event.origin check; this brings the poller to parity.
+          const popupOrigin = new URL(href).origin;
+          if (popupOrigin !== window.location.origin) return;
           if (!href.includes('/app/auth/callback')) return;
           const u = new URL(href);
           const hash = u.hash.startsWith('#') ? u.hash.slice(1) : u.hash;
@@ -340,6 +348,10 @@ export async function signInWithGoogle(): Promise<{ error?: string }> {
     await GoogleSignin.hasPlayServices();
     await GoogleSignin.signOut().catch(() => {});
     const response = await GoogleSignin.signIn();
+    // v13+ SDK returns { type: 'cancelled' } instead of throwing when the
+    // user backs out of the account picker. Surface as 'cancelled' so the
+    // caller skips the error toast.
+    if (response.type === 'cancelled') return { error: 'cancelled' };
     const idToken = response.data?.idToken;
     if (!idToken) return { error: 'No ID token received' };
 
@@ -618,6 +630,20 @@ export async function confirmAndSetSessionFromDeepLink(
       // eslint-disable-next-line no-undef
       atob(padded.replace(/-/g, '+').replace(/_/g, '/')),
     );
+    // Defense in depth (P4-M-A-2 2026-06-01): even though we only use this
+    // decoded payload to drive a UI confirm modal (Supabase verifies the
+    // JWT on setSession), reject tokens whose iss/aud don't match our
+    // project. A forged unsigned JWT with `sub=victim.id` could otherwise
+    // sneak through the same-user fast path silently (setSession will
+    // ultimately fail, but the local Supabase client briefly treats the
+    // tokens as the active session and the confirm modal is skipped).
+    const expectedIss = SUPABASE_URL ? `${SUPABASE_URL.replace(/\/+$/, '')}/auth/v1` : null;
+    if (decoded.aud !== 'authenticated') {
+      return { applied: false, error: 'Invalid token (aud)' };
+    }
+    if (expectedIss && decoded.iss && decoded.iss !== expectedIss) {
+      return { applied: false, error: 'Invalid token (iss)' };
+    }
     newEmail = typeof decoded.email === 'string' ? decoded.email : null;
     newUserId = typeof decoded.sub === 'string' ? decoded.sub : null;
   } catch {
@@ -739,6 +765,18 @@ export async function deleteAccount(
       // fall through to generic error
     }
     return { error: (error as Error).message };
+  }
+
+  // Sentry user-tag immediate clear (P5-Compliance-H6 2026-06-01). The
+  // SIGNED_OUT listener in app/_layout.tsx eventually calls setUser(null),
+  // but that fires asynchronously — between deleteAccount return and the
+  // listener, any uncaught error or crumb still tagged with the now-deleted
+  // userId would land in Sentry. Clear immediately.
+  try {
+    const sentry = await import('./sentry');
+    sentry.setUser(null);
+  } catch {
+    // Sentry import failure shouldn't block deletion.
   }
 
   await supabase.auth.signOut();
