@@ -178,7 +178,28 @@ interface PaddleSdk {
       customData?: Record<string, string>;
       settings?: { displayMode?: 'overlay' | 'inline'; locale?: string; successUrl?: string };
     }): void;
+    close(): void;
   };
+}
+
+// Auto-close the Checkout overlay after a successful payment so the user
+// returns to the paywall without manually clicking ✕. The webhook updates
+// the server (profiles.plan) independently; we also kick a local refresh
+// so the "Premium active" badge surfaces on the next render. Refresh is
+// scheduled with a small delay because the webhook fires async — querying
+// profiles.plan immediately can read the old value before the server
+// reconcile RPC commits.
+function handlePaddleEvent(Paddle: PaddleSdk, data: unknown): void {
+  const name = (data as { name?: string } | null)?.name;
+  if (name !== 'checkout.completed') return;
+  setTimeout(() => {
+    try { Paddle.Checkout.close(); } catch { /* noop */ }
+  }, 2000);
+  // Webhook race buffer — give reconcile_plan_from_sources ~3s to commit
+  // before reading profiles.plan locally. Multiple refreshes catch the
+  // common case (1-2s) and the slow case (5s+) without a tight poll loop.
+  setTimeout(() => { refreshBonusPremium().catch(() => {}); }, 3000);
+  setTimeout(() => { refreshBonusPremium().catch(() => {}); }, 8000);
 }
 
 // Map our 8 UI languages to Paddle's locale codes. Paddle uses zh-Hans for
@@ -211,7 +232,10 @@ async function ensurePaddleReady(): Promise<PaddleSdk | null> {
 
   try {
     Paddle.Environment.set(paddleEnvironment());
-    Paddle.Initialize({ token });
+    Paddle.Initialize({
+      token,
+      eventCallback: (data) => handlePaddleEvent(Paddle, data),
+    });
     _paddleInitialized = true;
     return Paddle;
   } catch (e) {
