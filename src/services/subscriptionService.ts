@@ -6,6 +6,7 @@ import { captureError } from './sentry';
 const TIER_CACHE_KEY = 'typeword.tier';
 const PREMIUM_CACHE_KEY = 'typeword.premium'; // legacy — read for migration only
 const BONUS_UNTIL_CACHE_KEY = 'typeword.bonus_premium_until';
+const SERVER_TIER_CACHE_KEY = 'typeword.serverTier'; // reflects profiles.plan (Web Paddle + cross-channel)
 
 // 2-tier 시스템: free / premium 단일 paid tier.
 // Internal canonical: 'premium'. Legacy values ('pro', 'plus') still accepted
@@ -16,6 +17,7 @@ type Listener = (tier: Tier) => void;
 const listeners = new Set<Listener>();
 
 let _rcTier: Tier = 'free';
+let _serverTier: Tier = 'free'; // profiles.plan — captures web Paddle subs that RC doesn't see
 let _bonusUntilMs = 0; // epoch ms; treated as premium when now() <= this (referral bonus)
 let _initialized = false;
 
@@ -26,6 +28,10 @@ function notify() {
 
 function _computeTier(): Tier {
   if (_rcTier === 'premium') return 'premium';
+  // Server profile (reconcile_plan_from_sources ORs RC + Web + Bonus). Mobile
+  // reads this so a user who paid via web Paddle sees premium even before any
+  // RC event fires.
+  if (_serverTier === 'premium') return 'premium';
   if (Date.now() <= _bonusUntilMs) return 'premium';
   return 'free';
 }
@@ -81,25 +87,39 @@ function tierFromEntitlements(active: Record<string, unknown>): Tier {
 }
 
 /**
- * Sync the bonus_premium_until window from the user's profile (set by the
- * apply_referral RPC). Independent of RevenueCat — both grant pro and
- * the longer of the two wins.
+ * Sync server-derived entitlement state in one roundtrip:
+ *   - profiles.plan       — reconciled OR of (RC, Web Paddle, Bonus). Lets a
+ *                           user who paid on the web see premium on mobile
+ *                           without waiting for an RC event.
+ *   - profiles.bonus_premium_until — referral bonus window. Independent of
+ *                           RC and Web; the longer of the three wins via
+ *                           _computeTier()'s OR.
  */
 export async function refreshBonusPremium(): Promise<void> {
   try {
     const { data: session } = await supabase.auth.getSession();
     const uid = session.session?.user?.id;
     if (!uid) {
+      _serverTier = 'free';
       _bonusUntilMs = 0;
+      await AsyncStorage.removeItem(SERVER_TIER_CACHE_KEY);
       await AsyncStorage.removeItem(BONUS_UNTIL_CACHE_KEY);
       notify();
       return;
     }
     const { data: profile } = await supabase
       .from('profiles')
-      .select('bonus_premium_until')
+      .select('plan, bonus_premium_until')
       .eq('user_id', uid)
       .maybeSingle();
+
+    const planRaw = (profile as { plan?: string | null } | null)?.plan;
+    const serverTier: Tier = planRaw === 'premium' || planRaw === 'pro' || planRaw === 'plus'
+      ? 'premium'
+      : 'free';
+    _serverTier = serverTier;
+    await AsyncStorage.setItem(SERVER_TIER_CACHE_KEY, serverTier);
+
     const raw = (profile as { bonus_premium_until?: string | null } | null)?.bonus_premium_until;
     const ms = raw ? Date.parse(raw) : 0;
     _bonusUntilMs = Number.isFinite(ms) ? ms : 0;
@@ -129,6 +149,8 @@ export async function initSubscription(): Promise<void> {
   const cachedBonus = await AsyncStorage.getItem(BONUS_UNTIL_CACHE_KEY);
   const cachedMs = cachedBonus ? Number(cachedBonus) : 0;
   _bonusUntilMs = Number.isFinite(cachedMs) ? cachedMs : 0;
+  const cachedServer = (await AsyncStorage.getItem(SERVER_TIER_CACHE_KEY)) as Tier | null;
+  _serverTier = cachedServer === 'premium' ? 'premium' : 'free';
 
   try {
     const { default: Purchases } = require('react-native-purchases');
@@ -181,6 +203,11 @@ export async function resetUser(): Promise<void> {
       if (!isAnonErr) throw e;
     }
     await cacheTier('free');
+    _serverTier = 'free';
+    _bonusUntilMs = 0;
+    await AsyncStorage.removeItem(SERVER_TIER_CACHE_KEY);
+    await AsyncStorage.removeItem(BONUS_UNTIL_CACHE_KEY);
+    notify();
   } catch (e) {
     captureError(e, { service: 'subscriptionService', fn: 'resetUser' });
   }
