@@ -31,9 +31,20 @@ const POS_MAP: Record<string, Record<string, number>> = {
     prefix: 11, suffix: 11, affix: 11, "alphabet-letter": 11, character: 11,
   },
   freedict: {
-    noun: 0, verb: 1, adjective: 2, adverb: 3,
-    preposition: 4, conjunction: 5, interjection: 6,
-    pronoun: 7, "proper noun": 8, phrase: 9, numeral: 10,
+    noun: 0, n: 0,
+    verb: 1, v: 1,
+    adjective: 2, adj: 2,
+    adverb: 3, adv: 3,
+    preposition: 4, prep: 4,
+    conjunction: 5, conj: 5,
+    interjection: 6, intj: 6, interj: 6,
+    pronoun: 7, pron: 7,
+    "proper noun": 8, "proper-noun": 8, name: 8,
+    phrase: 9, expression: 9, idiom: 9, particle: 9, prt: 9,
+    article: 9, det: 9, determiner: 9,
+    numeral: 10, num: 10,
+    symbol: 11, abbrev: 11, abbreviation: 11,
+    prefix: 11, suffix: 11, affix: 11,
   },
   krdict: {
     "명사": 0, "의존 명사": 0, "의존명사": 0,
@@ -88,6 +99,11 @@ const POS_MAP: Record<string, Record<string, number>> = {
     "proper noun": 8, "proper-noun": 8, name: 8,
     phrase: 9, expression: 9, idiom: 9, proverb: 9, particle: 9, prt: 9,
     article: 9, det: 9, determiner: 9, "auxiliary verb": 9, aux: 9,
+    // Chinese classifiers (量词/measure words) appear as cedict POS labels
+    // the LLM infers — map to expression (canonical 9) so they render
+    // instead of dropping to empty "-". Similarly for Korean grammatical
+    // particles the LLM might emit in English.
+    classifier: 9, "measure word": 9, "bound form": 9,
     numeral: 10, num: 10, "cardinal-number": 10, "ordinal-number": 10,
     symbol: 11, letter: 11, abbrev: 11, abbreviation: 11,
     prefix: 11, suffix: 11, affix: 11,

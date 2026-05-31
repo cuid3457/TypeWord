@@ -33,7 +33,11 @@ type LoadedAd = {
 export function NativeAdCard({ marginTop = 0 }: { marginTop?: number }) {
   const premium = usePremium();
   const [loaded, setLoaded] = useState<LoadedAd | null>(null);
-  const [NativeAdViewComponent, setNativeAdViewComponent] = useState<React.ComponentType<{ nativeAd: unknown; children: React.ReactNode; style?: object }> | null>(null);
+  const [adModules, setAdModules] = useState<{
+    NativeAdView: React.ComponentType<{ nativeAd: unknown; children: React.ReactNode; style?: object }>;
+    NativeAsset: React.ComponentType<{ assetType: string; children: React.ReactElement }>;
+    NativeAssetType: Record<string, string>;
+  } | null>(null);
 
   useEffect(() => {
     if (isExpoGo || premium || !NATIVE_AD_UNIT_ID) return;
@@ -43,14 +47,14 @@ export function NativeAdCard({ marginTop = 0 }: { marginTop?: number }) {
 
     (async () => {
       try {
-        const { NativeAd, NativeAdView } = require('react-native-google-mobile-ads');
+        const { NativeAd, NativeAdView, NativeAsset, NativeAssetType } = require('react-native-google-mobile-ads');
         const ad = await NativeAd.createForAdRequest(NATIVE_AD_UNIT_ID);
         if (cancelled) {
           ad.destroy();
           return;
         }
         adInstance = ad;
-        setNativeAdViewComponent(() => NativeAdView);
+        setAdModules({ NativeAdView, NativeAsset, NativeAssetType });
         setLoaded({
           headline: ad.headline ?? '',
           body: ad.body ?? '',
@@ -72,9 +76,9 @@ export function NativeAdCard({ marginTop = 0 }: { marginTop?: number }) {
     };
   }, [premium]);
 
-  if (premium || !loaded || !NativeAdViewComponent || !NATIVE_AD_UNIT_ID) return null;
+  if (premium || !loaded || !adModules || !NATIVE_AD_UNIT_ID) return null;
 
-  const Wrapper = NativeAdViewComponent;
+  const { NativeAdView: Wrapper, NativeAsset, NativeAssetType } = adModules;
 
   return (
     <Wrapper nativeAd={loaded.ad} style={{ width: '100%', marginTop }}>
@@ -82,29 +86,39 @@ export function NativeAdCard({ marginTop = 0 }: { marginTop?: number }) {
         <View className="mb-2 flex-row items-center justify-between">
           <Text className="text-[10px] font-bold uppercase tracking-wider text-faint">광고</Text>
           {loaded.advertiser ? (
-            <Text className="text-[10px] text-faint" numberOfLines={1}>{loaded.advertiser}</Text>
+            <NativeAsset assetType={NativeAssetType.ADVERTISER}>
+              <Text className="text-[10px] text-faint" numberOfLines={1}>{loaded.advertiser}</Text>
+            </NativeAsset>
           ) : null}
         </View>
         <View className="flex-row items-center gap-3">
           {loaded.iconUri ? (
-            <Image
-              source={{ uri: loaded.iconUri }}
-              style={{ width: 44, height: 44, borderRadius: 10 }}
-            />
+            <NativeAsset assetType={NativeAssetType.ICON}>
+              <Image
+                source={{ uri: loaded.iconUri }}
+                style={{ width: 44, height: 44, borderRadius: 10 }}
+              />
+            </NativeAsset>
           ) : null}
           <View className="flex-1">
-            <Text className="text-sm font-semibold text-ink dark:text-ink-dark" numberOfLines={2}>
-              {loaded.headline}
-            </Text>
+            <NativeAsset assetType={NativeAssetType.HEADLINE}>
+              <Text className="text-sm font-semibold text-ink dark:text-ink-dark" numberOfLines={2}>
+                {loaded.headline}
+              </Text>
+            </NativeAsset>
             {loaded.body ? (
-              <Text className="mt-0.5 text-xs text-muted" numberOfLines={2}>{loaded.body}</Text>
+              <NativeAsset assetType={NativeAssetType.BODY}>
+                <Text className="mt-0.5 text-xs text-muted" numberOfLines={2}>{loaded.body}</Text>
+              </NativeAsset>
             ) : null}
           </View>
         </View>
         {loaded.callToAction ? (
-          <Pressable className="mt-3 self-start rounded-lg bg-accent px-3 py-1.5">
-            <Text className="text-xs font-bold text-white">{loaded.callToAction}</Text>
-          </Pressable>
+          <NativeAsset assetType={NativeAssetType.CALL_TO_ACTION}>
+            <Pressable className="mt-3 self-start rounded-lg bg-accent px-3 py-1.5">
+              <Text className="text-xs font-bold text-white">{loaded.callToAction}</Text>
+            </Pressable>
+          </NativeAsset>
         ) : null}
       </View>
     </Wrapper>

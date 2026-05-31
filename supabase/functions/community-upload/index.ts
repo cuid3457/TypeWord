@@ -37,7 +37,8 @@ const ALLOWED_ORIGINS = new Set([
 ]);
 
 const MIN_WORDS_FOR_UPLOAD = 5;
-const MAX_WORDS_FOR_UPLOAD = 1000;
+// Mirrors client-side MAX_WORDS_PER_BOOK in src/db/queries.ts — keep in sync.
+const MAX_WORDS_FOR_UPLOAD = 300;
 const MAX_TITLE_LEN = 80;
 const MAX_DESCRIPTION_LEN = 300;
 const MAX_BODY_BYTES = 1024 * 1024; // 1 MB hard cap

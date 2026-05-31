@@ -122,6 +122,36 @@ export async function validateNeologism(
   const stripMeta = (s: string) =>
     s.replace(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)\s*[,:.\-]\s*/i, "").trim();
 
+  // Detect definition leaks the LLM occasionally produces in target_gloss:
+  // long English explanatory phrases dropped into a CJK target slot
+  // ("A common greeting meaning 'hello'..." in a ja card,
+  //  "The Japanese language" in a ja card,
+  //  "an electronic device for storing..." in an it card).
+  // The prompt says target_gloss = 1-3 words in TARGET_LANG script. Reject
+  // glosses that are clearly off-spec rather than display garbage.
+  const looksLikeDefinitionLeak = (gloss: string): boolean => {
+    const g = gloss.trim();
+    if (!g) return false;
+    const wordCount = g.split(/\s+/).filter(Boolean).length;
+    const hasLatin = /[A-Za-z]/.test(g);
+    const hasHangul = /[가-힣]/.test(g);
+    const hasJp = /[ぁ-んァ-ヶ]/.test(g);
+    const hasCjk = /[一-鿿]/.test(g);
+    // CJK target with no native script + long Latin text = English definition
+    if (["ja", "ko", "zh-CN"].includes(targetLang)) {
+      if (targetLang === "ja" && !hasJp && !hasCjk && hasLatin && wordCount > 3) return true;
+      if (targetLang === "ko" && !hasHangul && hasLatin && wordCount > 3) return true;
+      if (targetLang === "zh-CN" && !hasCjk && hasLatin && wordCount > 3) return true;
+    }
+    // Latin-script target with explanatory English phrases (starts with
+    // articles + long): "A common greeting...", "An electronic device...",
+    // "The Japanese language".
+    if (["en", "es", "fr", "de", "it"].includes(targetLang) && wordCount > 5) {
+      if (/^(a|an|the)\s+\w/i.test(g)) return true;
+    }
+    return false;
+  };
+
   // Defensive: ensure shape integrity
   return {
     verdict: parsed.verdict,
@@ -135,6 +165,7 @@ export async function validateNeologism(
             frequency_score: Math.max(0, Math.min(100, Number(s.frequency_score) || 0)),
           }))
           .filter((s) => s.en_def && s.target_gloss)
+          .filter((s) => !looksLikeDefinitionLeak(s.target_gloss))
           .slice(0, 4)
       : [],
   };

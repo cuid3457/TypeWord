@@ -64,6 +64,16 @@ function extractRegister(misc: string[] = []): string | undefined {
   return undefined;
 }
 
+// JMdict gloss cleanup — strip parenthetical context tags lexicographers add
+// to disambiguate ("(secret) date", "(person's) father"). On a learner card
+// these read as noise. Same pattern as cedict.cleanCedictGloss.
+function cleanJmdictGloss(text: string): string {
+  let s = text.trim();
+  s = s.replace(/^\s*\([^)]{1,40}\)\s+/, "");
+  s = s.replace(/\s*\([^)]{0,40}\)\s*$/g, "");
+  return s.trim();
+}
+
 /**
  * JMdict에서 한자(kanji) 또는 가나(kana)로 단어 검색.
  * 정확 일치 (GIN array contains).
@@ -110,11 +120,12 @@ export async function jmdictSearch(
       // 방언 sense 제외 (관서/관동/사투리 등 — 표준 일본어 학습 범위 밖).
       if ((s.dialect ?? []).length > 0) return;
       const glosses = s.gloss ?? [];
-      const en_translation = glosses.find((g) => g.lang === "eng")?.text;
+      const rawEn = glosses.find((g) => g.lang === "eng")?.text;
+      const en_translation = rawEn ? cleanJmdictGloss(rawEn) : undefined;
       const translations_by_lang: Record<string, string> = {};
       for (const g of glosses) {
         const mapped = JMDICT_LANG_MAP[g.lang];
-        if (mapped) translations_by_lang[mapped] = g.text;
+        if (mapped) translations_by_lang[mapped] = cleanJmdictGloss(g.text);
       }
       senses.push({
         sense_id: `${row.jmdict_seq}:${idx}`,

@@ -192,7 +192,6 @@ export default {
     mode_dictation: 'Dictée',
     mode_context: 'Phrase',
     mode_fill_blank: 'Texte à trous',
-    mode_cloze_listening: 'Dictée de phrase',
     mode_auto: 'Automatique',
     speaking_prompt: 'Prononcez ce mot à voix haute',
     speaking_listening: 'Écoute en cours...',
@@ -442,6 +441,7 @@ export default {
     word_placeholder: 'Ex : ephemeral',
     search: 'Rechercher',
     generating: 'Génération\u2026',
+    ai_may_err: 'L’IA peut faire des erreurs',
     meanings: 'Définitions',
     save: 'Enregistrer dans la liste',
     saved: 'Enregistré dans la liste',
@@ -482,6 +482,9 @@ export default {
     listening: 'Écoute en cours\u2026',
     stt_dev_build_required: 'La recherche vocale nécessite une version de développement',
     which_meaning: 'Quel sens ?',
+    book_full_title: 'Liste de mots pleine',
+    book_full_message: 'Cette liste contient déjà {{max}} mots. Crée une nouvelle liste pour continuer à apprendre.',
+    book_full_cta: 'Créer une nouvelle liste',
   },
   inquiry: {
     title: 'Nous contacter',
@@ -674,6 +677,7 @@ export default {
     thanks_1: 'Merci pour votre signalement ! Cela nous aide à améliorer l\'appli.',
     thanks_2: 'Votre avis est précieux ! Nous examinerons cela rapidement.',
     thanks_3: 'Merci ! Votre retour contribue à améliorer l\'appli pour tous.',
+    send: 'Envoyer',
   },
   library_tab: {
     "subtitle": "Listes partagées par les utilisateurs",

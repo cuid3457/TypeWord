@@ -189,7 +189,6 @@ export default {
     mode_dictation: 'Diktat',
     mode_context: 'Satz',
     mode_fill_blank: 'Lückentext',
-    mode_cloze_listening: 'Satzdiktat',
     mode_auto: 'Automatisch',
     speaking_prompt: 'Sprich dieses Wort laut aus',
     speaking_listening: 'Höre zu...',
@@ -428,7 +427,7 @@ export default {
   },
   add_word: {
     title: 'Wort hinzufügen', word: 'Wort', word_placeholder: 'z.B. ephemeral',
-    search: 'Suchen', generating: 'Generieren\u2026', meanings: 'Bedeutungen',
+    search: 'Suchen', generating: 'Generieren\u2026', ai_may_err: 'KI kann Fehler machen', meanings: 'Bedeutungen',
     save: 'In Liste speichern', saved: 'In Liste gespeichert',
     already_exists: 'Bereits in der Liste',
     first_lookup: 'Du hast dieses Wort als Erster gesucht!',
@@ -465,6 +464,9 @@ export default {
     listening: 'Hört zu\u2026',
     stt_dev_build_required: 'Sprachsuche erfordert einen Entwicklungs-Build',
     which_meaning: 'Welche Bedeutung?',
+    book_full_title: 'Wortliste ist voll',
+    book_full_message: 'Diese Wortliste enthält bereits {{max}} Wörter. Erstelle eine neue Liste, um weiterzulernen.',
+    book_full_cta: 'Neue Wortliste erstellen',
   },
   inquiry: {
     title: 'Kontakt',
@@ -657,6 +659,7 @@ export default {
     thanks_1: 'Danke für die Meldung! Das hilft uns, die App zu verbessern.',
     thanks_2: 'Vielen Dank für Ihr Feedback! Wir werden es bald prüfen.',
     thanks_3: 'Danke! Ihr Beitrag hilft, die App für alle besser zu machen.',
+    send: 'Senden',
   },
   library_tab: {
     "subtitle": "Von Nutzern geteilte Wortlisten",

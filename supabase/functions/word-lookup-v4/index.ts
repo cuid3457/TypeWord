@@ -26,7 +26,12 @@ import { jmdictSearch } from "../_shared/dict-clients/jmdict.ts";
 import { cedictSearch } from "../_shared/dict-clients/cedict.ts";
 import { freedictSearch } from "../_shared/dict-clients/freedict.ts";
 import { wiktionarySearch } from "../_shared/dict-clients/wiktionary.ts";
-import { judgeUnified, type JudgedSense } from "../_shared/dict-clients/ai-judge.ts";
+import {
+  judgeUnified,
+  translateCanonicalMeanings,
+  translateCanonicalMeaningsRetry,
+  type JudgedSense,
+} from "../_shared/dict-clients/ai-judge.ts";
 import { posCanonical } from "../_shared/dict-clients/pos-normalize.ts";
 import {
   generateExamples,
@@ -60,6 +65,7 @@ import {
   buildReverseLookupUserPrompt,
 } from "../_shared/prompts-v2.ts";
 import { callOpenAiForWordLookup, OpenAiError } from "../_shared/openai.ts";
+import { verifyReverseCandidates } from "../_shared/reverse-verify.ts";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_ROLE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -211,14 +217,17 @@ function groupByEntryThenTranslation(judged: JudgedSense[], targetLang?: string)
   //   en_translation fallback only when target IS English. For non-EN target,
   //   showing the dict's raw English gloss in a French/Italian/etc card is
   //   worse than dropping the sense — drop it.
+  // Display chain. For EN target: full chain (display_translation > en_override
+  // > en_translation). For non-EN target: ONLY display_translation — the
+  // escalation pass in judgeUnifiedSingle already retried with gpt-4.1 if mini
+  // failed; if there's still no target_lang label, dropping the sense beats
+  // surfacing English in a French/Italian/etc card.
   const isEnTarget = targetLang === "en" || !targetLang;
   const groups = new Map<string, SenseGroup>();
   for (const j of entryReps) {
-    const display =
-      j.display_translation ??
-      j.en_override ??
-      (isEnTarget ? j.sense.en_translation : undefined) ??
-      "";
+    const display = isEnTarget
+      ? (j.display_translation ?? j.en_override ?? j.sense.en_translation ?? "")
+      : (j.display_translation ?? "");
     const trimmed = display.trim();
     if (!trimmed) continue; // no learner-facing label → omit this sense
     const key = trimmed.toLowerCase();
@@ -417,6 +426,7 @@ async function fetchExamplesViaCanonical(
         g.senses[0]?.sense.source_def ??
         g.display_en,
       targetGloss: g.display_en,
+      pos: g.senses[0]?.sense.pos,
       proficiencyHint: opts.proficiencyHint,
     }));
     const gen = await generateExamples(reqs, sourceLang, targetLang);
@@ -469,6 +479,7 @@ async function fetchExamples(
       surfaceForms: readingVariants,
       senseDef,
       targetGloss,
+      pos: firstSense?.sense.pos,
       proficiencyHint,
     };
   });
@@ -593,6 +604,56 @@ interface CachedHit {
   exampleslessEnrichNeeded: boolean;
 }
 
+// Canonical-only fetch: returns the word_entries row WITHOUT requiring a
+// matching word_translations[targetLang]. Used by translateExistingCanonical
+// to honor the architectural promise — meanings/examples decided in source
+// language, reused across every target lang with only the translation layer
+// regenerated.
+interface CanonicalRow {
+  id: string;
+  headword: string;
+  reading?: string;
+  ipa?: string;
+  source: string;
+  meanings: Array<{
+    sense_id: string;
+    source_def: string;
+    en_translation?: string;
+    pos?: string;
+    grade?: string;
+    frequency_score?: number;
+    source?: string;
+  }>;
+  examples: CanonicalExampleRow[];
+}
+async function getCanonicalOnly(word: string, sourceLang: string): Promise<CanonicalRow | null> {
+  const { data } = await supabase
+    .from("word_entries")
+    .select("id, headword, reading, ipa, meanings, examples, source")
+    .eq("word", word)
+    .eq("word_lang", sourceLang)
+    .maybeSingle();
+  if (!data || !Array.isArray(data.meanings) || data.meanings.length === 0) return null;
+  // Polluted-canonical safety net: drop senses whose source_def is itself a
+  // dictionary typo-redirect ("Misspelling of X", "Alternative form of Y").
+  // These leak through old canonicals saved before freedict's typo filter was
+  // added; reusing them silently overrides the typo-correction path.
+  const isTypoRedirect = (def: string): boolean =>
+    /^(\s*(misspelling|misspelt|misspelled|alternative spelling|alternative form|alternative case form|obsolete spelling|archaic spelling|common misspelling|incorrect spelling|nonstandard spelling)\s+of)\b/i.test(def);
+  const cleanMeanings = (data.meanings as CanonicalRow["meanings"])
+    .filter((m) => !isTypoRedirect(m.source_def ?? ""));
+  if (cleanMeanings.length === 0) return null;
+  return {
+    id: data.id as string,
+    headword: (data.headword as string) ?? word,
+    reading: (data.reading as string) ?? undefined,
+    ipa: (data.ipa as string) ?? undefined,
+    source: (data.source as string) ?? "dictionary",
+    meanings: cleanMeanings,
+    examples: (data.examples ?? []) as CanonicalExampleRow[],
+  };
+}
+
 async function getCached(
   word: string,
   sourceLang: string,
@@ -624,12 +685,35 @@ async function getCached(
   // "enrich needed" = no examples at all, OR all examples are dict-sourced (no translation).
   // enrich's job is to produce LLM examples with full translation for the learning card.
   const hasLlmExample = examples.some((ex) => ex.source === "llm" && ex.translation);
+  // Stale-cache detection — treat as cache miss so translateExistingCanonical
+  // can heal the data on read.
+  //   (a) ALL meanings have empty partOfSpeech (cards saved before cedict POS
+  //       fix have this shape; a single populated one means it was saved
+  //       post-fix and the empty ones are intentional 의존명사 etc.).
+  //   (b) For target_lang=ko, any sense marked POS=verb/adjective whose
+  //       definition lacks the Korean -다 ending. These are stale labels from
+  //       before the POS-form-consistency prompt fix ("점화" for verb when it
+  //       should be "점화하다"); re-translating produces the correct form.
+  const meaningsArr = (trans.meanings_translated ?? []) as WordMeaning[];
+  const allPosEmpty = meaningsArr.length > 0 &&
+    meaningsArr.every((m) => !m.partOfSpeech || m.partOfSpeech === "");
+  if (allPosEmpty) return null;
+  if (targetLang === "ko") {
+    const hasStaleKoVerbForm = meaningsArr.some((m) =>
+      (m.partOfSpeech === "verb" || m.partOfSpeech === "adjective") &&
+      typeof m.definition === "string" &&
+      m.definition.trim().length > 0 &&
+      !m.definition.trim().endsWith("다") &&
+      !m.definition.trim().endsWith("다.")
+    );
+    if (hasStaleKoVerbForm) return null;
+  }
   return {
     result: {
       headword: entry.headword ?? word,
       reading: entry.reading ?? undefined,
       ipa: entry.ipa ?? undefined,
-      meanings: trans.meanings_translated ?? [],
+      meanings: meaningsArr,
       examples,
     },
     entryId: entry.id as string,
@@ -963,6 +1047,7 @@ async function enrichExistingCache(
       surfaceForms: [],
       senseDef: m.definition,
       targetGloss: m.definition,
+      pos: m.partOfSpeech,
       proficiencyHint,
     }));
     const gen = await generateExamples(reqs, sourceLang, targetLang);
@@ -1009,6 +1094,159 @@ async function enrichExistingCache(
 }
 
 // ────────────────────────────────────────────────────────────────────────
+// translateExistingCanonical — reuse already-judged canonical for a NEW
+// target_lang. Honors the "decide meanings & examples once per source word,
+// share across every target_lang" architectural promise: the dict + judge
+// steps are skipped entirely, the canonical's sense list + source-lang
+// example sentences are taken as-is, and we only run two translation calls
+// (meanings → target_lang, source sentences → target_lang). Writes ONLY to
+// word_translations[target_lang], never touches word_entries.
+// ────────────────────────────────────────────────────────────────────────
+async function translateExistingCanonical(
+  canonical: CanonicalRow,
+  sourceLang: string,
+  targetLang: string,
+  mode: "quick" | "enrich",
+): Promise<{ result: WordLookupResult; cached: boolean }> {
+  const canonicalMeanings = canonical.meanings;
+  if (canonicalMeanings.length === 0) {
+    return { result: { headword: canonical.headword, reading: canonical.reading, ipa: canonical.ipa, meanings: [], examples: [] }, cached: false };
+  }
+
+  // 1. Translate meanings to target_lang (single LLM call for all senses).
+  //    Includes gpt-4.1 escalation when mini drops senses (cross-target reuse
+  //    must not silently lose senses just because mini got confused).
+  const translations = await translateCanonicalMeanings(
+    canonical.headword,
+    canonicalMeanings.map((m) => ({
+      sense_id: m.sense_id,
+      en_translation: m.en_translation,
+      source_def: m.source_def,
+      pos: m.pos,
+    })),
+    sourceLang,
+    targetLang,
+  );
+  // 1b. Escalation pass — when mini failed to provide a translation for some
+  //     senses (cross-CJK polysemy is the common case), retry those senses
+  //     with gpt-4.1 + a tighter prompt. Same pattern as judgeUnifiedSingle.
+  const missing = canonicalMeanings.filter((m) => !translations.has(m.sense_id));
+  if (missing.length > 0 && targetLang !== sourceLang) {
+    try {
+      const retry = await translateCanonicalMeaningsRetry(
+        canonical.headword, missing, sourceLang, targetLang,
+      );
+      for (const [sid, val] of retry) translations.set(sid, val);
+    } catch (err) {
+      console.warn(`[v4 canonical-retry] failed: ${(err as Error).message}`);
+    }
+  }
+
+  // 2. Build target-localized WordMeaning[]. Each meaning keeps the canonical's
+  //    sense_id and English context — only the displayed `definition` swaps to
+  //    target_lang. POS is resolved per meaning's source (cedict/llm use the
+  //    llm map; krdict/jmdict/wiktionary use their native map). When the
+  //    canonical lacks POS (legacy data from before the cedict-POS fix), fall
+  //    back to the LLM-inferred POS returned alongside the translation and
+  //    heal-on-read by patching canonical.
+  //    CRITICAL: build a parallel array of (sense_id → newIndex) AFTER the
+  //    drop-empty filter. Examples downstream re-index against this map so a
+  //    dropped sense never shifts the meaningIndex of a sibling sense.
+  const isEnTarget = targetLang === "en" || !targetLang;
+  const canonicalPatch: typeof canonicalMeanings = [];
+  let canonicalChanged = false;
+  const senseIdToNewIdx = new Map<string, number>();
+  const meanings: WordMeaning[] = [];
+  canonicalMeanings.forEach((m) => {
+    const llmRes = translations.get(m.sense_id);
+    // For EN target, fall back to dict's English gloss when LLM had nothing
+    // (en_translation is always English so still a valid card). For non-EN
+    // target, DO NOT fall back — surfacing English in a French/Italian/etc
+    // card would re-introduce the leak. Drop the sense instead.
+    const targetLabel = llmRes?.target ?? (isEnTarget ? (m.en_translation ?? "") : "");
+    const llmPos = llmRes?.pos;
+    const effectivePos = m.pos || llmPos;
+    if (!m.pos && llmPos) {
+      canonicalPatch.push({ ...m, pos: llmPos });
+      canonicalChanged = true;
+    } else {
+      canonicalPatch.push(m);
+    }
+    if (!targetLabel.trim()) return; // dropped
+    const posSrc = m.source === "cedict" || m.source === "llm" || !m.source ? "llm" : m.source;
+    senseIdToNewIdx.set(m.sense_id, meanings.length);
+    meanings.push({
+      definition: targetLabel,
+      partOfSpeech: posCanonical(effectivePos, posSrc),
+      relevanceScore: m.frequency_score,
+      senseId: m.sense_id,
+    } as WordMeaning);
+  });
+
+  // 2b. Heal canonical POS in the background if any sense was missing it.
+  //     One-time per legacy canonical — next lookup sees the patched data.
+  if (canonicalChanged) {
+    fireAndForget(supabase
+      .from("word_entries")
+      .update({ meanings: canonicalPatch })
+      .eq("id", canonical.id)
+      .then(() => undefined));
+  }
+
+  // 3. For enrich: reuse canonical example sentences (same Korean text across
+  //    all 7 target_langs) and only generate the target-lang translation for
+  //    each. CRITICAL: skip examples whose sense was DROPPED (no target_lang
+  //    translation available) — otherwise meaningIndex would point at the
+  //    wrong sense. Examples are matched to senses by sense_id, never by raw
+  //    position in canonicalMeanings.
+  let examples: WordExample[] = [];
+  if (mode === "enrich" && canonical.examples.length > 0) {
+    const translateReqs: Array<CanonicalTranslateRequest & { _mi: number }> = [];
+    for (const ex of canonical.examples) {
+      // Only honor sense_id matching — positional fallback is unsafe when
+      // senses get dropped (the legacy "meaningIndex" field can point at a
+      // dropped sibling).
+      if (!ex.senseId) continue;
+      const newIdx = senseIdToNewIdx.get(ex.senseId);
+      if (newIdx === undefined) continue; // sense was dropped
+      const targetGloss = meanings[newIdx].definition;
+      translateReqs.push({
+        key: ex.senseId,
+        sentence: ex.sentence,
+        targetGloss,
+        _mi: newIdx,
+      });
+    }
+
+    if (translateReqs.length > 0) {
+      const tr = await translateCanonicalSentences(translateReqs, sourceLang, targetLang);
+      examples = translateReqs.map((req) => ({
+        sentence: req.sentence,
+        translation: tr.get(req.key) ?? "",
+        meaningIndex: req._mi,
+        source: "llm",
+      }));
+    }
+  }
+
+  // 4. Persist ONLY the translation row — canonical word_entries stays
+  //    untouched, satisfying the cross-target preservation guarantee.
+  fireAndForget(saveCacheTranslation(canonical.id, targetLang, meanings, examples));
+
+  return {
+    result: {
+      headword: canonical.headword,
+      reading: canonical.reading,
+      ipa: canonical.ipa,
+      meanings,
+      examples,
+      confidence: canonicalMeanings[0]?.frequency_score ?? 0,
+    },
+    cached: false,
+  };
+}
+
+// ────────────────────────────────────────────────────────────────────────
 // Main handler
 // ────────────────────────────────────────────────────────────────────────
 async function handle(
@@ -1025,16 +1263,31 @@ async function handle(
   const forceFreshTranslation = opts.forceFreshTranslation === true;
 
   // 1. 캐시 — quick은 examples 비어있어도 hit, enrich는 LLM 예문 확보돼야 hit.
-  //    force* 플래그가 켜진 curation call은 캐시를 통째로 무시하고 fresh path로.
-  if (!forceFresh && !forceFreshTranslation) {
-    const cached = await getCached(word, sourceLang, targetLang);
-    if (cached) {
-      if (mode === "quick") return { result: cached.result, cached: true };
-      if (mode === "enrich" && !cached.exampleslessEnrichNeeded) {
-        return { result: cached.result, cached: true };
+  //    forceFresh: 전체 재생성 (curation only — operator opt-in).
+  if (!forceFresh) {
+    if (!forceFreshTranslation) {
+      const cached = await getCached(word, sourceLang, targetLang);
+      if (cached) {
+        if (mode === "quick") return { result: cached.result, cached: true };
+        if (mode === "enrich" && !cached.exampleslessEnrichNeeded) {
+          return { result: cached.result, cached: true };
+        }
+        // enrich + examples 부족 → cache의 meanings은 유지하고 examples만 LLM 보강
+        return await enrichExistingCache(cached, sourceLang, targetLang, proficiencyHint);
       }
-      // enrich + examples 부족 → cache의 meanings은 유지하고 examples만 LLM 보강
-      return await enrichExistingCache(cached, sourceLang, targetLang, proficiencyHint);
+    }
+    // 1b. Canonical reuse — word_entries.meanings already exists for (word,
+    //     source_lang) but no translation row for THIS target_lang. Skip
+    //     dict + judge entirely and reuse the canonical sense list +
+    //     source-lang example sentences; only the target_lang translation
+    //     layer is fresh. Honors the cross-target stability promise — every
+    //     learner of every L1 sees the same sense list and the same source
+    //     example sentence, only the translation differs.
+    //     Also fires on forceFreshTranslation (curation operator regenerating
+    //     a single target_lang without touching canonical).
+    const canonicalOnly = await getCanonicalOnly(word, sourceLang);
+    if (canonicalOnly && canonicalOnly.meanings.length > 0) {
+      return await translateExistingCanonical(canonicalOnly, sourceLang, targetLang, mode);
     }
   }
 
@@ -1427,9 +1680,20 @@ Deno.serve(async (req) => {
         userId, endpoint: ENDPOINT, cacheHit: true, costUsd: 0,
         durationMs: Date.now() - startedAt, status: "ok",
       }));
+      // Verify cached candidates against the forward dict-first cache. Cached
+      // rows predate verification, so they may contain fabricated headwords
+      // ("바 → bat, spa"). Verification runs on every response (not at save
+      // time) so the gate strengthens as word_translations grows.
+      let outCandidates = cached.candidates;
+      if (!cached.note && outCandidates.length > 0) {
+        const verified = await verifyReverseCandidates(
+          supabase, outCandidates, inputWord, inputLang, studyLang,
+        );
+        outCandidates = verified.candidates;
+      }
       const result = cached.note
         ? { candidates: [], note: cached.note }
-        : { candidates: cached.candidates };
+        : { candidates: outCandidates };
       return new Response(
         JSON.stringify({ result }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } },
@@ -1467,6 +1731,8 @@ Deno.serve(async (req) => {
         );
       }
 
+      // Save the raw LLM output (source of truth). Verification runs on the
+      // response only — cache rows stay verifiable against future cache growth.
       fireAndForget(saveReverseLookup(supabase, {
         input_word: inputWord,
         input_lang: inputLang,
@@ -1482,7 +1748,15 @@ Deno.serve(async (req) => {
         costUsd, durationMs, status: "ok",
       }));
 
-      const result = note ? { candidates: [], note } : { candidates };
+      // Verify against forward dict-first cache before responding.
+      let outCandidates = candidates;
+      if (!note && outCandidates.length > 0) {
+        const verified = await verifyReverseCandidates(
+          supabase, outCandidates, inputWord, inputLang, studyLang,
+        );
+        outCandidates = verified.candidates;
+      }
+      const result = note ? { candidates: [], note } : { candidates: outCandidates };
       return new Response(
         JSON.stringify({ result }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } },

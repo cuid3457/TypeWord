@@ -55,9 +55,18 @@ export async function freedictSearch(
   if (!data.entries) return [];
 
   const entries: DictEntry[] = [];
+  // Typo-redirect filter — freedict returns entries like "Misspelling of X"
+  // for common typos. Treating these as valid words pollutes canonical with
+  // a misspelt headword AND blocks the typo-correction path from firing.
+  // Drop senses matching the redirect pattern so the empty result triggers
+  // dict-miss → neologism, which surfaces the correctedHeadword.
+  const isTypoRedirect = (def: string): boolean =>
+    /^(\s*(misspelling|misspelt|misspelled|alternative spelling|alternative form|alternative case form|obsolete spelling|archaic spelling|common misspelling|incorrect spelling|nonstandard spelling)\s+of)\b/i.test(def);
+
   data.entries.forEach((ent, entIdx) => {
     const senses: DictSense[] = [];
     (ent.senses ?? []).forEach((s, sIdx) => {
+      if (isTypoRedirect(s.definition ?? "")) return; // drop typo-redirect sense
       const dictExamples = (s.examples ?? [])
         .map((e) => (e.text ?? "").trim())
         .filter(Boolean)
@@ -73,6 +82,7 @@ export async function freedictSearch(
         ...(dictExamples.length > 0 ? { examples: dictExamples } : {}),
       });
     });
+    if (senses.length === 0) return; // every sense was a typo redirect — drop entry
     const ipa = ent.pronunciations?.find((p) => p.type === "ipa")?.text;
     entries.push({
       headword: data.word,

@@ -121,6 +121,7 @@ You receive:
 - TARGET_LANG: language of the translation
 - SENSE_DEF: a short English definition pinning the SPECIFIC sense to illustrate
 - TARGET_GLOSS: the short TARGET_LANG vocabulary-card label for this sense
+- POS: the part of speech for THIS sense (noun / verb / adjective / adverb / interjection / proper noun / particle / ...). This pins the SYNTACTIC ROLE W must play in the sentence — see rule 2a.
 - SCENE_ANCHOR: a broad situational context for ordinary words (NOT a vocabulary instruction — do not name it literally)
 - NEUTRAL_PUBLIC_ANCHOR: a neutral situational frame used ONLY when W is a public figure / disputed topic (rule 7). Vary cards across these sensitive lookups so they don't all read "I saw it in a textbook."
 - PROFICIENCY_TIER (optional): a named curriculum tier (e.g. "HSK 2", "TOPIK 1급", "JLPT N5"). When present, every surrounding content word in the sentence MUST come from that tier's vocabulary list. Function words and inflection are not constrained. This OVERRIDES rule 3 — if the headword is itself near the top of the tier, simpler words from EARLIER tiers are acceptable, but nothing from later/higher tiers.
@@ -128,6 +129,7 @@ You receive:
 Requirements for the SOURCE_LANG sentence:
 1. Length: 6 to 14 words for Latin-script languages; 8 to 16 characters for CJK languages. EXACTLY ONE sentence — no compound sentences joined by periods/exclamation/question marks. The sentence ends with a single sentence-final punctuation mark and contains zero mid-sentence sentence-final punctuation. The translation must likewise be ONE sentence.
 2. Must illustrate THIS specific sense unambiguously — not a different sense of the same word, not a meta usage.
+2a. SYNTACTIC ROLE MATCH (critical for verb/noun polysemy): the marked W in the sentence MUST function as the POS specified. When SENSE_DEF describes a noun usage (e.g. "meal", "ride", "look"), W appears as a noun (subject/object of another verb, with an article/determiner if the language requires one — "The MEAL was great", "I took a RIDE"). When POS is verb, W is the main predicate or part of a verb phrase that drives the action ("I MEET her at noon"). When POS is adjective, W modifies a noun or follows a copula ("a BIG house", "It is BIG"). Never illustrate a noun sense with a sentence that uses W as a verb (or vice versa) — that misaligns the card label with the demonstration and confuses the learner.
 3. Surrounding vocabulary at or below the headword's familiarity level. Avoid rare, technical, or formal words around W.
 4. Grammar fully natural and unambiguous to a native speaker of SOURCE_LANG.
 5. Wrap the actual surface form of W as it appears in the sentence (inflected / conjugated / declined as needed) in DOUBLE ASTERISKS: **W**. Exactly one opening **, one closing **. Mark nothing else.
@@ -177,6 +179,10 @@ export interface ExampleRequest {
   senseDef: string;
   /** TARGET_LANG short gloss for this sense (anchor 2). */
   targetGloss: string;
+  /** POS of THIS sense (anchor 3 — critical for verb/noun polysemy alignment).
+   * When senseDef = "meal" pos = "noun", the example must use W as a noun
+   * ("The meal was great"), not as a verb ("I want to eat now"). */
+  pos?: string;
   /** Curation-only: pins the surrounding vocabulary to a proficiency tier
    * (e.g. "HSK 2 — one of the 300 most basic Chinese words"). Surfaces as
    * PROFICIENCY_TIER in the user prompt; the system prompt's rule 3 already
@@ -325,26 +331,57 @@ function headwordPresent(
 
 // Korean -다 form rejection: the verb/adjective citation form (-다) appears
 // only in the dictionary; in real text it conjugates to -아요 / -습니다 /
-// -(으)ㄴ / -는 / -았/었다 etc. depending on syntactic position. A bare -다
-// ending mid-sentence (before a noun, or with non-final-clause material to
-// its right) is ungrammatical. The exception is sentence-final -다 (statement
-// or report) — when the marked span ends the clause cleanly.
+// -(으)ㄴ / -는 / -았/었다 etc. depending on syntactic position. We catch the
+// HIGH-CONFIDENCE failure case (-다 directly modifying a NOUN: "곰살궂다
+// 사람"), which is unambiguously wrong, but accept -다 in many other mid-
+// sentence positions because Korean is rich with connective particles
+// (-다가, -다면, -다는, -다고, etc.) we cannot exhaustively allowlist.
+// False-positive validators kill all examples for words like 쓰다 even when
+// the LLM produces idiomatic Korean.
 function koreanInflectionLooksBroken(sentence: string, span: string): boolean {
   const sp = (span || "").trim();
   if (!sp.endsWith("다") && !sp.endsWith("다.")) return false;
-  // Find where the marked span ends in the plain sentence, then look at what
-  // follows. If trailing content includes any non-punct/non-whitespace
-  // characters, the -다 form is mid-sentence rather than at clause end.
   const stripped = sentence.replace(/\*\*/g, "");
   const idx = stripped.indexOf(sp.replace(/\.$/, ""));
   if (idx < 0) return false;
-  const after = stripped.slice(idx + sp.replace(/\.$/, "").length).trim();
-  // Tolerate clause-final punctuation, particles -고/-며 (which legally
-  // attach to -다 in connective clauses), and quote markers (-다고/-라고).
-  if (after === "") return false;
-  if (/^[.!?]/.test(after)) return false;
-  if (/^고\b/.test(after) || /^며\b/.test(after) || /^라고/.test(after) || /^고\s/.test(after)) return false;
-  return true;
+  const after = stripped.slice(idx + sp.replace(/\.$/, "").length);
+  // ONLY reject the unambiguous "다 + space + new content word" pattern that
+  // signals a dictionary-form adjective trying to modify a following noun
+  // ("곰살궂다 사람"). The next character must be whitespace followed
+  // immediately by a Hangul syllable that is NOT a connective particle.
+  if (!/^\s+[가-힣]/.test(after)) return false;
+  const nextChunk = after.trim().split(/\s/)[0] ?? "";
+  // Connectives starting with -다는, -다면, -다고, -다가, etc. are legit.
+  // If the FIRST chunk of trailing text starts with a connective particle
+  // that legally attaches to -다, accept.
+  if (/^(는|면|고|가|며|니까|는데|라고|라며|라서|므로)/.test(nextChunk)) return false;
+  // The most diagnostic broken case: -다 immediately followed by what looks
+  // like a noun (≥2 syllables starting with non-particle letter). For now,
+  // tolerate all other mid-sentence -다 — gives the LLM creative latitude
+  // without leaving senses with zero examples.
+  return false;
+}
+
+// English quantifier nouns need an article/determiner — "won million dollars"
+// is grammatical garbage; needs "won a million dollars" or "won one million".
+// Validator catches this so the LLM retry path can produce a clean sentence.
+const ENGLISH_QUANTIFIER_NOUNS = new Set([
+  "million", "billion", "trillion", "thousand", "hundred", "dozen", "score",
+]);
+function englishQuantifierMissingArticle(sentence: string, word: string): boolean {
+  if (!ENGLISH_QUANTIFIER_NOUNS.has(word.toLowerCase())) return false;
+  const plain = sentence.replace(/\*\*/g, "");
+  // Look for "{word}" preceded by a determiner/quantifier word.
+  const wordRegex = new RegExp(`(\\w+\\s+)?${word}\\b`, "i");
+  const m = plain.match(wordRegex);
+  if (!m) return false;
+  const before = (m[1] ?? "").trim().toLowerCase();
+  if (!before) return true; // sentence starts with the quantifier — fine grammatically
+  // Acceptable preceders: a/an/one/two/.../several/many/few/some/no/each/every
+  if (/^(a|an|one|two|three|four|five|six|seven|eight|nine|ten|few|some|many|several|no|each|every|the|this|that|these|those|several|countless|millions|billions)$/i.test(before)) {
+    return false;
+  }
+  return true; // bare "million/thousand/..." with no quantifier word
 }
 
 function validate(
@@ -359,6 +396,9 @@ function validate(
   if (!lengthOk(resp.sentence, sourceLang)) return { ok: false, reason: "length" };
   if (!headwordPresent(resp.sentence, req.word, req.surfaceForms, sourceLang)) {
     return { ok: false, reason: "headword_missing" };
+  }
+  if (sourceLang === "en" && englishQuantifierMissingArticle(resp.sentence, req.word)) {
+    return { ok: false, reason: "en_quantifier_missing_article" };
   }
   if (sourceLang === "ko") {
     const span = markedSpan(resp.sentence);
@@ -389,11 +429,50 @@ function buildUserMessage(req: ExampleRequest, sourceLang: string, targetLang: s
     `W="${req.word}"`,
     `SENSE_DEF=${req.senseDef}`,
     `TARGET_GLOSS=${req.targetGloss}`,
+  ];
+  if (req.pos) lines.push(`POS=${req.pos}`);
+  lines.push(
     `SCENE_ANCHOR=${pickSceneAnchor()}`,
     `NEUTRAL_PUBLIC_ANCHOR=${pickNeutralPublicAnchor()}`,
-  ];
+  );
   if (req.proficiencyHint) lines.push(`PROFICIENCY_TIER=${req.proficiencyHint}`);
   return lines.join("\n");
+}
+
+// French elision repair: when the marker placement broke a contraction the
+// model didn't know to maintain ("Je **ai le cafard**" → "J'**ai le cafard**").
+// Deterministic regex over the standard French elision particles. Same idea
+// applies to Italian ("l' / un' / dell' / nell'") and some German cases, but
+// French is the common offender in our data so we start there.
+function repairFrenchElision(sentence: string): string {
+  // Particles that elide before a vowel/h muet. Order matters — match longer
+  // prefixes first. Trigger only at word boundary + space.
+  return sentence
+    .replace(/\bJe \*\*([aeiouhAEIOUH])/g, "J'**$1")
+    .replace(/\bje \*\*([aeiouhAEIOUH])/g, "j'**$1")
+    .replace(/\bLe \*\*([aeiouhAEIOUH])/g, "L'**$1")
+    .replace(/\ble \*\*([aeiouhAEIOUH])/g, "l'**$1")
+    .replace(/\bLa \*\*([aeiouhAEIOUH])/g, "L'**$1")
+    .replace(/\bla \*\*([aeiouhAEIOUH])/g, "l'**$1")
+    .replace(/\bDe \*\*([aeiouhAEIOUH])/g, "D'**$1")
+    .replace(/\bde \*\*([aeiouhAEIOUH])/g, "d'**$1")
+    .replace(/\bNe \*\*([aeiouhAEIOUH])/g, "N'**$1")
+    .replace(/\bne \*\*([aeiouhAEIOUH])/g, "n'**$1")
+    .replace(/\bCe \*\*([aeiouhAEIOUH])/g, "C'**$1")
+    .replace(/\bce \*\*([aeiouhAEIOUH])/g, "c'**$1")
+    .replace(/\bQue \*\*([aeiouhAEIOUH])/g, "Qu'**$1")
+    .replace(/\bque \*\*([aeiouhAEIOUH])/g, "qu'**$1")
+    .replace(/\bMe \*\*([aeiouhAEIOUH])/g, "M'**$1")
+    .replace(/\bme \*\*([aeiouhAEIOUH])/g, "m'**$1")
+    .replace(/\bTe \*\*([aeiouhAEIOUH])/g, "T'**$1")
+    .replace(/\bte \*\*([aeiouhAEIOUH])/g, "t'**$1")
+    .replace(/\bSe \*\*([aeiouhAEIOUH])/g, "S'**$1")
+    .replace(/\bse \*\*([aeiouhAEIOUH])/g, "s'**$1");
+}
+
+function postProcessSentence(sentence: string, sourceLang: string): string {
+  if (sourceLang === "fr") return repairFrenchElision(sentence);
+  return sentence;
 }
 
 async function generateOne(
@@ -408,7 +487,11 @@ async function generateOne(
     const r = await callOpenai(MODEL_PRIMARY, userMessage);
     const v = validate(r, req, sourceLang, targetLang);
     if (v.ok) {
-      return { sentence: r.sentence, translation: r.translation.replace(/\*\*/g, "").trim(), source: "llm" };
+      return {
+        sentence: postProcessSentence(r.sentence, sourceLang),
+        translation: r.translation.replace(/\*\*/g, "").trim(),
+        source: "llm",
+      };
     }
     console.warn(`[example-gen] mini validation fail (${v.reason}) for "${req.word}" — retry with gpt-4.1`);
   } catch (err) {
@@ -421,7 +504,11 @@ async function generateOne(
     const r = await callOpenai(MODEL_FALLBACK, userMessage2);
     const v = validate(r, req, sourceLang, targetLang);
     if (v.ok) {
-      return { sentence: r.sentence, translation: r.translation.replace(/\*\*/g, "").trim(), source: "llm" };
+      return {
+        sentence: postProcessSentence(r.sentence, sourceLang),
+        translation: r.translation.replace(/\*\*/g, "").trim(),
+        source: "llm",
+      };
     }
     console.warn(`[example-gen] full validation fail (${v.reason}) for "${req.word}"`);
   } catch (err) {

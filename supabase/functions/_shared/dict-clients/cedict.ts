@@ -83,6 +83,50 @@ export async function cedictSearch(
   }
   if (!data) return [];
 
+  // CC-CEDICT gloss cleanup — strip dict-style metadata that leaks into card
+  // labels: "lit. X (idiom); fig. Y" → "Y", "variant of X[pinyin]" → drop
+  // sense, "see X" → drop sense, "abbr. for X" → drop sense. These notations
+  // are useful in a lexicographer reference but unusable as learner-card text.
+  function cleanCedictGloss(text: string): string {
+    let s = text.trim();
+    // "lit. X (idiom); fig. Y" — keep the figurative reading only
+    const litFigMatch = s.match(/\blit\.\s+[^;]*;\s*fig\.\s+(.+)/i);
+    if (litFigMatch) s = litFigMatch[1].trim();
+    // Bare "lit. X" without follow-up "fig." — strip the prefix only.
+    // CEDICT format for some idioms is just "lit. one action, two gains"
+    // with no figurative gloss provided.
+    s = s.replace(/^\s*lit\.\s+/i, "");
+    // Strip leading "(idiom)" / "(slang)" / "(formal)" tag wrappers
+    s = s.replace(/^\s*\((idiom|slang|formal|informal|literary|vulgar|colloquial|coll\.)\)\s*/i, "");
+    // Strip leading parenthetical context tags ("(concept of) time",
+    // "(of a woman's bearing) graceful", "(bound form) bull's-eye").
+    // CEDICT lexicographers add these to disambiguate; on a learner card
+    // they read as noise. Cap at 40 chars to avoid eating real content.
+    s = s.replace(/^\s*\([^)]{1,40}\)\s+/, "");
+    // Strip trailing "(see X)" / "(CL: 个)" / pinyin annotations [...]
+    s = s.replace(/\s*\([^)]{0,40}\)\s*$/g, "");
+    s = s.replace(/\[[^\]]{0,40}\]/g, "");
+    // Strip inline biographical date markers "(1953–)" / "(1953-2024)" /
+    // "(1953)" that follow a proper-noun headword. Without this the
+    // semicolon/comma reduce step in prefillTranslation lands on
+    // "Xi Jinping (1953–)" instead of just "Xi Jinping".
+    s = s.replace(/\s*\((1[0-9]{3}|20[0-2][0-9])(\s*[–\-—]\s*(1[0-9]{3}|20[0-2][0-9])?)?\)\s*/g, " ");
+    s = s.replace(/\s{2,}/g, " ");
+    // Expand CEDICT abbreviations sth → something, sb → someone for natural
+    // card text ("to ruin sth superfluous" → "to ruin something superfluous").
+    s = s.replace(/\bsth\b/g, "something").replace(/\bsb\b/g, "someone");
+    return s.trim();
+  }
+  function isCedictRedirectGloss(text: string): boolean {
+    const t = text.trim();
+    // "used in X[pinyin]" — sense exists only as a constituent of a fixed
+    // compound (most often a surname or rare proper-noun phrase). Useless
+    // on its own as a learner-card meaning.
+    if (/^\s*used in\b/i.test(t)) return true;
+    if (/^\s*(also pr\.|also written\b|same as\b|equivalent of\b|old form\b|old variant\b|Japanese variant\b)/i.test(t)) return true;
+    return /^\s*(variant of|see also|see|abbr\. for|abbreviation of|surname\s)\b/i.test(t);
+  }
+
   const entries: DictEntry[] = [];
   for (const row of data as Array<{
     id: number;
@@ -91,12 +135,19 @@ export async function cedictSearch(
     pinyin: string;
     senses: string[];
   }>) {
-    const senses: DictSense[] = row.senses.map((sense_text, idx) => ({
-      sense_id: `${row.id}:${idx}`,
-      source_def: sense_text, // CC-CEDICT 의미는 영어로 작성됨
-      en_translation: sense_text,
-      homograph_index: row.pinyin, // 多音字는 pinyin으로 구분
-    }));
+    const senses: DictSense[] = [];
+    row.senses.forEach((sense_text, idx) => {
+      if (isCedictRedirectGloss(sense_text)) return; // drop pure redirect
+      const cleaned = cleanCedictGloss(sense_text);
+      if (!cleaned) return;
+      senses.push({
+        sense_id: `${row.id}:${idx}`,
+        source_def: cleaned,
+        en_translation: cleaned,
+        homograph_index: row.pinyin,
+      });
+    });
+    if (senses.length === 0) continue;
 
     entries.push({
       headword: row.simplified === word ? row.simplified : row.traditional,

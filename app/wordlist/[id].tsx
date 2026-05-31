@@ -375,24 +375,29 @@ export default function WordlistDetailScreen() {
   })();
 
   // Inject native ad markers: one at the top + one every 15 words thereafter.
-  // Top placement ensures users with small lists still see an ad. Skip in
-  // edit mode (ads next to selection checkboxes invite accidental clicks →
-  // AdMob invalid traffic), and skip when the list is too small (<5 words)
-  // since an ad would dominate the screen.
+  // Always inject on native (incl. empty + tiny lists) so revenue surface is
+  // consistent. Skip in edit mode (ads next to selection checkboxes invite
+  // accidental clicks → AdMob invalid traffic).
   type AdItem = { __ad: true; key: string };
   type SortMarker = { __sort: true };
-  type ListItem = StoredWord | AdItem | SortMarker;
-  // Sort row sits at data index 0 so FlatList can pin it via
-  // stickyHeaderIndices once the user scrolls past the header card.
+  type EmptyHint = { __empty: true };
+  type ListItem = StoredWord | AdItem | SortMarker | EmptyHint;
+  // Sort row sits at data index 0 (when words exist) so FlatList can pin it
+  // via stickyHeaderIndices once the user scrolls past the header card.
   const sortedWordsWithAds: ListItem[] = (() => {
-    // Empty wordlist → drop the sort marker so ListEmptyComponent fires.
-    // With no words to sort, the sort row is meaningless anyway.
-    if (sortedWords.length === 0) return [];
-    const sortItem: SortMarker = { __sort: true };
-    if (editMode || sortedWords.length < 5) return [sortItem, ...sortedWords];
     // Web NativeAdCard renders null → injecting ad markers leaves blank
     // gaps between word cards. Skip ad injection on web entirely.
-    if (Platform.OS === 'web') return [sortItem, ...sortedWords];
+    if (Platform.OS === 'web') {
+      if (sortedWords.length === 0) return [];
+      return [{ __sort: true } as SortMarker, ...sortedWords];
+    }
+    // Empty wordlist → still show a top ad card; fold the empty hint into
+    // the data array (ListEmptyComponent only fires when data is empty).
+    if (sortedWords.length === 0) {
+      return [{ __ad: true, key: 'ad-top' }, { __empty: true }];
+    }
+    const sortItem: SortMarker = { __sort: true };
+    if (editMode) return [sortItem, ...sortedWords];
     const out: ListItem[] = [sortItem, { __ad: true, key: 'ad-top' }];
     sortedWords.forEach((w, idx) => {
       out.push(w);
@@ -402,6 +407,12 @@ export default function WordlistDetailScreen() {
     });
     return out;
   })();
+  // Sticky pin only when data[0] is the sort marker. Empty-list mode puts
+  // the ad at data[0]; pinning the ad would freeze it on scroll.
+  const stickyIndices =
+    sortedWordsWithAds.length > 0 && '__sort' in sortedWordsWithAds[0]
+      ? [1]
+      : undefined;
 
   // Header content — rendered as ListHeaderComponent so pull-to-refresh works
   // from the header area too (not just the FlatList rows below it).
@@ -611,7 +622,15 @@ export default function WordlistDetailScreen() {
       {(
         <FlatList<ListItem>
           data={sortedWordsWithAds}
-          keyExtractor={(item) => ('__sort' in item ? '__sort__' : '__ad' in item ? item.key : item.id)}
+          keyExtractor={(item) =>
+            '__sort' in item
+              ? '__sort__'
+              : '__empty' in item
+                ? '__empty__'
+                : '__ad' in item
+                  ? item.key
+                  : item.id
+          }
           contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 24, paddingBottom: editMode ? 100 : 80, flexGrow: 1 }}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handlePullRefresh} tintColor="#1E9E84" colors={['#1E9E84']} />
@@ -621,7 +640,7 @@ export default function WordlistDetailScreen() {
           // ListFooter]. Sort row lives at data[0] → child index 1, so the
           // app bar + book card scroll normally and the sort row pins as
           // soon as the user scrolls past the header.
-          stickyHeaderIndices={[1]}
+          stickyHeaderIndices={stickyIndices}
           // Click on empty space below the last word card exits edit
           // mode (intuitive click-outside-to-deselect for mouse users).
           ListFooterComponent={editMode ? (
@@ -646,6 +665,16 @@ export default function WordlistDetailScreen() {
               return (
                 <View className="my-3">
                   <NativeAdCard />
+                </View>
+              );
+            }
+            if ('__empty' in item) {
+              return (
+                <View className="items-center justify-center px-10" style={{ minHeight: 200 }}>
+                  <MaterialIcons name="translate" size={48} color="#A79E90" />
+                  <Text className="mt-4 text-center text-sm text-muted">
+                    {t('wordlist.empty')}
+                  </Text>
                 </View>
               );
             }

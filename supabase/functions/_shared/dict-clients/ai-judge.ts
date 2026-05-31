@@ -322,17 +322,19 @@ function selectKept(
 // back to source_def — that field contains the SOURCE-LANG definition (Korean
 // for krdict, Chinese for cedict) and would leak as the card label.
 function prefillTranslation(sense: DictSense, targetLang: string): string | null {
+  // Reduce a multi-synonym dict gloss to a single learner-card label:
+  // "speech; words" → "speech", "car; automobile; vehicle" → "car",
+  // "maison, foyer, demeure, ..." → "maison". The other listed terms are
+  // paraphrases of the same sense; a card label needs ONE primary form.
+  const reduce = (s: string): string => {
+    const trimmed = s.trim();
+    if (!trimmed) return trimmed;
+    const sep = /[;,]/.exec(trimmed);
+    return sep ? trimmed.slice(0, sep.index).trim() : trimmed;
+  };
   const pre = sense.translations_by_lang?.[targetLang];
-  if (pre) {
-    // krdict ships some entries with a long comma-separated synonym list
-    // (e.g. 집→fr "maison, foyer, demeure, habitation, domicile,
-    // résidence, logis, pavillon, lotissement, appartement, logement,
-    // immeuble"). A learner card label needs ONE primary translation, not
-    // 12. Take the first item; the others are paraphrases of the same sense.
-    if (pre.includes(",")) return pre.split(",")[0].trim();
-    return pre;
-  }
-  if (targetLang === "en") return sense.en_translation ?? null;
+  if (pre) return reduce(pre);
+  if (targetLang === "en" && sense.en_translation) return reduce(sense.en_translation);
   return null;
 }
 
@@ -415,32 +417,151 @@ function isDictRomanizationLeak(en: string | undefined | null, sourceLang: strin
   return true;
 }
 
-// Common English function words / very-frequent stems that, when they
-// appear as the ENTIRE non-English target translation, signal an English
-// leak (LLM produced English where it should have produced the target lang).
-// Excludes loanwords that double as native vocabulary in many languages.
-const COMMON_ENGLISH_LEAK = new Set([
-  "money", "can", "to", "and", "or", "the", "a", "an", "is", "are", "was",
-  "were", "be", "been", "have", "has", "had", "do", "does", "did", "thing",
-  "way", "say", "see", "get", "make", "go", "good", "bad", "big", "small",
-  "new", "old", "all", "any", "some", "no", "not", "yes", "people", "person",
-  "man", "woman", "child", "child", "house", "home", "car", "water", "food",
-  "time", "day", "year", "for", "with", "without", "of", "by", "from", "in",
-  "on", "at", "out", "up", "down", "back",
-  // multi-word phrases the LLM commonly emits as English glosses
-  "to have", "to be", "to do", "to go", "to make", "to take", "to give",
-  "to know", "to want", "to say", "to see", "to come", "to use",
-  "to have the skill", "to know how to",
-  "to look forward to", "to look forward",
-  "abdomen; belly", "abdomen", "belly", "to think",
-]);
+// Strip trailing/leading metadata parens that some LLM outputs slip into
+// target_translation despite the prompt asking for ONE clean lexical item.
+// "es (verbo)" → "es", "est (verbe être)" → "est", "soit (subjonctif)" → "soit",
+// "Takeshima (islas disputadas)" → "Takeshima", "habla (idioma)" → "habla".
+// Conservative: only strip when the paren is at one end (not mid-string,
+// where it might be part of a legitimate phrase), and the paren contents are
+// shortish and look meta-descriptive (POS labels, register tags, geo
+// disambiguation, language names).
+function stripTargetMetaParen(text: string): string {
+  let s = text.trim();
+  if (!s) return s;
+  // Strip trailing paren at end if short — POS/register/disambiguation
+  s = s.replace(/\s*[\(（][^)）]{1,40}[\)）]\s*$/g, "");
+  // Strip leading paren at start if short
+  s = s.replace(/^\s*[\(（][^)）]{1,40}[\)）]\s*/g, "");
+  return s.trim();
+}
+
+// POS-form post-fix: catches LLM omissions where target=ko + pos=verb but the
+// translation lacks the -다 ending. The prompt asks for this but mini occasionally
+// returns the noun stem ("연구" instead of "연구하다") — deterministic auto-append
+// makes the rule reliable. Same idea for adjectives (always -다 citation form).
+function fixKoreanVerbAdjForm(text: string, pos: string | undefined): string {
+  const t = (text || "").trim();
+  if (!t) return t;
+  if (!pos) return t;
+  const p = pos.toLowerCase().trim();
+  // Accept short-form POS tags from wiktionary (adj, v) alongside the spelled
+  // forms. Without this the en→ko path skips attributive fixes entirely —
+  // wiktionary stores pos="adj" not "adjective".
+  const isVerb = p === "verb" || p === "v" || p.startsWith("v5") || p.startsWith("v1") || p === "vi" || p === "vt";
+  const isAdj = p === "adjective" || p === "adj" || p.startsWith("adj-");
+  if (!isVerb && !isAdj) return t;
+  // Already in -다 form (most common variants).
+  if (/다$/.test(t)) return t;
+  if (/다\.$/.test(t)) return t.replace(/\.$/, ""); // strip trailing period
+  // Multi-token (parenthetical or alt-form): leave alone — e.g. "공부 (하다)".
+  if (/\s/.test(t) || /[()]/.test(t)) return t;
+
+  // Attributive (관형형) → dictionary form. The LLM sometimes returns the
+  // modifier form (밝은, 큰, 가는, 성숙한) instead of citation form (밝다,
+  // 크다, 가다, 성숙하다). Transform only the high-confidence cases.
+  if (/^[가-힣]+$/.test(t)) {
+    const last = t[t.length - 1];
+    const base = t.slice(0, -1);
+    // X한 (X non-empty) → X하다 (성숙한 → 성숙하다, 약한 → 약하다, 강한 → 강하다)
+    if (last === "한" && base.length > 0) return base + "하다";
+    // X는 (X non-empty) → X다 (가는 → 가다, 먹는 → 먹다, 하는 → 하다)
+    if (last === "는" && base.length > 0) return base + "다";
+    // X은 when base ends in a 받침 → X다 (밝은 → 밝다, 익은 → 익다, 좋은 → 좋다)
+    if (last === "은" && base.length > 0) {
+      const bLast = base[base.length - 1];
+      const code = bLast.charCodeAt(0) - 0xAC00;
+      if (code >= 0 && code < 11172 && code % 28 !== 0) return base + "다";
+    }
+    // ㅂ-irregular attributive reversal: 가벼운→가볍다, 감미로운→감미롭다,
+    // 무거운→무겁다, 어려운→어렵다, 즐거운→즐겁다, 쉬운→쉽다.
+    // Pattern: ...X운 where X has no jongseong → ...X' (add ㅂ jong) + 다.
+    // Run before the generic ㄴ-strip so 운 doesn't get sliced to 우.
+    if (last === "운" && base.length >= 1) {
+      const bLast = base[base.length - 1];
+      const bCode = bLast.charCodeAt(0) - 0xAC00;
+      if (bCode >= 0 && bCode < 11172 && bCode % 28 === 0) {
+        // Promote bLast jongseong from 0 to ㅂ (index 17).
+        const newChar = String.fromCharCode(bLast.charCodeAt(0) + 17);
+        return base.slice(0, -1) + newChar + "다";
+      }
+    }
+    // Generic ㄴ-jongseong attributive: 큰→크다, 본→보다 (1-char),
+    // 예쁜→예쁘다, 모자란→모자라다, 짠→짜다 (multi-char where the final
+    // ㄴ rides on the stem's last vowel-final syllable).
+    // Skip the explicit 한/는/은 cases (handled above) and 운 (ㅂ-irregular).
+    if (last !== "한" && last !== "는" && last !== "은" && last !== "운") {
+      const code = last.charCodeAt(0) - 0xAC00;
+      if (code >= 0 && code < 11172 && code % 28 === 4) {
+        const stripped = String.fromCharCode(0xAC00 + Math.floor(code / 28) * 28);
+        return base + stripped + "다";
+      }
+    }
+  }
+
+  // Sino-Korean / 한자어 stems: append -하다 ONLY when the word looks like
+  // a typical hanja-derived noun stem ending in a vowel (no jongseong on
+  // the last syllable). This covers the common 2-char compounds (점화,
+  // 연구, 조사, 사랑) while avoiding false attachments on:
+  //   • ㅂ-irregular attributives the LLM occasionally emits (가벼운,
+  //     감미로운) — last syllable carries ㄴ jongseong
+  //   • Native Korean nouns mis-tagged adjective (갈색, 형편) — last
+  //     syllable carries stop-consonant jongseong
+  // Some legitimate Sino-Korean stems (성숙, 학습) are skipped by this
+  // narrow filter; they'll surface as bare nouns rather than as wrongly
+  // verbified words, which is the safer failure mode.
+  if (/^[가-힣]{2,3}$/.test(t)) {
+    const lastChar = t[t.length - 1];
+    const code = lastChar.charCodeAt(0) - 0xAC00;
+    if (code >= 0 && code < 11172) {
+      const jong = code % 28;
+      // jong=0 (no jongseong: 사, 가, 보) or jong=21 (ㅇ: 사랑, 영광, 강)
+      // — both are common terminal patterns in Sino-Korean verb stems.
+      if (jong === 0 || jong === 21) return t + "하다";
+    }
+  }
+  return t;
+}
+
+// English-leak signature in non-English Latin target slots. ONLY catches
+// patterns the LLM emits when it gives up on translation:
+//   • multi-word English explanatory glosses with English-specific syntax
+//     ("to have the skill", "to look forward to") — the "to" + infinitive
+//     is English-specific (Romance/German use the infinitive alone).
+//   • English function-word labels ("a thing", "the way") — articles + noun
+//     phrases like an English textbook would write.
+// We deliberately do NOT flag single Latinate words like "abdomen",
+// "animal", "plan", "point" because these are valid words in French/
+// Italian/Spanish too (the LLM may have legitimately chosen the cognate).
+// False-positive on those words drops legitimate translations.
 function looksLikeEnglishLeak(text: string): boolean {
   const lower = text.toLowerCase().trim();
-  if (COMMON_ENGLISH_LEAK.has(lower)) return true;
-  // Multi-word: split on ; and , then check each chunk
-  for (const chunk of lower.split(/[;,]/).map((c) => c.trim()).filter(Boolean)) {
-    if (COMMON_ENGLISH_LEAK.has(chunk)) return true;
+  if (!lower) return false;
+  // "to + verb" infinitive marker is English-specific
+  if (/^to\s+\w/.test(lower)) return true;
+  // multi-word with semicolons / commas usually means dictionary-style
+  // English gloss ("abdomen; belly" → English gloss style)
+  if (/[;,]/.test(lower)) {
+    const chunks = lower.split(/[;,]/).map((c) => c.trim()).filter(Boolean);
+    if (chunks.some((c) => /^to\s+\w/.test(c))) return true;
+    // Multi-word with semicolon nearly always indicates English dict-gloss
+    // format. Real Romance/German translations are typically single token.
+    if (lower.includes(";")) return true;
   }
+  // Common English idiom equivalents the LLM substitutes when it can't find
+  // a target_lang idiom. These are dead giveaways of an English leak.
+  const englishIdiomPatterns = [
+    /\btwo birds with one stone\b/,
+    /\bkill two birds\b/,
+    /\bpiece of cake\b/,
+    /\bbreak a leg\b/,
+    /\bspill the beans\b/,
+    /\bhit the books\b/,
+    /\bonce in a blue moon\b/,
+    /\bunder the weather\b/,
+    /\bcost an arm and a leg\b/,
+    /\bbite the bullet\b/,
+  ];
+  if (englishIdiomPatterns.some((re) => re.test(lower))) return true;
   return false;
 }
 
@@ -456,7 +577,12 @@ function translationLooksWrong(
   if (!t) return true;
   if (sourceLang === targetLang) return false;
   // Source-word echo (e.g. 커피→fr translation = "커피"): strongest leak.
-  if (t === sourceWord.trim()) return true;
+  // BUT: cross-CJK pairs legitimately share kanji — 学校 (zh-CN) → 学校 (ja)
+  // is correct because the word IS the same character in both languages.
+  // Only flag source-word echo when source and target use different scripts.
+  const cjkLangs = new Set(["ja", "zh", "zh-CN"]);
+  const bothCjkShare = cjkLangs.has(sourceLang) && cjkLangs.has(targetLang);
+  if (t === sourceWord.trim() && !bothCjkShare) return true;
   // Script mismatch — translation should contain the target lang's script.
   const hasHangul = /[가-힣]/.test(t);
   const hasHiraganaKatakana = /[぀-ゟ゠-ヿ]/.test(t);
@@ -483,7 +609,43 @@ function translationLooksWrong(
   if (["es", "fr", "de", "it"].includes(targetLang) && looksLikeEnglishLeak(t)) {
     return true;
   }
+  // Meta-category labels for profanity (LLM hedge instead of producing the
+  // actual vulgar equivalent). "profanity" / "vulgar insult" / "swear word"
+  // are descriptions, not words a learner can use. Reject so the retry path
+  // gets a chance to produce a real translation.
+  if (looksLikeProfanityMetaLabel(t)) return true;
   return false;
+}
+
+// Detects the LLM's safety-hedge output when it refuses to render an actual
+// vulgar word and substitutes a category label instead. These labels are
+// useless on a learner card — the user looked up the word to learn the
+// equivalent, not to be told it is a swear word.
+function looksLikeProfanityMetaLabel(text: string): boolean {
+  const t = text.trim().toLowerCase();
+  if (!t || t.split(/\s+/).length > 4) return false;
+  const metaLabels = [
+    // en
+    "profanity", "vulgar insult", "vulgar word", "swear word", "swearword",
+    "curse word", "curse", "expletive", "offensive word",
+    // es
+    "maldición vulgar", "palabra vulgar", "insulto vulgar", "palabrota",
+    "groseria", "grosería",
+    // fr
+    "gros mot vulgaire", "gros mot", "insulte vulgaire", "juron",
+    // de
+    "beleidigendes schimpfwort", "schimpfwort", "fluchwort", "fluch",
+    "vulgäres schimpfwort",
+    // it
+    "parolaccia volgare", "parolaccia", "insulto volgare",
+    // ko
+    "욕설", "비속어", "욕", "멍청이 욕설", "비속한 말",
+    // zh-CN
+    "粗话", "脏话", "辱骂", "侮辱词", "粗俗话",
+    // ja
+    "ののしり言葉", "汚い言葉", "罵り言葉",
+  ];
+  return metaLabels.includes(t);
 }
 
 // ────────────────────────────────────────────────────────────────────────
@@ -514,8 +676,15 @@ General profanity / slang / casual derogatory that is NOT discriminatory or hara
 - Return "" ONLY when SOURCE_LANG equals TARGET_LANG, or when PRE_TARGET is already provided.
 - Otherwise ALWAYS produce a TARGET_LANG translation — never return "" just because W is a loanword in TARGET_LANG, never echo W or its romanization, never echo SOURCE_DEF. The TARGET_LANG translation must be in the TARGET_LANG's script using TARGET_LANG vocabulary.
 - A recognizable TARGET_LANG lexical item, not a paraphrase. Different senses must take different translations.
+- POS-FORM CONSISTENCY: target_translation must be in the lexical FORM that matches the assigned pos for the TARGET_LANG. The card label must be the form a learner would memorize as that POS, not a bare noun stem when the sense is verbal.
+  • TARGET_LANG=Korean, pos=verb → use the verbal form ending in -다 (sino-Korean stem + 하다 like "점화하다", "참가하다", "노력하다", "이해하다"; native Korean -다 stem like "먹다", "가다", "오다"). The bare noun stem ("점화", "참가", "노력") is the noun form, not the verb form.
+  • TARGET_LANG=Korean, pos=adjective → -다 citation form (큰→크다, 빠른→빠르다).
+  • TARGET_LANG=Japanese, pos=verb → dictionary form (-る or -u ending; "勉強する" for suru-verbs, "食べる", "行く"). Bare noun root is the noun form.
+  • TARGET_LANG=English/Spanish/French/German/Italian, pos=verb → infinitive form ("to run" / "correr" / "courir" / "laufen" / "correre" for English use "to + base form"; Romance/German use the infinitive; do not output the gerund/participle as the card label).
+  • TARGET_LANG=zh-CN, pos=verb → the bare verbal form is fine (Chinese verbs don't inflect for citation).
 - For grammatical particles / function words / bound morphemes (Korean 조사, Japanese 助詞, Chinese 助词): never echo the dictionary definition — output a SHORT learner-card label ("topic marker", "object marker", "past tense", …), 1-3 words MAX.
-- For real public figures (politicians/world leaders/celebrities/historical figures): output just the full name in TARGET_LANG using the TARGET_LANG's standard transliteration/translation of that name (e.g. for "Yoon Suk-yeol": output the romanized name when TARGET_LANG uses Latin script, or the established CJK rendering when TARGET_LANG is ja/zh-CN). Never leave the name in the source script.
+- For real public figures (politicians/world leaders/celebrities/historical figures): output just the full name in TARGET_LANG using the TARGET_LANG's standard transliteration/translation of that name (e.g. for "Yoon Suk-yeol": output the romanized name when TARGET_LANG uses Latin script, or the established CJK rendering when TARGET_LANG is ja/zh-CN). Never leave the name in the source script. Do NOT include biographical commentary, dates, or titles in the target_translation field — just the name itself.
+- For general profanity / swear words / vulgar interjections / casual derogatory terms (not the HARD-CUT categories above): output the ACTUAL equivalent vulgar word in TARGET_LANG that a native speaker would shout in the same context. Never output a meta-category label like "profanity", "vulgar insult", "swear word", "curse", "maldición vulgar", "parolaccia volgare", "gros mot vulgaire", "beleidigendes Schimpfwort", "욕설", "粗话" — the user looked up this word to learn the actual equivalent, not to be told the category.
 
 Output strict JSON (id is the integer from the input, no other keys):
 {
@@ -561,13 +730,97 @@ async function judgeUnifiedSingle(
     };
     const ov = (r.en_override ?? "").trim();
     if (ov && !isLikelyRomanization(ov, word)) overrideByIdx[key] = ov;
-    const tr = (r.target_translation ?? "").trim();
-    if (tr && !translationLooksWrong(tr, word, sourceLang, targetLang)) transByIdx[key] = tr;
+    const rawTr = stripTargetMetaParen((r.target_translation ?? "").trim());
     const pos = (r.pos ?? "").trim();
     if (pos) posByIdx[key] = pos;
+    // Korean -다 auto-append for verb/adjective senses where LLM dropped it.
+    const tr = targetLang === "ko" ? fixKoreanVerbAdjForm(rawTr, pos) : rawTr;
+    if (tr && !translationLooksWrong(tr, word, sourceLang, targetLang)) transByIdx[key] = tr;
   });
 
   const keptReps = selectKept(allSenses, signalByIdx, sourceLang, entries[0]?.source);
+
+  // Escalation pass: for non-EN target, when the mini judge failed to produce
+  // a target_translation (LLM echoed source word or returned English), retry
+  // ONLY those senses with gpt-4.1 + a focused prompt. Single batched call —
+  // adds latency only when needed.
+  if (targetLang !== "en" && keptReps.length > 0) {
+    const missingSenses: Array<{ idx: number; sense: DictSense }> = [];
+    for (const r of keptReps) {
+      const key = String(r.idx);
+      const haveTarget = !!transByIdx[key];
+      const havePrefill = !!prefillTranslation(r.sense, targetLang);
+      if (!haveTarget && !havePrefill) missingSenses.push({ idx: r.idx, sense: r.sense });
+    }
+    if (missingSenses.length > 0) {
+      const retryPrompt =
+        `SOURCE_LANG=${langName(sourceLang)}  TARGET_LANG=${langName(targetLang)}\n` +
+        `W="${word}"\n` +
+        `For each sense, output ONE TARGET_LANG learner-card label (1-3 words). REQUIREMENTS:\n` +
+        `- TARGET_LANG's everyday colloquial word for this concept (the word a native TARGET_LANG speaker would use in casual conversation), NOT the formal/medical/Latinate cognate when an everyday word exists.\n` +
+        `- TARGET_LANG's script + vocabulary. Never echo W or its romanization.\n` +
+        `- POS-form match: Korean verb → -다 form ("점화하다", not "점화"); Romance/German verb → infinitive ("courir", not "court"); Japanese verb → -る form.\n` +
+        `Senses:\n` +
+        missingSenses.map(({ idx, sense }) =>
+          `- id=${idx}  POS=${sense.pos ?? ""}  EN=${sense.en_translation ?? ""}  DEF=${sense.source_def.slice(0, 120)}`,
+        ).join("\n") + `\n\nOutput strict JSON:\n{ "translations": [{ "id": <int>, "target": "<TARGET_LANG label>" }] }`;
+      try {
+        const retryResp = (await openaiCall(
+          "You translate vocabulary card labels precisely. Always return target_lang in target_lang's script. Never echo source.",
+          retryPrompt,
+          "gpt-4.1",
+        )) as { translations?: Array<{ id: number | string; target?: string }> };
+        for (const t of retryResp.translations ?? []) {
+          const key = String(t.id);
+          const rawTr = stripTargetMetaParen((t.target ?? "").trim());
+          const sense = missingSenses.find((s) => String(s.idx) === key)?.sense;
+          const pos = posByIdx[key] || (sense?.pos ?? "");
+          const tr = targetLang === "ko" ? fixKoreanVerbAdjForm(rawTr, pos) : rawTr;
+          if (tr && !translationLooksWrong(tr, word, sourceLang, targetLang)) {
+            transByIdx[key] = tr;
+          }
+        }
+      } catch (err) {
+        console.warn(`[v4 retry] gpt-4.1 escalation failed for ${word}→${targetLang}: ${(err as Error).message}`);
+      }
+    }
+  }
+
+  // POS-only retry — when the source dict didn't carry POS (cedict, neologism)
+  // AND mini's unified judge skipped the pos field for some senses, fire a
+  // cheap mini call asking for POS only. Avoids "(- )" labels on cards.
+  const dictSource = entries[0]?.source;
+  if (dictSource === "cedict") {
+    const missingPos = keptReps.filter((r) => {
+      const key = String(r.idx);
+      return !r.sense.pos && !posByIdx[key];
+    });
+    if (missingPos.length > 0) {
+      const posPrompt =
+        `SOURCE_LANG=${langName(sourceLang)}\nW="${word}"\n` +
+        `For each sense below, output the part of speech in lowercase English (noun / verb / adjective / adverb / interjection / pronoun / proper noun / particle / phrase / numeral / preposition / conjunction / determiner). Always return a value.\n` +
+        `Senses:\n` +
+        missingPos.map((r) =>
+          `- id=${r.idx}  EN=${(r.sense.en_translation ?? "").slice(0, 80)}  DEF=${r.sense.source_def.slice(0, 120)}`,
+        ).join("\n") +
+        `\n\nOutput strict JSON:\n{ "results": [{ "id": <int>, "pos": "<English POS>" }] }`;
+      try {
+        const posResp = (await openaiCall(
+          "You assign part-of-speech labels to dictionary senses. Be concise.",
+          posPrompt,
+          MODEL_QUALITY,
+        )) as { results?: Array<{ id: number | string; pos?: string }> };
+        for (const r of posResp.results ?? []) {
+          const key = String(r.id);
+          const pos = (r.pos ?? "").trim();
+          if (pos) posByIdx[key] = pos;
+        }
+      } catch (err) {
+        console.warn(`[v4 pos-retry] failed for ${word}: ${(err as Error).message}`);
+      }
+    }
+  }
+
   return keptReps
     .map((r) => {
       const key = String(r.idx);
@@ -647,8 +900,11 @@ export async function judgeAndTranslate(
   const needsTranslate: number[] = []; // indices into kept
   kept.forEach((k, i) => {
     const pre = prefillTranslation(k.sense, targetLang);
-    if (pre) k.display_translation = pre;
-    else needsTranslate.push(i);
+    if (pre) {
+      k.display_translation = targetLang === "ko" ? fixKoreanVerbAdjForm(pre, k.sense.pos) : pre;
+    } else {
+      needsTranslate.push(i);
+    }
   });
 
   // OVERRIDE (all kept) ∥ TRANSLATE (only those needing it). Index into kept = id.
@@ -684,11 +940,49 @@ export async function judgeAndTranslate(
   }
   if (translateResp) {
     for (const t of translateResp.translations ?? []) {
-      const v = (t.translation ?? "").trim();
+      const raw = stripTargetMetaParen((t.translation ?? "").trim());
       const k = kept[Number(t.id)];
-      if (v && k && !translationLooksWrong(v, word, sourceLang, targetLang)) k.display_translation = v;
+      if (!raw || !k) continue;
+      const v = targetLang === "ko" ? fixKoreanVerbAdjForm(raw, k.sense.pos) : raw;
+      if (!translationLooksWrong(v, word, sourceLang, targetLang)) k.display_translation = v;
     }
   }
+
+  // POS retry for cedict (no structural POS in source dict) — judgeAndTranslate
+  // didn't ask for pos in any of its calls, so cards would show "(- )" without
+  // this. Same idea as the POS retry in judgeUnifiedSingle.
+  if (entries[0]?.source === "cedict") {
+    const missingPosIdx = kept
+      .map((k, i) => ({ k, i }))
+      .filter(({ k }) => !k.sense.pos);
+    if (missingPosIdx.length > 0) {
+      const posPrompt =
+        `SOURCE_LANG=${langName(sourceLang)}\nW="${word}"\n` +
+        `For each sense below, output the part of speech in lowercase English (noun / verb / adjective / adverb / interjection / pronoun / proper noun / particle / phrase / numeral / preposition / conjunction / determiner). Always return a value.\n` +
+        `Senses:\n` +
+        missingPosIdx.map(({ k, i }) =>
+          `- id=${i}  EN=${(k.sense.en_translation ?? "").slice(0, 80)}  DEF=${k.sense.source_def.slice(0, 120)}`,
+        ).join("\n") +
+        `\n\nOutput strict JSON:\n{ "results": [{ "id": <int>, "pos": "<English POS>" }] }`;
+      try {
+        const posResp = (await openaiCall(
+          "You assign part-of-speech labels to dictionary senses. Be concise.",
+          posPrompt,
+          MODEL_QUALITY,
+        )) as { results?: Array<{ id: number | string; pos?: string }> };
+        for (const r of posResp.results ?? []) {
+          const i = Number(r.id);
+          const pos = (r.pos ?? "").trim();
+          if (pos && kept[i]) {
+            kept[i].sense = { ...kept[i].sense, pos, llm_pos: pos };
+          }
+        }
+      } catch (err) {
+        console.warn(`[v4 pos-retry j&t] failed for ${word}: ${(err as Error).message}`);
+      }
+    }
+  }
+
   // Drop romanization-leak senses (CJK dict shipped EN as romaja, LLM didn't
   // override or echoed the romanization). Same defense as judgeUnifiedSingle.
   return kept.filter((j) => {
@@ -722,7 +1016,7 @@ Return ONLY the everyday CORE meanings a general learner needs:
 
 PUBLIC FIGURE / DISPUTED TOPIC RULE — NEUTRAL CARDS:
 - When a sense identifies a real politician, world leader, monarch, public official, celebrity, athlete, author, or other public figure, render target_translation as just the full name in TARGET_LANG (e.g. "조 바이든", "Donald Trump", "Xi Jinping") with NO biographical commentary. The "en" label is a brief neutral descriptor: full name + role + country/affiliation only, no controversies, no party framing, no current-events opinion. Limit to ONE merged card for the figure.
-- For contested place names / historical events / geopolitical disputes: present the term in neutral textbook tone, as a learner of SOURCE_LANG would encounter it in standard textbooks. Do not insert advocacy.
+- For contested place names / historical events / geopolitical disputes: present the term in neutral textbook tone, as a learner of SOURCE_LANG would encounter it in standard textbooks. Do not insert advocacy. Use the established TARGET_LANG name for the SPECIFIC place referenced (e.g. 钓鱼岛 = Diaoyu Islands = 댜오위다오 / 釣魚島 / Senkaku Islands depending on the TARGET_LANG convention; Dokdo 독도 is a DIFFERENT disputed territory and must NEVER be used as the translation for 钓鱼岛). When unsure of the established TARGET_LANG name, use phonetic transliteration of the source name rather than substituting a different territory's name.
 
 For each kept meaning, choose ONE representative sense and output:
 - id: the integer id of that representative sense
@@ -767,8 +1061,22 @@ async function judgeSelect(
   // Strip the meta-category prefix some models prepend to translations of
   // idioms / set phrases ("idiom, substitute", "expression: …", "phrase - …").
   // The learner card needs the lexical item only.
-  const stripMetaPrefix = (s: string) =>
-    s.replace(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)\s*[,:.\-]\s*/i, "").trim();
+  const stripMetaPrefix = (s: string) => {
+    let out = s
+      .replace(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)\s*[,:.\-]\s*/i, "")
+      .trim();
+    // "idiom 'X'" / "idiom meaning 'X'" / "expression \"X\"" — strip the
+    // meta tag (with optional "meaning"/"for"/"that means" connector) and
+    // keep only the quoted content. Greedy capture so the closing quote
+    // binds to the LAST quote in the string (the inner apostrophe in
+    // "don't" must not terminate early).
+    const quoted = out.match(/^(?:idiom|expression|phrase|proverb|saying|colloq(?:uialism)?|slang)(?:\s+(?:meaning|for|that\s+means))?\s+['"“”‘’](.+)['"“”‘’]\s*$/i);
+    if (quoted) out = quoted[1].trim();
+    // "to ruin sth by ..." / "to do sth" — expand the dictionary abbreviation
+    // "sth" (= something) so the card text reads naturally.
+    out = out.replace(/\bsth\b/g, "something").replace(/\bsb\b/g, "someone");
+    return out;
+  };
 
   const out: JudgedSense[] = [];
   const seen = new Set<number>();
@@ -788,14 +1096,27 @@ async function judgeSelect(
     }
     seen.add(idx);
     const enLabel = stripMetaPrefix((m.en ?? "").trim());
-    const tr = stripMetaPrefix((m.target_translation ?? "").trim());
-    const prefill = prefillTranslation(sense, targetLang);
+    const rawTr = stripTargetMetaParen(stripMetaPrefix((m.target_translation ?? "").trim()));
+    const rawPrefill = prefillTranslation(sense, targetLang);
+    // Korean target: convert attributive forms (밝은, 큰, 가는, 성숙한)
+    // and bare Sino-Korean stems (연구, 사랑) to dictionary -다 form.
+    const tr = targetLang === "ko" ? fixKoreanVerbAdjForm(rawTr, sense.pos) : rawTr;
+    const prefill = targetLang === "ko" && rawPrefill
+      ? fixKoreanVerbAdjForm(rawPrefill, sense.pos)
+      : rawPrefill;
+    // Drop wrong-script labels (LLM returned 생명 for fr, 学校 for en, etc.).
+    // Apply to the chosen display value, mirroring the defense in
+    // judgeUnifiedSingle/judgeAndTranslate.
+    const candidate = prefill ?? (tr || undefined);
+    if (candidate && translationLooksWrong(candidate, word, sourceLang, targetLang)) {
+      return; // skip this sense — no usable target label
+    }
     out.push({
       sense,
       score: 100 - rank, // synthetic: preserve the model's frequency ordering
       reasoning: "",
       en_override: enLabel || undefined,
-      display_translation: prefill ?? (tr || undefined),
+      display_translation: candidate,
     });
   });
   return out;
@@ -832,4 +1153,131 @@ export async function judgeUnified(
     return judgeUnifiedSingle(word, entries, sourceLang, targetLang);
   }
   return judgeAndTranslate(word, entries, sourceLang, targetLang);
+}
+
+// ────────────────────────────────────────────────────────────────────────
+// translateCanonicalMeanings — target-only translation for already-judged
+// canonical senses. Use when word_entries.meanings exists for a given (word,
+// source_lang) but no word_translations row for the requested target_lang.
+// Bypasses dict + judge entirely: takes the canonical's authoritative sense
+// list as-is and produces ONLY TARGET_LANG translations. This is what
+// guarantees the "decide meanings once per source word, share across all
+// target_langs" architectural promise. Returns a Map<sense_id, target_text>.
+// ────────────────────────────────────────────────────────────────────────
+export interface CanonicalMeaningInput {
+  sense_id: string;
+  en_translation?: string;
+  source_def: string;
+  pos?: string;
+}
+
+const TRANSLATE_CANONICAL_MEANINGS_SYSTEM = `You translate vocabulary card labels for a multilingual learning dictionary. Each input sense has the headword W (in SOURCE_LANG), an existing English gloss EN, and the source-language definition DEF. For each sense, produce ONE short TARGET_LANG learner-card label (1-3 words) AND its part of speech.
+
+Rules for "target":
+- Output MUST be in TARGET_LANG's script using TARGET_LANG vocabulary. Never echo W (the source headword) or its romanization. Never echo EN. Never echo SOURCE_DEF.
+- Different senses must take different translations (the labels are distinguishing cards).
+- POS-FORM CONSISTENCY: target must be in the lexical FORM matching the assigned pos for TARGET_LANG.
+  • TARGET_LANG=Korean, pos=verb → verbal form ending in -다 (sino-Korean: "점화하다", "참가하다", "노력하다", "이해하다"; native: "먹다", "가다"). The bare noun stem (점화/참가/노력) is the NOUN form, not the verb form — wrong for a verb card.
+  • TARGET_LANG=Korean, pos=adjective → -다 citation form (크다, 빠르다).
+  • TARGET_LANG=Japanese, pos=verb → dictionary form (-る/-u; "勉強する", "食べる").
+  • TARGET_LANG=English/Spanish/French/German/Italian, pos=verb → infinitive ("to run" / "correr" / "courir" / "laufen" / "correre").
+  • TARGET_LANG=zh-CN, pos=verb → bare verbal form (Chinese verbs don't inflect).
+- For grammatical particles / function words / bound morphemes: output a short learner-card label ("topic marker", "object marker", "past tense", etc.).
+- For real public figures (politicians/celebrities/historical figures): output just the full name in TARGET_LANG's standard transliteration ("조 바이든" for ko, "Donald Trump" for en/es/fr/de/it, "尹錫悦" for ja, "尹锡悦" for zh-CN).
+- For loanwords or neologisms where the same letters could be intended: write the locally-standard rendering, never the raw source spelling.
+
+Rules for "pos":
+- Lowercase English POS label: noun / verb / adjective / adverb / interjection / pronoun / proper noun / particle / phrase / numeral / preposition / conjunction / determiner / symbol.
+- Always return a value — if input POS is empty, infer from SOURCE_DEF + EN.
+
+Output strict JSON:
+{
+  "translations": [
+    { "id": <int>, "target": "<TARGET_LANG label>", "pos": "<English POS>" }
+  ]
+}`;
+
+export interface TranslatedMeaning {
+  target: string;
+  pos?: string;
+}
+
+export async function translateCanonicalMeanings(
+  word: string,
+  meanings: CanonicalMeaningInput[],
+  sourceLang: string,
+  targetLang: string,
+): Promise<Map<string, TranslatedMeaning>> {
+  const out = new Map<string, TranslatedMeaning>();
+  if (meanings.length === 0 || sourceLang === targetLang) return out;
+  const userPrompt =
+    `SOURCE_LANG=${langName(sourceLang)}  TARGET_LANG=${langName(targetLang)}\n` +
+    `W="${word}"\n` +
+    `Senses:\n` +
+    meanings.map((m, i) =>
+      `- id=${i}  EN=${(m.en_translation ?? "").slice(0, 80)}  DEF=${m.source_def.slice(0, 120)}  POS=${m.pos ?? ""}`,
+    ).join("\n");
+  let resp: { translations?: Array<{ id: number | string; target?: string; pos?: string }> };
+  try {
+    resp = (await openaiCall(TRANSLATE_CANONICAL_MEANINGS_SYSTEM, userPrompt, MODEL_QUALITY)) as typeof resp;
+  } catch (err) {
+    console.warn(`[translateCanonicalMeanings] HTTP error: ${(err as Error).message}`);
+    return out;
+  }
+  for (const r of resp.translations ?? []) {
+    const idx = Number(r.id);
+    const rawTr = stripTargetMetaParen((r.target ?? "").trim());
+    if (!rawTr || idx < 0 || idx >= meanings.length) continue;
+    const pos = (r.pos ?? "").trim() || meanings[idx].pos || undefined;
+    const tr = targetLang === "ko" ? fixKoreanVerbAdjForm(rawTr, pos) : rawTr;
+    if (translationLooksWrong(tr, word, sourceLang, targetLang)) continue;
+    out.set(meanings[idx].sense_id, { target: tr, pos });
+  }
+  return out;
+}
+
+// gpt-4.1 escalation for translateCanonicalMeanings — fires when the mini
+// pass dropped a sense (LLM echoed source word, returned English, etc.).
+// Same fallback pattern as judgeUnifiedSingle's escalation.
+export async function translateCanonicalMeaningsRetry(
+  word: string,
+  meanings: CanonicalMeaningInput[],
+  sourceLang: string,
+  targetLang: string,
+): Promise<Map<string, TranslatedMeaning>> {
+  const out = new Map<string, TranslatedMeaning>();
+  if (meanings.length === 0 || sourceLang === targetLang) return out;
+  const userPrompt =
+    `SOURCE_LANG=${langName(sourceLang)}  TARGET_LANG=${langName(targetLang)}\n` +
+    `W="${word}"\n` +
+    `For each sense, output ONE TARGET_LANG learner-card label (1-3 words). REQUIREMENTS:\n` +
+    `- TARGET_LANG's everyday colloquial word, NOT formal/medical/Latinate cognate when an everyday word exists.\n` +
+    `- TARGET_LANG's script + vocabulary. Never echo W or its romanization. Never echo EN or DEF.\n` +
+    `- POS-form match: Korean verb pos → -다 form ("점화하다", not "점화"); Romance/German verb pos → infinitive; Japanese verb pos → -る form.\n` +
+    `Senses:\n` +
+    meanings.map((m, i) =>
+      `- id=${i}  POS=${m.pos ?? ""}  EN=${(m.en_translation ?? "").slice(0, 80)}  DEF=${m.source_def.slice(0, 120)}`,
+    ).join("\n") +
+    `\n\nOutput strict JSON:\n{ "translations": [{ "id": <int>, "target": "<TARGET_LANG label>", "pos": "<English POS>" }] }`;
+  let resp: { translations?: Array<{ id: number | string; target?: string; pos?: string }> };
+  try {
+    resp = (await openaiCall(
+      "You translate vocabulary card labels precisely. Always return target_lang in target_lang's script. Never echo source.",
+      userPrompt,
+      "gpt-4.1",
+    )) as typeof resp;
+  } catch (err) {
+    console.warn(`[translateCanonicalMeaningsRetry] HTTP error: ${(err as Error).message}`);
+    return out;
+  }
+  for (const r of resp.translations ?? []) {
+    const idx = Number(r.id);
+    const rawTr = stripTargetMetaParen((r.target ?? "").trim());
+    if (!rawTr || idx < 0 || idx >= meanings.length) continue;
+    const pos = (r.pos ?? "").trim() || meanings[idx].pos || undefined;
+    const tr = targetLang === "ko" ? fixKoreanVerbAdjForm(rawTr, pos) : rawTr;
+    if (translationLooksWrong(tr, word, sourceLang, targetLang)) continue;
+    out.set(meanings[idx].sense_id, { target: tr, pos });
+  }
+  return out;
 }

@@ -391,7 +391,6 @@ export default {
     mode_dictation: '听写',
     mode_context: '例句',
     mode_fill_blank: '完形填空',
-    mode_cloze_listening: '句子听写',
     mode_auto: '自动',
     speaking_prompt: '请大声读出这个单词',
     speaking_listening: '正在聆听...',
@@ -641,6 +640,7 @@ export default {
     word_placeholder: '例：ephemeral',
     search: '搜索',
     generating: '生成中\u2026',
+    ai_may_err: 'AI 可能会出错',
     meanings: '释义',
     save: '保存到词汇本',
     saved: '已保存到词汇本',
@@ -681,6 +681,9 @@ export default {
     listening: '正在聆听\u2026',
     stt_dev_build_required: '语音搜索需要开发版本',
     which_meaning: '哪个意思？',
+    book_full_title: '单词本已满',
+    book_full_message: '此单词本已收录{{max}}个单词。创建新的单词本继续学习吧。',
+    book_full_cta: '创建新单词本',
   },
   inquiry: {
     title: '联系我们',
@@ -873,6 +876,7 @@ export default {
     thanks_1: '感谢您的反馈！这有助于我们改进应用。',
     thanks_2: '非常感谢您的宝贵意见！我们会尽快处理。',
     thanks_3: '谢谢您！您的反馈让应用变得更好。',
+    send: '发送',
   },
   library_tab: {
     "subtitle": "用户分享的单词本",

@@ -192,7 +192,6 @@ export default {
     mode_dictation: 'Dictado',
     mode_context: 'Oración',
     mode_fill_blank: 'Completar',
-    mode_cloze_listening: 'Dictado de oración',
     mode_auto: 'Automático',
     speaking_prompt: 'Di esta palabra en voz alta',
     speaking_listening: 'Escuchando...',
@@ -442,6 +441,7 @@ export default {
     word_placeholder: 'Ej: ephemeral',
     search: 'Buscar',
     generating: 'Generando\u2026',
+    ai_may_err: 'La IA puede cometer errores',
     meanings: 'Significados',
     save: 'Guardar en la lista',
     saved: 'Guardado en la lista',
@@ -482,6 +482,9 @@ export default {
     listening: 'Escuchando\u2026',
     stt_dev_build_required: 'La búsqueda por voz requiere una compilación de desarrollo',
     which_meaning: '¿Cuál significado?',
+    book_full_title: 'Lista de palabras llena',
+    book_full_message: 'Esta lista ya contiene {{max}} palabras. Crea una nueva lista para seguir aprendiendo.',
+    book_full_cta: 'Crear nueva lista',
   },
   inquiry: {
     title: 'Contáctenos',
@@ -674,6 +677,7 @@ export default {
     thanks_1: '¡Gracias por reportar! Esto nos ayuda a mejorar la app.',
     thanks_2: '¡Tu opinión es valiosa! Lo revisaremos pronto.',
     thanks_3: '¡Gracias! Tu aporte ayuda a mejorar la app para todos.',
+    send: 'Enviar',
   },
   library_tab: {
     "subtitle": "Listas compartidas por usuarios",

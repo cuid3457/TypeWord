@@ -32,6 +32,11 @@ verify_jwt = false
 # shared secret, not a JWT). Gateway JWT verification would block pg_cron entirely.
 verify_jwt = false
 
+[functions.send-inquiry-notification]
+# Internal-only function — fired by inquiries INSERT trigger via pg_net.
+# Auth via INQUIRY_NOTIFY_SECRET (Vault-matched), not a user JWT.
+verify_jwt = false
+
 [functions.image-extract]
 verify_jwt = false
 
@@ -43,6 +48,11 @@ verify_jwt = false
 [functions.revenuecat-webhook]
 # Public webhook — auth is via Authorization header with RC-shared secret,
 # not a user JWT. Verified inside the function.
+verify_jwt = false
+
+[functions.web-subscription-webhook]
+# Public webhook — auth is via Paddle-Signature HMAC header verified by the
+# adapter (paddle.ts). No user JWT involved.
 verify_jwt = false
 
 [functions.community-upload]

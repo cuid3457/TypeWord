@@ -142,7 +142,7 @@ function CenteredCardLayout({ visible, onClose, word, wordId, context, sourceLan
                 <Text className={`text-base font-semibold ${
                   !reason ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
                 }`}>
-                  {t('report.submit')}
+                  {t('report.send')}
                 </Text>
               )}
             </Pressable>
@@ -336,7 +336,7 @@ function BottomSheetLayout({ visible, onClose, word, wordId, context, sourceLang
                       <Text className={`text-base font-semibold ${
                         !reason ? 'text-faint' : 'text-canvas dark:text-canvas-dark'
                       }`}>
-                        {t('report.submit')}
+                        {t('report.send')}
                       </Text>
                     )}
                   </Pressable>

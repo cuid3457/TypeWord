@@ -2,7 +2,7 @@
   "expo": {
     "name": "MoaVoca",
     "slug": "typeword",
-    "version": "2.0.1",
+    "version": "2.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "typeword",

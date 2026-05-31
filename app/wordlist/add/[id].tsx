@@ -28,7 +28,7 @@ import { Toast } from '@/components/toast';
 import type { PartialLookup } from '@src/api/streamLookup';
 import { findLanguage } from '@src/constants/languages';
 import { getExamplePrefix, getPlaceholder } from '@src/constants/placeholders';
-import { findWord, getBook, getTotalWordCount, saveWord, ANON_WORD_LIMIT } from '@src/db/queries';
+import { findWord, getBook, getBookWordCount, getTotalWordCount, saveWord, ANON_WORD_LIMIT, MAX_WORDS_PER_BOOK } from '@src/db/queries';
 import { useIsAnonymous } from '@src/hooks/useIsAnonymous';
 import { SignupCTAModal } from '@/components/signup-cta';
 import { getStreak, getTodayStreakDate, recordStudyDateIfQualified } from '@src/services/streakService';
@@ -198,6 +198,12 @@ export default function AddWordScreen() {
   const [alreadyExists, setAlreadyExists] = useState(false);
   const [response, setResponse] = useState<WordLookupResponse | null>(null);
   const [partial, setPartial] = useState<PartialLookup | null>(null);
+  // MoaTip enters 3.5s into a lookup (sub-second/cached responses skip it).
+  // Once shown, we hold the skeleton 1.5s minimum so a near-simultaneous
+  // response doesn't flash the character for a few hundred ms.
+  const [tipShown, setTipShown] = useState(false);
+  const tipShownAtRef = useRef<number | null>(null);
+  const [holdSkeleton, setHoldSkeleton] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [enriching, setEnriching] = useState(false);
@@ -205,6 +211,7 @@ export default function AddWordScreen() {
   const [showReport, setShowReport] = useState(false);
   const [reportToast, setReportToast] = useState('');
   const [showAnonWordLimitModal, setShowAnonWordLimitModal] = useState(false);
+  const [showBookFullModal, setShowBookFullModal] = useState(false);
   const isAnon = useIsAnonymous();
 
   const [ocrWords, setOcrWords] = useState<ExtractedWord[]>([]);
@@ -349,6 +356,30 @@ export default function AddWordScreen() {
     return () => clearInterval(timer);
   }, [fullPlaceholder, wordEmpty]);
 
+  // Reveal MoaTip 3.5s into a lookup. If partial/response arrives before then,
+  // cleanup cancels the timer so sub-3.5s lookups never see the character.
+  useEffect(() => {
+    if (!loading || partial != null || response != null) return;
+    const id = setTimeout(() => {
+      setTipShown(true);
+      tipShownAtRef.current = Date.now();
+    }, 3500);
+    return () => clearTimeout(id);
+  }, [loading, partial, response]);
+
+  // When partial/response arrives after the tip is visible, hold the skeleton
+  // for the remainder of the 1.5s minimum so the character can't flash briefly.
+  useEffect(() => {
+    if (partial == null && response == null) return;
+    const at = tipShownAtRef.current;
+    if (at == null) return;
+    const remaining = 1500 - (Date.now() - at);
+    if (remaining <= 0) return;
+    setHoldSkeleton(true);
+    const id = setTimeout(() => setHoldSkeleton(false), remaining);
+    return () => clearTimeout(id);
+  }, [partial, response]);
+
   const handleLookup = async (overrideWord?: string) => {
     if (!isConnected) {
       setToast(t('error.offline_message'));
@@ -384,6 +415,9 @@ export default function AddWordScreen() {
     setAlreadyExists(false);
     setSaving(false);
     setCandidates([]);
+    setTipShown(false);
+    setHoldSkeleton(false);
+    tipShownAtRef.current = null;
 
     setHasSearched(true);
 
@@ -600,6 +634,13 @@ export default function AddWordScreen() {
         setShowAnonWordLimitModal(true);
         return;
       }
+    }
+
+    // Per-wordlist cap: route to "wordlist full" modal with new-wordlist CTA.
+    const bookCount = await getBookWordCount(book.id);
+    if (bookCount >= MAX_WORDS_PER_BOOK) {
+      setShowBookFullModal(true);
+      return;
     }
 
     setSaving(true);
@@ -1141,13 +1182,13 @@ export default function AddWordScreen() {
             </View>
           ) : null}
 
-          {loading && !partial && !response ? (
-            <SkeletonCard word={word.trim()} t={t} />
+          {(loading && !partial && !response) || holdSkeleton ? (
+            <SkeletonCard word={word.trim()} t={t} showTip={tipShown} />
           ) : null}
 
-          {partial && !response ? <PartialCard partial={partial} word={word.trim()} t={t} /> : null}
+          {partial && !response && !holdSkeleton ? <PartialCard partial={partial} word={word.trim()} t={t} /> : null}
 
-          {response ? (
+          {response && !holdSkeleton ? (
             <ResultCard
               response={response}
               word={word.trim()}
@@ -1323,6 +1364,19 @@ export default function AddWordScreen() {
         nextPath={`/wordlist/add/${book?.id ?? ''}`}
         onClose={() => setShowAnonWordLimitModal(false)}
       />
+
+      <AppModal
+        visible={showBookFullModal}
+        title={t('add_word.book_full_title')}
+        message={t('add_word.book_full_message', { max: MAX_WORDS_PER_BOOK })}
+        buttonText={t('common.close')}
+        confirmText={t('add_word.book_full_cta')}
+        onConfirm={() => {
+          setShowBookFullModal(false);
+          router.replace('/wordlist/new');
+        }}
+        onClose={() => setShowBookFullModal(false)}
+      />
     </SafeAreaView>
   );
 }
@@ -1341,17 +1395,11 @@ function formatReading(reading?: string | string[]): string | undefined {
 /**
  * SkeletonCard — placeholder shown immediately on search submit, before the
  * SSE stream's first delta arrives. Echoes the user's input as the headword
- * ("this is what I searched for") with a "generating" spinner. After a short
- * delay — so sub-second/cached lookups never flash it — a MoaTip fades in to
- * make the wait less idle. Transitions to PartialCard on the first delta.
+ * with a "generating" spinner. The parent controls `showTip`: it only flips
+ * true after the lookup has been running 3.5s, and the parent also holds this
+ * card mounted for a 1.5s minimum once the tip is visible.
  */
-function SkeletonCard({ word, t }: { word: string; t: TFn }) {
-  const [showTip, setShowTip] = useState(false);
-  useEffect(() => {
-    const id = setTimeout(() => setShowTip(true), 700);
-    return () => clearTimeout(id);
-  }, []);
-
+function SkeletonCard({ word, t, showTip }: { word: string; t: TFn; showTip: boolean }) {
   return (
     <View className="mt-6">
       {/* Headword echo — bold, prominent like the real result */}
@@ -1366,7 +1414,14 @@ function SkeletonCard({ word, t }: { word: string; t: TFn }) {
         <ActivityIndicator size="small" className="ml-2" />
       </View>
 
-      {showTip ? <MoaTip /> : null}
+      {showTip ? (
+        <>
+          <MoaTip />
+          <Text className="mt-3 text-center text-[11px] text-muted" style={{ opacity: 0.6 }}>
+            {t('add_word.ai_may_err')}
+          </Text>
+        </>
+      ) : null}
     </View>
   );
 }

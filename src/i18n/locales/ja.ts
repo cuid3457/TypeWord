@@ -211,7 +211,6 @@ export default {
     mode_dictation: 'ディクテーション',
     mode_context: '例文',
     mode_fill_blank: '穴埋め',
-    mode_cloze_listening: '文の聞き取り',
     mode_auto: '自動',
     speaking_prompt: 'この単語を発音してみましょう',
     speaking_listening: '聞き取り中...',
@@ -461,6 +460,7 @@ export default {
     word_placeholder: '例: ephemeral',
     search: '検索',
     generating: '生成中\u2026',
+    ai_may_err: 'AIは間違えることがあります',
     meanings: '意味',
     save: '単語帳に保存',
     saved: '単語帳に保存しました',
@@ -501,6 +501,9 @@ export default {
     listening: '聞いています\u2026',
     stt_dev_build_required: '音声検索には開発ビルドが必要です',
     which_meaning: 'どの意味ですか？',
+    book_full_title: '単語帳がいっぱいです',
+    book_full_message: 'この単語帳はすでに{{max}}語登録されています。新しい単語帳を作って学習を続けましょう。',
+    book_full_cta: '新しい単語帳を作成',
   },
   inquiry: {
     title: 'お問い合わせ',
@@ -693,6 +696,7 @@ export default {
     thanks_1: 'ご報告ありがとうございます！アプリの改善に役立てます。',
     thanks_2: '貴重なご意見をありがとうございます！早急に確認いたします。',
     thanks_3: 'フィードバックに感謝します！皆様のためにアプリをより良くしていきます。',
+    send: '送信',
   },
   library_tab: {
     "subtitle": "ユーザーが共有した単語帳",

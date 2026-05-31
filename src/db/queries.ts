@@ -802,6 +802,10 @@ export const BOOK_LIMIT_BY_TIER = {
 export const ANON_BOOK_LIMIT = 1;
 export const ANON_WORD_LIMIT = 10;
 
+/** Per-wordlist word count cap (all tiers). Mirrored server-side as
+ * MAX_WORDS_FOR_UPLOAD in the community-upload edge function — keep in sync. */
+export const MAX_WORDS_PER_BOOK = 300;
+
 export async function getBookCount(): Promise<number> {
   const db = await getDb();
   const row = await db.getFirstAsync<{ cnt: number }>(
@@ -814,6 +818,15 @@ export async function getTotalWordCount(): Promise<number> {
   const db = await getDb();
   const row = await db.getFirstAsync<{ cnt: number }>(
     'SELECT COUNT(*) AS cnt FROM user_words',
+  );
+  return row?.cnt ?? 0;
+}
+
+export async function getBookWordCount(bookId: string): Promise<number> {
+  const db = await getDb();
+  const row = await db.getFirstAsync<{ cnt: number }>(
+    'SELECT COUNT(*) AS cnt FROM user_words WHERE book_id = ?',
+    [bookId],
   );
   return row?.cnt ?? 0;
 }

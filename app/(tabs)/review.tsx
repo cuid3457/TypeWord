@@ -65,14 +65,12 @@ export default function ReviewScreen() {
   const params = useLocalSearchParams<{ bookId?: string }>();
 
   type ReviewOrder = 'newest' | 'shuffle';
-  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening' | 'auto';
+  type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
   // Modes a single card can actually render (auto resolves into one of these per card).
   type ResolvedMode = Exclude<ReviewMode, 'auto'>;
-  // cloze_listening = fill_blank UI + auto TTS playback at card mount.
-  // Shares the markered-example requirement with fill_blank/context.
-  const AUTO_CANDIDATE_MODES: ResolvedMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank', 'cloze_listening'];
+  const AUTO_CANDIDATE_MODES: ResolvedMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank'];
   const isBlankMode = (m: string | undefined | null): boolean =>
-    m === 'fill_blank' || m === 'cloze_listening';
+    m === 'fill_blank';
   // Indices of examples whose translation contains highlight markers. context
   // and fill_blank both surface the translation as the bridge between sentence
   // and word — examples missing that bridge (e.g. negated form 모르다 for 知道)
@@ -134,7 +132,7 @@ export default function ReviewScreen() {
   const [limitTotal, setLimitTotal] = useState<number>(50);
   const [showLimitModal, setShowLimitModal] = useState(false);
   const [limitAdAvailable, setLimitAdAvailable] = useState(false);
-  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, cloze_listening: Infinity, auto: Infinity });
+  const [settingsRemaining, setSettingsRemaining] = useState<Record<string, number>>({ flashcard: Infinity, choice: Infinity, dictation: Infinity, context: Infinity, fill_blank: Infinity, auto: Infinity });
 
   // Settings modal state
   const [showSettings, setShowSettings] = useState(false);
@@ -159,7 +157,13 @@ export default function ReviewScreen() {
     if (settings.reviewOrder === reviewOrder) return;
     saveUserSettings({ ...settings, reviewOrder }).catch(() => {});
   }, [reviewOrder, settings]);
-  const [reviewMode, setReviewMode] = useState<ReviewMode>((settings?.reviewMode as ReviewMode) ?? 'auto');
+  // Migrate retired modes (e.g. 'cloze_listening' removed 2026-05-30) so the
+  // settings sheet doesn't render a missing i18n key from a stale stored pref.
+  const migrateMode = (m: string | undefined | null): ReviewMode => {
+    const valid: ReviewMode[] = ['flashcard', 'choice', 'dictation', 'context', 'fill_blank', 'auto'];
+    return (m && (valid as string[]).includes(m)) ? (m as ReviewMode) : 'auto';
+  };
+  const [reviewMode, setReviewMode] = useState<ReviewMode>(migrateMode(settings?.reviewMode));
   // settings hook loads async — once it arrives, hydrate from the stored
   // last-used mode. Tracked by ref so we only hydrate once (subsequent
   // user changes within the session must not be clobbered).
@@ -168,8 +172,8 @@ export default function ReviewScreen() {
     if (reviewModeHydratedRef.current) return;
     if (!settings) return;
     reviewModeHydratedRef.current = true;
-    const stored = settings.reviewMode as ReviewMode | undefined;
-    if (stored && stored !== reviewMode) {
+    const stored = migrateMode(settings.reviewMode);
+    if (stored !== reviewMode) {
       setReviewMode(stored);
     }
   }, [settings, reviewMode]);
@@ -1413,10 +1417,7 @@ export default function ReviewScreen() {
         ttsTimer = setTimeout(() => {
           if (m === 'dictation' || m === 'choice' || (m === 'flashcard' && !cardReversed)) {
             playWord();
-          } else if (m === 'context' || m === 'cloze_listening') {
-            // cloze_listening reads the full sentence so the user has to
-            // pick up the blanked word from audio context, matching how
-            // the word actually appears in conversation.
+          } else if (m === 'context') {
             const examples = w.result.examples ?? [];
             const ex = examples[pickedExIdx] ?? examples[0];
             if (ex?.sentence) {

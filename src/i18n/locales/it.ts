@@ -185,7 +185,6 @@ export default {
     mode_dictation: 'Dettato',
     mode_context: 'Frase',
     mode_fill_blank: 'Completa',
-    mode_cloze_listening: 'Dettato di frase',
     mode_auto: 'Automatico',
     speaking_prompt: 'Pronuncia questa parola ad alta voce',
     speaking_listening: 'In ascolto...',
@@ -423,7 +422,7 @@ export default {
   },
   add_word: {
     title: 'Aggiungi parola', word: 'Parola', word_placeholder: 'Es: ephemeral',
-    search: 'Cerca', generating: 'Generazione\u2026', meanings: 'Significati',
+    search: 'Cerca', generating: 'Generazione\u2026', ai_may_err: 'L\u2019IA pu\u00f2 commettere errori', meanings: 'Significati',
     save: 'Salva nella lista', saved: 'Salvato nella lista',
     already_exists: 'Già nella lista',
     first_lookup: 'Sei il primo a cercare questa parola!',
@@ -460,6 +459,9 @@ export default {
     listening: 'In ascolto\u2026',
     stt_dev_build_required: 'La ricerca vocale richiede una build di sviluppo',
     which_meaning: 'Quale significato?',
+    book_full_title: 'Lista di parole piena',
+    book_full_message: 'Questa lista contiene già {{max}} parole. Crea una nuova lista per continuare a imparare.',
+    book_full_cta: 'Crea nuova lista',
   },
   inquiry: {
     title: 'Contattaci',
@@ -652,6 +654,7 @@ export default {
     thanks_1: 'Grazie per la segnalazione! Ci aiuta a migliorare l\'app.',
     thanks_2: 'Il tuo feedback è prezioso! Lo esamineremo presto.',
     thanks_3: 'Grazie! Il tuo contributo rende l\'app migliore per tutti.',
+    send: 'Invia',
   },
   library_tab: {
     "subtitle": "Liste condivise dagli utenti",

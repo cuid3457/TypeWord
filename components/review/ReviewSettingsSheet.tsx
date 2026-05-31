@@ -13,7 +13,7 @@ import { BottomSheetShell } from '@/components/bottom-sheet-shell';
 import { getDailyLimit, type ReviewMode as LimitReviewMode } from '@src/services/reviewLimitService';
 
 type ReviewOrder = 'newest' | 'shuffle';
-type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening' | 'auto';
+type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
 
 const MIN_SESSION = 10;
 const MAX_SESSION_FREE = 30;
@@ -35,14 +35,13 @@ interface Props {
   onStart: () => void;
 }
 
-const MODE_ORDER: ReviewMode[] = ['auto', 'flashcard', 'choice', 'dictation', 'context', 'fill_blank', 'cloze_listening'];
+const MODE_ORDER: ReviewMode[] = ['auto', 'flashcard', 'choice', 'dictation', 'context', 'fill_blank'];
 const modeIcon = (m: ReviewMode): keyof typeof MaterialIcons.glyphMap =>
   m === 'auto' ? 'shuffle'
   : m === 'flashcard' ? 'style'
   : m === 'choice' ? 'quiz'
   : m === 'dictation' ? 'keyboard'
   : m === 'context' ? 'menu-book'
-  : m === 'cloze_listening' ? 'hearing'
   : 'edit-note';
 
 export function ReviewSettingsSheet(props: Props) {

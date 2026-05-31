@@ -45,7 +45,13 @@ function isArchaicSense(tags: string[] = []): boolean {
 // meanings — drop so SELECT doesn't see them. If every sense of an entry is
 // form-of (the "ran" case), the entry collapses to 0 senses and is dropped
 // downstream (→ dict-miss → LLM fallback handles inflection cards).
+//
+// Exception: an "ellipsis" tag (Crimea = ellipsis of Crimean peninsula) marks
+// a shortening that IS the everyday form of a proper noun — keep it so the
+// learner card surfaces the place name rather than falling through to the
+// LLM neologism path (which can lose dict-supplied gender/POS metadata).
 function isFormOf(tags: string[] = []): boolean {
+  if (tags.includes("ellipsis")) return false;
   return tags.includes("form-of") || tags.includes("alt-of");
 }
 

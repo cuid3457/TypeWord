@@ -135,19 +135,101 @@ export async function resetUser(): Promise<void> {
 /**
  * Web checkout. Gated by EXPO_PUBLIC_WEB_CHECKOUT_PROVIDER:
  *   unset / 'none' → returns false (mobile-store CTA in paywall)
- *   'paddle'       → opens Paddle checkout (TBD: hosted-page URL or JS SDK)
+ *   'paddle'       → opens Paddle Checkout overlay
  *   'toss'         → opens Toss checkout (TBD)
  *
- * Until a provider is wired, both purchase paths return false and the
- * paywall falls back to the App Store / Play Store CTAs.
+ * Returns true once the provider checkout overlay is open. The
+ * web-subscription-webhook attributes the resulting subscription via
+ * custom_data.user_id and updates profiles.plan on its own; the paywall
+ * does not need to await purchase completion here.
  */
-async function startWebCheckout(_plan: 'monthly' | 'annual'): Promise<boolean> {
+
+const PADDLE_SDK_URL = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+let _paddleInitialized = false;
+
+async function loadPaddleSdk(): Promise<unknown | null> {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return null;
+  const win = window as unknown as { Paddle?: unknown };
+  if (win.Paddle) return win.Paddle;
+
+  return new Promise((resolve) => {
+    const script = document.createElement('script');
+    script.src = PADDLE_SDK_URL;
+    script.async = true;
+    script.onload = () => resolve(win.Paddle ?? null);
+    script.onerror = () => resolve(null);
+    document.head.appendChild(script);
+  });
+}
+
+function paddleEnvironment(): 'sandbox' | 'production' {
+  const env = (process.env.EXPO_PUBLIC_PADDLE_ENVIRONMENT ?? 'sandbox').toLowerCase();
+  return env === 'production' ? 'production' : 'sandbox';
+}
+
+interface PaddleSdk {
+  Environment: { set(env: 'sandbox' | 'production'): void };
+  Initialize(opts: { token: string; eventCallback?: (data: unknown) => void }): void;
+  Checkout: {
+    open(opts: {
+      items: { priceId: string; quantity: number }[];
+      customer?: { email?: string };
+      customData?: Record<string, string>;
+      settings?: { displayMode?: 'overlay' | 'inline'; locale?: string; successUrl?: string };
+    }): void;
+  };
+}
+
+async function ensurePaddleReady(): Promise<PaddleSdk | null> {
+  const sdk = await loadPaddleSdk();
+  if (!sdk) return null;
+  const Paddle = sdk as PaddleSdk;
+
+  if (_paddleInitialized) return Paddle;
+
+  const token = process.env.EXPO_PUBLIC_PADDLE_CLIENT_TOKEN;
+  if (!token) return null;
+
+  try {
+    Paddle.Environment.set(paddleEnvironment());
+    Paddle.Initialize({ token });
+    _paddleInitialized = true;
+    return Paddle;
+  } catch (e) {
+    captureError(e, { service: 'subscriptionService.web', fn: 'ensurePaddleReady' });
+    return null;
+  }
+}
+
+async function startWebCheckout(plan: 'monthly' | 'annual'): Promise<boolean> {
   const provider = process.env.EXPO_PUBLIC_WEB_CHECKOUT_PROVIDER ?? 'none';
-  if (provider === 'none') return false;
-  // TODO Phase 2: redirect to provider's hosted checkout, passing
-  //   custom_data.user_id = (await supabase.auth.getSession()).data.session?.user.id
-  // so the webhook can attribute the resulting subscription event.
-  return false;
+  if (provider !== 'paddle') return false;
+
+  try {
+    const Paddle = await ensurePaddleReady();
+    if (!Paddle) return false;
+
+    const priceId = plan === 'annual'
+      ? process.env.EXPO_PUBLIC_PADDLE_PRICE_ANNUAL
+      : process.env.EXPO_PUBLIC_PADDLE_PRICE_MONTHLY;
+    if (!priceId) return false;
+
+    const { data: session } = await supabase.auth.getSession();
+    const userId = session.session?.user?.id;
+    if (!userId) return false;
+    const email = session.session?.user?.email;
+
+    Paddle.Checkout.open({
+      items: [{ priceId, quantity: 1 }],
+      customer: email ? { email } : undefined,
+      customData: { user_id: userId },
+      settings: { displayMode: 'overlay' },
+    });
+    return true;
+  } catch (e) {
+    captureError(e, { service: 'subscriptionService.web', fn: 'startWebCheckout', plan });
+    return false;
+  }
 }
 
 export async function purchaseMonthly(): Promise<boolean> {

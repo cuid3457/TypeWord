@@ -25,8 +25,10 @@ if [ -d "dist/app/assets/node_modules" ]; then
   # bundles, CSS sourcemaps, HTML SSR snapshots, and JSON manifests are
   # all candidates. Quoted-string occurrences only — anything that
   # mentions the literal substring `assets/node_modules/` gets rewritten.
+  # Use perl for cross-platform in-place edit (BSD sed on macOS rejects
+  # GNU `sed -i` syntax, so we sidestep sed entirely here).
   find dist/app \( -name '*.js' -o -name '*.css' -o -name '*.html' -o -name '*.json' -o -name '*.map' \) -type f -print0 \
-    | xargs -0 sed -i 's|assets/node_modules/|assets/_packages/|g'
+    | xargs -0 perl -i -pe 's|assets/node_modules/|assets/_packages/|g'
 fi
 
 # Expo Web emits `<title data-rh="true"></title>` (react-helmet anchor)
@@ -37,7 +39,7 @@ fi
 # once the app boots.
 echo "[build-cf-pages] injecting default <title>MoaVoca</title>"
 find dist/app -name '*.html' -type f -print0 \
-  | xargs -0 sed -i 's|<title data-rh="true"></title>|<title data-rh="true">MoaVoca</title>|g'
+  | xargs -0 perl -i -pe 's|<title data-rh="true"></title>|<title data-rh="true">MoaVoca</title>|g'
 
 echo "[build-cf-pages] copying landing + legal pages to dist root"
 cp index.html privacy.html terms.html business-info.html licenses.html data.html probability.html _redirects _headers googlea7e926c78ec67b7e.html robots.txt sitemap.xml og-image.png dist/

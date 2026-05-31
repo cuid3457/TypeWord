@@ -3,7 +3,7 @@ import { getTier, type Tier } from './subscriptionService';
 
 const STORAGE_KEY = 'typeword.reviewLimits';
 
-export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'cloze_listening' | 'auto';
+export type ReviewMode = 'flashcard' | 'choice' | 'dictation' | 'context' | 'fill_blank' | 'auto';
 
 /**
  * Per-tier daily card limit (combined across ALL review modes).
@@ -122,7 +122,6 @@ export async function getRemainingAll(): Promise<Record<ReviewMode, number>> {
     dictation: remaining,
     context: remaining,
     fill_blank: remaining,
-    cloze_listening: remaining,
     auto: remaining,
   };
 }
