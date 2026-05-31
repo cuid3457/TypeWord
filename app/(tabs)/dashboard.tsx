@@ -438,9 +438,10 @@ export default function DashboardScreen() {
             </Pressable>
 
             {/* Stats summary card — small surface that previews mastery and
-                deep-links into the full Stats page. Tap-through targets the
-                same /stats route as the calendar card for symmetry. */}
-            {!isAnon && stats && stats.srs.total > 0 ? (
+                deep-links into the full Stats page. Renders even when the
+                user has no cards yet (shows an empty-state hint) so the
+                card stays a discoverable entry-point into /stats. */}
+            {!isAnon && stats ? (
               <Pressable
                 onPress={() => { haptic.tap(); router.push('/stats'); }}
                 accessibilityRole="button"
@@ -456,10 +457,18 @@ export default function DashboardScreen() {
                       <MaterialIcons name="chevron-right" size={18} color="#A79E90" />
                     </View>
                   </View>
-                  <MasteryBar dist={stats.srs} dark={dark} />
-                  <Text className="mt-2 text-xs text-muted">
-                    {t('stats.total_cards', { count: stats.srs.total })}
-                  </Text>
+                  {stats.srs.total > 0 ? (
+                    <>
+                      <MasteryBar dist={stats.srs} dark={dark} />
+                      <Text className="mt-2 text-xs text-muted">
+                        {t('stats.total_cards', { count: stats.srs.total })}
+                      </Text>
+                    </>
+                  ) : (
+                    <Text className="mt-3 text-sm text-muted">
+                      {t('stats.empty_subtitle')}
+                    </Text>
+                  )}
                 </Card>
               </Pressable>
             ) : null}
