@@ -55,6 +55,12 @@ verify_jwt = false
 # adapter (paddle.ts). No user JWT involved.
 verify_jwt = false
 
+[functions.paddle-portal-session]
+# Gateway JWT verify disabled because of ES256 key incompat (same as
+# word-lookup). The function verifies the caller's JWT internally via
+# admin.auth.getUser(jwt) before reaching the Paddle API.
+verify_jwt = false
+
 [functions.community-upload]
 # Same as word-lookup: gateway-level JWT verification disabled because of
 # ES256 key incompatibility; verified inside via admin.auth.getUser(jwt).

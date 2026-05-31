@@ -50,7 +50,7 @@ import { clearLocalData } from '@src/db';
 import { clearUserSettings } from '@src/storage/userSettings';
 import { usePremium } from '@src/hooks/usePremium';
 import { useNetworkStatus } from '@src/hooks/useNetworkStatus';
-import { getSubscriptionManagementUrl } from '@src/services/subscriptionService';
+import { openSubscriptionManagement } from '@src/services/subscriptionService';
 
 // Stable churn-feedback keys. Order is rendering order; localized labels
 // come from `auth.deletion_reason_<key>` in each locale.
@@ -332,7 +332,7 @@ export default function ProfileScreen() {
               shows no matching subscription. */}
           {premium ? (
             <Pressable
-              onPress={() => { Linking.openURL(getSubscriptionManagementUrl()).catch(() => {}); }}
+              onPress={() => { openSubscriptionManagement().catch(() => {}); }}
               className="mt-5 items-center rounded-[14px] border border-line bg-surface py-4 dark:border-line-dark dark:bg-surface-dark"
             >
               <Text className="text-base font-medium text-ink dark:text-ink-dark">
@@ -389,7 +389,7 @@ export default function ProfileScreen() {
         message={t('auth.subscription_warning_message')}
         secondaryText={t('auth.manage_subscription')}
         onSecondary={() => {
-          Linking.openURL(getSubscriptionManagementUrl()).catch(() => {});
+          openSubscriptionManagement().catch(() => {});
         }}
         buttonText={t('settings.cancel')}
         confirmText={t('auth.continue_delete')}

@@ -19,7 +19,7 @@ import { setPaywallPending } from '@src/services/paywallPending';
 import { haptic } from '@src/services/hapticService';
 import {
   getOfferings,
-  getSubscriptionManagementUrl,
+  openSubscriptionManagement,
   purchaseAnnual,
   purchaseMonthly,
   restorePurchases,
@@ -179,10 +179,10 @@ export function Paywall() {
             </Text>
           </Pressable>
           <Pressable onPress={() => {
-            // Route to the channel the user actually paid through (RC → store,
-            // web Paddle → support email) so the cancel button doesn't dead-end
-            // on a store with no matching subscription.
-            Linking.openURL(getSubscriptionManagementUrl()).catch(() => {});
+            // Route to the channel the user actually paid through: store URL
+            // for RC, Paddle Customer Portal session for web_paddle (fetched
+            // server-side), mailto fallback otherwise.
+            openSubscriptionManagement().catch(() => {});
           }} hitSlop={8}>
             <Text className="text-xs text-muted underline">{t('premium.manage_subscription')}</Text>
           </Pressable>

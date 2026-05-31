@@ -100,6 +100,39 @@ export function getSubscriptionSource(): string | null {
 }
 
 /**
+ * Open subscription-management UI in a browser tab. For web Paddle subs,
+ * request a Customer Portal session URL via the paddle-portal-session
+ * Edge Function. For RC subs the user is on the web but their sub is in
+ * the App Store / Play Store, so we open those store URLs. Fallback to
+ * mailto if everything else fails.
+ */
+export async function openSubscriptionManagement(): Promise<void> {
+  if (_subscriptionSource === 'web_paddle') {
+    try {
+      const { data, error } = await supabase.functions.invoke('paddle-portal-session', {
+        method: 'POST',
+      });
+      const url = (data as { url?: string } | null)?.url;
+      if (!error && url) {
+        if (typeof window !== 'undefined') {
+          window.open(url, '_blank');
+        }
+        return;
+      }
+      if (error) {
+        captureError(error, { service: 'subscriptionService.web', fn: 'openSubscriptionManagement', via: 'paddle-portal' });
+      }
+    } catch (e) {
+      captureError(e, { service: 'subscriptionService.web', fn: 'openSubscriptionManagement', via: 'paddle-portal' });
+    }
+  }
+  const fallback = getSubscriptionManagementUrl();
+  if (typeof window !== 'undefined') {
+    window.open(fallback, '_blank');
+  }
+}
+
+/**
  * Refresh entitlement from the server. Reads profiles.plan +
  * bonus_premium_until in a single roundtrip. profiles.plan is kept current
  * by the RC and web-subscription webhooks, so this captures both

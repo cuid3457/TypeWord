@@ -98,6 +98,37 @@ export function getSubscriptionSource(): string | null {
   return _subscriptionSource;
 }
 
+/**
+ * Open the appropriate subscription-management surface for the user's
+ * channel: Paddle Customer Portal for web_paddle, store URL for RC,
+ * mailto as last-resort fallback. Async because web_paddle requires
+ * a server round-trip to mint a portal session URL.
+ *
+ * Always resolves — failures fall back to getSubscriptionManagementUrl().
+ */
+export async function openSubscriptionManagement(): Promise<void> {
+  const { Linking } = require('react-native') as { Linking: { openURL(u: string): Promise<unknown> } };
+  if (_subscriptionSource === 'web_paddle') {
+    try {
+      const { data, error } = await supabase.functions.invoke('paddle-portal-session', {
+        method: 'POST',
+      });
+      const url = (data as { url?: string } | null)?.url;
+      if (!error && url) {
+        await Linking.openURL(url);
+        return;
+      }
+      // Edge function failure → fall through to mailto fallback below.
+      if (error) {
+        captureError(error, { service: 'subscriptionService', fn: 'openSubscriptionManagement', via: 'paddle-portal' });
+      }
+    } catch (e) {
+      captureError(e, { service: 'subscriptionService', fn: 'openSubscriptionManagement', via: 'paddle-portal' });
+    }
+  }
+  await Linking.openURL(getSubscriptionManagementUrl());
+}
+
 async function cacheTier(tier: Tier) {
   _rcTier = tier;
   await AsyncStorage.setItem(TIER_CACHE_KEY, tier);
