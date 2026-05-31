@@ -509,6 +509,7 @@ export default {
     manage: 'Gestisci abbonamento',
     manage_subscription: 'Gestisci abbonamento',
     disclosure: 'MoaVoca Premium — Mensile ({{monthlyPrice}}/mese) o Annuale ({{annualPrice}}/anno). I prezzi visualizzati includono le imposte applicabili (ad es. IVA) ove previsto dalla legge. Il pagamento verrà addebitato sul tuo ID Apple o account Google alla conferma dell\'acquisto. L\'abbonamento si rinnova automaticamente a meno che il rinnovo automatico non venga disattivato almeno 24 ore prima della fine del periodo in corso. L\'addebito di rinnovo avviene entro le 24 ore precedenti alla scadenza. Puoi gestire l\'abbonamento e disattivare il rinnovo automatico dalle impostazioni del tuo account dopo l\'acquisto.',
+    web_disclosure: 'MoaVoca Premium — Mensile ({{monthlyPrice}}/mese) o Annuale ({{annualPrice}}/anno). I prezzi visualizzati includono le imposte applicabili (IVA o imposta sulle vendite) ove previsto dalla legge. Il pagamento è elaborato da Paddle.com Market Limited come Merchant of Record. L\'abbonamento si rinnova automaticamente fino all\'annullamento. Puoi annullare in qualsiasi momento tramite il link nell\'e-mail di conferma o contattando support@moavoca.com. La politica di rimborso è dettagliata nella Sezione 4 dei nostri Termini d\'uso.',
     cancel: 'Chiudi',
   },
   tier: {

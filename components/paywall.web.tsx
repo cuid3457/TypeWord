@@ -228,6 +228,41 @@ export function Paywall() {
             {message ? (
               <Text className="mt-2 text-center text-xs text-muted">{message}</Text>
             ) : null}
+
+            {/* Disclosure — Korean 전자상거래법 + general transparency.
+                Apple/Google paywall has a similar block; web uses a Paddle-
+                worded variant since Apple ID / Play Store language doesn't
+                apply here. */}
+            <Text className="mt-6 text-center text-[11px] leading-4 text-faint">
+              {t('premium.web_disclosure', { monthlyPrice: '$5.99', annualPrice: '$39.99' })}
+            </Text>
+
+            {/* Subscription actions — manage (cancel/update payment) via
+                support email. Once Paddle's customer portal is integrated
+                this can swap to a portal URL fetched server-side. */}
+            <View className="mt-4 flex-row items-center justify-center gap-x-6">
+              <Pressable
+                onPress={() => Linking.openURL('mailto:support@moavoca.com?subject=Subscription%20Management')}
+                hitSlop={8}
+              >
+                <Text className="text-xs text-muted underline">{t('premium.manage_subscription')}</Text>
+              </Pressable>
+            </View>
+
+            {/* Legal links — terms / privacy / business info (compliance) */}
+            <View className="mt-3 flex-row flex-wrap items-center justify-center gap-x-2 gap-y-1">
+              <Pressable onPress={() => router.push('/terms')} hitSlop={6}>
+                <Text className="text-[11px] text-faint underline">{t('settings.terms')}</Text>
+              </Pressable>
+              <Text className="text-[11px] text-faint">·</Text>
+              <Pressable onPress={() => router.push('/privacy')} hitSlop={6}>
+                <Text className="text-[11px] text-faint underline">{t('settings.privacy')}</Text>
+              </Pressable>
+              <Text className="text-[11px] text-faint">·</Text>
+              <Pressable onPress={() => router.push('/business-info')} hitSlop={6}>
+                <Text className="text-[11px] text-faint underline">{t('settings.business_info')}</Text>
+              </Pressable>
+            </View>
           </View>
         ) : null}
       </ScrollView>

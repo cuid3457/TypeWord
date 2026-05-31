@@ -731,6 +731,7 @@ export default {
     manage: '管理订阅',
     manage_subscription: '管理订阅',
     disclosure: 'MoaVoca 高级版 — 按月（{{monthlyPrice}}/月）或按年（{{annualPrice}}/年）。显示价格已包含适用的税费（如增值税/消费税）。付款将在购买确认时从您的 Apple ID 或 Google 账户扣除。如果在当前订阅周期结束前至少 24 小时未关闭自动续订,订阅将自动续订;续费将在到期前 24 小时内扣款。购买后您可在账户设置中管理订阅并关闭自动续订。',
+    web_disclosure: 'MoaVoca 高级版 — 按月（{{monthlyPrice}}/月）或按年（{{annualPrice}}/年）。显示价格已包含法律要求的适用税费（如增值税/消费税）。付款由 Paddle.com Market Limited（指定商户/Merchant of Record）处理。订阅在取消前将自动续费。您可通过购买确认邮件中的链接或联系 support@moavoca.com 随时取消。退款政策详见服务条款第 4 条。',
     cancel: '关闭',
   },
   tier: {

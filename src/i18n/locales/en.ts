@@ -762,6 +762,7 @@ ad_privacy: 'Ad Privacy Settings',
     manage: 'Manage Subscription',
     manage_subscription: 'Manage Subscription',
     disclosure: 'MoaVoca Premium — Monthly ({{monthlyPrice}}/month) or Annual ({{annualPrice}}/year). Prices shown include any applicable taxes (e.g., VAT or sales tax) where required by law. Payment is charged to your Apple ID or Google account at confirmation of purchase. Subscription automatically renews unless auto-renew is turned off at least 24 hours before the end of the current period. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage subscriptions and turn off auto-renewal by going to your Account Settings after purchase.',
+    web_disclosure: 'MoaVoca Premium — Monthly ({{monthlyPrice}}/month) or Annual ({{annualPrice}}/year). Prices shown include any applicable taxes (VAT or sales tax) where required by law. Payment is processed by Paddle.com Market Limited acting as Merchant of Record. Subscription automatically renews until canceled. You may cancel anytime via the link in your purchase confirmation email or by contacting support@moavoca.com. The refund policy is detailed in Section 4 of our Terms of Service.',
     cancel: 'Close',
   },
   tier: {

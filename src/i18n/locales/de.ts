@@ -514,6 +514,7 @@ export default {
     manage: 'Abo verwalten',
     manage_subscription: 'Abo verwalten',
     disclosure: 'MoaVoca Premium — Monatlich ({{monthlyPrice}}/Monat) oder Jährlich ({{annualPrice}}/Jahr). Die angezeigten Preise enthalten die gesetzlich vorgeschriebenen Steuern (z. B. Mehrwertsteuer). Die Zahlung wird bei Kaufbestätigung von deiner Apple-ID oder deinem Google-Konto abgebucht. Das Abonnement verlängert sich automatisch, sofern es nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums deaktiviert wird. Die Verlängerung wird innerhalb von 24 Stunden vor Ablauf abgerechnet. Du kannst dein Abonnement und die automatische Verlängerung in deinen Kontoeinstellungen verwalten und kündigen.',
+    web_disclosure: 'MoaVoca Premium — Monatlich ({{monthlyPrice}}/Monat) oder Jährlich ({{annualPrice}}/Jahr). Die angezeigten Preise enthalten ggf. gesetzlich anfallende Steuern (MwSt. oder Umsatzsteuer). Die Zahlung wird von Paddle.com Market Limited als Merchant of Record verarbeitet. Das Abonnement verlängert sich automatisch, bis es gekündigt wird. Du kannst jederzeit über den Link in deiner Bestätigungs-E-Mail oder per E-Mail an support@moavoca.com kündigen. Die Erstattungsrichtlinie ist in Abschnitt 4 unserer Nutzungsbedingungen beschrieben.',
     cancel: 'Schließen',
   },
   tier: {

@@ -551,6 +551,7 @@ export default {
     manage: 'サブスクリプション管理',
     manage_subscription: 'サブスクリプション管理',
     disclosure: 'MoaVoca プレミアム — 月額（{{monthlyPrice}}/月）または年額（{{annualPrice}}/年）。表示価格には消費税（VAT）が含まれた最終金額です。お支払いは購入確定時に Apple ID または Google アカウントに請求されます。現在の期間終了の少なくとも 24 時間前までに自動更新をオフにしない限り、サブスクリプションは自動的に更新されます。更新の請求は終了 24 時間以内に行われます。購入後はアカウント設定からサブスクリプションを管理し、自動更新をオフにできます。',
+    web_disclosure: 'MoaVoca プレミアム — 月額（{{monthlyPrice}}/月）または年額（{{annualPrice}}/年）。表示価格には法令により適用される消費税またはVATが含まれます。お支払いは Paddle.com Market Limited（Merchant of Record）が処理します。サブスクリプションはキャンセルされるまで自動的に更新されます。購入確認メールのリンクまたは support@moavoca.com へのご連絡でいつでも解約できます。返金ポリシーは利用規約第 4 条に記載されています。',
     cancel: '閉じる',
   },
   tier: {

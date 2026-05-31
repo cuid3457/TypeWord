@@ -948,6 +948,7 @@ ad_privacy: '광고 개인정보 설정',
     manage: '구독 관리',
     manage_subscription: '구독 관리',
     disclosure: 'MoaVoca 프리미엄 — 월간({{monthlyPrice}}/월) 또는 연간({{annualPrice}}/년). 표시 가격은 부가가치세(VAT)가 포함된 최종 결제 금액입니다. 결제는 구매 확인 시점에 Apple ID 또는 Google 계정으로 청구됩니다. 현재 결제 기간 종료 최소 24시간 전에 자동 갱신을 해지하지 않으면 구독이 자동으로 갱신되며, 갱신 청구는 종료 24시간 이내에 이뤄집니다. 구매 후 계정 설정에서 구독을 관리하고 자동 갱신을 해지할 수 있습니다.',
+    web_disclosure: 'MoaVoca 프리미엄 — 월간({{monthlyPrice}}/월) 또는 연간({{annualPrice}}/년). 표시 가격은 법령에 따라 적용되는 부가가치세(VAT)가 포함된 최종 결제 금액입니다. 결제는 Paddle.com Market Limited(Merchant of Record)에 의해 처리됩니다. 구독은 취소 전까지 자동으로 갱신됩니다. 결제 확인 이메일의 링크 또는 support@moavoca.com을 통해 언제든 취소하실 수 있습니다. 환불 정책은 이용약관 4조에 명시되어 있습니다.',
     cancel: '닫기',
   },
   tier: {
