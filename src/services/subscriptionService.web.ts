@@ -12,6 +12,7 @@
 // snappy when only the bonus expires.
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import i18n from '@src/i18n';
 import { supabase } from '@src/api/supabase';
 import { captureError } from './sentry';
 
@@ -180,6 +181,24 @@ interface PaddleSdk {
   };
 }
 
+// Map our 8 UI languages to Paddle's locale codes. Paddle uses zh-Hans for
+// Simplified Chinese (we ship zh-CN). Anything outside the supported set
+// returns undefined → Paddle falls back to English, matching their default.
+function paddleLocaleFromAppLang(lang: string | undefined): string | undefined {
+  switch ((lang || '').toLowerCase()) {
+    case 'en': return 'en';
+    case 'ko': return 'ko';
+    case 'ja': return 'ja';
+    case 'zh-cn':
+    case 'zh': return 'zh-Hans';
+    case 'es': return 'es';
+    case 'fr': return 'fr';
+    case 'de': return 'de';
+    case 'it': return 'it';
+    default:   return undefined;
+  }
+}
+
 async function ensurePaddleReady(): Promise<PaddleSdk | null> {
   const sdk = await loadPaddleSdk();
   if (!sdk) return null;
@@ -219,11 +238,14 @@ async function startWebCheckout(plan: 'monthly' | 'annual'): Promise<boolean> {
     if (!userId) return false;
     const email = session.session?.user?.email;
 
+    const locale = paddleLocaleFromAppLang(i18n.language);
     Paddle.Checkout.open({
       items: [{ priceId, quantity: 1 }],
       customer: email ? { email } : undefined,
       customData: { user_id: userId },
-      settings: { displayMode: 'overlay' },
+      settings: locale
+        ? { displayMode: 'overlay', locale }
+        : { displayMode: 'overlay' },
     });
     return true;
   } catch (e) {
