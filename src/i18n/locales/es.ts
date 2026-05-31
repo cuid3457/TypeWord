@@ -99,7 +99,7 @@ export default {
     title: 'Listas',
     subtitle_count: '{{count}} listas',
     subtitle_empty: 'Crea tu primera lista de vocabulario',
-    new_button: '+ Nueva lista',
+    new_button: 'Crear una lista',
     loading: 'Cargando\u2026',
     empty: 'Aún no has creado listas.\nCrea una por libro o tema.',
     word_count: '{{count}}',

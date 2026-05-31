@@ -99,7 +99,7 @@ export default {
     title: 'Listes',
     subtitle_count: '{{count}} listes',
     subtitle_empty: 'Créez votre première liste',
-    new_button: '+ Nouvelle liste',
+    new_button: 'Créer une liste',
     loading: 'Chargement\u2026',
     empty: "Vous n'avez pas encore de liste.\nCréez-en une par livre ou par thème.",
     word_count: '{{count}}',

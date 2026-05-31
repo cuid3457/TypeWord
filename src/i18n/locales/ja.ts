@@ -118,7 +118,7 @@ export default {
     title: '単語帳',
     subtitle_count: '{{count}}冊の単語帳',
     subtitle_empty: '最初の単語帳を作りましょう',
-    new_button: '+ 新規作成',
+    new_button: '単語帳を作る',
     loading: '読み込み中\u2026',
     empty: 'まだ単語帳がありません。\n本やテーマごとに自由に作成しましょう。',
     word_count: '{{count}}語',

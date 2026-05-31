@@ -298,7 +298,7 @@ export default {
     title: '单词本',
     subtitle_count: '{{count}}个词汇本',
     subtitle_empty: '创建您的第一个词汇本',
-    new_button: '+ 新建',
+    new_button: '创建单词本',
     loading: '加载中\u2026',
     empty: '还没有创建词汇本。\n按书籍或主题自由创建吧。',
     word_count: '{{count}}个',

@@ -207,7 +207,7 @@ export default {
     title: 'Word Lists',
     subtitle_count: '{{count}} word lists',
     subtitle_empty: 'Create your first word list',
-    new_button: '+ New List',
+    new_button: 'Create a wordlist',
     loading: 'Loading\u2026',
     empty: "You haven't created any word lists yet.\nCreate one per book or topic.",
     word_count: '{{count}}',

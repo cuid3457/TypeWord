@@ -97,7 +97,7 @@ export default {
   },
   home: {
     title: 'Liste', subtitle_count: '{{count}} liste', subtitle_empty: 'Crea la tua prima lista',
-    new_button: '+ Nuova lista', loading: 'Caricamento\u2026',
+    new_button: 'Crea una lista', loading: 'Caricamento\u2026',
     empty: 'Non hai ancora creato liste.\nCreane una per libro o argomento.', word_count: '{{count}}',
     sort_recent: 'Recenti',
     sort_created: 'Creazione',

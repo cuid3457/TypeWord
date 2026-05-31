@@ -393,7 +393,7 @@ export default {
     title: '단어장',
     subtitle_count: '{{count}}개의 단어장',
     subtitle_empty: '첫 단어장을 만들어보세요',
-    new_button: '+ 새 단어장',
+    new_button: '단어장 만들기',
     loading: '불러오는 중\u2026',
     empty: '아직 만든 단어장이 없어요.\n원서, 주제별로 자유롭게 만들어보세요.',
     word_count: '{{count}}개',

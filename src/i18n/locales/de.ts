@@ -99,7 +99,7 @@ export default {
     title: 'Wortlisten',
     subtitle_count: '{{count}} Vokabellisten',
     subtitle_empty: 'Erstelle deine erste Vokabelliste',
-    new_button: '+ Neue Liste',
+    new_button: 'Liste erstellen',
     loading: 'Laden\u2026',
     empty: 'Noch keine Vokabellisten erstellt.\nErstelle eine pro Buch oder Thema.',
     word_count: '{{count}}',
