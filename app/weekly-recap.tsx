@@ -8,8 +8,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Pressable, Share, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
+import { TabletContainer } from '@/components/tablet-container';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { getWeeklyRecap, type WeeklyRecap } from '@src/services/statsService';
 import { haptic } from '@src/services/hapticService';
@@ -49,11 +51,25 @@ export default function WeeklyRecapScreen() {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: isDark ? '#15130E' : '#F4F1EA' }}>
-      <Stack.Screen options={{ title: t('weekly.title'), headerShown: true }} />
-
+    <SafeAreaView style={{ flex: 1, backgroundColor: isDark ? '#15130E' : '#F4F1EA' }}>
+      <Stack.Screen options={{ headerShown: false }} />
+      <TabletContainer>
       <View style={{ flex: 1, padding: 24, justifyContent: 'space-between' }}>
         <View>
+          <View className="h-11 flex-row items-center mb-4">
+            <Pressable
+              onPress={() => { haptic.tap(); router.back(); }}
+              className="mr-2 p-1"
+              accessibilityLabel={t('common.back')}
+              accessibilityRole="button"
+              hitSlop={8}
+            >
+              <MaterialIcons name="arrow-back" size={24} color="#7B7366" />
+            </Pressable>
+            <Text className="text-base font-semibold" style={{ color: isDark ? '#F1ECE2' : '#2A2620' }}>
+              {t('weekly.title')}
+            </Text>
+          </View>
           <Text style={{ fontSize: 22, fontWeight: '800', color: isDark ? '#F1ECE2' : '#2A2620' }}>
             {t('weekly.header')}
           </Text>
@@ -140,7 +156,8 @@ export default function WeeklyRecapScreen() {
           </Pressable>
         </View>
       </View>
-    </View>
+      </TabletContainer>
+    </SafeAreaView>
   );
 }
 
